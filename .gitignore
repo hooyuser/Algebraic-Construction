@@ -1,0 +1,10 @@
+*.aux
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.thm
+
+.history/*
