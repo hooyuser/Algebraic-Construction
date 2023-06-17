@@ -64,6 +64,17 @@
 \chapter{Commutative Ring}
 \section{Basic Concepts}
 \subsection{Ideals}
+\dfn{Ideal}{
+    Let $R$ be a ring. A subset $I\subseteq R$ is called an \textbf{ideal} if
+    \begin{enumerate}[label=(\roman*)]
+        \item $I$ is a subgroup of $(R,+)$.
+        \item $I$ is closed under multiplication, i.e. $a\in I$ and $b\in R$ implies $ab\in I$.
+    \end{enumerate}
+}
+
+\prop{Ideal as Submodule}{
+    Let $R$ be a ring and $I\subseteq R$ be a subset of $R$. Then $I$ is an ideal of $R$ if and only if $I$ is a submodule of $R$ as an $R$-module.
+}
 
 \dfn{Prime Ideal}{
     Let $R$ be a commutative ring. An ideal $I\subseteq R$ is called \textbf{prime} if  and 
@@ -319,12 +330,29 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 }
 
 Localization is the most economical way to make a multiplicative subset invertible.
-\prop{Properties of Localization}{
+
+\prop{}{
+    Let $R$ be a commutative and $S \subseteq R$ be a multiplicative subset. The category of $S^{-1} R$ modules is equivalent to the category of $R$-modules $N$ with the property that every $s \in S$ acts as an automorphism on $N$.
+}
+\proof{
+    Assume the localization map is $\varphi:R\to S^{-1}R$. Then $R$ can acts on $S^{-1}R$-module $M$ through $R\to S^{-1}R\to\mathrm{End}$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            S^{-1} R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\text{ acted by S}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] M\arrow[dd, "f"{name=R}] \&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "F", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  N\&
+        \end{tikzcd}
+        \]
+}
+\prop{Properties of Localization of Rings}{
     Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset. Then
     \begin{enumerate}[label=(\roman*)]
         \item $S^{-1}R=0$ if and only if $0\in S$.
         \item If $0\notin S$, then $\frac{a}{s}$ is invertible in $S^{-1}R$ if and only if there exists $r\in R$ such that $ra\in S$.
-        \item If $0\notin S$, the map $\varphi:R\to S^{-1}R$ is injective if and only if $S$ contains no zero divisors.
+        \item If $0\notin S$, the localization map $\varphi:R\to S^{-1}R$ is injective if and only if $S$ contains no zero divisors.
         \item If $R$ is an integral domain, then $S^{-1}R$ is also an integral domain.
     \end{enumerate}
 }
@@ -353,10 +381,63 @@ Localization is the most economical way to make a multiplicative subset invertib
     If $R$ be an integral domain, the total ring of fractions $\mathrm{Frac}(R)$ is a field, call the \textbf{field of fractions} of $R$.
 }
 
+\dfn{Localization of an Ideal}{
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $I$ be an ideal of $R$. If we regard $I$ as a $R$-module, the \textbf{localization of the ideal} $I$ by $S$, denoted $S^{-1}I$, is the localization of the module $I$ by $S$. That is,
+    \[
+        S^{-1}I=\left\{\frac{a}{s}\midv a\in I, s\in S\right\}.
+    \]
+    $S^{-1}I$ is a $S^{-1}R$-submodule of $S^{-1}R$.
+}
+\prop{Properties of localization of Ideals}{
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $0\notin S$
+    \begin{enumerate}[label=(\roman*)]
+        \item If $I$ is a ideal of $R$, then $S^{-1}I=S^{-1}R\iff I\cap S=\varnothing$.
+        \item The localization map $\varphi:R\to S^{-1}R$ induces a bijection between the set of ideals of $R$ that do not intersect $S$ and the set of ideals of $S^{-1}R$.
+        \begin{align*}
+            S^{-1}: \left\{\text{ideals of }R\right\}&\to \left\{\text{ideals of }S^{-1}R\right\}\\
+        \end{align*}
+    \end{enumerate}
+}
+
 \chapter{Module}
+\section{Basic Concepts}
+\dfn{Module}{
+    Let $R$ be a ring. An \textbf{$R$-module} is an abelian group $M$ with a binary operation $R\times M\to M$ such that
+    \begin{enumerate}[label=(\roman*)]
+        \item $r(m+n)=rm+rn$ for all $r\in R$ and $m, n\in M$.
+        \item $(r+s)m=rm+sm$ for all $r, s\in R$ and $m\in M$.
+        \item $(rs)m=r(sm)$ for all $r, s\in R$ and $m\in M$.
+        \item $1m=m$ for all $m\in M$.
+    \end{enumerate}
+    If $R$ is a commutative ring, then $M$ is called a \textbf{commutative $R$-module}.
+}
+\prop{Ring Action on an Abelian Group}{
+From the perspective of representation theory, a module is a ring action on an abelian group. To be more precise, a ring $R$ can be regarded as an $\mathsf{Ab}$-enriched category with only one object, called the delooping of $R$, denoted $\mathsf{B}R$. $\mathsf{Ab}$ itself is an $\mathsf{Ab}$-enriched category. Thus a left $R$-module $M$ is a functor between $\mathsf{Ab}$-enriched categories $\mathcal{M}:\mathsf{B}R\to \mathsf{Ab}$. 
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{B}R\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{Ab}\&[-30pt]\&[-30pt] \\ [-15pt] 
+        *  \arrow[dd, "r\in R"{name=L, left}] 
+        \&[-25pt] \& [+10pt] 
+        \& [-30pt] M\arrow[dd, "r_M\in \mathrm{End}_{\mathsf{Ab}}(M)"{name=R}] \&[-30pt]\\ [-10pt] 
+        \&  \phantom{.}\arrow[r, "\mathcal{M}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+        * \& \& \&  M\&
+    \end{tikzcd}
+\]
+As a map between objects, $\mathcal{M}$ specifies an abelian group $M$. and a ring homomorphism $R\to \mathrm{End}_{\mathsf{Ab}}(M)$, which is the ring action of $R$ on $M$. As a map between morphisms, $\mathcal{M}$ specifies a ring homomorphism $R\to \mathrm{End}_{\mathsf{Ab}}(M)$, which is $\mathbb{Z}$-bilinear, i.e. $r(m+n)=rm+rn$ for all $r\in R$ and $m, n\in M$.
+}
+
+If $R$ and $S$ are rings with a ring homomorphism $f: R\to S$, then every $S$-module $M$ is an $R$-module by defining $rm = f(r)m$, or equivalently through $R\to S\to \mathrm{End}_{\mathsf{Ab}}(M)$. In particular, $S$ itself is such an $R$-module.
 \section{Construction}
 \dfn{Localization of a Module}{
-    
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. The \textbf{localization of the module} $M$ by $S$, denoted $S^{-1}M$, is an $S^{-1}R$-module that is constructed exactly as the localization of $R$, except that the numerators of the fractions belong to $M$. That is, as a set, it consists of equivalence classes, denoted $\frac{m}{s}$, of pairs $(m, s)$, where $m\in M$ and $s\in S$, and two pairs $(m, s)$ and $(n, t)$ are equivalent if there is an element $u$ in $S$ such that
+    \[u(sn-tm)=0.\]
+    Addition and scalar multiplication are defined as for usual fractions (in the following formula, $r\in R$, $s,t\in S$, and $m,n\in M$):
+    \[\frac{m}{s} + \frac{n}{t} = \frac{tm+sn}{st},\]
+    \[\frac{r}{s} \frac{m}{t} = \frac{r m}{st}.\]
+}
+
+\prop{Localization Functor}{
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Then $S^{-1}M$ is a $S^{-1}R$-module. The localization map $\varphi:M\to S^{-1}M$ is an $R$-module homomorphism.
 }
 
 % \begin{Theorem}{Title}{label}
