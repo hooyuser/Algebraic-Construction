@@ -81,6 +81,18 @@
 
 \chapter{Commutative Ring}
 \section{Basic Concepts}
+\prop{Equivalent Definition for Local Ring}{
+    Let $R$ be a commutative ring. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $R$ is a local ring.
+        \item $R$ has a unique maximal ideal.
+        \item $R$ has a maximal idea $\mathfrak{m}$ and $R - \mathfrak{m}\subseteq R^{\times}$.
+        \item $R$ is not the zero ring and for every $x \in R$, $x\in R^{\times}$ or $1-x\in R^{\times}$.
+        \item $R$ is not the zero ring and if $\sum_{i=1}^n r_i\in R^{\times}$, then there exist some $i$ such that $r_i\in R^{\times}$. 
+        \item $R$ is not the zero ring and the sum of any two non-units in $R$ is a non-unit.
+    \end{enumerate}
+}
+
 \subsection{Ideals}
 \dfn{Ideal}{
     Let $R$ be a ring. A subset $I\subseteq R$ is called an \textbf{ideal} if
@@ -350,10 +362,10 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 Localization is the most economical way to make a multiplicative subset invertible.
 
 \prop{}{
-    Let $R$ be a commutative and $S \subseteq R$ be a multiplicative subset. The category of $S^{-1} R$ modules is equivalent to the category of $R$-modules $N$ with the property that every $s \in S$ acts as an automorphism on $N$. The quasi-inverse functor $F$ that sends $N$ to $S^{-1} N$ where $S^{-1} N$ is the $S^{-1} R$-module with the action defined by $\frac{a}{s} \cdot \frac{n}{t} = \frac{an}{st}$.
+    Let $R$ be a commutative ring and $S \subseteq R$ be a multiplicative subset. The category of $S^{-1} R$ modules is equivalent to the category of $R$-modules $M$ with the property that every $s \in S$ acts as an automorphism on $M$. The following functor $F$ gives a equivalence of categories: 
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            S^{-1} R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\text{ acted by }S\&[-30pt]\&[-30pt] \\ [-15pt] 
+            S^{-1} R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\text{ where }S\text{ act as automorphisms}\&[-30pt]\&[-30pt] \\ [-15pt] 
             M  \arrow[dd, "f"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
             \& [-30pt] M\arrow[dd, "f"{name=R}] \&[-30pt]\\ [-10pt] 
@@ -363,15 +375,24 @@ Localization is the most economical way to make a multiplicative subset invertib
         \]
 }
 \proof{
-    Assume $S$ is a multiplicative subset of communitative ring $R$ and the localization map is $\varphi:R\to S^{-1}R$. Then $R$ can acts on $S^{-1}R$-module $M$ through $R\to S^{-1}R\to\mathrm{End}_{R\text{-}\mathsf{Mod}}(M)$, which enables us to regard $M$ as an $R$-module. Conversely, if $M$ is an $R$-module such that every $s\in S$ acts as an automorphism on $M$, i.e. $\psi:R\to\mathrm{End}_{R\text{-}\mathsf{Mod}}(M)$ satisfies $\psi(S)\subseteq \mathrm{Aut}_{R\text{-}\mathsf{Mod}}(M)$, then by unversal property
+    Assume $S$ is a multiplicative subset of communitative ring $R$ and the localization map is $\varphi:R\to S^{-1}R$. Then $R$ can acts on $S^{-1}R$-module $M$ through 
+    \[
+        R\xrightarrow{\varphi}S^{-1}R\xrightarrow{\sigma_M'}\mathrm{End}_{\mathsf{Ab}}(M),
+    \]
+    which enables us to regard $M$ as an $R$-module. Furthermore, since 
+    \[
+        \sigma_M'(\varphi(S))\subseteq \sigma_M' \left(\left(S^{-1}R\right)^\times\right)\subseteq \left(\mathrm{End}_{\mathsf{Ab}}(M)\right)^\times=\mathrm{Aut}_{\mathsf{Ab}}(M),
+    \]
+    every $s \in S$ acts as an automorphism on $M$.\\
+    Conversely, if $M$ is an $R$-module such that every $s\in S$ acts as an automorphism on $M$, i.e. $\sigma_M:R\to\mathrm{End}_{\mathsf{Ab}}(M)$ satisfies $\sigma_M(S)\subseteq \mathrm{Aut}_{\mathsf{Ab}}(M)$, then by unversal property
     \begin{center}
         \begin{tikzcd}[ampersand replacement=\&]
          
-            S^{-1}R\arrow[rr, "\psi'", dashed]\&\& \mathrm{End}_{R\text{-}\mathsf{Mod}}(M) \&  \\             
-            \&R \arrow[ru, "\psi"'] \arrow[lu, "\varphi"] \&                          
+            S^{-1}R\arrow[rr, "\sigma_M'", dashed]\&\& \mathrm{End}_{\mathsf{Ab}}(M) \&  \\             
+            \&R \arrow[ru, "\sigma_M"'] \arrow[lu, "\varphi"] \&                          
         \end{tikzcd}
     \end{center}
-    we can define a $S^{-1}R$-module structure on $M$ by lifting $\psi$ to $\psi'$. It is easy to check that these two functors are quasi-inverse to each other.
+    we can define a $S^{-1}R$-module structure on $M$ by lifting $\sigma_M$ to $\sigma_M'$. It is easy to check that these two functors are quasi-inverse to each other.
 }
 \prop{Properties of Localization of Rings}{
     Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset. Then
@@ -424,11 +445,10 @@ Localization is the most economical way to make a multiplicative subset invertib
          \left\{\text{ideals of }S^{-1}R\right\}=\mathcal{I}(S^{-1}R)
     \end{align*}
     \begin{enumerate}[label=(\roman*)]
-        \item $S^{-1}\circ \varphi^{-1}=\mathrm{id}_{\mathcal{I}(S^{-1}R)}$.
-        \item $S^{-1}$ is surjective. That is, for any ideal $J$ of $S^{-1}R$, there exists an ideal $I$ of $R$ such that $S^{-1}I=J$.
-        \item $\varphi^{-1}$ is injective.
-        \item If $I$ is a ideal of $R$, then $S^{-1}I=S^{-1}R\iff I\cap S=\varnothing$.
-        \item The localization map $\varphi:R\to S^{-1}R$ induces a bijection between the set of prime ideals of $R$ that do not intersect $S$ and the set of prime ideals of $S^{-1}R$. That is, the following restriction of $S^{-1}$ and $\varphi^{-1}$ are bijections:
+        \item $S^{-1}\circ \varphi^{-1}=\mathrm{id}_{\mathcal{I}(S^{-1}R)}$. As a result, $S^{-1}$ is surjective and $\varphi^{-1}$ is injective.
+        \item For any ideal $J$ of $S^{-1}R$, there exists an ideal $I$ of $R$ such that $S^{-1}I=J$. 
+        \item If $I$ is a ideal of $R$, then $S^{-1}I=S^{-1}R\iff I\cap S\ne\varnothing$.
+        \item $\varphi$ induces a bijection between the set of prime ideals of $R$ that do not intersect $S$ and the set of prime ideals of $S^{-1}R$. That is, the following restriction of $S^{-1}$ and $\varphi^{-1}$ are bijections:
         \begin{align*}
             \{I \in \operatorname{Spec} R: I \cap S=\varnothing\} \xrightleftarrows[\varphi^{-1}]{\quad S^{-1}\quad}
            \spec S^{-1}R
@@ -436,13 +456,39 @@ Localization is the most economical way to make a multiplicative subset invertib
     \end{enumerate}
 }
 \proof{
-    \begin{enumerate}
-        \item We will prove $S^{-1}I\circ \varphi^{-1}=\mathrm{id}_{\mathcal{I}(S^{-1}R)}$. Let $J$ be an ideal of $S^{-1}R$. Then $J=\langle \frac{a}{s_1},\cdots,\frac{b}{s_n}\rangle$ for some $a,b\in I$ and $s_1,\cdots,s_n\in S$. Then  $S^{-1}I\circ \varphi^{-1}(J)=S^{-1}I\circ \varphi^{-1}(\langle \frac{a}{s_1},\cdots,\frac{b}{s_n}\rangle)=\langle a,\cdots,b\rangle=J$.
+    \begin{enumerate}[label=(\roman*)]
+        \item Let $J$ be an ideal of $S^{-1}R$. We have
+        \[
+            S^{-1}\varphi^{-1}(J)=\left\{\frac{x}{s}\midv x\in \varphi^{-1}(J),s\in S\right\}=\left\{\frac{x}{s}\midv \frac{x}{1}\in J,s\in S\right\}=\left\{\frac{1}{s}\frac{x}{1}\midv \frac{x}{1}\in J,s\in S\right\}=J.
+        \]
+        \item It is a direct consequence of the surjectivity of $S^{-1}$.
+        \item Let $I$ be an ideal of $R$. We have
+        \[
+            S^{-1}I=S^{-1}R\iff \frac{1}{1} \in S^{-1}I \iff \exists t,s\in S,a\in I, t(a-s)=0\iff ta=ts\in I\cap S\ne\varnothing \iff I\cap S\ne\varnothing.
+        \]
     \end{enumerate}
 }
 
 \ex{Localization at a Prime Ideal}{
-    Let $R$ be a commutative ring and $\mathfrak{p}$ be a prime ideal of $R$. Then $S=R-\mathfrak{p}$ is a multiplicative set. The localization $S^{-1}R$ is called the \textbf{localization of $R$ at $\mathfrak{p}$}, denoted by $R_\mathfrak{p}$. $R_\mathfrak{p}$ is a local ring with unique maximal ideal $\mathfrak{p}R_\mathfrak{p}$. 
+    Let $R$ be a commutative ring and $\mathfrak{p}$ be a prime ideal of $R$. Then $S=R-\mathfrak{p}$ is a multiplicative set. The localization $S^{-1}R$ is called the \textbf{localization of $R$ at $\mathfrak{p}$}, denoted by $R_\mathfrak{p}$. $R_\mathfrak{p}$ is a local ring with unique maximal ideal 
+    \[
+    \mathfrak{p}R_\mathfrak{p}=S^{-1}\mathfrak{p}=\left\{\frac{x}{s}\midv x\in \mathfrak{p}, s\in R-\mathfrak{p}\right\}.
+    \]
+    And we have field isomorphism $R_\mathfrak{p}/\mathfrak{p}R_\mathfrak{p}\cong \mathrm{Frac}(R/\mathfrak{p})$.
+}
+\proof{
+    Since for any ideal $I\in  \{I \in \operatorname{Spec} R: I \cap S=\varnothing\}$, we have
+    \[
+        I\subseteq \mathfrak{p}\implies S^{-1}I\subseteq  S^{-1}\mathfrak{p}.
+    \]
+    Thus we see $S^{-1}\mathfrak{p}$ is the unique maximal ideal of $S^{-1}R$.
+}
+
+\ex{}{
+    Let $R$ be a commutative ring and $f\in R$. Let $S=\{1,f,f^2,\cdots\}$ be the monoid generated by $f$. Then $S$ is a multiplicative set. The localization $S^{-1}R$ is called the \textbf{localization of $R$ at $f$}, denoted by $R_f$. $R_f=0$ if and only if $f$ is nilpotent.
+}
+\proof{
+    $R_f=0\iff 0\in S\iff \exists n\in\mathbb{Z}_{\ge0},\;f^n=0$.
 }
 
 \chapter{Module}
@@ -489,7 +535,7 @@ to be the category of all functors between $\mathsf{Ab}$-enriched categories $\m
 \]
 }
 \prop{Ring homomorphism $R\to S$ induces functor $S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$}{
-    Let $R$ and $S$ be rings with a ring homomorphism $f: R\to S$. Then every $S$-module $M$ is an $R$-module by defining $rm = f(r)m$, or equivalently through $R\to S\to \mathrm{End}_{R\text{-}\mathsf{Mod}}(M)$. This defines a functor $F: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$, which is identify map on objects and morphisms.
+    Let $R$ and $S$ be rings with a ring homomorphism $f: R\to S$. Then every $S$-module $M$ is an $R$-module by defining $rm = f(r)m$, or equivalently through $R\to S\to \mathrm{End}_{\mathsf{Ab}}(M)$. This defines a functor $F: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$, which is identify map on objects and morphisms.
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             S\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
@@ -517,10 +563,10 @@ In particular, homomorphism $R\to S$ makes $S$ an $R$-module.
         \varphi:M&\longrightarrow S^{-1}M\\
          m&\longmapsto \frac{m}{1}
     \end{align*}
-    satisfies the following universal property: for any $R$-linear map $\psi:M\to N$ such that $S$ act as automorphisms on $N$ (i.e. the induced ring homomorphism $f_N:R\to\mathrm{End}_{R\text{-}\mathsf{Mod}}(N)$ satisfies $f_N(S)\subseteq \mathrm{Aut}_{R\text{-}\mathsf{Mod}}(N)$), there exists a unique $R$-linear map
+    satisfies the following universal property: for any $R$-linear map $\psi:M\to N$ such that $S$ act as automorphisms on $N$ (i.e. the induced ring homomorphism $\sigma_{N}:R\to\mathrm{End}_{\mathsf{Ab}}(N)$ satisfies $\sigma_{N}(S)\subseteq \mathrm{Aut}_{\mathsf{Ab}}(N)$), there exists a unique $R$-linear map
     \begin{align*}
         \psi':S^{-1}M&\longrightarrow N\\
-        \frac{m}{s}&\longmapsto s^{-1}\psi(m)
+        \frac{m}{s}&\longmapsto s^{-1}\psi(m)=\sigma_{N}(s)^{-1}(\psi(m))
     \end{align*}
     such that the following diagram commutes
     \begin{center}
@@ -564,6 +610,105 @@ In particular, homomorphism $R\to S$ makes $S$ an $R$-module.
         S^{-1}(u)\left(\frac{l}{ts}\right)=\frac{u(l)}{ts}=\frac{tm}{ts}=\frac{m}{s},
     \]
     we see that $\frac{m}{s}\in \operatorname{im}S^{-1}(u)$, which means $\operatorname{im}S^{-1}(u)=\ker S^{-1}(v)$. Hence $S^{-1}$ is exact.
+}
+\prop{Localization Respects Quotients}{
+    Let $M$ be an $R$-module and $N$ be a submodule of $M$. Then we have an isomorphism $S^{-1}(M/N)\simeq (S^{-1}M)/(S^{-1}N)$.
+}
+\proof{
+    From the exact sequence
+    \[
+        0\longrightarrow N\longrightarrow M\longrightarrow M/N\longrightarrow 0,
+    \]
+    we have the exact sequence
+    \[
+        0\longrightarrow S^{-1}N\longrightarrow S^{-1}M\longrightarrow S^{-1}(M/N)\longrightarrow 0.
+    \]
+}
+\prop{Localization as colimit}{
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Then we have an isomorphism
+    \[
+        S^{-1}M\cong \varinjlim_{f\in S}M_f,
+    \]
+    where $M_f$ is the localization of $M$ by the multiplicative set $S_f=\{f^n\mid n\in \mathbb{Z}_{\ge0}\}$. 
+    
+    Formally, $S$ can be endowed with a preorder relation: $f\mid g$ if and only if $fh=g$ for some $h\in S$, which makes $S$ a thin category $\mathsf{S}$. Then we can define a functor $G:\mathsf{S}\to R\text{-}\mathsf{Mod}$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{S}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            f  \arrow[dd, ""{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]M_f\arrow[dd, "\varphi_g'"{name=R}] \&[-30pt]\ni
+            \&[-30pt]\frac{m}{f^n}\arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "G", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            g \&\hspace{-3pt}=fh \& \&  M_g\&[-30pt]\ni
+            \&[-30pt]\frac{mh^n}{g^n}
+        \end{tikzcd}
+        \]  
+        where $\varphi_g'$ is given by the following  universal property
+        \begin{center}
+            \begin{tikzcd}[ampersand replacement=\&]
+             
+                M_f\arrow[rr, "\varphi_g'", dashed]\&\& M_g \&  \\             
+                \&M \arrow[ru, "\varphi_g"'] \arrow[lu, "\varphi_f"] \&                          
+            \end{tikzcd}
+        \end{center}
+        And we have
+        \[
+            S^{-1}M\cong \varinjlim G  
+        \]
+}
+\proof{
+First let's show that the $\varphi'_g$ induced by universal property can be writen as $\varphi'_g:\frac{m}{f^n}\mapsto\frac{mh^n}{g^n}$. Suppose $R$ acts on $M_g$ through
+\[
+    \sigma_{M_g}:R\xrightarrow{}S^{-1}_gR\xrightarrow{\sigma_{M_g'}}\mathrm{End}_{\mathsf{Ab}}(M_g),
+\]
+Then we can check for any $f^n \in S_f$,
+\[
+    \sigma_{M_g}(f^n)\sigma_{M_g'}\left(\frac{h^n}{g^n}\right)=\sigma_{M_g'}\left(\frac{f^nh^n}{g^n}\right)=\sigma_{M_g'}\left(1\right)=1\implies \sigma_{M_g}(f^n)\in \mathrm{Aut}_{\mathsf{Ab}}(M_g),
+\]
+which means $\sigma_{M_g}(S_f)\subseteq  \mathrm{Aut}_{\mathsf{Ab}}(M_g)$. Thus by universal property of $M_f$, we have
+\[
+    \varphi'_g\left(\frac{m}{f^n}\right)=\sigma_{M_g}(f^n)^{-1}(m)=\sigma_{M_g'}\left(\frac{h^n}{g^n}\right)(m)=\frac{mh^n}{g^n}.
+\]
+In a similar way, we can check that $S_f$ can act on $S^{-1}M$ as automorphisms and induce $\psi_f$ by the following universal property
+\begin{center}
+    \begin{tikzcd}[ampersand replacement=\&]
+     
+        M_f\arrow[rr, "\psi_f", dashed]\&\& S^{-1}M\&  \\             
+        \&M \arrow[ru, "\varphi_S"'] \arrow[lu, "\varphi_f"] \&                          
+    \end{tikzcd}
+\end{center}
+And we are going to show that $\left(\psi_f:M_f\to S^{-1}M\right)_{f\in S}$ is the colimit of $G$. 
+\[
+\begin{tikzcd}
+        & N                                 &                                                             \\[+15pt]
+        & S^{-1}M \arrow[u, "\nu"', dashed] &                                                             \\[+10pt]
+M_f \arrow[rr, "\varphi_g'"] \arrow[ru, "\psi_f"] \arrow[ruu, "\mu_f", bend left] &                                   & M_g \arrow[lu, "\psi_g"'] \arrow[luu, "\mu_g"', bend right]
+\end{tikzcd}
+\]
+We can prove
+\[
+   \psi_f=\psi_g\circ \varphi_g'
+\]
+by checking
+\[
+    \left(\psi_g\circ \varphi_g'\right)\circ \varphi_f=\psi_g\circ\varphi_g =\varphi_S=\psi_f\circ \varphi_f
+\]
+and utilizing the uniqueness of the universal property. \\
+Given any $\left(\mu_f:M_f\to S^{-1}M\right)_{f\in S}$ such that $\mu_f=\mu_g\circ \varphi_g'$, note that $\mu_f\circ \varphi_f=\mu_f\circ \mu_g\circ \varphi_g'=\mu_g\circ \varphi_g$. Thus we can define $\nu$ to be the unique map such that $\nu\circ \varphi_S=\mu_f\circ \varphi_f$.
+\[
+\begin{tikzcd}
+    & N                                                  &                                    \\[+12pt]
+M_f \arrow[rr, "\psi_f"] \arrow[ru, "\mu_f"] &                                                    & S^{-1}M \arrow[lu, "\nu"', dashed] \\[+12pt]
+    & M \arrow[lu, "\varphi_f"] \arrow[ru, "\varphi_S"'] &                                   
+\end{tikzcd}
+\]
+Hence we have 
+\[
+\left(\nu\circ \psi_f\right)\circ \varphi_f=\nu\circ\varphi_S =\mu_f\circ \varphi_f.
+\]
+By the uniqueness of the universal property of $M_f$, we have $\mu_f=\nu\circ \psi_f$. If there exists another $\nu'$ such that $\mu_f=\nu'\circ \psi_f$, there must be $\nu'\circ \varphi_S=\nu'\circ \psi_f \circ\varphi_f=\mu_f \circ\varphi_f=\nu\circ \varphi_S$. The uniqueness of such $\nu$ forces $\nu=\nu'$.\\
+Therefore we show that $ S^{-1}M\cong \varinjlim_{f\in S}M_f$.
 }
 % \begin{Theorem}{Title}{label}
 %     This is the statement of the theorem.
