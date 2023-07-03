@@ -14,6 +14,8 @@
         }
     }
 
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
 \begin{document}
 \begin{center}
 	~\\
@@ -52,11 +54,102 @@
 
 % Your document content here
 
+\chapter{Category Theory}
+\section{Limits and Colimits}
+\newpage
+\begin{center}
+\Large
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|P{4.3cm}|m{5.2cm}|m{5.2cm}|}
+    \hline
+    {\bf Diagram} &\multicolumn{1}{c|}{\bf  Limit }& \multicolumn{1}{c|}{\bf Colimit } \\ 
+    \hline\hline
+    Empty Category $\varnothing$ & Terminal Object & Initial Object\\ 
+    \hline
+    Discrete Category  $\bullet\;\bullet\;\bullet\;\bullet\,\cdots$& Product & Coproduct \\
+    \hline
+    $\bullet\qquad\bullet$ & Finite Product
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+            & \circ \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[ld, draw=cyan] \arrow[rd, draw=cyan] &         \\
+    \bullet & \varprojlim \arrow[l, draw=arrowBlue] \arrow[r, draw=arrowBlue]               & \bullet
+    \end{tikzcd}
+    \end{center} & Finite Coproduct 
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+            & \circ   &         \\
+    \bullet \arrow[r, draw=arrowBlue]  \arrow[ru, draw=cyan] & \varinjlim  \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]             & \bullet\arrow[l, draw=arrowBlue]\arrow[lu, draw=cyan]
+    \end{tikzcd}
+    \end{center}\\
+    \hline
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+            \bullet \arrow[r] &[-0.8em] \bullet &[-0.8em] \bullet \arrow[l]
+        \end{tikzcd}
+    & Pullback    
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+        \circ \arrow[rd, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[rrd, draw=cyan, bend left] \arrow[rdd, draw=cyan, bend right] &[-2em]                                 &  [-0.4em]                  \\[-0.3cm]
+                                                                                & \varprojlim \arrow[d, draw=arrowBlue] \arrow[r, draw=arrowBlue] & \bullet \arrow[d] \\
+                                                                                & \bullet \arrow[r]               & \bullet          
+        \end{tikzcd} 
+    \end{center}
+    & Pushout 
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+        \circ  \arrow[rrd, draw=cyan, bend left] \arrow[rdd, draw=cyan, bend right] &[-2em]                                 &  [-0.4em]                  \\[-0.3cm]
+                                                                                & \varinjlim\arrow[lu, dash pattern=on 4pt off 2pt, draw=arrowRed]  & \bullet   \arrow[l, draw=arrowBlue]\\
+                                                                                & \bullet \arrow[u, draw=arrowBlue]             & \bullet  \arrow[l] \arrow[u]      
+        \end{tikzcd} 
+    \end{center} \\
+    \hline
+    $\begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+        \bullet \arrow[r, shift left] \arrow[r, shift right] & \bullet
+        \end{tikzcd}$ & Equalizer  \begin{center}
+            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+                \circ \arrow[rd, draw=cyan] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] &                                                      &         \\
+                \varprojlim \arrow[r, draw=arrowBlue]    & \bullet \arrow[r, shift left] \arrow[r, shift right] & \bullet
+                \end{tikzcd}
+        \end{center}  & Coequalizer \begin{center}
+            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+                &                              & \circ                        \\
+            \bullet \arrow[r, shift left] \arrow[r, shift right] & \bullet \arrow[r, draw=arrowBlue] \arrow[ru, draw=cyan] & \varinjlim \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]
+            \end{tikzcd}
+        \end{center}\\
+    \hline
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt, shorten <=-4pt, shorten >=-4pt}]
+            \bullet &[-1.5em] \bullet \arrow[l] &[-1.5em] \bullet \arrow[l] &[-1.5em] \cdots \arrow[l]
+        \end{tikzcd}
+    
+        & Inverse Limit
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+            &   [-1.5em]                &[-1em] \circ \arrow[rdd, draw=cyan] \arrow[ldd, draw=cyan] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] & [-1em]                  \\
+            &                   & \varprojlim \arrow[ld, draw=arrowBlue, shorten <=-4pt] \arrow[rd, draw=arrowBlue, shorten <=-4pt]               &                   \\[-0.3cm]
+    \bullet & \bullet \arrow[l, shorten <=-3pt, shorten >=-3pt] &                                                 & \cdots \arrow[ll]
+    \end{tikzcd}
+\end{center}
+    & Direct Limit 
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+            &   [-1.5em]                &[-1em] \circ \arrow[rdd, draw=cyan] \arrow[ldd, draw=cyan] & [-1em]                  \\
+            &                   & \varinjlim \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[ld, draw=arrowBlue, shorten <=-4pt] \arrow[rd, draw=arrowBlue, shorten <=-4pt]               &                   \\[-0.3cm]
+    \bullet \arrow[r, shorten <=-3pt, shorten >=-3pt]& \bullet \arrow[rr] &                                                 & \cdots 
+    \end{tikzcd}
+\end{center}\\
+    \hline
+    \end{tabular}
+\end{center}
+\chapter{Group}
+\section{Basic Concepts}
+
+\chapter{Abelian Group}
+\section{Basic Concepts}
+
 \chapter{Ring}
 \section{Basic Concepts}
 \dfn{Ring}{
     A \textbf{ring} is a set $R$ together with two binary operations $+$ and $\cdot$ on $R$ such that
-    \begin{enumerate}
+    \begin{enumerate}[label=(\roman*)]
         \item $(R,+)$ is an abelian group.
         \item $(R,\cdot)$ is a monoid.
         \item $\cdot$ is distributive over $+$,
@@ -73,6 +166,14 @@
 
 \dfn{Reduced Ring}{
     A ring $R$ is called \textbf{reduced} if it has no nonzero nilpotent elements, or equivalently, if for any $x\in R$, $x^2=0\implies x=0$.
+}
+
+\prop{Examples of Reduced Ring}{
+    \begin{enumerate}[label=(\roman*)]
+        \item Subrings, products, and localizations of reduced rings are again reduced rings.
+        \item Every integral domain is reduced.
+        \item $\mathbb{Z}/n\mathbb{Z}$ is reduced if and only if $n=0$ or $n$ is square-free.
+    \end{enumerate}
 }
 
 \dfn{Local Ring}{
@@ -112,6 +213,9 @@
         \item $I\neq R$, i.e. $I$ is a proper ideal.
         \item $ab\in I\implies a\in I\text{ or }b\in I$, i.e. there exist no two elements in $R$ whose product is in $I$ but neither of them is in $I$.
     \end{enumerate}    
+}
+\prop{Prime Ideal Equivalent Definition}{
+    Let $R$ be a commutative ring and $I\subseteq R$ be an ideal. Then $I$ is prime if and only if $R/I$ is an integral domain.
 }
 \dfn{Maximal Ideal}{
     Let $R$ be a commutative ring. An ideal $I\subseteq R$ is called \textbf{maximal} if
@@ -175,6 +279,9 @@
 \dfn{Radical Ideal}{
     An ideal $I$ is called a \textbf{radical ideal} if $I=\sqrt{I}$.
 }
+\prop{Radical Ideal Equivalent Definition}{
+    Let $R$ be a commutative ring and $I\subseteq R$ be an ideal. Then $I$ is radical if and only if $R/I$ is reduced.
+}
 \dfn{Nilradical}{
     The \textbf{nilradical} of $R$, denoted by $\mathfrak{N}_R$, is the radical ideal $\sqrt{0}$ consisting of all the nilpotent elements of $R$. We have
     \[
@@ -190,11 +297,19 @@
         \item $\sqrt{\mathfrak{p}^n}=\sqrt{\mathfrak{p}}=\mathfrak{p}$ for any prime ideal $\mathfrak{p}$, which means prime ideals are radical.
         \item Suppose the natural projection $\pi: R\to R/I$ induces a bijection between the set of ideals of $R$ containing $I$ and the set of ideals of $R/I$, denoted by $\tilde{\pi}:\mathcal{I}(R)\to\mathcal{I}(R/I)$. Then $\tilde{\pi}$ maps $\sqrt{I}$ to $\mathfrak{N}_{R/I}$.
         \item A commutative ring $R$ is reduced if and only if $\mathfrak{N}_R=(0)$. 
-        \item Let $R$ be a commutative ring and $I$ be an ideal of $R$. Then
-        \[
-        R/I \text{ is reduced }\iff I\text{ is radical}
-        \]
     \end{enumerate}
+}
+In summary, we have the following chain of inclusions:
+\[
+\left\{\text{maximal ideals of }R\right\} \subseteq \left\{\text{prime ideals of }R\right\} \subseteq \left\{\text{radical ideals of }R\right\} \subseteq \left\{\text{ideals of }R\right\}.
+\]
+\prop{Quotient Preserves Radical, Prime, Maximal Ideals}{
+    Let $R$ be a commutative ring and $I\subseteq R$ be a proper ideal. Then we have bijections between the following sets:
+    \begin{align*}
+        \left\{\text{ideals of }R\text{ containing }I\right\}&\longleftrightarrow\left\{\text{ideals of }R/I\right\}\\
+        J&\longmapsto J/I
+    \end{align*}
+    The ideal $J\supseteq I$ is radical, prime, or maximal if and only if $J/I$ is radical, prime, or maximal respectively.
 }
 
 \subsection{Prime Elements}
