@@ -124,16 +124,16 @@
     \begin{center}
         \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
             &   [-1.5em]                &[-1em] \circ \arrow[rdd, draw=cyan] \arrow[ldd, draw=cyan] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] & [-1em]                  \\
-            &                   & \varprojlim \arrow[ld, draw=arrowBlue, shorten <=-4pt] \arrow[rd, draw=arrowBlue, shorten <=-4pt]               &                   \\[-0.3cm]
+            &                   & \varprojlim \arrow[ld, draw=arrowBlue, shorten <=-4pt] \arrow[rd, draw=arrowBlue, shorten <=-3pt]               &                   \\[-0.3cm]
     \bullet & \bullet \arrow[l, shorten <=-3pt, shorten >=-3pt] &                                                 & \cdots \arrow[ll]
     \end{tikzcd}
 \end{center}
     & Direct Limit 
     \begin{center}
         \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-            &   [-1.5em]                &[-1em] \circ \arrow[rdd, draw=cyan] \arrow[ldd, draw=cyan] & [-1em]                  \\
-            &                   & \varinjlim \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[ld, draw=arrowBlue, shorten <=-4pt] \arrow[rd, draw=arrowBlue, shorten <=-4pt]               &                   \\[-0.3cm]
-    \bullet \arrow[r, shorten <=-3pt, shorten >=-3pt]& \bullet \arrow[rr] &                                                 & \cdots 
+            &   [-1.5em]                &[-1em] \circ  & [-1em]                  \\
+            &                   & \varinjlim \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]       &                   \\[-0.3cm]
+    \bullet \arrow[r, shorten <=-3pt, shorten >=-3pt]& \bullet  \arrow[ru, draw=arrowBlue, shorten >=-4pt]        \arrow[rr] \arrow[ruu, draw=cyan] &                                                 & \cdots \arrow[lu, draw=arrowBlue, shorten >=-3pt] \arrow[luu, draw=cyan]
     \end{tikzcd}
 \end{center}\\
     \hline
