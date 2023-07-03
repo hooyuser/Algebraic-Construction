@@ -289,10 +289,23 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 }
 
 \prop{Prime Ideal $\iff$ Maximal Ideal in PID}{
-    Let $R$ be a PID. Then every prime ideal in $R$ is maximal.
+    Let $R$ be a PID. Then every nonzero prime ideal in $R$ is maximal.
 }
 \proof{
     Let $I\subseteq R$ be a prime ideal. We only need to show $R/I$ is a field. Let $\overline{a}\in R/I$ be a nonzero element. Then $a\notin I$. Since $I$ is prime, $a$ is not a multiple of any prime element in $R$. Thus $a$ is irreducible. Since $R$ is a PID, $a$ is prime. Thus $\overline{a}$ is prime in $R/I$. Since $R/I$ is an integral domain, $\overline{a}$ is a maximal ideal in $R/I$. That implies $R/I$ is a field.
+}
+
+\section{Polynomial Ring}
+\dfn{Polynomial Ring}{
+    Let $R$ be a commutative ring. The \textbf{polynomial ring} in $n$ variables over $R$ is the ring $R[x_1,\cdots,x_n]$ defined as the set of all formal sums $$\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha$$ where $a_\alpha\in R$ satisfies $a_\alpha=0$ for all but finitely many $\alpha\in\mathbb{N}^n$ and $x^\alpha=x_1^{\alpha_1}\cdots x_n^{\alpha_n}$ for $\alpha=(\alpha_1,\cdots,\alpha_n)\in\mathbb{N}^n$. The addition and multiplication are defined as follows: $$\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha+\sum_{\alpha\in\mathbb{N}^n}b_\alpha x^\alpha=\sum_{\alpha\in\mathbb{N}^n}(a_\alpha+b_\alpha)x^\alpha$$ and $$\left(\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha\right)\left(\sum_{\beta\in\mathbb{N}^n}b_\beta x^\beta\right)=\sum_{\gamma\in\mathbb{N}^n}\left(\sum_{\alpha+\beta=\gamma}a_\alpha b_\beta\right)x^\gamma.$$
+}
+
+\prop{Properties of Polynomial Ring}{
+    Let $R$ be a commutative ring.
+    \begin{enumerate}
+        \item If $R$ is a UFD, then $R[x_1,\cdots.x_n]$ is a UFD.
+        \item $R$ is a field $\iff$ $R[x]$ is a PID $\iff$ $R[x]$ is an Euclidean domain.
+    \end{enumerate}
 }
 
 \section{Construction}
