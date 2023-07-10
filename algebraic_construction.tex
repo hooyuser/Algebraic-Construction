@@ -153,32 +153,182 @@
 \end{center}
 \chapter{Group}
 \section{Basic Concepts}
-
-\dfn{Commutator}{
-    Let $G$ be a group. Define a binary operation defined on $G$ as
-    \begin{align*}
-        [\cdot,\cdot]:G\times G &\longrightarrow G\\
-        (x,y) &\longmapsto [x,y]=xyx^{-1}y^{-1}
-    \end{align*}
-    $[x,y]$ is called the \textbf{commutator} of $x$ and $y$.
+\dfn{Group}{
+    A \textbf{group} is a set $G$ together with a binary operation $\cdot:G\times G\to G$ such that
+    \begin{enumerate}[label=(\roman*)]
+        \item (Associativity) $\forall x,y,z\in G$, $(x\cdot y)\cdot z=x\cdot(y\cdot z)$.
+        \item (Identity) $\exists e\in G$ such that $\forall x\in G$, $e\cdot x=x\cdot e=x$.
+        \item (Inverse) $\forall x\in G$, $\exists x^{-1}\in G$ such that $x\cdot x^{-1}=x^{-1}\cdot x=e$.
+    \end{enumerate}
+}
+Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
+\dfn{Opposite Group}{
+    Let $G=(G,*)$ be a group. The \textbf{opposite group} of $G$ is the group $G^{\mathrm{op}}=(G,*^{\mathrm{op}})$, where $*^{\mathrm{op}}:G\times G\to G$ is defined by $x*^{\mathrm{op}}y=y\cdot x$. If we consider $G$ as a category $\mathsf{B}G$, then we have category isomorphism
+    \[
+        \mathsf{B}G^{\mathrm{op}}\simeq (\mathsf{B}G)^{\mathrm{op}}.
+    \]
 }
 
-\prop{Properties of Commutator}{
-    Let $G$ be a group. Then
+\section{Group Action}
+\subsection{Definitions}
+\dfn{Group Action}{
+    Let $G$ be a group and $X$ be a set. A \textbf{group action} of $G$ on $X$ is a group homomorphism
+    \begin{align*}
+        \sigma:G&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}(X)\\
+        g&\longmapsto \sigma_g
+    \end{align*}
+    If $G$ acts on $X$ by $\sigma$, we say $(X,\sigma)$ is a \textbf{$G$-set}. If there is no ambiguity, we simply say $X$ is a $G$-set.
+}
+The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have category isomorphism
+\[
+    G\text{-}\mathsf{Set}\simeq\mathrm{Fun}(\mathsf{B}G, \mathsf{Set})    
+\]
+\prop{Equivalent Definition of Group Actions}{
+    Let $G$ be a group and $X$ be a set. A group action of $G$ on $X$ can be alternatively defined as a map
+    \begin{align*}
+        \cdot:G\times X&\longrightarrow X\\
+        (g,x)&\longmapsto g\cdot x
+    \end{align*}
+    such that
     \begin{enumerate}[label=(\roman*)]
-        \item $x$ commutes with $y$ if and only if $[x,y]=1$.
-        \item $[x,y]^{-1}=[y,x]$.
-        \item For any homomorphism $f:G\longrightarrow H$, $f([x,y])=[f(x),f(y)]$.
+        \item $\forall x\in X$, $e\cdot x=x$.
+        \item $\forall g,h\in G$, $\forall x\in X$, $(gh)\cdot x=g\cdot(h\cdot x)$.
+    \end{enumerate}
+    The equivalence of the two definitions is given by
+    \[
+    \sigma_g(x)=g\cdot x.
+    \]
+}
+We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
+\ex{Trivial Group Action}{
+    Let $G$ be a group and $X$ be a set. The \textbf{trivial group action} of $G$ on $X$ is defined as $\sigma_g=\mathrm{id}_X$ for all $g\in G$.
+}
+\ex{Acting on Subsets}{
+    If a group $G$ acts on a set $X$, then $G$ acts on the power set $\mathcal{P}(X)$ by
+    \[
+    g\cdot A=\{ g\cdot x\mid x\in A\}    .
+    \]
+}
+
+\dfn{Orbit of a Group Action}{
+    Let $G$ be a group acting on a set $X$. For $x\in X$, the \textbf{orbit} of $x$ is defined as 
+    \[
+    G x=\{ g\cdot x\mid g\in G\}    .
+    \]
+}
+\dfn{Orbit Space}{
+    Let $G$ be a group acting on a set $X$. The \textbf{orbit space} of $G$ acting on $X$ is defined as 
+    \[
+    X/G=\{ Gx\mid x\in X\}    .
+    \]
+}
+\prop{Orbit Decomposition}{
+    Let $G$ be a group acting on a set $X$. We define a equivalence relation $\sim$ on $X$ by
+    \[
+    x\sim y \iff Gx=Gy.
+    \]
+    Then the equivalence class of $x$ is exactly $Gx$. And we have a partition of $X$ by the orbits of $G$ acting on $X$
+    \[
+    X=\bigsqcup_{x\in X}Gx=X/G    .
+    \]
+}
+\proof{
+We can check that the equivalence class of $x$ is $Gx$. If $y\sim x$, then $y\in Gy=Gx$. If $y\in Gx$, then $Gy\subseteq Gx$ and $x\in Gy$. Note $x\in Gy$ implies $Gx\subseteq Gy$. We have $Gx=Gy$, i.e. $x\sim y$. 
+}
+
+If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
+\dfn{$G$-invariant element }{
+    Let $G$ be a group acting on a set $X$. An element $x\in X$ is called \textbf{$G$-invariant} if $Gx=\{ x\}$. The set of all $G$-invariant elements is denoted by $X^G$
+    \[
+      X^G=\{ x\in X\mid Gx=\{ x\} \}  .  
+    \]
+}
+
+\dfn{Stabilizer Subgroup}{
+    Let $G$ be a group acting on a set $X$. For $x\in X$, the \textbf{stabilizer subgroup} of of $G$ with respect to $x$ is defined as 
+    \[
+    \mathrm{Stab}_G(x)=\{ g\in G\mid g\cdot x=x\}    .
+    \]
+    It is easy to see that $\mathrm{Stab}_G(x)$ is a subgroup of $G$.
+}
+
+We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
+
+\dfn{Faithful Group Action}{
+    Let $G$ be a group acting on a set $X$. The action is called \textbf{faithful} if any of the following equivalent conditions holds
+    \begin{enumerate}[label=(\roman*)]
+        \item $G\to \mathrm{Aut}_{\mathsf{Set}}(X)$ is injective.
+        \item $\bigcap\limits_{x\in X}\mathrm{Stab}_G(x)=\{ 1_G\}$.
+        \item $\forall x\in X,\;g\cdot x=x\implies g=1_G$.
     \end{enumerate}
 }
 
-\dfn{Left Multiplication Action}{
+\dfn{Free Group Action}{
+    Let $G$ be a group acting on a set $X$. The action is called \textbf{free} if any of the following equivalent conditions holds
+    \begin{enumerate}[label=(\roman*)]
+        \item For all $x\in X$, $\mathrm{Stab}_G(x)=\{ 1_G\}$ .
+        \item $\exists x\in X,\;g\cdot x=x\implies g=1_G$.
+    \end{enumerate}
+}
+
+\dfn{Transitive Group Action}{
+    Let $G$ be a group acting on a set $X$. The action is called \textbf{transitive} if any of the following equivalent conditions holds
+    \begin{enumerate}[label=(\roman*)]
+        \item For any $x,y\in X$, there exists $g\in G$ such that $g\cdot x=y$.
+        \item $X$ has only one orbit, i.e. $X= Gx$ for any $x\in X$.
+    \end{enumerate}
+    If $G$ acts transitively on $X$, then $X$ is called a \textbf{homogeneous space} for $G$.
+}
+
+\dfn{Regular Group Action}{
+    Let $G$ be a group acting on a set $X$. The action is called \textbf{regular} if any of the following equivalent conditions holds
+    \begin{enumerate}[label=(\roman*)]
+        \item The action is transitive and free.
+        \item For any $x,y\in X$, there exists unique $g\in G$ such that $g\cdot x=y$.
+    \end{enumerate}
+    If $G$ acts regularly on $X$, then $X$ is called a \textbf{principal homogeneous space} for $G$ or a $G$-\textbf{torsor}.
+}
+
+\subsection{Coset}
+\ex{Left Multiplication Action}{
     Let $G$ be a group. The \textbf{left multiplication action} of $G$ on itself is defined as 
     \begin{align*}
-        G &\longrightarrow \mathrm{Aut}(G)\\
+        m^L:G &\longrightarrow \mathrm{Aut}(G)\\
         g &\longmapsto ( x\longmapsto gx)
     \end{align*}
 }
+\ex{Right Multiplication Action}{
+    Let $G$ be a group. The \textbf{right multiplication action} of $G$ on itself is defined as 
+    \begin{align*}
+        m^R:G^\circ &\longrightarrow \mathrm{Aut}(G)\\
+        g &\longmapsto ( x\longmapsto xg)
+    \end{align*}
+}
+\dfn{Left Cosets}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. $H^\circ$ can act on $G$ through $H^\circ\hookrightarrow G^\circ\stackrel{m^R}{\longrightarrow} \mathrm{Aut}(G)$, namely
+    \begin{align*}
+        H^\circ &\longrightarrow \mathrm{Aut}(G)\\
+        h &\longmapsto  (g\longmapsto gh)
+    \end{align*}
+    The orbit of $g$ under $H^\circ$ is called the \textbf{left coset} of $H$ containing $g$, denoted by $gH$
+    \[
+        gH = H^\circ g = \{ gh\mid h\in H\}.
+    \]
+    The set of all left cosets of $H$ is denoted by $G/H^L$, called the left coset space of $G$ modulo $H$.
+}
+\dfn{Right Cosets}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. $H$ can act on $G$ through $H\hookrightarrow G\stackrel{m^L}{\longrightarrow} \mathrm{Aut}(G)$, namely
+    \begin{align*}
+        H &\longrightarrow \mathrm{Aut}(G)\\
+        h &\longmapsto  (g\longmapsto hg)
+    \end{align*}
+    The orbit of $g$ under $H$ is called the \textbf{right coset} of $H$ containing $g$, denoted by $Hg$
+    \[
+        Hg = \{ hg\mid h\in H\},
+    \]
+    which matches notation of orbit. The set of all right cosets of $H$ is denoted by $G/H^R$, called the right coset space of $G$ modulo $H$.
+}
+\subsection{Conjugacy Action}
 \dfn{Conjugacy Action and Inner Automorphism Group}{
     Let $G$ be a group. The \textbf{conjugacy action} of $G$ on itself is defined as 
     \begin{align*}
@@ -204,6 +354,30 @@
             G \arrow[r, hook, "\iota"']                      \& H                             
         \end{tikzcd}
     \]
+}
+\dfn{Conjugacy Class}{
+    Let $G$ be a group. The orbit of $a$ under conjugacy action is called the \textbf{conjugacy class} of $a$, denoted by 
+    \[
+      \mathrm{Cl}(a)=\{ gag^{-1}\mid x\in G   \}.
+    \]
+    Two elements $a,b\in G$ are called \textbf{conjugate} if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
+}
+\dfn{Centralizer}{
+    Let $G$ be a group and $S$ be a subset of $G$. The \textbf{centralizer} of $S$ in $G$ is defined as 
+    \[
+        \mathrm{C}_G(S)=\left\{g\in G\mid  \forall s\in S,\;gs=sg\right\}.
+    \]
+    The centralizer of $\{x\}$ is the stabilizer subgroup of $x$ under conjugacy action, denoted by 
+    \[
+      \mathrm{C}_G(x)=\{ g\in G\mid gxg^{-1}=x   \}.
+    \]
+}
+\prop{Properties of Conjugacy Class}{
+    Let $G$ be a group. Then the following are true:
+    \begin{enumerate}[label=(\roman*)]
+        \item $a\sim b$ if and only if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
+        \item $\mathrm{Cl}(a)=\{ a\}$ if and only if $a\in Z(G)$.
+    \end{enumerate}
 }
 \dfn{Normal Subgroup}{
     Let $G$ be a group. A subgroup $H$ of $G$ is called a \textbf{normal subgroup} if $gHg^{-1}=H$ for all $g\in G$.
@@ -241,11 +415,15 @@
     \]
 }
 \dfn{Word Map}{
-    Let $G$ be a group. A \textbf{word map} is a map $w:G^n\longrightarrow G$ defined by 
+    Suppose $G$ is a group and 
     $$
-    w(x_1,\cdots,x_n)=x_1^{\alpha_1}\cdots x_n^{\alpha_n},
-    $$ 
-    where $\alpha_i\in\mathbb{Z}$ for all $i$.
+    x=x_{i_1}^{\alpha_{1}}\cdots x_{i_m}^{\alpha_{m}}\in F\langle x_1,\cdots,x_n\rangle
+    $$
+    is a reduced word in a free group of rank $n$, where $\alpha_k\in\mathbb{Z}-\{0\}$ for $k=1,2,\cdots,m$. The \textbf{word map} induced by $x$ is defined as a map
+    \begin{align*}
+        w_x:G^m &\longrightarrow G\\
+        (g_1,\cdots,g_m) &\longmapsto g_{i_1}^{\alpha_1}\cdots g_{i_m}^{\alpha_m}.
+    \end{align*}
 }
 \dfn{Verbal Subgroup}{
     Let $G$ be a group and $\mathcal{W}$ be a collection of word maps. A subgroup $H\le G$ is called a \textbf{verbal subgroup} if $H$ is the subgroup generated by
@@ -253,11 +431,48 @@
     \left\{ w(g_1,\cdots,g_n)\mid w\in\mathcal{W},\; g_i\in G \right\}.
     $$
 }
+\dfn{Commutator}{
+    Let $G$ be a group. Define a binary operation defined on $G$ as
+    \begin{align*}
+        [\cdot,\cdot]:G\times G &\longrightarrow G\\
+        (x,y) &\longmapsto [x,y]=xyx^{-1}y^{-1}
+    \end{align*}
+    $[x,y]$ is called the \textbf{commutator} of $x$ and $y$.
+}
+\prop{Properties of Commutator}{
+    Let $G$ be a group. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $x$ commutes with $y$ if and only if $[x,y]=1_G$.
+        \item $[x,y]^{-1}=[y,x]$.
+        \item For any homomorphism $f:G\to H$, $f([x,y])=[f(x),f(y)]$.
+    \end{enumerate}
+}
 \prop{}{
     \[
         \left\{\text{verbal subgroups}\right\}\subseteq \left\{\text{fully characteristic subgroups}\right\}\subseteq \left\{\text{characteristic subgroups}\right\}\subseteq\left\{\text{normal subgroups}\right\}.
     \]
 }
+
+\dfn{Normalizer}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{normalizer} of $H$ in $G$ is defined as 
+    $$
+    N_G(H)=\left\{ g\in G\mid gHg^{-1}=H \right\}.
+    $$ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \chapter{Abelian Group}
 \section{Basic Concepts}
 \dfn{Abelian Group}{
