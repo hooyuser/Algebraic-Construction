@@ -20,13 +20,13 @@
 \begin{center}
 	~\\
 	\vspace{6em}
-	\textsc{\Huge ALGEBRAIC CONSTRUCTION}
+	{\fontsize{34}{48}\selectfont\textsc{Algebraic Construction}}
 	~\\
 	\vspace{2.5em}
 	{\Large }
 	~\\
 	\vspace{6em}
-	\textsf{Huyi Chen}
+	\textsf{\Large Huyi Chen}
 	~\\
 	\vspace{5in}
 	{\large Latest Update: \today}
@@ -60,13 +60,25 @@
 \begin{center}
 \Large
 \renewcommand{\arraystretch}{1.5}
-\begin{tabular}{|P{4.3cm}|m{5.2cm}|m{5.2cm}|}
+\begin{tabular}{|P{4.4cm}|m{5.3cm}|m{5.3cm}|}
     \hline
     {\bf Diagram} &\multicolumn{1}{c|}{\bf  Limit }& \multicolumn{1}{c|}{\bf Colimit } \\ 
     \hline\hline
-    Empty Category $\varnothing$ & Terminal Object & Initial Object\\ 
+    Empty Category $\varnothing$ & Terminal Object
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+            \circ \arrow[r, dash pattern=on 4pt off 2pt, draw=arrowRed] & \varprojlim\\[-2em]
+        \end{tikzcd}
+    \end{center}
+    & Initial Object
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+             \varinjlim\arrow[r, dash pattern=on 4pt off 2pt, draw=arrowRed]&\circ  \\[-2em]
+        \end{tikzcd}
+    \end{center}
+    \\ 
     \hline
-    Discrete Category  $\bullet\;\bullet\;\bullet\;\bullet\,\cdots$& Product & Coproduct \\
+    Discrete Category  $\bullet\;\bullet\;\bullet\;\bullet\;\cdots$& Product & Coproduct \\
     \hline
     $\bullet\qquad\bullet$ & Finite Product
     \begin{center}
@@ -116,7 +128,7 @@
             \end{tikzcd}
         \end{center}\\
     \hline
-        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt, shorten <=-4pt, shorten >=-4pt}]
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt, shorten <=-3.5pt, shorten >=-3.5pt}]
             \bullet &[-1.5em] \bullet \arrow[l] &[-1.5em] \bullet \arrow[l] &[-1.5em] \cdots \arrow[l]
         \end{tikzcd}
     
@@ -133,7 +145,7 @@
         \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
             &   [-1.5em]                &[-1em] \circ  & [-1em]                  \\
             &                   & \varinjlim \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]       &                   \\[-0.3cm]
-    \bullet \arrow[r, shorten <=-3pt, shorten >=-3pt]& \bullet  \arrow[ru, draw=arrowBlue, shorten >=-4pt]        \arrow[rr] \arrow[ruu, draw=cyan] &                                                 & \cdots \arrow[lu, draw=arrowBlue, shorten >=-3pt] \arrow[luu, draw=cyan]
+    \bullet \arrow[r, shorten <=-3pt, shorten >=-3pt]& \bullet  \arrow[ru, draw=arrowBlue, shorten >=-4.7pt]        \arrow[rr] \arrow[ruu, draw=cyan] &                                                 & \cdots \arrow[lu, draw=arrowBlue, shorten >=-2.5pt] \arrow[luu, draw=cyan]
     \end{tikzcd}
 \end{center}\\
     \hline
@@ -142,8 +154,117 @@
 \chapter{Group}
 \section{Basic Concepts}
 
+\dfn{Commutator}{
+    Let $G$ be a group. Define a binary operation defined on $G$ as
+    \begin{align*}
+        [\cdot,\cdot]:G\times G &\longrightarrow G\\
+        (x,y) &\longmapsto [x,y]=xyx^{-1}y^{-1}
+    \end{align*}
+    $[x,y]$ is called the \textbf{commutator} of $x$ and $y$.
+}
+
+\prop{Properties of Commutator}{
+    Let $G$ be a group. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $x$ commutes with $y$ if and only if $[x,y]=1$.
+        \item $[x,y]^{-1}=[y,x]$.
+        \item For any homomorphism $f:G\longrightarrow H$, $f([x,y])=[f(x),f(y)]$.
+    \end{enumerate}
+}
+
+\dfn{Left Multiplication Action}{
+    Let $G$ be a group. The \textbf{left multiplication action} of $G$ on itself is defined as 
+    \begin{align*}
+        G &\longrightarrow \mathrm{Aut}(G)\\
+        g &\longmapsto ( x\longmapsto gx)
+    \end{align*}
+}
+\dfn{Conjugacy Action and Inner Automorphism Group}{
+    Let $G$ be a group. The \textbf{conjugacy action} of $G$ on itself is defined as 
+    \begin{align*}
+        \gamma:G &\longrightarrow \mathrm{Aut}(G)\\
+        g &\longmapsto (\gamma_g: x\longmapsto gxg^{-1})
+    \end{align*}
+    The \textbf{inner automorphism group} of $G$ is defined as 
+    $$
+    \mathrm{Inn}(G)=\gamma(G)=\{ \gamma_g\mid g\in G\},
+    $$ 
+    which is a subgroup of $\mathrm{Aut}(G)$.
+}
+\prop{Equivalent Characterization of Inner Automorphisms}{
+    Let $G$ be a group and $\varphi \in \mathrm{Aut}(G)$. Then $\varphi \in \mathrm{Inn}(G)$ if and only if $\varphi$ satisfies the property: 
+    \[
+        \text{$G$ is embedded in a group $H$} \implies \text{$\varphi$ extends to an automorphism of $H$}.
+    \]
+    To be specific, the property can be stated as: for any monomophism $\iota:G\hookrightarrow H$,
+    there exists $\psi\in \mathrm{Aut}(H)$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            G \arrow[r, hook, "\iota"] \arrow[d, "\varphi"'] \& H \arrow[d, "\psi"] \\
+            G \arrow[r, hook, "\iota"']                      \& H                             
+        \end{tikzcd}
+    \]
+}
+\dfn{Normal Subgroup}{
+    Let $G$ be a group. A subgroup $H$ of $G$ is called a \textbf{normal subgroup} if $gHg^{-1}=H$ for all $g\in G$.
+}
+\prop{Equivalent Definition of Normal Subgroup}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $H$ is a normal subgroup of $G$.
+        \item $\forall \gamma_g \in\mathrm{Inn}(G)$, $\gamma_g(H)\subseteq H$.
+        \item $gHg^{-1}\subseteq H$ for all $g\in G$.
+        \item $gHg^{-1}=H$ for all $g\in G$.
+        \item $gH=Hg$ for all $g\in G$.
+    \end{enumerate}
+}
+\dfn{Outer Automorphism Group}{
+    Let $G$ be a group. Then we have $\mathrm{Inn}(G) \triangleleft \mathrm{Aut}(G)$. And the \textbf{outer automorphism group} of $G$ is defined as 
+    $$
+    \mathrm{Out}(G)=\mathrm{Aut}(G)/\mathrm{Inn}(G).
+    $$ 
+}
+\dfn{Characteristic Subgroup}{
+    Let $G$ be a group. A subgroup $H\le G$ is called a \textbf{characteristic subgroup} if 
+    \[
+        \forall \varphi \in\mathrm{Aut}(G),\; \varphi(H)\subseteq H.
+    \]
+    It would be equivalent to require the stronger condition that $\forall \varphi \in\mathrm{Aut}(G)$, $\varphi(H)= H$, because 
+    \[
+        \varphi(H)\subseteq H\implies \varphi^{-1}(H)\subseteq H\implies H\subseteq \varphi(H).
+    \]
+}
+\dfn{Fully Characteristic Subgroup}{
+    Let $G$ be a group. A subgroup $H\le G$ is called a \textbf{fully characteristic subgroup} if 
+    \[
+        \forall \varphi \in\mathrm{End}(G),\; \varphi(H)\subseteq H.
+    \]
+}
+\dfn{Word Map}{
+    Let $G$ be a group. A \textbf{word map} is a map $w:G^n\longrightarrow G$ defined by 
+    $$
+    w(x_1,\cdots,x_n)=x_1^{\alpha_1}\cdots x_n^{\alpha_n},
+    $$ 
+    where $\alpha_i\in\mathbb{Z}$ for all $i$.
+}
+\dfn{Verbal Subgroup}{
+    Let $G$ be a group and $\mathcal{W}$ be a collection of word maps. A subgroup $H\le G$ is called a \textbf{verbal subgroup} if $H$ is the subgroup generated by
+    $$
+    \left\{ w(g_1,\cdots,g_n)\mid w\in\mathcal{W},\; g_i\in G \right\}.
+    $$
+}
+\prop{}{
+    \[
+        \left\{\text{verbal subgroups}\right\}\subseteq \left\{\text{fully characteristic subgroups}\right\}\subseteq \left\{\text{characteristic subgroups}\right\}\subseteq\left\{\text{normal subgroups}\right\}.
+    \]
+}
 \chapter{Abelian Group}
 \section{Basic Concepts}
+\dfn{Abelian Group}{
+    An \textbf{abelian group} is a group $G$ such that $G$ is commutative. That is, for all $a,b\in G$, $ab=ba$.
+}
+
+An Abelian group is a $\mathbb{Z}$-module and we have category isomorphism $\mathsf{Ab}\cong\mathbb{Z}\raisebox{0.22ex}{-}\mathsf{Mod}$.
 
 \chapter{Ring}
 \section{Basic Concepts}
@@ -159,7 +280,9 @@
         \end{align*}
     \end{enumerate}
 }
-
+A ring is a monoid object in the category $\mathsf{Ab}$. In other words, a ring is an $\mathsf{Ab}$-enriched category with only one object.\\
+A ring $R$ is an $R$-module over itself.\\
+A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 \dfn{Unit Group of a Ring}{
     Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$.
 }
@@ -838,6 +961,25 @@ Hence we have
 By the uniqueness of the universal property of $M_f$, we have $\mu_f=\nu\circ \psi_f$. If there exists another $\nu'$ such that $\mu_f=\nu'\circ \psi_f$, there must be $\nu'\circ \varphi_S=\nu'\circ \psi_f \circ\varphi_f=\mu_f \circ\varphi_f=\nu\circ \varphi_S$. The uniqueness of such $\nu$ forces $\nu=\nu'$.\\
 Therefore we show that $ S^{-1}M\cong \varinjlim_{f\in S}M_f$.
 }
+
+\chapter{Associate Algebra}
+
+\section{Basic Properties}
+\dfn{Associative $R$-algebra}{
+    Let $R$ be a commutative ring. An \textbf{associative $R$-algebra} is a ring $A$ together with a ring homomorphism $\varphi:R\to Z(A)$, which makes $A$ an $R$-module by defining 
+    $$
+    r\cdot a=\varphi(r)a
+    $$
+    for all $r\in R$ and $a\in A$.
+    We usually call associative $R$-algebra as $R$-algebra for short.
+}
+We can check that 
+\[
+  r\cdot (ab)=\varphi(r)ab=(r\cdot a)b=a\varphi(r)b =a(r\cdot b).
+\]
+
+
+
 % \begin{Theorem}{Title}{label}
 %     This is the statement of the theorem.
 % \end{Theorem}
