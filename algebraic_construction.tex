@@ -165,7 +165,167 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 \dfn{Opposite Group}{
     Let $G=(G,*)$ be a group. The \textbf{opposite group} of $G$ is the group $G^{\mathrm{op}}=(G,*^{\mathrm{op}})$, where $*^{\mathrm{op}}:G\times G\to G$ is defined by $x*^{\mathrm{op}}y=y\cdot x$. If we consider $G$ as a category $\mathsf{B}G$, then we have category isomorphism
     \[
-        \mathsf{B}G^{\mathrm{op}}\simeq (\mathsf{B}G)^{\mathrm{op}}.
+        \mathsf{B}G^{\mathrm{op}}\cong (\mathsf{B}G)^{\mathrm{op}}.
+    \]
+}
+\dfn{Subgroup}{
+    Let $G$ be a group. A subset $H$ of $G$ is called a \textbf{subgroup} of $G$ if $H$ is a group with respect to the binary operation of $G$. In this case, we write $H\le G$.
+}
+
+
+\section{Group Homomorphism}
+\dfn{Group Homomorphism}{
+    Let $G,H$ be groups. A \textbf{group homomorphism} from $G$ to $H$ is a function $\varphi:G\to H$ such that
+    \[
+        \forall x,y\in G,\quad \varphi(x y)=\varphi(x)\varphi(y).
+    \]
+}
+\dfn{Isomorphism}{
+    Let $G,H$ be groups. A group homomorphism $\varphi:G\to H$ is called an \textbf{isomorphism} if $\varphi$ is bijective. In this case, we say that $G$ and $H$ are \textbf{isomorphic} and write $G\cong H$.
+}
+\prop{Properties of Group Homomorphisms}{
+    Let $G,H$ be groups and $\varphi:G\to H$ be a group homomorphism. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $\varphi(1_G)=1_H$.
+        \item $\forall x\in G$, $\varphi(x^{-1})=\varphi(x)^{-1}$.
+        \item $\forall n\in\mathbb{Z}$, $\varphi(x^n)=\varphi(x)^n$.
+        \item If $K\le G$ , then $\varphi(K)\le H$.
+        \item If $K\le H$, then $\varphi^{-1}(K)\le G$.
+    \end{enumerate}
+}
+\dfn{Kernel of Group Homomorphism}{
+    Let $\varphi:G\to H$ be a group homomorphism. The \textbf{kernel} of $\varphi$ is defined by
+    \[
+        \ker\varphi=\{x\in G\mid \varphi(x)=1_H\}.
+    \]
+}
+\prop{Property of Kernel}{
+    Let $G$ be a group. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item Let $\varphi:G\to H$ be a group homomorphism. Then $\varphi$ is injective if and only if $\ker\varphi=\{1_G\}$.
+    \end{enumerate}
+}
+\dfn{Normal Subgroup}{
+    Let $G$ be a group. A subgroup $H$ of $G$ is called a \textbf{normal subgroup} if $gHg^{-1}=H$ for all $g\in G$. In this case, we write $H\lhd G$.
+}
+\prop{Equivalent Definition of Normal Subgroup}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $H$ is a normal subgroup of $G$.
+        \item $\forall \gamma_g \in\mathrm{Inn}(G)$, $\gamma_g(H)\subseteq H$.
+        \item $gHg^{-1}\subseteq H$ for all $g\in G$.
+        \item $gHg^{-1}=H$ for all $g\in G$.
+        \item $gH=Hg$ for all $g\in G$.
+        \item $H$ is a union of conjugacy classes.
+        \item $H=\ker\varphi$ for some group homomorphism $\varphi:G\to K$.
+    \end{enumerate}
+}
+\prop{Properties of Normal Subgroup}{
+    Let $G$ be a group.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\{1_G\}$ and $G$ are normal subgroups of $G$.
+        \item If $H\le K\le G$ and $H\lhd G$, then $H\lhd K$.
+        \item If $H\lhd_{\rm char} K\lhd G$, then $H\lhd G$.
+        \item Normality is preserved under surjective homomorphisms: if $f:G \rightarrow H$ is a surjective group homomorphism and $N\lhd G$, then $f(N)\lhd H$.
+        \item Normality is preserved by taking inverse images of homomorphisms: if $f:G \rightarrow H$ is a group homomorphism and $N\lhd H$, then $f^{-1}(N)\lhd G$.
+        \item Normality is preserved on taking finite products: if $N_1 \lhd G_1$ and $N_2 \lhd G_2$, then $N_1 \times N_2 \lhd G_1 \times G_2$.
+        \item Given two normal subgroups, $N$ and $M$, of $G$, their intersection $N \cap M$ and their product $N M=\{n m: n \in N$ and $m \in M\}$ are also normal subgroups of $G$.
+    \end{enumerate}
+}
+\dfn{Simple Group}{
+    A group $G$ is called \textbf{simple} if $G$ is nontrivial and the only normal subgroups of $G$ are $\{1_G\}$ and $G$.
+}
+\dfn{Normalizer}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{normalizer} of $H$ in $G$ is defined as 
+    $$
+    N_G(H)=\left\{ g\in G\mid gHg^{-1}=H \right\}.
+    $$ 
+}
+\prop{Properties of Normalizer}{
+    Let $G$ be a group and $H$ be a subset of $G$. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $\mathrm{N}_G(H)$ is a subgroup of $G$.
+        \item If $H\le G$, then $\mathrm{N}_G(H)$ is the largest subgroup of $G$ in which $H$ is normal. That is, if $H\lhd K\le G$, then $K\le \mathrm{N}_G(H)$.
+    \end{enumerate}
+}
+\dfn{Centralizer}{
+    Let $G$ be a group and $S$ be a subset of $G$. The \textbf{centralizer} of $S$ in $G$ is defined as 
+    \[
+        \mathrm{C}_G(S)=\left\{g\in G\mid  \forall s\in S,\;gs=sg\right\}.
+    \]
+    The centralizer of $\{x\}$ is the stabilizer subgroup of $x$ under conjugacy action, denoted by 
+    \[
+      \mathrm{C}_G(x)=\{ g\in G\mid gx=xg \}=\{ g\in G\mid gxg^{-1}=x \},
+    \]
+    which equals $\mathrm{N}_G(x)$.
+}
+\prop{Properties of Centralizer}{
+    Let $G$ be a group and $H$ be a subset of $G$. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $\mathrm{C}_G(H)\lhd \mathrm{N}_G(H)\le G$.
+    \end{enumerate}
+}
+\dfn{Center of a Group}{
+    Let $G$ be a group. The \textbf{center} of $G$ is defined as the centralizer of $G$ in $G$, denoted by
+    \[
+        Z_G=\mathrm{C}_G(G)=\{ g\in G\mid \forall x\in G,\; gx=xg\}.
+    \]
+}
+\thm{N/C Theorem}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. Define
+    \begin{align*}
+        \Psi: \mathrm{N}_G(H) &\longrightarrow \mathrm{Aut}(H)\\
+        g &\longmapsto \gamma_g|_H
+    \end{align*}
+    Then we have $\ker\Psi=\mathrm{C}_G(H)$ and $\mathrm{N}_G(H)/\mathrm{C}_G(H) \cong \mathrm{Im}\Psi\le \mathrm{Aut}(H)$.
+}
+\thm{Fundamental Theorem on Homomorphisms}{
+    Let $G,H$ be groups and $\varphi:G\to H$ be a group homomorphism. Define natural projection 
+    \begin{align*}
+        \pi:G&\longrightarrow G/\ker\varphi\\
+        g&\longmapsto g\ker\varphi
+    \end{align*}
+    Then there exists a unique group homomorphism $\overline{\varphi}:G/\ker\varphi\to H$ such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            G \arrow[r, "\varphi"] \arrow[d, "\pi"'] \& H \\[0.3cm]
+            G/\ker\varphi \arrow[ru, dashed, "\exists!\,\overline{\varphi}"'] \&  
+        \end{tikzcd}
+    \end{center}
+    Moreover, $\overline{\varphi}$ is injective and we have $ G/\ker\varphi\cong \mathrm{im}\varphi$.
+}
+\cor{First isomorphism theorem}{
+    Let $G,H$ be groups and $\varphi:G\to H$ be surjective group homomorphism. Then $G/\ker\varphi\cong H$.
+}
+
+\prop{Universal Property of Quotient Group}{
+    Let $G$ be a group and $N \lhd G$ be a normal subgroup. Suppose $\pi:G\to G/N$ is the natural projection. Then $\pi$ is initial in the category of group homomorphisms $\varphi:G\to H$ such that $N\subseteq \ker\varphi$. \\
+    That is, for any group $H$ and group homomorphism $\varphi:G\to H$ such that $N\subseteq \ker\varphi$, there exists a unique group homomorphism $\widetilde{\varphi}:G/N\to H$ such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            G \arrow[r, "\varphi"] \arrow[d, "\pi"'] \& H \\[0.3cm]
+            G/N \arrow[ru, dashed, "\exists !\,\widetilde{\varphi}"'] \&  
+        \end{tikzcd}
+    \end{center}
+}
+\proof{
+    Since $N\subseteq \ker\varphi$, there is a canonical projection 
+    \begin{align*}
+        p:G/N &\longrightarrow G/\ker\varphi\\
+        gN &\longmapsto g\ker\varphi
+    \end{align*}
+    According to the following diagram, we can define $\widetilde{\varphi}$ by $\widetilde{\varphi}=\overline{\varphi}\circ p$.
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            G \arrow[r, "\varphi"] \arrow[d, "\pi"'] \& H \\[0.4cm]
+            G/N \arrow[ru, dashed, "\widetilde{\varphi}"'] \arrow[r,"p"'] \&  G/\ker\varphi \arrow[u, dashed, "\overline{\varphi}"']
+        \end{tikzcd}
+    \end{center}
+}
+\thm{Second Isoomorphism Theorem}{
+    Let $G$ be a group and $H,K$ be subgroups of $G$. Then $HK$ is a subgroup of $G$ and $H\cap K$ is a normal subgroup of $H$. Moreover, we have
+    \[
+        HK/H\cong K/(H\cap K).
     \]
 }
 
@@ -181,7 +341,7 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 }
 The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have category isomorphism
 \[
-    G\text{-}\mathsf{Set}\simeq\mathrm{Fun}(\mathsf{B}G, \mathsf{Set})    
+    G\text{-}\mathsf{Set}\cong\mathrm{Fun}(\mathsf{B}G, \mathsf{Set})    
 \]
 \prop{Equivalent Definition of Group Actions}{
     Let $G$ be a group and $X$ be a set. A group action of $G$ on $X$ can be alternatively defined as a map
@@ -328,6 +488,12 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \]
     which matches notation of orbit. The set of all right cosets of $H$ is denoted by $G/H^R$, called the right coset space of $G$ modulo $H$.
 }
+\dfn{Index of Subgroup}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{index} of $H$ in $G$ is defined as the cardinality of $G/H^L$ or $G/H^R$, denoted by $[G:H]$.
+}
+\thm{Lagrange's Theorem}{
+    Let $G$ be a finite group and $H$ be a subgroup of $G$. Then $|G|=|H|[G:H]$.
+}
 \subsection{Conjugacy Action}
 \dfn{Conjugacy Action and Inner Automorphism Group}{
     Let $G$ be a group. The \textbf{conjugacy action} of $G$ on itself is defined as 
@@ -362,16 +528,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \]
     Two elements $a,b\in G$ are called \textbf{conjugate} if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
 }
-\dfn{Centralizer}{
-    Let $G$ be a group and $S$ be a subset of $G$. The \textbf{centralizer} of $S$ in $G$ is defined as 
-    \[
-        \mathrm{C}_G(S)=\left\{g\in G\mid  \forall s\in S,\;gs=sg\right\}.
-    \]
-    The centralizer of $\{x\}$ is the stabilizer subgroup of $x$ under conjugacy action, denoted by 
-    \[
-      \mathrm{C}_G(x)=\{ g\in G\mid gxg^{-1}=x   \}.
-    \]
-}
+
 \prop{Properties of Conjugacy Class}{
     Let $G$ be a group. Then the following are true:
     \begin{enumerate}[label=(\roman*)]
@@ -379,21 +536,10 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
         \item $\mathrm{Cl}(a)=\{ a\}$ if and only if $a\in Z(G)$.
     \end{enumerate}
 }
-\dfn{Normal Subgroup}{
-    Let $G$ be a group. A subgroup $H$ of $G$ is called a \textbf{normal subgroup} if $gHg^{-1}=H$ for all $g\in G$.
-}
-\prop{Equivalent Definition of Normal Subgroup}{
-    Let $G$ be a group and $H$ be a subgroup of $G$. Then the following are equivalent:
-    \begin{enumerate}[label=(\roman*)]
-        \item $H$ is a normal subgroup of $G$.
-        \item $\forall \gamma_g \in\mathrm{Inn}(G)$, $\gamma_g(H)\subseteq H$.
-        \item $gHg^{-1}\subseteq H$ for all $g\in G$.
-        \item $gHg^{-1}=H$ for all $g\in G$.
-        \item $gH=Hg$ for all $g\in G$.
-    \end{enumerate}
-}
+
+
 \dfn{Outer Automorphism Group}{
-    Let $G$ be a group. Then we have $\mathrm{Inn}(G) \triangleleft \mathrm{Aut}(G)$. And the \textbf{outer automorphism group} of $G$ is defined as 
+    Let $G$ be a group. Then we have $\mathrm{Inn}(G) \lhd \mathrm{Aut}(G)$. And the \textbf{outer automorphism group} of $G$ is defined as 
     $$
     \mathrm{Out}(G)=\mathrm{Aut}(G)/\mathrm{Inn}(G).
     $$ 
@@ -432,7 +578,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     $$
 }
 \dfn{Commutator}{
-    Let $G$ be a group. Define a binary operation defined on $G$ as
+    Let $G$ be a group. The word map induced by $xyx^{-1}y^{-1}$ is a binary operation defined on $G$, denoted by
     \begin{align*}
         [\cdot,\cdot]:G\times G &\longrightarrow G\\
         (x,y) &\longmapsto [x,y]=xyx^{-1}y^{-1}
@@ -448,18 +594,41 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \end{enumerate}
 }
 \prop{}{
+    According to the extent that a subgroup is preserved by endomorphisms, we have the following inclusions
     \[
         \left\{\text{verbal subgroups}\right\}\subseteq \left\{\text{fully characteristic subgroups}\right\}\subseteq \left\{\text{characteristic subgroups}\right\}\subseteq\left\{\text{normal subgroups}\right\}.
     \]
 }
-
-\dfn{Normalizer}{
-    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{normalizer} of $H$ in $G$ is defined as 
+\dfn{Commutator Subgroup}{
+    Let $G$ be a group. The \textbf{commutator subgroup} or \textbf{derived subgroup} of $G$ is the subgroup generated by all the commutators, denoted by
     $$
-    N_G(H)=\left\{ g\in G\mid gHg^{-1}=H \right\}.
-    $$ 
+    [G,G]=\langle \left\{[x,y]\mid x,y\in G \right\}\rangle.
+    $$
+}
+\prop{Properties of Commutator Subgroup}{
+    Let $G$ be a group. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $[G,G]$ is a verbal subgroup with $\mathcal{W}=\left\{ [\cdot,\cdot] \right\}$. Hence $[G,G]\lhd G$.
+        \item $[G,G]$ is the smallest normal subgroup of $G$ such that $G/[G,G]$ is abelian.
+        \item $[G,G]=\{1_G\}$ if and only if $G$ is abelian.
+    \end{enumerate}
 }
 
+\dfn{Abelianization}{
+    Let $G$ be a group. The \textbf{abelianization} of $G$ is defined as the quotient group
+    $$
+    G^{\mathrm{ab}}=G/[G,G].
+    $$
+}
+\prop{Universal Property of Abelianization}{
+    Let $G$ be a group and $A$ be an abelian group. Then any group homomorphism $f:G\to A$ factors through $G^{\mathrm{ab}}$ uniquely, that is, there exists a unique homomorphism $\bar{f}:G^{\mathrm{ab}}\to A$ such that the following diagram commutes
+    $$
+    \begin{tikzcd}[ampersand replacement=\&]
+        G \arrow[rr, "f"] \arrow[rd] \&  \& A \\
+        \& G^{\mathrm{ab}} \arrow[ru, "\bar{f}"'] \& 
+    \end{tikzcd}
+    $$
+}
 
 
 
@@ -997,7 +1166,7 @@ As a map between objects, $\mathcal{M}$ specifies an abelian group $M$. and a ri
 \]
 to be the category of all functors between $\mathsf{Ab}$-enriched categories $\mathsf{B}R$ and $\mathsf{Ab}$. Then we have category isomorphism 
 \[
-    \mathrm{Rep}(R)\simeq R\text{-}\mathsf{Mod}
+    \mathrm{Rep}(R)\cong R\text{-}\mathsf{Mod}
 \]
 }
 \prop{Ring homomorphism $R\to S$ induces functor $S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$}{
@@ -1078,7 +1247,7 @@ In particular, homomorphism $R\to S$ makes $S$ an $R$-module.
     we see that $\frac{m}{s}\in \operatorname{im}S^{-1}(u)$, which means $\operatorname{im}S^{-1}(u)=\ker S^{-1}(v)$. Hence $S^{-1}$ is exact.
 }
 \prop{Localization Respects Quotients}{
-    Let $M$ be an $R$-module and $N$ be a submodule of $M$. Then we have an isomorphism $S^{-1}(M/N)\simeq (S^{-1}M)/(S^{-1}N)$.
+    Let $M$ be an $R$-module and $N$ be a submodule of $M$. Then we have an isomorphism $S^{-1}(M/N)\cong (S^{-1}M)/(S^{-1}N)$.
 }
 \proof{
     From the exact sequence
