@@ -2,6 +2,9 @@
 
 \input{preamble}
 
+\definecolor{arrowBlue}{RGB}{66, 135, 245}
+\definecolor{arrowRed}{RGB}{245, 93, 66}
+
 \tikzcdset{arrow style=tikz,
     squigarrow/.style={
         decoration={
@@ -109,9 +112,9 @@
     & Pushout 
     \begin{center}
         \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-        \circ  \arrow[rrd, draw=cyan, bend left] \arrow[rdd, draw=cyan, bend right] &[-2em]                                 &  [-0.4em]                  \\[-0.3cm]
-                                                                                & \varinjlim\arrow[lu, dash pattern=on 4pt off 2pt, draw=arrowRed]  & \bullet   \arrow[l, draw=arrowBlue]\\
-                                                                                & \bullet \arrow[u, draw=arrowBlue]             & \bullet  \arrow[l] \arrow[u]      
+        \circ   &[-2em]                                 &  [-0.4em]                  \\[-0.3cm]
+                                                                                & \varinjlim\arrow[lu, dash pattern=on 4pt off 2pt, draw=arrowRed]  & \bullet  \arrow[llu, draw=cyan, bend right] \arrow[l, draw=arrowBlue]\\
+                                                                                & \bullet \arrow[u, draw=arrowBlue]   \arrow[luu, draw=cyan, bend left]           & \bullet  \arrow[l] \arrow[u]      
         \end{tikzcd} 
     \end{center} \\
     \hline
@@ -153,7 +156,7 @@
     \end{tabular}
 \end{center}
 
-\prop{Evaluation Functor Preserves Limits}{
+\prop[ev_functor_preserves_limits]{Evaluation Functor Preserves Limits}{
     Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
     \[
         \mathrm{ev}_a \circ F:\mathsf{J}\xrightarrow{\quad F\quad}\left[\mathsf{A},\mathsf{C}\right]\xrightarrow{\quad\mathrm{ev}_a\quad}\mathsf{C}
@@ -347,6 +350,9 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 
 \section{Group Action}
 \subsection{Definitions}
+\dfn{Symmetric Group}{
+    The \textbf{symmetric group} on a set $X$ is the group whose elements are all bijections from $X$ to $X$, with the group operation of function composition. The symmetric group on $X$ is denoted by $\mathrm{Sym}(X)$ or $\mathrm{Aut}_{\mathsf{Set}}(X)$. If $X=\{1,2,\cdots,n\}$, then we denote $\mathrm{Sym}(X)$ by $S_n$.
+}
 \dfn{Group Action}{
     Let $G$ be a group and $X$ be a set. A \textbf{group action} of $G$ on $X$ is a group homomorphism
     \begin{align*}
@@ -356,9 +362,10 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
     If $G$ acts on $X$ by $\sigma$, we say $(X,\sigma)$ is a \textbf{$G$-set}. If there is no ambiguity, we simply say $X$ is a $G$-set.
 }
 The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have category isomorphism
-\[
-    G\text{-}\mathsf{Set}\cong\mathrm{Fun}(\mathsf{B}G, \mathsf{Set})    
-\]
+\begin{align*}
+    G\text{-}\mathsf{Set}&\stackrel{\sim}{\longrightarrow} \mathrm{Fun}(\mathsf{B}G, \mathsf{Set})    \\
+    \sigma&\longmapsto \sigma(-)
+\end{align*}
 \prop{Equivalent Definition of Group Actions}{
     Let $G$ be a group and $X$ be a set. A group action of $G$ on $X$ can be alternatively defined as a map
     \begin{align*}
@@ -385,12 +392,27 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     g\cdot A=\{ g\cdot x\mid x\in A\}    .
     \]
 }
+\dfn{Equivariant Map}{
+    Let $G$ be a group and $X,Y$ be $G$-sets. A map $f:X\to Y$ is called \textbf{equivariant} if for all $g\in G$ and $x\in X$, we have
+    \[
+    f(g\cdot x)=g\cdot f(x)    .
+    \]
+    Equivalently, $f$ is equivariant if it is a natural transformation $f:\sigma(-)\implies \sigma'(-)$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, column sep=1.7em, row sep=small]
+            \mathsf{B}G  \& * \arrow[rr, "g"]                         \&  \& *                 \\
+                         \& X \arrow[dd, "f"'] \arrow[rr, "\sigma_g"] \&  \& X \arrow[dd, "f"] \\
+            \mathsf{Set} \&                                           \&  \&                   \\
+                         \& Y \arrow[rr, "\sigma'_g"']                \&  \& Y                
+            \end{tikzcd}
+    \]
+}
 \dfn{Product of $G$-Sets}{
     The \textbf{product} of two $G$-sets $X$ and $Y$ is defined as the set $X\times Y$ with the $G$-action
     \[
     g\cdot (x,y)=(g\cdot x, g\cdot y)    .
     \]
-    Alternatively, the product of two $G$-sets can be defined as the product of two functors.
+    Alternatively, the product of two $G$-sets can be defined as the product of two functors, cf. \Cref{th:ev_functor_preserves_limits}.
 }
 \dfn{Coproduct of $G$-Sets}{
     The \textbf{coproduct} of two $G$-sets $X$ and $Y$ is defined as the set $X\sqcup Y$ with the $G$-action
@@ -400,7 +422,23 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
         g\cdot a & a\in Y
     \end{cases} 
     \]
-    Alternatively, the coproduct of two $G$-sets can be defined as the coproduct of two functors.
+    Alternatively, the coproduct of two $G$-sets can be defined as the coproduct of two functors, cf. \Cref{th:ev_functor_preserves_limits}.
+}
+\ex[acting_on_functions]{Acting on Functions}{
+    If $G$ acts on $X$, then it also acts on $Y^X$ for any set $Y$. The action on $Y^X$ is given as follows: for all $g\in G$, $f\in Y^X$ and $x\in X$,
+    \[
+        (g\cdot f)(x)=f(g^{-1}\cdot x).
+    \]
+}
+\pf{
+    We can check that
+    \begin{align*}
+        (g_1\cdot (g_2\cdot f))(x)&=\left(g_2\cdot f\right)\left(g_1^{-1}\cdot x\right)\\
+        &=\left(g_2\cdot f\right)\left(g_1^{-1}\cdot x\right)\\
+        &=f\left(g_2^{-1}\cdot\left(g_1^{-1}\cdot x\right)\right)\\
+        &=f\left(\left(g_2^{-1} g_1^{-1}\right)\cdot x\right)\\
+        &=\left(\left(g_1g_2\right)\cdot f\right)(x).
+    \end{align*}
 }
 \dfn{Orbit of a Group Action}{
     Let $G$ be a group acting on a set $X$. For $x\in X$, the \textbf{orbit} of $x$ is defined as 
@@ -408,9 +446,7 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     G x=\{ g\cdot x\mid g\in G\}    .
     \]
 }
-\ex{Acting on Orbit}{
-    Let $G$ be a group acting on a set $X$ and $x\in X$. Then $G$ acts on $Gx$ by left multiplication.
-}
+
 \dfn{Orbit Space}{
     Let $G$ be a group acting on a set $X$. The \textbf{orbit space} of $G$ acting on $X$ is defined as 
     \[
@@ -423,9 +459,10 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     \[
     x\sim y \iff Gx=Gy.
     \]
-    Then the equivalence class of $x$ is exactly $Gx$. And we have a partition of $X$ by the orbits of $G$ acting on $X$
+    Then the equivalence class of $x$ is exactly $Gx$. The quotient set $X/\sim$ is exactly the orbit space $X/G$.
+    And we have a partition of $X$ by the orbits of $G$ acting on $X$
     \[
-    X=\bigsqcup_{x\in X}Gx=X/G    .
+    X=\bigsqcup_{Gx\in X/G}Gx.
     \]
 }
 \proof{
@@ -475,7 +512,13 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \end{enumerate}
     If $G$ acts transitively on $X$, then $X$ is called a \textbf{homogeneous space} for $G$.
 }
-
+\ex{$G$ Acts on Orbit $Gx$ Transitively}{
+    Let $G$ be a group acting on a set $X$ and $x\in X$. Then $G$ acts on the orbit $Gx$ by left multiplication transitively. And we have a $G$-set isomorphism
+    \[
+    X\cong \bigsqcup_{Gx\in X/G}Gx,
+    \]
+    which decomposes any $G$-set into coproduct of transitive $G$-sets.
+}
 \dfn{Regular Group Action}{
     Let $G$ be a group acting on a set $X$. The action is called \textbf{regular} if any of the following equivalent conditions holds
     \begin{enumerate}[(i)]
@@ -484,7 +527,6 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \end{enumerate}
     If $G$ acts regularly on $X$, then $X$ is called a \textbf{principal homogeneous space} for $G$ or a $G$-\textbf{torsor}.
 }
-
 
 \subsection{Coset}
 \ex{Left Multiplication Action}{
@@ -540,8 +582,20 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     Let $G$ be a finite group and $H$ be a subgroup of $G$. Then $|G|=|H|[G:H]$.
 }
 
-\prop{$G$-set Isomorphism $G/\mathrm{Stab}_G(x)^L\cong Gx$}{
-
+\prop[iso_stab_orbit]{$G$-Set Isomorphism $G/\mathrm{Stab}_G(x)^L\cong Gx$}{
+    Let $G$ be a group acting on a set $X$ and $x\in X$. Then the map
+    \begin{align*}
+        F:G/\mathrm{Stab}_G(x)^L &\longrightarrow Gx\\
+        g\hspace{1pt}\mathrm{Stab}_G(x) &\longmapsto g\cdot x
+    \end{align*}
+    is a $G$-set isomorphism.
+}
+\pf{ 
+    The map is well-defined since for any $h\in \mathrm{Stab}_G(x)$, we have $(gh)\cdot x=g\cdot (h\cdot x)=g\cdot x$. The map is a $G$-set homomorphism since for any $g_1,g_2\in G$, 
+    \begin{align*}
+        F\left(g_1\cdot g_2\mathrm{Stab}_G(x)\right)=(g_1g_2)\cdot x=g_1\cdot(g_2\cdot x)=g_1\cdot F\left(g_2\mathrm{Stab}_G(x)\right).
+    \end{align*}
+     The map is injective since for any $g,h\in G$, if $g\cdot x=h\cdot x$, then $h^{-1}g\in \mathrm{Stab}_G(x)$. Hence $g\mathrm{Stab}_G(x)=h\mathrm{Stab}_G(x)$. The map is surjective because for any $g\cdot x\in Gx$, we have $F\left(g\hspace{1pt}\mathrm{Stab}_G(x)\right)=g\cdot x$.
 }
 \thm{Orbit-Stabilizer Theorem}{
     Let $G$ be a group acting on a set $X$. For $x\in X$, we have
@@ -549,6 +603,33 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     |G|=|Gx|\cdot |\mathrm{Stab}_G(x)|    .
     \]
 }
+\pf{ 
+    According to \Cref{th:iso_stab_orbit}, we have
+    \[
+\left|Gx\right|=\left|G/\mathrm{Stab}_G(x)^L\right|=|G|/\left|\mathrm{Stab}_G(x)\right|.
+    \]
+}
+\thm{Burnside's Lemma}{
+    Let $G$ be a finite group acting on a finite set $X$. Then the number of orbits of $G$ on $X$ is equal to
+    \[
+    |X/G|=\frac{1}{|G|}\sum_{g\in G}|X^g|    ,
+    \]
+    where $X^g=\{x\in X\mid g\cdot x=x\}$ is the set of fixed points of $g$.
+}
+\pf{ 
+    \begin{align*}
+    \sum_{g \in G}\left|X^g\right|&=|\{(g, x) \in G \times X \mid g \cdot x=x\}|\\
+    &=\sum_{x \in X}\left|\mathrm{Stab}_G(x)\right|\\
+    &=\sum_{x \in X}\frac{|G|}{\left|G x\right|} \quad \text{by Orbit-Stabilizer Theorem}\\
+    &=|G| \sum_{G y \in X / G}\; \sum_{x \in Gy}\frac{1}{\left|G x\right|}\\
+    &=|G| \sum_{G y \in X / G} \left|Gy\right|\frac{1}{\left|G y\right|}\\
+    &=|G| \sum_{G y \in X / G} 1\\
+    &=|G| \cdot|X / G|.
+    \end{align*}
+
+}
+
+
 \subsection{Conjugacy Action}
 \dfn{Conjugacy Action and Inner Automorphism Group}{
     Let $G$ be a group. The \textbf{conjugacy action} of $G$ on itself is defined as 
@@ -654,6 +735,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
         \left\{\text{verbal subgroups}\right\}\subseteq \left\{\text{fully characteristic subgroups}\right\}\subseteq \left\{\text{characteristic subgroups}\right\}\subseteq\left\{\text{normal subgroups}\right\}.
     \]
 }
+
 \dfn{Commutator Subgroup}{
     Let $G$ be a group. The \textbf{commutator subgroup} or \textbf{derived subgroup} of $G$ is the subgroup generated by all the commutators, denoted by
     $$
@@ -684,6 +766,33 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \end{tikzcd}
     $$
 }
+
+\section{Symmetric Groups}
+\dfn{$k$-Cycle}{
+    Let $n\ge 2$ and $k\ge 1$ be integers. A \textbf{$k$-cycle} in $S_n$ is a permutation $\sigma\in S_n$ such that there exist a subset of $P_n=\{1,2,\cdots,n\}$, denoted by $A=\{a_1,a_2,\cdots,a_k\}$, satisfying
+    \begin{enumerate}[(i)]
+        \item $\sigma(a_i)=a_{i+1}\quad\text{for }i=1,2,\cdots,k-1$,
+        \item $\sigma(a_k)=a_1$,
+        \item $\sigma(x)=x\quad\text{for }x\in P_n-A$.
+    \end{enumerate}
+}
+
+\thm{Pólya Enumeration Theorem (Unweighted)}{
+    Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors. Suppose a group $G$ acts on $X$ through $\sigma:G\to\mathrm{Aut}_{\mathsf{Set}}(X)$. Then it also acts on $Y^X$ by \Cref{th:acting_on_functions}. Define that a coloring configuration of $(X,Y,\sigma)$ is an orbit in the $G$-set $Y^X$. Then the number of distinct coloring configurations is
+$$
+\left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}|Y|^{c(g)},
+$$
+where $c(g)$ denotes the number of cycles in the cycle decomposition of $\sigma_g \in \mathrm{Aut}_{\mathsf{Set}}(X)$.
+}
+\pf{ 
+    We apply Burnside's Lemma, which states that
+$$
+\left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}\left|\left(Y^X\right)^g\right| .
+$$
+It remains to show that $\left|\left(Y^X\right)^g\right|=|Y|^{c(g)}$. But any function $f \in Y^X$ will remain constant under the action of $g$ if and only if all elements in $X$ in each cycle are assigned the same set element in $Y$. There are thus $|Y|$ choices of elements in $Y$ for each of the $c(g)$ cycles in the cycle decomposition, and the result follows.
+}
+
+
 
 
 

@@ -6,14 +6,8 @@
 \usepackage[tmargin=2cm,rmargin=1in,lmargin=1in,margin=0.85in,bmargin=2cm,footskip=.2in]{geometry}
 \usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools}
 \usepackage{bookmark}
-\usepackage{enumerate}
+\usepackage{enumerate}  
 \usepackage{hyperref,theoremref}
-\hypersetup{
-	pdftitle={Differentiable Manifolds},
-	colorlinks=true, linkcolor=doc!90,
-	bookmarksnumbered=true,
-	bookmarksopen=true
-}
 \usepackage[most,many,breakable]{tcolorbox}
 \usepackage{xcolor}
 \usepackage{graphicx}
@@ -31,12 +25,11 @@
 \usepgfplotslibrary{patchplots}
 \usepackage{anyfontsize}
 \usepackage{sectsty}
-\usepackage{tabularx}
 %\usepackage{import}
 %\usepackage{xifthen}
 %\usepackage{pdfpages}
 %\usepackage{transparent}
-
+\usepackage[nameinlink]{cleveref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SELF MADE COLORS
@@ -71,14 +64,73 @@
 \definecolor{Emerald}{HTML}{00A99D}
 \definecolor{RoyalBlue}{HTML}{0071BC}
 
-\definecolor{arrowBlue}{RGB}{66, 135, 245}
-\definecolor{arrowRed}{RGB}{245, 93, 66}
 % \definecolor{mydefnewbg}{HTML}{FFF0E0}
 % \definecolor{mydefnewfr}{HTML}{FF9900}
+\definecolor{myRoyalBlue}{RGB}{50,60,150}
+\definecolor{myGreen}{RGB}{45,100,45}
+\definecolor{mynavy}{RGB}{56, 102, 148} % RGB color model
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HYPERREF SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=mynavy,
+	citecolor=BurntOrange,
+	bookmarksnumbered=true,
+	bookmarksopen=true,
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TCOLORBOX SETUPS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%================================
+% NEW DEFINITION BOX
+%================================
+
+
+\newtcbtheorem[number within=section]{Definition}{Definition}
+{%
+    enhanced
+    ,breakable
+    ,colback = mydefinitbg
+    ,frame hidden
+    ,boxrule = 0sp
+    ,borderline west = {2pt}{0pt}{mydefinitfr}
+    ,sharp corners
+    ,detach title
+    ,before upper = \tcbtitle\par\smallskip
+    ,coltitle = mydefinitfr!85!black
+    ,fonttitle = \bfseries\sffamily
+    ,description font = \mdseries
+    ,separator sign none
+    ,segmentation style={solid, mydefinitfr!85!black}
+	,label type=definition
+}
+{th}
+
+% \newtcbtheorem[number within=chapter]{definition}{Definition}
+% {%
+%     enhanced
+%     ,breakable
+%     ,colback = mydefinitbg
+%     ,frame hidden
+%     ,boxrule = 0sp
+%     ,borderline west = {2pt}{0pt}{mydefinitfr}
+%     ,sharp corners
+%     ,detach title
+%     ,before upper = \tcbtitle\par\smallskip
+%     ,coltitle = mydefinitfr!85!black
+%     ,fonttitle = \bfseries\sffamily
+%     ,description font = \mdseries
+%     ,separator sign none
+%     ,segmentation style={solid, mydefinitfr!85!black}
+% 	,label type=definition
+% }
+% {th}
 
 \setlength{\parindent}{0.5cm}
 %================================
@@ -86,7 +138,7 @@
 %================================
 
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=section]{Theorem}{Theorem}
+\newtcbtheorem[use counter from=Definition, number within=section]{Theorem}{Theorem}
 {%
 	enhanced,
 	breakable,
@@ -102,28 +154,30 @@
 	description font = \mdseries,
 	separator sign none,
 	segmentation style={solid, mytheoremfr},
+	label type=theorem
 }
 {th}
 
-\tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=chapter]{theorem}{Theorem}
-{%
-	enhanced,
-	breakable,
-	colback = mytheorembg,
-	frame hidden,
-	boxrule = 0sp,
-	borderline west = {2pt}{0pt}{mytheoremfr},
-	sharp corners,
-	detach title,
-	before upper = \tcbtitle\par\smallskip,
-	coltitle = mytheoremfr,
-	fonttitle = \bfseries\sffamily,
-	description font = \mdseries,
-	separator sign none,
-	segmentation style={solid, mytheoremfr},
-}
-{th}
+% \tcbuselibrary{theorems,skins,hooks}
+% \newtcbtheorem[number within=chapter]{theorem}{Theorem}
+% {%
+% 	enhanced,
+% 	breakable,
+% 	colback = mytheorembg,
+% 	frame hidden,
+% 	boxrule = 0sp,
+% 	borderline west = {2pt}{0pt}{mytheoremfr},
+% 	sharp corners,
+% 	detach title,
+% 	before upper = \tcbtitle\par\smallskip,
+% 	coltitle = mytheoremfr,
+% 	fonttitle = \bfseries\sffamily,
+% 	description font = \mdseries,
+% 	separator sign none,
+% 	segmentation style={solid, mytheoremfr},
+% 	label type=theorem
+% }
+% {th}
 
 
 \tcbuselibrary{theorems,skins,hooks}
@@ -145,7 +199,7 @@
 % Corollery
 %================================
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=section]{corolary}{Corollary}
+\newtcbtheorem[use counter from=Definition, number within=section]{corolary}{Corollary}
 {%
 	enhanced
 	,breakable
@@ -161,27 +215,29 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, myp!85!black}
+	,label type=corollary
 }
 {th}
-\tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=chapter]{corollary}{Corollary}
-{%
-	enhanced
-	,breakable
-	,colback = myp!10
-	,frame hidden
-	,boxrule = 0sp
-	,borderline west = {2pt}{0pt}{myp!85!black}
-	,sharp corners
-	,detach title
-	,before upper = \tcbtitle\par\smallskip
-	,coltitle = myp!85!black
-	,fonttitle = \bfseries\sffamily
-	,description font = \mdseries
-	,separator sign none
-	,segmentation style={solid, myp!85!black}
-}
-{th}
+% \tcbuselibrary{theorems,skins,hooks}
+% \newtcbtheorem[number within=chapter]{corollary}{Corollary}
+% {%
+% 	enhanced
+% 	,breakable
+% 	,colback = myp!10
+% 	,frame hidden
+% 	,boxrule = 0sp
+% 	,borderline west = {2pt}{0pt}{myp!85!black}
+% 	,sharp corners
+% 	,detach title
+% 	,before upper = \tcbtitle\par\smallskip
+% 	,coltitle = myp!85!black
+% 	,fonttitle = \bfseries\sffamily
+% 	,description font = \mdseries
+% 	,separator sign none
+% 	,segmentation style={solid, myp!85!black}
+% 	,label type=corol
+% }
+% {th}
 
 %================================
 % CLAIM
@@ -204,6 +260,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, myg!85!black}
+	,label type=claim
 }
 {th}
 
@@ -224,6 +281,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, myg!85!black}
+	,label type=claim
 }
 {th}
 %================================
@@ -231,7 +289,7 @@
 %================================
 
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=section]{proposition}{Proposition}
+\newtcbtheorem[use counter from=Definition, number within=section]{proposition}{Proposition}
 {%
 	enhanced
 	,breakable
@@ -247,33 +305,35 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, mypropfr!85!black}
+	,label type=proposition
 }
 {th}
 
-\newtcbtheorem[number within=chapter]{Proposition}{Proposition}
-{%
-	enhanced
-	,breakable
-	,colback = mypropbg!10
-	,frame hidden
-	,boxrule = 0sp
-	,borderline west = {2pt}{0pt}{mypropfr!85!black}
-	,sharp corners
-	,detach title
-	,before upper = \tcbtitle\par\smallskip
-	,coltitle = mypropfr!85!black
-	,fonttitle = \bfseries\sffamily
-	,description font = \mdseries
-	,separator sign none
-	,segmentation style={solid, mypropfr!85!black}
-}
-{th}
+% \newtcbtheorem[number within=chapter]{Proposition}{Proposition}
+% {%
+% 	enhanced
+% 	,breakable
+% 	,colback = mypropbg!10
+% 	,frame hidden
+% 	,boxrule = 0sp
+% 	,borderline west = {2pt}{0pt}{mypropfr!85!black}
+% 	,sharp corners
+% 	,detach title
+% 	,before upper = \tcbtitle\par\smallskip
+% 	,coltitle = mypropfr!85!black
+% 	,fonttitle = \bfseries\sffamily
+% 	,description font = \mdseries
+% 	,separator sign none
+% 	,segmentation style={solid, mypropfr!85!black}
+% 	,label type=proposition
+% }
+% {th}
 %================================
 % LEMMA
 %================================
 
 \tcbuselibrary{theorems,skins,hooks}
-\newtcbtheorem[number within=section]{lemma}{Lemma}
+\newtcbtheorem[use counter from=Definition, number within=section]{lemma}{Lemma}
 {%
 	enhanced
 	,breakable
@@ -289,32 +349,34 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, mylemmafr!85!black}
+	,label type=lemma
 }
 {th}
 
-\newtcbtheorem[number within=chapter]{Lemma}{Lemma}
-{%
-	enhanced
-	,breakable
-	,colback = mylemmabg!10
-	,frame hidden
-	,boxrule = 0sp
-	,borderline west = {2pt}{0pt}{mylemmafr!85!black}
-	,sharp corners
-	,detach title
-	,before upper = \tcbtitle\par\smallskip
-	,coltitle = mylemmafr!85!black
-	,fonttitle = \bfseries\sffamily
-	,description font = \mdseries
-	,separator sign none
-	,segmentation style={solid, mylemmafr!85!black}
-}
-{th}
+% \newtcbtheorem[number within=chapter]{Lemma}{Lemma}
+% {%
+% 	enhanced
+% 	,breakable
+% 	,colback = mylemmabg!10
+% 	,frame hidden
+% 	,boxrule = 0sp
+% 	,borderline west = {2pt}{0pt}{mylemmafr!85!black}
+% 	,sharp corners
+% 	,detach title
+% 	,before upper = \tcbtitle\par\smallskip
+% 	,coltitle = mylemmafr!85!black
+% 	,fonttitle = \bfseries\sffamily
+% 	,description font = \mdseries
+% 	,separator sign none
+% 	,segmentation style={solid, mylemmafr!85!black}
+% 	,label type=lemma
+% }
+% {th}
 %================================
 % EXAMPLE BOX
 %================================
 
-\newtcbtheorem[number within=section]{Example}{Example}
+\newtcbtheorem[use counter from=Definition, number within=section]{Example}{Example}
 {%
 	colback = myexamplebg
 	,breakable
@@ -328,25 +390,27 @@
 	,description font = \mdseries
 	,separator sign none
 	,description delimiters parenthesis
+	,label type=example
 }
 {ex}
 
-\newtcbtheorem[number within=chapter]{example}{Example}
-{%
-	colback = myexamplebg
-	,breakable
-	,colframe = myexamplefr
-	,coltitle = myexampleti
-	,boxrule = 1pt
-	,sharp corners
-	,detach title
-	,before upper=\tcbtitle\par\smallskip
-	,fonttitle = \bfseries
-	,description font = \mdseries
-	,separator sign none
-	,description delimiters parenthesis
-}
-{ex}
+% \newtcbtheorem[number within=chapter]{example}{Example}
+% {%
+% 	colback = myexamplebg
+% 	,breakable
+% 	,colframe = myexamplefr
+% 	,coltitle = myexampleti
+% 	,boxrule = 1pt
+% 	,sharp corners
+% 	,detach title
+% 	,before upper=\tcbtitle\par\smallskip
+% 	,fonttitle = \bfseries
+% 	,description font = \mdseries
+% 	,separator sign none
+% 	,description delimiters parenthesis
+% 	,label type=example
+% }
+% {ex}
 
 %================================
 % DEFINITION BOX
@@ -393,50 +457,7 @@
 % 	fonttitle=\bfseries,
 % 	title={#2},#1}{def}
 
-%================================
-% NEW DEFINITION BOX
-%================================
 
-% Define new colors
-
-
-\newtcbtheorem[number within=section]{Definition}{Definition}
-{%
-    enhanced
-    ,breakable
-    ,colback = mydefinitbg
-    ,frame hidden
-    ,boxrule = 0sp
-    ,borderline west = {2pt}{0pt}{mydefinitfr}
-    ,sharp corners
-    ,detach title
-    ,before upper = \tcbtitle\par\smallskip
-    ,coltitle = mydefinitfr!85!black
-    ,fonttitle = \bfseries\sffamily
-    ,description font = \mdseries
-    ,separator sign none
-    ,segmentation style={solid, mydefinitfr!85!black}
-}
-{th}
-
-\newtcbtheorem[number within=chapter]{definition}{Definition}
-{%
-    enhanced
-    ,breakable
-    ,colback = mydefinitbg
-    ,frame hidden
-    ,boxrule = 0sp
-    ,borderline west = {2pt}{0pt}{mydefinitfr}
-    ,sharp corners
-    ,detach title
-    ,before upper = \tcbtitle\par\smallskip
-    ,coltitle = mydefinitfr!85!black
-    ,fonttitle = \bfseries\sffamily
-    ,description font = \mdseries
-    ,separator sign none
-    ,segmentation style={solid, mydefinitfr!85!black}
-}
-{th}
 
 %================================
 % OPEN QUESTION BOX
