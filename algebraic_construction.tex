@@ -56,6 +56,7 @@
 
 \chapter{Category Theory}
 \section{Limits and Colimits}
+
 \newpage
 \begin{center}
 \Large
@@ -151,11 +152,23 @@
     \hline
     \end{tabular}
 \end{center}
+
+\prop{Evaluation Functor Preserves Limits}{
+    Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
+    \[
+        \mathrm{ev}_a \circ F:\mathsf{J}\xrightarrow{\quad F\quad}\left[\mathsf{A},\mathsf{C}\right]\xrightarrow{\quad\mathrm{ev}_a\quad}\mathsf{C}
+    \]
+    has a limit, then
+    \begin{enumerate}[(i)]
+        \item $\varprojlim F$ exists.
+        \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
+    \end{enumerate}
+}
 \chapter{Group}
 \section{Basic Concepts}
 \dfn{Group}{
     A \textbf{group} is a set $G$ together with a binary operation $\cdot:G\times G\to G$ such that
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item (Associativity) $\forall x,y,z\in G$, $(x\cdot y)\cdot z=x\cdot(y\cdot z)$.
         \item (Identity) $\exists e\in G$ such that $\forall x\in G$, $e\cdot x=x\cdot e=x$.
         \item (Inverse) $\forall x\in G$, $\exists x^{-1}\in G$ such that $x\cdot x^{-1}=x^{-1}\cdot x=e$.
@@ -185,7 +198,7 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 }
 \prop{Properties of Group Homomorphisms}{
     Let $G,H$ be groups and $\varphi:G\to H$ be a group homomorphism. Then
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $\varphi(1_G)=1_H$.
         \item $\forall x\in G$, $\varphi(x^{-1})=\varphi(x)^{-1}$.
         \item $\forall n\in\mathbb{Z}$, $\varphi(x^n)=\varphi(x)^n$.
@@ -201,7 +214,7 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 }
 \prop{Property of Kernel}{
     Let $G$ be a group. Then
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item Let $\varphi:G\to H$ be a group homomorphism. Then $\varphi$ is injective if and only if $\ker\varphi=\{1_G\}$.
     \end{enumerate}
 }
@@ -210,7 +223,7 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 }
 \prop{Equivalent Definition of Normal Subgroup}{
     Let $G$ be a group and $H$ be a subgroup of $G$. Then the following are equivalent:
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $H$ is a normal subgroup of $G$.
         \item $\forall \gamma_g \in\mathrm{Inn}(G)$, $\gamma_g(H)\subseteq H$.
         \item $gHg^{-1}\subseteq H$ for all $g\in G$.
@@ -222,7 +235,7 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 }
 \prop{Properties of Normal Subgroup}{
     Let $G$ be a group.
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $\{1_G\}$ and $G$ are normal subgroups of $G$.
         \item If $H\le K\le G$ and $H\lhd G$, then $H\lhd K$.
         \item If $H\lhd_{\rm char} K\lhd G$, then $H\lhd G$.
@@ -238,15 +251,18 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 \dfn{Normalizer}{
     Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{normalizer} of $H$ in $G$ is defined as 
     $$
-    N_G(H)=\left\{ g\in G\mid gHg^{-1}=H \right\}.
+    \mathrm{N}_G(H)=\left\{ g\in G\mid gHg^{-1}=H \right\}.
     $$ 
 }
 \prop{Properties of Normalizer}{
     Let $G$ be a group and $H$ be a subset of $G$. Then
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $\mathrm{N}_G(H)$ is a subgroup of $G$.
         \item If $H\le G$, then $\mathrm{N}_G(H)$ is the largest subgroup of $G$ in which $H$ is normal. That is, if $H\lhd K\le G$, then $K\le \mathrm{N}_G(H)$.
     \end{enumerate}
+}
+\pf{
+    (i) is trivial. For (ii), let $H\lhd K\le G$. Then $\forall k\in K$, $kHk^{-1}=H$. Thus $k\in \mathrm{N}_G(H)$.
 }
 \dfn{Centralizer}{
     Let $G$ be a group and $S$ be a subset of $G$. The \textbf{centralizer} of $S$ in $G$ is defined as 
@@ -261,7 +277,7 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 }
 \prop{Properties of Centralizer}{
     Let $G$ be a group and $H$ be a subset of $G$. Then
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $\mathrm{C}_G(H)\lhd \mathrm{N}_G(H)\le G$.
     \end{enumerate}
 }
@@ -350,7 +366,7 @@ The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have ca
         (g,x)&\longmapsto g\cdot x
     \end{align*}
     such that
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $\forall x\in X$, $e\cdot x=x$.
         \item $\forall g,h\in G$, $\forall x\in X$, $(gh)\cdot x=g\cdot(h\cdot x)$.
     \end{enumerate}
@@ -363,25 +379,45 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
 \ex{Trivial Group Action}{
     Let $G$ be a group and $X$ be a set. The \textbf{trivial group action} of $G$ on $X$ is defined as $\sigma_g=\mathrm{id}_X$ for all $g\in G$.
 }
-\ex{Acting on Subsets}{
+\ex{Acting on Power Set}{
     If a group $G$ acts on a set $X$, then $G$ acts on the power set $\mathcal{P}(X)$ by
     \[
     g\cdot A=\{ g\cdot x\mid x\in A\}    .
     \]
 }
-
+\dfn{Product of $G$-Sets}{
+    The \textbf{product} of two $G$-sets $X$ and $Y$ is defined as the set $X\times Y$ with the $G$-action
+    \[
+    g\cdot (x,y)=(g\cdot x, g\cdot y)    .
+    \]
+    Alternatively, the product of two $G$-sets can be defined as the product of two functors.
+}
+\dfn{Coproduct of $G$-Sets}{
+    The \textbf{coproduct} of two $G$-sets $X$ and $Y$ is defined as the set $X\sqcup Y$ with the $G$-action
+    \[
+    g\cdot a=\begin{cases}
+        g\cdot a & a\in X\\
+        g\cdot a & a\in Y
+    \end{cases} 
+    \]
+    Alternatively, the coproduct of two $G$-sets can be defined as the coproduct of two functors.
+}
 \dfn{Orbit of a Group Action}{
     Let $G$ be a group acting on a set $X$. For $x\in X$, the \textbf{orbit} of $x$ is defined as 
     \[
     G x=\{ g\cdot x\mid g\in G\}    .
     \]
 }
+\ex{Acting on Orbit}{
+    Let $G$ be a group acting on a set $X$ and $x\in X$. Then $G$ acts on $Gx$ by left multiplication.
+}
 \dfn{Orbit Space}{
     Let $G$ be a group acting on a set $X$. The \textbf{orbit space} of $G$ acting on $X$ is defined as 
     \[
-    X/G=\{ Gx\mid x\in X\}    .
+    X/G=\{ Gx\mid x\in X\}.
     \]
 }
+If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
 \prop{Orbit Decomposition}{
     Let $G$ be a group acting on a set $X$. We define a equivalence relation $\sim$ on $X$ by
     \[
@@ -416,7 +452,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 
 \dfn{Faithful Group Action}{
     Let $G$ be a group acting on a set $X$. The action is called \textbf{faithful} if any of the following equivalent conditions holds
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $G\to \mathrm{Aut}_{\mathsf{Set}}(X)$ is injective.
         \item $\bigcap\limits_{x\in X}\mathrm{Stab}_G(x)=\{ 1_G\}$.
         \item $\forall x\in X,\;g\cdot x=x\implies g=1_G$.
@@ -425,7 +461,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 
 \dfn{Free Group Action}{
     Let $G$ be a group acting on a set $X$. The action is called \textbf{free} if any of the following equivalent conditions holds
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item For all $x\in X$, $\mathrm{Stab}_G(x)=\{ 1_G\}$ .
         \item $\exists x\in X,\;g\cdot x=x\implies g=1_G$.
     \end{enumerate}
@@ -433,7 +469,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 
 \dfn{Transitive Group Action}{
     Let $G$ be a group acting on a set $X$. The action is called \textbf{transitive} if any of the following equivalent conditions holds
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item For any $x,y\in X$, there exists $g\in G$ such that $g\cdot x=y$.
         \item $X$ has only one orbit, i.e. $X= Gx$ for any $x\in X$.
     \end{enumerate}
@@ -442,12 +478,13 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 
 \dfn{Regular Group Action}{
     Let $G$ be a group acting on a set $X$. The action is called \textbf{regular} if any of the following equivalent conditions holds
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item The action is transitive and free.
         \item For any $x,y\in X$, there exists unique $g\in G$ such that $g\cdot x=y$.
     \end{enumerate}
     If $G$ acts regularly on $X$, then $X$ is called a \textbf{principal homogeneous space} for $G$ or a $G$-\textbf{torsor}.
 }
+
 
 \subsection{Coset}
 \ex{Left Multiplication Action}{
@@ -474,7 +511,15 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \[
         gH = H^\circ g = \{ gh\mid h\in H\}.
     \]
-    The set of all left cosets of $H$ is denoted by $G/H^L$, called the left coset space of $G$ modulo $H$.
+    The set of all left cosets of $H$ is denoted by $G/H^L$, called the left coset space of $G$ modulo $H$. $G/H^L$ is the orbit space of $G$ under the right multiplication action of $H$.
+}
+\ex{$G$ Acts on $G/H^L$ Transitively}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. $G$ acts on $G/H^L$ through
+    \begin{align*}
+        G &\longrightarrow \mathrm{Aut}(G/H^L)\\
+        g &\longmapsto  (xH\longmapsto gxH)
+    \end{align*}
+    For any $xH,yH\in G/H^L$, we have $yH=gxH$ for some $g=yx^{-1}\in G$. Thus $G$ acts on $G/H^L$ transitively.
 }
 \dfn{Right Cosets}{
     Let $G$ be a group and $H$ be a subgroup of $G$. $H$ can act on $G$ through $H\hookrightarrow G\stackrel{m^L}{\longrightarrow} \mathrm{Aut}(G)$, namely
@@ -493,6 +538,16 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 }
 \thm{Lagrange's Theorem}{
     Let $G$ be a finite group and $H$ be a subgroup of $G$. Then $|G|=|H|[G:H]$.
+}
+
+\prop{$G$-set Isomorphism $G/\mathrm{Stab}_G(x)^L\cong Gx$}{
+
+}
+\thm{Orbit-Stabilizer Theorem}{
+    Let $G$ be a group acting on a set $X$. For $x\in X$, we have
+    \[
+    |G|=|Gx|\cdot |\mathrm{Stab}_G(x)|    .
+    \]
 }
 \subsection{Conjugacy Action}
 \dfn{Conjugacy Action and Inner Automorphism Group}{
@@ -531,7 +586,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 
 \prop{Properties of Conjugacy Class}{
     Let $G$ be a group. Then the following are true:
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $a\sim b$ if and only if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
         \item $\mathrm{Cl}(a)=\{ a\}$ if and only if $a\in Z(G)$.
     \end{enumerate}
@@ -587,7 +642,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 }
 \prop{Properties of Commutator}{
     Let $G$ be a group. Then
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $x$ commutes with $y$ if and only if $[x,y]=1_G$.
         \item $[x,y]^{-1}=[y,x]$.
         \item For any homomorphism $f:G\to H$, $f([x,y])=[f(x),f(y)]$.
@@ -607,7 +662,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 }
 \prop{Properties of Commutator Subgroup}{
     Let $G$ be a group. Then
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $[G,G]$ is a verbal subgroup with $\mathcal{W}=\left\{ [\cdot,\cdot] \right\}$. Hence $[G,G]\lhd G$.
         \item $[G,G]$ is the smallest normal subgroup of $G$ such that $G/[G,G]$ is abelian.
         \item $[G,G]=\{1_G\}$ if and only if $G$ is abelian.
@@ -654,7 +709,7 @@ An Abelian group is a $\mathbb{Z}$-module and we have category isomorphism $\mat
 \section{Basic Concepts}
 \dfn{Ring}{
     A \textbf{ring} is a set $R$ together with two binary operations $+$ and $\cdot$ on $R$ such that
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $(R,+)$ is an abelian group.
         \item $(R,\cdot)$ is a monoid.
         \item $\cdot$ is distributive over $+$,
@@ -676,7 +731,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 }
 
 \prop{Examples of Reduced Ring}{
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item Subrings, products, and localizations of reduced rings are again reduced rings.
         \item Every integral domain is reduced.
         \item $\mathbb{Z}/n\mathbb{Z}$ is reduced if and only if $n=0$ or $n$ is square-free.
@@ -691,7 +746,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 \section{Basic Concepts}
 \prop{Equivalent Definition for Local Ring}{
     Let $R$ be a commutative ring. Then the following are equivalent:
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $R$ is a local ring.
         \item $R$ has a unique maximal ideal.
         \item $R$ has a maximal idea $\mathfrak{m}$ and $R - \mathfrak{m}\subseteq R^{\times}$.
@@ -704,7 +759,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 \subsection{Ideals}
 \dfn{Ideal}{
     Let $R$ be a ring. A subset $I\subseteq R$ is called an \textbf{ideal} if
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $I$ is a subgroup of $(R,+)$.
         \item $I$ is closed under multiplication, i.e. $a\in I$ and $b\in R$ implies $ab\in I$.
     \end{enumerate}
@@ -716,7 +771,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 
 \dfn{Prime Ideal}{
     Let $R$ be a commutative ring. An ideal $I\subseteq R$ is called \textbf{prime} if  and 
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $I\neq R$, i.e. $I$ is a proper ideal.
         \item $ab\in I\implies a\in I\text{ or }b\in I$, i.e. there exist no two elements in $R$ whose product is in $I$ but neither of them is in $I$.
     \end{enumerate}    
@@ -726,7 +781,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 }
 \dfn{Maximal Ideal}{
     Let $R$ be a commutative ring. An ideal $I\subseteq R$ is called \textbf{maximal} if
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $I\ne R$, i.e. $I$ is a proper ideal.
         \item There exists no ideal $J\subseteq R$ such that $I\subsetneq J\subsetneq R$.
     \end{enumerate}
@@ -745,7 +800,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
     \]
 }
 \dfn{Ideal Operations}{
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item Sum: $$I+J=\left\{a+b\mid a\in I,b\in J\right\}=\left(I\cup J\right),$$
         $$
         \sum_{t \in T} I_t=\left\{a_{t_1}+ \cdots +a_{t_n}\mid n\in\mathbb{Z}_{+},t_i\in T,a_{t_i}\in I_{t_i}\right\}.
@@ -762,7 +817,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 }
 
 \prop{Properties of Ideal Operations}{
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $(I\cap J)^2 \subseteq I J \subseteq I \cap J \subseteq I+J$
         \item ${I} \cap({J}+{K}) \supseteq {I} \cap {J}+{I} \cap {K}$
         \item ${I} ({J}+{K}) = {I}  {J}+{I}  {K}$
@@ -778,7 +833,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
     \end{enumerate}
 }
 \proof{
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item Since $\{ab\mid a\in I,b\in J\}\subseteq I\cap J$, we see $IJ=\left(\{ab\mid a\in I,b\in J\}\right)\subseteq I\cap J$. Also we can check $I \cap J \subseteq I \cup J\subseteq (I \cup J)=I+J$.
     \end{enumerate}
 }
@@ -826,14 +881,14 @@ In summary, we have the following chain of inclusions:
 
 \prop{}{
     Let $R$ be a commutative ring.
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $a \mid b\iff(b) \subseteq (a)$.
         \item $u\in R^\times \iff (u) = R  \iff \forall r\in R,\,u\mid r$.
     \end{enumerate}
 }
 \dfn{Prime Element}{
     Let $R$ be a commutative ring. An element $a\in R$ is called \textbf{prime} if
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $a\ne 0$.
         \item $a\notin R^\times$, i.e. $a$ is not a unit.
         \item $a\mid bc\implies a\mid b\text{ or }a\mid c$.
@@ -860,7 +915,7 @@ In summary, we have the following chain of inclusions:
 \section{Integral Domain}
 \dfn{Associate}{
     Let $R$ be an integal domain. Two elements $a,b\in R$ are called \textbf{associates} if one of the following equivalent conditions holds:
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $a=ub$ for some $u\in R^\times$.
         \item $a\mid b$ and $b\mid a$, i.e. $(a)=(b)$.
     \end{enumerate}
@@ -870,7 +925,7 @@ If $R$ is a general commutative ring, then we only have the implication $(\mathr
 Associatedness can also be described in terms of the action of $R^\times$ on $R$ via multiplication: two elements of $R$ are associates if they are in the same $R^\times$-orbit.
 \dfn{Irreducible Element}{
     Let $R$ be an integal domain. An element $a\in R$ is called \textbf{irreducible} if
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $a\notin R^\times$, i.e. $a$ is not a unit.
         \item $a=bc\implies b\in R^\times\text{ or }c\in R^\times$.
     \end{enumerate}    
@@ -889,7 +944,7 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 \section{Unique Factorization Domain}
 \dfn{Unique Factorization Domain}{
     An integral domain $R$ is called a \textbf{unique factorization domain} (UFD) if
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item every nonzero nonunit element of $R$ can be written as a product of irreducible elements of $R$.
         \item if $p_1\cdots p_n=q_1\cdots q_m$ for some irreducible elements $p_1,\cdots,p_n,q_1,\cdots,q_m\in R$, then $n=m$ and there exists a permutation $\sigma\in S_n$ such that $p_i$ is an associate of $q_{\sigma(i)}$ for all $i=1,\cdots,n$.
     \end{enumerate}
@@ -933,7 +988,7 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 \section{Construction}
 \dfn{Multuplicative Subset}{
     Let $R$ be a commutative ring. A subset $S\subseteq R$ is called \textbf{multiplicative} if $S$ is monoid under the multiplication of $R$, i.e.
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $1\in S$.
         \item $a,b\in S\implies ab\in S$.
     \end{enumerate}
@@ -1031,7 +1086,7 @@ Localization is the most economical way to make a multiplicative subset invertib
 }
 \prop{Properties of Localization of Rings}{
     Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset. Then
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $S^{-1}R=0$ if and only if $0\in S$.
         \item If $0\notin S$, then $\frac{a}{s}$ is invertible in $S^{-1}R$ if and only if there exists $r\in R$ such that $ra\in S$.
         \item If $0\notin S$, the localization map $\varphi:R\to S^{-1}R$ is injective if and only if $S$ contains no zero divisors.
@@ -1039,7 +1094,7 @@ Localization is the most economical way to make a multiplicative subset invertib
     \end{enumerate}
 }
 \proof{
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item \[
             S^{-1}R=0\iff \frac{1}{1}=\frac{0}{1}\iff \exists s\in S\text{ such that }s\cdot 1=0\iff 0\in S.
             \]
@@ -1079,7 +1134,7 @@ Localization is the most economical way to make a multiplicative subset invertib
         \mathcal{I}(R)=\left\{\text{ideals of }R\right\}\xrightleftarrows[\varphi^{-1}]{\quad S^{-1}\quad}
          \left\{\text{ideals of }S^{-1}R\right\}=\mathcal{I}(S^{-1}R)
     \end{align*}
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $S^{-1}\circ \varphi^{-1}=\mathrm{id}_{\mathcal{I}(S^{-1}R)}$. As a result, $S^{-1}$ is surjective and $\varphi^{-1}$ is injective.
         \item For any ideal $J$ of $S^{-1}R$, there exists an ideal $I$ of $R$ such that $S^{-1}I=J$. 
         \item If $I$ is a ideal of $R$, then $S^{-1}I=S^{-1}R\iff I\cap S\ne\varnothing$.
@@ -1091,7 +1146,7 @@ Localization is the most economical way to make a multiplicative subset invertib
     \end{enumerate}
 }
 \proof{
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item Let $J$ be an ideal of $S^{-1}R$. We have
         \[
             S^{-1}\varphi^{-1}(J)=\left\{\frac{x}{s}\midv x\in \varphi^{-1}(J),s\in S\right\}=\left\{\frac{x}{s}\midv \frac{x}{1}\in J,s\in S\right\}=\left\{\frac{1}{s}\frac{x}{1}\midv \frac{x}{1}\in J,s\in S\right\}=J.
@@ -1130,7 +1185,7 @@ Localization is the most economical way to make a multiplicative subset invertib
 \section{Basic Concepts}
 \dfn{Module}{
     Let $R$ be a ring. An left \textbf{$R$-module} is an abelian group $M$ with a binary operation $R\times M\to M$ such that
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $r(m+n)=rm+rn$ for all $r\in R$ and $m, n\in M$.
         \item $(r+s)m=rm+sm$ for all $r, s\in R$ and $m\in M$.
         \item $(rs)m=r(sm)$ for all $r, s\in R$ and $m\in M$.
@@ -1141,7 +1196,7 @@ Localization is the most economical way to make a multiplicative subset invertib
 
 \dfn{Homomorphism of $R$-modules}{
     Let $R$ be a ring and $M, N$ be $R$-modules. A map $f:M\to N$ is called an \textbf{$R$-module homomorphism} if
-    \begin{enumerate}[label=(\roman*)]
+    \begin{enumerate}[(i)]
         \item $f(m+n)=f(m)+f(n)$ for all $m, n\in M$.
         \item $f(rm)=rf(m)$ for all $r\in R$ and $m\in M$.
     \end{enumerate}
