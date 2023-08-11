@@ -768,41 +768,96 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 }
 
 \section{Symmetric Groups}
+
 \dfn{$k$-Cycle}{
     Let $n\ge 2$ and $k\ge 1$ be integers. A \textbf{$k$-cycle} in $S_n$ is a permutation $\sigma\in S_n$ such that there exist a subset of $P_n=\{1,2,\cdots,n\}$, denoted by $A=\{a_1,a_2,\cdots,a_k\}$, satisfying
     \begin{enumerate}[(i)]
-        \item $\sigma(a_i)=a_{i+1}\quad\text{for }i=1,2,\cdots,k-1$,
+        \item $\sigma(a_i)=a_{i+1}\text{ for }i=1,2,\cdots,k-1$,
         \item $\sigma(a_k)=a_1$,
-        \item $\sigma(x)=x\quad\text{for }x\in P_n-A$.
+        \item $\sigma(x)=x\text{ for }x\in P_n-A$.
     \end{enumerate}
 }
+\dfn{Cycle Decomposition}{
+    Let $n\ge 2$ and $\sigma\in S_n$. A \textbf{cycle decomposition} of $\sigma$ is a product of disjoint cycles $\sigma=\sigma_1\sigma_2\cdots\sigma_r$ such that $\sigma_i$ is a $k_i$-cycle for $i=1,2,\cdots,r$ and $k_1+k_2+\cdots+k_r=n$. $(k_1,k_2,\cdots,k_r)$ is called the \textbf{cycle type} of $\sigma$. Equivalently, a \textbf{cycle decomposition} of $\sigma$ is the decomposition of $P_n$ into orbits under the action of $\langle\sigma\rangle$.
+}
 
-\thm{Pólya Enumeration Theorem (Unweighted)}{
-    Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors. Suppose a group $G$ acts on $X$ through $\sigma:G\to\mathrm{Aut}_{\mathsf{Set}}(X)$. Then it also acts on $Y^X$ by \Cref{th:acting_on_functions}. Define that a coloring configuration of $(X,Y,\sigma)$ is an orbit in the $G$-set $Y^X$. Then the number of distinct coloring configurations is
+\thm[Polya_enumeration_unweighted]{Pólya Enumeration Theorem (Unweighted)}{
+    Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors. Suppose a group $G$ acts on $X$ through $\sigma:G\to\mathrm{Aut}_{\mathsf{Set}}(X)$. Then it also acts on $Y^X$ by \Cref{ex:acting_on_functions}. Define that a coloring configuration of $(X,Y,\sigma)$ is an orbit in the $G$-set $Y^X$. Then the number of essentially distinct coloring configurations is
 $$
 \left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}|Y|^{c(g)},
 $$
-where $c(g)$ denotes the number of cycles in the cycle decomposition of $\sigma_g \in \mathrm{Aut}_{\mathsf{Set}}(X)$.
+where $c(g):=\left|X/\langle \sigma_g\rangle\right|$ denotes the number of cycles in the cycle decomposition of $\sigma_g \in \mathrm{Aut}_{\mathsf{Set}}(X)$.
 }
 \pf{ 
     We apply Burnside's Lemma, which states that
 $$
 \left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}\left|\left(Y^X\right)^g\right| .
 $$
-It remains to show that $\left|\left(Y^X\right)^g\right|=|Y|^{c(g)}$. But any function $f \in Y^X$ will remain constant under the action of $g$ if and only if all elements in $X$ in each cycle are assigned the same set element in $Y$. There are thus $|Y|$ choices of elements in $Y$ for each of the $c(g)$ cycles in the cycle decomposition, and the result follows.
+It remains to show that $\left|\left(Y^X\right)^g\right|=|Y|^{c(g)}$. For any map $f:X\to Y$, if 
+\[
+f(g\cdot x)=f(x)   ,\quad\forall x\in X, 
+\]
+then $f(x)=f(y)\iff Gx=Gy$. By the universal property of the quotient set, there exists a unique map $\overline{f}:X/G\to Y$ such that the following diagram commutes
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+    X \arrow[rr, "f"] \arrow[rd,"\pi"'] \&  \& Y \\
+    \& X/\langle \sigma_g\rangle \arrow[ru, "\overline{f}"'] \&
+\end{tikzcd}
+\]
+Conversely, for any map $h:X/\langle \sigma_g\rangle\to Y$, we can define a map $f:X\to Y$ and checking that $f(g\cdot x)=f(x)$ for all $x\in X$. Hence we have a bijection between $\left(Y^X\right)^g$ and $Y^{X/\langle \sigma_g\rangle}$, which implies that $\left|\left(Y^X\right)^g\right|=|Y|^{c(g)}$.
+}
+\dfn{Cycle Index Polynomial}{
+    Let $G$ be a subgroup of $S_n$. The \textbf{cycle index polynomial} of $G$ is defined as
+    $$
+    Z(t_1,t_2,\cdots,t_n;G)=\frac{1}{|G|}\sum_{g\in G}t_1^{c_1(g)}t_2^{c_2(g)}\cdots t_n^{c_n(g)},
+    $$
+    where $c_k(g)$ denotes the number of $k$-cycles in the cycle decomposition of $\sigma_g$. $|G|Z(t_1,t_2,\cdots,t_n;G)$ can be seen as a generating function, where the coefficient of $t_1^{c_1}t_2^{c_2}\cdots t_n^{c_n}$ represents the number of permutations in $G$ with excatly $c_k$ $k$-cycles for $k=1,2,\cdots,n$.
 }
 
 
-
-
-
-
-
-
-
-
-
-
+\thm{Pólya Enumeration Theorem (Weighted)}{
+Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors.  Suppose $w:Y\to\mathbb{Z}_{\ge 0}^m$ is a weight function which assigns a weight $w(y)=(w_1(y),w_2(y),\cdots,w_m(y))$ to each color $y\in Y$. Consider the genrating function 
+\[
+q(x_1,\cdots,x_m)=\sum_{y\in Y}x_1^{w_1(y)}x_2^{w_2(y)}\cdots x_m^{w_m(y)},
+\]
+where the coefficient of the term $x_1^{a_1}x_2^{a_2}\cdots x_m^{a_m}$ is the number of colors with weight $(a_1,a_2,\cdots,a_m)$. For each coloring configuration $f:X\to Y$, define the its weight as $W(f)$, where
+\begin{align*}
+    W:Y^X&\longrightarrow\mathbb{Z}_{\ge 0}^m\\
+f&\longmapsto\sum_{x\in X}w(f(x))
+\end{align*}
+Let $G$ be subgroup of $S_n$. Since for all $g\in G$ and $f\in X^Y$,
+\begin{align*}
+    W(g\cdot f)=\sum_{x\in X}w((g\cdot f)(x))=\sum_{x\in X}w(f(g^{-1}\cdot x))=\sum_{x\in X}w(f(x))=W(f),
+\end{align*}
+we see $G$ acts on $W^{-1}(\omega)$ for each $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$. The generating function for the number of essentially distinct coloring configurations with weight $\omega$ can be expressed as
+\begin{align*}
+    \mathrm{CGF}\left(x_1, \cdots,x_m\right) &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
+     &= Z_G\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right)\right).
+\end{align*}
+}
+\pf{ 
+    For any $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$, by applying Burnside's lemma to the $G$-set $W^{-1}(\omega)$, we have
+    \[
+        \left|W^{-1}(\omega)/G\right| =\frac{1}{|G|}\sum_{g\in G}\left|W^{-1}(\omega)^g\right|.
+    \]
+    Similar to \Cref{th:Polya_enumeration_unweighted}, we have a bijection between 
+    \[
+        W^{-1}(\omega)^g=\left\{f\in \left(Y^X\right)^g\mid W(f)=\omega\right\}\quad\text{and}\quad\left\{\overline{f}\in Y^{X/\langle g\rangle}\mid W\left(\,\overline{f}\circ\pi\right)=\omega\right\},
+    \]
+    which implies coloring points of $X$ essentially distinctly with colors in $Y$ with weight $\omega=(\omega_1,\cdots,\omega_m)$ is equivalent to coloring orbits $g_1,g_2,\cdots,g_r$ of $X/\langle g\rangle$ with colors in $Y$ with weight $\omega=(|g_1|\omega_{v_1},\cdots,|g_r|\omega_{v_r})$. Hence
+    \begin{align*}
+        \sum_{\omega\in\mathbb{Z}_{\ge 0}^m} \left |W^{-1}(\omega)^g\right |x_1^{\omega_1} \cdots x_m^{\omega_m} &= \prod_{g_i \in X/\langle g\rangle } q\left (x_1^{|g_i|}, x_2^{|g_i|}, \cdots,x_m^{|g_i|}\right )\\
+&= q(x_1,  \cdots,x_m)^{c_1(g)} q \left (x_1^2, \cdots,x_m^2 \right )^{c_2(g)} \cdots q \left (x_1^n, \cdots,x_m^n\right )^{c_n(g)}.
+    \end{align*}
+    Therefore, we have
+    \begin{align*}
+        \mathrm{CGF}\left(x_1, \cdots,x_m\right) &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
+        &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\frac{1}{|G|}\sum_{g \in G}\left|W^{-1}(\omega)^g\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
+        &=\frac{1}{|G|}\sum_{g \in G}\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
+        &=\frac{1}{|G|}\sum_{g \in G}q(x_1,  \cdots,x_m)^{c_1(g)} q \left (x_1^2, \cdots,x_m^2 \right )^{c_2(g)} \cdots q \left (x_1^n, \cdots,x_m^n\right )^{c_n(g)}\\
+     &= Z_G\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right)\right).
+    \end{align*}
+}
 
 
 
