@@ -1,6 +1,7 @@
 \documentclass{report}
 
 \input{preamble}
+\usepackage{chemfig}
 
 \definecolor{arrowBlue}{RGB}{66, 135, 245}
 \definecolor{arrowRed}{RGB}{245, 93, 66}
@@ -252,16 +253,17 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
     A group $G$ is called \textbf{simple} if $G$ is nontrivial and the only normal subgroups of $G$ are $\{1_G\}$ and $G$.
 }
 \dfn{Normalizer}{
-    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{normalizer} of $H$ in $G$ is defined as 
+    Let $G$ be a group and $E$ be a subset of $G$. The \textbf{normalizer} of $E$ in $G$ is defined as 
     $$
-    \mathrm{N}_G(H)=\left\{ g\in G\mid gHg^{-1}=H \right\}.
+    \mathrm{N}_G(E)=\left\{ g\in G\mid gEg^{-1}=E \right\}.
     $$ 
+    Let $G$ acts on $2^G$ by conjugation. Then $\mathrm{N}_G(E)=\mathrm{Stab}_G(E)$.
 }
 \prop{Properties of Normalizer}{
     Let $G$ be a group and $H$ be a subset of $G$. Then
     \begin{enumerate}[(i)]
         \item $\mathrm{N}_G(H)$ is a subgroup of $G$.
-        \item If $H\le G$, then $\mathrm{N}_G(H)$ is the largest subgroup of $G$ in which $H$ is normal. That is, if $H\lhd K\le G$, then $K\le \mathrm{N}_G(H)$.
+        \item If $H\le G$, then $H\lhd\mathrm{N}_G(H)$. Moreover, $\mathrm{N}_G(H)$ is the largest subgroup of $G$ in which $H$ is normal, i.e. $$H\lhd K\le G\implies K\le \mathrm{N}_G(H).$$
     \end{enumerate}
 }
 \pf{
@@ -386,8 +388,8 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
 \ex{Trivial Group Action}{
     Let $G$ be a group and $X$ be a set. The \textbf{trivial group action} of $G$ on $X$ is defined as $\sigma_g=\mathrm{id}_X$ for all $g\in G$.
 }
-\ex{Acting on Power Set}{
-    If a group $G$ acts on a set $X$, then $G$ acts on the power set $\mathcal{P}(X)$ by
+\ex[acting_on_power_set]{Actions on $X$ Induce Actions on $2^X$}{
+    If a group $G$ acts on a set $X$, then $G$ acts on the power set $2^X$ by
     \[
     g\cdot A=\{ g\cdot x\mid x\in A\}    .
     \]
@@ -400,7 +402,7 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     Equivalently, $f$ is equivariant if it is a natural transformation $f:\sigma(-)\implies \sigma'(-)$
     \[
         \begin{tikzcd}[ampersand replacement=\&, column sep=1.7em, row sep=small]
-            \mathsf{B}G  \& * \arrow[rr, "g"]                         \&  \& *                 \\
+            \mathsf{B}G  \& \bullet \arrow[rr, "g"]                         \&  \& \bullet                 \\
                          \& X \arrow[dd, "f"'] \arrow[rr, "\sigma_g"] \&  \& X \arrow[dd, "f"] \\
             \mathsf{Set} \&                                           \&  \&                   \\
                          \& Y \arrow[rr, "\sigma'_g"']                \&  \& Y                
@@ -424,7 +426,30 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     \]
     Alternatively, the coproduct of two $G$-sets can be defined as the coproduct of two functors, cf. \Cref{th:ev_functor_preserves_limits}.
 }
-\ex[acting_on_functions]{Acting on Functions}{
+\ex{$\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ and $\mathrm{Hom}_\mathsf{C}(Y,X)$}{
+    Let $X$ and $Y$ be objects in a category $\mathsf{C}$. Then $\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ by the composition of functors
+    \[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=5em, row sep=3em]
+    \mathsf{B}\mathrm{Aut}_\mathsf{C}(X)\arrow[r] \&[-3em] \mathsf{B}\mathrm{Aut}_\mathsf{C}(X)^{\mathrm{op}} \arrow[r, hook] \&[-2em] \mathsf{C}^{\mathrm{op}} \arrow[r, "{\mathrm{Hom}_{\mathsf{C}}(-,Y)}"] \& \mathsf{Set}\\[-2.3em]
+    \bullet \arrow[r, maps to] \arrow[d, "g"']           \& \bullet \arrow[r, maps to] \arrow[d, "g^{-1}"]                           \& X \arrow[d, "g^{-1}"] \arrow[r, maps to]                               \& {\mathrm{Hom}(X,Y)} \arrow[d, "\left(g^{-1}\right)^*"] \\
+    \bullet \arrow[r, maps to]                           \& \bullet \arrow[r, maps to]                                               \& X \arrow[r, maps to]                                                   \& {\mathrm{Hom}(X,Y)}  
+    \end{tikzcd}
+    \]
+    Writing explicily, the action is given by
+    \begin{align*}
+        \mathrm{Aut}_\mathsf{C}(X)\times \mathrm{Hom}_\mathsf{C}(X,Y)&\longrightarrow \mathrm{Hom}_\mathsf{C}(X,Y)\\
+        (g,f)&\longmapsto f\circ g^{-1}
+    \end{align*}
+    Similarly, $\mathrm{Aut}_\mathsf{C}(Y)$ acts on $\mathrm{Hom}_\mathsf{C}(Y,X)$ by
+    \[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=5em, row sep=3em]
+    \mathsf{B}\mathrm{Aut}_\mathsf{C}(X)\arrow[r, hook] \&[-1em] \mathsf{C} \arrow[r, "{\mathrm{Hom}_{\mathsf{C}}(Y,-)}"] \& \mathsf{Set}\\[-2.3em]
+    \bullet \arrow[r, maps to] \arrow[d, "g"']           \&  X \arrow[d, "g"] \arrow[r, maps to]                               \& {\mathrm{Hom}(Y,X)} \arrow[d, "g_*"] \\
+    \bullet \arrow[r, maps to]                           \& X \arrow[r, maps to]                                                   \& {\mathrm{Hom}(X,Y)}  
+    \end{tikzcd}
+    \]
+}
+\ex[acting_on_functions]{Actions on $X$ Induce Actions on $Y^X$}{
     If $G$ acts on $X$, then it also acts on $Y^X$ for any set $Y$. The action on $Y^X$ is given as follows: for all $g\in G$, $f\in Y^X$ and $x\in X$,
     \[
         (g\cdot f)(x)=f(g^{-1}\cdot x).
@@ -465,7 +490,7 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     X=\bigsqcup_{Gx\in X/G}Gx.
     \]
 }
-\proof{
+\pf{
 We can check that the equivalence class of $x$ is $Gx$. If $y\sim x$, then $y\in Gy=Gx$. If $y\in Gx$, then $Gy\subseteq Gx$ and $x\in Gy$. Note $x\in Gy$ implies $Gx\subseteq Gy$. We have $Gx=Gy$, i.e. $x\sim y$. 
 }
 
@@ -519,6 +544,34 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \]
     which decomposes any $G$-set into coproduct of transitive $G$-sets.
 }
+\prop{}{
+    Let $G$ acts transitively on a set $S$. Choose $s \in S$, and let $H = \mathrm{Stab}_G(s)$. Then we have group isomorphism $\mathrm{N}_G(H)/H\cong \mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$.
+}
+\pf{
+    For any $n \in \mathrm{N}_G(H)$ with image $\bar{n} \in \mathrm{N}_G(H)/H$, since $G$ acts transitively on $S$, we can define a map 
+    \begin{align*}
+        \phi(\bar{n}):S &\longrightarrow S\\
+        g\cdot s &\longmapsto gn\cdot s
+    \end{align*}
+    and check $\phi(\bar{n})\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$ by
+    \begin{itemize}
+        \item $\phi(\bar{n})\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$. $\phi(\bar{n})$ is well-defined: 
+        \[
+        \bar{m}=\bar{n}\in\mathrm{N}_G(H)/H\implies m\in nH\implies \exists h\in H,m=nh\implies\phi(\bar{m})(s)=gm\cdot s=gnh\cdot s=gn\cdot s=\phi(\bar{n})(s).
+        \]
+        \item $\phi(\bar{n})$ is a $G$-set morphism: $\phi(\bar{n})(g\cdot s)=gn\cdot s=g\cdot\phi(\bar{n})(s)$
+        \item $\phi(\bar{n})$ is a bijection: $\phi(\bar{n}^{-1})$ is the inverse of $\phi(\bar{n})$.
+    \end{itemize}
+    For any automorphism $\psi\in \mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$, by transitivity we have $\psi(s)=n\cdot s$ for some $n \in G$. For $h \in H$, $hn\cdot s=h\cdot\psi(s)=\psi(h\cdot s)=\psi(s)=n\cdot s$, hence $n^{-1} h n \in H$ and $n \in N H$. This gives a well-defined map 
+    \begin{align*}
+        \eta:\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S) &\longrightarrow \mathrm{N}_G(H)/H\\
+        \psi &\longmapsto \bar{n}
+    \end{align*}
+    Clearly $\eta(\phi(\bar{n}))=\bar{n}$. Suppose $\psi\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$ and $\psi(s)=n\cdot s$. Then $\phi(\eta(\psi))(g\cdot s)=g n\cdot s=g\psi(s)=\psi(g\cdot s)$, which imples $\phi(\eta(\psi))=\psi$. Therefore, $\phi:\mathrm{N}_G(H)/H\to\mathrm{Aut}_{G\text{-}\mathsf{Set}}$ is bijective. And it is easy to check that this $\phi$ is an isomorphism of groups,
+    \[
+    \phi(\bar{n}\bar{m})(g\cdot s)=\phi(\overline{nm})(g\cdot s)=gnm\cdot s=\phi(\bar{n})(gm\cdot s)=\phi(\bar{n})\circ\phi(\bar{m})(g\cdot s).
+    \]
+}
 \dfn{Regular Group Action}{
     Let $G$ be a group acting on a set $X$. The action is called \textbf{regular} if any of the following equivalent conditions holds
     \begin{enumerate}[(i)]
@@ -527,7 +580,6 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     \end{enumerate}
     If $G$ acts regularly on $X$, then $X$ is called a \textbf{principal homogeneous space} for $G$ or a $G$-\textbf{torsor}.
 }
-
 \subsection{Coset}
 \ex{Left Multiplication Action}{
     Let $G$ be a group. The \textbf{left multiplication action} of $G$ on itself is defined as 
@@ -609,7 +661,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 \left|Gx\right|=\left|G/\mathrm{Stab}_G(x)^L\right|=|G|/\left|\mathrm{Stab}_G(x)\right|.
     \]
 }
-\thm{Burnside's Lemma}{
+\thm[Burnside's_lemma]{Burnside's Lemma}{
     Let $G$ be a finite group acting on a finite set $X$. Then the number of orbits of $G$ on $X$ is equal to
     \[
     |X/G|=\frac{1}{|G|}\sum_{g\in G}|X^g|    ,
@@ -643,7 +695,15 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     $$ 
     which is a subgroup of $\mathrm{Aut}(G)$.
 }
-\prop{Equivalent Characterization of Inner Automorphisms}{
+\dfn{Conjugate Subgroups}{
+From \Cref{ex:acting_on_power_set}, we see conjugacy action on $G$ induces an action on its power set $2^G$: \begin{align*}
+    G\times 2^G &\longrightarrow 2^G\\
+    (g,E)&\longmapsto gEg^{-1}
+\end{align*}
+If $H$ is a subgroup of $G$, then $gHg^{-1}$ is also a subgroup of $G$. We say $H$ and $gHg^{-1}$ are \textbf{conjugate subgroups} of $G$.
+}
+\prop{Equivalent 
+Characterization of Inner Automorphisms}{
     Let $G$ be a group and $\varphi \in \mathrm{Aut}(G)$. Then $\varphi \in \mathrm{Inn}(G)$ if and only if $\varphi$ satisfies the property: 
     \[
         \text{$G$ is embedded in a group $H$} \implies \text{$\varphi$ extends to an automorphism of $H$}.
@@ -789,7 +849,7 @@ $$
 where $c(g):=\left|X/\langle \sigma_g\rangle\right|$ denotes the number of cycles in the cycle decomposition of $\sigma_g \in \mathrm{Aut}_{\mathsf{Set}}(X)$.
 }
 \pf{ 
-    We apply Burnside's Lemma, which states that
+    We apply Burnside's lemma \ref{th:Burnside's_lemma}, which states that
 $$
 \left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}\left|\left(Y^X\right)^g\right| .
 $$
@@ -813,8 +873,6 @@ Conversely, for any map $h:X/\langle \sigma_g\rangle\to Y$, we can define a map 
     $$
     where $c_k(g)$ denotes the number of $k$-cycles in the cycle decomposition of $\sigma_g$. $|G|Z(t_1,t_2,\cdots,t_n;G)$ can be seen as a generating function, where the coefficient of $t_1^{c_1}t_2^{c_2}\cdots t_n^{c_n}$ represents the number of permutations in $G$ with excatly $c_k$ $k$-cycles for $k=1,2,\cdots,n$.
 }
-
-
 \thm{Pólya Enumeration Theorem (Weighted)}{
 Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors.  Suppose $w:Y\to\mathbb{Z}_{\ge 0}^m$ is a weight function which assigns a weight $w(y)=(w_1(y),w_2(y),\cdots,w_m(y))$ to each color $y\in Y$. Consider the genrating function 
 \[
@@ -832,11 +890,11 @@ Let $G$ be subgroup of $S_n$. Since for all $g\in G$ and $f\in X^Y$,
 we see $G$ acts on $W^{-1}(\omega)$ for each $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$. The generating function for the number of essentially distinct coloring configurations with weight $\omega$ can be expressed as
 \begin{align*}
     \mathrm{CGF}\left(x_1, \cdots,x_m\right) &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
-     &= Z_G\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right)\right).
+     &= Z\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right);G\right).
 \end{align*}
 }
 \pf{ 
-    For any $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$, by applying Burnside's lemma to the $G$-set $W^{-1}(\omega)$, we have
+    For any $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$, by applying Burnside's lemma \ref{th:Burnside's_lemma} to the $G$-set $W^{-1}(\omega)$, we have
     \[
         \left|W^{-1}(\omega)/G\right| =\frac{1}{|G|}\sum_{g\in G}\left|W^{-1}(\omega)^g\right|.
     \]
@@ -855,10 +913,46 @@ we see $G$ acts on $W^{-1}(\omega)$ for each $\omega=(\omega_1,\cdots,\omega_m)\
         &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\frac{1}{|G|}\sum_{g \in G}\left|W^{-1}(\omega)^g\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
         &=\frac{1}{|G|}\sum_{g \in G}\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
         &=\frac{1}{|G|}\sum_{g \in G}q(x_1,  \cdots,x_m)^{c_1(g)} q \left (x_1^2, \cdots,x_m^2 \right )^{c_2(g)} \cdots q \left (x_1^n, \cdots,x_m^n\right )^{c_n(g)}\\
-     &= Z_G\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right)\right).
+     &= Z\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right);G\right).
     \end{align*}
 }
+\ex{Counting the Isomers of Chlorobenzene}{
+    Replacing the H in a benzene ring with Cl, one can consider coloring the 6 vertices of the benzene ring with two colors: H and Cl. The group action is $D_{12}$, which includes 6 rotations: 0°, 60°, ..., 300°, and 6 reflections: 3 along the opposing sides and 3 along the opposing diagonals.
 
+    Compute the cycle decomposition for each \(g\):
+    \begin{itemize}
+        \item Identity: 6 1-cycles, corresponding to \(t_1^6\).
+        \item Rotation by 1 or 5 times 60°: 1 6-cycle, corresponding to \(t_6^1\).
+        \item Rotation by 2 or 4 times 60°: 2 3-cycles, corresponding to \(t_3^2\).
+        \item Rotation by 3 times 60°: 3 2-cycles, corresponding to \(t_2^3\).
+        \item 3 kinds of opposing side reflections: 3 2-cycles, corresponding to \(t_2^3\).
+        \item 3 kinds of opposing diagonal reflections: 2 1-cycles and 2 2-cycles, corresponding to \(t_1^2t_2^2\).
+    \end{itemize}
+
+    Writing out \(Z(t_1,\cdots,t_6;D_{12})\):
+\[
+    Z(t_1,\cdots,t_6;D_{12})=\frac{1}{12}\left(t_1^6+3 t_1^2 t_2^2+4 t_2^3+2 t_3^2+2 t_6\right)
+\]
+
+Assigning a weight of (1,0) to H and a weight of (0,1) to Cl, the corresponding generating function is \(q(\text{H},\text{Cl})=\text{H}+\text{Cl}\). Finally, the generating function for the number of essentially distinct colorings is:
+
+\[
+\begin{aligned}
+&\quad \mathrm{CGF}(\text{H},\text{Cl})\\
+& =\frac{1}{12}\left((\text{H}+\text{Cl})^6+3(\text{H}+\text{Cl})^2\left(\text{H}^2+\text{Cl}^2\right)^2+4\left(\text{H}^2+\text{Cl}^2\right)^3+2\left(\text{H}^3+\text{Cl}^3\right)^2+2\left(\text{H}^6+\text{Cl}^6\right)\right) \\
+& =\text{H}^6+\text{H}^5 \text{Cl}+3 \text{H}^4 \text{Cl}^2+3 \text{H}^3 \text{Cl}^3+3 \text{H}^2 \text{Cl}^4+\text{H} \text{Cl}^5+\text{Cl}^6
+\end{aligned}
+\]
+
+The coefficients give the number of isomers for various chlorobenzene compounds. For instance, looking at the term \(3 \text{H}^4 \text{Cl}^2\), with a weight of $(4,2)$, it can only be achieved using 4 H atoms and 2 Cl atoms. The coefficient 3 indicates that there are 3 isomers for dichlorobenzene. The 3 isomers are 1,2-dichlorobenzene, 1,3-dichlorobenzene, and 1,4-dichlorobenzene, plotted as follows:
+
+\begin{center}
+    \setchemfig{atom sep=1.5em}
+    \chemfig[scale=0.1]{*6(=-(-Cl)=(-Cl)-=-)} \qquad % 1,2-dichlorobenzene
+    \chemfig[scale=0.1]{*6(=-=(-Cl)-=(-Cl)-=)} \qquad % 1,3-dichlorobenzene
+    \chemfig[scale=0.1]{*6(=-(-Cl)=-=(-Cl)-)}     % 1,4-dichlorobenzene
+\end{center}
+}
 
 
 \chapter{Abelian Group}
