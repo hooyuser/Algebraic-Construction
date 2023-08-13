@@ -252,54 +252,6 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 \dfn{Simple Group}{
     A group $G$ is called \textbf{simple} if $G$ is nontrivial and the only normal subgroups of $G$ are $\{1_G\}$ and $G$.
 }
-\dfn{Normalizer}{
-    Let $G$ be a group and $E$ be a subset of $G$. The \textbf{normalizer} of $E$ in $G$ is defined as 
-    $$
-    \mathrm{N}_G(E)=\left\{ g\in G\mid gEg^{-1}=E \right\}.
-    $$ 
-    Let $G$ acts on $2^G$ by conjugation. Then $\mathrm{N}_G(E)=\mathrm{Stab}_G(E)$.
-}
-\prop{Properties of Normalizer}{
-    Let $G$ be a group and $H$ be a subset of $G$. Then
-    \begin{enumerate}[(i)]
-        \item $\mathrm{N}_G(H)$ is a subgroup of $G$.
-        \item If $H\le G$, then $H\lhd\mathrm{N}_G(H)$. Moreover, $\mathrm{N}_G(H)$ is the largest subgroup of $G$ in which $H$ is normal, i.e. $$H\lhd K\le G\implies K\le \mathrm{N}_G(H).$$
-    \end{enumerate}
-}
-\pf{
-    (i) is trivial. For (ii), let $H\lhd K\le G$. Then $\forall k\in K$, $kHk^{-1}=H$. Thus $k\in \mathrm{N}_G(H)$.
-}
-\dfn{Centralizer}{
-    Let $G$ be a group and $S$ be a subset of $G$. The \textbf{centralizer} of $S$ in $G$ is defined as 
-    \[
-        \mathrm{C}_G(S)=\left\{g\in G\mid  \forall s\in S,\;gs=sg\right\}.
-    \]
-    The centralizer of $\{x\}$ is the stabilizer subgroup of $x$ under conjugacy action, denoted by 
-    \[
-      \mathrm{C}_G(x)=\{ g\in G\mid gx=xg \}=\{ g\in G\mid gxg^{-1}=x \},
-    \]
-    which equals $\mathrm{N}_G(x)$.
-}
-\prop{Properties of Centralizer}{
-    Let $G$ be a group and $H$ be a subset of $G$. Then
-    \begin{enumerate}[(i)]
-        \item $\mathrm{C}_G(H)\lhd \mathrm{N}_G(H)\le G$.
-    \end{enumerate}
-}
-\dfn{Center of a Group}{
-    Let $G$ be a group. The \textbf{center} of $G$ is defined as the centralizer of $G$ in $G$, denoted by
-    \[
-        Z_G=\mathrm{C}_G(G)=\{ g\in G\mid \forall x\in G,\; gx=xg\}.
-    \]
-}
-\thm{N/C Theorem}{
-    Let $G$ be a group and $H$ be a subgroup of $G$. Define
-    \begin{align*}
-        \Psi: \mathrm{N}_G(H) &\longrightarrow \mathrm{Aut}(H)\\
-        g &\longmapsto \gamma_g|_H
-    \end{align*}
-    Then we have $\ker\Psi=\mathrm{C}_G(H)$ and $\mathrm{N}_G(H)/\mathrm{C}_G(H) \cong \mathrm{Im}\Psi\le \mathrm{Aut}(H)$.
-}
 \thm{Fundamental Theorem on Homomorphisms}{
     Let $G,H$ be groups and $\varphi:G\to H$ be a group homomorphism. Define natural projection 
     \begin{align*}
@@ -426,7 +378,7 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     \]
     Alternatively, the coproduct of two $G$-sets can be defined as the coproduct of two functors, cf. \Cref{th:ev_functor_preserves_limits}.
 }
-\ex{$\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ and $\mathrm{Hom}_\mathsf{C}(Y,X)$}{
+\ex[aut_acts_on_hom]{$\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ and $\mathrm{Hom}_\mathsf{C}(Y,X)$}{
     Let $X$ and $Y$ be objects in a category $\mathsf{C}$. Then $\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ by the composition of functors
     \[
     \begin{tikzcd}[ampersand replacement=\&, column sep=5em, row sep=3em]
@@ -448,12 +400,24 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     \bullet \arrow[r, maps to]                           \& X \arrow[r, maps to]                                                   \& {\mathrm{Hom}(X,Y)}  
     \end{tikzcd}
     \]
+    Writing explicily, the action is given by
+    \begin{align*}
+        \mathrm{Aut}_\mathsf{C}(Y)\times \mathrm{Hom}_\mathsf{C}(Y,X)&\longrightarrow \mathrm{Hom}_\mathsf{C}(Y,X)\\
+        (g,f)&\longmapsto g\circ f
+    \end{align*}
 }
 \ex[acting_on_functions]{Actions on $X$ Induce Actions on $Y^X$}{
-    If $G$ acts on $X$, then it also acts on $Y^X$ for any set $Y$. The action on $Y^X$ is given as follows: for all $g\in G$, $f\in Y^X$ and $x\in X$,
+    If $G$ acts on $X$ through a functor $\sigma(-):\mathsf{B}G\to\mathsf{Set}$, then it also acts on $Y^X$ for any set $Y$ by the composition of functors 
+    \[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=5em, row sep=3em]
+        \mathsf{B}G \arrow[r] \&[-2em] \mathsf{B}G^{\mathrm{op}} \arrow[r, "\sigma(-)^{\mathrm{op}}"] \&[-2.2em] \mathsf{Set}^{\mathrm{op}} \arrow[r, "{\mathrm{Hom}_{\mathsf{Set}}(-,Y)}"] \& \mathsf{Set}
+        \end{tikzcd}
+    \]
+    The action on $Y^X$ is given explicitly as follows: for all $g\in G$, $f\in Y^X$ and $x\in X$,
     \[
         (g\cdot f)(x)=f(g^{-1}\cdot x).
     \]
+    
 }
 \pf{
     We can check that
@@ -543,34 +507,6 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     X\cong \bigsqcup_{Gx\in X/G}Gx,
     \]
     which decomposes any $G$-set into coproduct of transitive $G$-sets.
-}
-\prop{}{
-    Let $G$ acts transitively on a set $S$. Choose $s \in S$, and let $H = \mathrm{Stab}_G(s)$. Then we have group isomorphism $\mathrm{N}_G(H)/H\cong \mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$.
-}
-\pf{
-    For any $n \in \mathrm{N}_G(H)$ with image $\bar{n} \in \mathrm{N}_G(H)/H$, since $G$ acts transitively on $S$, we can define a map 
-    \begin{align*}
-        \phi(\bar{n}):S &\longrightarrow S\\
-        g\cdot s &\longmapsto gn\cdot s
-    \end{align*}
-    and check $\phi(\bar{n})\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$ by
-    \begin{itemize}
-        \item $\phi(\bar{n})\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$. $\phi(\bar{n})$ is well-defined: 
-        \[
-        \bar{m}=\bar{n}\in\mathrm{N}_G(H)/H\implies m\in nH\implies \exists h\in H,m=nh\implies\phi(\bar{m})(s)=gm\cdot s=gnh\cdot s=gn\cdot s=\phi(\bar{n})(s).
-        \]
-        \item $\phi(\bar{n})$ is a $G$-set morphism: $\phi(\bar{n})(g\cdot s)=gn\cdot s=g\cdot\phi(\bar{n})(s)$
-        \item $\phi(\bar{n})$ is a bijection: $\phi(\bar{n}^{-1})$ is the inverse of $\phi(\bar{n})$.
-    \end{itemize}
-    For any automorphism $\psi\in \mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$, by transitivity we have $\psi(s)=n\cdot s$ for some $n \in G$. For $h \in H$, $hn\cdot s=h\cdot\psi(s)=\psi(h\cdot s)=\psi(s)=n\cdot s$, hence $n^{-1} h n \in H$ and $n \in N H$. This gives a well-defined map 
-    \begin{align*}
-        \eta:\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S) &\longrightarrow \mathrm{N}_G(H)/H\\
-        \psi &\longmapsto \bar{n}
-    \end{align*}
-    Clearly $\eta(\phi(\bar{n}))=\bar{n}$. Suppose $\psi\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$ and $\psi(s)=n\cdot s$. Then $\phi(\eta(\psi))(g\cdot s)=g n\cdot s=g\psi(s)=\psi(g\cdot s)$, which imples $\phi(\eta(\psi))=\psi$. Therefore, $\phi:\mathrm{N}_G(H)/H\to\mathrm{Aut}_{G\text{-}\mathsf{Set}}$ is bijective. And it is easy to check that this $\phi$ is an isomorphism of groups,
-    \[
-    \phi(\bar{n}\bar{m})(g\cdot s)=\phi(\overline{nm})(g\cdot s)=gnm\cdot s=\phi(\bar{n})(gm\cdot s)=\phi(\bar{n})\circ\phi(\bar{m})(g\cdot s).
-    \]
 }
 \dfn{Regular Group Action}{
     Let $G$ be a group acting on a set $X$. The action is called \textbf{regular} if any of the following equivalent conditions holds
@@ -683,10 +619,10 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 
 
 \subsection{Conjugacy Action}
-\dfn{Conjugacy Action and Inner Automorphism Group}{
+\dfn[conjugacy_action]{Conjugacy Action and Inner Automorphism Group}{
     Let $G$ be a group. The \textbf{conjugacy action} of $G$ on itself is defined as 
     \begin{align*}
-        \gamma:G &\longrightarrow \mathrm{Aut}(G)\\
+        \gamma:G &\longrightarrow \mathrm{Aut}_{\mathsf{Grp}}(G)\\
         g &\longmapsto (\gamma_g: x\longmapsto gxg^{-1})
     \end{align*}
     The \textbf{inner automorphism group} of $G$ is defined as 
@@ -826,7 +762,103 @@ Characterization of Inner Automorphisms}{
     \end{tikzcd}
     $$
 }
+\dfn{Normalizer}{
+    Let $G$ be a group and $S$ be a subset of $G$. The \textbf{normalizer} of $S$ in $G$ is defined as 
+    $$
+    \mathrm{N}_G(S)=\left\{ g\in G\mid gSg^{-1}=S \right\}.
+    $$ 
+    Let $G$ acts on $2^G$ by conjugation (c.f. \Cref{th:conjugacy_action}). Then $\mathrm{N}_G(S)=\mathrm{Stab}_G(S)\le G$.
+}
+\prop{Normalizer of a Subgroup}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. Then $H\lhd\mathrm{N}_G(H)$. Moreover, $\mathrm{N}_G(H)$ is the largest subgroup of $G$ in which $H$ is normal, i.e. $$H\lhd K\le G\implies H\lhd K\le \mathrm{N}_G(H)\le G.$$
+}
+\pf{
+    For all $n\in \mathrm{N}_G(H)$, we have $nHn^{-1}=H$, which implies $H \lhd \mathrm{N}_G(H)$. Suppose $H\lhd K\le G$. Then $\forall k\in K$, $kHk^{-1}=H$. Hence $k\in \mathrm{N}_G(H)$. Therefore we prove the maximality of $\mathrm{N}_G(H)$.
+}
+\dfn{Centralizer}{
+    Let $G$ be a group and $S$ be a subset of $G$. The \textbf{centralizer} of $S$ in $G$ is defined as 
+    \[
+        \mathrm{C}_G(S)=\left\{g\in G\mid  \forall s\in S,\;gs=sg\right\}.
+    \]
+    The centralizer of $\{x\}$ is the stabilizer subgroup of $x$ under conjugacy action, denoted by 
+    \[
+      \mathrm{C}_G(x)=\{ g\in G\mid gx=xg \}=\{ g\in G\mid gxg^{-1}=x \},
+    \]
+    which equals $\mathrm{N}_G(x)$.
+}
 
+\dfn{Center of a Group}{
+    Let $G$ be a group. The \textbf{center} of $G$ is defined as the centralizer of $G$ in $G$, denoted by
+    \[
+        Z_G=\mathrm{C}_G(G)=\{ g\in G\mid \forall x\in G,\; gx=xg\}.
+    \]
+}
+\prop[normalizer_conjugation_action]{Normalizer $\mathrm{N}_G(S)$ Acts on $S$ by Conjugation}{
+    Let $G$ be a group and $S\subseteq G$. Then $\mathrm{N}_G(S)$ acts on $S$ by conjugation, i.e. by the group homomorphism
+    \begin{align*}
+        \Psi_S: \mathrm{N}_G(S) &\longrightarrow \mathrm{Aut}_{\mathsf{Set}}(S)\\
+        g &\longmapsto \gamma_g|_S
+    \end{align*}
+    where $\gamma_g|_S(s)=gsg^{-1}$ for all $s\in S$. Moreover, we have $\ker\Psi_S=\mathrm{C}_G(S)\lhd \mathrm{N}_G(S)$.
+}
+\proof{
+    $\Psi_S$ is obtained from restriction $\Psi_S:\mathrm{N}_G(S)\hookrightarrow G\xrightarrow{\gamma}\mathrm{Aut}_{\mathsf{Set}}(G)$. Since for any $g\in \mathrm{N}_G(S)$, $\gamma_g|_S(S)=\left\{gsg^{-1}\in G\mid s \in S\right\}\subseteq S$, we see $\Psi_S(g)=\gamma_g|_S\in \mathrm{Aut}_{\mathsf{Set}}(S)$. The kernel of $\Psi_S$ is 
+    \begin{align*}
+        \ker\Psi_S &= \left\{ n\in \mathrm{N}_G(S)\mid \gamma_n|_S=\mathrm{id}_S \right\}= \left\{ n\in \mathrm{N}_G(S)\mid \forall s\in S, nsn^{-1}=s \right\}=\mathrm{N}_G(S)\cap \mathrm{C}_G(S) = \mathrm{C}_G(S).
+    \end{align*}
+}
+
+\thm{N/C Theorem}{
+    Let $G$ be a group and $H$ be a subgroup of $G$. By \Cref{th:normalizer_conjugation_action}, $\mathrm{N}_G(H)$ acts on $H$ by conjugation through the group homomorphism $\Psi_H:\mathrm{N}_G(H)\to \mathrm{Aut}_{\mathsf{Set}}(H)$. We assert that 
+    \[
+        \mathrm{N}_G(H)/\mathrm{C}_G(H) \cong \mathrm{Im}\Psi_H\le \mathrm{Aut}_{\mathsf{Grp}}(H).
+    \]
+    Hence it is legal to define
+    \begin{align*}
+        \Psi_H: \mathrm{N}_G(H) &\longrightarrow \mathrm{Aut}_{\mathsf{Grp}}(H)\\
+        g &\longmapsto \gamma_g|_H
+    \end{align*}
+}
+
+\prop{Properties of Centralizer}{
+    Let $G$ be a group and $S$ be a subset of $G$. Then
+    \begin{enumerate}[(i)]
+        \item $\mathrm{C}_G(S)\lhd \mathrm{N}_G(S)\le G$.
+    \end{enumerate}
+}
+
+
+\prop{}{
+    Let $G$ acts transitively on a set $S$. Choose $s \in S$, and let $H = \mathrm{Stab}_G(s)$. Then we have group isomorphism $\mathrm{N}_G(H)/H\cong \mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$.
+}
+\pf{
+    For any $n \in \mathrm{N}_G(H)$ with image $\bar{n} \in \mathrm{N}_G(H)/H$, since $G$ acts transitively on $S$, we can define a map 
+    \begin{align*}
+        \phi(\bar{n}):S &\longrightarrow S\\
+        g\cdot s &\longmapsto gn^{-1}\cdot s
+    \end{align*}
+    and check $\phi(\bar{n})\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$ by
+    \begin{itemize}
+        \item $\phi(\bar{n})\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$. $\phi(\bar{n})$ is well-defined: 
+        \begin{align*}
+               &\bar{m}=\bar{n}\in\mathrm{N}_G(H)/H\\
+               \implies &m^{-1}\in n^{-1}H\\
+              \implies & \exists h\in H,m^{-1}=n^{-1}h\\
+              \implies&\phi(\bar{m})(s)=gm^{-1}\cdot s=gn^{-1}h\cdot s=gn^{-1}\cdot s=\phi(\bar{n})(s).
+        \end{align*}
+        \item $\phi(\bar{n})$ is a $G$-set morphism: $\phi(\bar{n})(g\cdot s)=gn^{-1}\cdot s=g\cdot\phi(\bar{n})(s)$
+        \item $\phi(\bar{n})$ is a bijection: $\phi(\bar{n}^{-1})$ is the inverse of $\phi(\bar{n})$.
+    \end{itemize}
+    For any automorphism $\psi\in \mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$, by transitivity we have $\psi(s)=n^{-1}\cdot s$ for some $n \in G$. For $h \in H$, $hn^{-1}\cdot s=h\cdot\psi(s)=\psi(h\cdot s)=\psi(s)=n^{-1}\cdot s$, hence $n h n^{-1} \in H$ and $n \in \mathrm{N}_G(H)$. This gives a well-defined map 
+    \begin{align*}
+        \eta:\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S) &\longrightarrow \mathrm{N}_G(H)/H\\
+        \psi &\longmapsto \bar{n}
+    \end{align*}
+    Clearly $\eta(\phi(\bar{n}))=\bar{n}$. Suppose $\psi\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$ and $\psi(s)=n\cdot s$. Then $\phi(\eta(\psi))(g\cdot s)=g n\cdot s=g\psi(s)=\psi(g\cdot s)$, which imples $\phi(\eta(\psi))=\psi$. Therefore, $\phi:\mathrm{N}_G(H)/H\to\mathrm{Aut}_{G\text{-}\mathsf{Set}}$ is bijective. And it is easy to check that this $\phi$ is an isomorphism of groups,
+    \[
+    \phi(\bar{n}\bar{m})(g\cdot s)=\phi(\overline{nm})(g\cdot s)=gnm\cdot s=\phi(\bar{n})(gm\cdot s)=\phi(\bar{n})\circ\phi(\bar{m})(g\cdot s).
+    \]
+}
 \section{Symmetric Groups}
 
 \dfn{$k$-Cycle}{
