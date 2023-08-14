@@ -473,8 +473,14 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     \]
     It is easy to see that $\mathrm{Stab}_G(x)$ is a subgroup of $G$.
 }
+\prop{Properties of Stabilizer Subgroup}{
+    Let $G$ be a group acting on a set $X$. For $x\in X$, the stabilizer subgroup $\mathrm{Stab}_G(x)$ has the following properties
+    \begin{enumerate}[(i)]
+        \item $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
+        \item $\ker \left(G\to \mathrm{Aut}_{\mathsf{Set}}(X)\right)=\bigcap\limits_{x\in X}\mathrm{Stab}_G(x)$.
+    \end{enumerate}
+}
 
-We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
 
 \dfn{Faithful Group Action}{
     Let $G$ be a group acting on a set $X$. The action is called \textbf{faithful} if any of the following equivalent conditions holds
@@ -629,7 +635,7 @@ We can see $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
     $$
     \mathrm{Inn}(G)=\gamma(G)=\{ \gamma_g\mid g\in G\},
     $$ 
-    which is a subgroup of $\mathrm{Aut}(G)$.
+    which is a subgroup of $\mathrm{Aut}_{\mathsf{Grp}}(G)$.
 }
 \dfn{Conjugate Subgroups}{
 From \Cref{ex:acting_on_power_set}, we see conjugacy action on $G$ induces an action on its power set $2^G$: \begin{align*}
@@ -665,23 +671,23 @@ Characterization of Inner Automorphisms}{
     Let $G$ be a group. Then the following are true:
     \begin{enumerate}[(i)]
         \item $a\sim b$ if and only if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
-        \item $\mathrm{Cl}(a)=\{ a\}$ if and only if $a\in Z(G)$.
+        \item $\mathrm{Cl}(a)=\{ a\}$ if and only if $a\in Z_G$.
     \end{enumerate}
 }
 
 
 \dfn{Outer Automorphism Group}{
-    Let $G$ be a group. Then we have $\mathrm{Inn}(G) \lhd \mathrm{Aut}(G)$. And the \textbf{outer automorphism group} of $G$ is defined as 
+    Let $G$ be a group. Then we have $\mathrm{Inn}(G) \lhd \mathrm{Aut}_{\mathsf{Grp}}(G)$. And the \textbf{outer automorphism group} of $G$ is defined as 
     $$
-    \mathrm{Out}(G)=\mathrm{Aut}(G)/\mathrm{Inn}(G).
+    \mathrm{Out}(G)=\mathrm{coker}\,\gamma=\mathrm{Aut}_{\mathsf{Grp}}(G)/\mathrm{Inn}(G).
     $$ 
 }
 \dfn{Characteristic Subgroup}{
     Let $G$ be a group. A subgroup $H\le G$ is called a \textbf{characteristic subgroup} if 
     \[
-        \forall \varphi \in\mathrm{Aut}(G),\; \varphi(H)\subseteq H.
+        \forall \varphi \in\mathrm{Aut}_{\mathsf{Grp}}(G),\; \varphi(H)\subseteq H.
     \]
-    It would be equivalent to require the stronger condition that $\forall \varphi \in\mathrm{Aut}(G)$, $\varphi(H)= H$, because 
+    It would be equivalent to require the stronger condition that $\forall \varphi \in\mathrm{Aut}_{\mathsf{Grp}}(G)$, $\varphi(H)= H$, because 
     \[
         \varphi(H)\subseteq H\implies \varphi^{-1}(H)\subseteq H\implies H\subseteq \varphi(H).
     \]
@@ -689,7 +695,7 @@ Characterization of Inner Automorphisms}{
 \dfn{Fully Characteristic Subgroup}{
     Let $G$ be a group. A subgroup $H\le G$ is called a \textbf{fully characteristic subgroup} if 
     \[
-        \forall \varphi \in\mathrm{End}(G),\; \varphi(H)\subseteq H.
+        \forall \varphi \in\mathrm{End}_{\mathsf{Grp}}(G),\; \varphi(H)\subseteq H.
     \]
 }
 \dfn{Word Map}{
@@ -808,7 +814,7 @@ Characterization of Inner Automorphisms}{
     \end{align*}
 }
 
-\thm{N/C Theorem}{
+\thm[N/C_theorem]{N/C Theorem}{
     Let $G$ be a group and $H$ be a subgroup of $G$. By \Cref{th:normalizer_conjugation_action}, $\mathrm{N}_G(H)$ acts on $H$ by conjugation through the group homomorphism $\Psi_H:\mathrm{N}_G(H)\to \mathrm{Aut}_{\mathsf{Set}}(H)$. We assert that 
     \[
         \mathrm{N}_G(H)/\mathrm{C}_G(H) \cong \mathrm{Im}\Psi_H\le \mathrm{Aut}_{\mathsf{Grp}}(H).
@@ -819,11 +825,28 @@ Characterization of Inner Automorphisms}{
         g &\longmapsto \gamma_g|_H
     \end{align*}
 }
+\cor{}{
+    Let $G$ be a group. Then $G/Z_G\cong \mathrm{Inn}(G)$. That means the conjugation action of a central element is trivial. The kernel and cokernel of the conjugation $\gamma:G\to \mathrm{Aut}_{\mathsf{Grp}}(G)$ can be connected by the following exact sequence
+    \[
+        1\longrightarrow Z_G\longrightarrow G\xrightarrow{\hspace{5pt}\gamma\hspace{5pt}}\mathrm{Aut}_{\mathsf{Grp}}(G)\longrightarrow \mathrm{Out}(G)\longrightarrow 1.
+    \]
+}
+\pf{
+Take $H=G$ in \Cref{th:N/C_theorem}.
+}
+
 
 \prop{Properties of Centralizer}{
     Let $G$ be a group and $S$ be a subset of $G$. Then
     \begin{enumerate}[(i)]
-        \item $\mathrm{C}_G(S)\lhd \mathrm{N}_G(S)\le G$.
+        \item $S\subseteq\mathrm{C}_G(\mathrm{C}_G(S))$.
+    \end{enumerate}
+}
+\prop{Properties of Center}{
+    Let $G$ be a group. Then
+    \begin{enumerate}[(i)]
+        \item $Z_G\lhd_{\mathrm{char}} G$.
+        \item A group is Abelian if and only if $Z_G=G$.
     \end{enumerate}
 }
 
@@ -854,10 +877,25 @@ Characterization of Inner Automorphisms}{
         \eta:\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S) &\longrightarrow \mathrm{N}_G(H)/H\\
         \psi &\longmapsto \bar{n}
     \end{align*}
-    Clearly $\eta(\phi(\bar{n}))=\bar{n}$. Suppose $\psi\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$ and $\psi(s)=n\cdot s$. Then $\phi(\eta(\psi))(g\cdot s)=g n\cdot s=g\psi(s)=\psi(g\cdot s)$, which imples $\phi(\eta(\psi))=\psi$. Therefore, $\phi:\mathrm{N}_G(H)/H\to\mathrm{Aut}_{G\text{-}\mathsf{Set}}$ is bijective. And it is easy to check that this $\phi$ is an isomorphism of groups,
+    Clearly $\eta(\phi(\bar{n}))=\bar{n}$. Suppose $\psi\in\mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$ and $\psi(s)=n^{-1}\cdot s$. Then $\phi(\eta(\psi))(g\cdot s)=g n^{-1}\cdot s=g\psi(s)=\psi(g\cdot s)$, which imples $\phi(\eta(\psi))=\psi$. Therefore, $\phi:\mathrm{N}_G(H)/H\to\mathrm{Aut}_{G\text{-}\mathsf{Set}}$ is bijective. And it is easy to check that this $\phi$ is an isomorphism of groups,
     \[
-    \phi(\bar{n}\bar{m})(g\cdot s)=\phi(\overline{nm})(g\cdot s)=gnm\cdot s=\phi(\bar{n})(gm\cdot s)=\phi(\bar{n})\circ\phi(\bar{m})(g\cdot s).
+    \phi(\bar{n}\bar{m})(g\cdot s)=\phi(\overline{nm})(g\cdot s)=g(nm)^{-1}\cdot s=gm^{-1}n^{-1}\cdot s=\phi(\bar{n})(gm^{-1}\cdot s)=\phi(\bar{n})\circ\phi(\bar{m})(g\cdot s).
     \]
+}
+
+\prop{}{
+    A $G$-map $\alpha: G / H \longrightarrow G / K$ has the form $\alpha(g H)=g r K$, where the element $r \in G$ satisfies $r^{-1} H r\subseteq K$.
+}
+\pf{
+    Note
+    \[
+        \alpha(g H)=\alpha(g 1_G H)=g \alpha(1_G H).
+    \]
+Taking $\alpha(1_G H)=r K$, then we obtain $\alpha(g H)=g r K$. Since for all $h\in H$ we have 
+$$
+r K=\alpha(h1_G H)=h \alpha(1_G H)=hr K\implies r^{-1} h r \in K,
+$$
+we show $r^{-1} H r\subseteq K$.
 }
 \section{Symmetric Groups}
 
