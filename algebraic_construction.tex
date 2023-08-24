@@ -6,6 +6,10 @@
 \definecolor{arrowBlue}{RGB}{66, 135, 245}
 \definecolor{arrowRed}{RGB}{245, 93, 66}
 
+\usetikzlibrary{cd, decorations.pathmorphing, nfold}
+\tikzcdset{
+  diagrams={/tikz/double/.append style=/tikz/nfold},
+}
 \tikzcdset{arrow style=tikz,
     squigarrow/.style={
         decoration={
@@ -168,6 +172,71 @@
         \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
     \end{enumerate}
 }
+
+\section{Monoidal Category}
+\dfn{Monoidal Category}{
+    A monoidal category is a category $\mathsf{V}$ equipped with
+    \begin{enumerate}[(i)]
+        \item Tensor product: a functor $\otimes:\mathsf{V}\times\mathsf{V}\to\mathsf{V}$.
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{V}\times \mathsf{V}\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{V}\&[-30pt]\&[-30pt] \\ [-15pt] 
+                (X_1,Y_1)  \arrow[dd, "f\times g"{name=L, left}] 
+                \&[-25pt] \& [+10pt] 
+                \& [-30pt]X_1\otimes Y_1\arrow[dd, "f\otimes g"{name=R}] \\ [-10pt] 
+                \&  \phantom{.}\arrow[r, "\otimes", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+                (X_2,Y_2)  \& \& \& X_2\otimes Y_2
+            \end{tikzcd}
+            \]
+        \item Associator: a natural isomorphism $a$
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{V}\times\mathsf{V}\times\mathsf{V} \arrow[r, "(-\otimes-)\otimes-"{name=A, above}, bend left] \arrow[r, "-\otimes(-\otimes-)"'{name=B, below}, bend right] \&[+30pt] \mathsf{V}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "a"]
+            \end{tikzcd}
+        \]
+        \item Unit object: an object $1\in \mathrm{Ob}(\mathsf{V})$ 
+        \item An isomorphism in $\mathsf{V}$: $\iota:1\otimes 1\to 1$
+    \end{enumerate}
+    such that the following two condition holds
+    \begin{enumerate}[(i)]
+        \item The pentagon axiom: the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+            \& [-50pt]                  \&[-25pt]    ((A\otimes B)\otimes C)\otimes D \arrow[lld, "{a_{(A,B,C)}\otimes \mathrm{id}_D}"'] \arrow[rrd, "{a_{(A\otimes B,C,D)}}"] \& [-25pt]                  \&   [-50pt]                                                                      \\[+20pt]
+(A\otimes( B\otimes C))\otimes D \arrow[rd, "{a_{(A,B\otimes C,D)}}"'] \&                                                                                    \&    \&       \& (A\otimes B)\otimes (C\otimes D) \arrow[ld, "{a_{(A, B, C\otimes D)}}"] \\[+35pt]
+            \& A\otimes( (B\otimes C)\otimes D) \arrow[rr, "{\mathrm{id}_A\otimes a_{(B,C,D)}}"'] \&    \& A\otimes( B\otimes (C\otimes D)) \&                                                                        
+\end{tikzcd}
+    \]
+    \item Unit axiom: the functors $1\otimes -:\mathsf{V}\to\mathsf{V}$ and $-\otimes 1:\mathsf{V}\to\mathsf{V}$ are category equivalences.
+    \end{enumerate}
+}
+\section{Enriched Category}
+\dfn{Enriched Category}{
+    Let $\mathsf{V}$ be a monoidal category. An \textbf{$\mathsf{V}$-enriched category} $\mathsf{C}$ consists of
+    \begin{enumerate}[(i)]
+        \item Object set: a set of objects $\mathrm{Ob}(\mathsf{C})$.
+        \item $\mathrm{Hom}$-object: for each pair of objects $A,B\in \mathrm{Ob}(\mathsf{C})$, an object $\mathrm{Hom}_{\mathsf{C}}(A,B)\in \mathrm{Ob}(\mathsf{V})$.
+        \item Composition: for each triple of objects $A,B,C\in \mathrm{Ob}(\mathsf{C})$, a morphism in $\mathsf{V}$
+        \[
+            \circ:\mathrm{Hom}_{\mathsf{C}}(B,C)\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)\longrightarrow \mathrm{Hom}_{\mathsf{C}}(A,C)
+        \]
+        \item Identity: for each object $A\in \mathrm{Ob}(\mathsf{C})$, a morphism $\mathrm{id}_A:1 \to \mathrm{Hom}_{\mathsf{C}}(A,A)$ in $\mathsf{V}$.
+    \end{enumerate}
+    such that the following conditions hold
+    \begin{enumerate}[(i)]
+        \item For each quadruple of objects $A,B,C,D\in \mathrm{Ob}(\mathsf{C})$, the following diagram commutes
+        \[
+            \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+                    \&[-130pt] {\left(\mathrm{Hom}(C,D)\otimes \mathrm{Hom}(B,C)\right)\otimes \mathrm{Hom}(A,B) } \arrow[ld, "\circ\;\otimes \,\mathrm{id}_{\mathrm{Hom}(A,B)}"'] \arrow[rr, "\cong"] \&  [-30pt]   \&  [-30pt]{\mathrm{Hom}(C,D)\otimes \left(\mathrm{Hom}(B,C)\otimes \mathrm{Hom}(A,B)\right) } \arrow[rd, "\mathrm{id}_{\mathrm{Hom}(C,D)}\,\otimes\;\circ "] \&  [-130pt]  \\[+35pt]
+{\mathrm{Hom}(B,D)\otimes \mathrm{Hom}(A,B) } \arrow[rrd, "\circ"'] \&                                                                                                                                    \&                                               \&                                                                                                               \& {\mathrm{Hom}(C,D)\otimes \mathrm{Hom}(A,C) } \arrow[lld, "\circ"] \\[+20pt]
+                    \&                                                                                                                                    \& {\mathrm{Hom}(A,D)} \&                                                                                                               \&                                                                   
+\end{tikzcd}
+    \]
+    \end{enumerate}
+}
+
+
 \chapter{Group}
 \section{Basic Concepts}
 \dfn{Group}{
@@ -317,7 +386,7 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
 }
 The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have category isomorphism
 \begin{align*}
-    G\text{-}\mathsf{Set}&\stackrel{\sim}{\longrightarrow} \mathrm{Fun}(\mathsf{B}G, \mathsf{Set})    \\
+    G\text{-}\mathsf{Set}&\stackrel{\sim}{\longrightarrow}[\mathsf{B}G, \mathsf{Set}]    \\
     \sigma&\longmapsto \sigma(-)
 \end{align*}
 \prop{Equivalent Definition of Group Actions}{
@@ -1033,6 +1102,18 @@ The coefficients give the number of isomers for various chlorobenzene compounds.
 
 An Abelian group is a $\mathbb{Z}$-module and we have category isomorphism $\mathsf{Ab}\cong\mathbb{Z}\raisebox{0.22ex}{-}\mathsf{Mod}$.
 
+\dfn{Free Abelian Group}{
+    A \textbf{free abelian group} generated by a set $X$ is an abelian group denoted by $\mathbb{Z}^{\oplus X}$ which satisfies the following universal property: for any group $G$ and any funtion $f:X\to G$, there exists a unique group homomorphism $\varphi:\mathbb{Z}^{\oplus X}\to G$ such that the following diagram commutes
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathbb{Z}^{\oplus X} \arrow[r, "\exists!\varphi", dashed] \& G \\[+10pt]
+X \arrow[u, "\iota"] \arrow[ru, "f"']                      \&  
+    \end{tikzcd}
+    \] 
+    where $\iota:X\to \mathbb{Z}^{\oplus X}$ is the canonical injection.
+
+}
+
 \chapter{Ring}
 \section{Basic Concepts}
 \dfn{Ring}{
@@ -1545,7 +1626,7 @@ From the perspective of representation theory, a module is a ring action on an a
 \]
 As a map between objects, $\mathcal{M}$ specifies an abelian group $M$. and a ring homomorphism $R\to \mathrm{End}_{\mathsf{Ab}}(M)$, which is the ring action of $R$ on $M$. As a map between morphisms, $\mathcal{M}$ specifies a ring homomorphism $R\to \mathrm{End}_{\mathsf{Ab}}(M)$, which is $\mathbb{Z}$-bilinear, i.e. $r(m+n)=rm+rn$ for all $r\in R$ and $m, n\in M$. Define the ring representation category 
 \[
-\mathrm{Rep}_{\mathsf{Ab}}(R)=\mathrm{Fun}_{\mathsf{Ab}}(\mathsf{B}R, \mathsf{Ab})    
+\mathrm{Rep}_{\mathsf{Ab}}(R)=[\mathsf{B}R, \mathsf{Ab}]_{\mathsf{Ab}\text{-}\mathsf{Cat}}   
 \]
 to be the category of all functors between $\mathsf{Ab}$-enriched categories $\mathsf{B}R$ and $\mathsf{Ab}$. Then we have category isomorphism 
 \[
