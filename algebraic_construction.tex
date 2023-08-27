@@ -161,6 +161,35 @@
     \end{tabular}
 \end{center}
 
+\dfn{Zero Object}{
+    Let $\mathsf{C}$ be a category. An object $0\in \mathrm{Ob}(\mathsf{C})$ is called a \textbf{zero object} if it is both initial and terminal. In other words, $0$ is a zero object if for any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists unique morphisms $0\to X$ and $X\to 0$. These morphisms are the \textbf{zero morphisms} of $\mathsf{C}$.
+}
+
+\ex{Evaluation Functor}{
+    Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. The \textbf{evaluation functor} $\mathrm{ev}:\mathsf{A}\times\left[\mathsf{A},\mathsf{C}\right]\to \mathsf{C}$ is defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{A}\times\left[\mathsf{A},\mathsf{C}\right]\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            (X,F)  \arrow[dd, "f\times \theta"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]F(X)\arrow[dd, "\theta_Y\circ F(f)=G(f)\circ \theta_{X}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathrm{ev}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            (Y,G)  \& \& \& G(Y)
+        \end{tikzcd}
+        \]
+    From the following diagram, we can see that $\mathrm{ev}$ preserves composition.
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, background color=myexamplebg,row sep=large]
+                F(X) \arrow[r, "F(f)"] \arrow[d, "\theta_X"'] \arrow[rd, "\mathrm{ev}(f\times\theta)" description]\& F(Y) \arrow[d, "\theta_Y"] \arrow[r, "F(g)"]                                                  \& F(Z) \arrow[d, "\theta_Z"] \\
+                G(X) \arrow[r, "G(f)"'] \arrow[d, "\eta_X"']                                                      \& G(Y) \arrow[r, "G(g)"] \arrow[d, "\eta_Y"'] \arrow[rd, "\mathrm{ev}(g\times\eta)" description]\& G(Z) \arrow[d, "\eta_Z"]   \\
+                H(X) \arrow[r, "H(f)"']                                                                           \& H(Y) \arrow[r, "H(g)"']                                                                        \& H(Z)                      
+                \end{tikzcd}
+    \]
+    If we fix $X\in \mathsf{A}$, then we have a functor $\mathrm{ev}_X:\left[\mathsf{A},\mathsf{C}\right]\to \mathsf{C}$ defined by $\mathrm{ev}_X(F)=F(X)$. This functor is called the \textbf{evaluation functor at $X$}.
+}
+
+The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : A \to C$, the value of the limit functor $\lim_{j\in J} F_j : A \to C$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
+
 \prop[ev_functor_preserves_limits]{Evaluation Functor Preserves Limits}{
     Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
     \[
@@ -211,6 +240,25 @@
     \item Unit axiom: the functors $1\otimes -:\mathsf{V}\to\mathsf{V}$ and $-\otimes 1:\mathsf{V}\to\mathsf{V}$ are category equivalences.
     \end{enumerate}
 }
+
+A strict monoidal category is one for which the natural isomorphisms $a$, $\lambda$ and $\rho$ are identities. Every monoidal category is monoidally equivalent to a strict monoidal category.
+
+\dfn{Cartesian/Cocartesian Monoidal Category}{
+    \begin{itemize}[leftmargin=8pt]
+        \item A \textbf{cartesian monoidal category} is a monoidal category where the tensor product is the categorical product and the unit object is the terminal object. 
+        \item A \textbf{cocartesian monoidal category} is a monoidal category where the tensor product is the categorical coproduct and the unit object is the initial object.
+    \end{itemize}
+}
+\ex{Category of Endofunctors}{
+    Let $\mathsf{C}$ be a category. The \textbf{category of endofunctors} $\left[\mathsf{C},\mathsf{C}\right]$ is a monoidal category with the following structure
+    \begin{enumerate}[(i)]
+        \item Tensor product: composition of functors.
+        \item Associator: the natural isomorphism $a$ is the identity.
+        \item Unit object: the identity functor $\mathrm{id}_{\mathsf{C}}$.
+        \item Unit isomorphism: the natural isomorphism $\iota$ is the identity.
+    \end{enumerate}
+}
+
 \section{Enriched Category}
 \dfn{Enriched Category}{
     Let $\mathsf{V}$ be a monoidal category. An \textbf{$\mathsf{V}$-enriched category} $\mathsf{C}$ consists of
@@ -221,11 +269,11 @@
         \[
             \circ:\mathrm{Hom}_{\mathsf{C}}(B,C)\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)\longrightarrow \mathrm{Hom}_{\mathsf{C}}(A,C)
         \]
-        \item Identity: for each object $A\in \mathrm{Ob}(\mathsf{C})$, a morphism $\mathrm{id}_A:1 \to \mathrm{Hom}_{\mathsf{C}}(A,A)$ in $\mathsf{V}$.
+        \item Identity: for each object $A\in \mathrm{Ob}(\mathsf{C})$, a morphism ${\mathcal{I}d}_A:1 \to \mathrm{Hom}_{\mathsf{C}}(A,A)$ in $\mathsf{V}$.
     \end{enumerate}
     such that the following conditions hold
     \begin{enumerate}[(i)]
-        \item For each quadruple of objects $A,B,C,D\in \mathrm{Ob}(\mathsf{C})$, the following diagram commutes
+        \item For each quadruple of objects $A,B,C,D\in \mathrm{Ob}(\mathsf{C})$, the following diagram in $\mathsf{V}$ commutes
         \[
             \begin{tikzcd}[ampersand replacement=\&, column sep=small]
                     \&[-130pt] {\left(\mathrm{Hom}(C,D)\otimes \mathrm{Hom}(B,C)\right)\otimes \mathrm{Hom}(A,B) } \arrow[ld, "\circ\;\otimes \,\mathrm{id}_{\mathrm{Hom}(A,B)}"'] \arrow[rr, "\cong"] \&  [-30pt]   \&  [-30pt]{\mathrm{Hom}(C,D)\otimes \left(\mathrm{Hom}(B,C)\otimes \mathrm{Hom}(A,B)\right) } \arrow[rd, "\mathrm{id}_{\mathrm{Hom}(C,D)}\,\otimes\;\circ "] \&  [-130pt]  \\[+35pt]
@@ -233,6 +281,70 @@
                     \&                                                                                                                                    \& {\mathrm{Hom}(A,D)} \&                                                                                                               \&                                                                   
 \end{tikzcd}
     \]
+    \item For each pair of objects $A,B\in \mathrm{Ob}(\mathsf{C})$, the following diagrams in $\mathsf{V}$ commute
+    \[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+        {1\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)} \arrow[rr, "{{\mathcal{I}d}_B\otimes\,\mathrm{id}_{\mathrm{Hom}_{\mathsf{C}}(A,B)}}"] \arrow[rd, "\cong"'] \&                     \& {\mathrm{Hom}_{\mathsf{C}}(B,B)\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)} \arrow[ld, "\circ"] \\[+10pt]
+        \& {\mathrm{Hom}_{\mathsf{C}}(A,B)} \&   
+\end{tikzcd}
+    \]
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+            {\mathrm{Hom}_{\mathsf{C}}(A,B)\otimes 1} \arrow[rr, "\mathrm{id}_{\mathrm{Hom}_{\mathsf{C}}(A,B)}\otimes\,{\mathcal{I}d}_A "] \arrow[rd, "\cong"'] \&                     \& {\mathrm{Hom}_{\mathsf{C}}(A,B)\otimes \mathrm{Hom}_{\mathsf{C}}(A,A)} \arrow[ld, "\circ"] \\[+10pt]
+            \& {\mathrm{Hom}_{\mathsf{C}}(A,B)} \&
+    \end{tikzcd}
+        \]
+    \end{enumerate}
+}
+
+
+\section{Abelian Category}
+Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We will not use this term in this note..
+\dfn{Biproduct}{
+    Let $\mathsf{C}$ be an $\mathsf{Ab}$-category and $X_1$, $X_2$ be objects in $\mathsf{C}$. A \textbf{biproduct} of $X_1$ and $X_2$ is a diagram
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+            X_1 \arrow[r, "i_1", shift left] \& X_1\oplus X_2 \arrow[l, "p_1", shift left] \arrow[r, "p_2"', shift right] \& X_2 \arrow[l, "i_2"', shift right]
+    \end{tikzcd}
+    \]
+    such that
+    \begin{itemize}
+        \item $p_1\circ i_1=\mathrm{id}_{X_1}$, $p_2\circ i_2=\mathrm{id}_{X_2}$.
+        \item $i_1\circ p_1+ i_2\circ p_2=\mathrm{id}_{X_1\oplus X_2}$.
+    \end{itemize}
+    Empty biproduct is defined to be the zero object.
+}
+
+\prop{Equivalent Conditions of Existance of Biproduct}{
+    Let $\mathsf{C}$ be an $\mathsf{Ab}$-category and $X_1$, $X_2$ be objects in $\mathsf{C}$. Then the following are equivalent
+    \begin{enumerate}[(i)]
+        \item Product $X_1\times X_2$ exists.
+        \item Coproduct $X_1\amalg X_2$ exists.
+        \item Biproduct $X_1\oplus X_2$ exists.
+    \end{enumerate}
+}
+\prop{Equivalent Conditions of Existance of Zero Object}{
+    Let $\mathsf{C}$ be an $\mathsf{Ab}$-category. Then the following are equivalent
+    \begin{enumerate}[(i)]
+        \item Initial object (empty product) exists.
+        \item Terminal object (empty coproduct) exists.
+        \item Zero object (empty biproduct) exists.
+    \end{enumerate}
+}
+\prop{$\mathsf{Ab}$-enriched functors preserve biproducts}{
+    $\mathsf{Ab}$-enriched functors preserve finite biproducts.
+}
+\dfn{Additive Category}{
+    An $\mathsf{Ab}$-category is \textbf{additive} if it has all finite biproducts.
+}
+
+
+
+\dfn{Abelian Category}{
+    An additive category $\mathsf{C}$ is \textbf{abelian} if 
+    \begin{enumerate}[(i)]
+        \item Every morphism has both a kernel and a cokernel.
+        \item Every monomorphism and every epimorphism is normal. This means that every monomorphism is a kernel of some morphism, and every epimorphism is a cokernel of some morphism.
     \end{enumerate}
 }
 
