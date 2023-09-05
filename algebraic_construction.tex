@@ -3,6 +3,8 @@
 \input{preamble}
 \usepackage{chemfig}
 \usepackage{relsize}
+\usepackage{multirow}
+\usepackage{booktabs}
 
 \newcommand{\Largewedge}{\mathlarger{\mathlarger{\wedge}}}
 \newcommand{\largewedge}{\mathlarger{\wedge}}
@@ -175,6 +177,29 @@ In this book, we use the following notation conventions:
     Let $\mathsf{C}$ be a category. An object $0\in \mathrm{Ob}(\mathsf{C})$ is called a \textbf{zero object} if it is both initial and terminal. In other words, $0$ is a zero object if for any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists unique morphisms $0\to X$ and $X\to 0$. These morphisms are the \textbf{zero morphisms} of $\mathsf{C}$.
 }
 
+\begin{table}[]
+    \centering
+    \renewcommand{\arraystretch}{1.6}
+    \begin{tabular}{l|m{5.3cm}|m{5.3cm}}
+        \toprule
+        \textbf{Category}       & \multicolumn{1}{c|}{\textbf{Initial Object}} & \multicolumn{1}{c}{\textbf{Terminal Object}}             \\ 
+        \midrule
+        \midrule
+        $\mathsf{Set}$ & \multicolumn{1}{c|}{$\varnothing$}  & \multicolumn{1}{c}{$\{*\}$} \\ \midrule
+        $\mathsf{Grp}$ & \multicolumn{2}{c}{$\{0\}$}                                       \\ \midrule
+        $R\text{-}\mathsf{Mod}$  & \multicolumn{2}{c}{$\{0\}$}                                       \\ \midrule
+        $\mathsf{Ring}$ & \multicolumn{1}{c|}{$\mathbb{Z}$} & \multicolumn{1}{c}{$\{0\}$}            \\ \midrule
+        $\mathsf{Sch}$ & \multicolumn{1}{c|}{$\spec\mathbb{Z}$} & \multicolumn{1}{c}{$\spec \{0\}=\varnothing$ }           \\ \midrule
+        $\mathsf{Field}_p$ & \multicolumn{1}{c|}{\begin{minipage}{.3\linewidth}$$
+            \begin{array}{ll} 
+                \mathbb{Q} & \text{if } p=0 \\
+                \mathbb{F}_p & \text{if } p>0 
+            \end{array}
+            $$\end{minipage}} &             \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+
 \ex{Evaluation Functor}{
     Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. The \textbf{evaluation functor} $\mathrm{ev}:\mathsf{A}\times\left[\mathsf{A},\mathsf{C}\right]\to \mathsf{C}$ is defined by
     \[
@@ -211,6 +236,11 @@ The next result shows that functor categories inherit limits and colimits, defin
         \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
     \end{enumerate}
 }
+
+\prop{Limits commute with limits}{
+    Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
+}
+
 
 \section{Monoidal Category}
 \dfn{Monoidal Category}{
@@ -309,7 +339,10 @@ A strict monoidal category is one for which the natural isomorphisms $a$, $\lamb
 
 
 \section{Abelian Category}
-Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We will not use this term in this note..
+Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We will not use this term in this note.
+
+
+
 \dfn{Biproduct}{
     Let $\mathsf{C}$ be an $\mathsf{Ab}$-category and $X_1$, $X_2$ be objects in $\mathsf{C}$. A \textbf{biproduct} of $X_1$ and $X_2$ is a diagram
     \[
@@ -348,7 +381,23 @@ Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We
     An $\mathsf{Ab}$-category is \textbf{additive} if it has all finite biproducts.
 }
 
+\dfn{Kernel and Cokernel}{
+    Suppose $\mathsf{C}$ is an abelian category with zero object and $f:X\to Y$ is a morphism in $\mathsf{C}$. The \textbf{kernel} of $f$ is the equalizer of $f$ and the zero morphism, which is denoted by $\ker f$. The universal property of kernel is given by the following diagram
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \& M \arrow[d, "g"] \arrow[rd, "0"] \arrow[ld, "\exists!\widetilde{g}"', dashed] \&   \\
+        \ker f \arrow[r] \& X \arrow[r, "f"']                                                             \& Y
+    \end{tikzcd}
+    \]
+    The \textbf{cokernel} of $f$ is the coequalizer of $f$ and the zero morphism, which is denoted by $\operatorname{coker}f$. The universal property of cokernel is given by the following diagram
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \& M                           \&                                                                     \\
+        X \arrow[r, "f"'] \arrow[ru, "0"] \& Y \arrow[u, "g"'] \arrow[r] \& \operatorname{coker} f \arrow[lu, "\exists!\widetilde{g}"', dashed]
+        \end{tikzcd}
+    \]
 
+}
 
 \dfn{Abelian Category}{
     An additive category $\mathsf{C}$ is \textbf{abelian} if 
@@ -1258,6 +1307,34 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
     Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$.
 }
 
+\dfn{Ideal}{
+    Let \( R \) be a ring and \( I \subseteq R \) be an additive subgroup.
+    \begin{itemize}
+        \item \textbf{Left ideal}: If for every \( r \in R \), \( rI \subseteq I \), then \( I \) is called a left ideal of \( R \).
+        \item \textbf{Right ideal}: If for every \( r \in R \), \( Ir \subseteq I \), then \( I \) is called a right ideal of \( R \).
+        \item \textbf{Two-sided ideal}: If \( I \) is both a left and a right ideal, then it is called a two-sided ideal.
+    \end{itemize}
+
+A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called a \textbf{proper ideal}. In commutative rings, left and right ideals are the same and are simply called ideals.
+}
+
+\dfn{Quotient Ring}{
+    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Equip the additive group \( R / I \) with the following multiplication operation:
+\[
+(r+I) \cdot (s+I) := (rs + I), \quad r, s \in R .
+\]
+Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R \) modulo \( I \)}. The quotient map \( R \rightarrow R / I \) is called the quotient homomorphism.
+}
+\prop{Universal Property of Quotient Rings}{
+    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Then the quotient map $\pi:R\to R/I$ is a surjective ring homomorphism with kernel $I$. Moreover, for any ring $S$ and any ring homomorphism $f:R\to S$ such that $I\subseteq\ker f$, there exists a unique ring homomorphism $\bar{f}:R/I\to S$ such that the following diagram commutes
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        R \arrow[r, "f"] \arrow[d, "\pi"'] \& S \\
+        R/I \arrow[ru, "\exists!\bar{f}"'] \&  
+    \end{tikzcd}
+    \] 
+}
+
 \dfn{Reduced Ring}{
     A ring $R$ is called \textbf{reduced} if it has no nonzero nilpotent elements, or equivalently, if for any $x\in R$, $x^2=0\implies x=0$.
 }
@@ -1286,7 +1363,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
     Let $R$ be an $I$-graded ring with grading $(R_i)_{i\in I}$. An ideal $J$ of $R$ is called \textbf{graded} if $J=\bigoplus_{i\in I}J\cap R_i$.
 }
 \prop{Homogeneous Elements Generate Graded Ideal}{
-    Let $R$ be a $I$-graded ring with grading $(R_i)_{i\in I}$ and $\mathfrak{a}$ be a two sided ideal of $R$. Then $\mathfrak{a}$ is a graded ideal if and only if $\mathfrak{a}$ is generated by homogeneous elements.
+    Let $R$ be a $I$-graded ring with grading $(R_i)_{i\in I}$ and $\mathfrak{a}$ be a two-sided ideal of $R$. Then $\mathfrak{a}$ is a graded ideal if and only if $\mathfrak{a}$ is generated by homogeneous elements.
 }
 \pf{
 If $\mathfrak{a}$ is a graded ideal, then 
@@ -2023,6 +2100,11 @@ We can check that
 \[
   r\cdot (ab)=\sigma(r)ab=(r\cdot a)b=\sigma(r)ab=a\left(\sigma(r)b\right) =a(r\cdot b).
 \]
+
+\dfn{Quotient Algebra}{
+    Let $A$ be an $R$-algebra and $\mathfrak{a}$ be a two-sided ideal of $A$. Since $\mathfrak{a}$ is an $R$-submodule of $A$, the quotient ring $A/\mathfrak{a}$ can also be endowed with an $R$-module structure, which makes $A/\mathfrak{a}$ an $R$-algebra. We call $A/\mathfrak{a}$ the \textbf{quotient algebra} of $A$ by $\mathfrak{a}$.
+}
+
 \dfn{$I$-Graded Algebra over an Graded Commutative Ring}{
     Let $(I,+)$ be a monoid and $R$ be a $I$-graded commutative ring with grading $(R_i)_{i\in I}$. An \textbf{$I$-graded algebra over graded ring $R$} is an $R$-algebra $A$ together with a family of subalgebras $\left(A_i\right)_{i\in I}$ such that
     \begin{enumerate}[(i)]
@@ -2033,6 +2115,13 @@ We can check that
     Elements in $A_i$ are called \textbf{homogeneous elements of degree $i$}.
 }
 
+\prop{Graded Algebra Quotients out Graded Ideal}{
+    Let $A$ be an $I$-graded algebra over graded ring $R$ with grading $(A_i)_{i\in I}$ and $\mathfrak{a}$ be a graded two-sided ideal of $A$. Then $A/\mathfrak{a}$ has decomposition
+    \[
+    A/ \mathfrak{a}=\bigoplus_{i\in I}A_i/\left(\mathfrak{a}\cap A_i\right),    
+    \]
+    which makes $A/\mathfrak{a}$ an $I$-graded algebra.
+}
 
 
 \ex{Polynomial Algebra $R[X_1,\cdots,X_n]$}{
@@ -2049,7 +2138,11 @@ We can check that
     \end{align*}
     The \textbf{tensor algebra} of $M$ is defined as
     \[
-        T^{\bullet}(M)=\bigoplus_{k=0}^{\infty}T^k(M).
+        T^{\bullet}(M)=\bigoplus_{k=0}^{\infty}T^k(M)
+    \]
+    with multiplication $\otimes$ defined as
+    \[
+        (m_1\otimes\cdots\otimes m_k)\otimes(m_{k+1}\otimes\cdots\otimes m_{k+l})=m_1\otimes\cdots\otimes m_{k+l}
     \]
     $T^{\bullet}(M)$ is an $\mathbb{N}$-graded $R$-algebra with grading $(T^k(M))_{k\ge 0}$.
 }
@@ -2060,11 +2153,23 @@ We can check that
     \begin{align*}
         I_{\largewedge}(M) & :=\langle x \otimes x: x \in M\rangle
     \end{align*}
-    is a graded two sided ideal of $T^{\bullet}(M)$. The \textbf{exterior algebra} of $M$ is defined as
+    is a graded two-sided ideal of $T^{\bullet}(M)$. The \textbf{exterior algebra} of $M$ is defined as
     \[
         \largewedge^{\bullet} (M)=T^{\bullet}(M)/I_{\largewedge}(M).
     \]
+    The multiplication of $\Largewedge^{\bullet} (M)$ is denoted by $\wedge$ and is called the \textbf{wedge product}.
+    The grading of $\Largewedge^{\bullet} (M)$ is given by 
+    \begin{align*}
+        \largewedge^{\bullet} (M)=\bigoplus_{k=0}^{\infty}\largewedge^k(M),
+    \end{align*}
+    where 
+    \[
+        \largewedge^k(M)=T^k(M)/\left(I_{\largewedge}(M)\cap T^k(M)\right)
+    \] 
+    is called the \textbf{$k$-th exterior power of $M$}.
 }
+
+
 
 % \begin{Theorem}{Title}{label}
 %     This is the statement of the theorem.
