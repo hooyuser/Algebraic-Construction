@@ -222,6 +222,130 @@ In this book, we use the following notation conventions:
     \]
     If we fix $X\in \mathsf{A}$, then we have a functor $\mathrm{ev}_X:\left[\mathsf{A},\mathsf{C}\right]\to \mathsf{C}$ defined by $\mathrm{ev}_X(F)=F(X)$. This functor is called the \textbf{evaluation functor at $X$}.
 }
+\dfn{Constant Functor}{
+    Suppose $\mathsf{C}$, $\mathsf{D}$ be categories and $d\in \mathrm{Ob}(\mathsf{D})$. The \textbf{constant functor} $\Delta d:\mathsf{C}\to \mathsf{D}$ is defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{D}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            x  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]d\arrow[dd, "\mathrm{id}_{d}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\Delta d", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            y  \& \& \& d
+        \end{tikzcd}
+    \]
+}
+\dfn{Diagonal Functor}{
+    Suppose $\mathsf{J}$, $\mathsf{C}$ are categories. The \textbf{diagonal functor} $\Delta:\mathsf{C}\to [\mathsf{J},\mathsf{C}]$ is defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}\&[-25pt]\&[+10pt]\&[-30pt][\mathsf{J},\mathsf{C}]\&[-30pt]\&[-30pt] \&\&\&\\ [-15pt] 
+            x  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\Delta x\arrow[dd, Rightarrow, "f_*"{name=R}] \& \hspace{30pt}\& x\arrow[r, "\mathrm{id}_x"]\arrow[dd, "f"']\&x\arrow[dd, "f"]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\Delta", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            y  \& \& \& \Delta y\&\& y\arrow[r, "\mathrm{id}_y"']\&y
+        \end{tikzcd}
+    \]
+}
+\dfn{Comma Category}{
+    Suppose that $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories, and $S$ and $T$ (for source and target) are functors:
+$$
+\mathsf{A} \stackrel{S}{\longrightarrow} \mathsf{C} \stackrel{T}{\longleftarrow} \mathsf{B}
+$$
+We can form the comma category $(S\downarrow T)$ as follows:
+\begin{itemize}
+    \item The objects are all triples $(A, B, h)$ with $A\in\mathrm{Ob}(\mathsf{A})$, $B\in\mathrm{Ob}(\mathsf{B})$, and $h: S(A) \rightarrow T(B)$ a morphism in $\mathsf{C}$.
+    \item The morphisms from $(A, B, h)$ to $\left(A^{\prime}, B^{\prime}, h^{\prime}\right)$ are all pairs $(f, g)$ where $f: A \rightarrow A^{\prime}$ and $g: B \rightarrow B^{\prime}$ are morphisms in $\mathsf{A}$ and $\mathsf{B}$ respectively, such that the following diagram commutes:
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            S(A) \arrow[r, "h"] \arrow[d, "S(f)"'] \& T(B) \arrow[d, "T(g)"] \\
+            S\left(A^{\prime}\right) \arrow[r, "h^{\prime}"'] \& T\left(B^{\prime}\right)
+            \end{tikzcd}
+    \]
+
+
+    Morphisms are composed by taking $\left(f^{\prime}, g^{\prime}\right) \circ(f, g)$ to be $\left(f^{\prime} \circ f, g^{\prime} \circ g\right)$, whenever the latter expression is defined. The identity morphism on an object $(A, B, h)$ is $\left(\operatorname{id}_A, \operatorname{id}_B\right)$.
+\end{itemize}
+}
+\dfn{Slice Category}{
+    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} $\left(\mathsf{C} / X\right)$ is the comma category $(\mathrm{id}_{\mathsf{C}} \downarrow\Delta X)$, where functors are illustrated as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \mathsf{1} \arrow[l, "\Delta X"']
+        \end{tikzcd}
+    \]
+    Morphims in $\left(\mathsf{C} / X\right)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            C \arrow[rd, "h"] \arrow[dd, "f"'] \& \\
+            \& X\\
+            C^{\prime} \arrow[ru, "h^{\prime}"'] \&
+            \end{tikzcd}
+    \]
+}
+\dfn{Coslice Category}{
+    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(\Delta X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{1} \arrow[r, "\Delta X"] \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
+        \end{tikzcd}
+    \]
+    Morphims in $\left(X / \mathsf{C}\right)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+              \& C \arrow[dd, "f"]\\
+            X\arrow[rd, "h"']\arrow[ru, "h^{\prime}"]\& \\
+             \& C^{\prime} 
+            \end{tikzcd}
+    \]
+}
+\dfn{Limit}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\Delta"] \& {[\mathsf{J},\mathsf{C}]} \& \mathsf{1} \arrow[l, "\Delta F"']
+        \end{tikzcd}
+    \]
+    and the comma category $\left(\Delta \downarrow \Delta F\right)$. The objects in $\left(\Delta \downarrow \Delta F\right)$ are all natural transformations 
+    \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{J} \arrow[r, "\Delta C"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
+            \end{tikzcd}
+    \]
+    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:\Delta C\Rightarrow F$ is called a \textbf{cone} with vertex $C$ over $F$ because its commutative square simplifies to the following communitative triangle
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \& C \arrow[ld, "h_i"'] \arrow[rd, "h_j"] \&      \\
+F(i) \arrow[rr, "F(\lambda)"'] \&                                         \& F(j)
+\end{tikzcd}
+\]    
+    The morphisms in $\left(\Delta \downarrow \Delta F\right)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            \Delta C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_*"'] \& \\
+            \&  F\\
+            \Delta C' \arrow[ru, Rightarrow, "h^{\prime}"'] \&
+            \end{tikzcd}
+    \]
+    The \textbf{limit} of $F$, denoted by $\varprojlim F$, is the terminal object of $(\Delta\downarrow \Delta F)$. 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
+            \&   [-1.5em]                \&[-1em] C \arrow[rdd, draw=cyan, "h_j"] \arrow[ldd, draw=cyan, "h_i"'] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \& [-1em]                  \\[+0.2cm]
+            \&                   \& \varprojlim F\arrow[ld, draw=arrowBlue, shorten <=-3.5pt, "\phi_i" yshift=4.5pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "\phi_j"' yshift=4.5pt]               \&                   \\[-0.1cm]
+        \& F(i) \arrow[rr, "F(\lambda)"']\&   \& F(j)
+        \end{tikzcd}
+    \]
+}
+
+\dfn{Complete Category}{
+    A category $\mathsf{C}$ is \textbf{complete} if it has all small limits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varprojlim F$ exists.
+}
+
+\thm{Existance Theorem for Limits}{
+    Let $\mathsf{C}$ be a category and $F:\mathsf{J}\to\mathsf{C}$ be a functor. If a category $\mathsf{C}$ has equalizers and all products indexed by the classes $\mathrm{Ob}(\mathsf{J})$ and $\mathrm{Hom}(\mathsf{J})$, then $\mathsf{C}$ has all limits of shape $\mathsf{J}$.
+}
 
 The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : A \to C$, the value of the limit functor $\lim_{j\in J} F_j : A \to C$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
 
@@ -241,6 +365,25 @@ The next result shows that functor categories inherit limits and colimits, defin
     Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
 }
 
+\dfn{Filtered Category}{
+    A category $\mathsf{J}$ is \textbf{filtered} if 
+    \begin{itemize}
+        \item $\mathsf{J}$ is nonempty.
+        \item For any pair of objects $j_1,j_2\in \mathrm{Ob}(\mathsf{J})$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and morphisms $j_1\to j_3$ and $j_2\to j_3$.
+        \item For any pair of morphisms $f,g:j_1\to j_2$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and a morphism $h:j_2\to j_3$ such that $h\circ f=h\circ g$.
+    \end{itemize}
+}
+\dfn{Cofiltered Category}{
+    A category $\mathsf{J}$ is \textbf{cofiltered} if $\mathsf{J}^{\mathrm{op}}$ is filtered. Equivalently, $\mathsf{J}$ is cofiltered if
+    \begin{itemize}
+        \item $\mathsf{J}$ is nonempty.
+        \item For any pair of objects $j_1,j_2\in \mathrm{Ob}(\mathsf{J})$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and morphisms $j_3\to j_1$ and $j_3\to j_2$.
+        \item For any pair of morphisms $f,g:j_1\to j_2$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and a morphism $h:j_3\to j_2$ such that $f\circ h=g\circ h$.
+    \end{itemize}
+}
+\dfn{Filtered Colimit}{
+    A \textbf{filtered colimit} is a colimit of a functor $F: \mathsf{J} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a filtered category.
+}
 
 \section{Monoidal Category}
 \dfn{Monoidal Category}{
@@ -1284,6 +1427,52 @@ X \arrow[u, "\iota"] \arrow[ru, "f"']                      \&
     where $\iota:X\to \mathbb{Z}^{\oplus X}$ is the canonical injection.
 
 }
+\chapter{Topological Group}
+\section{Topological Group}
+\dfn{Topological Group}{
+    A \textbf{topological group} is a group $G$ equipped with a topology $\tau$ such that the group multiplication map
+    \begin{align*}
+        \mu:G\times G&\longrightarrow G\\
+        (g,h)&\longmapsto gh
+    \end{align*}
+    and the inversion map
+    \begin{align*}
+        \sigma:G&\longrightarrow G\\
+        g&\longmapsto g^{-1}
+    \end{align*}
+    are continuous maps.
+}
+\noindent Topological groups are the group objects in the category $\mathsf{Top}$ of topological spaces.\\
+Topological groups form a category $\mathsf{TopGrp}$, where the morphisms are continuous group homomorphisms.
+\prop{}{
+    The category $\mathsf{TopGrp}$ is complete. Limits in $\mathsf{TopGrp}$ commute with 
+    \begin{itemize}
+        \item forgetful functor $\mathsf{TopGrp}\to\mathsf{Top}$
+        \item forgetful functor $\mathsf{TopGrp}\to\mathsf{Grp}$
+    \end{itemize}
+}
+\pf{ 
+    It is enough to prove the existence and commutation for products and equalizers. Let $R_i, i \in I$ be a collection of topological rings. Take the usual product $R=\prod R_i$ with the product topology. Since $R \times R=\prod\left(R_i \times R_i\right)$ as a topological space (because products commutes with products in any category), we see that addition and multiplication on $R$ are continuous. Let $a, b: R \rightarrow R^{\prime}$ be two homomorphisms of topological rings. Then as the equalizer we can simply take the equalizer of $a$ and $b$ as maps of topological spaces, which is the same thing as the equalizer as maps of rings endowed with the induced topology.
+}
+\section{Topological Ring}
+\dfn{Topological Ring}{
+    A \textbf{topological ring} is a ring $R$ equipped with a topology $\tau$ such that the ring addition map
+    \begin{align*}
+        +:R\times R&\longrightarrow R\\
+        (a,b)&\longmapsto a+b
+    \end{align*}
+    the ring multiplication map
+    \begin{align*}
+        \cdot:R\times R&\longrightarrow R\\
+        (a,b)&\longmapsto a\cdot b
+    \end{align*}
+    and the addition inverse map
+    \begin{align*}
+        -:R&\longrightarrow R\\
+        a&\longmapsto -a
+    \end{align*}
+    are continuous maps.
+}
 
 
 \chapter{Ring}
@@ -2170,6 +2359,65 @@ We can check that
 }
 
 
+
+\chapter{Number Theory}
+\section{$p$-adic Numbers}
+
+
+\dfn{$p$-adic Integer}{
+    Let $p$ be a prime number. The $p$-adic integer topological ring is defined as
+    \[
+    \mathbb{Z}_p=\varprojlim_{n}\mathbb{Z}/p^n\mathbb{Z}.    
+    \]
+    The universal property of $\mathbb{Z}_p$ is given by the following commutative diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=30pt]
+            \&                                    \&                  \&                                    \&                  \& G \arrow[d, dashed] \arrow[rdd]                                                    \&                  \\
+            \&                                    \&                  \&                                    \&                  \& \mathbb{Z}_p \arrow[d] \arrow[lld] \arrow[lllld] \arrow[llllld] \arrow[rd] \&                  \\
+\mathbb{Z}/p\mathbb{Z} \& \mathbb{Z}/p^2\mathbb{Z} \arrow[l] \& \cdots \arrow[l] \& \mathbb{Z}/p^n\mathbb{Z} \arrow[l] \& \cdots \arrow[l] \& \mathbb{Z}/p^m\mathbb{Z} \arrow[l]                                                 \& \cdots \arrow[l]
+\end{tikzcd}
+\]
+
+}
+A $p$-adic integer can be represented as a sequence
+$$
+x=\left(x_1 \bmod p, x_2 \bmod p^2, x_3 \bmod p^3, \ldots\right)
+$$
+such that $x_{n+1}\equiv x_n \bmod p^n$ for all $n\in \mathbb{Z}_{\ge 1}$. Writing in base-$p$ form, $x_n \bmod p^n$ can be represented as 
+\[
+x_n =a_0+a_1p+\cdots+a_{n-1}p^{n-1}= \left(\,\overline{ a_{n-1}\cdots a_1a_0}\,\right)_p.    
+\]
+The condition $x_{n+1}\equiv x_n \bmod p^n$ means that $x_{n+1}$ and $x_n$ have the same last $n$ digits in base-$p$ form. Thus $p$-adic integer $x$ can be thought as a base-$p$ interger with infinite digits
+\[
+x =a_0+a_1p+\cdots+a_{n}p^{n}+\cdots= \left(\,\overline{\cdots a_{n}\cdots a_1a_0}\,\right)_p.
+\]
+The projection map $\pi_n:\mathbb{Z}_p\to \mathbb{Z}/p^n\mathbb{Z}$ is the  truncation map that truncates the last $n$ digits of $x$ in base-$p$ form.
+
+\dfn{Global Field}{
+    A \textbf{global field} is a field isomorphic to one of the following:
+    \begin{itemize}
+        \item a \textbf{number field}: finite extension of $\mathbb{Q}$,
+        \item a \textbf{function field} over a finite field $\mathbb{F}_q$: finite extension of $\mathbb{F}_q(t)$.
+    \end{itemize}
+}
+\dfn{Local Field}{
+    A \textbf{local field} is a field isomorphic to one of the following:
+    \begin{itemize}
+        \item (Character zero): $\mathbb{R}$, $\mathbb{C}$ or a finite extension of $\mathbb{Q}_p$,
+        \item (Character $p>1$): the field of formal Laurent series  $\mathbb{F}_q((t))$, where $q=p^n$.
+    \end{itemize}
+}
+\section{Dirichlet Charater}
+\dfn{Dirichlet Character}{
+    Given any group homomorphism $\rho_m:(\mathbb{Z} / m \mathbb{Z})^{\times} \rightarrow \mathbb{C}^{\times}$, we can define a function $\chi:\mathbb{Z} \rightarrow \mathbb{C}$ by
+    \begin{align*}
+        \chi_m(a)=\left\{\begin{array}{lll}
+            0 & \text { if }[a] \notin(\mathbb{Z} / m \mathbb{Z})^{\times} & \text {i.e. }(a, m)>1 \\
+            \rho([a]) & \text { if }[a] \in(\mathbb{Z} / m \mathbb{Z})^{\times} & \text {i.e. }(a, m)=1
+            \end{array}\right.
+    \end{align*}
+    Such function $\chi_m$ is called a \textbf{Dirichlet character modulo $m$}.
+}
 
 % \begin{Theorem}{Title}{label}
 %     This is the statement of the theorem.
