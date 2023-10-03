@@ -4,10 +4,17 @@
 \usepackage{chemfig}
 \usepackage{relsize}
 \usepackage{multirow}
-\usepackage{booktabs}
+\usepackage{colortbl}
+
+
+\newcommand{\poscell}[1]{\cellcolor{green!22}#1}
+\newcommand{\negcell}[1]{\cellcolor{red!20}#1}
 
 \newcommand{\Largewedge}{\mathlarger{\mathlarger{\wedge}}}
 \newcommand{\largewedge}{\mathlarger{\wedge}}
+\DeclareMathOperator*\lowlim{\underline{lim}}
+\DeclareMathOperator*\uplim{\overline{lim}}
+
 \definecolor{arrowBlue}{RGB}{66, 135, 245}
 \definecolor{arrowRed}{RGB}{245, 93, 66}
 
@@ -73,6 +80,153 @@ In this book, we use the following notation conventions:
 \begin{itemize}
     \item $\mathbb{N}$: the set of natural numbers $\{0,1,2,\cdots\}$.
 \end{itemize}
+
+\chapter{Set Theory}
+\section{Set}
+\subsection{Basic Operations}
+\dfn{Family of Sets}{
+    Let $I$ be some index set. A \textbf{family of sets index by $I$} is a function that maps each index $i\in I$ to a set $A_i$, denoted by $\left(A_i\right)_{i\in I}$.
+}
+\dfn{Union and Intersection}{
+    Let $I$ be some index set and $(A_i)_{i\in I}$ be a family of sets. The \textbf{union} and \textbf{intersection} of $(A_i)_{i\in I}$ are defined as follows
+	\begin{align*}
+		\bigcup_{i\in I} A_i&:=\left\{x:\exists\,i\in I,x\in A_i \right\}\\
+		\bigcap_{i\in I} A_i&:=\left\{x:\forall\,i\in I,x\in A_i \right\}
+	\end{align*}
+}
+\prop{Distribution Law}{
+	Suppose that $A_\alpha,A,B_\alpha,B$ are sets and $I$ is some index set. We have the following distribution law:
+	\begin{itemize}
+        \item $A\cup\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}\left(A\cup B_\alpha\right)$
+		\item $A\cap\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}\left(A\cap B_\alpha\right)$
+	\end{itemize}
+}
+
+\prop{De Morgan Law}{
+	Suppose that $A_\alpha,A$ are sets and $I$ is some index set. We have
+	\begin{itemize}
+		\item $\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)^\complement=\bigcap\limits_{\alpha\in I}A_\alpha^{\complement}\ $, $\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)^\complement=\bigcup\limits_{\alpha\in I}A_\alpha^{\complement}$
+		\item $E-\bigcup\limits_{\alpha\in I}A_\alpha=\bigcap\limits_{\alpha\in I}\left(E-A_\alpha\right)\ $, $E-\bigcap\limits_{\alpha\in I}A_\alpha=\bigcup\limits_{\alpha\in I}\left(E-A_\alpha\right)$
+	\end{itemize}
+}
+
+\subsection{Limit of Sequence of Sets}
+\dfn{Upper Limit of Sequence of Sets}{
+	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets. The \textbf{upper limit} of $\left(A_n\right)_{n=1}^{\infty}$ is defined as follows
+	\begin{align*}
+		\uplim_{n\to\infty}A_n&:=\bigcap_{n=1}^\infty\bigcup_{k=n}^\infty A_k=\left\{x:x\text{ belongs to infinitely many sets in }\left(A_n\right)_{n=1}^{\infty}\right\}
+	\end{align*}
+}
+We have
+\[
+	x\in \uplim_{n\to\infty}A_n\iff \forall n\ge1,\exists k\ge n,x\in A_k.
+\]
+
+\dfn{Lower Limit of Sequence of Sets}{
+	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets. The \textbf{lower limit} of $\left(A_n\right)_{n=1}^{\infty}$ is defined as follows
+	\begin{align*}
+		\lowlim_{n\to\infty}A_n&:=\bigcup_{n=1}^\infty\bigcap_{k=n}^\infty A_k=\left\{x:x\text{ belongs to all but finitely many sets in }\left(A_n\right)_{n=1}^{\infty}\right\}\\
+	\end{align*}
+}
+\prop{Property of Upper Limit and Lower limit}{
+	\[
+		\bigcap_{n=1}^\infty A_n\subseteq\lowlim_{n\to\infty}A_n\subseteq\uplim_{n\to\infty}A_n\subseteq \bigcup_{n=1}^\infty A_n.
+	\]
+}
+\dfn{Limit of Sequence of Sets}{
+	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets. If 
+	$\lowlim\limits_{n\to\infty}A_n=\uplim\limits_{n\to\infty}A_n$, we define the \textbf{limit} of $\left(A_n\right)_{n=1}^{\infty}$ as follows 
+	\[
+		\lim\limits_{n\to\infty}A_n:=\lowlim\limits_{n\to\infty}A_n=\uplim\limits_{n\to\infty}A_n
+	\]
+}
+\prop{}{
+	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets.
+	\begin{enumerate}
+		\item If $\left(A_n\right)_{n=1}^{\infty}$ is nondecreasing, then it has limit
+		\[
+			\lim\limits_{n\to\infty}A_n=\bigcup_{n=1}^\infty A_n.
+		\]
+		\item If $\left(A_n\right)_{n=1}^{\infty}$ is nonincreasing, then it has limit
+		\[
+			\lim\limits_{n\to\infty}A_n=\bigcap_{n=1}^\infty A_n.
+		\]
+	\end{enumerate}
+}
+\subsection{Relation}
+\dfn{Relation}{
+    An \textbf{$n$-ary relation} $R$ over sets $X_1, \cdots, X_n$ is a subset of the Cartesian product $X_1 \times \cdots \times X_n$. A \textbf{binary relation} $R$ over sets $X$ and $Y$ is a subset of $X \times Y$. We write $xRy$ to denote that $(x, y) \in R$.
+}
+\dfn{Homogeneous Relation}{
+    A \textbf{homogeneous relation} $R$ over a set $X$ is a binary relation between $X$ and itself, i.e. a subset of $X \times X$. 
+}
+Here are some important properties that a homogeneous relation $R$ over a set X may have:
+\begin{itemize}
+    \item \textbf{Reflexivity}: $\forall x \in X$, $xRx$.
+    \item \textbf{Irreflexivity}: $\forall x \in X$, not $xRx$.
+    \item \textbf{Transitivity}: $\forall x, y, z \in X$, $xRy$ and $yRz$ $\implies$ $xRz$.
+    \item \textbf{Symmetry}: $\forall x, y \in X$, $xRy$ $\implies$ $yRx$.
+    \item \textbf{Antisymmetry}: $\forall x, y \in X$, $xRy$ and $yRx$ $\implies$ $x = y$.
+    \item \textbf{Asymmetry}: $\forall x, y \in X$, $xRy$ $\implies$ not $yRx$.
+    \item \textbf{Strong Connectedness}: $\forall x, y \in X$, $xRy$ or $yRx$.
+    \item \textbf{Connectedness}: $\forall x, y \in X$, $x\ne y$ $\implies$ $xRy$ or $yRx$.
+\end{itemize}
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.6}
+    \begin{tabular}{l|l|l|l|l}
+        \toprule
+        \textbf{Homogeneous Relation} & \multicolumn{1}{c|}{\textbf{Reflexivity}} & \multicolumn{1}{c|}{\textbf{Symmetry}} & \multicolumn{1}{c|}{\textbf{Transitivity}} & \multicolumn{1}{c}{\textbf{Connectedness}} \\ 
+        \midrule
+        \midrule
+        Directed graph & & & & \\ \midrule
+        Undirected graph & & \poscell{Symmetric} & & \\ \midrule
+        Dependency & \poscell{Reflexive} & \poscell{Symmetric} & & \\ \midrule
+        Tournament & \negcell{Irreflexive} & \negcell{Asymmetric} & & \\ \midrule
+        Preorder & \poscell{Reflexive} & & \poscell{Transitive} & \\ \midrule
+        Total preorder & \poscell{Reflexive} & & \poscell{Transitive} & \poscell{Strongly Connected} \\ \midrule
+        Partial order & \poscell{Reflexive} & \negcell{Antisymmetric} & \poscell{Transitive} & \\ \midrule
+        Strict partial order & \negcell{Irreflexive} & \negcell{Asymmetric} & \poscell{Transitive} & \\ \midrule
+        Total order & \poscell{Reflexive} & \negcell{Antisymmetric} & \poscell{Transitive} & \poscell{Strongly Connected} \\ \midrule
+        Strict total order & \negcell{Irreflexive} & \negcell{Asymmetric} & \poscell{Transitive} & \poscell{Connected} \\ \midrule
+        Partial equivalence & & \poscell{Symmetric} & \poscell{Transitive} & \\ \midrule 
+        Equivalence & \poscell{Reflexive} & \poscell{Symmetric} & \poscell{Transitive} & \\ \bottomrule
+    \end{tabular}
+\end{table}
+% \begin{table}[h]
+%     \centering
+%     \renewcommand{\arraystretch}{1.6}
+%     \begin{tabular}{l|l|l|l|l}
+%         \toprule
+%         \textbf{Homogeneous Relation}       & \multicolumn{1}{c|}{\textbf{Reflexivity}} & \multicolumn{1}{c|}{\textbf{Symmetry}} & \multicolumn{1}{c|}{\textbf{Transitivity}}     & \multicolumn{1}{c}{\textbf{Connectedness}}                 \\ 
+%         \midrule
+%         \midrule
+%         Directed graph & & & & \\ \midrule
+% Undirected graph & & Symmetric & & \\ \midrule
+% Dependency & Reflexive & Symmetric & & \\ \midrule
+% Tournament & Irreflexive & Asymmetric & & \\ \midrule
+% Preorder & Reflexive & & Transitive & \\ \midrule
+% Total preorder & Reflexive & & Transitive & Strongly Connected \\ \midrule
+% Partial order & Reflexive & Antisymmetric & Transitive & \\ \midrule
+% Strict partial order & Irreflexive & Asymmetric & Transitive & \\ \midrule
+% Total order & Reflexive & Antisymmetric & Transitive & Strongly Connected \\ \midrule
+% Strict total order & Irreflexive & Asymmetric & Transitive & Connected \\ \midrule
+% Partial equivalence & & Symmetric & Transitive & \\ \midrule 
+% Equivalence & Reflexive & Symmetric & Transitive & \\ \bottomrule
+%     \end{tabular}
+% \end{table}
+
+\section{Function}
+\prop{}{
+Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subseteq X$ and $B_\alpha,B,F\subseteq Y$. We have
+\begin{itemize}
+
+
+	\item $f\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)=\bigcup\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)\subseteq\bigcap\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f(E-A)\supseteq f(E)-f(A)$.
+	\item $f^{-1}\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}(F-B)=f^{-1}(F)-f^{-1}(B)$.
+	\item $A\subseteq f^{-1}(f(A))\ $, $B\supseteq f(f^{-1}(B))$.
+\end{itemize}
+}
 
 \chapter{Category Theory}
 \section{Limits and Colimits}
