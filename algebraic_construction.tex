@@ -14,6 +14,12 @@
 \newcommand{\largewedge}{\mathlarger{\wedge}}
 \DeclareMathOperator*\lowlim{\underline{lim}}
 \DeclareMathOperator*\uplim{\overline{lim}}
+\DeclareMathSymbol{\mhyphen}{\mathord}{AMSa}{"39}
+% Define \bigcdot
+\makeatletter
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
 
 \definecolor{arrowBlue}{RGB}{66, 135, 245}
 \definecolor{arrowRed}{RGB}{245, 93, 66}
@@ -235,9 +241,6 @@ Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subseteq X$ and $B_\alpha,B,
     Let $\mathsf{C}$ be a category. An object $0\in \mathrm{Ob}(\mathsf{C})$ is called a \textbf{zero object} if it is both initial and terminal. In other words, $0$ is a zero object if for any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists unique morphisms $0\to X$ and $X\to 0$. These morphisms are the \textbf{zero morphisms} of $\mathsf{C}$.
 }
 
-
-
-
 \ex{Evaluation Functor}{
     Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. The \textbf{evaluation functor} $\mathrm{ev}:\mathsf{A}\times\left[\mathsf{A},\mathsf{C}\right]\to \mathsf{C}$ is defined by
     \[
@@ -338,36 +341,49 @@ We can form the comma category $(S\downarrow T)$ as follows:
             \end{tikzcd}
     \]
 }
-\dfn{Limit}{
+\dfn{Cone}{
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C} \arrow[r, "\Delta"] \& {[\mathsf{J},\mathsf{C}]} \& \mathsf{1} \arrow[l, "\Delta F"']
         \end{tikzcd}
     \]
-    and the comma category $\left(\Delta \downarrow \Delta F\right)$. The objects in $\left(\Delta \downarrow \Delta F\right)$ are all natural transformations 
-    \[
+    The comma category $\left(\Delta \downarrow \Delta F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. 
+    \begin{itemize}
+        \item Objects: The objects in $\mathsf{Cone}(\textsf{C},F)$ are all natural transformations 
+        \[
+                \begin{tikzcd}[ampersand replacement=\&]
+                    \mathsf{J} \arrow[r, "\Delta C"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
+                    \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
+                \end{tikzcd}
+        \]
+        where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:\Delta C\Rightarrow F$ is called a \textbf{cone from $C$ to $F$} because it can be viewed as a family of morphisms $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
+        \[
             \begin{tikzcd}[ampersand replacement=\&]
-                \mathsf{J} \arrow[r, "\Delta C"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
-                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
-            \end{tikzcd}
-    \]
-    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:\Delta C\Rightarrow F$ is called a \textbf{cone from $C$ to $F$} because its commutative square simplifies to the following communitative triangle
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            \& C \arrow[ld, "h_i"'] \arrow[rd, "h_j"] \&      \\
-F(i) \arrow[rr, "F(\lambda)"'] \&                                         \& F(j)
-\end{tikzcd}
-\]    
-    The morphisms in $\left(\Delta \downarrow \Delta F\right)$ are commutative triangles shown as follows
+                \& C \arrow[ld, "h_i"'] \arrow[rd, "h_j"] \&      \\
+    F(i) \arrow[rr, "F(\lambda)"'] \&                                         \& F(j)
+    \end{tikzcd}
+    \]  
+    \item Morphisms: The morphisms in $\mathsf{Cone}(\textsf{C},F)$ are commutative triangles shown as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
             \Delta C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_*"'] \& \\
             \&  F\\
             \Delta C' \arrow[ru, Rightarrow, "h^{\prime}"'] \&
             \end{tikzcd}
+    \] 
+    Equivalently, a morphism from cone $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cone $\left(h_i':C'\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+             C \arrow[rd, "h_i"] \arrow[dd, "f"'] \& \\
+            \&  F(i)\\
+             C' \arrow[ru, "h^{\prime}_i"'] \&
+        \end{tikzcd}
     \]
-    The \textbf{limit} of $F$, denoted by $\varprojlim F$, is the terminal object of $(\Delta\downarrow \Delta F)$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
+    \end{itemize}
+}
+\dfn{Limit}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The \textbf{limit} of $F$, denoted by $\varprojlim F$, is the terminal object of $\mathsf{Cone}(\textsf{C},F)$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
     \[
         \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
             \&   [-1.5em]                \&[-1em] C \arrow[rdd, draw=cyan, "h_j"] \arrow[ldd, draw=cyan, "h_i"'] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \& [-1em]                  \\[+0.2cm]
@@ -376,36 +392,51 @@ F(i) \arrow[rr, "F(\lambda)"'] \&                                         \& F(j
         \end{tikzcd}
     \]
 }
-\dfn{Colimit}{
+\dfn{Cocone}{
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
     \[
         \begin{tikzcd}[ampersand replacement=\&]
              \mathsf{1} \arrow[r, "\Delta F"] \& {[\mathsf{J},\mathsf{C}]} \&\mathsf{C} \arrow[l, "\Delta "']
         \end{tikzcd}
     \]
-    and the comma category $\left(\Delta F \downarrow \Delta\right)$. The objects in $\left(\Delta F \downarrow \Delta\right)$ are all natural transformations 
-    \[
+    The comma category $\left(\Delta F \downarrow \Delta\right)$ is called the \textbf{cocone category from $F$ to $\textsf{C}$}, denoted by $\mathsf{Cocone}(F,\textsf{C})$. 
+    \begin{itemize}
+        \item Objects: The objects in $\mathsf{Cocone}(F,\textsf{C})$ are all natural transformations
+        \[
             \begin{tikzcd}[ampersand replacement=\&]
                 \mathsf{J} \arrow[r, "F"{name=A, above}, bend left] \arrow[r, "\Delta C"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
                 \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
             \end{tikzcd}
     \]
-    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:F\Rightarrow \Delta C$ is called a \textbf{cocone from $F$ to $C$} because its commutative square simplifies to the following communitative triangle
+    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:F\Rightarrow \Delta C$ is called a \textbf{cocone from $F$ to $C$} because it can be viewed as a family of morphisms $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \& C\&      \\
 F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                                         \& F(j) \arrow[lu, "h_j"'] 
 \end{tikzcd}
 \]    
-    The morphisms in $\left(\Delta F \downarrow \Delta\right)$ are commutative triangles shown as follows
+    \item Morphisms: The morphisms in $\mathsf{Cocone}(F,\textsf{C})$ are commutative triangles shown as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \&\Delta C \arrow[dd, Rightarrow, "f_*"']  \\
+            \&\Delta C \arrow[dd, Rightarrow, "f_*"]  \\
             F \arrow[ru, Rightarrow, "h"]\arrow[rd, Rightarrow, "h^{\prime}"']\&  \\
             \&\Delta C' 
             \end{tikzcd}
     \]
-    The \textbf{colimit} of $F$, denoted by $\varinjlim F$, is the initial object of $(\Delta F\downarrow \Delta)$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
+    \end{itemize}
+    Equivalently, a morphism from cocone $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cocone $\left(h_i':F(i)\to C'\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            \&\Delta C \arrow[dd, "f"]  \\
+            F(i) \arrow[ru, "h_I"]\arrow[rd, "h^{\prime}_i"']\&  \\
+            \&\Delta C' 
+            \end{tikzcd}
+    \]
+}
+
+\dfn{Colimit}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. 
+    The \textbf{colimit} of $F$, denoted by $\varinjlim F$, is the initial object of $\mathsf{Cocone}(F,\textsf{C})$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
     \[
         \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
             \&   [-1.5em]                \&[-1em] C \& [-1em]                  \\[+0.2cm]
@@ -443,7 +474,7 @@ The next result shows that functor categories inherit limits and colimits, defin
     Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
 }
 
-\dfn{Filtered Category}{
+\dfn[filtered_category]{Filtered Category}{
     A category $\mathsf{J}$ is \textbf{filtered} if 
     \begin{itemize}
         \item $\mathsf{J}$ is nonempty.
@@ -461,6 +492,23 @@ The next result shows that functor categories inherit limits and colimits, defin
 }
 \dfn{Filtered Colimit}{
     A \textbf{filtered colimit} is a colimit of a functor $F: \mathsf{J} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a filtered category.
+}
+
+\dfn[thin_category]{Thin Category}{
+    A \textbf{thin category} or \textbf{$(0,1)$-category} is a category in which any two objects have at most one morphism between them. 
+
+    A preorder set $(X,\leq)$ can be regarded as a thin category $\mathsf{X}$ with objects being elements of $X$ and morphisms being
+    \begin{align*}
+        \mathrm{Hom}(x,y)=\begin{cases}
+            \{*\} & \text{if }x\leq y\\
+            \varnothing & \text{otherwise}
+        \end{cases}
+    \end{align*}
+    Therefore, we obtain a category isomorphism between the category of preorder sets and the category of thin categories
+    \begin{align*}
+        F:\mathsf{PreOrdSet}&\longrightarrow (0,1)\text{-}\mathsf{Cat}\\
+        (X,\leq)&\longmapsto \mathsf{X}
+    \end{align*}
 }
 
 \section{Monoidal Category}
@@ -761,6 +809,25 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
     \[
         HK/H\cong K/(H\cap K).
     \]
+}
+\section{Construction}
+\dfn[inverse_limit_of_groups]{Inverse Limit in $\mathsf{Grp}$}{
+    Let $\mathsf{I}$ be a \hyperref[th:filtered_category]{filtered} \hyperref[th:thin_category]{thin category} and $F:\mathsf{I}^{\mathrm{op}}\to \mathsf{Grp}$ be a functor. To unpack the information of $F$, denote $I:=\mathrm{Ob}(\mathsf{I})$, $G_i:=F(i)$ and $f_{ij}:=F(i\to j)$. An \textbf{inverse system} is a pair $\left(\left(G_i\right)_{i \in I},\left(f_{i j}\right)_{i \leq j \in I}\right)$ where $f_{i j}: G_{j} \rightarrow G_{i}$ is a group homomorphism for each $i \leq j$ such that
+    \begin{enumerate}[(i)]
+        \item $f_{i i}=\mathrm{id}_{G_i}$ for all $i \in I$.
+        \item $f_{i k}=f_{i j} \circ f_{j k}$ for all $i \leq j \leq k$.
+    \end{enumerate}
+    The \textbf{inverse limit} of $\left(\left(G_i\right)_{i \in I},\left(f_{i j}\right)_{i \leq j \in I}\right)$ is $\varprojlim F$, also denoted by $\varprojlim_{i\in I}G_i$, which can be constructed as a subgroup of $\prod_{i \in I} G_{i}$ as follows
+    \[
+        \varprojlim_{i\in I}G_i \cong \left\{(x_i)_{i\in I}\in \prod_{i \in I} G_{i}\midv x_i=f_{ij}(x_j) \text{ for all }i\le j \in I\right\}
+    \]
+    equipped with natural projections $\pi_i:\varprojlim_{i\in I}G_i\to G_i$.\\
+
+}
+
+\ex{Inverse Limit $\varprojlim_{i\ge 1}G_i$}{
+    Let $\mathsf{I}=\left(\mathbb{Z}_{\ge 1},\le\right)$ be a filtered thin category and $F:\mathsf{I}^{\mathrm{op}}\to \mathsf{Grp}$ be a functor. To determine an inverse system, it is sufficient to specify $G_i$ and $f_{i,i+1}:G_{i+1}\to G_i$ for all $i\in \mathbb{Z}_{\ge 1}$. The inverse limit of this inverse system is denoted by $\varprojlim_{i\ge 1}G_i$, which we now write as $G$ for simplicity.\\
+    $G$ can be imaged as a tree with root layer being $G_0=\{1\}$ and $i$-th layer being $G_i$. Each node in $G_i$ has a unique parent node in $G_{i-1}$, which is determined by $f_{i,i-1}$. An element in $G$ is a path starting from the root and passing through each $G_i$ exactly once along the edges of the tree. The $i$-th component $x_i$ of an element $x\in G$ includes all information of its history path from $G_0$ to $G_i$, which makes $x_1,x_2,\cdots, x_{i-1}$ redundant. 
 }
 
 \section{Group Action}
@@ -1536,6 +1603,18 @@ X \arrow[u, "\iota"] \arrow[ru, "f"']                      \&
     It is enough to prove the existence and commutation for products and equalizers. Let $R_i, i \in I$ be a collection of topological rings. Take the usual product $R=\prod R_i$ with the product topology. Since $R \times R=\prod\left(R_i \times R_i\right)$ as a topological space (because products commutes with products in any category), we see that addition and multiplication on $R$ are continuous. Let $a, b: R \rightarrow R^{\prime}$ be two homomorphisms of topological rings. Then as the equalizer we can simply take the equalizer of $a$ and $b$ as maps of topological spaces, which is the same thing as the equalizer as maps of rings endowed with the induced topology.
 }
 
+\prop{Subgroups of Topological Group are Topological Groups}{
+    Let $G$ be a topological group and $H$ be a subgroup of $G$. Then $H$ is a topological group with the subspace topology induced by $G$.
+}
+\pf{
+    Since $H$ is a subgroup of $G$, the group multiplication map $\mu:G\times G\to G$ restricts to a map $\mu|_{H\times H}:H\times H\to H$. Since the inclusion $i:H\hookrightarrow G$ is continuous, 
+    \[
+        \mu|_{H\times H}:H \times H \xrightarrow{i\times i} G\times G\xrightarrow{\mu}\mu(G)  \xrightarrow{i'} H
+    \]
+    is also continuous. Similarly, the inversion map $\sigma:G\to G$ restricts to a map $\sigma|_H:H\to H$ and $\sigma|_H$ is continuous. Hence $H$ is a topological group.
+    
+}
+
 \prop{Translation Invariance}{
     For any $a \in G$, left or right multiplication by $a$ yields a homeomorphism $G \rightarrow G$.
 }
@@ -1552,6 +1631,7 @@ X \arrow[u, "\iota"] \arrow[ru, "f"']                      \&
     \end{align*}
     be the right multiplication map. Since the group multiplication map $\mu:G\times G\to G$ is continuous, $L_a$ and $R_a$ must be continuous. Note that $L_a^{-1}=L_{a^{-1}}$ and $R_a^{-1}=R_{a^{-1}}$. Then we see $L_a^{-1}$ and $R_a^{-1}$ are also continuous maps. Hence $L_a$ and $R_a$ are homeomorphisms.
 }
+
 \cor[translation_invariance_cor]{}{
     Given any $a \in G$ and $S \subseteq G$, let's denote $a S:=\{a s: s \in S\}$ and $S a:=\{s a: s \in S\}$. Then
     \begin{itemize}
@@ -1559,7 +1639,7 @@ X \arrow[u, "\iota"] \arrow[ru, "f"']                      \&
         \item $S$ is closed $\iff$ $a S$ is closed $\iff$ $a S$ is closed.
     \end{itemize}
 }
-\prop{}{
+\prop{Neighborhood Basis at $1_G$ Determines the Topology of $G$}{
     Given a topological group $G$, if $\mathcal{N}$ is a neighborhood basis of the identity element $1_G$, then for all $x \in X$, 
     \[
         x \mathcal{N}:=\{x N: N \in \mathcal{N}\}
@@ -1569,6 +1649,20 @@ X \arrow[u, "\iota"] \arrow[ru, "f"']                      \&
 \pf{
     Let $x \in G$ and $V$ be any neighborhood of $x$. There exists an open set $U$ such that $x\in U\subseteq V$. By \Cref{th:translation_invariance_cor}, $x^{-1} U$ is an open neighborhood of $1_G$. Since $\mathcal{N}$ is a neighborhood basis of $1_G$, there exists $N \in \mathcal{N}$ such that $N \subseteq x^{-1} U$. Then there exists $x N \in x \mathcal{N}$ such that $x N \subseteq U$. Hence $x \mathcal{N}$ is a neighborhood basis of $x$.
 }
+
+\dfn{Topological Group Action on a Topological Space}{
+    Let $G$ be a topological group and $X$ be a topological space. A \textbf{topological group action} of $G$ on $X$ is a group action of $G$ on $X$ such that the action map
+    \begin{align*}
+        \mu:G\times X&\longrightarrow X\\
+        (g,x)&\longmapsto g\cdot x
+    \end{align*}
+    is continuous.
+}
+\dfn{Inverse Limit in $\mathsf{TopGrp}$}{
+    Let $\mathsf{I}$ be a \hyperref[th:filtered_category]{filtered} \hyperref[th:thin_category]{thin category} and $F:\mathsf{I}^{\mathrm{op}}\to \mathsf{TopGrp}$ be a functor. Similar to the \hyperref[th:inverse_limit_of_groups]{inverse limit in \textsf{Grp}}, we can unpack the information of $F$ into an inverse system $\left(\left(G_i\right)_{i \in I},\left(f_{i j}\right)_{i \leq j \in I}\right)$. The inverse limit of this inverse system is $\varprojlim F$, also denoted by $\varprojlim_{i\in I}G_i$.\\
+    To give a concrete construction of $\varprojlim_{i\in I}G_i$, we can take the inverse limit of the underlying group and endow it with the subspace topology induced by the product topology on $\prod_{i\in I}G_i$.
+}
+
 
 \section{Topological Ring}
 \dfn{Topological Ring}{
@@ -1611,7 +1705,14 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 \dfn{Unit Group of a Ring}{
     Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$.
 }
-
+\dfn{Zero Divisor}{
+    Assume that $a$ is an element of a ring $R$. 
+    \begin{itemize}
+        \item $a$ is called a \textbf{left zero divisor} if there exists a nonzero $x$ in $R$ such that $ax = 0$.
+        \item $a$ is called a \textbf{right zero divisor} if there exists a nonzero $x$ in $R$ such that $xa = 0$.
+        \item $a$ is called a \textbf{zero divisor} if there exists a nonzero $x$ in $R$ such that $ax = xa = 0$.
+    \end{itemize}
+}
 \dfn{Ideal}{
     Let \( R \) be a ring and \( I \subseteq R \) be an additive subgroup.
     \begin{itemize}
@@ -1715,6 +1816,22 @@ which means $\mathfrak{a}$ is a graded ideal.
         \item $R$ is not the zero ring and for every $x \in R$, $x\in R^{\times}$ or $1-x\in R^{\times}$.
         \item $R$ is not the zero ring and if $\sum_{i=1}^n r_i\in R^{\times}$, then there exist some $i$ such that $r_i\in R^{\times}$. 
         \item $R$ is not the zero ring and the sum of any two non-units in $R$ is a non-unit.
+    \end{enumerate}
+}
+
+\dfn{Noetherian commutative ring}{
+    Let $R$ be a commutative ring. We say $R$ is \textbf{Noetherian} if one of following conditions holds:
+    \begin{enumerate}[(i)]
+        \item $R$ as an $R$-module is Noetherian.
+        \item Every ideal of $R$ is finitely generated.
+        \item Every prime ideal of $R$ is finitely generated.
+        \item Every ascending chain of ideals of $R$ is eventually constant. That is, if $I_1\subseteq I_2\subseteq I_3\subseteq\cdots$ is a chain of ideals of $R$, then there exists $n\in\mathbb{N}$ such that $I_n=I_{n+1}=\cdots$.
+    \end{enumerate}
+}
+\prop{Properties of Noetherian rings}{
+    \begin{enumerate}[(i)]
+        \item If $R$ is a Noetherian ring, then the polynomial ring $R[X_1,X_2,\cdots,X_n]$ is also Noetherian.
+        \item If $R$ is a Noetherian ring, then the  formal power series ring $R[[X_1,X_2,\cdots,X_n]]$ is also Noetherian.
     \end{enumerate}
 }
 
@@ -1891,6 +2008,7 @@ In summary, we have the following chain of inclusions:
 
 
 \section{Integral Domain}
+
 \dfn{Associate}{
     Let $R$ be an integal domain. Two elements $a,b\in R$ are called \textbf{associates} if one of the following equivalent conditions holds:
     \begin{enumerate}[(i)]
@@ -2002,6 +2120,7 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
             \&R \arrow[ru, "\psi"'] \arrow[lu, "\varphi"] \&                          
         \end{tikzcd}
     \end{center}
+    Moreover, if $\psi$ is injective, then $\psi'$ is injective. If $\psi$ is surjective, then $\psi'$ is surjective.
 }
 \proof{
     First let's check $\psi'$ is well-defined. Suppose $\dfrac{a}{s}=\dfrac{b}{t}$. Then there exists $u\in S$ such that $u(at-bs)=0$. Since $\psi$ is a ring homomorphism, we have 
@@ -2024,7 +2143,12 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
     \[
         \psi''\left(\frac{a}{s}\right) = \psi''\left(\frac{a}{1}\frac{1}{s}\right) = \psi''\left(\frac{a}{1}\right)\psi''\left(\frac{1}{s}\right) = \psi''\left(\frac{a}{1}\right)\left(\psi''\left(\frac{s}{1}\right)\right)^{-1} = \psi\left(a\right)(\psi(s))^{-1} =    \psi'\left(\frac{a}{s}\right).
     \]
-    That implies $\psi''=\psi'$. Thus $\psi'$ is unique.
+    That implies $\psi''=\psi'$. Thus $\psi'$ is unique.\\
+    Now suppose $\psi$ is injective. Then 
+    \[
+    \ker \psi' = \left\{ \frac{a}{s} \in S^{-1}R \midv \psi(a)(\psi(s))^{-1} = 0 \right\} = \left\{ \frac{a}{s} \in S^{-1}R \midv \psi(a) = 0 \right\} = \left\{ \frac{0}{s} \midv s \in S \right\} = \left\{ 0 \right\},    
+    \]
+    which implies $\psi'$ is injective.
 }
 
 Localization is the most economical way to make a multiplicative subset invertible.
@@ -2062,7 +2186,7 @@ Localization is the most economical way to make a multiplicative subset invertib
     \end{center}
     we can define a $S^{-1}R$-module structure on $M$ by lifting $\sigma_M$ to $\sigma_M'$. It is easy to check that these two functors are quasi-inverse to each other.
 }
-\prop{Properties of Localization of Rings}{
+\prop[prop_of_localization_of_rings]{Properties of Localization of Rings}{
     Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset. Then
     \begin{enumerate}[(i)]
         \item $S^{-1}R=0$ if and only if $0\in S$.
@@ -2089,9 +2213,17 @@ Localization is the most economical way to make a multiplicative subset invertib
 }
 
 \dfn{Total Ring of Fractions}{
-    Let $R$ be a commutative ring. Then $S=\left\{r\in R\mid r\text{ is not a zero divisor}\right\}$ is a multiplicative subset. The \textbf{total ring of fractions} of $R$ is the localization $S^{-1}R$, denoted by $\mathrm{Frac}(R)$. The localization map $\varphi:R\to \mathrm{Frac}(R)$ is an injective ring homomorphism.
+    Let $R$ be a commutative ring. Then $S=\left\{r\in R-\{0\}\mid r\text{ is not a zero divisor}\right\}$ is a multiplicative subset. The \textbf{total ring of fractions} of $R$ is the localization $S^{-1}R$, denoted by $\mathrm{Frac}(R)$. The localization map $\varphi:R\hookrightarrow \mathrm{Frac}(R)$ is an injective ring homomorphism.
 }
-
+\pf{
+    Since $0\notin S$ and $S$ contains no zero divisors, $\varphi$ is injective by (iii) of \Cref{th:prop_of_localization_of_rings}.
+}
+\prop{Properties of Total Ring of Fractions}{
+    Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset. Then $S^{-1}R$ can be regarded as a subring of $\mathrm{Frac}(R)$. 
+}
+\pf{
+    By the universal property of localization, there exists a unique ring homomorphism $\psi:S^{-1}R\to \mathrm{Frac}(R)$. Since $\varphi:R\hookrightarrow \mathrm{Frac}(R)$ is injective, $\psi$ is also injective.
+}
 \dfn{Field of Fractions}{
     If $R$ be an integral domain, then $S=R-\{0\}$ is a multiplicative subset. The total ring of fractions $\mathrm{Frac}(R)=S^{-1}R$ is a field, call the \textbf{field of fractions} of $R$.
 }
@@ -2153,7 +2285,8 @@ Localization is the most economical way to make a multiplicative subset invertib
 }
 
 \ex{}{
-    Let $R$ be a commutative ring and $f\in R$. Let $S=\{1,f,f^2,\cdots\}$ be the monoid generated by $f$. Then $S$ is a multiplicative set. The localization $S^{-1}R$ is called the \textbf{localization of $R$ at $f$}, denoted by $R_f$ or $R\left[\tfrac{1}{f}\right]$. $R_f=\{0\}$ if and only if $f$ is nilpotent.
+    Let $R$ be a commutative ring and $f\in R$. Let $S=\{1,f,f^2,\cdots\}$ be the monoid generated by $f$. Then $S$ is a multiplicative set. The localization $S^{-1}R$ is called the \textbf{localization of $R$ at $f$}, denoted by $R_f$ or $R\left[\tfrac{1}{f}\right]$. The notation can be justified by the fact that $R\left[\tfrac{1}{f}\right]\cong R\left[t\right]/(ft-1)$.
+    $R_f=\{0\}$ if and only if $f$ is nilpotent.
 }
 \proof{
     $R_f=\{0\}\iff 0\in S\iff \exists n\in\mathbb{Z}_{\ge0},\;f^n=0$.
@@ -2241,7 +2374,7 @@ On a finite field, the trivial absolute value is the only absolute value.
 }
 \pf{
     The equivalence of these conditions can be shown as follows.
-    \begin{itemize}
+    \begin{itemize}[leftmargin=*]
         \item (i)$\implies$(ii). Suppose $I,J$ are two distinct ideals of $R$. Without loss of generality, we can assume $I\subsetneq J$ and there exists $a\in I-J$. Suppose $b\in J$. Since $a\notin J$, there must be $ab^{-1}\notin R$, which forces $ba^{-1}\in R$. Thus there exists $r\in R$ such that $b=ra$, implying $b\in I$. Therefore, we show $J\subseteq I$.
         \item (ii)$\implies$(iii). Trivial.
         \item (iii)$\implies$(i). Given any $x\in K^{\times}$, there exists $a,b\in R$ such $x=ab^{-1}$. Then we have
@@ -2280,6 +2413,21 @@ On a finite field, the trivial absolute value is the only absolute value.
 
 \prop{}{
     Let $K$ be a field. Let $R \subset K$ be a local subring. Then there exists a valuation ring with fraction field $K$ dominating $R$.
+}
+
+\dfn{Discrete Valuation Ring}{
+    Suppose $R$ is an integral domain and has field of fractions $K=\mathrm{Frac}\left(R\right)$. We say $R$ is a \textbf{discrete valuation ring} if $R$ satisfies one of the following equivalent conditions:
+    \begin{enumerate}[(i)]
+        \item $R$ is a valuation ring such that the induced valuation $v:K\to \Gamma\cup\{\infty\}$ is a discrete valuation.
+        \item $R$ is a local PID, and not a field.
+        \item $R$ is a PID with a unique non-zero prime ideal.
+        \item $R$ is a PID with a unique irreducible element (up to multiplication by units).
+        \item $R$ is a UFD with a unique irreducible element (up to multiplication by units).
+        \item $R$ is a local Dedekind domain and not a field.
+        \item $R$ is a Noetherian local domain whose maximal ideal is principal, and not a field. 
+        \item $R$ is an integrally closed Noetherian local ring with Krull dimension one.
+        \item $R$ is Noetherian, not a field, and every nonzero fractional ideal of $R$ is irreducible in the sense that it cannot be written as a finite intersection of fractional ideals properly containing it.
+    \end{enumerate}
 }
 
 \chapter{Module}
@@ -2340,6 +2488,18 @@ to be the category of all functors between $\mathsf{Ab}$-enriched categories $\m
 }
 In particular, homomorphism $R\to S$ makes $S$ an $R$-module.
 
+\dfn{Noetherian Module}{
+Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \textbf{Noetherian} if one of the following equivalent conditions holds:
+\begin{enumerate}
+    \item Every submodule of $M$ is finitely generated.
+    \item Every ascending chain of submodules of $M$ stabilizes; that is, if
+    $$
+    N_1 \subseteq N_2 \subseteq N_3 \subseteq \cdots
+    $$
+    is a chain of submodules of $M$, then $\exists i$ such that $N_i=N_{i+1}=N_{i+2}=\ldots$.
+    \item Every nonempty family of submodules of $M$ has a maximal element w.r.t. inclusion.
+\end{enumerate}
+}
 \section{Construction}
 \dfn{Localization of a Module}{
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. The \textbf{localization of the module} $M$ by $S$, denoted $S^{-1}M$, is an $S^{-1}R$-module that is constructed exactly as the localization of $R$, except that the numerators of the fractions belong to $M$. That is, as a set, it consists of equivalence classes, denoted $\frac{m}{s}$, of pairs $(m, s)$, where $m\in M$ and $s\in S$, and two pairs $(m, s)$ and $(n, t)$ are equivalent if there is an element $u$ in $S$ such that
@@ -2422,7 +2582,7 @@ In particular, homomorphism $R\to S$ makes $S$ an $R$-module.
     \]
     where $M_f$ is the localization of $M$ by the multiplicative set $S_f=\{f^n\mid n\in \mathbb{Z}_{\ge0}\}$. 
     
-    Formally, $S$ can be endowed with a preorder relation: $f\mid g$ if and only if $fh=g$ for some $h\in S$, which makes $S$ a thin category $\mathsf{S}$. Then we can define a functor $G:\mathsf{S}\to R\text{-}\mathsf{Mod}$
+    Formally, $S$ can be endowed with a preorder relation: $f\mid g$ if and only if $fh=g$ for some $h\in S$, which makes $S$ a thin category $\mathsf{S}$. Then we can define a functor $M_{\text{\textbf{-}}}:\mathsf{S}\to R\text{-}\mathsf{Mod}$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{S}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
@@ -2445,7 +2605,7 @@ In particular, homomorphism $R\to S$ makes $S$ an $R$-module.
         \end{center}
         And we have
         \[
-            S^{-1}M\cong \varinjlim G  
+            S^{-1}M\cong \varinjlim M_{\text{\textbf{-}}}
         \]
 }
 \proof{
@@ -2761,7 +2921,19 @@ which satisfies the following properties for all $a, b$ in $K$ :
 \prop{}{
    Two valuations are equivalent if and only if their valuation rings are equal.
 }
-
+\prop{}{
+    Suppose $v$ is a valuation of a field $K$ and $\varpi$ is an element in $\mathcal{O}_v-\{0\}$ such that 
+    $$
+    \sup\left\{n v\left(\varpi\right)\in \Gamma\mid n\in\mathbb{N}\right\}=\infty.
+    $$
+    Then there is a natural isomorphism $K\cong \mathcal{O}_v\left[\frac{1}{\varpi}\right]$.
+}
+\pf{
+    Since $K=\mathrm{Frac}(\mathcal{O}_v)$, we have an embedding $\mathcal{O}_v\left[\frac{1}{\varpi}\right]\hookrightarrow K$. For any $x\in K$, there exists $n\in \mathbb{N}$ such that $nv(\varpi)\ge -v(x)$. Thus
+    \[
+    v(x\varpi^n)= v(x)+nv(\varpi)\ge 0\implies x\varpi^n\in \mathcal{O}_v\implies x\in \mathcal{O}_v\left[\frac{1}{\varpi}\right].
+    \]
+}
 
 \chapter{Number Theory}
 \section{$p$-adic Numbers}
