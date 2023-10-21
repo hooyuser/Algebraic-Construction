@@ -454,7 +454,7 @@ It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
         \end{tikzcd}
     \]
 }
-\dfn{Comma Category}{
+\dfn[comma_category]{Comma Category}{
     Suppose that $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories, and $S$ and $T$ (for source and target) are functors:
 $$
 \mathsf{A} \stackrel{S}{\longrightarrow} \mathsf{C} \stackrel{T}{\longleftarrow} \mathsf{B}
@@ -506,6 +506,57 @@ We can form the comma category $(S\downarrow T)$ as follows:
             \end{tikzcd}
     \]
 }
+
+\ex{$\mathsf{Disc}$ Functor}{
+    Given a set $X$, we can define a functor $\mathsf{Disc}:\mathsf{Set}\to \mathsf{Cat}$ as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Set}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Cat}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            X  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\mathsf{Disc}(X)\arrow[dd, "\mathsf{Disc}(f)"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathsf{Disc}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            Y  \& \& \& \mathsf{Disc}(Y)
+        \end{tikzcd}
+    \]
+    where $\mathsf{Disc}(X)$ is the discrete category with object set $\mathrm{Ob}\left(\mathsf{Disc}(X)\right)=X$ and morphism set 
+    \begin{align*}
+        \mathrm{Hom}_{\mathsf{Disc}(X)}(x,y)=\begin{cases}
+            \{\mathrm{id}_x\} & \text{if }x=y,\\
+            \varnothing & \text{if }x\neq y,
+        \end{cases}
+    \end{align*}
+    and $\mathsf{Disc}(f)$ is the functor defined by $\mathsf{Disc}(f)(x)=f(x)$ and $\mathsf{Disc}(f)(\mathrm{id}_x)=\mathrm{id}_{f(x)}$ for each $x\in X$.\\
+    It is easy to check that the functor $\mathsf{Disc}$ is fully faithful.
+}
+
+\dfn[category_of_elements]{Category of Elements}{
+    Let $\mathsf{C}$ be a category and let $F: \mathsf{C} \rightarrow \mathsf{Set}$  be a  functor. The \textbf{category of elements of $F$} is the  the \hyperref[th:comma_category]{comma category} $\left(\Delta\{*\} \downarrow F\right)$
+    where functors are illustrated as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{1} \arrow[r, "\Delta\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
+        \end{tikzcd}
+    \]
+    This category is denoted by $\int_\mathsf{C} F$ and can be explicitly described as follows
+    \begin{itemize}
+        \item Objects are pairs $(A, a)$ where $A \in \mathrm{Ob}(\mathsf{C})$ and $a \in F(A)$.
+        \item Morphisms $(A, a) \rightarrow(B, b)$ are arrows $f: A \rightarrow B$ of $\mathsf{C}$ such that $F(f)(a)=b$.
+    \end{itemize}
+
+    The category of elements of $F$ is naturally equipped with a projection functor $\pi: \int_\mathsf{C} F \rightarrow \mathsf{C}$ 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \int_\mathsf{C} F \&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            (A,a)  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]A\arrow[dd, "f"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\pi", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            (B,b)  \& \& \& B
+        \end{tikzcd}
+    \]
+}
+
 \section{Limits and Colimits}
 \dfn{Cone}{
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
@@ -747,8 +798,15 @@ The next result shows that functor categories inherit limits and colimits, defin
         \mathrm{ev}:\mathsf{C}^{\mathrm{op}}\times \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]&\longrightarrow \mathsf{Set}\\
         \left(A,F\right)&\longmapsto F(A)
     \end{align*}
-    % :\left[\begin{aligned}\phi_X: \mathrm{Hom}_{\mathsf{C}}(X,A_2)&\rightarrow F(X)\\
-    %     f&\mapsto \eta_X\left(\phi_X(g\circ f)\right)\end{aligned}  \right]
+    \textbf{Covariant version}\\
+    For any functor $F:\mathsf{C}\to \mathsf{Set}$ and any $A\in \mathrm{Ob}(\mathsf{C})$, there is a natural bijection
+    \begin{align*}
+        \operatorname{Hom}_{\left[\mathsf{C},\mathsf{Set}\right]}\left(\operatorname{Hom}_{\mathsf{C}}\left(A,-\right), F\right) & \overset{\sim}{\longrightarrow} F(A) \\
+        {  \left[ \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(A{,}-\right)"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{Set}
+            \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi"]
+        \end{tikzcd}\right] } & \longmapsto \phi_A\left(\operatorname{id}_A\right)
+    \end{align*}
 }
 \pf{
     We break the proof into following steps.
@@ -757,7 +815,7 @@ The next result shows that functor categories inherit limits and colimits, defin
     Suppose $\phi:\mathrm{Hom}_{\mathsf{C}}\left(-,A\right)\Rightarrow F$ is a natural transformation. Given any morphism $f:X\to A$ in $\mathsf{C}$, the naturality of $\phi$ gives the following commutative diagram
     \[
 		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
-			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(X,A)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
+			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f^*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(X,A)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
 			\phi_A(\mathrm{id}_A)\&\in\&{F(A)}\arrow[rr, "{F(f)}"'] \&  \& {F(X)}  \&\ni\& \phi_X(f)     
 		\end{tikzcd}
 	\]
@@ -890,7 +948,53 @@ An object in a category is equivalent to the collection of all arrows pointing t
 
 The arrows between objects in a category are equivalent to the transformations between sets of arrows pointing to objects. Specifically, suppose $f$ is an arrow from object $A$ to object $B$, then any arrow pointing to $A$ can be transformed into an arrow pointing to $B$ by appending an $f$, which is exactly what $f_\star$ does. Conversely, if there is a way to naturally transform all arrows pointing to $A$ into arrows pointing to $B$, then this transformation must be realized by appending an arrow between $A$ and $B$.
 
-
+\dfn{Representable Functor}{
+    Let $\mathsf{C}$ be a locally small category. 
+    \begin{itemize}
+        \item A functor $F:\mathsf{C}\to \mathsf{Set}$ is called \textbf{representable} if it is naturally isomorphic to $\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)$ for some $A\in \mathrm{Ob}(\mathsf{C})$.
+        \item A functor $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is called \textbf{representable} if it is naturally isomorphic to $\operatorname{Hom}_{\mathsf{C}}\left(-,A\right)$ for some $A\in \mathrm{Ob}(\mathsf{C})$.
+    \end{itemize}
+    A \textbf{representation of $F$} is a pair $(A,\phi)$, where $A\in \mathrm{Ob}(\mathsf{C})$ and $\phi:F\stackrel{\sim\;}{\Rightarrow} \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)$ is a natural isomorphism. \\
+    According to \hyperref[th:yoneda_lemma]{Yoneda lemma}, $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow  F$ is 1-1 correspondence with an element $\phi_A(\mathrm{id}_A)\in F(A)$. We define an \textbf{universal element of $F$} is a pair $(A,u)$ where $A\in \mathrm{Ob}(\mathsf{C})$ and $u\in F(A)$ such that $u$ corresponds to a natural isomorphism $\phi: \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}F$. Specifying a universal element of $F$ is equivalent to specifying a representation of $F$.
+}
+\prop[universal_element_characterization]{}{
+    Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a representable functor. Then $(A,u)$ is a universal element of $F$ if and only if $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}. That is, if $(A,u)$ is a universal element of $F$, then for any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
+}
+\pf{
+    Suppose $(A,u)$ is an object of $\int_{\mathsf{C}}F$ and  $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ is the natural isomorphism corresponding to $u\in F(A)$. For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, we have the following commutative diagram
+    \[
+		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
+			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(A,X)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
+			u=\phi_A(\mathrm{id}_A)\&\in\&{F(A)}\arrow[rr, "{F(f)}"'] \&  \& {F(X)}  \&\ni\& \phi_X(f)     
+		\end{tikzcd}
+	\]
+    which implies
+    \[
+        F(f)(u)=\phi_X(f),\quad\forall f\in \mathrm{Hom}_{\mathsf{C}}(A,X).
+    \]
+    Thus we have
+    \begin{align*}
+        (A,u)\text{ is initial in }\int_{\mathsf{C}}F&\iff \forall(X,x)\in \mathrm{Ob}\left(\int_{\mathsf{C}}F\right),\;\exists! f\in \mathrm{Hom}_{\mathsf{C}}(A,X),\;F(f)(u)=x\\
+        &\iff\forall X\in \mathrm{Ob}\left(\mathsf{C}\right),\; \forall x\in F(X),\;\exists! f\in \mathrm{Hom}_{\mathsf{C}}(A,X),\;\phi_X(f)=x\\
+        &\iff \forall X\in \mathrm{Ob}\left(\mathsf{C}\right),\;\phi_X \text{ is bijective}\\
+        &\iff \phi \text{ is a natural isomorphism}\\
+        &\iff (A,u) \text{ is a universal element of }F.
+    \end{align*}
+}
+\cor{}{
+    Suppose $\mathsf{C}$ is a locally small category.
+    \begin{itemize}
+        \item $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\mathsf{C}$ if and only if the functor $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$.
+        \item $A\in\mathrm{Ob}(\mathsf{C})$ is terminal in $\mathsf{C}$ if and only if the functor $\Delta \{*\}:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(-,A\right)$.
+    \end{itemize}
+}
+\pf{
+    Let $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ be a constant functor. It is easy to see that the category $\int_\mathsf{C}\Delta \{*\}$ is isomorphic to $\mathsf{C}$. 
+    According to \Cref{th:universal_element_characterization},
+    $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\Delta \{*\}$ if and only if $\Delta$ is a representable functor with a universal element $(A,*)$.\\
+    If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}\Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
+}
+\section{Adjoint Functor}
 \section{Monoidal Category}
 \dfn{Monoidal Category}{
     A monoidal category is a category $\mathsf{V}$ equipped with
