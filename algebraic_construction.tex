@@ -6,6 +6,7 @@
 \usepackage{multirow}
 \usepackage{colortbl}
 \usepackage{mathrsfs}
+\usepackage{bbm}
 
 
 \newcommand{\poscell}[1]{\cellcolor{green!22}#1}
@@ -87,6 +88,22 @@ In this book, we use the following notation conventions:
 \begin{itemize}
     \item $\mathbb{N}$: the set of natural numbers $\{0,1,2,\cdots\}$.
 \end{itemize}
+We use sans-serif font for categories. Some common categories are
+\begin{itemize}
+    \item $\mathsf{Set}$: the category of sets.
+    \item $\mathsf{Mon}$: the category of monoids.
+    \item $\mathsf{Grp}$: the category of groups.
+    \item $\mathsf{Ab}$: the category of abelian groups.
+    \item $\mathsf{Ring}$: the category of rings.
+    \item $\mathsf{CRing}$: the category of commutative rings.
+    \item $\mathsf{Fld}$: the category of fields.
+    \item $R\text{-}\mathsf{Mod}$: the category of $R$-modules, where $R\in \mathrm{Ob}\left(\mathsf{Ring}\right)$.
+    \item $K\text{-}\mathsf{Vect}$: the category of $K$-vector spaces, where $K\in \mathrm{Ob}\left(\mathsf{Fld}\right)$.
+    \item $R\text{-}\mathsf{Alg}$: the category of associative $R$-algebras, where $R\in \mathrm{Ob}\left(\mathsf{CRing}\right)$.
+    \item $R\text{-}\mathsf{CAlg}$: the category of commutative $R$-algebras, where $R\in \mathrm{Ob}\left(\mathsf{CRing}\right)$.
+    \item $\mathsf{Top}$: the category of topological spaces.
+\end{itemize}
+
 
 \chapter{Set Theory}
 \section{Set}
@@ -981,7 +998,7 @@ The arrows between objects in a category are equivalent to the transformations b
         &\iff (A,u) \text{ is a universal element of }F.
     \end{align*}
 }
-\cor{}{
+\cor{Initial Object Characterized by Representable Functor}{
     Suppose $\mathsf{C}$ is a locally small category.
     \begin{itemize}
         \item $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\mathsf{C}$ if and only if the functor $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$.
@@ -1158,6 +1175,10 @@ Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We
         \item Every morphism has both a kernel and a cokernel.
         \item Every monomorphism and every epimorphism is normal. This means that every monomorphism is a kernel of some morphism, and every epimorphism is a cokernel of some morphism.
     \end{enumerate}
+}
+
+\prop{}{
+    If $\mathsf{A}$ is an abelian category, then $\left[\mathsf{C}^\mathrm{op}, \mathsf{A}\right]$ is abelian for any small category $\mathsf{C}$.
 }
 
 
@@ -2291,6 +2312,10 @@ which means $\mathfrak{a}$ is a graded ideal.
 
 \chapter{Commutative Ring}
 \section{Basic Concepts}
+A commutative ring $R$ is a commutative $R$-algebra. And we have a categorical isomorphism 
+\[
+    \mathsf{CRing}\cong \mathbb{Z}\text{-}\mathsf{CAlg}.
+\]
 \dfn[local_commutative_ring]{Local Commutative Ring}{
     Let $R$ be a commutative ring. Then the following are equivalent:
     \begin{enumerate}[(i)]
@@ -2914,6 +2939,11 @@ On a finite field, the trivial absolute value is the only absolute value.
     \end{enumerate}
 }
 
+\section{Integral Element}
+\dfn{Integral Element}{
+    Let $R$ be an integral domain and $K$ be its field of fractions. An element $x\in K$ is called \textbf{integral} over $R$ if there exists a monic polynomial $f\in R[x]$ such that $f(x)=0$. The set of all elements in $K$ that are integral over $R$ is called the \textbf{integral closure} of $R$ in $K$, denoted by $\overline{R}$.
+}
+
 \chapter{Module}
 \section{Basic Concepts}
 \dfn{Module}{
@@ -3257,6 +3287,20 @@ We can check that
     is called the \textbf{$k$-th exterior power of $M$}.
 }
 
+\section{Commutative Algebra}
+\dfn{Commutative Algebra}{
+    Let $R$ be a commutative ring. A \textbf{commutative $R$-algebra} is an $R$-algebra where the multiplication is commutative.
+}
+
+
+\dfn{Free Commutative Algebra}{
+    Let $R$ be a commutative ring. 
+    \begin{tikzcd}[ampersand replacement=\&]
+        \& X \arrow[ld, "\iota"'] \arrow[rd, "f"] \& \\
+        F \arrow[rr, "\hat{f}"] \& \& A
+    \end{tikzcd}
+}
+
 \chapter{Field Theory}
 \section{Field Extension}
 \dfn{Field}{
@@ -3488,6 +3532,30 @@ The \textbf{$p$-adic absolute value} is defined as
     \end{itemize}
 }
 \section{Dirichlet Charater}
+\dfn{Euler's Totient Function}{
+    The \textbf{Euler's totient function} is defined as
+    \begin{align*}
+        \varphi:\mathbb{N}&\longrightarrow \mathbb{N}\\
+        n&\longmapsto \left|\left\{a\in \mathbb{N}\mid 1\le a\le n, (a,n)=1\right\}\right|.
+    \end{align*}
+}
+\prop{Euler's Product Formula}{
+    For any $n\in \mathbb{N}$, we have
+    \[
+        \varphi(n)=\sum_{k=1}^n \mathbbm{1}_{(k,n)=1}=n\prod_{p\mid n}\left(1-\frac{1}{p}\right).
+    \]
+}
+\prop{Properties of Euler's Totient Function}{
+    For any $m,n\in \mathbb{N}$, we have
+    \begin{enumerate}[(i)]
+        \item $\varphi(mn)=\varphi(m)\varphi(n)$ if $(m,n)=1$.
+        \item $\varphi(n)\mid n$.
+        \item $\varphi(n)=n$ if and only if $n=1$.
+        \item $\varphi(p^k)=p^k-p^{k-1}$ for any prime $p$ and $k\in \mathbb{N}$.
+        \item $\varphi(n)\le n-\sqrt{n}$ for any $n\in \mathbb{N}$.
+    \end{enumerate}
+}
+
 \dfn{Dirichlet Character}{
     Given any group homomorphism $\rho_m:(\mathbb{Z} / m \mathbb{Z})^{\times} \rightarrow \mathbb{C}^{\times}$, we can define a function $\chi:\mathbb{Z} \rightarrow \mathbb{C}$ by
     \begin{align*}
@@ -3498,6 +3566,17 @@ The \textbf{$p$-adic absolute value} is defined as
     \end{align*}
     Such function $\chi_m$ is called a \textbf{Dirichlet character modulo $m$}.
 }
+\dfn{Principal Dirichlet Character}{
+    The \textbf{principal Dirichlet character modulo $m$} is the simplest Dirichlet character defined by
+    \begin{align*}
+        \chi_0\left(a\right)=\left\{\begin{array}{lll}
+            0 & \text { if } a \neq 1 \\
+            1 & \text { if } a=1
+            \end{array}\right.
+    \end{align*}
+}
+
+
 \chapter*{Appendix}
 \begin{table}[h]
     \centering
