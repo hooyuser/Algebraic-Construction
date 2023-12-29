@@ -97,7 +97,7 @@ We use sans-serif font for categories. Some common categories are
     \item $\mathsf{Ring}$: the category of rings.
     \item $\mathsf{CRing}$: the category of commutative rings.
     \item $\mathsf{Fld}$: the category of fields.
-    \item $R\text{-}\mathsf{Mod}$: the category of $R$-modules, where $R\in \mathrm{Ob}\left(\mathsf{Ring}\right)$.
+    \item $R\text{-}\mathsf{Mod}$: the category of left $R$-modules, where $R\in \mathrm{Ob}\left(\mathsf{Ring}\right)$.
     \item $K\text{-}\mathsf{Vect}$: the category of $K$-vector spaces, where $K\in \mathrm{Ob}\left(\mathsf{Fld}\right)$.
     \item $R\text{-}\mathsf{Alg}$: the category of associative $R$-algebras, where $R\in \mathrm{Ob}\left(\mathsf{CRing}\right)$.
     \item $R\text{-}\mathsf{CAlg}$: the category of commutative $R$-algebras, where $R\in \mathrm{Ob}\left(\mathsf{CRing}\right)$.
@@ -256,6 +256,30 @@ Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subseteq X$ and $B_\alpha,B,
 	\item $f^{-1}\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}(F-B)=f^{-1}(F)-f^{-1}(B)$.
 	\item $A\subseteq f^{-1}(f(A))\ $, $B\supseteq f(f^{-1}(B))$.
 \end{itemize}
+}
+\prop{Equivalent Characterization of Injections}{
+    Let $f:X\to Y$ be a map. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is injective.
+        \item $f$ has a left inverse: there exists a map $h:Y\to X$ such that $h\circ f=\mathrm{id}_X$.
+        \item $f$ is left-cancellable: if $f\circ g_1=f\circ g_2$, then $g_1=g_2$.
+    \end{enumerate}
+}
+\prop{Equivalent Characterization of Surjections}{
+    Let $f:X\to Y$ be a map. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is surjective.
+        \item $f$ has a right inverse: there exists a map $h:Y\to X$ such that $f\circ h=\mathrm{id}_Y$.
+        \item $f$ is right-cancellable: if $g_1\circ f=g_2\circ f$, then $g_1=g_2$.
+    \end{enumerate}
+}
+
+\prop{}{
+    Suppose $f:X\to Y$ and $g:Y\to Z$ are maps. We have
+    \begin{enumerate}[(i)]
+        \item If $g\circ f$ is injective, then $f$ is injective.
+        \item If $g\circ f$ is surjective, then $g$ is surjective.
+    \end{enumerate}
 }
 
 \section{Grothendieck Universe}
@@ -2446,7 +2470,7 @@ which means $\mathfrak{a}$ is a graded ideal.
 
 \chapter{Commutative Ring}
 \section{Basic Concepts}
-A commutative ring $R$ is a commutative $R$-algebra. And we have a categorical isomorphism 
+A commutative ring $R$ is a commutative $R$-algebra and accordingly a commutative $\mathbb{Z}$-algebra. Furthermore we have a categorical isomorphism 
 \[
     \mathsf{CRing}\cong \mathbb{Z}\text{-}\mathsf{CAlg}.
 \]
@@ -2751,6 +2775,11 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 }
 
 \section{Construction}
+\subsection{Free Object}
+\dfn{Free Commutative Ring}{
+    Since $\mathsf{CRing}\cong \mathbb{Z}\text{-}\mathsf{CAlg}$, the \textbf{free commutative ring} on a set $X$ is isomorphic to the polynomial ring $\mathbb{Z}[X]$, which coincides with the free commutative $\mathbb{Z}$-algebra on $X$.
+}
+\subsection{Localization}
 \dfn{Multuplicative Subset}{
     Let $R$ be a commutative ring. A subset $S\subseteq R$ is called \textbf{multiplicative} if $S$ is monoid under the multiplication of $R$, i.e.
     \begin{enumerate}[(i)]
@@ -3160,7 +3189,7 @@ to be the category of all functors between $\mathsf{Ab}$-enriched categories $\m
         \end{tikzcd}
         \]  
 }
-In particular, homomorphism $R\to S$ makes $S$ an $R$-module.
+In particular, ring homomorphism $R\to S$ makes $S$ an $R$-module.
 
 \dfn{Noetherian Module}{
 Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \textbf{Noetherian} if one of the following equivalent conditions holds:
@@ -3195,9 +3224,24 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
     one of the following equivariant conditions holds:
     \begin{enumerate}[(i)]
         \item there exist $x_1, \ldots, x_n \in M$ such that every element of $M$ is an $R$-linear combination of the $x_i$. 
-        \item there exists an epimorphism $R^{\oplus n} \rightarrow M$ for some $n \in \mathbb{N}$.
+        \item there exists an epimorphism $R^{\oplus n} \rightarrow M$ for some $n \in \mathbb{Z}_+$.
+        \item there exists an exact sequence
+        \[
+        R^{\oplus n}  \rightarrow M \rightarrow 0
+        \]
+        for some $n\in \mathbb{N}$.
+        \item $S\cong R^{\oplus n}/M$ for some $n\in \mathbb{Z}_+$ and some submodule $M$ of $R^{\oplus n}$.
     \end{enumerate}
 }
+\dfn{Finitely Presented Module}{
+    We say $M$ is a \textbf{finitely presented $R$-module} if 
+    there exists an exact sequence
+    \[
+    R^{\oplus m} \rightarrow R^{\oplus n} \rightarrow M \rightarrow 0
+    \]
+    for some $m, n\in \mathbb{Z}_+$.
+}
+
 \subsection{Localization}
 \dfn{Localization of a Module}{
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. The \textbf{localization of the module} $M$ by $S$, denoted $S^{-1}M$, is an $S^{-1}R$-module that is constructed exactly as the localization of $R$, except that the numerators of the fractions belong to $M$. That is, as a set, it consists of equivalence classes, denoted $\frac{m}{s}$, of pairs $(m, s)$, where $m\in M$ and $s\in S$, and two pairs $(m, s)$ and $(n, t)$ are equivalent if there is an element $u$ in $S$ such that
@@ -3399,17 +3443,38 @@ When $I$ is a monoid, \Cref{th:graded_module_over_ring_internal} is a special ca
     $$
     r\cdot a=\sigma(r)a
     $$
-    for all $r\in R$ and $a\in A$.
-    We usually call associative $R$-algebra as $R$-algebra for short.
-}
-We can check that 
+    for all $r\in R$ and $a\in A$. \\
+    We can check that 
 \[
-  r\cdot (ab)=\sigma(r)ab=(r\cdot a)b=\sigma(r)ab=a\left(\sigma(r)b\right) =a(r\cdot b).
+  r\cdot (ab)=\sigma(r)ab=(r\cdot a)b=\sigma(r)ab=a\left(\sigma(r)b\right) =a(r\cdot b),
 \]
+which justifies the naming ``associative". 
+}
+We usually call associative $R$-algebra as $R$-algebra for short.
+
+\prop{Commutative Ring homomorphism $R\to S$ induces functor $S\text{-}\mathsf{Alg}\to R\text{-}\mathsf{Alg}$}{
+    Let $R$ and $S$ be commutative rings with a ring homomorphism $f: R\to S$. Then every $S$-algebra $A$ is an $R$-algebra by defining $ra = f(r)a$, or equivalently through $R\to S\to Z(A)$. This defines a functor $F: S\text{-}\mathsf{Alg}\to R\text{-}\mathsf{Alg}$, which is identify map on objects and morphisms.
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            S\text{-}\mathsf{Alg}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Alg}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            A  \arrow[dd, "g"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] A\arrow[dd, "g"{name=R}] \&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "F", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            B \& \& \&  B\&
+        \end{tikzcd}
+        \]  
+}
+In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
+
+\section{Construction}
+\subsection{Quotient Object}
 
 \dfn{Quotient Algebra}{
     Let $A$ be an $R$-algebra and $\mathfrak{a}$ be a two-sided ideal of $A$. Since $\mathfrak{a}$ is an $R$-submodule of $A$, the quotient ring $A/\mathfrak{a}$ can also be endowed with an $R$-module structure, which makes $A/\mathfrak{a}$ an $R$-algebra. We call $A/\mathfrak{a}$ the \textbf{quotient algebra} of $A$ by $\mathfrak{a}$.
 }
+
+\subsection{Graded Object}
 
 \dfn{$I$-Graded Algebra over an Graded Commutative Ring}{
     Let $(I,+)$ be a monoid and $R$ be a $I$-graded commutative ring with grading $(R_i)_{i\in I}$. An \textbf{$I$-graded algebra over graded ring $R$} is an $R$-algebra $A$ together with a family of subalgebras $\left(A_i\right)_{i\in I}$ such that
@@ -3477,16 +3542,43 @@ We can check that
 
 \section{Commutative Algebra}
 \dfn{Commutative Algebra}{
-    Let $R$ be a commutative ring. A \textbf{commutative $R$-algebra} is an $R$-algebra where the multiplication is commutative.
+    Let $R$ be a commutative ring. A \textbf{commutative $R$-algebra} is an $R$-algebra where the multiplication is commutative. Or equivalently, a commutative $R$-algebra is a commutative ring $A$ together with a ring homomorphism $R\to A$. Hence there is a category isomorphism $R\text{-}\mathsf{CAlg}\cong \left(R/\mathsf{CRing}\right)$.
 }
 
 
 \dfn{Free Commutative Algebra}{
-    Let $R$ be a commutative ring. 
-    \begin{tikzcd}[ampersand replacement=\&]
-        \& X \arrow[ld, "\iota"'] \arrow[rd, "f"] \& \\
-        F \arrow[rr, "\hat{f}"] \& \& A
-    \end{tikzcd}
+    Let $X$ be a set and $R$ be a commutative ring. The \textbf{free commutative $R$-algebra} on $X$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, together with a map $\iota:X\to \mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, is defined by the following universal property: for any commutative $R$-algebra $A$ and any map $f:X\to A$, there exists a unique homomorphism $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)\to A$ such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A\\[0.3cm]
+            X\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
+        \end{tikzcd}
+    \end{center}
+    The free $R$-module $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$ can be contructed as the polynomial algebra $R[X]$.
+}
+\dfn{Finite-type Commutative Algebra}{
+    Let $R\to A$ be a commutative ring homomorphism. We say $A$ is a \textbf{finite-type $R$-algebra}, or that $R\to A$ is \textbf{of finite type}, if one of the following equivalent conditions holds:
+    \begin{enumerate}[(i)]
+        \item there exists a finite set of elements $a_1,\cdots,a_n$ of A such that every element of $A$ can be expressed as a polynomial in $a1,\cdots,an$, with coefficients in $K$.
+        \item there exists a finite set $X$ such that $A\cong R[X]/I$ as $R$-algebra where $I$ is an ideal of $R[X]$.
+    \end{enumerate}
+    
+}
+
+\prop{}{
+    Let $A$ be a $R$-algebra. If $A$ is finitely generated as an $R$-module, then $A$ is a finite-type $R$-algebra.
+}
+\pf{
+    This holds because if each element of $A$ can be expressed as an $R$-linear combination of finitely many elements of $A$, then each element of $A$ can also be expressed as a polynomial in finitely many elements of $A$ with coefficients in $R$.
+
+    An alternative proof can be given by utilizing the universal property of the free contruction. Suppose $A$ is finitely generated as an $R$-module. Then there exists some a finite set $X=\{x_1,\cdots,x_n\}$ and a surjective $R$-linear map $\varphi:R^{\oplus X}\to A$. Define $f=\varphi\circ \iota$, where $\iota:X\to R^{\oplus X}$ is the inclusion map. 
+     \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            R^{\oplus X}\arrow[r, dashed, "\exists !\,\widetilde{j}"]  \&R[X]\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A\\[0.3cm]
+            \& X\arrow[ul, "\iota"] \arrow[u, "j"] \arrow[ru, "f:=\varphi\circ \iota"'] \&  
+        \end{tikzcd}
+    \end{center}
+    The universal property of free $R$-module induces a unique $R$-linear map $\widetilde{j}:R^{\oplus}\to R[X]$ such that $j=\widetilde{j}\circ \iota$. And the universal property of free commutative $R$-algebra induces a unique $R$-algebra homomorphism $\widetilde{f}:R[X]\to A$ such that $f=\widetilde{f}\circ j$. Note $f=\varphi\circ \iota=\left(\widetilde{f}\circ \widetilde{j}\right)\circ \iota$. By the uniqueness of the universal property of $R^{\oplus}$, we have $\widetilde{f}\circ \widetilde{j}=\varphi$. Since $\widetilde{f}\circ \widetilde{j}$ is surjective, $\widetilde{f}$ must be surjective, which implies $A$ is a finite-type $R$-algebra.
 }
 
 \chapter{Field Theory}
