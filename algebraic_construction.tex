@@ -2364,10 +2364,22 @@ X \arrow[u, "\iota"] \arrow[ru, "f"']                      \&
 }
 A ring is a monoid object in the category $\mathsf{Ab}$. In other words, a ring is an $\mathsf{Ab}$-enriched category with only one object.\\
 A ring $R$ is an $R$-module over itself.\\
-A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
+A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.
 \dfn{Unit Group of a Ring}{
     Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$.
 }
+Next we define the morphisms in the category $\mathsf{Ring}$.
+\dfn{Ring Homomorphism}{
+    Let $R$, $S$ be rings. A \textbf{ring homomorphism} from $R$ to $S$ is a map $f:R\to S$ such that
+    \begin{enumerate}[(i)]
+        \item $f(a+b)=f(a)+f(b)$ for all $a,b\in R$.
+        \item $f(a\cdot b)=f(a)\cdot f(b)$ for all $a,b\in R$.
+        \item $f(1_R)=1_S$.
+    \end{enumerate}
+}
+
+
+
 \dfn{Zero Divisor}{
     Assume that $a$ is an element of a ring $R$. 
     \begin{itemize}
@@ -2386,22 +2398,11 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.\\
 
 A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called a \textbf{proper ideal}. In commutative rings, left and right ideals are the same and are simply called ideals.
 }
-
-\dfn{Quotient Ring}{
-    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Equip the additive group \( R / I \) with the following multiplication operation:
-\[
-(r+I) \cdot (s+I) := (rs + I), \quad r, s \in R .
-\]
-Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R \) modulo \( I \)}. The quotient map \( R \rightarrow R / I \) is called the quotient homomorphism.
-}
-\prop{Universal Property of Quotient Rings}{
-    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Then the quotient map $\pi:R\to R/I$ is a surjective ring homomorphism with kernel $I$. Moreover, for any ring $S$ and any ring homomorphism $f:R\to S$ such that $I\subseteq\ker f$, there exists a unique ring homomorphism $\bar{f}:R/I\to S$ such that the following diagram commutes
+\dfn{Kernel of a Ring Homomorphism}{
+    Let $f:R\to S$ be a ring homomorphism. The \textbf{kernel} of $f$ is the set
     \[
-    \begin{tikzcd}[ampersand replacement=\&]
-        R \arrow[r, "f"] \arrow[d, "\pi"'] \& S \\
-        R/I \arrow[ru, "\exists!\bar{f}"'] \&  
-    \end{tikzcd}
-    \] 
+        \ker f=f^{-1}(0_S)=\{r\in R\mid f(r)=0_S\}.
+    \]
 }
 
 \dfn{Reduced Ring}{
@@ -2419,7 +2420,53 @@ Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R
 \dfn{Local Ring}{
     A ring $R$ is called \textbf{local} if it has a unique maximal ideal.
 }
+\section{Construction}
+\subsection{Initial Object and Terminal Object}
+\prop{Initial Object in $\mathsf{Ring}$}{
+    The ring $\mathbb{Z}$ is the initial object in $\mathsf{Ring}$. That is, for any ring $R$, there exists a unique ring homomorphism
+    \begin{align*}
+        \varphi:\mathbb{Z}&\longrightarrow R\\
+        n&\longmapsto n\cdot 1_R
+    \end{align*}
+}
+\dfn{Characteristic of a Ring}{
+    Let $R$ be a ring and $\varphi:\mathbb{Z}\to R$ be the unique ring homomorphism. Then $\mathrm{\varphi}\cong \mathbb{Z}/n\mathbb{Z}$, where $n=\in\mathbb{N}$.
+    The \textbf{characteristic} of $R$ is defined to be $n$, denoted by $\mathrm{char}(R)$.
 
+    Equivalently, $\mathrm{char}(R)$ is the smallest positive integer $n$ such that $n\cdot 1_R=0_R$ if such an integer exists. Otherwise, the characteristic of $R$ is $0$.
+}
+\prop{Terminal Object in $\mathsf{Ring}$}{
+    The ring $\mathbb{Z}$ is the initial object in $\{0\}$.
+}
+Since the forgetful functor $\mathsf{Ring}\to\mathsf{Set}$ is a right adjoint, it preserves all limits. Hence the underlying set of the terminal object in $\mathsf{Ring}$ is the terminal object in $\mathsf{Set}$, which is the singleton set $\{*\}$.
+
+\subsection{Quotient Object}
+\dfn{Quotient Ring}{
+    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Equip the additive group \( R / I \) with the following multiplication operation:
+\[
+(r+I) \cdot (s+I) := (rs + I), \quad r, s \in R .
+\]
+Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R \) modulo \( I \)}. The quotient map \( R \rightarrow R / I \) is called the quotient homomorphism.
+}
+\prop{Universal Property of Quotient Rings}{
+    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Then the quotient map $\pi:R\to R/I$ is a surjective ring homomorphism with kernel $I$. Moreover, for any ring $S$ and any ring homomorphism $f:R\to S$ such that $I\subseteq\ker f$, there exists a unique ring homomorphism $\bar{f}:R/I\to S$ such that the following diagram commutes
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        R \arrow[r, "f"] \arrow[d, "\pi"'] \& S \\
+        R/I \arrow[ru, "\exists!\bar{f}"'] \&  
+    \end{tikzcd}
+    \] 
+}
+\prop{Kernel of a Ring Homomorphism is a Two-sided Ideal}{
+    Let $f:R\to S$ be a ring homomorphism. Then $\ker f$ is an two-sided ideal of $R$.
+}
+\prop{Image of a Ring Homomorphism is a Subring}{
+    Let $f:R\to S$ be a ring homomorphism. Then $\mathrm{im}f$ is a subring of $S$.
+}
+\thm{The Fundamental Theorem of Ring Homomorphisms}{
+    Let $f:R\to S$ be a ring homomorphism. Then $R/\ker f\cong \mathrm{im}f$.
+}
+\subsection{Graded Object}
 \dfn{$I$-Graded Ring (Internal Definition)}{
     Let $(I,+)$ be a monoid. An \textbf{$I$-graded ring} is a ring $(R,+,\cdot)$ together with a family of subgroups $(R_i)_{i\in I}$ of $(R,+)$ such that
     \begin{enumerate}[(i)]
@@ -2465,7 +2512,30 @@ It is clear that $\bigoplus\limits_{i\geq 0}(\mathfrak a\cap R_i) \subseteq \mat
 which means $\mathfrak{a}$ is a graded ideal.
 }
 
+\section{Category Properties}
+The category Ring is both complete and cocomplete.
 
+\prop{Equivalence Chracaterization of Monomorphisms in $\mathsf{Ring}$}{
+    Let $f:R\to S$ be a ring homomorphism. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is a monomorphism.
+        \item $f$ is injective.
+        \item $\ker f=\{0_R\}$.
+    \end{enumerate}
+}
+
+\prop{Sujective Ring Homomorphisms are Epimorphisms}{
+    Every surjective homomorphism of rings is an epimorphism. However, the converse is not true in general.
+}
+
+\prop{Equivalence Chracaterization of Isomorphisms in $\mathsf{Ring}$}{
+    Let $f:R\to S$ be a ring homomorphism. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is an isomorphism.
+        \item $f$ is bijective.
+        \item $\ker f=\{0_R\}$ and $\mathrm{im}f=S$. 
+    \end{enumerate}
+}
 
 
 \chapter{Commutative Ring}
@@ -2936,7 +3006,7 @@ Localization is the most economical way to make a multiplicative subset invertib
         S^{-1}I=\langle \varphi(I)\rangle=\left\{\frac{r}{s}\frac{a}{1}\midv a\in I, \frac{r}{s}\in S^{-1}R\right\}.
     \]
 }
-\prop{Properties of localization of Ideals}{
+\prop{Properties of Localization of Ideals}{
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $0\notin S$. Suppose the localization map is $\varphi:R\to S^{-1}R$. Then we have maps between the sets of ideals of $R$ and $S^{-1}R$:
     \begin{align*}
         \mathcal{I}(R)=\left\{\text{ideals of }R\right\}\xrightleftarrows[\varphi^{-1}]{\quad S^{-1}\quad}
@@ -3586,6 +3656,25 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \dfn{Field}{
     A \textbf{field} is a commutative ring $K$ such that $K^{\times}=K-\{0\}$.
 }
+\prop{}{
+    If $K$ is a field, $R$a ring homomorphism $f:K\to R$.
+}
+\dfn{Field Extension}{
+    Let $K$ be a field and $L$ be a commutative ring. 
+}
+
+\lemm{Zariski's Lemma}{
+    If a field is a finite-type $K$-algebra, then it is a finite extension of $K$ (that is, it is also finitely generated as a $K$-linear space).
+}
+
+\thm{Hilbert's Weak Nullstellensatz}{
+    If $\overline{\Bbbk}$ is an algebraically closed field, then the maximal ideals of $\overline{\Bbbk}\left[x_1, \cdots, x_n\right]$ are precisely those ideals of the form $\left(x_1-a_1, \cdots, x_n-a_{n}\right)$, where $a_i\in \overline{\Bbbk}$. 
+}
+
+\thm{Hilbert's Nullstellensatz}{
+    If $\Bbbk$ is any field and $\mathfrak{m}$ is a maximal ideal of $\Bbbk\left[x_1, \ldots, x_n\right]$, then $\Bbbk\left[x_1, \ldots, x_n\right]/\mathfrak{m}$ is a finite extension of $\Bbbk$.
+}
+
 \chapter{Valuation Theory}
 \section{Valuation of Ring}
 \dfn[totally_ordered_abelian_group]{Totally Ordered Abelian Group}{
