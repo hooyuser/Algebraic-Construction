@@ -1,0 +1,195 @@
+
+\chapter{Set Theory}
+\thispagestyle{empty}
+\setcounter{page}{1}
+\section{Set}
+\subsection{Basic Operations}
+\dfn{Family of Sets}{
+    Let $I$ be some index set. A \textbf{family of sets index by $I$} is a function that maps each index $i\in I$ to a set $A_i$, denoted by $\left(A_i\right)_{i\in I}$.
+}
+\dfn{Union and Intersection}{
+    Let $I$ be some index set and $(A_i)_{i\in I}$ be a family of sets. The \textbf{union} and \textbf{intersection} of $(A_i)_{i\in I}$ are defined as follows
+	\begin{align*}
+		\bigcup_{i\in I} A_i&:=\left\{x:\exists\,i\in I,x\in A_i \right\}\\
+		\bigcap_{i\in I} A_i&:=\left\{x:\forall\,i\in I,x\in A_i \right\}
+	\end{align*}
+}
+\prop{Distribution Law}{
+	Suppose that $A_\alpha,A,B_\alpha,B$ are sets and $I$ is some index set. We have the following distribution law:
+	\begin{itemize}
+        \item $A\cup\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}\left(A\cup B_\alpha\right)$
+		\item $A\cap\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}\left(A\cap B_\alpha\right)$
+	\end{itemize}
+}
+
+\prop{De Morgan Law}{
+	Suppose that $A_\alpha,A$ are sets and $I$ is some index set. We have
+	\begin{itemize}
+		\item $\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)^\complement=\bigcap\limits_{\alpha\in I}A_\alpha^{\complement}\ $, $\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)^\complement=\bigcup\limits_{\alpha\in I}A_\alpha^{\complement}$
+		\item $E-\bigcup\limits_{\alpha\in I}A_\alpha=\bigcap\limits_{\alpha\in I}\left(E-A_\alpha\right)\ $, $E-\bigcap\limits_{\alpha\in I}A_\alpha=\bigcup\limits_{\alpha\in I}\left(E-A_\alpha\right)$
+	\end{itemize}
+}
+
+\subsection{Limit of Sequence of Sets}
+\dfn{Upper Limit of Sequence of Sets}{
+	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets. The \textbf{upper limit} of $\left(A_n\right)_{n=1}^{\infty}$ is defined as follows
+	\begin{align*}
+		\uplim_{n\to\infty}A_n&:=\bigcap_{n=1}^\infty\bigcup_{k=n}^\infty A_k=\left\{x:x\text{ belongs to infinitely many sets in }\left(A_n\right)_{n=1}^{\infty}\right\}
+	\end{align*}
+}
+We have
+\[
+	x\in \uplim_{n\to\infty}A_n\iff \forall n\ge1,\exists k\ge n,x\in A_k.
+\]
+
+\dfn{Lower Limit of Sequence of Sets}{
+	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets. The \textbf{lower limit} of $\left(A_n\right)_{n=1}^{\infty}$ is defined as follows
+	\begin{align*}
+		\lowlim_{n\to\infty}A_n&:=\bigcup_{n=1}^\infty\bigcap_{k=n}^\infty A_k=\left\{x:x\text{ belongs to all but finitely many sets in }\left(A_n\right)_{n=1}^{\infty}\right\}\\
+	\end{align*}
+}
+\prop{Property of Upper Limit and Lower limit}{
+	\[
+		\bigcap_{n=1}^\infty A_n\subseteq\lowlim_{n\to\infty}A_n\subseteq\uplim_{n\to\infty}A_n\subseteq \bigcup_{n=1}^\infty A_n.
+	\]
+}
+\dfn{Limit of Sequence of Sets}{
+	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets. If 
+	$\lowlim\limits_{n\to\infty}A_n=\uplim\limits_{n\to\infty}A_n$, we define the \textbf{limit} of $\left(A_n\right)_{n=1}^{\infty}$ as follows 
+	\[
+		\lim\limits_{n\to\infty}A_n:=\lowlim\limits_{n\to\infty}A_n=\uplim\limits_{n\to\infty}A_n
+	\]
+}
+\prop{}{
+	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets.
+	\begin{enumerate}
+		\item If $\left(A_n\right)_{n=1}^{\infty}$ is nondecreasing, then it has limit
+		\[
+			\lim\limits_{n\to\infty}A_n=\bigcup_{n=1}^\infty A_n.
+		\]
+		\item If $\left(A_n\right)_{n=1}^{\infty}$ is nonincreasing, then it has limit
+		\[
+			\lim\limits_{n\to\infty}A_n=\bigcap_{n=1}^\infty A_n.
+		\]
+	\end{enumerate}
+}
+
+\subsection{Relation}
+\dfn{Relation}{
+    An \textbf{$n$-ary relation} $R$ over sets $X_1, \cdots, X_n$ is a subset of the Cartesian product $X_1 \times \cdots \times X_n$. A \textbf{binary relation} $R$ over sets $X$ and $Y$ is a subset of $X \times Y$. We write $xRy$ to denote that $(x, y) \in R$.
+}
+\dfn[homogeneous_relation]{Homogeneous Relation}{
+    A \textbf{homogeneous relation} $R$ over a set $X$ is a binary relation between $X$ and itself, i.e. a subset of $X \times X$. 
+}
+Here are some important properties that a homogeneous relation $R$ over a set X may have:
+\begin{itemize}
+    \item \textbf{Reflexivity}: $\forall x \in X$, $xRx$.
+    \item \textbf{Irreflexivity}: $\forall x \in X$, not $xRx$.
+    \item \textbf{Transitivity}: $\forall x, y, z \in X$, $xRy$ and $yRz$ $\implies$ $xRz$.
+    \item \textbf{Symmetry}: $\forall x, y \in X$, $xRy$ $\implies$ $yRx$.
+    \item \textbf{Antisymmetry}: $\forall x, y \in X$, $xRy$ and $yRx$ $\implies$ $x = y$.
+    \item \textbf{Asymmetry}: $\forall x, y \in X$, $xRy$ $\implies$ not $yRx$.
+    \item \textbf{Strong Connectedness}: $\forall x, y \in X$, $xRy$ or $yRx$.
+    \item \textbf{Connectedness}: $\forall x, y \in X$, $x\ne y$ $\implies$ $xRy$ or $yRx$.
+\end{itemize}
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.6}
+    \begin{tabular}{l|l|l|l|l}
+        \toprule
+        \textbf{Homogeneous Relation} & \multicolumn{1}{c|}{\textbf{Reflexivity}} & \multicolumn{1}{c|}{\textbf{Symmetry}} & \multicolumn{1}{c|}{\textbf{Transitivity}} & \multicolumn{1}{c}{\textbf{Connectedness}} \\ 
+        \midrule
+        \midrule
+        Directed graph & & & & \\ \midrule
+        Undirected graph & & \poscell{Symmetric} & & \\ \midrule
+        Dependency & \poscell{Reflexive} & \poscell{Symmetric} & & \\ \midrule
+        Tournament & \negcell{Irreflexive} & \negcell{Asymmetric} & & \\ \midrule
+        Preorder & \poscell{Reflexive} & & \poscell{Transitive} & \\ \midrule
+        Total preorder & \poscell{Reflexive} & & \poscell{Transitive} & \poscell{Strongly Connected} \\ \midrule
+        Partial order & \poscell{Reflexive} & \negcell{Antisymmetric} & \poscell{Transitive} & \\ \midrule
+        Strict partial order & \negcell{Irreflexive} & \negcell{Asymmetric} & \poscell{Transitive} & \\ \midrule
+        Total order & \poscell{Reflexive} & \negcell{Antisymmetric} & \poscell{Transitive} & \poscell{Strongly Connected} \\ \midrule
+        Strict total order & \negcell{Irreflexive} & \negcell{Asymmetric} & \poscell{Transitive} & \poscell{Connected} \\ \midrule
+        Partial equivalence & & \poscell{Symmetric} & \poscell{Transitive} & \\ \midrule 
+        Equivalence & \poscell{Reflexive} & \poscell{Symmetric} & \poscell{Transitive} & \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+\dfn{Filtered Set}{
+    A \textbf{filtered set} or \textbf{directed set} is a preorder set $(X, \le)$ with an additional property that every pair of elements has an upper bound. In other words, for every $x, y \in X$, there exists $z \in X$ such that $x \le z$ and $y \le z$.
+}
+\prop{Intersection of equivalence relations is an equivalence relation}{
+    The intersection of a family of equivalence relations on a set $X$ is an equivalence relation on $X$.
+}
+\pf{
+    Suppose $(R_i)_{i\in i}$ is a family of equivalence relations on $X$. We can check that $\bigcap\limits_{i\in I}R_i$ is an equivalence relation on $X$ by checking the three properties of equivalence relation:
+    \begin{enumerate}[(i)]
+        \item Reflexivity: For any $x\in X$, since $(x,x)\in R_i$ for all $i\in I$, we have $(x,x)\in \bigcap\limits_{i\in I}R_i$.
+        \item Symmetry: For any $x,y\in X$,
+        \[
+            (x,y)\in \bigcap\limits_{i\in I}R_i\implies\forall i\in I,(x,y)\in R_i\implies\forall i\in I, (y,x)\in R_i\implies(y,x)\in \bigcap\limits_{i\in I}R_i
+        \]
+        \item Transitivity: For any $x,y,z\in X$,
+        \begin{align*}
+            (x,y)\in \bigcap\limits_{i\in I}R_i\text{ and }(y,z)\in \bigcap\limits_{i\in I}R_i
+            &\implies\forall i\in I,(x,y)\in R_i\text{ and }(y,z)\in R_i\\
+            &\implies\forall i\in I, (x,z)\in R_i\\
+            &\implies(x,z)\in \bigcap\limits_{i\in I}R_i
+        \end{align*}
+    \end{enumerate}
+}
+
+\dfn{Generated Equivalence Relation}{
+    Let $X$ be a set and $R\subseteq X\times X$ be a relation on $X$. The \textbf{generated relation} $\langle R \rangle$ is defined as the smallest equivalence relation on $X$ that contains $R$, or equivalently, the intersection of all equivalence relations on $X$ that contain $R$.
+}
+
+\section{Function}
+\prop{}{
+Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subseteq X$ and $B_\alpha,B,F\subseteq Y$. We have
+\begin{itemize}
+
+
+	\item $f\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)=\bigcup\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)\subseteq\bigcap\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f(E-A)\supseteq f(E)-f(A)$.
+	\item $f^{-1}\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}(F-B)=f^{-1}(F)-f^{-1}(B)$.
+	\item $A\subseteq f^{-1}(f(A))\ $, $B\supseteq f(f^{-1}(B))$.
+\end{itemize}
+}
+\prop{Equivalent Characterization of Injections}{
+    Let $f:X\to Y$ be a map. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is injective.
+        \item $f$ has a left inverse: there exists a map $h:Y\to X$ such that $h\circ f=\mathrm{id}_X$.
+        \item $f$ is left-cancellable: if $f\circ g_1=f\circ g_2$, then $g_1=g_2$.
+    \end{enumerate}
+}
+\prop{Equivalent Characterization of Surjections}{
+    Let $f:X\to Y$ be a map. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is surjective.
+        \item $f$ has a right inverse: there exists a map $h:Y\to X$ such that $f\circ h=\mathrm{id}_Y$.
+        \item $f$ is right-cancellable: if $g_1\circ f=g_2\circ f$, then $g_1=g_2$.
+    \end{enumerate}
+}
+
+\prop{}{
+    Suppose $f:X\to Y$ and $g:Y\to Z$ are maps. We have
+    \begin{enumerate}[(i)]
+        \item If $g\circ f$ is injective, then $f$ is injective.
+        \item If $g\circ f$ is surjective, then $g$ is surjective.
+    \end{enumerate}
+}
+
+\section{Grothendieck Universe}
+\dfn{Grothendieck Universe}{
+    A \textbf{Grothendieck universe} is a set $\mathscr{U}$ such that
+    \begin{enumerate}
+        \item $\mathscr{U}$ is transitive: $\forall x\in \mathscr{U},\forall y\in x, \;\left(y\in \mathscr{U}\right)$. Or equivalently, $\forall x\in \mathscr{U}, x\subseteq \mathscr{U}$.
+        \item $\mathscr{U}$ is closed under power set: $\forall x\in \mathscr{U}, \mathscr{P}(x)\in \mathscr{U}$.
+        \item $\mathscr{U}$ is closed under union: $\forall x\in \mathscr{U},\bigcup x\in \mathscr{U}$.
+        \item $\mathscr{U}$ is closed under replacement: $\forall x\in \mathscr{U},\forall f\in \mathrm{Hom}(x,\mathscr{U}), f(x)\in \mathscr{U}$.
+        \item $\mathscr{U}$ contains all the natural numbers: $\mathbb{N}\in \mathscr{U}$.
+    \end{enumerate}
+}
+\dfn[small_set]{$\mathscr{U}$-Small Set}{
+    Let $\mathscr{U}$ be a Grothendieck universe. A set $X$ is called a \textbf{$\mathscr{U}$-small set} if there exists $Y\in \mathscr{U}$ such that $X$ and $Y$ have the same cardinality.
+}
