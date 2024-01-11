@@ -1,0 +1,148 @@
+
+\chapter{Associative Algebra}
+
+\section{Basic Properties}
+\dfn{Associative Algebra over Commutative Ring}{
+    Let $R$ be a commutative ring. An \textbf{associative $R$-algebra} is a ring $A$ together with a ring homomorphism $\sigma:R\to Z(A)$, which makes $A$ an $R$-module by defining 
+    $$
+    r\cdot a=\sigma(r)a
+    $$
+    for all $r\in R$ and $a\in A$. \\
+    We can check that 
+\[
+  r\cdot (ab)=\sigma(r)ab=(r\cdot a)b=\sigma(r)ab=a\left(\sigma(r)b\right) =a(r\cdot b),
+\]
+which justifies the naming ``associative". 
+}
+We usually call associative $R$-algebra as $R$-algebra for short.
+
+\prop{Commutative Ring homomorphism $R\to S$ induces functor $S\text{-}\mathsf{Alg}\to R\text{-}\mathsf{Alg}$}{
+    Let $R$ and $S$ be commutative rings with a ring homomorphism $f: R\to S$. Then every $S$-algebra $A$ is an $R$-algebra by defining $ra = f(r)a$, or equivalently through $R\to S\to Z(A)$. This defines a functor $F: S\text{-}\mathsf{Alg}\to R\text{-}\mathsf{Alg}$, which is identify map on objects and morphisms.
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            S\text{-}\mathsf{Alg}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Alg}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            A  \arrow[dd, "g"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] A\arrow[dd, "g"{name=R}] \&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "F", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            B \& \& \&  B\&
+        \end{tikzcd}
+        \]  
+}
+In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
+
+
+
+\section{Construction}
+\subsection{Quotient Object}
+
+\dfn{Quotient Algebra}{
+    Let $A$ be an $R$-algebra and $\mathfrak{a}$ be a two-sided ideal of $A$. Since $\mathfrak{a}$ is an $R$-submodule of $A$, the quotient ring $A/\mathfrak{a}$ can also be endowed with an $R$-module structure, which makes $A/\mathfrak{a}$ an $R$-algebra. We call $A/\mathfrak{a}$ the \textbf{quotient algebra} of $A$ by $\mathfrak{a}$.
+}
+
+\subsection{Graded Object}
+
+\dfn{$I$-Graded Algebra over an Graded Commutative Ring}{
+    Let $(I,+)$ be a monoid and $R$ be a $I$-graded commutative ring with grading $(R_i)_{i\in I}$. An \textbf{$I$-graded algebra over graded ring $R$} is an $R$-algebra $A$ together with a family of subalgebras $\left(A_i\right)_{i\in I}$ such that
+    \begin{enumerate}[(i)]
+        \item $A=\bigoplus_{i\in I}A_i$.
+        \item $A_iA_j\subseteq A_{i+j}$ for all $i, j\in I$.
+        \item $R_iA_j\subseteq A_{i+j}$ for all $i, j\in I$.
+    \end{enumerate}
+    Elements in $A_i$ are called \textbf{homogeneous elements of degree $i$}.
+}
+
+\prop{Graded Algebra Quotients out Graded Ideal}{
+    Let $A$ be an $I$-graded algebra over graded ring $R$ with grading $(A_i)_{i\in I}$ and $\mathfrak{a}$ be a graded two-sided ideal of $A$. Then $A/\mathfrak{a}$ has decomposition
+    \[
+    A/ \mathfrak{a}=\bigoplus_{i\in I}A_i/\left(\mathfrak{a}\cap A_i\right),    
+    \]
+    which makes $A/\mathfrak{a}$ an $I$-graded algebra.
+}
+
+
+\ex{Polynomial Algebra $R[X_1,\cdots,X_n]$}{
+    Let $R$ be a commutative ring and $X_1,\cdots,X_n$ be indeterminates. Then $R[X_1,\cdots,X_n]$ is an $\mathbb{N}$-graded $R$-algebra with grading $R[X_1,\cdots,X_n]_i$ being the set of homogeneous polynomials of degree $i$.
+}
+
+
+\section{Tensor Algebra}
+\dfn{Tensor Algebra $T^{\bullet}(M)$}{
+    Given a $R$-module $M$, the \textbf{$k$-th tensor power of $M$} is defined as
+    \begin{align*}
+        T^k(M)&=M^{\otimes k}=\underbrace{M\otimes_R\cdots\otimes_R M}_{k\text{ times}},\\
+        T^0(M)&=R.
+    \end{align*}
+    The \textbf{tensor algebra} of $M$ is defined as
+    \[
+        T^{\bullet}(M)=\bigoplus_{k=0}^{\infty}T^k(M)
+    \]
+    with multiplication $\otimes$ defined as
+    \[
+        (m_1\otimes\cdots\otimes m_k)\otimes(m_{k+1}\otimes\cdots\otimes m_{k+l})=m_1\otimes\cdots\otimes m_{k+l}
+    \]
+    $T^{\bullet}(M)$ is an $\mathbb{N}$-graded $R$-algebra with grading $(T^k(M))_{k\ge 0}$.
+}
+
+\section{Exterior Algebra and Symmetric Algebra}
+\dfn{Exterior Algebra $\Largewedge^{\bullet} (M)$}{
+    Given an $R$-module $M$, 
+    \begin{align*}
+        I_{\largewedge}(M) & :=\langle x \otimes x: x \in M\rangle
+    \end{align*}
+    is a graded two-sided ideal of $T^{\bullet}(M)$. The \textbf{exterior algebra} of $M$ is defined as
+    \[
+        \largewedge^{\bullet} (M)=T^{\bullet}(M)/I_{\largewedge}(M).
+    \]
+    The multiplication of $\Largewedge^{\bullet} (M)$ is denoted by $\wedge$ and is called the \textbf{wedge product}.
+    The grading of $\Largewedge^{\bullet} (M)$ is given by 
+    \begin{align*}
+        \largewedge^{\bullet} (M)=\bigoplus_{k=0}^{\infty}\largewedge^k(M),
+    \end{align*}
+    where 
+    \[
+        \largewedge^k(M)=T^k(M)/\left(I_{\largewedge}(M)\cap T^k(M)\right)
+    \] 
+    is called the \textbf{$k$-th exterior power of $M$}.
+}
+
+\section{Commutative Algebra}
+\dfn{Commutative Algebra}{
+    Let $R$ be a commutative ring. A \textbf{commutative $R$-algebra} is an $R$-algebra where the multiplication is commutative. Or equivalently, a commutative $R$-algebra is a commutative ring $A$ together with a ring homomorphism $R\to A$. Hence there is a category isomorphism $R\text{-}\mathsf{CAlg}\cong \left(R/\mathsf{CRing}\right)$.
+}
+
+
+\dfn{Free Commutative Algebra}{
+    Let $X$ be a set and $R$ be a commutative ring. The \textbf{free commutative $R$-algebra} on $X$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, together with a map $\iota:X\to \mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, is defined by the following universal property: for any commutative $R$-algebra $A$ and any map $f:X\to A$, there exists a unique homomorphism $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)\to A$ such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A\\[0.3cm]
+            X\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
+        \end{tikzcd}
+    \end{center}
+    The free $R$-module $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$ can be contructed as the polynomial algebra $R[X]$.
+}
+\dfn{Finite-type Commutative Algebra}{
+    Let $R\to A$ be a commutative ring homomorphism. We say $A$ is a \textbf{finite-type $R$-algebra}, or that $R\to A$ is \textbf{of finite type}, if one of the following equivalent conditions holds:
+    \begin{enumerate}[(i)]
+        \item there exists a finite set of elements $a_1,\cdots,a_n$ of A such that every element of $A$ can be expressed as a polynomial in $a1,\cdots,an$, with coefficients in $K$.
+        \item there exists a finite set $X$ such that $A\cong R[X]/I$ as $R$-algebra where $I$ is an ideal of $R[X]$.
+    \end{enumerate}
+    
+}
+
+\prop{}{
+    Let $A$ be a $R$-algebra. If $A$ is finitely generated as an $R$-module, then $A$ is a finite-type $R$-algebra.
+}
+\pf{
+    This holds because if each element of $A$ can be expressed as an $R$-linear combination of finitely many elements of $A$, then each element of $A$ can also be expressed as a polynomial in finitely many elements of $A$ with coefficients in $R$.
+
+    An alternative proof can be given by utilizing the universal property of the free contruction. Suppose $A$ is finitely generated as an $R$-module. Then there exists some a finite set $X=\{x_1,\cdots,x_n\}$ and a surjective $R$-linear map $\varphi:R^{\oplus X}\to A$. Define $f=\varphi\circ \iota$, where $\iota:X\to R^{\oplus X}$ is the inclusion map. 
+     \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            R^{\oplus X}\arrow[r, dashed, "\exists !\,\widetilde{j}"]  \&R[X]\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A\\[0.3cm]
+            \& X\arrow[ul, "\iota"] \arrow[u, "j"] \arrow[ru, "f:=\varphi\circ \iota"'] \&  
+        \end{tikzcd}
+    \end{center}
+    The universal property of free $R$-module induces a unique $R$-linear map $\widetilde{j}:R^{\oplus}\to R[X]$ such that $j=\widetilde{j}\circ \iota$. And the universal property of free commutative $R$-algebra induces a unique $R$-algebra homomorphism $\widetilde{f}:R[X]\to A$ such that $f=\widetilde{f}\circ j$. Note $f=\varphi\circ \iota=\left(\widetilde{f}\circ \widetilde{j}\right)\circ \iota$. By the uniqueness of the universal property of $R^{\oplus}$, we have $\widetilde{f}\circ \widetilde{j}=\varphi$. Since $\widetilde{f}\circ \widetilde{j}$ is surjective, $\widetilde{f}$ must be surjective, which implies $A$ is a finite-type $R$-algebra.
+}
