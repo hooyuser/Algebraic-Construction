@@ -6,5 +6,6 @@
 *.synctex(busy)
 *.toc
 *.thm
+*.auxlock
 
 .history/*

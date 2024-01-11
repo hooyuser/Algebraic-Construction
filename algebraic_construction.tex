@@ -1,6 +1,9 @@
 \documentclass{report}
 
 \input{preamble}
+
+%\tikzexternalize % activate!
+
 \usepackage{chemfig}
 \usepackage{relsize}
 \usepackage{multirow}
@@ -43,8 +46,16 @@
     }
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\bld}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\spec}{\operatorname{Spec}}
+\newcommand{\midv}{\,\middle\vert\,}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Start document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+\begin{titlepage}
 \begin{center}
 	~\\
 	\vspace{6em}
@@ -59,6 +70,7 @@
 	\vspace{5in}
 	{\large Latest Update: \today}
 \end{center}
+\end{titlepage}
 
 \makeatletter
 \MHInternalSyntaxOn
@@ -74,12 +86,11 @@
   \kern-\wd0 \lower.55ex\box0}}
 \MHInternalSyntaxOff
 \makeatother
-\newcommand{\spec}{\operatorname{Spec}}
-\newcommand{\midv}{\,\middle\vert\,}
+
 \newpage
 % table of contents
 \tableofcontents
-
+\thispagestyle{empty}
 % Your document content here
 
 \chapter*{Notation Conventions}
@@ -106,6 +117,8 @@ We use sans-serif font for categories. Some common categories are
 
 
 \chapter{Set Theory}
+\thispagestyle{empty}
+\setcounter{page}{1}
 \section{Set}
 \subsection{Basic Operations}
 \dfn{Family of Sets}{
@@ -523,13 +536,39 @@ We can form the comma category $(S\downarrow T)$ as follows:
             S\left(A^{\prime}\right) \arrow[r, "h^{\prime}"'] \& T\left(B^{\prime}\right)
             \end{tikzcd}
     \]
-
-
     Morphisms are composed by taking $\left(f^{\prime}, g^{\prime}\right) \circ(f, g)$ to be $\left(f^{\prime} \circ f, g^{\prime} \circ g\right)$, whenever the latter expression is defined. The identity morphism on an object $(A, B, h)$ is $\left(\operatorname{id}_A, \operatorname{id}_B\right)$.
 \end{itemize}
 }
+\dfn{Comma Category with Constant Functor from $\mathsf{1}$}{
+    Suupose $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories and $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. The comma category $(\Delta X\downarrow \mathsf{B})$ for the following pair of functors
+$$
+\mathsf{1} \xlongrightarrow{\Delta X} \mathsf{C} \xlongleftarrow{T} \mathsf{B}
+$$
+can be written as $\left(X\downarrow \mathsf{B}\right)$ for short. And morphisms in $\left(X\downarrow \mathsf{B}\right)$ can be simplified to
+commutative triangles
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+              \& T(B) \arrow[dd, "T(g)"]\\
+            X\arrow[ru, "h"]\arrow[rd, "h^{\prime}"']\& \\
+             \& T\left(B^{\prime} \right)
+            \end{tikzcd}
+    \]
+Similarly, the comma category $(\mathsf{A}\downarrow \Delta X)$ for the following pair of functors
+$$
+\mathsf{A} \xlongrightarrow{S} \mathsf{C} \xlongleftarrow{\Delta X} \mathsf{1}
+$$
+can be written as $\left(\mathsf{A}\downarrow X\right)$ for short. And morphisms in $\left(\mathsf{A}\downarrow X\right)$ can be simplified to
+commutative triangles
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            S(A) \arrow[rd, "h"] \arrow[dd, "S(f)"'] \& \\ 
+            \& X\\
+            S\left(A^{\prime}\right) \arrow[ru, "h^{\prime}"'] \& 
+            \end{tikzcd}
+    \]
+}
 \dfn{Slice Category}{
-    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} $\left(\mathsf{C} / X\right)$ is the comma category $(\mathrm{id}_{\mathsf{C}} \downarrow\Delta X)$, where functors are illustrated as follows
+    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} $\left(\mathsf{C} / X\right)$ is the comma category $(\mathrm{id}_{\mathsf{C}} \downarrow X)$, where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \mathsf{1} \arrow[l, "\Delta X"']
@@ -545,7 +584,7 @@ We can form the comma category $(S\downarrow T)$ as follows:
     \]
 }
 \dfn{Coslice Category}{
-    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(\Delta X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
+    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{1} \arrow[r, "\Delta X"] \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
@@ -555,7 +594,7 @@ We can form the comma category $(S\downarrow T)$ as follows:
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
               \& C \arrow[dd, "f"]\\
-            X\arrow[rd, "h"']\arrow[ru, "h^{\prime}"]\& \\
+            X\arrow[ru, "h"]\arrow[rd, "h^{\prime}"']\& \\
              \& C^{\prime} 
             \end{tikzcd}
     \]
@@ -585,7 +624,7 @@ We can form the comma category $(S\downarrow T)$ as follows:
 }
 
 \dfn[category_of_elements]{Category of Elements}{
-    Let $\mathsf{C}$ be a category and let $F: \mathsf{C} \rightarrow \mathsf{Set}$  be a  functor. The \textbf{category of elements of $F$} is the  the \hyperref[th:comma_category]{comma category} $\left(\Delta\{*\} \downarrow F\right)$
+    Let $\mathsf{C}$ be a category and let $F: \mathsf{C} \rightarrow \mathsf{Set}$  be a  functor. The \textbf{category of elements of $F$} is the  the \hyperref[th:comma_category]{comma category} $\left(\{*\} \downarrow F\right)$
     where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
@@ -1138,6 +1177,94 @@ The arrows between objects in a category are equivalent to the transformations b
     If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}\Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
 }
 \section{Adjoint Functor}
+\dfn{Adjoint Pair of Functors}{
+    An \textbf{adjoint pair of functors} is a tuple $\left(L,R,\varphi\right)$ consisting of a pair of functors $\begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[r, "L", bend left] \& \mathsf{D} \arrow[l, "R", bend left]
+        \end{tikzcd}$
+    and a natural isomorphism 
+    \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)"{name=A, above}, bend left] \arrow[r, "\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)"'{name=B, below}, bend right] \&[+50pt] \mathsf{Set}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\varphi", "\sim\hspace{1.5pt}"']
+            \end{tikzcd}
+    \]
+    which means for any $X\in \mathrm{Ob}(\mathsf{C})$ and $Y\in \mathrm{Ob}(\mathsf{D})$, there is a bijection
+    \begin{align*}
+        \varphi_{X,Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)\\
+        \Big(L(X)\xlongrightarrow{f}Y\Big)&\longmapsto \Big(X\xlongrightarrow{\tilde{f}}R(Y)\Big)
+    \end{align*}
+    natural in $X$ and $Y$. $L$ is called the \textbf{left adjoint} of $R$, and $R$ is called the \textbf{right adjoint} of $L$. We write $L\dashv R$ to denote that $L$ is left adjoint to $R$.
+}
+The naturality square of $\varphi$ means that for any morphism $g:X_2\to X_1$ in $\mathsf{C}$ and $h:Y_1\to Y_2$ in $\mathsf{D}$, the following diagram commutes
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathrm{Hom}_{\mathsf{D}}\left(L(X_1),Y_1\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{D}}\left(L(g){,}h\right)}"] \arrow[d, "\varphi_{X_1,Y_1}"', "\sim"] \&[+50pt] \mathrm{Hom}_{\mathsf{D}}\left(L(X_2),Y_2\right) \arrow[d, "\varphi_{X_2,Y_2}", "\sim"'] \\[+20pt]
+        \mathrm{Hom}_{\mathsf{C}}\left(X_1,R(Y_1)\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{C}}\left(g{,}R(h)\right)}"'] \& \mathrm{Hom}_{\mathsf{C}}\left(X_2,R(Y_2)\right)
+    \end{tikzcd}
+\]
+which in turn can be explicitly written as for any $f:L(X_1)\to Y_1$ in $\mathsf{D}$,
+\[
+    \varphi_{X_2,Y_2}\left(h\circ f\circ L(g)\right)=R(h)\circ\varphi_{X_1,Y_1}(f)\circ g.
+\]
+
+\dfn{Adjunction Unit and Counit}{
+Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors. The \textbf{adjunction unit} $\eta$ of this adjunction is a natural transformation
+\begin{center}
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"{name=A, above}, bend left=40] \arrow[r, "R\circ L"'{name=B, below}, bend right=40] 
+        \&[+25pt] \mathsf{C}
+        \arrow[Rightarrow, shorten <=3.5pt, shorten >=3.5pt, from=A.south-|B, to=B, "\eta"]
+    \end{tikzcd}
+    \hspace{3cm}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        \fill[fill=blue!20] (-2.5,0) rectangle (2.5,2.8);
+        \filldraw[fill=green!20] (-1,2) arc (180:360:1);
+        \fill[fill=green!20] (-1,2) rectangle (1,2.8);
+        \node[above=2pt] at (-1,2.8) {$F$};
+        \node[above=2pt] at (1,2.8) {$G$};
+        \node[above=2pt] at (0,1) {$\eta$};
+        \draw[fill=black] (0, 1) circle (0.07);
+        \draw (-1,2) -- (-1,2.8);
+        \draw (1,2) -- (1,2.8);
+    \end{tikzpicture}
+\end{center}
+defined by $\eta_X:=\varphi_{X,L(X)}(\mathrm{id}_{L(X)})$ for any $X\in \mathrm{Ob}(\mathsf{C})$, where $\varphi_{X,L(X)}$ is the natural bijection
+$$
+\begin{aligned}
+    \varphi_{X,L(X)}:\operatorname{Hom}_{\mathsf{D}}\left(L(X), L(X)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(X, RL(X)) \\
+\operatorname{id}_{F X} & \longmapsto \eta_X 
+\end{aligned}
+$$
+The \textbf{adjunction counit} $\varepsilon$ of this adjunction is a natural transformation
+\begin{center}
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{D} \arrow[r, "\scalebox{1.2}{$L\circ R$}"{name=A, above}, bend left=40] \arrow[r, "\scalebox{1.2}{$\mathrm{id}_{\mathsf{D}}$}"'{name=B, below}, bend right=40] 
+        \&[+25pt] \mathsf{D}
+        \arrow[Rightarrow, shorten <=3.5pt, shorten >=3.5pt, from=A.south-|B, to=B, "\varepsilon"]
+    \end{tikzcd}
+    \hspace{3cm}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        \fill[fill=blue!20] (-2.5,0) rectangle (2.5,2.8);
+        \filldraw[fill=green!20] (-1,2) arc (180:360:1);
+        \fill[fill=green!20] (-1,2) rectangle (1,2.8);
+        \node[above=2pt] at (-1,2.8) {$F$};
+        \node[above=2pt] at (1,2.8) {$G$};
+        \node[above=2pt] at (0,1) {$\eta$};
+        \draw[fill=black] (0, 1) circle (0.07);
+        \draw (-1,2) -- (-1,2.8);
+        \draw (1,2) -- (1,2.8);
+    \end{tikzpicture}
+\end{center}
+}
+\pf{
+    The naturality square of $\eta$ means that for any morphism $g:X_1\to X_2$ in $\mathsf{C}$, the following diagram commutes
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        X_1 \arrow[d, "{\eta_{X_1}}"'] \arrow[r, "g"] \&[+50pt]X_2\arrow[d, "{\eta_{X_2}}"]    \\[+20pt]
+         R(L(X_1))\arrow[r, "R(L(g))"']\& R(L(X_2))
+    \end{tikzcd}
+\] 
+}
 \section{Monoidal Category}
 \dfn{Monoidal Category}{
     A monoidal category is a category $\mathsf{V}$ equipped with
@@ -1157,7 +1284,7 @@ The arrows between objects in a category are equivalent to the transformations b
         \[
             \begin{tikzcd}[ampersand replacement=\&]
                 \mathsf{V}\times\mathsf{V}\times\mathsf{V} \arrow[r, "(-\otimes-)\otimes-"{name=A, above}, bend left] \arrow[r, "-\otimes(-\otimes-)"'{name=B, below}, bend right] \&[+30pt] \mathsf{V}
-                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "a"]
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "a", "\sim\hspace{1pt}"']
             \end{tikzcd}
         \]
         \item Unit object: an object $1\in \mathrm{Ob}(\mathsf{V})$ 
@@ -1471,6 +1598,30 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
     w_1\cdot w_2 = \rho(w_1\diamond w_2).    
     \]
     The identity element is the empty word. The inverse of a word is obtained by reversing the order of the letters and replacing each letter by its inverse.
+}
+
+\prop{Free-Forgetful Adjunction}{
+    The free group functor $\mathrm{Free}_{\mathsf{Grp}}$ is left adjoint to the forgetful functor $U:\mathsf{Grp}\to \mathsf{Set}$
+    $$
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{Set} \arrow[rr, "\mathrm{Free}_{\mathsf{Grp}}", bend left] \&[-10pt]\bot\&[-10pt] \mathsf{Grp} \arrow[ll, "U", bend left]
+        \end{tikzcd}
+        $$
+    The adjunction isomorphism is given by
+    \begin{align*}
+        \varphi_{S,G}:\mathrm{Hom}_{\mathsf{Grp}}(\mathrm{Free}_{\mathsf{Grp}}(S),G)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{Set}}(S,U(G))\\
+        g&\longmapsto g\circ \iota
+    \end{align*}
+}
+\pf{
+    First we show that $\varphi_{S,G}$ is injective. Suppose $g_1,g_2:\mathrm{Free}_{\mathsf{Grp}}(S)\to G$ are two group homomorphisms such that $g_1\circ \iota=g_2\circ \iota$. By the universal property of free group, we have $g_1=g_2$. Then we show that $\varphi_{S,G}$ is surjective. Suppose $f:S\to U(G)$ is a function. By the universal property there exists a group homomorphism $\widetilde{f}:\mathrm{Free}_{\mathsf{Grp}}(S)\to G$ such that $\varphi_{S,G}(\widetilde{f})=\widetilde{f}\circ \iota=f$. Finally, we show that $\varphi_{S,G}$ is natural in $S$ and $G$. Suppose $h:S_1\to S_2$ is a function and $q:G_1\to G_2$ is a group homomorphism. Then we can check that for any $g\in \mathrm{Hom}_{\mathsf{Grp}}(\mathrm{Free}_{\mathsf{Grp}}(S_2),G_2)$,
+    \begin{align*}
+        \varphi_{S_1,G_1}(q\circ g\circ \iota_{S_1})&=(q\circ g\circ \iota_{S_1})\circ \iota_{S_1}\\
+        &=q\circ g\circ (\iota_{S_1}\circ \iota_{S_1})\\
+        &=q\circ g\circ \iota_{S_2}\\
+        &=\varphi_{S_2,G_2}(g\circ \iota_{S_2}).
+    \end{align*}
+
 }
 
 \subsection{Inverse Limit}
@@ -2670,6 +2821,7 @@ It now just remains to check that $I \neq A$. But $1 \notin J$ for each $J \in \
         \end{gathered}
         $$
         \item $I(J K)=(I J) K$
+        \item $(a)^n=(a^n)$
         \item $I^0 \supseteq \sqrt{I} \supseteq I \supseteq I^2 \supseteq I^3 \supseteq \cdots$
         \item $\sqrt{\sqrt{I}} = \sqrt{I}$,
         \item $\sqrt{I^n}=\sqrt{I}$, $\sqrt{I J}=\sqrt{I \cap J}=\sqrt{I} \cap \sqrt{J}$
@@ -2678,6 +2830,7 @@ It now just remains to check that $I \neq A$. But $1 \notin J$ for each $J \in \
 \proof{
     \begin{enumerate}[(i)]
         \item Since $\{ab\mid a\in I,b\in J\}\subseteq I\cap J$, we see $IJ=\left(\{ab\mid a\in I,b\in J\}\right)\subseteq I\cap J$. Also we can check $I \cap J \subseteq I \cup J\subseteq (I \cup J)=I+J$.
+        \item[(vi)] If $x\in(a)^n$, then $x=r_1(r_2a)^n=r_1r_2^na^n\in(a^n)$. If $y\in(a^n)$, then $y=ra^n\in(a)^n$.
     \end{enumerate}
 }
 
@@ -2711,7 +2864,7 @@ It now just remains to check that $I \neq A$. But $1 \notin J$ for each $J \in \
 
 
 \prop{Properties of Radical Ideal}{
-    \begin{enumerate}
+    \begin{enumerate}[(i)]
         \item For any ideal $I$, $\sqrt{0}\subseteq \sqrt{I}$.
         \item $\sqrt{I}$ is the smallest radical ideal containing $I$.
         \item $\sqrt{\mathfrak{p}^n}=\sqrt{\mathfrak{p}}=\mathfrak{p}$ for any prime ideal $\mathfrak{p}$, which means prime ideals are radical.
