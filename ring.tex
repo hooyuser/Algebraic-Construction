@@ -1,0 +1,189 @@
+
+\chapter{Ring}
+\section{Basic Concepts}
+\dfn{Ring}{
+    A \textbf{ring} is a set $R$ together with two binary operations $+$ and $\cdot$ on $R$ such that
+    \begin{enumerate}[(i)]
+        \item $(R,+)$ is an abelian group.
+        \item $(R,\cdot)$ is a monoid.
+        \item $\cdot$ is distributive over $+$,
+        \begin{align*}
+            a\cdot(b+c)=a\cdot b+a\cdot c\\
+            (a+b)\cdot c=a\cdot c+b\cdot c
+        \end{align*}
+    \end{enumerate}
+}
+A ring is a monoid object in the category $\mathsf{Ab}$. In other words, a ring is an $\mathsf{Ab}$-enriched category with only one object.\\
+A ring $R$ is an $R$-module over itself.\\
+A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.
+\dfn{Unit Group of a Ring}{
+    Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$.
+}
+Next we define the morphisms in the category $\mathsf{Ring}$.
+\dfn{Ring Homomorphism}{
+    Let $R$, $S$ be rings. A \textbf{ring homomorphism} from $R$ to $S$ is a map $f:R\to S$ such that
+    \begin{enumerate}[(i)]
+        \item $f(a+b)=f(a)+f(b)$ for all $a,b\in R$.
+        \item $f(a\cdot b)=f(a)\cdot f(b)$ for all $a,b\in R$.
+        \item $f(1_R)=1_S$.
+    \end{enumerate}
+}
+
+
+
+\dfn{Zero Divisor}{
+    Assume that $a$ is an element of a ring $R$. 
+    \begin{itemize}
+        \item $a$ is called a \textbf{left zero divisor} if there exists a nonzero $x$ in $R$ such that $ax = 0$.
+        \item $a$ is called a \textbf{right zero divisor} if there exists a nonzero $x$ in $R$ such that $xa = 0$.
+        \item $a$ is called a \textbf{zero divisor} if there exists a nonzero $x$ in $R$ such that $ax = xa = 0$.
+    \end{itemize}
+}
+\dfn{Ideal}{
+    Let \( R \) be a ring and \( I \subseteq R \) be an additive subgroup.
+    \begin{itemize}
+        \item \textbf{Left ideal}: If for every \( r \in R \), \( rI \subseteq I \), then \( I \) is called a left ideal of \( R \).
+        \item \textbf{Right ideal}: If for every \( r \in R \), \( Ir \subseteq I \), then \( I \) is called a right ideal of \( R \).
+        \item \textbf{Two-sided ideal}: If \( I \) is both a left and a right ideal, then it is called a two-sided ideal.
+    \end{itemize}
+
+A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called a \textbf{proper ideal}. In commutative rings, left and right ideals are the same and are simply called ideals.
+}
+\dfn{Kernel of a Ring Homomorphism}{
+    Let $f:R\to S$ be a ring homomorphism. The \textbf{kernel} of $f$ is the set
+    \[
+        \ker f=f^{-1}(0_S)=\{r\in R\mid f(r)=0_S\}.
+    \]
+}
+
+\dfn{Reduced Ring}{
+    A ring $R$ is called \textbf{reduced} if it has no nonzero nilpotent elements, or equivalently, if for any $x\in R$, $x^2=0\implies x=0$.
+}
+
+\prop{Examples of Reduced Ring}{
+    \begin{enumerate}[(i)]
+        \item Subrings, products, and localizations of reduced rings are again reduced rings.
+        \item Every integral domain is reduced.
+        \item $\mathbb{Z}/n\mathbb{Z}$ is reduced if and only if $n=0$ or $n$ is square-free.
+    \end{enumerate}
+}
+
+\dfn{Local Ring}{
+    A ring $R$ is called \textbf{local} if it has a unique maximal ideal.
+}
+\section{Construction}
+\subsection{Initial Object and Terminal Object}
+\prop{Initial Object in $\mathsf{Ring}$}{
+    The ring $\mathbb{Z}$ is the initial object in $\mathsf{Ring}$. That is, for any ring $R$, there exists a unique ring homomorphism
+    \begin{align*}
+        \varphi:\mathbb{Z}&\longrightarrow R\\
+        n&\longmapsto n\cdot 1_R
+    \end{align*}
+}
+\dfn{Characteristic of a Ring}{
+    Let $R$ be a ring and $\varphi:\mathbb{Z}\to R$ be the unique ring homomorphism. Then $\mathrm{\varphi}\cong \mathbb{Z}/n\mathbb{Z}$, where $n=\in\mathbb{N}$.
+    The \textbf{characteristic} of $R$ is defined to be $n$, denoted by $\mathrm{char}(R)$.
+
+    Equivalently, $\mathrm{char}(R)$ is the smallest positive integer $n$ such that $n\cdot 1_R=0_R$ if such an integer exists. Otherwise, the characteristic of $R$ is $0$.
+}
+\prop{Terminal Object in $\mathsf{Ring}$}{
+    The ring $\mathbb{Z}$ is the initial object in $\{0\}$.
+}
+Since the forgetful functor $\mathsf{Ring}\to\mathsf{Set}$ is a right adjoint, it preserves all limits. Hence the underlying set of the terminal object in $\mathsf{Ring}$ is the terminal object in $\mathsf{Set}$, which is the singleton set $\{*\}$.
+
+\subsection{Quotient Object}
+\dfn{Quotient Ring}{
+    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Equip the additive group \( R / I \) with the following multiplication operation:
+\[
+(r+I) \cdot (s+I) := (rs + I), \quad r, s \in R .
+\]
+Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R \) modulo \( I \)}. The quotient map \( R \rightarrow R / I \) is called the quotient homomorphism.
+}
+\prop{Universal Property of Quotient Rings}{
+    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Then the quotient map $\pi:R\to R/I$ is a surjective ring homomorphism with kernel $I$. Moreover, for any ring $S$ and any ring homomorphism $f:R\to S$ such that $I\subseteq\ker f$, there exists a unique ring homomorphism $\bar{f}:R/I\to S$ such that the following diagram commutes
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        R \arrow[r, "f"] \arrow[d, "\pi"'] \& S \\
+        R/I \arrow[ru, "\exists!\bar{f}"'] \&  
+    \end{tikzcd}
+    \] 
+}
+\prop{Kernel of a Ring Homomorphism is a Two-sided Ideal}{
+    Let $f:R\to S$ be a ring homomorphism. Then $\ker f$ is an two-sided ideal of $R$.
+}
+\prop{Image of a Ring Homomorphism is a Subring}{
+    Let $f:R\to S$ be a ring homomorphism. Then $\mathrm{im}f$ is a subring of $S$.
+}
+\thm{The Fundamental Theorem of Ring Homomorphisms}{
+    Let $f:R\to S$ be a ring homomorphism. Then $R/\ker f\cong \mathrm{im}f$.
+}
+\subsection{Graded Object}
+\dfn{$I$-Graded Ring (Internal Definition)}{
+    Let $(I,+)$ be a monoid. An \textbf{$I$-graded ring} is a ring $(R,+,\cdot)$ together with a family of subgroups $(R_i)_{i\in I}$ of $(R,+)$ such that
+    \begin{enumerate}[(i)]
+        \item $R=\bigoplus_{i\in I}R_i$.
+        \item $R_iR_j\subseteq R_{i+j}$ for all $i,j\in I$.
+    \end{enumerate}
+    Elements in $R_i-\{0\}$ are called \textbf{homogeneous elements of degree $i$}.
+}
+\dfn{Graded Ideal}{
+    Let $R$ be an $I$-graded ring with grading $(R_i)_{i\in I}$. An ideal $J$ of $R$ is called \textbf{graded} if $J=\bigoplus_{i\in I}J\cap R_i$.
+}
+\prop{Homogeneous Elements Generate Graded Ideal}{
+    Let $R$ be a $I$-graded ring with grading $(R_i)_{i\in I}$ and $\mathfrak{a}$ be a two-sided ideal of $R$. Then $\mathfrak{a}$ is a graded ideal if and only if $\mathfrak{a}$ is generated by homogeneous elements.
+}
+\pf{
+If $\mathfrak{a}$ is a graded ideal, then 
+\[
+    \mathfrak{a}=\bigoplus_{i\in I}\mathfrak{a}\cap R_i=\left\langle \bigcup_{i\in I}\left( \mathfrak{a}\cap R_i\right)\right\rangle,
+\]
+which means $\mathfrak{a}$ is generated by homogeneous elements.\\
+
+Assume $\mathfrak a$ is generated by homogeneous elements, say $\mathfrak a = \left\langle\, \bigcup_{i\in I}H_i \right\rangle$, where $H_i\subseteq R_i$. Let $H=\bigcup_{i\in I}H_i $. Then for any $a\in\mathfrak a$, it can be written as
+\[
+a=\sum_{k=1}^nr_k h_ks_k.
+\]
+where $r_k,s_k\in R$, $h_k\in H$. Assume that $r_k,s_k$ have the following decomposition
+\begin{align*}
+    r_k=\sum_{i\in I}r_{k,i},\quad r_{k,i}\in R_i,\\
+    s_k=\sum_{j\in I}s_{k,j},\quad s_{k,j}\in R_j,
+\end{align*}
+Then we have
+\[
+a=\sum_{k=1}^n\left(\sum_{i\in I}r_{k,i}\right)h_k\left(\sum_{j\in I}s_{k,j}\right)=\sum_{k=1}^n\sum_{i\in I}\sum_{j\in I} r_{k,i}h_ks_{k,j}.
+\]
+Suppose $h_k\in R_m$, then $r_{k,i}h_ks_{k,j}\in R_{i+m+j}$. Also we note $h_k\in \mathfrak{a}$ implies $r_{k,i}h_ks_{k,j}\in \mathfrak{a}$. Hence 
+\[
+a=\sum_{k=1}^n\sum_{i\in I}\sum_{j\in I} r_{k,i}h_ks_{k,j}\in \sum_{i\in I} \mathfrak{a} \cap R_i=\bigoplus_{i\in I}\mathfrak{a}\cap R_i.
+\]
+It is clear that $\bigoplus\limits_{i\geq 0}(\mathfrak a\cap R_i) \subseteq \mathfrak a $. Therefore, we show that
+\[
+    \mathfrak a=\bigoplus_{i\geq 0}(\mathfrak a\cap R_i) , 
+\]
+which means $\mathfrak{a}$ is a graded ideal.
+}
+
+\section{Category Properties}
+The category Ring is both complete and cocomplete.
+
+\prop{Equivalence Chracaterization of Monomorphisms in $\mathsf{Ring}$}{
+    Let $f:R\to S$ be a ring homomorphism. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is a monomorphism.
+        \item $f$ is injective.
+        \item $\ker f=\{0_R\}$.
+    \end{enumerate}
+}
+
+\prop{Sujective Ring Homomorphisms are Epimorphisms}{
+    Every surjective homomorphism of rings is an epimorphism. However, the converse is not true in general.
+}
+
+\prop{Equivalence Chracaterization of Isomorphisms in $\mathsf{Ring}$}{
+    Let $f:R\to S$ be a ring homomorphism. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is an isomorphism.
+        \item $f$ is bijective.
+        \item $\ker f=\{0_R\}$ and $\mathrm{im}f=S$. 
+    \end{enumerate}
+}
