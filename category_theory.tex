@@ -1,0 +1,1129 @@
+
+\chapter{Category Theory}
+\section{Category}
+\dfn{Small Category and Locally Small Category}{
+    Suppose $\mathscr{U}$ is a Grothendieck universe and $\mathsf{C}$ is a category. We say
+    \begin{itemize}
+        \item $\mathsf{C}$ is \textbf{locally $\mathscr{U}$-small} if $\mathrm{Hom}_{\mathsf{C}}(X,Y)$ is a $\mathscr{U}$-small set for all $X,Y\in \mathrm{Ob}(\mathsf{C})$.
+        \item $\mathsf{C}$ is \textbf{$\mathscr{U}$-small} if $\mathsf{C}$ is locally $\mathscr{U}$-small and $\mathrm{Ob}(\mathsf{C})$ is a \hyperref[th:small_set]{$\mathscr{U}$-small set},
+    \end{itemize}
+    We can simply say $\mathsf{C}$ is \textbf{small} or \textbf{locally small} if the choice of $\mathscr{U}$ can be understood from the context.
+}
+\dfn{Isomorphism of Categories}{
+    Suppose $\mathsf{C}$ and $\mathsf{D}$ are two categories. A \textbf{functor} $F:\mathsf{C}\to \mathsf{D}$ is called an \textbf{isomorphism} if there exists a functor $G:\mathsf{D}\to \mathsf{C}$ such that $F\circ G=\mathrm{id}_{\mathsf{D}}$ and $G\circ F=\mathrm{id}_{\mathsf{C}}$. In this case, we say $\mathsf{C}$ and $\mathsf{D}$ are \textbf{isomorphic} and write $\mathsf{C}\cong \mathsf{D}$.
+}
+\dfn{Section of a Morphism}{
+    A section of a morphism $f: E \rightarrow X$ in some category is a right-inverse: a morphism $\sigma: X \rightarrow E$ such that
+$$
+f \circ \sigma: X \xrightarrow{\sigma} E \xrightarrow{f} X
+$$
+equals the identity morphism on $X$.
+}
+\dfn{Category of Categories}{
+    $\mathscr{U}$-$\mathsf{Cat}$ is defined as a category whose objects are all $\mathscr{U}$-small categories and morphisms are all functors between small categories.\\
+    $\mathscr{U}$-$\mathsf{CAT}$ is defined as a category whose objects are all locally $\mathscr{U}$-small categories and morphisms are all functors between locally small categories. 
+}
+\prop{Size of Functor Category}{
+    Suppose $\mathsf{C}$, $\mathsf{D}$ are two categories. 
+    \begin{itemize}
+        \item If $\mathsf{C}$ and $\mathsf{D}$ are small, then $\left[\mathsf{C},\mathsf{D}\right]$ is small.
+        \item If $\mathsf{C}$ is small and $\mathsf{D}$ is locally small, then $\left[\mathsf{C},\mathsf{D}\right]$ is locally small.
+        \item If $\mathsf{C}$ and $\mathsf{D}$ are locally small, then $\left[\mathsf{C},\mathsf{D}\right]$ is generally not locally small.
+    \end{itemize}
+}
+
+Suppose $\mathsf{C}_i$ and $\mathsf{D}_i$ are locally $\mathscr{U}_i$-small categories, and that $\mathsf{c}_i$ and $\mathsf{d}_i$ are $\mathscr{U}_i$-small categories. We have the following table
+\begin{table}[h]
+    \centering
+    \begin{tabular}{P{2cm}|P{2cm}|P{2cm}|P{2cm}}
+        \toprule
+        \textbf{Category}&$\mathscr{U}_1$-$\mathsf{Cat}$ & $\mathscr{U}_1$-$\mathsf{CAT}$ & $\mathscr{U}_2$-$\mathsf{CAT}$ \\
+        \midrule
+        \midrule
+        \textbf{Object}&$ [\mathsf{c_1},\mathsf{d_1}]$& $\mathscr{U}_1$-$\mathsf{Set}$ $\mathscr{U}_1$-$\mathsf{Cat}$ $[\mathsf{c_1},\mathsf{D_1}]$& $\mathscr{U}_2$-$\mathsf{Set}$ $[\mathsf{C_1},\mathsf{D_1}]$ \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+\dfn{Opposite Category}{
+    Suppose $\mathsf{C}$ is a category. The \textbf{opposite category} $\mathsf{C}^{\mathrm{op}}$ is defined as follows
+    \begin{itemize}
+        \item Objects: $\mathrm{Ob}(\mathsf{C}^{\mathrm{op}})=\mathrm{Ob}(\mathsf{C})$
+        \item Morphisms: $\mathrm{Hom}_{\mathsf{C}^{\mathrm{op}}}(X,Y)=\mathrm{Hom}_{\mathsf{C}}(Y,X)$
+        \item Composition: $f\circ_{\mathsf{C}^{\mathrm{op}}}g=g\circ_{\mathsf{C}}f$
+        \item Identity: $\mathrm{id}_{\mathsf{C}^{\mathrm{op}}}=\mathrm{id}_{\mathsf{C}}$
+    \end{itemize}
+}
+It is easy to see that $\left(\mathsf{C}^{\mathrm{op}}\right)^{\mathrm{op}}=\mathsf{C}$.
+\dfn{Opposite Functor}{
+    Suppose $\mathsf{C}$ and $\mathsf{D}$ are two categories and $F:\mathsf{C}\to \mathsf{D}$ is a functor. The \textbf{opposite functor} $F^{\mathrm{op}}:\mathsf{C}^{\mathrm{op}}\to \mathsf{D}^{\mathrm{op}}$ is defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}^{\mathrm{op}}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{D}^{\mathrm{op}}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            X  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]F(X)\arrow[dd, "F(f)"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "F^{\mathrm{op}}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            Y  \& \& \& F(Y)
+        \end{tikzcd}
+    \]
+}
+It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
+\ex{}{
+    Define a functor ${}^{\mathrm{op}}:\mathsf{CAT}\to \mathsf{CAT}$ as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{CAT}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{CAT}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            \mathsf{C}  \arrow[dd, "F"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\mathsf{C}^{\mathrm{op}}\arrow[dd, "F^{\mathrm{op}}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "{}^{\mathrm{op}}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            \mathsf{D}  \& \& \& \mathsf{D}^{\mathrm{op}}
+        \end{tikzcd}
+    \]
+    The functor ${}^{\mathrm{op}}$ is an involution, i.e. ${}^{\mathrm{op}}\circ {}^{\mathrm{op}}=\mathrm{id}_{\mathsf{CAT}}$. Hence ${}^{\mathrm{op}}$ is an automorphism of $\mathsf{CAT}$.
+}
+
+\dfn{$\mathrm{Hom}$ Functors}{
+    Let $\mathsf{C}$ be a locally small category. We can define a functor $\mathrm{Hom}_{\mathsf{C}}\left(-{,}-\right)$ as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}^{\mathrm{op}}\times \mathsf{C}\&[-25pt]\&[+30pt]\&[-25pt] \mathsf{Set}\&[-25pt]\&[-25pt] \\ [-15pt] 
+            (X_1,Y_1)  \arrow[dd, "\left(f{,} g\right)"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\mathrm{Hom}_{\mathsf{C}}\left(X_1,Y_1\right)\arrow[dd, "f^*\circ g_*"{name=R}] \&\ni\& h\arrow[dd,mapsto]\\ [-8pt] 
+            \&  \phantom{.}\arrow[r, "\mathrm{Hom}_{\mathsf{C}}\left(-{,}-\right)", squigarrow]\&\phantom{.}  \&   \\[-8pt] 
+            (X_2,Y_2)  \& \& \& \mathrm{Hom}_{\mathsf{C}}\left(X_2,Y_2\right)\& \ni \& g\circ h\circ f
+        \end{tikzcd}
+    \]
+    By partial application, we obtain the following two functors: 
+    \begin{itemize}
+        \item $\mathrm{Hom}_{\mathsf{C}}\left(X{,}-\right):\mathsf{C}\to  \mathsf{Set}$
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                 \mathsf{C}\&[-25pt]\&[+30pt]\&[-25pt] \mathsf{Set}\&[-25pt]\&[-25pt] \\ [-15pt] 
+                Y_1  \arrow[dd, "g"{name=L, left}] 
+                \&[-25pt] \& [+10pt] 
+                \& [-30pt]\mathrm{Hom}_{\mathsf{C}}\left(X,Y_1\right)\arrow[dd, "g_*"{name=R}] \& \ni \& h\arrow[dd,mapsto]\\ [-8pt] 
+                \&  \phantom{.}\arrow[r, "\mathrm{Hom}_{\mathsf{C}}\left(X{,}-\right)", squigarrow]\&\phantom{.}  \&   \\[-8pt] 
+                Y_2  \& \& \& \mathrm{Hom}_{\mathsf{C}}\left(X,Y_2\right)\& \ni \&g\circ h
+            \end{tikzcd}
+        \]
+        where $g_*$ is called \textbf{pushforward by $g$}.
+        \item $\mathrm{Hom}_{\mathsf{C}}\left(-{,}Y\right):\mathsf{C}^{\mathrm{op}}\to  \mathsf{Set}$
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                 \mathsf{C}^{\mathrm{op}}\&[-25pt]\&[+30pt]\&[-25pt] \mathsf{Set}\&[-25pt]\&[-25pt] \\ [-15pt] 
+                X_1  \arrow[dd, "f"{name=L, left}] 
+                \&[-25pt] \& [+10pt] 
+                \& [-30pt]\mathrm{Hom}_{\mathsf{C}}\left(X_1,Y\right)\arrow[dd, "f^*"{name=R}] \& \ni \& h\arrow[dd,mapsto]\\ [-8pt] 
+                \&  \phantom{.}\arrow[r, "\mathrm{Hom}_{\mathsf{C}}\left(-{,}Y\right)", squigarrow]\&\phantom{.}  \&   \\[-8pt] 
+                X_2  \& \& \& \mathrm{Hom}_{\mathsf{C}}\left(X_2,Y\right)\& \ni \& h\circ f
+            \end{tikzcd}
+        \]
+        where $f^*$ is called \textbf{pullback by $f$}.
+    \end{itemize}
+}
+\prop{Natural Isomorphism $\left[\mathsf{C},\mathsf{D}\right]^{\mathrm{op}}\cong \left[\mathsf{C}^{\mathrm{op}},\mathsf{D}^{\mathrm{op}}\right]$}{
+    We have a natural isomorphism $\left[\mathsf{C},\mathsf{D}\right]^{\mathrm{op}}\cong \left[\mathsf{C}^{\mathrm{op}},\mathsf{D}^{\mathrm{op}}\right]$. The isomorphism is given by the functor $O_{\mathsf{C},\mathsf{D}}:\left[\mathsf{C},\mathsf{D}\right]^{\mathrm{op}}\to \left[\mathsf{C}^{\mathrm{op}},\mathsf{D}^{\mathrm{op}}\right]$ defined as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \left[\mathsf{C},\mathsf{D}\right]^{\mathrm{op}}\&[-25pt]\&[+10pt]\&[-30pt]\left[\mathsf{C}^{\mathrm{op}},\mathsf{D}^{\mathrm{op}}\right]\&[-5pt]\&[-10pt] \\ [-15pt] 
+            F  \arrow[dd, Rightarrow, "\theta"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]F^{\mathrm{op}}\arrow[dd, Rightarrow, "\theta^{\mathrm{op}}"{name=R}]\&\&F^{\mathrm{op}}(X) \arrow[dd, "\theta_X"']\arrow[rr, "F^{\mathrm{op}}(f)"]\&\& F^{\mathrm{op}}(Y)\arrow[dd, "\theta_Y"]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "O_{\mathsf{C},\mathsf{D}}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            G \& \& \& G^{\mathrm{op}}\&\&G^{\mathrm{op}}(X) \arrow[rr, "G^{\mathrm{op}}(f)"']
+             \&\& G^{\mathrm{op}}(Y)
+        \end{tikzcd}
+    \]
+    The inverse of $O_{\mathsf{C},\mathsf{D}}$ is $O^{\mathrm{op}}_{\mathsf{C}^{\mathrm{op}},\mathsf{D}^{\mathrm{op}}}$. The naturality means the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=3em]
+            \left[\mathsf{C}_1,\mathsf{D}_1\right]^{\mathrm{op}}\arrow[rr, "O_{\mathsf{C}_1,\mathsf{D}_1}"]\arrow[d, "(S^*T_*)^{\mathrm{op}}"{name=L, left}] 
+            \& \&\left[\mathsf{C}_1^{\mathrm{op}},\mathsf{D}_1^{\mathrm{op}}\right]\arrow[d, "\left(S^{\mathrm{op}}\right)^*\circ\left(T^{\mathrm{op}}\right)_*"{name=R}] \\ 
+            \left[\mathsf{C}_2,\mathsf{D}_2\right]^{\mathrm{op}}\arrow[rr, "O_{\mathsf{C}_2,\mathsf{D}_2}"]
+            \& \&\left[\mathsf{C}_2^{\mathrm{op}},\mathsf{D}_2^{\mathrm{op}}\right]
+        \end{tikzcd}
+    \]
+}
+
+\dfn{Product Category}{
+    Let $\mathsf{C}$ and $\mathsf{D}$ be categories. The \textbf{product category} $\mathsf{C}\times \mathsf{D}$ is defined as follows
+    \begin{itemize}
+        \item Objects: $\mathrm{Ob}(\mathsf{C}\times \mathsf{D})=\mathrm{Ob}(\mathsf{C})\times \mathrm{Ob}(\mathsf{D})$
+        \item Morphisms: $\mathrm{Hom}_{\mathsf{C}\times \mathsf{D}}((C,D),(C',D'))=\mathrm{Hom}_{\mathsf{C}}(C,C')\times \mathrm{Hom}_{\mathsf{D}}(D,D')$
+        \item Composition: $(f',g')\circ (f,g)=(f'\circ f,g'\circ g)$
+        \item Identity: $\mathrm{id}_{(C,D)}=(\mathrm{id}_C,\mathrm{id}_D)$
+    \end{itemize}
+}
+
+
+\dfn{Zero Object}{
+    Let $\mathsf{C}$ be a category. An object $0\in \mathrm{Ob}(\mathsf{C})$ is called a \textbf{zero object} if it is both initial and terminal. In other words, $0$ is a zero object if for any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists unique morphisms $0\to X$ and $X\to 0$. These morphisms are the \textbf{zero morphisms} of $\mathsf{C}$.
+}
+
+\dfn[evaluation_functor]{Evaluation Functor}{
+    Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. The \textbf{evaluation functor} $\mathrm{ev}:\mathsf{A}\times\left[\mathsf{A},\mathsf{C}\right]\to \mathsf{C}$ is defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{A}\times\left[\mathsf{A},\mathsf{C}\right]\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            (X,F)  \arrow[dd, "f\times \theta"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]F(X)\arrow[dd, "\theta_Y\circ F(f)=G(f)\circ \theta_{X}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathrm{ev}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            (Y,G)  \& \& \& G(Y)
+        \end{tikzcd}
+        \]
+    From the following diagram, we can see that $\mathrm{ev}$ preserves composition.
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, background color=mydefinitbg,row sep=large]
+                F(X) \arrow[r, "F(f)"] \arrow[d, "\theta_X"'] \arrow[rd, "\mathrm{ev}(f\times\theta)" description]\& F(Y) \arrow[d, "\theta_Y"] \arrow[r, "F(g)"]                                                  \& F(Z) \arrow[d, "\theta_Z"] \\
+                G(X) \arrow[r, "G(f)"'] \arrow[d, "\eta_X"']                                                      \& G(Y) \arrow[r, "G(g)"] \arrow[d, "\eta_Y"'] \arrow[rd, "\mathrm{ev}(g\times\eta)" description]\& G(Z) \arrow[d, "\eta_Z"]   \\
+                H(X) \arrow[r, "H(f)"']                                                                           \& H(Y) \arrow[r, "H(g)"']                                                                        \& H(Z)                      
+                \end{tikzcd}
+    \]
+    If we fix $X\in \mathsf{A}$, then we have a functor $\mathrm{ev}_X:\left[\mathsf{A},\mathsf{C}\right]\to \mathsf{C}$ defined by $\mathrm{ev}_X(F)=F(X)$. This functor is called the \textbf{evaluation functor at $X$}.
+}
+\dfn{Constant Functor}{
+    Suppose $\mathsf{C}$, $\mathsf{D}$ be categories and $d\in \mathrm{Ob}(\mathsf{D})$. The \textbf{constant functor} $\Delta d:\mathsf{C}\to \mathsf{D}$ is defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{D}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            x  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]d\arrow[dd, "\mathrm{id}_{d}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\Delta d", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            y  \& \& \& d
+        \end{tikzcd}
+    \]
+}
+\dfn{Diagonal Functor}{
+    Suppose $\mathsf{J}$, $\mathsf{C}$ are categories. The \textbf{diagonal functor} $\Delta:\mathsf{C}\to [\mathsf{J},\mathsf{C}]$ is defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}\&[-25pt]\&[+10pt]\&[-30pt][\mathsf{J},\mathsf{C}]\&[-30pt]\&[-30pt] \&\&\&\\ [-15pt] 
+            x  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\Delta x\arrow[dd, Rightarrow, "f_*"{name=R}] \& \hspace{30pt}\& x\arrow[r, "\mathrm{id}_x"]\arrow[dd, "f"']\&x\arrow[dd, "f"]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\Delta", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            y  \& \& \& \Delta y\&\& y\arrow[r, "\mathrm{id}_y"']\&y
+        \end{tikzcd}
+    \]
+}
+\dfn[comma_category]{Comma Category}{
+    Suppose that $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories, and $S$ and $T$ (for source and target) are functors:
+$$
+\mathsf{A} \stackrel{S}{\longrightarrow} \mathsf{C} \stackrel{T}{\longleftarrow} \mathsf{B}
+$$
+We can form the comma category $(S\downarrow T)$ as follows:
+\begin{itemize}
+    \item The objects are all triples $(A, B, h)$ with $A\in\mathrm{Ob}(\mathsf{A})$, $B\in\mathrm{Ob}(\mathsf{B})$, and $h: S(A) \rightarrow T(B)$ a morphism in $\mathsf{C}$.
+    \item The morphisms from $(A, B, h)$ to $\left(A^{\prime}, B^{\prime}, h^{\prime}\right)$ are all pairs $(f, g)$ where $f: A \rightarrow A^{\prime}$ and $g: B \rightarrow B^{\prime}$ are morphisms in $\mathsf{A}$ and $\mathsf{B}$ respectively, such that the following diagram commutes:
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            S(A) \arrow[r, "h"] \arrow[d, "S(f)"'] \& T(B) \arrow[d, "T(g)"] \\
+            S\left(A^{\prime}\right) \arrow[r, "h^{\prime}"'] \& T\left(B^{\prime}\right)
+            \end{tikzcd}
+    \]
+    Morphisms are composed by taking $\left(f^{\prime}, g^{\prime}\right) \circ(f, g)$ to be $\left(f^{\prime} \circ f, g^{\prime} \circ g\right)$, whenever the latter expression is defined. The identity morphism on an object $(A, B, h)$ is $\left(\operatorname{id}_A, \operatorname{id}_B\right)$.
+\end{itemize}
+}
+\dfn{Comma Category with Constant Functor from $\mathsf{1}$}{
+    Suupose $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories and $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. The comma category $(\Delta X\downarrow \mathsf{B})$ for the following pair of functors
+$$
+\mathsf{1} \xlongrightarrow{\Delta X} \mathsf{C} \xlongleftarrow{T} \mathsf{B}
+$$
+can be written as $\left(X\downarrow \mathsf{B}\right)$ for short. And morphisms in $\left(X\downarrow \mathsf{B}\right)$ can be simplified to
+commutative triangles
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+              \& T(B) \arrow[dd, "T(g)"]\\
+            X\arrow[ru, "h"]\arrow[rd, "h^{\prime}"']\& \\
+             \& T\left(B^{\prime} \right)
+            \end{tikzcd}
+    \]
+Similarly, the comma category $(\mathsf{A}\downarrow \Delta X)$ for the following pair of functors
+$$
+\mathsf{A} \xlongrightarrow{S} \mathsf{C} \xlongleftarrow{\Delta X} \mathsf{1}
+$$
+can be written as $\left(\mathsf{A}\downarrow X\right)$ for short. And morphisms in $\left(\mathsf{A}\downarrow X\right)$ can be simplified to
+commutative triangles
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            S(A) \arrow[rd, "h"] \arrow[dd, "S(f)"'] \& \\ 
+            \& X\\
+            S\left(A^{\prime}\right) \arrow[ru, "h^{\prime}"'] \& 
+            \end{tikzcd}
+    \]
+}
+\dfn{Slice Category}{
+    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} $\left(\mathsf{C} / X\right)$ is the comma category $(\mathrm{id}_{\mathsf{C}} \downarrow X)$, where functors are illustrated as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \mathsf{1} \arrow[l, "\Delta X"']
+        \end{tikzcd}
+    \]
+    Morphims in $\left(\mathsf{C} / X\right)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            C \arrow[rd, "h"] \arrow[dd, "f"'] \& \\
+            \& X\\
+            C^{\prime} \arrow[ru, "h^{\prime}"'] \&
+            \end{tikzcd}
+    \]
+}
+\dfn{Coslice Category}{
+    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{1} \arrow[r, "\Delta X"] \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
+        \end{tikzcd}
+    \]
+    Morphims in $\left(X / \mathsf{C}\right)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+              \& C \arrow[dd, "f"]\\
+            X\arrow[ru, "h"]\arrow[rd, "h^{\prime}"']\& \\
+             \& C^{\prime} 
+            \end{tikzcd}
+    \]
+}
+
+\ex{$\mathsf{Disc}$ Functor}{
+    Given a set $X$, we can define a functor $\mathsf{Disc}:\mathsf{Set}\to \mathsf{Cat}$ as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Set}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Cat}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            X  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\mathsf{Disc}(X)\arrow[dd, "\mathsf{Disc}(f)"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathsf{Disc}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            Y  \& \& \& \mathsf{Disc}(Y)
+        \end{tikzcd}
+    \]
+    where $\mathsf{Disc}(X)$ is the discrete category with object set $\mathrm{Ob}\left(\mathsf{Disc}(X)\right)=X$ and morphism set 
+    \begin{align*}
+        \mathrm{Hom}_{\mathsf{Disc}(X)}(x,y)=\begin{cases}
+            \{\mathrm{id}_x\} & \text{if }x=y,\\
+            \varnothing & \text{if }x\neq y,
+        \end{cases}
+    \end{align*}
+    and $\mathsf{Disc}(f)$ is the functor defined by $\mathsf{Disc}(f)(x)=f(x)$ and $\mathsf{Disc}(f)(\mathrm{id}_x)=\mathrm{id}_{f(x)}$ for each $x\in X$.\\
+    It is easy to check that the functor $\mathsf{Disc}$ is fully faithful.
+}
+
+\dfn[category_of_elements]{Category of Elements}{
+    Let $\mathsf{C}$ be a category and let $F: \mathsf{C} \rightarrow \mathsf{Set}$  be a  functor. The \textbf{category of elements of $F$} is the  the \hyperref[th:comma_category]{comma category} $\left(\{*\} \downarrow F\right)$
+    where functors are illustrated as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{1} \arrow[r, "\Delta\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
+        \end{tikzcd}
+    \]
+    This category is denoted by $\int_\mathsf{C} F$ and can be explicitly described as follows
+    \begin{itemize}
+        \item Objects are pairs $(A, a)$ where $A \in \mathrm{Ob}(\mathsf{C})$ and $a \in F(A)$.
+        \item Morphisms $(A, a) \rightarrow(B, b)$ are arrows $f: A \rightarrow B$ of $\mathsf{C}$ such that $F(f)(a)=b$.
+    \end{itemize}
+
+    The category of elements of $F$ is naturally equipped with a projection functor $\pi: \int_\mathsf{C} F \rightarrow \mathsf{C}$ 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \int_\mathsf{C} F \&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            (A,a)  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]A\arrow[dd, "f"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\pi", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            (B,b)  \& \& \& B
+        \end{tikzcd}
+    \]
+}
+
+
+
+\section{Limit and Colimit}
+\dfn{Cone}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\Delta"] \& {[\mathsf{J},\mathsf{C}]} \& \mathsf{1} \arrow[l, "\Delta F"']
+        \end{tikzcd}
+    \]
+    The comma category $\left(\Delta \downarrow \Delta F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. 
+    \begin{itemize}
+        \item Objects: The objects in $\mathsf{Cone}(\textsf{C},F)$ are all natural transformations 
+        \[
+                \begin{tikzcd}[ampersand replacement=\&]
+                    \mathsf{J} \arrow[r, "\Delta C"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
+                    \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
+                \end{tikzcd}
+        \]
+        where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:\Delta C\Rightarrow F$ is called a \textbf{cone from $C$ to $F$} because it can be viewed as a family of morphisms $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \& C \arrow[ld, "h_i"'] \arrow[rd, "h_j"] \&      \\
+    F(i) \arrow[rr, "F(\lambda)"'] \&                                         \& F(j)
+    \end{tikzcd}
+    \]  
+    \item Morphisms: The morphisms in $\mathsf{Cone}(\textsf{C},F)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            \Delta C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_*"'] \& \\
+            \&  F\\
+            \Delta C' \arrow[ru, Rightarrow, "h^{\prime}"'] \&
+            \end{tikzcd}
+    \] 
+    Equivalently, a morphism from cone $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cone $\left(h_i':C'\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+             C \arrow[rd, "h_i"] \arrow[dd, "f"'] \& \\
+            \&  F(i)\\
+             C' \arrow[ru, "h^{\prime}_i"'] \&
+        \end{tikzcd}
+    \]
+    \end{itemize}
+}
+\dfn{Limit}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The \textbf{limit} of $F$, denoted by $\varprojlim F$, is the terminal object of $\mathsf{Cone}(\textsf{C},F)$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
+            \&   [-1.5em]                \&[-1em] C \arrow[rdd, draw=cyan, "h_j"] \arrow[ldd, draw=cyan, "h_i"'] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \& [-1em]                  \\[+0.2cm]
+            \&                   \& \varprojlim F\arrow[ld, draw=arrowBlue, shorten <=-3pt, "\phi_i" yshift=4.5pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "\phi_j"' yshift=4pt]               \&                   \\[-0.1cm]
+        \& F(i) \arrow[rr, "F(\lambda)"']\&   \& F(j)
+        \end{tikzcd}
+    \]
+}
+\dfn{Cocone}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+             \mathsf{1} \arrow[r, "\Delta F"] \& {[\mathsf{J},\mathsf{C}]} \&\mathsf{C} \arrow[l, "\Delta "']
+        \end{tikzcd}
+    \]
+    The comma category $\left(\Delta F \downarrow \Delta\right)$ is called the \textbf{cocone category from $F$ to $\textsf{C}$}, denoted by $\mathsf{Cocone}(F,\textsf{C})$. 
+    \begin{itemize}
+        \item Objects: The objects in $\mathsf{Cocone}(F,\textsf{C})$ are all natural transformations
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{J} \arrow[r, "F"{name=A, above}, bend left] \arrow[r, "\Delta C"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
+            \end{tikzcd}
+    \]
+    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:F\Rightarrow \Delta C$ is called a \textbf{cocone from $F$ to $C$} because it can be viewed as a family of morphisms $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \& C\&      \\
+F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                                         \& F(j) \arrow[lu, "h_j"'] 
+\end{tikzcd}
+\]    
+    \item Morphisms: The morphisms in $\mathsf{Cocone}(F,\textsf{C})$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            \&\Delta C \arrow[dd, Rightarrow, "f_*"]  \\
+            F \arrow[ru, Rightarrow, "h"]\arrow[rd, Rightarrow, "h^{\prime}"']\&  \\
+            \&\Delta C' 
+            \end{tikzcd}
+    \]
+    \end{itemize}
+    Equivalently, a morphism from cocone $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cocone $\left(h_i':F(i)\to C'\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            \&\Delta C \arrow[dd, "f"]  \\
+            F(i) \arrow[ru, "h_I"]\arrow[rd, "h^{\prime}_i"']\&  \\
+            \&\Delta C' 
+            \end{tikzcd}
+    \]
+}
+
+\dfn{Colimit}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. 
+    The \textbf{colimit} of $F$, denoted by $\varinjlim F$, is the initial object of $\mathsf{Cocone}(F,\textsf{C})$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
+            \&   [-1.5em]                \&[-1em] C \& [-1em]                  \\[+0.2cm]
+            \&                   \& \varinjlim F \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]         \&                   \\[-0.1cm]
+        \& F(i) \arrow[ruu, draw=cyan, "h_i"]\arrow[ru, draw=arrowBlue, shorten >=-3.5pt, "\phi_i"' yshift=4.5pt]        \arrow[rr, "F(\lambda)"']\&   \& F(j)\arrow[luu, draw=cyan, "h_j"']\arrow[lu, draw=arrowBlue, shorten >=-3.7pt, "\phi_j" yshift=4.5pt] 
+        \end{tikzcd}
+    \]
+}
+
+\ex{Limit in $\mathsf{Set}$}{
+    Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Then
+    \begin{align*}
+        \varprojlim F&\cong\left\{(x_i)_{i\in \mathrm{Ob}(\mathsf{J})}\in \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\;\midv \;\forall \lambda:i\to j\text{ in }\mathrm{Hom}_\mathsf{J}(i,j),\,F(\lambda)(x_i)=x_j\right\}
+    \end{align*}
+    where $\alpha$ and $\beta$ are defined by 
+    and the map $\phi_i:\varprojlim F\to F(i)$ is given by the composition
+    \[
+        \varprojlim F\xrightarrow{\quad\iota\quad}\prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi_i\quad}F(i).
+    \]
+    $\varprojlim F$ also can be constructed from product and equalizer 
+    \begin{align*}
+        \varprojlim F\cong \ker\left[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[r, "\alpha", shift left] \arrow[r, "\beta"', shift right] \& \prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))
+                \end{tikzcd}
+        \right]
+    \end{align*}
+    where $\alpha$ and $\beta$ are induced by the following diagrams
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            F\left(\mathrm{dom}\left(\lambda\right)\right) \arrow[d, "F(\lambda)"'] \&[+25pt] \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[l, "\pi_{\mathrm{dom}\left(\lambda\right)}"'] \arrow[d, "\alpha", dashed] \&[-15pt]\ni \& [-15pt]      (x_i)_{i\in \mathrm{Ob}(\mathsf{J})}   \arrow[d, "\alpha", mapsto]                    \\ [+10pt]
+            F\left(\mathrm{codom}\left(\lambda\right)\right)        \& {\prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))} \arrow[l, "{\pi_{\lambda}}"]\&\ni\& (F(\lambda)(x_i))_{\lambda:i\to j\in \mathrm{Mor}(\mathsf{J})}
+            \end{tikzcd}
+    \]
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+             \&[+25pt] \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[ld, "\pi_{\mathrm{codom}\left(\lambda\right)}"'] \arrow[d, "\beta", dashed]    \&[-15pt]\ni \&[-15pt]   (x_i)_{i\in \mathrm{Ob}(\mathsf{J})}   \arrow[d, "\beta", mapsto]                                 \\ [+10pt]
+            F\left(\mathrm{codom}\left(\lambda\right)\right)        \& {\prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))} \arrow[l, "{\pi_{\lambda}}"]\&\ni\& (x_j)_{\lambda:i\to j\in \mathrm{Mor}(\mathsf{J})}
+            \end{tikzcd}
+    \]
+}
+
+
+\ex{Colimit in $\mathsf{Set}$}{
+    Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Define a relation $\sim^*$ on $\coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
+    \[
+        (i,x)\sim^* (j,y)\iff \text{there exists }\lambda:i\to j\text{ in }\mathrm{Hom}_\mathsf{J}(i,j)\text{ such that }F(\lambda)(x)=y.
+    \]
+    Let $\sim$ denote the equivalence relation generated by $\sim^*$. Then 
+    \[
+        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
+    \]
+    and the map $\phi_i:F(i)\to \varinjlim F$ is given by the composition
+    \[
+        F(i)\xrightarrow{\quad\iota_i\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim.
+    \]
+    If $\mathsf{J}$ is a filtered category, then the equivalence relation $\sim$ has a explicit description: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
+    \[
+        (i,x)\sim (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
+    \]
+}
+\pf{ 
+    It is easy to show 
+    \[
+        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
+    \]
+    by checking the universal property of $\varinjlim F$. If $\mathsf{J}$ is a filtered category, first we can check 
+    \[
+        (i,x)\approx (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
+    \]
+    is an equivalence relation. To show $\approx\;=\;\sim$, let's assume $\backsimeq$ is any equivalence relation containing $\sim^*$. If $(i,x)\approx(j,y)$, then there exists $\lambda_1:i\to k$ and $\lambda_2:j\to k$ such that $F(\lambda_1)(x)=F(\lambda_2)(y)=z$. Hence 
+    \[
+        (i,x)\sim^* (k,z)\text{ and }(j,y)\sim^* (k,z)\implies(i,x)\backsimeq (k,z)\text{ and }(j,y)\backsimeq (k,z)\implies (i,x)\backsimeq (j,y).
+    \]
+    This implies $\backsimeq$ contains $\approx$. Therefore, $\approx$ is the smallest equivalence relation containing $\sim^*$, which means $\approx$ coincides with $\sim$.
+}
+
+\dfn{Complete Category}{
+    A category $\mathsf{C}$ is \textbf{complete} if it has all small limits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varprojlim F$ exists.
+}
+\dfn{Cocomplete Category}{
+    A category $\mathsf{C}$ is \textbf{cocomplete} if it has all small colimits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varinjlim F$ exists.
+}
+
+\thm{Existance Theorem for Limits}{
+    Let $\mathsf{C}$ be a category and $F:\mathsf{J}\to\mathsf{C}$ be a functor. If a category $\mathsf{C}$ has equalizers and all products indexed by the classes $\mathrm{Ob}(\mathsf{J})$ and $\mathrm{Hom}(\mathsf{J})$, then $\mathsf{C}$ has all limits of shape $\mathsf{J}$.
+}
+
+The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : A \to C$, the value of the limit functor $\lim_{j\in J} F_j : A \to C$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
+
+\prop[ev_functor_preserves_limits]{Evaluation Functor Preserves Limits}{
+    Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
+    \[
+        \mathrm{ev}_a \circ F:\mathsf{J}\xrightarrow{\quad F\quad}\left[\mathsf{A},\mathsf{C}\right]\xrightarrow{\quad\mathrm{ev}_a\quad}\mathsf{C}
+    \]
+    has a limit, then
+    \begin{enumerate}[(i)]
+        \item $\varprojlim F$ exists.
+        \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
+    \end{enumerate}
+}
+
+\prop{Limits commute with limits}{
+    Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
+}
+
+\dfn[filtered_category]{Filtered Category}{
+    A category $\mathsf{J}$ is \textbf{filtered} if 
+    \begin{itemize}
+        \item $\mathsf{J}$ is nonempty.
+        \item For any pair of objects $j_1,j_2\in \mathrm{Ob}(\mathsf{J})$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and morphisms $j_1\to j_3$ and $j_2\to j_3$.
+        \item For any pair of morphisms $f,g:j_1\to j_2$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and a morphism $h:j_2\to j_3$ such that $h\circ f=h\circ g$.
+    \end{itemize}
+}
+\dfn{Cofiltered Category}{
+    A category $\mathsf{J}$ is \textbf{cofiltered} if $\mathsf{J}^{\mathrm{op}}$ is filtered. Equivalently, $\mathsf{J}$ is cofiltered if
+    \begin{itemize}
+        \item $\mathsf{J}$ is nonempty.
+        \item For any pair of objects $j_1,j_2\in \mathrm{Ob}(\mathsf{J})$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and morphisms $j_3\to j_1$ and $j_3\to j_2$.
+        \item For any pair of morphisms $f,g:j_1\to j_2$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and a morphism $h:j_3\to j_2$ such that $f\circ h=g\circ h$.
+    \end{itemize}
+}
+\dfn{Filtered Colimit}{
+    A \textbf{filtered colimit} is a colimit of a functor $F: \mathsf{J} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a filtered category.
+}
+
+\dfn[thin_category]{Thin Category}{
+    A \textbf{thin category} or \textbf{$(0,1)$-category} is a category in which any two objects have at most one morphism between them. 
+
+    A preorder set $(X,\leq)$ can be regarded as a thin category $\mathsf{X}$ with objects being elements of $X$ and morphisms being
+    \begin{align*}
+        \mathrm{Hom}(x,y)=\begin{cases}
+            \{*\} & \text{if }x\leq y\\
+            \varnothing & \text{otherwise}
+        \end{cases}
+    \end{align*}
+    Therefore, we obtain a category isomorphism between the category of preorder sets and the category of thin categories
+    \begin{align*}
+        F:\mathsf{PreOrdSet}&\longrightarrow (0,1)\text{-}\mathsf{Cat}\\
+        (X,\leq)&\longmapsto \mathsf{X}
+    \end{align*}
+}
+
+\ex{Filtered Set}{
+    A filtered set can be regarded as a filtered (0,1)-category with objects being elements of the set and morphisms being
+    \begin{align*}
+        \mathrm{Hom}(x,y)=\begin{cases}
+            \{*\} & \text{if }x\leq y\\
+            \varnothing & \text{otherwise}
+        \end{cases}
+    \end{align*}
+}
+
+\dfn{}{
+    For any class of diagrams $K: \mathsf{J} \rightarrow \mathsf{C}$ valued in $\mathsf{C}$, a functor $F: \mathsf{C} \rightarrow \mathsf{D}$
+    \begin{itemize}
+        \item \textbf{preserves} those limits if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ and limit cone over $K$, the image of this cone defines a limit cone over the composite diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$;
+        \item \textbf{reflects} those limits if any cone over a diagram $K: \mathsf{J} \rightarrow \mathsf{C}$, whose image upon applying $F$ is a limit cone for the diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$, is a limit cone over $K$;
+        \item \textbf{creates} those limits if whenever $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$ has a limit in $\mathsf{D}$, there is some limit cone over $F\circ K$ that can be lifted to a limit cone over $K$, and moreover $F$ reflects the limits in the class of diagrams.
+    \end{itemize}
+}
+
+\section{Representable Functor}
+\dfn{Presheaf}{
+    Let $\mathsf{C}$ be a category. A \textbf{presheaf} on $\mathsf{C}$ is a functor $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$.
+}
+
+\dfn[yoneda_embedding_functor]{Yoneda Embedding Functor}{
+    Let $\mathsf{C}$ be a category. The \textbf{Yoneda embedding functor} is the functor $Y_\mathsf{C}:\mathsf{C}\to \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]$ defined as follows
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+    \mathsf{C} % column 1
+    \&[-25pt]  % column 2
+    \&[+30pt]  % column 3
+    \&[-30pt] \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]    % column 4
+    \&[+25pt]  % column 5
+    \&[-25pt]  % column 6 
+    \&         % column 7
+    \\[-15pt]
+    Y_1 \arrow[dd, "g"{name=L, left}] \&\&  \& \mathrm{Hom}_{\mathsf{C}}\left(-,Y_1\right) \arrow[dd, Rightarrow, "g_\star"{name=R}] \& \mathrm{Hom}_{\mathsf{C}}(X_1,Y_1) \arrow[dd, "{g_*}"'] \arrow[rr, "{f^*}"] \& \& \mathrm{Hom}_{\mathsf{C}}(X_2,Y_1) \arrow[dd, "g_*"] \\[-5pt]
+    \& \phantom{.}\arrow[r, "Y_\mathsf{C}", squigarrow]\&\phantom{.} \&\phantom{.} \&\phantom{.}\&\\[-5pt]
+    Y_2 \& \& \& \mathrm{Hom}_{\mathsf{C}}\left(-,Y_2\right)\& \mathrm{Hom}_{\mathsf{C}}(X_1,Y_2) \arrow[rr, "{f^*}"'] \& \& \mathrm{Hom}_{\mathsf{C}}(X_2,Y_2) 
+    \arrow[from=4-5, to=2-5, dash, start anchor={[xshift=-8ex,yshift=-3ex]}, end anchor={[xshift=-8ex,yshift=3ex]},decorate,decoration={brace,amplitude=10pt,raise=4pt}] 
+    \arrow[from=3-4, to=3-5, dashed, start anchor={[xshift=9pt, yshift=-2pt]}, end anchor={[xshift=-11ex, yshift=-2pt]},decorate] 
+    \end{tikzcd}
+    \]
+    where the natural transformation $g_\star$ is defined pointwise as follows: $\left(g_\star\right)_X=g_*$ for any $X\in \mathrm{Ob}(\mathsf{C}^{\mathrm{op}})$.\\
+    The contravariant version is $Y_{\mathsf{C}^{\mathrm{op}}}:\mathsf{C}^{\mathrm{op}}\to \left[\mathsf{C},\mathsf{Set}\right]$, which is defined as follows
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+    \mathsf{C}^{\mathrm{op}} % column 1
+    \&[-25pt]  % column 2
+    \&[+30pt]  % column 3
+    \&[-30pt] \left[\mathsf{C},\mathsf{Set}\right]    % column 4
+    \&[+25pt]  % column 5
+    \&[-25pt]  % column 6 
+    \&         % column 7
+    \\[-15pt]
+    X_1 \arrow[dd, "f"{name=L, left}] \&\&  \& \mathrm{Hom}_{\mathsf{C}}\left(X_1,-\right) \arrow[dd, Rightarrow, "f^\star"{name=R}] \& \mathrm{Hom}_{\mathsf{C}}(X_1,Y_1) \arrow[dd, "{f^*}"'] \arrow[rr, "{g_*}"] \& \& \mathrm{Hom}_{\mathsf{C}}(X_1,Y_2) \arrow[dd, "f^*"] \\[-5pt]
+    \& \phantom{.}\arrow[r, "Y_{\mathsf{C}^{\mathrm{op}}}", squigarrow]\&\phantom{.} \&\phantom{.} \&\phantom{.}\&\\[-5pt]
+    X_2 \& \& \& \mathrm{Hom}_{\mathsf{C}}\left(X_2,-\right)\& \mathrm{Hom}_{\mathsf{C}}(X_2,Y_1) \arrow[rr, "{g_*}"'] \& \& \mathrm{Hom}_{\mathsf{C}}(X_2,Y_2) 
+    \arrow[from=4-5, to=2-5, dash, start anchor={[xshift=-8ex,yshift=-3ex]}, end anchor={[xshift=-8ex,yshift=3ex]},decorate,decoration={brace,amplitude=10pt,raise=4pt}] 
+    \arrow[from=3-4, to=3-5, dashed, start anchor={[xshift=9pt, yshift=-2pt]}, end anchor={[xshift=-11ex, yshift=-2pt]},decorate] 
+    \end{tikzcd}
+    \]
+    Here we use the fact $\mathrm{Hom}_{\mathsf{C}^{\mathrm{op}}}\left(-,X\right)=\mathrm{Hom}_{\mathsf{C}}\left(X,-\right)$.
+    
+}
+\thm[yoneda_lemma]{Yoneda Lemma}{
+    Let $\mathsf{C}$ be a locally small category. For any functor $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ and any $A\in \mathrm{Ob}(\mathsf{C})$, there is a natural bijection
+    \begin{align*}
+        q_{A,F}:\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A\right), F\right) & \overset{\sim}{\longrightarrow} F(A) \\
+        {  \left[ \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}^{\mathrm{op}} \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(-{,}A\right)"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{Set}
+            \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi"]
+        \end{tikzcd}\right] } & \longmapsto \phi_A\left(\operatorname{id}_A\right)
+    \end{align*}
+    The naturality of $q_{A,F}$ means that 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}^{\mathrm{op}}\times \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]\&[-34pt]\&[+62pt]\&[-25pt] \mathsf{Set}\&[-25pt]\&[-25pt] \\ [-15pt] 
+            (A_1,F_1)  \arrow[dd, "\left(g{,} \eta\right)"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(\mathrm{Hom}_{\mathsf{C}}(-,A_1),F_1)\arrow[dd, ""{name=R}] \& \ni \& \phi \arrow[dd,mapsto]\\ [-8pt] 
+            \&  \phantom{.}\arrow[r, "\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(Y_\mathsf{C}(-){,}-\right)", squigarrow]\&\phantom{.}  \&   \\[-8pt] 
+            (A_2,F_2)  \& \& \& \operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(\mathrm{Hom}_{\mathsf{C}}(-,A_2),F_2)\& \ni \& \eta\circ \phi\circ g_\star
+        \end{tikzcd}
+    \]
+    is a functor isomorphic to the \hyperref[th:evaluation_functor]{evaluation functor}
+    \begin{align*}
+        \mathrm{ev}:\mathsf{C}^{\mathrm{op}}\times \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]&\longrightarrow \mathsf{Set}\\
+        \left(A,F\right)&\longmapsto F(A)
+    \end{align*}
+    \textbf{Covariant version}\\
+    For any functor $F:\mathsf{C}\to \mathsf{Set}$ and any $A\in \mathrm{Ob}(\mathsf{C})$, there is a natural bijection
+    \begin{align*}
+        \operatorname{Hom}_{\left[\mathsf{C},\mathsf{Set}\right]}\left(\operatorname{Hom}_{\mathsf{C}}\left(A,-\right), F\right) & \overset{\sim}{\longrightarrow} F(A) \\
+        {  \left[ \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(A{,}-\right)"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{Set}
+            \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi"]
+        \end{tikzcd}\right] } & \longmapsto \phi_A\left(\operatorname{id}_A\right)
+    \end{align*}
+}
+\pf{
+    We break the proof into following steps.
+\begin{itemize}[leftmargin=*]
+    \item \textbf{$\phi$ is determined by $\phi_A\left(\operatorname{id}_A\right)$}.\\
+    Suppose $\phi:\mathrm{Hom}_{\mathsf{C}}\left(-,A\right)\Rightarrow F$ is a natural transformation. Given any morphism $f:X\to A$ in $\mathsf{C}$, the naturality of $\phi$ gives the following commutative diagram
+    \[
+		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
+			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f^*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(X,A)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
+			\phi_A(\mathrm{id}_A)\&\in\&{F(A)}\arrow[rr, "{F(f)}"'] \&  \& {F(X)}  \&\ni\& \phi_X(f)     
+		\end{tikzcd}
+	\]
+    Thus we see $\phi$ is determined by $\phi_A(\mathrm{id}_A)$ as follows
+    \[
+        \phi_X(f)=F(f)(\phi_A(\mathrm{id}_A)),\quad\forall X\in \mathrm{Ob}(\mathsf{C}),\forall f\in \mathrm{Hom}_{\mathsf{C}}(X,A).
+    \]
+    This implies that the injectivity of $q_{A,F}$.
+    \item \textbf{Construct the inverse of $q_{A,F}$}.\\
+    Define 
+    \begin{align*}
+        r_{A,F}:  F(A)&\longrightarrow\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A\right), F\right) \\
+         u & \longmapsto \phi^u:\left[\begin{aligned}\phi_X^u: \mathrm{Hom}_{\mathsf{C}}(X,A)&\longrightarrow F(X)\\
+             f&\longmapsto F(f)(u)\end{aligned}  \right]
+    \end{align*}
+    To ensure $r_{A,F}$ is well-defined, we need to check that $r_{A,F}(u)=\phi^u$ is always a natural transformation. In fact, given any morphism $h:X_1\to X_2$ in $\mathsf{C}$, it is easy to check the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
+                g\arrow[mapsto]{d}\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(X_2,A) \arrow[d, "{\phi_{X_2}^u}"']  \arrow[rr, "{h^*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(X_1,A)} \arrow[d, "\phi_{X_1}^u"]\&[-25pt]\ni\&[-25pt]g\circ h \arrow[mapsto]{d}\\
+                F(g)(u)\&\in\&{F(X_2)}\arrow[rr, "{F(h)}"'] \&  \& {F(X_1)}  \&\ni\& F(g\circ h)(u)  
+            \end{tikzcd}
+    \]
+    because the functoriality of $F$ gives the identity $F(g\circ h)=F(h)\circ F(g)$.
+
+    For any $u\in F(A)$, we have
+    \begin{align*}
+        \left(q_{A,F}\circ r_{A,F}\right)(u)
+        &=q_{A,F}(\phi^u)\\
+        &=\phi^u_A(\mathrm{id}_A)\\
+        &=F(\mathrm{id}_A)(u)\\
+        &=\mathrm{id}_{F(A)}(u)\\
+        &=u,
+    \end{align*}
+    which implies that $q_{A,F}$ is surjective. Therefore, $q_{A,F}$ is a bijection and $r_{A,F}$ is the inverse of $q_{A,F}$.
+
+    We can also manually check that $\left(r_{A,F}\circ q_{A,F}\right)(\phi)=\phi$ for any natural transformation $\phi:\mathrm{Hom}_{\mathsf{C}}\left(-,A\right)\Rightarrow F$, by evaluating the natural transformations at $\mathrm{id}_A$,
+    \begin{align*}
+        \left(\left(r_{A,F}\circ q_{A,F}\right)(\phi)\right)_A(\mathrm{id}_A)&=(r_{A,F}(\phi_A(\mathrm{id}_A)))_A(\mathrm{id}_A)\\
+        &=F(\mathrm{id}_A)(\phi_A(\mathrm{id}_A))\\
+        &=\mathrm{id}_{F(A)}(\phi_A(\mathrm{id}_A))\\
+        &=\phi_A(\mathrm{id}_A).
+    \end{align*}
+    \item \textbf{$q_{A,F}$ is natural in $A$ and $F$}.\\
+    $\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(Y_\mathsf{C}(-){,}-\right)$ is a functor obtained by the composition 
+    \[
+        \mathsf{C}^{\mathrm{op}}\times \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]\xrightarrow{\left(Y^{\mathrm{op}}_{\mathsf{C}},\mathrm{id}\right)}\left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]^{\mathrm{op}}\times \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]\xrightarrow{\mathrm{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(-,-\right)}\mathsf{Set}
+    \]
+    Given any $g:A_2\to A_1$ and $\eta:F_1\to F_2$, we should check the following diagram commutes
+    \[
+        \begin{tikzcd}[row sep=3.5em, column sep=2.5em, ampersand replacement=\&]
+        {\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(Y_\mathsf{C}(A_1),F_1)} \arrow[d, "{q_{A_1,F_1}}"'] \arrow[rr, "\left(g_\star\right)^*\circ \eta_*"] \&  \& {\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(Y_\mathsf{C}(A_2),F_2)} \arrow[d, "q_{A_2,F_2}"] \\
+        {F_1(A_1)} \arrow[rr, "F_2(g)\circ \eta_{A_1}"']      \&  \& {F_2(A_2)}               
+    \end{tikzcd}
+    \]
+    It suffices to check that the following diagram commutes
+    \[
+    \begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
+        \operatorname{Hom}(Y_\mathsf{C}(A_1),F_1) \arrow[rr,"\left(g_\star\right)^*"] \arrow[dr,swap,"\eta_*"] \arrow[dd,swap,"q_{A_1,F_1}"] \&\&
+        \operatorname{Hom}(Y_\mathsf{C}(A_2),F_1) \arrow[dd,swap,"q_{A_2,F_1}" near start] \arrow[dr,"\eta_*"] \\
+        \& \operatorname{Hom}(Y_\mathsf{C}(A_1),F_2) \arrow[rr,crossing over,"\left(g_\star\right)^*" near start] \&\&
+        \operatorname{Hom}(Y_\mathsf{C}(A_2),F_2) \arrow[dd,"q_{A_2,F_2}"] \\
+        F_1(A_1) \arrow[rr,"F_1(g)" near end] \arrow[dr,swap,"\eta_{A_1}"] \&\& F_1(A_2) \arrow[dr,swap,"\eta_{A_2}"] \\
+        \& F_2(A_1) \arrow[rr,"F_2(g)"] \arrow[uu,<-,crossing over,"q_{A_1,F_2}" near end]\&\& F_2(A_2)
+        \end{tikzcd}
+    \]
+\end{itemize}
+    To check the commutativity of the left square
+    \[
+        \begin{tikzcd}[row sep=3.5em, column sep=2.5em, ampersand replacement=\&]
+        {\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(Y_\mathsf{C}(A_1),F_1)} \arrow[d, "{q_{A_1,F_1}}"'] \arrow[rr, "\eta_*"] \&  \& {\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(Y_\mathsf{C}(A_1),F_2)} \arrow[d, "q_{A_1,F_2}"] \\
+        {F_1(A_1)} \arrow[rr, "\eta_{A_1}"']      \&  \& {F_2(A_1)}               
+    \end{tikzcd}
+    \]
+    we can verify that for any $\phi\in \operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(Y_\mathsf{C}(A_1),F_1\right)$, 
+    \begin{align*}
+        q_{A_1,F_2}\circ \eta_*\left(\phi\right)&=q_{A_1,F_2}\left(\eta\circ \phi\right)\\
+        &=\left(\eta\circ \phi\right)_{A_1}\left(\mathrm{id}_{A_1}\right)\\
+        &=\eta_{A_1}(\phi_{A_1}(\mathrm{id}_{A_1}))\\
+        &=\eta_{A_1}\circ q_{A_1,F_1}(\phi).
+    \end{align*}
+    To check the commutativity of the front square
+    \[
+        \begin{tikzcd}[row sep=3.5em, column sep=2.5em, ampersand replacement=\&]
+        {\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(Y_\mathsf{C}(A_1),F_2)} \arrow[d, "{q_{A_1,F_2}}"'] \arrow[rr, "\left(g_\star\right)^*"] \&  \& {\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(Y_\mathsf{C}(A_2),F_2)} \arrow[d, "q_{A_2,F_2}"] \\
+        {F_2(A_1)} \arrow[rr, "F_2(g)"']      \&  \& {F_2(A_2)}               
+    \end{tikzcd}
+    \]
+    we can verify that for any $\psi\in \operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(Y_\mathsf{C}(A_1),F_2\right)$, we have
+    \begin{align*}
+        q_{A_2,F_2}\circ \left(g_\star\right)^*(\psi)&=q_{A_2,F_2}\left(\psi\circ g_\star\right)\\
+        &=\left(\psi\circ g_\star\right)_{A_2}\left(\mathrm{id}_{A_2}\right)\\
+        &=\psi_{A_2}\circ g_*\left(\mathrm{id}_{A_2}\right)\\
+        &=\psi_{A_2}(g)\\
+        &=F_2(g)(\psi_{A_1}(\mathrm{id}_{A_1}))\\
+        &=F_2(g)\circ q_{A_1,F_2}(\psi).
+    \end{align*}
+}
+\cor{Yoneda Embedding}{
+    Let $\mathsf{C}$ be a locally small category. The \hyperref[th:yoneda_embedding_functor]{Yoneda embedding functor} $Y_\mathsf{C}:\mathsf{C}\to \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]$ is fully faithful. That is, for any $A_1,A_2\in\mathrm{Ob}\left(\mathsf{C}\right)$, the morphism set map 
+    \begin{align*}
+        \left.Y_{\mathsf{C}}\right|_{\operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right)}:\operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right) &\longrightarrow\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right) \\
+         f & \longmapsto f_\star
+    \end{align*}
+    is a bijection. That justifies the name ``embedding'' because $\mathsf{C}$ is embedded into $\mathsf{Psh}(\mathsf{C})$ via $Y_\mathsf{C}$ as a full subcategory.
+}
+\pf{
+    By \hyperref[th:yoneda_lemma]{Yoneda lemma}, there is a natural bijection
+    \[
+        \operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right)\cong \operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right),
+    \]
+    which is given by
+    \begin{align*}
+        r_{A_1,Y_{\mathsf{C}}(A_2)}:  \operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right) &\longrightarrow\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right) \\
+         f & \longmapsto f_\star:\left[\begin{aligned}\left(f_\star\right)_X: \mathrm{Hom}_{\mathsf{C}}(X,A_1)&\longrightarrow \mathrm{Hom}_{\mathsf{C}}(X,A_2)\\
+             g&\longmapsto f_*(g)=f\circ g\end{aligned}  \right]
+    \end{align*}
+    and
+    \begin{align*}
+        q_{A_1,Y_{\mathsf{C}}(A_2)}:\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right) & \overset{\sim}{\longrightarrow} \operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right) \\
+        {  \left[ \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}^{\mathrm{op}} \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(-{,}A_1\right)"{name=A, above}, bend left] \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(-{,}A_2\right)"'{name=B, below}, bend right] \&[+30pt] \mathsf{Set}
+            \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi"]
+        \end{tikzcd}\right] } & \longmapsto \phi_{A_1}\left(\operatorname{id}_{A_1}\right)
+    \end{align*}
+    Note that $r_{A_1,Y_{\mathsf{C}}(A_2)}$ is exactly the morphism set map $\left.Y_{\mathsf{C}}\right|_{\operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right)}$.
+}
+Yoneda embedding allows us to regard any category $\mathsf{C}$ as a full subcategory of $\mathsf{Psh}(\mathsf{C})$. So in the sense of categorical isomorphism, we can identify any object $A\in \mathrm{Ob}(\mathsf{C})$ with a presheaf $\operatorname{Hom}_{\mathsf{C}}(-, A)$. 
+
+An object in a category is equivalent to the collection of all arrows pointing to that object. In other words, the information we care about is which arrows from an object itself and other objects would point to this object, while the object's internals are completely regarded as a black box. 
+
+The arrows between objects in a category are equivalent to the transformations between sets of arrows pointing to objects. Specifically, suppose $f$ is an arrow from object $A$ to object $B$, then any arrow pointing to $A$ can be transformed into an arrow pointing to $B$ by appending an $f$, which is exactly what $f_\star$ does. Conversely, if there is a way to naturally transform all arrows pointing to $A$ into arrows pointing to $B$, then this transformation must be realized by appending an arrow between $A$ and $B$.
+
+\dfn{Representable Functor}{
+    Let $\mathsf{C}$ be a locally small category. 
+    \begin{itemize}
+        \item A functor $F:\mathsf{C}\to \mathsf{Set}$ is called \textbf{representable} if it is naturally isomorphic to $\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)$ for some $A\in \mathrm{Ob}(\mathsf{C})$.
+        \item A functor $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is called \textbf{representable} if it is naturally isomorphic to $\operatorname{Hom}_{\mathsf{C}}\left(-,A\right)$ for some $A\in \mathrm{Ob}(\mathsf{C})$.
+    \end{itemize}
+    A \textbf{representation of $F$} is a pair $(A,\phi)$, where $A\in \mathrm{Ob}(\mathsf{C})$ and $\phi:F\stackrel{\sim\;}{\Rightarrow} \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)$ is a natural isomorphism. \\
+    According to \hyperref[th:yoneda_lemma]{Yoneda lemma}, $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow  F$ is 1-1 correspondence with an element $\phi_A(\mathrm{id}_A)\in F(A)$. We define an \textbf{universal element of $F$} is a pair $(A,u)$ where $A\in \mathrm{Ob}(\mathsf{C})$ and $u\in F(A)$ such that $u$ corresponds to a natural isomorphism $\phi: \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}F$. Specifying a universal element of $F$ is equivalent to specifying a representation of $F$.
+}
+\prop[universal_element_characterization]{}{
+    Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a representable functor. Then $(A,u)$ is a universal element of $F$ if and only if $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}. That is, if $(A,u)$ is a universal element of $F$, then for any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
+}
+\pf{
+    Suppose $(A,u)$ is an object of $\int_{\mathsf{C}}F$ and  $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ is the natural isomorphism corresponding to $u\in F(A)$. For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, we have the following commutative diagram
+    \[
+		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
+			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(A,X)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
+			u=\phi_A(\mathrm{id}_A)\&\in\&{F(A)}\arrow[rr, "{F(f)}"'] \&  \& {F(X)}  \&\ni\& \phi_X(f)     
+		\end{tikzcd}
+	\]
+    which implies
+    \[
+        F(f)(u)=\phi_X(f),\quad\forall f\in \mathrm{Hom}_{\mathsf{C}}(A,X).
+    \]
+    Thus we have
+    \begin{align*}
+        (A,u)\text{ is initial in }\int_{\mathsf{C}}F&\iff \forall(X,x)\in \mathrm{Ob}\left(\int_{\mathsf{C}}F\right),\;\exists! f\in \mathrm{Hom}_{\mathsf{C}}(A,X),\;F(f)(u)=x\\
+        &\iff\forall X\in \mathrm{Ob}\left(\mathsf{C}\right),\; \forall x\in F(X),\;\exists! f\in \mathrm{Hom}_{\mathsf{C}}(A,X),\;\phi_X(f)=x\\
+        &\iff \forall X\in \mathrm{Ob}\left(\mathsf{C}\right),\;\phi_X \text{ is bijective}\\
+        &\iff \phi \text{ is a natural isomorphism}\\
+        &\iff (A,u) \text{ is a universal element of }F.
+    \end{align*}
+}
+\cor{Initial Object Characterized by Representable Functor}{
+    Suppose $\mathsf{C}$ is a locally small category.
+    \begin{itemize}
+        \item $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\mathsf{C}$ if and only if the functor $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$.
+        \item $A\in\mathrm{Ob}(\mathsf{C})$ is terminal in $\mathsf{C}$ if and only if the functor $\Delta \{*\}:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(-,A\right)$.
+    \end{itemize}
+}
+\pf{
+    Let $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ be a constant functor. It is easy to see that the category $\int_\mathsf{C}\Delta \{*\}$ is isomorphic to $\mathsf{C}$. 
+    According to \Cref{th:universal_element_characterization},
+    $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\Delta \{*\}$ if and only if $\Delta$ is a representable functor with a universal element $(A,*)$.\\
+    If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}\Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
+}
+
+
+\section{Adjoint Functor}
+\dfn{Adjoint Pair of Functors}{
+    An \textbf{adjoint pair of functors} is a tuple $\left(L,R,\varphi\right)$ consisting of a pair of functors $\begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[r, "L", bend left] \& \mathsf{D} \arrow[l, "R", bend left]
+        \end{tikzcd}$
+    and a natural isomorphism 
+    \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)"{name=A, above}, bend left] \arrow[r, "\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)"'{name=B, below}, bend right] \&[+50pt] \mathsf{Set}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\varphi", "\sim\hspace{1.5pt}"']
+            \end{tikzcd}
+    \]
+    which means for any $X\in \mathrm{Ob}(\mathsf{C})$ and $Y\in \mathrm{Ob}(\mathsf{D})$, there is a bijection
+    \begin{align*}
+        \varphi_{X,Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)\\
+        \Big(L(X)\xlongrightarrow{f}Y\Big)&\longmapsto \Big(X\xlongrightarrow{\tilde{f}}R(Y)\Big)
+    \end{align*}
+    natural in $X$ and $Y$. $L$ is called the \textbf{left adjoint} of $R$, and $R$ is called the \textbf{right adjoint} of $L$. We write $L\dashv R$ to denote that $L$ is left adjoint to $R$.
+}
+The naturality square of $\varphi$ means that for any morphism $g:X_2\to X_1$ in $\mathsf{C}$ and $h:Y_1\to Y_2$ in $\mathsf{D}$, the following diagram commutes
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathrm{Hom}_{\mathsf{D}}\left(L(X_1),Y_1\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{D}}\left(L(g){,}h\right)}"] \arrow[d, "\varphi_{X_1,Y_1}"', "\sim"] \&[+50pt] \mathrm{Hom}_{\mathsf{D}}\left(L(X_2),Y_2\right) \arrow[d, "\varphi_{X_2,Y_2}", "\sim"'] \\[+20pt]
+        \mathrm{Hom}_{\mathsf{C}}\left(X_1,R(Y_1)\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{C}}\left(g{,}R(h)\right)}"'] \& \mathrm{Hom}_{\mathsf{C}}\left(X_2,R(Y_2)\right)
+    \end{tikzcd}
+\]
+which in turn can be explicitly written as for any $f:L(X_1)\to Y_1$ in $\mathsf{D}$,
+\[
+    \varphi_{X_2,Y_2}\left(h\circ f\circ L(g)\right)=R(h)\circ\varphi_{X_1,Y_1}(f)\circ g.
+\]
+
+\dfn{Adjunction Unit and Counit}{
+Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors. The \textbf{adjunction unit} $\eta$ of this adjunction is a natural transformation
+\begin{center}
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"{name=A, above}, bend left=40] \arrow[r, "R\circ L"'{name=B, below}, bend right=40] 
+        \&[+25pt] \mathsf{C}
+        \arrow[Rightarrow, shorten <=3.5pt, shorten >=3.5pt, from=A.south-|B, to=B, "\eta"]
+    \end{tikzcd}
+    \hspace{3cm}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        \fill[fill=blue!20] (-2.5,0) rectangle (2.5,2.8);
+        \filldraw[fill=green!20] (-1,2) arc (180:360:1);
+        \fill[fill=green!20] (-1,2) rectangle (1,2.8);
+        \node[above=2pt] at (-1,2.8) {$F$};
+        \node[above=2pt] at (1,2.8) {$G$};
+        \node[above=2pt] at (0,1) {$\eta$};
+        \draw[fill=black] (0, 1) circle (0.07);
+        \draw (-1,2) -- (-1,2.8);
+        \draw (1,2) -- (1,2.8);
+    \end{tikzpicture}
+\end{center}
+defined by $\eta_X:=\varphi_{X,L(X)}(\mathrm{id}_{L(X)})$ for any $X\in \mathrm{Ob}(\mathsf{C})$, where $\varphi_{X,L(X)}$ is the natural bijection
+$$
+\begin{aligned}
+    \varphi_{X,L(X)}:\operatorname{Hom}_{\mathsf{D}}\left(L(X), L(X)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(X, RL(X)) \\
+\operatorname{id}_{F X} & \longmapsto \eta_X 
+\end{aligned}
+$$
+The \textbf{adjunction counit} $\varepsilon$ of this adjunction is a natural transformation
+\begin{center}
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{D} \arrow[r, "\scalebox{1.2}{$L\circ R$}"{name=A, above}, bend left=40] \arrow[r, "\scalebox{1.2}{$\mathrm{id}_{\mathsf{D}}$}"'{name=B, below}, bend right=40] 
+        \&[+25pt] \mathsf{D}
+        \arrow[Rightarrow, shorten <=3.5pt, shorten >=3.5pt, from=A.south-|B, to=B, "\varepsilon"]
+    \end{tikzcd}
+    \hspace{3cm}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        \fill[fill=blue!20] (-2.5,0) rectangle (2.5,2.8);
+        \filldraw[fill=green!20] (-1,2) arc (180:360:1);
+        \fill[fill=green!20] (-1,2) rectangle (1,2.8);
+        \node[above=2pt] at (-1,2.8) {$F$};
+        \node[above=2pt] at (1,2.8) {$G$};
+        \node[above=2pt] at (0,1) {$\eta$};
+        \draw[fill=black] (0, 1) circle (0.07);
+        \draw (-1,2) -- (-1,2.8);
+        \draw (1,2) -- (1,2.8);
+    \end{tikzpicture}
+\end{center}
+}
+\pf{
+    The naturality square of $\eta$ means that for any morphism $g:X_1\to X_2$ in $\mathsf{C}$, the following diagram commutes
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        X_1 \arrow[d, "{\eta_{X_1}}"'] \arrow[r, "g"] \&[+50pt]X_2\arrow[d, "{\eta_{X_2}}"]    \\[+20pt]
+         R(L(X_1))\arrow[r, "R(L(g))"']\& R(L(X_2))
+    \end{tikzcd}
+\] 
+}
+\section{Monoidal Category}
+\dfn{Monoidal Category}{
+    A monoidal category is a category $\mathsf{V}$ equipped with
+    \begin{enumerate}[(i)]
+        \item Tensor product: a functor $\otimes:\mathsf{V}\times\mathsf{V}\to\mathsf{V}$.
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{V}\times \mathsf{V}\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{V}\&[-30pt]\&[-30pt] \\ [-15pt] 
+                (X_1,Y_1)  \arrow[dd, "f\times g"{name=L, left}] 
+                \&[-25pt] \& [+10pt] 
+                \& [-30pt]X_1\otimes Y_1\arrow[dd, "f\otimes g"{name=R}] \\ [-10pt] 
+                \&  \phantom{.}\arrow[r, "\otimes", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+                (X_2,Y_2)  \& \& \& X_2\otimes Y_2
+            \end{tikzcd}
+            \]
+        \item Associator: a natural isomorphism $a$
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{V}\times\mathsf{V}\times\mathsf{V} \arrow[r, "(-\otimes-)\otimes-"{name=A, above}, bend left] \arrow[r, "-\otimes(-\otimes-)"'{name=B, below}, bend right] \&[+30pt] \mathsf{V}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "a", "\sim\hspace{1pt}"']
+            \end{tikzcd}
+        \]
+        \item Unit object: an object $1\in \mathrm{Ob}(\mathsf{V})$ 
+        \item An isomorphism in $\mathsf{V}$: $\iota:1\otimes 1\to 1$
+    \end{enumerate}
+    such that the following two condition holds
+    \begin{enumerate}[(i)]
+        \item The pentagon axiom: the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+            \& [-50pt]                  \&[-25pt]    ((A\otimes B)\otimes C)\otimes D \arrow[lld, "{a_{(A,B,C)}\otimes \mathrm{id}_D}"'] \arrow[rrd, "{a_{(A\otimes B,C,D)}}"] \& [-25pt]                  \&   [-50pt]                                                                      \\[+20pt]
+(A\otimes( B\otimes C))\otimes D \arrow[rd, "{a_{(A,B\otimes C,D)}}"'] \&                                                                                    \&    \&       \& (A\otimes B)\otimes (C\otimes D) \arrow[ld, "{a_{(A, B, C\otimes D)}}"] \\[+35pt]
+            \& A\otimes( (B\otimes C)\otimes D) \arrow[rr, "{\mathrm{id}_A\otimes a_{(B,C,D)}}"'] \&    \& A\otimes( B\otimes (C\otimes D)) \&                                                                        
+\end{tikzcd}
+    \]
+    \item Unit axiom: the functors $1\otimes -:\mathsf{V}\to\mathsf{V}$ and $-\otimes 1:\mathsf{V}\to\mathsf{V}$ are category equivalences.
+    \end{enumerate}
+}
+
+A strict monoidal category is one for which the natural isomorphisms $a$, $\lambda$ and $\rho$ are identities. Every monoidal category is monoidally equivalent to a strict monoidal category.
+
+\dfn{Cartesian/Cocartesian Monoidal Category}{
+    \begin{itemize}[leftmargin=8pt]
+        \item A \textbf{cartesian monoidal category} is a monoidal category where the tensor product is the categorical product and the unit object is the terminal object. 
+        \item A \textbf{cocartesian monoidal category} is a monoidal category where the tensor product is the categorical coproduct and the unit object is the initial object.
+    \end{itemize}
+}
+\ex{Category of Endofunctors is a Monoidal Category}{
+    Let $\mathsf{C}$ be a category. The \textbf{category of endofunctors} $\left[\mathsf{C},\mathsf{C}\right]$ is a monoidal category with the following structure
+    \begin{enumerate}[(i)]
+        \item Tensor product: composition of functors.
+        \item Associator: the natural isomorphism $a$ is the identity.
+        \item Unit object: the identity functor $\mathrm{id}_{\mathsf{C}}$.
+        \item Unit isomorphism: the natural isomorphism $\iota$ is the identity.
+    \end{enumerate}
+}
+
+
+\section{Enriched Category}
+\dfn{Enriched Category}{
+    Let $\mathsf{V}$ be a monoidal category. An \textbf{$\mathsf{V}$-enriched category} $\mathsf{C}$ consists of
+    \begin{enumerate}[(i)]
+        \item Object set: a set of objects $\mathrm{Ob}(\mathsf{C})$.
+        \item $\mathrm{Hom}$-object: for each pair of objects $A,B\in \mathrm{Ob}(\mathsf{C})$, an object $\mathrm{Hom}_{\mathsf{C}}(A,B)\in \mathrm{Ob}(\mathsf{V})$.
+        \item Composition: for each triple of objects $A,B,C\in \mathrm{Ob}(\mathsf{C})$, a morphism in $\mathsf{V}$
+        \[
+            \circ:\mathrm{Hom}_{\mathsf{C}}(B,C)\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)\longrightarrow \mathrm{Hom}_{\mathsf{C}}(A,C)
+        \]
+        \item Identity: for each object $A\in \mathrm{Ob}(\mathsf{C})$, a morphism ${\mathcal{I}d}_A:1 \to \mathrm{Hom}_{\mathsf{C}}(A,A)$ in $\mathsf{V}$.
+    \end{enumerate}
+    such that the following conditions hold
+    \begin{enumerate}[(i)]
+        \item For each quadruple of objects $A,B,C,D\in \mathrm{Ob}(\mathsf{C})$, the following diagram in $\mathsf{V}$ commutes
+        \[
+            \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+                    \&[-130pt] {\left(\mathrm{Hom}(C,D)\otimes \mathrm{Hom}(B,C)\right)\otimes \mathrm{Hom}(A,B) } \arrow[ld, "\circ\;\otimes \,\mathrm{id}_{\mathrm{Hom}(A,B)}"'] \arrow[rr, "\cong"] \&  [-30pt]   \&  [-30pt]{\mathrm{Hom}(C,D)\otimes \left(\mathrm{Hom}(B,C)\otimes \mathrm{Hom}(A,B)\right) } \arrow[rd, "\mathrm{id}_{\mathrm{Hom}(C,D)}\,\otimes\;\circ "] \&  [-130pt]  \\[+35pt]
+{\mathrm{Hom}(B,D)\otimes \mathrm{Hom}(A,B) } \arrow[rrd, "\circ"'] \&                                                                                                                                    \&                                               \&                                                                                                               \& {\mathrm{Hom}(C,D)\otimes \mathrm{Hom}(A,C) } \arrow[lld, "\circ"] \\[+20pt]
+                    \&                                                                                                                                    \& {\mathrm{Hom}(A,D)} \&                                                                                                               \&                                                                   
+\end{tikzcd}
+    \]
+    \item For each pair of objects $A,B\in \mathrm{Ob}(\mathsf{C})$, the following diagrams in $\mathsf{V}$ commute
+    \[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+        {1\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)} \arrow[rr, "{{\mathcal{I}d}_B\otimes\,\mathrm{id}_{\mathrm{Hom}_{\mathsf{C}}(A,B)}}"] \arrow[rd, "\cong"'] \&                     \& {\mathrm{Hom}_{\mathsf{C}}(B,B)\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)} \arrow[ld, "\circ"] \\[+10pt]
+        \& {\mathrm{Hom}_{\mathsf{C}}(A,B)} \&   
+\end{tikzcd}
+    \]
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+            {\mathrm{Hom}_{\mathsf{C}}(A,B)\otimes 1} \arrow[rr, "\mathrm{id}_{\mathrm{Hom}_{\mathsf{C}}(A,B)}\otimes\,{\mathcal{I}d}_A "] \arrow[rd, "\cong"'] \&                     \& {\mathrm{Hom}_{\mathsf{C}}(A,B)\otimes \mathrm{Hom}_{\mathsf{C}}(A,A)} \arrow[ld, "\circ"] \\[+10pt]
+            \& {\mathrm{Hom}_{\mathsf{C}}(A,B)} \&
+    \end{tikzcd}
+        \]
+    \end{enumerate}
+}
+
+
+\section{Abelian Category}
+Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We will not use this term in this note.
+
+
+
+\dfn{Biproduct}{
+    Let $\mathsf{C}$ be an $\mathsf{Ab}$-category and $X_1$, $X_2$ be objects in $\mathsf{C}$. A \textbf{biproduct} of $X_1$ and $X_2$ is a diagram
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+            X_1 \arrow[r, "i_1", shift left] \& X_1\oplus X_2 \arrow[l, "p_1", shift left] \arrow[r, "p_2"', shift right] \& X_2 \arrow[l, "i_2"', shift right]
+    \end{tikzcd}
+    \]
+    such that
+    \begin{itemize}
+        \item $p_1\circ i_1=\mathrm{id}_{X_1}$, $p_2\circ i_2=\mathrm{id}_{X_2}$.
+        \item $i_1\circ p_1+ i_2\circ p_2=\mathrm{id}_{X_1\oplus X_2}$.
+    \end{itemize}
+    Empty biproduct is defined to be the zero object.
+}
+
+\prop{Equivalent Conditions of Existance of Biproduct}{
+    Let $\mathsf{C}$ be an $\mathsf{Ab}$-category and $X_1$, $X_2$ be objects in $\mathsf{C}$. Then the following are equivalent
+    \begin{enumerate}[(i)]
+        \item Product $X_1\times X_2$ exists.
+        \item Coproduct $X_1\amalg X_2$ exists.
+        \item Biproduct $X_1\oplus X_2$ exists.
+    \end{enumerate}
+}
+\prop{Equivalent Conditions of Existance of Zero Object}{
+    Let $\mathsf{C}$ be an $\mathsf{Ab}$-category. Then the following are equivalent
+    \begin{enumerate}[(i)]
+        \item Initial object (empty product) exists.
+        \item Terminal object (empty coproduct) exists.
+        \item Zero object (empty biproduct) exists.
+    \end{enumerate}
+}
+\prop{$\mathsf{Ab}$-enriched functors preserve biproducts}{
+    $\mathsf{Ab}$-enriched functors preserve finite biproducts.
+}
+\dfn{Additive Category}{
+    An $\mathsf{Ab}$-category is \textbf{additive} if it has all finite biproducts.
+}
+
+\dfn{Kernel and Cokernel}{
+    Suppose $\mathsf{C}$ is an abelian category with zero object and $f:X\to Y$ is a morphism in $\mathsf{C}$. The \textbf{kernel} of $f$ is the equalizer of $f$ and the zero morphism, which is denoted by $\ker f$. The universal property of kernel is given by the following diagram
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \& M \arrow[d, "g"] \arrow[rd, "0"] \arrow[ld, "\exists!\widetilde{g}"', dashed] \&   \\
+        \ker f \arrow[r] \& X \arrow[r, "f"']                                                             \& Y
+    \end{tikzcd}
+    \]
+    The \textbf{cokernel} of $f$ is the coequalizer of $f$ and the zero morphism, which is denoted by $\operatorname{coker}f$. The universal property of cokernel is given by the following diagram
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \& M                           \&                                                                     \\
+        X \arrow[r, "f"'] \arrow[ru, "0"] \& Y \arrow[u, "g"'] \arrow[r] \& \operatorname{coker} f \arrow[lu, "\exists!\widetilde{g}"', dashed]
+        \end{tikzcd}
+    \]
+
+}
+
+\dfn{Abelian Category}{
+    An additive category $\mathsf{C}$ is \textbf{abelian} if 
+    \begin{enumerate}[(i)]
+        \item Every morphism has both a kernel and a cokernel.
+        \item Every monomorphism and every epimorphism is normal. This means that every monomorphism is a kernel of some morphism, and every epimorphism is a cokernel of some morphism.
+    \end{enumerate}
+}
+
+\prop{}{
+    If $\mathsf{A}$ is an abelian category, then $\left[\mathsf{C}^\mathrm{op}, \mathsf{A}\right]$ is abelian for any small category $\mathsf{C}$.
+}
