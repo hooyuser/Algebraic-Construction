@@ -904,28 +904,28 @@ which in turn can be explicitly written as for any $f:L(X_1)\to Y_1$ in $\mathsf
 Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors. The \textbf{adjunction unit} $\eta$ of this adjunction is a natural transformation
 \begin{center}
     \begin{tikzcd}[ampersand replacement=\&]
-        \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"{name=A, above}, bend left=40] \arrow[r, "R\circ L"'{name=B, below}, bend right=40] 
+        \mathsf{C} \arrow[r, "\scalebox{1.2}{$\mathrm{id}_{\mathsf{C}}$}"{name=A, above}, bend left=40] \arrow[r, "\scalebox{1.2}{$R\circ L$}"'{name=B, below}, bend right=40] 
         \&[+25pt] \mathsf{C}
         \arrow[Rightarrow, shorten <=3.5pt, shorten >=3.5pt, from=A.south-|B, to=B, "\eta"]
     \end{tikzcd}
     \hspace{3cm}
     \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
-        \fill[fill=blue!20] (-2.5,0) rectangle (2.5,2.8);
-        \filldraw[fill=green!20] (-1,2) arc (180:360:1);
-        \fill[fill=green!20] (-1,2) rectangle (1,2.8);
-        \node[above=2pt] at (-1,2.8) {$F$};
-        \node[above=2pt] at (1,2.8) {$G$};
-        \node[above=2pt] at (0,1) {$\eta$};
-        \draw[fill=black] (0, 1) circle (0.07);
-        \draw (-1,2) -- (-1,2.8);
-        \draw (1,2) -- (1,2.8);
+        \begin{scope}       
+            \clip (-2.5,0.2) rectangle (2.5,3);     
+            \fill[fill=green!20] (-2.5,0.2) rectangle (2.5,3);  
+            \draw[fill=blue!20, rounded corners=0.6cm, line width=0.5pt] (-1,-1) rectangle (1, 2); 
+        \end{scope}
+        \node[below=2pt] at (-1,0.2) {$L$};
+        \node[below=2pt] at (1,0.2) {$R$};
+        \node[above=1pt] at (0,2) {$\eta$};
+        \draw[fill=black] (0, 2) circle (0.07);
     \end{tikzpicture}
 \end{center}
-defined by $\eta_X:=\varphi_{X,L(X)}(\mathrm{id}_{L(X)})$ for any $X\in \mathrm{Ob}(\mathsf{C})$, where $\varphi_{X,L(X)}$ is the natural bijection
+defined by $\eta_X:=\varphi_{X,L(X)}\left(\mathrm{id}_{L(X)}\right)$ for any $X\in \mathrm{Ob}(\mathsf{C})$, where $\varphi_{X,L(X)}$ is the natural bijection
 $$
 \begin{aligned}
     \varphi_{X,L(X)}:\operatorname{Hom}_{\mathsf{D}}\left(L(X), L(X)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(X, RL(X)) \\
-\operatorname{id}_{F X} & \longmapsto \eta_X 
+\operatorname{id}_{F(X)} & \longmapsto \eta_X 
 \end{aligned}
 $$
 The \textbf{adjunction counit} $\varepsilon$ of this adjunction is a natural transformation
@@ -937,27 +937,60 @@ The \textbf{adjunction counit} $\varepsilon$ of this adjunction is a natural tra
     \end{tikzcd}
     \hspace{3cm}
     \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
-        \fill[fill=blue!20] (-2.5,0) rectangle (2.5,2.8);
-        \filldraw[fill=green!20] (-1,2) arc (180:360:1);
-        \fill[fill=green!20] (-1,2) rectangle (1,2.8);
-        \node[above=2pt] at (-1,2.8) {$F$};
-        \node[above=2pt] at (1,2.8) {$G$};
-        \node[above=2pt] at (0,1) {$\eta$};
-        \draw[fill=black] (0, 1) circle (0.07);
-        \draw (-1,2) -- (-1,2.8);
-        \draw (1,2) -- (1,2.8);
+        \begin{scope} 
+            \clip (-2.5,0) rectangle (2.5,2.8);     
+            \fill[fill=blue!20] (-2.5,0) rectangle (2.5,2.8);  
+            \draw[fill=green!20, rounded corners=0.6cm, line width=0.5pt] (-1,1) rectangle (1, 4);
+        \end{scope}
+        \node[above=2pt] at (-1,2.8) {$R$};
+        \node[above=2pt] at (1,2.8) {$L$};
+        \node[above=2pt] at (0,1) {$\varepsilon$};
+        \draw[fill=black] (0, 1) circle (0.07);  
     \end{tikzpicture}
 \end{center}
+defined by $\varepsilon_Y:=\varphi_{R(Y),Y}^{-1}\left(\mathrm{id}_{R(Y)}\right)$ for any $Y\in \mathrm{Ob}(\mathsf{D})$, where $\varphi_{R(Y),Y}^{-1}$ is the natural bijection
+$$
+\begin{aligned}
+    \varphi_{R(Y),Y}^{-1}:\operatorname{Hom}_{\mathsf{D}}\left(R(Y), R(Y)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(LR(Y), R(Y)) \\
+\mathrm{id}_{R(Y)} & \longmapsto \varepsilon_Y
+\end{aligned}
+$$
 }
 \pf{
-    The naturality square of $\eta$ means that for any morphism $g:X_1\to X_2$ in $\mathsf{C}$, the following diagram commutes
+    By naturality of $\varphi$, for any morphism $g:X_2\to X_1$ in $\mathsf{C}$, we have the following commutative diagram
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathrm{id}_{L(X_1)}\arrow[d,mapsto]\&[-30pt]\ni\&[-29pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_1), L(X_1)\right) } \arrow[d, "{\varphi_{X_1,L(X_1)}}"'] \arrow[r,"{\left(L(g)\right)^*}"] \& [+12pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_1)\right) } \arrow[d, "{\varphi_{X_2,L(X_1)}}"] \&[+12pt] {\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_2)\right) } \arrow[d, "{\varphi_{X_2,L(X_2)}}"] \arrow[l,"{\left(L(g)\right)_*}"'] \&[-28pt]\in\&[-28pt]\mathrm{id}_{L(X_2)}\arrow[d,mapsto]\\[+20pt]
+        \eta_{X_1}\&\ni\&{\operatorname{Hom}_{\mathsf{C}}(X_1, RL(X_1))} \arrow[r,"g^*"]                                                    \& {\operatorname{Hom}_{\mathsf{C}}(X_2, RL(X_1))}                                                   \& {\operatorname{Hom}_{\mathsf{C}}(X_2, RL(X_2))} \arrow[l, "\left(RL(g)\right)_*"']            \&[-30pt]\in\&[-30pt]\eta_{X_2}       
+        \end{tikzcd}
+        \]
+        Since
+        \[
+        (L(g))^*\left(\mathrm{id}_{L(X_1)}\right)=L(g)=(L(g))_*\left(\mathrm{id}_{L(X_2)}\right),
+        \]
+        we have
+        \[
+        g^*(\eta_{X_1})=\varphi_{X_2,L(X_1)}(L(g))=\left(RL(g)\right)_*(\eta_{X_2}),
+        \]   
+    which implies the naturality square of $\eta$ commutes
 \[
     \begin{tikzcd}[ampersand replacement=\&]
-        X_1 \arrow[d, "{\eta_{X_1}}"'] \arrow[r, "g"] \&[+50pt]X_2\arrow[d, "{\eta_{X_2}}"]    \\[+20pt]
-         R(L(X_1))\arrow[r, "R(L(g))"']\& R(L(X_2))
+        X_2 \arrow[d, "{\eta_{X_2}}"'] \arrow[r, "g"] \&[+18pt]X_1\arrow[d, "{\eta_{X_1}}"]    \\[+15pt]
+         RL(X_2)\arrow[r, "RL(g)"']\& RL(X_1)
     \end{tikzcd}
 \] 
+Similarly, we can show that for any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, the naturality square of $\varepsilon$ commutes
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        LR(Y_1) \arrow[d, "{\varepsilon_{Y_1}}"'] \arrow[r, "LR(h)"] \&[+18pt]LR(Y_2)\arrow[d, "{\varepsilon_{Y_2}}"]    \\[+15pt]
+         Y_1\arrow[r, "h"']\& Y_2
+    \end{tikzcd}
+\]
 }
+\prop{Snake Equations}{
+    
+}
+
 \section{Monoidal Category}
 \dfn{Monoidal Category}{
     A monoidal category is a category $\mathsf{V}$ equipped with
