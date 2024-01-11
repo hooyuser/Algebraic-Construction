@@ -3,7 +3,7 @@
 \input{preamble}
 
 %\tikzexternalize % activate!
-
+\usepackage[page,toc,titletoc,title]{appendix}
 \usepackage{chemfig}
 \usepackage{relsize}
 \usepackage{multirow}
@@ -127,126 +127,8 @@ We use sans-serif font for categories. Some common categories are
 \include{valuation_theory}
 \include{number_theory}
 
+\include{appendices}
 
-\chapter*{Appendix}
-\begin{table}[h]
-    \centering
-    \renewcommand{\arraystretch}{1.6}
-    \begin{tabular}{l|m{5.3cm}|m{5.3cm}}
-        \toprule
-        \textbf{Category}       & \multicolumn{1}{c|}{\textbf{Initial Object}} & \multicolumn{1}{c}{\textbf{Terminal Object}}             \\ 
-        \midrule
-        \midrule
-        $\mathsf{Set}$ & \multicolumn{1}{c|}{$\varnothing$}  & \multicolumn{1}{c}{$\{*\}$} \\ \midrule
-        $\mathsf{Top}$ & \multicolumn{1}{c|}{$\varnothing$}  & \multicolumn{1}{c}{$\{*\}$} \\ \midrule
-        $\mathsf{Grp}$ & \multicolumn{2}{c}{$\{0\}$}                                       \\ \midrule
-        $R\text{-}\mathsf{Mod}$  & \multicolumn{2}{c}{$\{0\}$}                                       \\ \midrule
-        $\mathsf{Ring}$ & \multicolumn{1}{c|}{$\mathbb{Z}$} & \multicolumn{1}{c}{$\{0\}$}            \\ \midrule
-        $\mathsf{Sch}$ & \multicolumn{1}{c|}{$\spec\mathbb{Z}$} & \multicolumn{1}{c}{$\spec \{0\}=\varnothing$ }           \\ \midrule
-        $\mathsf{Field}_p$ & \multicolumn{1}{c|}{\begin{minipage}{.3\linewidth}$$
-            \begin{array}{ll} 
-                \mathbb{Q} & \text{if } p=0 \\
-                \mathbb{F}_p & \text{if } p>0 
-            \end{array}
-            $$\end{minipage}} &             \\ \bottomrule
-    \end{tabular}
-\end{table}
-\newpage
-
-\begin{center}
-    \Large
-    \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|P{4.4cm}|m{5.3cm}|m{5.3cm}|}
-        \hline
-        {\bf Diagram} &\multicolumn{1}{c|}{\bf  Limit }& \multicolumn{1}{c|}{\bf Colimit } \\ 
-        \hline\hline
-        Empty Category $\varnothing$ & Terminal Object
-        \begin{center}
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                \circ \arrow[r, dash pattern=on 4pt off 2pt, draw=arrowRed] & \varprojlim\\[-2em]
-            \end{tikzcd}
-        \end{center}
-        & Initial Object
-        \begin{center}
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                 \varinjlim\arrow[r, dash pattern=on 4pt off 2pt, draw=arrowRed]&\circ  \\[-2em]
-            \end{tikzcd}
-        \end{center}
-        \\ 
-        \hline
-        Discrete Category  $\bullet\;\bullet\;\bullet\;\bullet\;\cdots$& Product & Coproduct \\
-        \hline
-        $\bullet\qquad\bullet$ & Finite Product
-        \begin{center}
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                & \circ \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[ld, draw=cyan] \arrow[rd, draw=cyan] &         \\
-        \bullet & \varprojlim \arrow[l, draw=arrowBlue] \arrow[r, draw=arrowBlue]               & \bullet
-        \end{tikzcd}
-        \end{center} & Finite Coproduct 
-        \begin{center}
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                & \circ   &         \\
-        \bullet \arrow[r, draw=arrowBlue]  \arrow[ru, draw=cyan] & \varinjlim  \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]             & \bullet\arrow[l, draw=arrowBlue]\arrow[lu, draw=cyan]
-        \end{tikzcd}
-        \end{center}\\
-        \hline
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                \bullet \arrow[r] &[-0.8em] \bullet &[-0.8em] \bullet \arrow[l]
-            \end{tikzcd}
-        & Pullback    
-        \begin{center}
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-            \circ \arrow[rd, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[rrd, draw=cyan, bend left] \arrow[rdd, draw=cyan, bend right] &[-2em]                                 &  [-0.4em]                  \\[-0.3cm]
-                                                                                    & \varprojlim \arrow[d, draw=arrowBlue] \arrow[r, draw=arrowBlue] & \bullet \arrow[d] \\
-                                                                                    & \bullet \arrow[r]               & \bullet          
-            \end{tikzcd} 
-        \end{center}
-        & Pushout 
-        \begin{center}
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-            \circ   &[-2em]                                 &  [-0.4em]                  \\[-0.3cm]
-                                                                                    & \varinjlim\arrow[lu, dash pattern=on 4pt off 2pt, draw=arrowRed]  & \bullet  \arrow[llu, draw=cyan, bend right] \arrow[l, draw=arrowBlue]\\
-                                                                                    & \bullet \arrow[u, draw=arrowBlue]   \arrow[luu, draw=cyan, bend left]           & \bullet  \arrow[l] \arrow[u]      
-            \end{tikzcd} 
-        \end{center} \\
-        \hline
-        $\begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-            \bullet \arrow[r, shift left] \arrow[r, shift right] & \bullet
-            \end{tikzcd}$ & Equalizer  \begin{center}
-                \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                    \circ \arrow[rd, draw=cyan] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] &                                                      &         \\
-                    \varprojlim \arrow[r, draw=arrowBlue]    & \bullet \arrow[r, shift left] \arrow[r, shift right] & \bullet
-                    \end{tikzcd}
-            \end{center}  & Coequalizer \begin{center}
-                \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                    &                              & \circ                        \\
-                \bullet \arrow[r, shift left] \arrow[r, shift right] & \bullet \arrow[r, draw=arrowBlue] \arrow[ru, draw=cyan] & \varinjlim \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]
-                \end{tikzcd}
-            \end{center}\\
-        \hline
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt, shorten <=-3.5pt, shorten >=-3.5pt}]
-                \bullet &[-1.5em] \bullet \arrow[l] &[-1.5em] \bullet \arrow[l] &[-1.5em] \cdots \arrow[l]
-            \end{tikzcd}
-        
-            & Inverse Limit
-        \begin{center}
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                &   [-1.5em]                &[-1em] \circ \arrow[rdd, draw=cyan] \arrow[ldd, draw=cyan] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] & [-1em]                  \\
-                &                   & \varprojlim \arrow[ld, draw=arrowBlue, shorten <=-4pt] \arrow[rd, draw=arrowBlue, shorten <=-3pt]               &                   \\[-0.3cm]
-        \bullet & \bullet \arrow[l, shorten <=-3pt, shorten >=-3pt] &                                                 & \cdots \arrow[ll]
-        \end{tikzcd}
-    \end{center}
-        & Direct Limit 
-        \begin{center}
-            \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
-                &   [-1.5em]                &[-1em] \circ  & [-1em]                  \\
-                &                   & \varinjlim \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]       &                   \\[-0.3cm]
-        \bullet \arrow[r, shorten <=-3pt, shorten >=-3pt]& \bullet  \arrow[ru, draw=arrowBlue, shorten >=-4.7pt]        \arrow[rr] \arrow[ruu, draw=cyan] &                                                 & \cdots \arrow[lu, draw=arrowBlue, shorten >=-2.5pt] \arrow[luu, draw=cyan]
-        \end{tikzcd}
-    \end{center}\\
-        \hline
-        \end{tabular}
-    \end{center}
 % \begin{Theorem}{Title}{label}
 %     This is the statement of the theorem.
 % \end{Theorem}
