@@ -340,6 +340,303 @@ commutative triangles
 }
 
 \section{String Diagram}
+String diagrams are a convenient way to represent the composition of natural transformations. From top to bottom, a string diagram represents a series of vertical compositions of natural transformations. 
+
+Suppose $\varphi:F\Rightarrow G$ is a natural transformation between functors $F,G:\mathsf{C}\to \mathsf{D}$. The string diagram for $\varphi$ is just the Poincare dual of its 2-cell diagram. 
+
+\begin{center}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+    
+        % Draw background
+        \fill[leftcolor] (0,0) rectangle (2,2);
+        \fill[rightcolor] (2,0) rectangle (4,2);
+    
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (2,0) -- (2,2);
+        \filldraw [black] (2,1) circle (2pt) node[left=1pt] {$\varphi$};
+    
+        % Label axes
+        \draw (2,0) node[below] {$G$};
+        \draw (2,2) node[above] {$F$};
+        \draw (7,1) node {$=$};
+    \end{tikzpicture}
+    \hspace{1cm}
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[r, "F"{name=A, above}, bend left=40] \arrow[r, "G"'{name=B, below}, bend right=40] \&[+30pt] \mathsf{D}
+        \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\varphi"]
+    \end{tikzcd}
+\end{center}
+
+When we say two string diagrams are equal, we mean that the vertical compositions of natural transformations they represent are equal.
+
+The point(0-cells), strings(1-cells), and 2-cells in a string diagram can be interpreted as follows
+\begin{itemize}
+    \item 2-cells: categories. 2-cells with different colors represent different categories.
+    \item 1-cells: functors. Each 1-cell has exactly two adjacent 2-cells. The left and right adjacent 2-cells are the domain and codomain of the functor respectively. We can think each 1-cell has two end points connected to either a natural transformation or the point at infinity $\infty$. If an end point is connected to $\infty$, then we say that it is a \textbf{free end}. The end point on the top of a string and the end point on the bottom of a string are called the \textbf{top end} and \textbf{bottom end} respectively.
+    \item 0-cells: natural transformations. Each 0-cell has exactly two adjacent 1-cells. The top and bottom adjacent 1-cells are the domain and codomain of the natural transformation respectively. 
+\end{itemize}
+
+\subsection{Basic Operations}
+\subsubsection{Composition of Functors}
+If two string $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{F}$ has the same top ends and bottom ends, then we can glue them together to form a new string $G\circ F$. Depending on whether the top ends and bottom ends are free or not, we can illustrate the following cases
+
+
+\begin{center}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm]
+            % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{midcolor}{RGB}{204,204,255} % light purple
+        \definecolor{rightcolor}{RGB}{204,255,204}
+        \begin{scope}
+                % Draw background
+            \fill[leftcolor] (0,0) rectangle (2,4);
+            \fill[midcolor] (2,0) rectangle (4,4);
+            \fill[rightcolor] (4,0) rectangle (6,4);
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,0) -- (2,4);
+            \draw[line width=0.7pt] (4,0) -- (4,4);
+    
+        
+            % Label axes
+            \draw (2,4) node[above] {$F$};
+            \draw (4,4) node[above] {$G$};
+        \end{scope}
+
+        \draw (7,2) node {$=$};
+
+        \begin{scope}[shift={(8,0)}]
+            % Draw background
+            % Draw background
+            \fill[leftcolor] (0,0) rectangle (2,4);
+            \fill[rightcolor] (2,0) rectangle (4,4);
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,0) -- (2,4);
+
+        
+            % Label axes
+            \draw (2,4) node[above] {$G\circ F$};
+        \end{scope}
+
+        
+
+        \begin{scope}[shift={(16,0)}]
+            % Draw background
+    
+            \fill[leftcolor] (-1,0) rectangle (2,4);
+            \fill[rightcolor] (2,0) rectangle (5,4);
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.5pt] (1,1) rectangle (3, 3);
+    
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,0) -- (2,1);
+            \draw[line width=0.7pt] (2,3) -- (2,4);
+            \filldraw [black] (2,1) circle (2pt);
+            \filldraw [black] (2,3) circle (2pt);
+        
+            % Label axes
+            \draw (1,2) node[left] {$F$};
+            \draw (3,2) node[right] {$G$};
+        \end{scope}
+        \draw (22,2) node {$=$};
+        \begin{scope}[shift={(23,0)}]
+                % Draw background
+            % Draw background
+            \fill[leftcolor] (0,0) rectangle (2,4);
+            \fill[rightcolor] (2,0) rectangle (4,4);
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,0) -- (2,4);
+            \filldraw [black] (2,1) circle (2pt);
+            \filldraw [black] (2,3) circle (2pt);
+        
+            % Label axes
+            \draw (2,2) node[left] {$G\circ F$};
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm]
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{midcolor}{RGB}{204,204,255} % light purple
+        \definecolor{rightcolor}{RGB}{204,255,204}
+
+        \begin{scope}[shift={(0,0)}]
+            \begin{scope}
+                \clip  (0,0) rectangle (6,4);
+                    % Draw background
+                \fill[leftcolor] (0,0) rectangle (3,4);
+                %\fill[midcolor] (2,0) rectangle (4,4);
+                \fill[rightcolor] (3,0) rectangle (6,4);
+                \filldraw[fill=blue!20] (2,5)-- (2,4) .. controls (2,2) and (2.5, 1) .. (3,1).. controls (3.5,1) and (4, 2) .. (4,4)--(4,5)--cycle;
+            \end{scope}
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (3,0) -- (3,1);
+            \filldraw [black] (3,1) circle (2pt);
+            
+        
+            % Label axes
+            \draw (2,4) node[above] {$F$};
+            \draw (4,4) node[above] {$G$};
+        \end{scope}
+
+        \draw (7,2) node {$=$};
+
+        \begin{scope}[shift={(8,0)}]
+            % Draw background
+            % Draw background
+            \fill[leftcolor] (0,0) rectangle (2,4);
+            \fill[rightcolor] (2,0) rectangle (4,4);
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,0) -- (2,4);
+            \filldraw [black] (2,1) circle (2pt);
+        
+            % Label axes
+            \draw (2,4) node[above] {$G\circ F$};
+        \end{scope}
+
+            \begin{scope}[shift={(15,0)}]
+            \begin{scope}
+                \clip  (0,0) rectangle (6,4);
+                    % Draw background
+                \fill[leftcolor] (0,0) rectangle (3,4);
+                \fill[rightcolor] (3,0) rectangle (6,4);
+                \filldraw[fill=blue!20] (2,-1)-- (2,0) .. controls (2,2) and (2.5, 3) .. (3,3).. controls (3.5,3) and (4, 2) .. (4,0)--(4,-1)--cycle;
+            \end{scope}
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (3,4) -- (3,3);
+            \filldraw [black] (3,3) circle (2pt);
+            
+        
+            % Label axes
+            \draw (2,0) node[below] {$F$};
+            \draw (4,0) node[below] {$G$};
+        \end{scope}
+
+        \draw (22,2) node {$=$};
+
+        \begin{scope}[shift={(23,0)}]
+            % Draw background
+            % Draw background
+            \fill[leftcolor] (0,0) rectangle (2,4);
+            \fill[rightcolor] (2,0) rectangle (4,4);
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,0) -- (2,4);
+            \filldraw [black] (2,3) circle (2pt);
+        
+            % Label axes
+            \draw (2,0) node[below] {$G\circ F$};
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+
+\subsubsection{Vertical Composition}
+The vertical composition of natural transformations $\varphi:F\Rightarrow G$ and $\psi:G\Rightarrow H$ collapses two adjacent points in a string into one single point and ``eats" the intermediate segment, which is illustrated as follows
+
+\begin{center}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+        \begin{scope}
+            % Draw background
+            \fill[leftcolor] (0,-2) rectangle (2,2);
+            \fill[rightcolor] (2,-2) rectangle (4,2);
+        
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,-2) -- (2,2);
+            \filldraw [black] (2,1) circle (2pt) node[left=1pt] {$\varphi$};
+            \filldraw [black] (2,-1) circle (2pt) node[left=1pt] {$\psi$};
+        
+            % Label axes
+            \draw (2,-2) node[below] {$H$};
+            \draw (2,0) node[left] {$G$};
+            \draw (2,2) node[above] {$F$};
+        \end{scope}
+
+        \draw (6,0) node {$=$};
+
+        \begin{scope}[shift={(8,0)}]
+            % Draw background
+            \fill[leftcolor] (0,-2) rectangle (2,2);
+            \fill[rightcolor] (2,-2) rectangle (4,2);
+        
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,-2) -- (2,2);
+            \filldraw [black] (2,0) circle (2pt) node[left=1pt] {$\psi\circ \varphi$};
+    
+            % Label axes
+            \draw (2,-2) node[below] {$H$};
+            \draw (2,2) node[above] {$F$};
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+\subsubsection{Horizontal Composition}
+The horizontal composition of natural transformations $\varphi:F\Rightarrow G$ and $\theta:H\Rightarrow I$ stick two natural transformations in a horizontal line together, which is illustrated as follows
+
+
+\begin{center}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{midcolor}{RGB}{204,204,255} % light purple
+        \definecolor{rightcolor}{RGB}{204,255,204}
+        \begin{scope}
+             % Draw background
+            \fill[leftcolor] (0,0) rectangle (2,4);
+            \fill[midcolor] (2,0) rectangle (4,4);
+            \fill[rightcolor] (4,0) rectangle (6,4);
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,0) -- (2,4);
+            \filldraw [black] (2,2) circle (2pt) node[anchor=east] {$\varphi$};
+            \draw[line width=0.7pt] (4,0) -- (4,4);
+            \filldraw [black] (4,2) circle (2pt) node[anchor=east] {$\theta$};
+        
+            % Label axes
+            \draw (2,0) node[below] {$G$};
+            \draw (2,4) node[above] {$F$};
+            \draw (4,0) node[below] {$I$};
+            \draw (4,4) node[above] {$H$};
+        \end{scope}
+
+        \draw (7.5,2) node {$=$};
+
+        \begin{scope}[shift={(9,0)}]
+            % Draw background
+            % Draw background
+            
+             \begin{scope}
+                \clip (0,0) rectangle (6,4);
+                \fill[leftcolor] (0,0) rectangle (3,4);
+                \fill[rightcolor] (3,0) rectangle (6,4);
+                \filldraw[fill=blue!20, line width=0.7pt] (2,5)-- (2,4) .. controls (2, 2.5) and (2.5, 2) .. (3,2).. controls (3.5,2) and (4, 2.5) .. (4,4)--(4,5)--cycle;
+                \filldraw[fill=blue!20, line width=0.7pt] (2,-1)-- (2,0) .. controls (2,1.5) and (2.5, 2) .. (3,2).. controls (3.5,2) and (4, 1.5) .. (4,0)--(4,-1)--cycle;
+            \end{scope}
+        
+            % Draw vertical line and point
+            \filldraw [black] (3,2) circle (2pt) node[left=9pt] {$\theta\circ\varphi$};
+        
+            % Label axes
+             \draw (2,0) node[below] {$G$};
+            \draw (2,4) node[above] {$F$};
+            \draw (4,0) node[below] {$I$};
+            \draw (4,4) node[above] {$H$};
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+
+
+
 \subsection{Morphism as Natural Transformation}
 If $f:X\to Y$ is a morphism in $\mathsf{C}$, then the following string diagram should be understood as follows
 \begin{center}
