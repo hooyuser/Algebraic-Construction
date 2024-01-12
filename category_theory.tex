@@ -204,7 +204,7 @@ It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
             \mathsf{C}\&[-25pt]\&[+10pt]\&[-30pt][\mathsf{J},\mathsf{C}]\&[-30pt]\&[-30pt] \&\&\&\\ [-15pt] 
             x  \arrow[dd, "f"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]\Delta x\arrow[dd, Rightarrow, "f_*"{name=R}] \& \hspace{30pt}\& x\arrow[r, "\mathrm{id}_x"]\arrow[dd, "f"']\&x\arrow[dd, "f"]\\ [-10pt] 
+            \& [-30pt]\Delta x\arrow[dd, Rightarrow, "f_\bullet"{name=R}] \& \hspace{30pt}\& x\arrow[r, "\mathrm{id}_x"]\arrow[dd, "f"']\&x\arrow[dd, "f"]\\ [-10pt] 
             \&  \phantom{.}\arrow[r, "\Delta", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
             y  \& \& \& \Delta y\&\& y\arrow[r, "\mathrm{id}_y"']\&y
         \end{tikzcd}
@@ -339,7 +339,128 @@ commutative triangles
     \]
 }
 
+\section{String Diagram}
+\subsection{Morphism as Natural Transformation}
+If $f:X\to Y$ is a morphism in $\mathsf{C}$, then the following string diagram should be understood as follows
+\begin{center}
+\begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+    % Define colors
+    \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+    \definecolor{rightcolor}{RGB}{204,204,255} % light purple
 
+    % Draw background
+    \fill[leftcolor] (0,0) rectangle (2,2);
+    \fill[rightcolor] (2,0) rectangle (4,2);
+
+    % Draw vertical line and point
+    \draw[line width=0.7pt] (2,0) -- (2,2);
+    \filldraw [black] (2,1) circle (2pt) node[anchor=east] {$f$};
+
+    % Label axes
+    \draw (2,0) node[below] {$Y$};
+    \draw (2,2) node[above] {$X$};
+    \draw (7,1) node {$=$};
+\end{tikzpicture}
+\hspace{1cm}
+\begin{tikzcd}[ampersand replacement=\&]
+    \mathsf{1} \arrow[r, "\Delta X"{name=A, above}, bend left=40] \arrow[r, "\Delta Y"'{name=B, below}, bend right=40] \&[+30pt] \mathsf{C}
+    \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "f_{\bullet}"]
+\end{tikzcd}
+\end{center}
+
+Suppose $\varphi:F\Rightarrow G$ is a natural transformation between functors $F,G:\mathsf{C}\to \mathsf{D}$. Then the functoriality of $\varphi$ can be described by the following string diagram
+\[
+\begin{tikzpicture}[x=1cm,y=1cm, baseline=(current bounding box.center)]
+    % Define colors
+    \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+    \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+
+    % Draw background
+    \fill[leftcolor] (0,0) rectangle (1,3);
+    \fill[green!20] (1,0) rectangle (3,3);
+    \begin{scope} 
+        \clip (1,0) rectangle (3, 3); 
+        \draw[fill=blue!20, rounded corners=1cm, line width=0.7pt] (0,2) rectangle (2, 5);
+        \draw[fill=blue!20, rounded corners=1cm, line width=0.7pt] (0,2) rectangle (2, -1);
+        %\fill[color=green!20] (2,0) rectangle (3,3);
+        %\filldraw[fill=green!20, rounded corners=1cm] (2, 4) -- (2, 1) -- (1, 1) -- (2, 1) -- (2, -1) -- (4, -1) -- (4, 4) -- cycle;
+    \end{scope} 
+    % Draw vertical line and point
+    \draw[line width=0.7pt] (1,0) -- (1,3);
+    \filldraw [black] (1,1) circle (2pt) node[left=2pt] {$f$};
+    \filldraw [black] (1,2) circle (2pt) node[left=2pt] {$\varphi_X$};
+    % Label axes
+    \draw (1,0) node[below] {$Y$};
+    \draw (1,3) node[above] {$X$};
+    \draw (2,0) node[below] {$G$};
+    \draw (2,3) node[above] {$F$};
+\end{tikzpicture}
+\hspace{5pt}=\hspace{5pt}
+\begin{tikzpicture}[x=1cm,y=1cm, baseline=(current bounding box.center)]
+    % Define colors
+    \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+    \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+
+    % Draw background
+    \fill[leftcolor] (0,0) rectangle (1,3);
+    \fill[blue!20] (1,0) rectangle (2,3);
+    \fill[green!20] (2,0) rectangle (3,3);
+ 
+    % Draw vertical line and point
+    \draw[line width=0.7pt] (1,0) -- (1,3);
+    \draw[line width=0.7pt] (2,0) -- (2,3);
+    \filldraw [black] (1,1.5) circle (2pt) node[left=2pt] {$f$};
+    \filldraw [black] (2,1.5) circle (2pt) node[left=2pt] {$\varphi$};
+    % Label axes
+    \draw (1,0) node[below] {$Y$};
+    \draw (1,3) node[above] {$X$};
+    \draw (2,0) node[below] {$G$};
+    \draw (2,3) node[above] {$F$};
+\end{tikzpicture}
+\hspace{5pt}=\hspace{5pt}
+\begin{tikzpicture}[x=1cm,y=1cm, baseline=(current bounding box.center)]
+    % Define colors
+    \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+    \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+
+    % Draw background
+    \fill[leftcolor] (0,0) rectangle (1,3);
+    \fill[green!20] (1,0) rectangle (3,3);
+    \begin{scope} 
+        \clip (1,0) rectangle (3, 3); 
+        \draw[fill=blue!20, rounded corners=1cm, line width=0.7pt] (0,1) rectangle (2, 4);
+        \draw[fill=blue!20, rounded corners=1cm, line width=0.7pt] (0,1) rectangle (2, -2);
+        %\fill[color=green!20] (2,0) rectangle (3,3);
+        %\filldraw[fill=green!20, rounded corners=1cm] (2, 4) -- (2, 1) -- (1, 1) -- (2, 1) -- (2, -1) -- (4, -1) -- (4, 4) -- cycle;
+    \end{scope} 
+    % Draw vertical line and point
+    \draw[line width=0.7pt] (1,0) -- (1,3);
+    \filldraw [black] (1,1) circle (2pt) node[left=2pt] {$\varphi_Y$};
+    \filldraw [black] (1,2) circle (2pt) node[left=2pt] {$f$};
+    % Label axes
+    \draw (1,0) node[below] {$Y$};
+    \draw (1,3) node[above] {$X$};
+    \draw (2,0) node[below] {$G$};
+    \draw (2,3) node[above] {$F$};
+\end{tikzpicture}
+\]
+Note that appending the string diagram \begin{tikzpicture}[x=0.3cm,y=0.3cm, baseline=(current bounding box.center)]
+    % Define colors
+    \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+    \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+
+    % Draw background
+    \fill[leftcolor] (0,0) rectangle (2,2);
+    \fill[rightcolor] (2,0) rectangle (4,2);
+
+    % Draw vertical line and point
+    \draw[line width=0.7pt] (2,0) -- (2,2);
+    \filldraw [black] (2,1) circle (2pt) node[anchor=east] {$f$};
+
+    % Label axes
+    \draw (2,0) node[below] {$Y$};
+    \draw (2,2) node[above] {$X$};
+\end{tikzpicture} to the left of the string diagram of $\varphi$ is equivalent to evaluating $\varphi$ at $f$.
 
 \section{Limit and Colimit}
 \dfn{Cone}{
@@ -368,7 +489,7 @@ commutative triangles
     \item Morphisms: The morphisms in $\mathsf{Cone}(\textsf{C},F)$ are commutative triangles shown as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \Delta C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_*"'] \& \\
+            \Delta C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_\bullet"'] \& \\
             \&  F\\
             \Delta C' \arrow[ru, Rightarrow, "h^{\prime}"'] \&
             \end{tikzcd}
@@ -419,7 +540,7 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     \item Morphisms: The morphisms in $\mathsf{Cocone}(F,\textsf{C})$ are commutative triangles shown as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \&\Delta C \arrow[dd, Rightarrow, "f_*"]  \\
+            \&\Delta C \arrow[dd, Rightarrow, "f_\bullet"]  \\
             F \arrow[ru, Rightarrow, "h"]\arrow[rd, Rightarrow, "h^{\prime}"']\&  \\
             \&\Delta C' 
             \end{tikzcd}
@@ -987,9 +1108,190 @@ Similarly, we can show that for any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, the
     \end{tikzcd}
 \]
 }
-\prop{Snake Equations}{
-    
+\prop{Adjunction Isomorphism Determined by Unit or Counit}{
+    Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then 
+   \begin{align*}
+\varphi_{X,Y}(f) & =G f \circ \eta_X: X \rightarrow G Y, \quad \forall f: F X \rightarrow Y , \\
+\varphi_{X,Y}^{-1}(g) & =\varepsilon_Y \circ F g: F X \rightarrow Y, \quad \forall g: X \rightarrow G Y .
+   \end{align*}
 }
+\pf{
+    \[
+		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
+			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(A,X)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
+			u=\phi_A(\mathrm{id}_A)\&\in\&{F(A)}\arrow[rr, "{F(f)}"'] \&  \& {F(X)}  \&\ni\& \phi_X(f)     
+		\end{tikzcd}
+	\]
+}
+\lemm{Snake Equations}{
+    Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then we have the following equalities of natural transformations
+    \begin{center}
+        \begin{tikzpicture}[x=0.8cm,y=0.8cm]
+            \node at (-7.4,1.5) {${\left[L \xRightarrow{L \eta}LR L\xRightarrow{\varepsilon L} L\right]=\mathrm{id}_L}$};
+            \begin{scope} 
+                \clip (-2.4,0) rectangle (2.4,3);     
+                \fill[fill=green!20] (-2.5,0) rectangle (2.5,3);  
+                \filldraw[fill=blue!20, rounded corners=0.48cm, line width=0.5pt] (-1.2,-1) -- (-1.2, 2.1)-- (0,2.1)-- (0,0.9)-- (1.2,0.9)
+                   -- (1.2,4)-- (4,4)-- (4,-1)--cycle;
+            \end{scope}
+        
+            \node[above] at (1.2,3) {$L$};
+            \node[below] at (-1.2,0) {$L$};
+        
+            \draw[fill=black] (0.6, 0.9) circle (0.07);  
+            \node[above=2pt] at (0.6, 0.9) {$\varepsilon$};
+            
+            \draw[fill=black] (-0.6, 2.1) circle (0.07); 
+            \node[above=2pt] at (-0.6, 2.1) {$\eta$};
+        
+            \node at (3.2, 1.5) {$=$};
+        
+            \begin{scope} 
+                \clip (4,0) rectangle (6.4,3); 
+                \fill[fill=green!20] (4,0) rectangle (6.4,3); 
+                \filldraw[fill=blue!20, line width=0.5pt] (5.2,-1) rectangle (7,4);  
+            \end{scope} 
+            
+            \node[below] at (5.2,0) {$L$};
+            \node[above] at (5.2,3) {$L$};
+        \end{tikzpicture}
+    \end{center}
+    \begin{center}
+        \begin{tikzpicture}[x=0.8cm,y=0.8cm]
+            \node at (-7.3,1.5) {${\left[R \xRightarrow{\eta R}RLR \xRightarrow{R \varepsilon}R\right]=\mathrm{id}_R}$};
+            \begin{scope} 
+                \clip (-2.4, 0) rectangle (2.4, 3);     
+                \fill[fill=blue!20] (-2.5, 0) rectangle (2.5,3);  
+                \filldraw[fill=green!20, rounded corners=0.48cm] (-1.2, 4) -- (-1.2, 0.9)-- (0, 0.9)-- (0, 2.1)-- (1.2, 2.1)
+                -- (1.2, -1)-- (4, -1)-- (4, 4)--cycle;
+            \end{scope}
+        
+            \node[below] at (1.2,0) {$R$};
+            \node[above] at (-1.2,3) {$R$};
+        
+            \draw[fill=black] (0.6, 2.1) circle (0.07);  
+            \node[above=2pt] at (0.6, 2.1) {$\eta$};
+            
+            \draw[fill=black] (-0.6, 0.9) circle (0.07); 
+            \node[above=2pt] at (-0.6, 0.9) {$\varepsilon$};
+        
+            \node at (3.2, 1.5) {$=$};
+        
+            \begin{scope} 
+                \clip (4,0) rectangle (6.4,3); 
+                \fill[fill=blue!20] (4,0) rectangle (6.4,3); 
+                \filldraw[fill=green!20] (5.2,-1) rectangle (7,4);  
+            \end{scope} 
+            
+            \node[below] at (5.2,0) {$R$};
+            \node[above] at (5.2,3) {$R$};
+        \end{tikzpicture}
+    \end{center}
+}
+\dfn{Wire Bending}{
+Let $\mathsf{C}$, $\mathsf{D}$, $\mathsf{C'}$, $\mathsf{D'}$ be categories and $L,R,L',R',H,K$ be functors shown in the following diagram
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[dd, "L"', bend right=38] \arrow[r, "H"]  \&[+36pt] \mathsf{C'} \arrow[dd, "L'"', bend right=38] \\[-5pt]
+        \dashv                                                  \& \dashv                                    \\[-5pt]
+        \mathsf{D} \arrow[uu, "R"', bend right=38] \arrow[r, "K"'] \& \mathsf{D'} \arrow[uu, "R'"', bend right=38]
+        \end{tikzcd}    
+\]
+There are bijections between the following sets of natural transformations
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        {\mathrm{Hom}_{[\mathsf{C}, \mathsf{D'}]}\left(L'H, KL\right) } \arrow[r, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[r, shift right=1pt,leftharpoondown, "\triangleleft"']  \& {\mathrm{Hom}_{[\mathsf{C}, \mathsf{C'}]}(H, R'KL) } \arrow[d, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[d, shift right=1pt,leftharpoondown, "\triangleleft"']   \\
+        { \mathrm{Hom}_{[\mathsf{D}, \mathsf{D'}]}\left(L'HR, K\right)} \arrow[u, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[u, shift right=1pt,leftharpoondown, "\triangleleft"'] \& {\mathrm{Hom}_{[\mathsf{D}, \mathsf{C'}]}(HR, R'K) } \arrow[l, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[l, shift right=1pt,leftharpoondown, "\triangleleft"'] 
+        \end{tikzcd}    
+\]
+natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\triangleright\triangleright\triangleright\hspace{2.15pt}\triangleright=\mathrm{id}$. $\triangleright$ is called \textbf{wire bending} because its action can be visualized as bending the wires of adjoint pairs in the following string diagrams
+
+\begin{center}
+\begin{tikzpicture}[x=0.8cm,y=0.8cm, baseline=(current bounding box.center)]
+    \draw [|-To] (3,1) -- (4,1) node[midway,above] {$\triangleright$};
+    \draw [|-To] (7,-1) -- (7,-2) node[midway,right] {$\triangleright$};
+    \draw [|-To] (4,-4) -- (3,-4) node[midway,above] {$\triangleright$};
+    \draw [|-To] (0,-2) -- (0,-1) node[midway,right] {$\triangleright$};
+    \begin{scope} 
+        %\clip (-2,0) rectangle (2,2);     
+        \fill[fill=green!20] (-2,0) rectangle (0,2);  
+        \fill[fill=blue!45] (0,0) rectangle (2,2); 
+        \fill[fill=blue!20] (-1,0) .. controls (-1,0.4) and (-0.8, 1) .. (0,1)--(0,0)--cycle;
+        \fill[fill=green!40] (1,2) .. controls (1,1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
+    \end{scope}
+    \draw[line width=0.5pt] (0,0) -- (0,2);
+    \draw[line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
+    
+    \node[above=2pt] at (0, 2) {$H$};
+    \node[below=2pt] at (0, 0) {$K$};
+    \node[below=2pt] at (-1, 0) {$L$};
+    \node[above=2pt] at (1, 2) {$L'$};
+
+    \draw[fill=black] (0, 1) circle (0.07);  
+    \node[left=7pt, above=1pt] at (0, 1)  {$\alpha$};
+
+\begin{scope}[shift={(7,0)}]
+     \begin{scope} 
+        %\clip (-2,0) rectangle (2,2);     
+        \fill[fill=green!20] (-2,0) rectangle (0,2);  
+        \fill[fill=green!45] (0,0) rectangle (2,2); 
+        \fill[fill=blue!20] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0,1)--(0,0)--cycle;
+        \fill[fill=blue!40] (1,0) .. controls (1, 0.4) and (0.8, 1) .. (0,1)--(0,0)--cycle;
+    \end{scope}
+    \draw[line width=0.5pt] (0,0) -- (0,2);
+    \draw[line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
+    
+    \node[above=2pt] at (0, 2) {$H$};
+    \node[below=2pt] at (0, 0) {$K$};
+    \node[below=2pt] at (-1, 0) {$L$};
+    \node[below=2pt] at (1, 0) {$R'$};
+
+    \draw[fill=black] (0, 1) circle (0.07);  
+    \node[left=7pt, above=1pt] at (0, 1)  {$\beta$};
+\end{scope}
+\begin{scope}[shift={(0,-5)}]
+     \begin{scope} 
+        %\clip (-2,0) rectangle (2,2);     
+        \fill[fill=blue!20] (-2,0) rectangle (0,2);  
+        \fill[fill=blue!45] (0,0) rectangle (2,2); 
+        \fill[fill=green!20] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0,1)--(0,2)--cycle;
+        \fill[fill=green!40] (1,2) .. controls (1, 1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
+    \end{scope}
+    \draw[line width=0.5pt] (0,0) -- (0,2);
+    \draw[line width=0.5pt] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
+    
+    \node[above=2pt] at (0, 2) {$H$};
+    \node[below=2pt] at (0, 0) {$K$};
+    \node[above=2pt] at (-1, 2) {$R$};
+    \node[above=2pt] at (1, 2) {$L'$};
+
+    \draw[fill=black] (0, 1) circle (0.07);  
+    \node[left=7pt, below=1pt] at (0, 1)  {$\delta$};
+\end{scope}
+\begin{scope}[shift={(7,-5)}]
+     \begin{scope} 
+        %\clip (-2,0) rectangle (2,2);     
+        \fill[fill=blue!20] (-2,0) rectangle (0,2);  
+        \fill[fill=green!45] (0,0) rectangle (2,2); 
+        \fill[fill=green!20] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0,1)--(0,2)--cycle;
+        \fill[fill=blue!40] (1,0) .. controls (1, 0.4) and (0.8, 1) .. (0,1)--(0,0)--cycle;
+    \end{scope}
+    \draw[line width=0.5pt] (0,0) -- (0,2);
+    \draw[line width=0.5pt] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
+    
+    \node[above=2pt] at (0, 2) {$H$};
+    \node[below=2pt] at (0, 0) {$K$};
+    \node[above=2pt] at (-1, 2) {$R$};
+    \node[below=2pt] at (1, 0) {$R'$};
+
+    \draw[fill=black] (0, 1) circle (0.07);  
+    \node[left=7pt, below=1pt] at (0, 1)  {$\gamma$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+}
+We only explicit define $\alpha^\triangleright$ and $\alpha^\triangleleft$ here. The other wire bendings are similar.
+
 
 \section{Monoidal Category}
 \dfn{Monoidal Category}{
