@@ -488,7 +488,6 @@ If two string $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{F}$ has th
 
         \begin{scope}[shift={(8,0)}]
             % Draw background
-            % Draw background
             \fill[leftcolor] (0,0) rectangle (2,4);
             \fill[rightcolor] (2,0) rectangle (4,4);
         
@@ -523,7 +522,6 @@ If two string $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{F}$ has th
 
         \begin{scope}[shift={(23,0)}]
             % Draw background
-            % Draw background
             \fill[leftcolor] (0,0) rectangle (2,4);
             \fill[rightcolor] (2,0) rectangle (4,4);
         
@@ -538,7 +536,7 @@ If two string $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{F}$ has th
 \end{center}
 
 \subsubsection{Vertical Composition}
-The vertical composition of natural transformations $\varphi:F\Rightarrow G$ and $\psi:G\Rightarrow H$ collapses two adjacent points in a string into one single point and ``eats" the intermediate segment, which is illustrated as follows
+The vertical composition of natural transformations $\varphi:F\Rightarrow H$ and $\psi:G\Rightarrow I$ collapses two adjacent points in a string into one single point and ``eats" the intermediate segment, which is illustrated as follows
 
 \begin{center}
     \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
@@ -581,8 +579,7 @@ The vertical composition of natural transformations $\varphi:F\Rightarrow G$ and
     \end{tikzpicture}
 \end{center}
 \subsubsection{Horizontal Composition}
-The horizontal composition of natural transformations $\varphi:F\Rightarrow G$ and $\theta:H\Rightarrow I$ stick two natural transformations in a horizontal line together, which is illustrated as follows
-
+To do horizontal composition for natural transformations $\varphi:F\Rightarrow H$ and $\theta:G\Rightarrow I$ on a horizontal line. First we can stick these two points together, which is illustrated as follows
 
 \begin{center}
     \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
@@ -600,23 +597,25 @@ The horizontal composition of natural transformations $\varphi:F\Rightarrow G$ a
             \draw[line width=0.7pt] (2,0) -- (2,4);
             \filldraw [black] (2,2) circle (2pt) node[anchor=east] {$\varphi$};
             \draw[line width=0.7pt] (4,0) -- (4,4);
-            \filldraw [black] (4,2) circle (2pt) node[anchor=east] {$\theta$};
+            \filldraw [black] (4,2) circle (2pt) node[anchor=west] {$\theta$};
+
+            % Draw dashed line
+            \draw[dashed, color=black!40, line width=0.7pt] (0,0) -- (6,0);
+            \draw[dashed, color=black!40, line width=0.7pt] (0,4) -- (6,4);
         
             % Label axes
-            \draw (2,0) node[below] {$G$};
+            \draw (2,0) node[below] {$H$};
             \draw (2,4) node[above] {$F$};
             \draw (4,0) node[below] {$I$};
-            \draw (4,4) node[above] {$H$};
+            \draw (4,4) node[above] {$G$};
         \end{scope}
 
-        \draw (7.5,2) node {$=$};
+        \draw (8,2) node {$=$};
 
-        \begin{scope}[shift={(9,0)}]
-            % Draw background
-            % Draw background
-            
+        \begin{scope}[shift={(10,0)}]
              \begin{scope}
                 \clip (0,0) rectangle (6,4);
+                % Draw background
                 \fill[leftcolor] (0,0) rectangle (3,4);
                 \fill[rightcolor] (3,0) rectangle (6,4);
                 \filldraw[fill=blue!20, line width=0.7pt] (2,5)-- (2,4) .. controls (2, 2.5) and (2.5, 2) .. (3,2).. controls (3.5,2) and (4, 2.5) .. (4,4)--(4,5)--cycle;
@@ -625,17 +624,71 @@ The horizontal composition of natural transformations $\varphi:F\Rightarrow G$ a
         
             % Draw vertical line and point
             \filldraw [black] (3,2) circle (2pt) node[left=9pt] {$\theta\circ\varphi$};
-        
+
+            % Draw dashed line
+            \draw[dashed, color=black!40, line width=0.7pt] (0,0) -- (6,0);
+            \draw[dashed, color=black!40, line width=0.7pt] (0,4) -- (6,4);
+
             % Label axes
-             \draw (2,0) node[below] {$G$};
+            \draw (2,0) node[below] {$H$};
             \draw (2,4) node[above] {$F$};
             \draw (4,0) node[below] {$I$};
-            \draw (4,4) node[above] {$H$};
+            \draw (4,4) node[above] {$G$};
         \end{scope}
     \end{tikzpicture}
 \end{center}
 
+Then we can composite the functors $F$ and $G$ to get a new functor $G\circ F$. Also we can composite the functors $H$ and $I$ to get a new functor $I\circ H$. By gluing these strings together, we get a new natural transformation $\theta\circ\varphi:G\circ F\Rightarrow I\circ H$. This is illustrated as follows
 
+
+\begin{center}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm]
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{midcolor}{RGB}{204,204,255} % light purple
+        \definecolor{rightcolor}{RGB}{204,255,204}
+
+        \begin{scope}[shift={(0,0)}]
+            \begin{scope}
+                \clip  (0,0) rectangle (6,4);
+                 % Draw background
+                \fill[leftcolor] (0,0) rectangle (3,4);
+                \fill[rightcolor] (3,0) rectangle (6,4);
+                \filldraw[fill=blue!20, line width=0.7pt] (2,5)-- (2,2) .. controls (2,1) and (2.5, 0.6) .. (3,0.6).. controls (3.5,0.6) and (4, 1) .. (4,2)--(4,5)--cycle;
+            \end{scope}
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (3,0) -- (3,0.6);
+            \filldraw [black] (3,0.6) circle (2pt);
+            \filldraw [black] (2,2) circle (2pt) node[anchor=east] {$\varphi$};
+            \filldraw [black] (4,2) circle (2pt) node[anchor=west] {$\theta$};
+
+            % Label axes
+            \draw (2,4) node[above] {$F$};
+            \draw (4,4) node[above] {$G$};
+            \draw (1.75,1) node {$H$};
+            \draw (4.1,1) node {$I$};
+        \end{scope}
+
+        \draw (8,2) node {$=$};
+
+        \begin{scope}[shift={(10,0)}]
+            % Draw background
+            % Draw background
+            \fill[leftcolor] (0,0) rectangle (2,4);
+            \fill[rightcolor] (2,0) rectangle (4,4);
+        
+            % Draw vertical line and point
+            \draw[line width=0.7pt] (2,0) -- (2,4);
+            \filldraw [black] (2,0.6) circle (2pt);
+            \filldraw [black] (2,2) circle (2pt) node[left=1pt] {$\theta\circ \varphi$};
+            \draw (2, 1.3) node[anchor=west] {$I\circ H$};
+
+            % Label axes
+            \draw (2,4) node[above] {$G\circ F$};
+        \end{scope}
+
+    \end{tikzpicture}
+\end{center}
 
 \subsection{Morphism as Natural Transformation}
 If $f:X\to Y$ is a morphism in $\mathsf{C}$, then the following string diagram should be understood as follows
@@ -1289,37 +1342,37 @@ The arrows between objects in a category are equivalent to the transformations b
 
 \section{Adjoint Functor}
 \dfn{Adjoint Pair of Functors}{
-    An \textbf{adjoint pair of functors} is a tuple $\left(L,R,\varphi\right)$ consisting of a pair of functors $\begin{tikzcd}[ampersand replacement=\&]
+    An \textbf{adjoint pair of functors} is a tuple $\left(L,R,\phi\right)$ consisting of a pair of functors $\begin{tikzcd}[ampersand replacement=\&]
         \mathsf{C} \arrow[r, "L", bend left] \& \mathsf{D} \arrow[l, "R", bend left]
         \end{tikzcd}$
     and a natural isomorphism 
     \[
             \begin{tikzcd}[ampersand replacement=\&]
-                \mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)"{name=A, above}, bend left] \arrow[r, "\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)"'{name=B, below}, bend right] \&[+50pt] \mathsf{Set}
-                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\varphi", "\sim\hspace{1.5pt}"']
+                \mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)$}"{name=A, above}, bend left] \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)$}"'{name=B, below}, bend right] \&[+60pt] \mathsf{Set}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi", "\sim\hspace{1.5pt}"']
             \end{tikzcd}
     \]
     which means for any $X\in \mathrm{Ob}(\mathsf{C})$ and $Y\in \mathrm{Ob}(\mathsf{D})$, there is a bijection
     \begin{align*}
-        \varphi_{X,Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)\\
+        \phi_{X,Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)\\
         \Big(L(X)\xlongrightarrow{f}Y\Big)&\longmapsto \Big(X\xlongrightarrow{\tilde{f}}R(Y)\Big)
     \end{align*}
     natural in $X$ and $Y$. $L$ is called the \textbf{left adjoint} of $R$, and $R$ is called the \textbf{right adjoint} of $L$. We write $L\dashv R$ to denote that $L$ is left adjoint to $R$.
 }
-The naturality square of $\varphi$ means that for any morphism $g:X_2\to X_1$ in $\mathsf{C}$ and $h:Y_1\to Y_2$ in $\mathsf{D}$, the following diagram commutes
+The naturality square of $\phi$ means that for any morphism $g:X_2\to X_1$ in $\mathsf{C}$ and $h:Y_1\to Y_2$ in $\mathsf{D}$, the following diagram commutes
 \[
     \begin{tikzcd}[ampersand replacement=\&]
-        \mathrm{Hom}_{\mathsf{D}}\left(L(X_1),Y_1\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{D}}\left(L(g){,}h\right)}"] \arrow[d, "\varphi_{X_1,Y_1}"', "\sim"] \&[+50pt] \mathrm{Hom}_{\mathsf{D}}\left(L(X_2),Y_2\right) \arrow[d, "\varphi_{X_2,Y_2}", "\sim"'] \\[+20pt]
+        \mathrm{Hom}_{\mathsf{D}}\left(L(X_1),Y_1\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{D}}\left(L(g){,}h\right)}"] \arrow[d, "\phi_{X_1,Y_1}"', "\sim"] \&[+50pt] \mathrm{Hom}_{\mathsf{D}}\left(L(X_2),Y_2\right) \arrow[d, "\phi_{X_2,Y_2}", "\sim"'] \\[+20pt]
         \mathrm{Hom}_{\mathsf{C}}\left(X_1,R(Y_1)\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{C}}\left(g{,}R(h)\right)}"'] \& \mathrm{Hom}_{\mathsf{C}}\left(X_2,R(Y_2)\right)
     \end{tikzcd}
 \]
 which in turn can be explicitly written as for any $f:L(X_1)\to Y_1$ in $\mathsf{D}$,
 \[
-    \varphi_{X_2,Y_2}\left(h\circ f\circ L(g)\right)=R(h)\circ\varphi_{X_1,Y_1}(f)\circ g.
+    \phi_{X_2,Y_2}\left(h\circ f\circ L(g)\right)=R(h)\circ\phi_{X_1,Y_1}(f)\circ g.
 \]
 
 \dfn{Adjunction Unit and Counit}{
-Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors. The \textbf{adjunction unit} $\eta$ of this adjunction is a natural transformation
+Let $\left(L,R,\phi\right)$ be an adjoint pair of functors. The \textbf{adjunction unit} $\eta$ of this adjunction is a natural transformation
 \begin{center}
     \begin{tikzcd}[ampersand replacement=\&]
         \mathsf{C} \arrow[r, "\scalebox{1.2}{$\mathrm{id}_{\mathsf{C}}$}"{name=A, above}, bend left=40] \arrow[r, "\scalebox{1.2}{$R\circ L$}"'{name=B, below}, bend right=40] 
@@ -1339,10 +1392,10 @@ Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors. The \textbf{adjun
         \draw[fill=black] (0, 2) circle (0.07);
     \end{tikzpicture}
 \end{center}
-defined by $\eta_X:=\varphi_{X,L(X)}\left(\mathrm{id}_{L(X)}\right)$ for any $X\in \mathrm{Ob}(\mathsf{C})$, where $\varphi_{X,L(X)}$ is the natural bijection
+defined by $\eta_X:=\phi_{X,L(X)}\left(\mathrm{id}_{L(X)}\right)$ for any $X\in \mathrm{Ob}(\mathsf{C})$, where $\phi_{X,L(X)}$ is the natural bijection
 $$
 \begin{aligned}
-    \varphi_{X,L(X)}:\operatorname{Hom}_{\mathsf{D}}\left(L(X), L(X)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(X, RL(X)) \\
+    \phi_{X,L(X)}:\operatorname{Hom}_{\mathsf{D}}\left(L(X), L(X)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(X, RL(X)) \\
 \operatorname{id}_{F(X)} & \longmapsto \eta_X 
 \end{aligned}
 $$
@@ -1366,19 +1419,19 @@ The \textbf{adjunction counit} $\varepsilon$ of this adjunction is a natural tra
         \draw[fill=black] (0, 1) circle (0.07);  
     \end{tikzpicture}
 \end{center}
-defined by $\varepsilon_Y:=\varphi_{R(Y),Y}^{-1}\left(\mathrm{id}_{R(Y)}\right)$ for any $Y\in \mathrm{Ob}(\mathsf{D})$, where $\varphi_{R(Y),Y}^{-1}$ is the natural bijection
+defined by $\varepsilon_Y:=\phi_{R(Y),Y}^{-1}\left(\mathrm{id}_{R(Y)}\right)$ for any $Y\in \mathrm{Ob}(\mathsf{D})$, where $\phi_{R(Y),Y}^{-1}$ is the natural bijection
 $$
 \begin{aligned}
-    \varphi_{R(Y),Y}^{-1}:\operatorname{Hom}_{\mathsf{D}}\left(R(Y), R(Y)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(LR(Y), R(Y)) \\
+    \phi_{R(Y),Y}^{-1}:\operatorname{Hom}_{\mathsf{D}}\left(R(Y), R(Y)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(LR(Y), R(Y)) \\
 \mathrm{id}_{R(Y)} & \longmapsto \varepsilon_Y
 \end{aligned}
 $$
 }
 \pf{
-    By naturality of $\varphi$, for any morphism $g:X_2\to X_1$ in $\mathsf{C}$, we have the following commutative diagram
+    By naturality of $\phi$, for any morphism $g:X_2\to X_1$ in $\mathsf{C}$, we have the following commutative diagram
     \[
     \begin{tikzcd}[ampersand replacement=\&]
-        \mathrm{id}_{L(X_1)}\arrow[d,mapsto]\&[-30pt]\ni\&[-29pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_1), L(X_1)\right) } \arrow[d, "{\varphi_{X_1,L(X_1)}}"'] \arrow[r,"{\left(L(g)\right)^*}"] \& [+12pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_1)\right) } \arrow[d, "{\varphi_{X_2,L(X_1)}}"] \&[+12pt] {\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_2)\right) } \arrow[d, "{\varphi_{X_2,L(X_2)}}"] \arrow[l,"{\left(L(g)\right)_*}"'] \&[-28pt]\in\&[-28pt]\mathrm{id}_{L(X_2)}\arrow[d,mapsto]\\[+20pt]
+        \mathrm{id}_{L(X_1)}\arrow[d,mapsto]\&[-30pt]\ni\&[-29pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_1), L(X_1)\right) } \arrow[d, "{\phi_{X_1,L(X_1)}}"'] \arrow[r,"{\left(L(g)\right)^*}"] \& [+12pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_1)\right) } \arrow[d, "{\phi_{X_2,L(X_1)}}"] \&[+12pt] {\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_2)\right) } \arrow[d, "{\phi_{X_2,L(X_2)}}"] \arrow[l,"{\left(L(g)\right)_*}"'] \&[-28pt]\in\&[-28pt]\mathrm{id}_{L(X_2)}\arrow[d,mapsto]\\[+20pt]
         \eta_{X_1}\&\ni\&{\operatorname{Hom}_{\mathsf{C}}(X_1, RL(X_1))} \arrow[r,"g^*"]                                                    \& {\operatorname{Hom}_{\mathsf{C}}(X_2, RL(X_1))}                                                   \& {\operatorname{Hom}_{\mathsf{C}}(X_2, RL(X_2))} \arrow[l, "\left(RL(g)\right)_*"']            \&[-30pt]\in\&[-30pt]\eta_{X_2}       
         \end{tikzcd}
         \]
@@ -1388,7 +1441,7 @@ $$
         \]
         we have
         \[
-        g^*(\eta_{X_1})=\varphi_{X_2,L(X_1)}(L(g))=\left(RL(g)\right)_*(\eta_{X_2}),
+        g^*(\eta_{X_1})=\phi_{X_2,L(X_1)}(L(g))=\left(RL(g)\right)_*(\eta_{X_2}),
         \]   
     which implies the naturality square of $\eta$ commutes
 \[
@@ -1406,22 +1459,30 @@ Similarly, we can show that for any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, the
 \]
 }
 \prop{Adjunction Isomorphism Determined by Unit or Counit}{
-    Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then 
+    Let $\left(L,R,\phi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then 
    \begin{align*}
-\varphi_{X,Y}(f) & =G f \circ \eta_X: X \rightarrow G Y, \quad \forall f: F X \rightarrow Y , \\
-\varphi_{X,Y}^{-1}(g) & =\varepsilon_Y \circ F g: F X \rightarrow Y, \quad \forall g: X \rightarrow G Y .
+\phi_{X,Y}(f) & =R(f) \circ \eta_X: X \rightarrow R(Y), \quad \forall f: L(X) \rightarrow Y , \\
+\phi_{X,Y}^{-1}(g) & =\varepsilon_Y \circ L(g): L(X) \rightarrow Y, \quad \forall g: X \rightarrow R(Y) .
    \end{align*}
 }
 \pf{
+    For any object $X\in \mathrm{Ob}(\mathsf{C})$ and any morphism $f:L(X)\to Y$ in $\mathsf{D}$, we have the following commutative diagram
     \[
 		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
-			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(A,X)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
-			u=\phi_A(\mathrm{id}_A)\&\in\&{F(A)}\arrow[rr, "{F(f)}"'] \&  \& {F(X)}  \&\ni\& \phi_X(f)     
+			\mathrm{id}_{L(X)}\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(L(X),L(X)) \arrow[d, "{\phi_{X,L(X)}}"']  \arrow[rr, "{f_*}"] \&[-15pt] \& {\mathrm{Hom}_{\mathsf{C}}(L(X),Y)}\arrow[d, "\phi_{X,Y}"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
+			\eta_X\&\in\&{\mathrm{Hom}_{\mathsf{C}}(X,RL(X))} \arrow[rr, "{\left(R(f)\right)_*}"'] \&  \& {\mathrm{Hom}_{\mathsf{C}}(X,R(Y))}  \&\ni\& \phi_{X,Y}(f)     
 		\end{tikzcd}
 	\]
+    For any object $Y\in \mathrm{Ob}(\mathsf{D})$ and any morphism $g:X\to R(Y)$ in $\mathsf{C}$, we have the following commutative diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
+            \mathrm{id}_{R(Y)}\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{D}}(R(Y),R(Y)) \arrow[d, "{\phi_{R(Y),Y}^{-1}}"']  \arrow[rr, "{g^*}"] \&[-15pt] \& {\mathrm{Hom}_{\mathsf{D}}(X,R(Y))}\arrow[d, "\phi_{R(Y),Y}^{-1}"]\&[-25pt]\ni\&[-25pt]g \arrow[d, mapsto]\\
+            \varepsilon_Y\&\in\&{\mathrm{Hom}_{\mathsf{C}}(LR(Y),Y)} \arrow[rr, "{\left(L(g)\right)^*}"'] \&  \& {\mathrm{Hom}_{\mathsf{C}}(L(X),Y)}  \&\ni\& \phi_{X,Y}^{-1}(g)
+        \end{tikzcd}
+    \]
 }
 \lemm{Snake Equations}{
-    Let $\left(L,R,\varphi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then we have the following equalities of natural transformations
+    Let $\left(L,R,\phi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then we have the following equalities of natural transformations
     \begin{center}
         \begin{tikzpicture}[x=0.8cm,y=0.8cm]
             \node at (-7.4,1.5) {${\left[L \xRightarrow{L \eta}LR L\xRightarrow{\varepsilon L} L\right]=\mathrm{id}_L}$};
@@ -1497,7 +1558,7 @@ Let $\mathsf{C}$, $\mathsf{D}$, $\mathsf{C'}$, $\mathsf{D'}$ be categories and $
 There are bijections between the following sets of natural transformations
 \[
     \begin{tikzcd}[ampersand replacement=\&]
-        {\mathrm{Hom}_{[\mathsf{C}, \mathsf{D'}]}\left(L'H, KL\right) } \arrow[r, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[r, shift right=1pt,leftharpoondown, "\triangleleft"']  \& {\mathrm{Hom}_{[\mathsf{C}, \mathsf{C'}]}(H, R'KL) } \arrow[d, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[d, shift right=1pt,leftharpoondown, "\triangleleft"']   \\
+        {\mathrm{Hom}_{[\mathsf{C}, \mathsf{D'}]}\left(L'H, KL\right) } \arrow[r, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[r, shift right=1pt,leftharpoondown, "\triangleleft"']  \& {\mathrm{Hom}_{[\mathsf{C}, \mathsf{C'}]}(H, R'KL) } \arrow[d, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[d, shift right=1pt,leftharpoondown, "\triangleleft"']   \\[+15pt]
         { \mathrm{Hom}_{[\mathsf{D}, \mathsf{D'}]}\left(L'HR, K\right)} \arrow[u, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[u, shift right=1pt,leftharpoondown, "\triangleleft"'] \& {\mathrm{Hom}_{[\mathsf{D}, \mathsf{C'}]}(HR, R'K) } \arrow[l, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[l, shift right=1pt,leftharpoondown, "\triangleleft"'] 
         \end{tikzcd}    
 \]
@@ -1509,12 +1570,11 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
     \draw [|-To] (7,-1) -- (7,-2) node[midway,right] {$\triangleright$};
     \draw [|-To] (4,-4) -- (3,-4) node[midway,above] {$\triangleright$};
     \draw [|-To] (0,-2) -- (0,-1) node[midway,right] {$\triangleright$};
-    \begin{scope} 
-        %\clip (-2,0) rectangle (2,2);     
+    \begin{scope}      
         \fill[fill=green!20] (-2,0) rectangle (0,2);  
         \fill[fill=blue!45] (0,0) rectangle (2,2); 
         \fill[fill=blue!20] (-1,0) .. controls (-1,0.4) and (-0.8, 1) .. (0,1)--(0,0)--cycle;
-        \fill[fill=green!40] (1,2) .. controls (1,1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
+        \fill[fill=green!45] (1,2) .. controls (1,1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
     \end{scope}
     \draw[line width=0.5pt] (0,0) -- (0,2);
     \draw[line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
@@ -1528,8 +1588,7 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
     \node[left=7pt, above=1pt] at (0, 1)  {$\alpha$};
 
 \begin{scope}[shift={(7,0)}]
-     \begin{scope} 
-        %\clip (-2,0) rectangle (2,2);     
+     \begin{scope}     
         \fill[fill=green!20] (-2,0) rectangle (0,2);  
         \fill[fill=green!45] (0,0) rectangle (2,2); 
         \fill[fill=blue!20] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0,1)--(0,0)--cycle;
@@ -1547,12 +1606,11 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
     \node[left=7pt, above=1pt] at (0, 1)  {$\beta$};
 \end{scope}
 \begin{scope}[shift={(0,-5)}]
-     \begin{scope} 
-        %\clip (-2,0) rectangle (2,2);     
+     \begin{scope}     
         \fill[fill=blue!20] (-2,0) rectangle (0,2);  
         \fill[fill=blue!45] (0,0) rectangle (2,2); 
         \fill[fill=green!20] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0,1)--(0,2)--cycle;
-        \fill[fill=green!40] (1,2) .. controls (1, 1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
+        \fill[fill=green!45] (1,2) .. controls (1, 1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
     \end{scope}
     \draw[line width=0.5pt] (0,0) -- (0,2);
     \draw[line width=0.5pt] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
@@ -1566,8 +1624,7 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
     \node[left=7pt, below=1pt] at (0, 1)  {$\delta$};
 \end{scope}
 \begin{scope}[shift={(7,-5)}]
-     \begin{scope} 
-        %\clip (-2,0) rectangle (2,2);     
+     \begin{scope}     
         \fill[fill=blue!20] (-2,0) rectangle (0,2);  
         \fill[fill=green!45] (0,0) rectangle (2,2); 
         \fill[fill=green!20] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0,1)--(0,2)--cycle;
@@ -1587,8 +1644,166 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
 \end{tikzpicture}
 \end{center}
 }
-We only explicit define $\alpha^\triangleright$ and $\alpha^\triangleleft$ here. The other wire bendings are similar.
+We only explicit define $\alpha^\triangleright$ here. The other wire bendings are defined similarly using the unit or counit of the adjunctions.
+\begin{center} \begin{tikzpicture}[x=0.8cm,y=0.8cm, baseline=(current bounding box.center)]
+    \begin{scope}     
+        \fill[fill=green!20] (-2,0) rectangle (0,2);  
+        \fill[fill=green!45] (0,0) rectangle (2,2); 
+        \fill[fill=blue!20] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0,1)--(0,0)--cycle;
+        \fill[fill=blue!40] (1,0) .. controls (1, 0.4) and (0.8, 1) .. (0,1)--(0,0)--cycle;
+    
+    \draw[line width=0.5pt] (0,0) -- (0,2);
+    \draw[line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
+    
+    \node[above=2pt] at (0, 2) {$H$};
+    \node[below=2pt] at (0, 0) {$K$};
+    \node[below=2pt] at (-1, 0) {$L$};
+    \node[below=2pt] at (1, 0) {$R'$};
 
+    \draw[fill=black] (0, 1) circle (0.07);  
+    \node[left=8pt, above=1pt] at (0, 1)  {$\alpha^{\triangleright}$};
+    \end{scope}
+    
+    \node at (4, 1) {$:=$};
+    
+    \begin{scope} [shift={(8,0)}]
+    \begin{scope} 
+            \clip (-2,0) rectangle (4,4);     
+            \fill[fill=green!20] (-2,0) rectangle (0,4);  
+            \fill[fill=green!45] (0,0) rectangle (4,4);  
+            \filldraw[fill=blue!20] (-1,-1) -- (-1,0) .. controls (-1,0.4) and (-0.8, 1) .. (0,1)--(0,-1)--cycle;
+            \filldraw[fill=blue!45, line width=0.5pt] (0, -1) -- 
+            (0, 1) .. controls (0.8, 1) and (1, 1.6) ..  
+            (1, 2) .. controls (1, 2.4) and (1.2, 3) .. 
+            (2, 3) .. controls (2.8, 3) and (3, 2.4) .. 
+            (3, 2)--(3, -1)--cycle;
+    \end{scope}
+        \draw[line width=0.5pt] (0,0) -- (0,4);
+
+        \node[above=2pt] at (0, 4) {$H$};
+        \node[below=2pt] at (0, 0) {$K$};
+        \node[below=2pt] at (-1, 0) {$L$};
+        \node[left=5pt,above=2pt] at (1, 2) {$L'$};
+        \node[below=2pt] at (3, 0) {$R'$};
+    
+        \draw[fill=black] (0, 1) circle (0.07);  
+        \node[left=7pt, above=1pt] at (0, 1)  {$\alpha$};
+
+        \draw[fill=black] (2, 3) circle (0.07);  
+        \node[above=1pt] at (2, 3)  {$\eta'$};
+
+        \draw[dashed, color=black!70, line width=0.7pt] (-2,0) rectangle (2,2);
+    \end{scope}
+    \end{tikzpicture}    
+\end{center}
+The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from the snake equations.
+
+\prop{Equivalent Definition of Adjoint Functor Using Unit and Counit}{
+    Given pair of functors $\begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[r, "L", bend left] \& \mathsf{D} \arrow[l, "R", bend left]
+        \end{tikzcd}$
+    there is a bijection between the following sets 
+    \begin{align*}
+        T:\left\{\text{adjoint pair }\left(L,R,\phi\right)\right\}&\xrightleftharpoons{\;\sim\;}\left\{\left(L,R,\eta,\varepsilon\right)\text{ that satisfies snake equations}\right\}\\
+        \phi&\longmapsto\left(\eta_X:=\phi\left(\mathrm{id}_{L(X)}\right), \varepsilon_Y:=\phi^{-1}\left(\mathrm{id}_{R(Y)}\right)\right)\\
+        \phi_{X,Y}(f):=R(f) \circ \eta_X&\longmapsfrom(\eta, \varepsilon)
+    \end{align*}
+}
+\pf{
+    Suppose $\left(L,R,\eta,\varepsilon\right)$ satisfies snake equations. Consider the diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{1} \arrow[dd, "\mathrm{id}"', bend right=38] \arrow[r, "\Delta X"]  \&[+36pt] \mathsf{C} \arrow[dd, "L"', bend right=38] \\[-5pt]
+            \dashv                                                  \& \dashv                                    \\[-5pt]
+            \mathsf{1} \arrow[uu, "\mathrm{id}"', bend right=38] \arrow[r, "\Delta Y"'] \& \mathsf{D} \arrow[uu, "R"', bend right=38]
+            \end{tikzcd}    
+    \]
+
+    \begin{center}
+        \begin{tikzpicture}[x=0.8cm,y=0.8cm, baseline=(current bounding box.center)]
+        \definecolor{leftcolor}{RGB}{255,255,204}
+            \draw [|-To] (2.5,1) -- (3.5,1) node[midway,above] {$\triangleright$};
+            \node at (9, 1) {$:=$};
+            \node at (14, 1) {$=$};
+          
+            \begin{scope}     
+                \fill[fill=leftcolor] (-2,0) rectangle (0,2);  
+                \fill[fill=blue!20] (0,0) rectangle (2,2); 
+                \fill[fill=green!20] (1,2) .. controls (1,1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
+            \end{scope}
+            \draw[line width=0.5pt] (0,0) -- (0,2);
+            \draw[dashed, color=black!50, line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) ;
+            \draw[line width=0.5pt]  (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
+            
+            \node[above=2pt] at (0, 2) {$X$};
+            \node[below=2pt] at (0, 0) {$Y$};
+            \node[above=2pt] at (1, 2) {$L$};
+        
+            \draw[fill=black] (0, 1) circle (0.07);  
+            \node[left=7pt, above=-2pt] at (0, 1)  {$f$};
+        
+        \begin{scope}[shift={(6,0)}]
+             \begin{scope} 
+                    
+                \fill[fill=leftcolor] (-2,0) rectangle (0,2);  
+                \fill[fill=green!20] (0,0) rectangle (2,2); 
+              
+                \fill[fill=blue!20] (1,0) .. controls (1, 0.4) and (0.8, 1) .. (0,1)--(0,0)--cycle;
+            \end{scope}
+            \draw[line width=0.5pt] (0,0) -- (0,2);
+            \draw[dashed, color=black!40, line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1);
+            \draw[line width=0.5pt] (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
+            \node[above=2pt] at (0, 2) {$X$};
+            \node[below=2pt] at (0, 0) {$Y$};
+            \node[below=2pt] at (1, 0) {$R$};
+        
+            \draw[fill=black] (0, 1) circle (0.07);  
+            \node[left=7pt, above=-2pt] at (0, 1)  {$f^{\hspace{0.2pt}\triangleright}$};
+        \end{scope}
+      \begin{scope}[shift={(11,0)}]
+             \begin{scope} 
+                \clip (-1,0) rectangle (2,2);     
+                \fill[fill=leftcolor] (-2,0) rectangle (0,2);  
+                \fill[fill=green!20] (0,0) rectangle (2,2); 
+                \filldraw[fill=blue!20] (1.5,-1)--(1.5,0) .. controls (1.5, 0.5) and (0.7, 2.3) .. (0,1)--(0,-1)--cycle;
+            \end{scope}
+            \draw[line width=0.5pt] (0,0) -- (0,2);
+            \draw[dashed, color=black!40, line width=0.5pt] (-0.5,0) .. controls (-0.5, 0.2) and (-0.3, 0.6) .. (0, 1);
+            \node[above=2pt] at (0, 2) {$X$};
+            \node[below=2pt] at (0, 0) {$Y$};
+            \node[below=2pt] at (1.5, 0) {$R$};
+        
+            \draw[fill=black] (0, 1) circle (0.07);  
+            \draw[fill=black] (0.54, 1.46) circle (0.07) node[above=0pt] {$\eta$}; 
+            \node[left=7pt, above=-2pt] at (0, 1)  {$f$};
+        \end{scope}
+
+        \begin{scope}[shift={(16,0)}]
+             \begin{scope}     
+                \fill[fill=leftcolor] (-1,0) rectangle (0,2);  
+                \fill[fill=green!20] (0,0) rectangle (2,2); 
+         
+                \fill[fill=blue!20] (1.4,0) .. controls (1.4,1) and (1, 1.4) .. (0,1.4)--(0,0)--cycle;
+            \end{scope}
+            \draw[line width=0.5pt] (0,0) -- (0,2);
+         
+            \draw[line width=0.5pt] (0, 1.4) .. controls (1, 1.4) and (1.4, 1) .. (1.4, 0);
+            \node[above=2pt] at (0, 2) {$X$};
+            \node[below=2pt] at (0, 0) {$Y$};
+            \node[below=2pt] at (1.4, 0) {$R$};
+        
+            \draw[fill=black] (0, 0.7) circle (0.07) node[left=0pt] {$f$};  
+            \draw[fill=black] (0, 1.4) circle (0.07) node[left=0pt] {$\eta_X$};  
+        \end{scope}
+        
+        \end{tikzpicture}
+    \end{center}
+    As the string diagram shows, we find $\phi_{X,Y}$ conincides with the wire bending map
+    \[
+        \triangleright: \mathrm{Hom}_{\mathsf{D}}\left(L(X), Y\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}(X, R(Y)) 
+    \]
+    which is natural in both $X$ and $Y$. Hence $\phi$ is a natural isomorphism. It is straightforward to check that $T$ is a bijection.
+}
 
 \section{Monoidal Category}
 \dfn{Monoidal Category}{
