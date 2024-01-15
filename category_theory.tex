@@ -7,7 +7,7 @@
         \item $\mathsf{C}$ is \textbf{locally $\mathscr{U}$-small} if $\mathrm{Hom}_{\mathsf{C}}(X,Y)$ is a $\mathscr{U}$-small set for all $X,Y\in \mathrm{Ob}(\mathsf{C})$.
         \item $\mathsf{C}$ is \textbf{$\mathscr{U}$-small} if $\mathsf{C}$ is locally $\mathscr{U}$-small and $\mathrm{Ob}(\mathsf{C})$ is a \hyperref[th:small_set]{$\mathscr{U}$-small set},
     \end{itemize}
-    We can simply say $\mathsf{C}$ is \textbf{small} or \textbf{locally small} if the choice of $\mathscr{U}$ can be understood from the context.
+    We can simply say $\mathsf{C}$ is \textbf{small} or \textbf{locally small} if the choice of $\mathscr{U}$ can be inferred from the context.
 }
 \dfn{Isomorphism of Categories}{
     Suppose $\mathsf{C}$ and $\mathsf{D}$ are two categories. A \textbf{functor} $F:\mathsf{C}\to \mathsf{D}$ is called an \textbf{isomorphism} if there exists a functor $G:\mathsf{D}\to \mathsf{C}$ such that $F\circ G=\mathrm{id}_{\mathsf{D}}$ and $G\circ F=\mathrm{id}_{\mathsf{C}}$. In this case, we say $\mathsf{C}$ and $\mathsf{D}$ are \textbf{isomorphic} and write $\mathsf{C}\cong \mathsf{D}$.
@@ -43,6 +43,28 @@ Suppose $\mathsf{C}_i$ and $\mathsf{D}_i$ are locally $\mathscr{U}_i$-small cate
         \textbf{Object}&$ [\mathsf{c_1},\mathsf{d_1}]$& $\mathscr{U}_1$-$\mathsf{Set}$ $\mathscr{U}_1$-$\mathsf{Cat}$ $[\mathsf{c_1},\mathsf{D_1}]$& $\mathscr{U}_2$-$\mathsf{Set}$ $[\mathsf{C_1},\mathsf{D_1}]$ \\ \bottomrule
     \end{tabular}
 \end{table}
+
+\dfn{Subcategory}{
+    Suppose $\mathsf{C}$ is a category. A \textbf{subcategory} $\mathsf{D}$ of $\mathsf{C}$ is a category such that
+    \begin{itemize}
+        \item $\mathrm{Ob}(\mathsf{D})\subseteq \mathrm{Ob}(\mathsf{C})$.
+        \item For any $X,Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}(X,Y)\subseteq \mathrm{Hom}_{\mathsf{C}}(X,Y)$.
+        \item For any $X\in \mathrm{Ob}(\mathsf{D})$, the identity morphism $\mathrm{id}_X$ of $\mathsf{D}$ is the same as the identity morphism $\mathrm{id}_X$ of $\mathsf{C}$.
+        \item For any $X,Y,Z\in \mathrm{Ob}(\mathsf{D})$ and  $g\in\mathrm{Hom}_{\mathsf{D}}\left(X,Y\right)$, $f\in\mathrm{Hom}_{\mathsf{D}}\left(Y,Z\right)$, $f\circ_{\mathsf{D}}g=f\circ_{\mathsf{C}}g$.
+    \end{itemize}
+    A subcategory $\mathsf{D}$ of $\mathsf{C}$ is called a \textbf{full subcategory} if for any $X,Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}(X,Y)= \mathrm{Hom}_{\mathsf{C}}(X,Y)$.
+}
+There is a looser way to think about a subcategory: $\mathsf{D}$ is a subcategory of $\mathsf{C}$ if there exists a fully faithful functor $F:\mathsf{D}\to \mathsf{C}$ that is injective on objects.\\
+
+\ex{Examples of Full Subcategories}{
+    Here are some examples of full subcategories:
+    \begin{itemize}
+        \item $\mathsf{Ab}\subseteq\mathsf{Grp}\subseteq\mathsf{Mon}$
+        \item $\mathsf{Field}\subseteq\mathsf{CRing}\subseteq\mathsf{Ring}$
+        \item $K\text{-}\mathsf{Vect}\subseteq K\text{-}\mathsf{Mod}$
+        \item $R\text{-}\mathsf{CAlg}\subseteq R\text{-}\mathsf{Alg}$
+    \end{itemize}
+}
 
 \dfn{Opposite Category}{
     Suppose $\mathsf{C}$ is a category. The \textbf{opposite category} $\mathsf{C}^{\mathrm{op}}$ is defined as follows
@@ -228,13 +250,12 @@ We can form the comma category $(S\downarrow T)$ as follows:
     Morphisms are composed by taking $\left(f^{\prime}, g^{\prime}\right) \circ(f, g)$ to be $\left(f^{\prime} \circ f, g^{\prime} \circ g\right)$, whenever the latter expression is defined. The identity morphism on an object $(A, B, h)$ is $\left(\operatorname{id}_A, \operatorname{id}_B\right)$.
 \end{itemize}
 }
-\dfn{Comma Category with Constant Functor from $\mathsf{1}$}{
-    Suupose $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories and $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. The comma category $(\Delta X\downarrow \mathsf{B})$ for the following pair of functors
+\dfn[universal_morphism]{Universal Morphism}{
+    Suupose $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories and $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. The comma category $(\Delta X\downarrow T)$ for the following pair of functors
 $$
 \mathsf{1} \xlongrightarrow{\Delta X} \mathsf{C} \xlongleftarrow{T} \mathsf{B}
 $$
-can be written as $\left(X\downarrow \mathsf{B}\right)$ for short. And morphisms in $\left(X\downarrow \mathsf{B}\right)$ can be simplified to
-commutative triangles
+can be written as $\left(X\downarrow T\right)$ for short. Morphisms in $\left(X\downarrow \mathsf{B}\right)$ can be simplified to commutative triangles
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
               \& T(B) \arrow[dd, "T(g)"]\\
@@ -242,12 +263,13 @@ commutative triangles
              \& T\left(B^{\prime} \right)
             \end{tikzcd}
     \]
+We say $\left(Y,X\xrightarrow{u} T(Y)\right)$ is a \textbf{universal morphism from $X$ to $T$} if it is initial in $\left(X\downarrow T\right)$.
+
 Similarly, the comma category $(\mathsf{A}\downarrow \Delta X)$ for the following pair of functors
 $$
 \mathsf{A} \xlongrightarrow{S} \mathsf{C} \xlongleftarrow{\Delta X} \mathsf{1}
 $$
-can be written as $\left(\mathsf{A}\downarrow X\right)$ for short. And morphisms in $\left(\mathsf{A}\downarrow X\right)$ can be simplified to
-commutative triangles
+can be written as $\left(\mathsf{A}\downarrow X\right)$ for short. Morphisms in $\left(\mathsf{A}\downarrow X\right)$ can be simplified to commutative triangles
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
             S(A) \arrow[rd, "h"] \arrow[dd, "S(f)"'] \& \\ 
@@ -255,7 +277,11 @@ commutative triangles
             S\left(A^{\prime}\right) \arrow[ru, "h^{\prime}"'] \& 
             \end{tikzcd}
     \]
+We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism from $S$ to $X$} if it is terminal in $\left(\mathsf{A}\downarrow X\right)$.
 }
+
+
+
 \dfn{Slice Category}{
     Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} $\left(\mathsf{C} / X\right)$ is the comma category $(\mathrm{id}_{\mathsf{C}} \downarrow X)$, where functors are illustrated as follows
     \[
@@ -289,6 +315,10 @@ commutative triangles
     \]
 }
 
+\dfn{Category of Pointed Objects}{
+    Suppose $\mathsf{C}$ is a category with terminal object $\bullet$. The coslice category $\left(\bullet / \mathsf{C}\right)$ is called the \textbf{category of pointed objects} of $\mathsf{C}$ and is denoted by $\mathsf{C}_\bullet$.
+}
+
 \ex{$\mathsf{Disc}$ Functor}{
     Given a set $X$, we can define a functor $\mathsf{Disc}:\mathsf{Set}\to \mathsf{Cat}$ as follows
     \[
@@ -310,6 +340,19 @@ commutative triangles
     \end{align*}
     and $\mathsf{Disc}(f)$ is the functor defined by $\mathsf{Disc}(f)(x)=f(x)$ and $\mathsf{Disc}(f)(\mathrm{id}_x)=\mathrm{id}_{f(x)}$ for each $x\in X$.\\
     It is easy to check that the functor $\mathsf{Disc}$ is fully faithful.
+}
+
+\dfn{Grothendieck Construction}{
+    Let $\mathsf{C}$ be a category and let $F: \mathsf{C} \rightarrow \mathsf{Cat}$ be a functor from any small category to the category of small categories. The \textbf{Grothendieck construction} of $F$ is a category $\int_{\mathsf{C}} F$  (also written $\Gamma(F)$) defined as follows:
+    \begin{itemize}
+        \item Objects are pairs $(A, a)$ where $A \in \mathrm{Ob}(\mathsf{C})$ and $a \in F(A)$.
+        \item Morphisms $(A, a) \rightarrow(B, b)$ are pairs $(f, g)$ where $f: A \rightarrow B$ is a morphism in $\mathsf{C}$ and $g: F(f)(a) \rightarrow b$ is a morphism in $F(B)$.
+    \end{itemize}
+    The composition of morphisms is defined as follows:
+    \[
+        (f', g') \circ(f, g)=\left(f' \circ f, g'\circ \left(F(f')(g)\right)\right)
+    \]
+    where $F(f')(g): F(f')(F(f)(a)) \rightarrow F(f')(b)$ is the morphism induced by $g$ under the functor $F(f')$.
 }
 
 \dfn[category_of_elements]{Category of Elements}{
@@ -338,6 +381,8 @@ commutative triangles
         \end{tikzcd}
     \]
 }
+By viewing sets in $\mathsf{Set}$ as discrete categories, we have an inclusion $\mathsf{Set}\hookrightarrow\mathsf{Cat}$. Hence the category of elements of $F$ is a special case of the Grothendieck construction when the image of $F$ on $\mathrm{Ob}(\mathsf{C})$ on
+
 
 \section{String Diagram}
 String diagrams are a convenient way to represent the composition of natural transformations. From top to bottom, a string diagram represents a series of vertical compositions of natural transformations. 
@@ -429,7 +474,7 @@ If two string $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{F}$ has th
     
             \fill[leftcolor] (-1,0) rectangle (2,4);
             \fill[rightcolor] (2,0) rectangle (5,4);
-            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.5pt] (1,1) rectangle (3, 3);
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (1,1) rectangle (3, 3);
     
             % Draw vertical line and point
             \draw[line width=0.7pt] (2,0) -- (2,1);
@@ -556,7 +601,7 @@ The vertical composition of natural transformations $\varphi:F\Rightarrow H$ and
         
             % Label axes
             \draw (2,-2) node[below] {$H$};
-            \draw (2,0) node[left] {$G$};
+            \draw (2,0) node[right] {$G$};
             \draw (2,2) node[above] {$F$};
         \end{scope}
 
@@ -720,80 +765,112 @@ If $f:X\to Y$ is a morphism in $\mathsf{C}$, then the following string diagram s
 
 Suppose $\varphi:F\Rightarrow G$ is a natural transformation between functors $F,G:\mathsf{C}\to \mathsf{D}$. Then the functoriality of $\varphi$ can be described by the following string diagram
 \[
-\begin{tikzpicture}[x=1cm,y=1cm, baseline=(current bounding box.center)]
-    % Define colors
-    \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-    \definecolor{rightcolor}{RGB}{204,204,255} % light purple
-
-    % Draw background
-    \fill[leftcolor] (0,0) rectangle (1,3);
-    \fill[green!20] (1,0) rectangle (3,3);
-    \begin{scope} 
-        \clip (1,0) rectangle (3, 3); 
-        \draw[fill=blue!20, rounded corners=1cm, line width=0.7pt] (0,2) rectangle (2, 5);
-        \draw[fill=blue!20, rounded corners=1cm, line width=0.7pt] (0,2) rectangle (2, -1);
-        %\fill[color=green!20] (2,0) rectangle (3,3);
-        %\filldraw[fill=green!20, rounded corners=1cm] (2, 4) -- (2, 1) -- (1, 1) -- (2, 1) -- (2, -1) -- (4, -1) -- (4, 4) -- cycle;
+    \begin{tikzpicture}[x=0.8cm,y=0.8cm, baseline=(current bounding box.center)]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+        \begin{scope} [shift={(-3.5,0)}]
+        % Draw background
+        \fill[leftcolor] (-0.5,0) rectangle (1,3);
+        \fill[rightcolor] (1,0) rectangle (2.5,3);
+    
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (1,0) -- (1,3);
+        \filldraw [black] (1,1) circle (2pt) node[left=2pt] {$G(f)$};
+        \filldraw [black] (1,2) circle (2pt) node[left=2pt] {$\varphi_X$};
+        % Label axes
+        \draw (1,0) node[below] {$G(Y)$};
+        \draw (1,3) node[above] {$F(X)$};
+        \draw (3,1.5) node {$=$};
     \end{scope} 
-    % Draw vertical line and point
-    \draw[line width=0.7pt] (1,0) -- (1,3);
-    \filldraw [black] (1,1) circle (2pt) node[left=2pt] {$f$};
-    \filldraw [black] (1,2) circle (2pt) node[left=2pt] {$\varphi_X$};
-    % Label axes
-    \draw (1,0) node[below] {$Y$};
-    \draw (1,3) node[above] {$X$};
-    \draw (2,0) node[below] {$G$};
-    \draw (2,3) node[above] {$F$};
-\end{tikzpicture}
-\hspace{5pt}=\hspace{5pt}
-\begin{tikzpicture}[x=1cm,y=1cm, baseline=(current bounding box.center)]
-    % Define colors
-    \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-    \definecolor{rightcolor}{RGB}{204,204,255} % light purple
-
-    % Draw background
-    \fill[leftcolor] (0,0) rectangle (1,3);
-    \fill[blue!20] (1,0) rectangle (2,3);
-    \fill[green!20] (2,0) rectangle (3,3);
- 
-    % Draw vertical line and point
-    \draw[line width=0.7pt] (1,0) -- (1,3);
-    \draw[line width=0.7pt] (2,0) -- (2,3);
-    \filldraw [black] (1,1.5) circle (2pt) node[left=2pt] {$f$};
-    \filldraw [black] (2,1.5) circle (2pt) node[left=2pt] {$\varphi$};
-    % Label axes
-    \draw (1,0) node[below] {$Y$};
-    \draw (1,3) node[above] {$X$};
-    \draw (2,0) node[below] {$G$};
-    \draw (2,3) node[above] {$F$};
-\end{tikzpicture}
-\hspace{5pt}=\hspace{5pt}
-\begin{tikzpicture}[x=1cm,y=1cm, baseline=(current bounding box.center)]
-    % Define colors
-    \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-    \definecolor{rightcolor}{RGB}{204,204,255} % light purple
-
-    % Draw background
-    \fill[leftcolor] (0,0) rectangle (1,3);
-    \fill[green!20] (1,0) rectangle (3,3);
     \begin{scope} 
-        \clip (1,0) rectangle (3, 3); 
-        \draw[fill=blue!20, rounded corners=1cm, line width=0.7pt] (0,1) rectangle (2, 4);
-        \draw[fill=blue!20, rounded corners=1cm, line width=0.7pt] (0,1) rectangle (2, -2);
-        %\fill[color=green!20] (2,0) rectangle (3,3);
-        %\filldraw[fill=green!20, rounded corners=1cm] (2, 4) -- (2, 1) -- (1, 1) -- (2, 1) -- (2, -1) -- (4, -1) -- (4, 4) -- cycle;
+        % Draw background
+        \fill[leftcolor] (0,0) rectangle (1,3);
+        \fill[green!20] (1,0) rectangle (3,3);
+        \begin{scope} 
+            \clip (1,0) rectangle (3, 3); 
+            \draw[fill=blue!20, rounded corners=0.8cm, line width=0.7pt] (0,2) rectangle (2, 5);
+            \draw[fill=blue!20, rounded corners=0.8cm, line width=0.7pt] (0,2) rectangle (2, -1);
+        \end{scope} 
+    
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (1,0) -- (1,3);
+        \filldraw [black] (1,1) circle (2pt) node[left=2pt] {$f$};
+        \filldraw [black] (1,2) circle (2pt) node[left=2pt] {$\varphi_X$};
+        % Label axes
+        \draw (1,0) node[below] {$Y$};
+        \draw (1,3) node[above] {$X$};
+        \draw (2,0) node[below] {$G$};
+        \draw (2,3) node[above] {$F$};
+        \draw (3.5,1.5) node {$=$};
     \end{scope} 
-    % Draw vertical line and point
-    \draw[line width=0.7pt] (1,0) -- (1,3);
-    \filldraw [black] (1,1) circle (2pt) node[left=2pt] {$\varphi_Y$};
-    \filldraw [black] (1,2) circle (2pt) node[left=2pt] {$f$};
-    % Label axes
-    \draw (1,0) node[below] {$Y$};
-    \draw (1,3) node[above] {$X$};
-    \draw (2,0) node[below] {$G$};
-    \draw (2,3) node[above] {$F$};
-\end{tikzpicture}
-\]
+        
+    \begin{scope} [shift={(4,0)}]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+    
+        % Draw background
+        \fill[leftcolor] (0,0) rectangle (1,3);
+        \fill[blue!20] (1,0) rectangle (2,3);
+        \fill[green!20] (2,0) rectangle (3,3);
+     
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (1,0) -- (1,3);
+        \draw[line width=0.7pt] (2,0) -- (2,3);
+        \filldraw [black] (1,1.5) circle (2pt) node[left=2pt] {$f$};
+        \filldraw [black] (2,1.5) circle (2pt) node[left=2pt] {$\varphi$};
+        % Label axes
+        \draw (1,0) node[below] {$Y$};
+        \draw (1,3) node[above] {$X$};
+        \draw (2,0) node[below] {$G$};
+        \draw (2,3) node[above] {$F$};
+        \draw (3.5,1.5) node {$=$};
+    \end{scope} 
+    
+    \begin{scope}[shift={(8,0)}]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+    
+        % Draw background
+        \fill[leftcolor] (0,0) rectangle (1,3);
+        \fill[green!20] (1,0) rectangle (3,3);
+        \begin{scope} 
+            \clip (1,0) rectangle (3, 3); 
+            \draw[fill=blue!20, rounded corners=0.8cm, line width=0.7pt] (0,1) rectangle (2, 4);
+            \draw[fill=blue!20, rounded corners=0.8cm, line width=0.7pt] (0,1) rectangle (2, -2);
+            %\fill[color=green!20] (2,0) rectangle (3,3);
+            %\filldraw[fill=green!20, rounded corners=1cm] (2, 4) -- (2, 1) -- (1, 1) -- (2, 1) -- (2, -1) -- (4, -1) -- (4, 4) -- cycle;
+        \end{scope} 
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (1,0) -- (1,3);
+        \filldraw [black] (1,1) circle (2pt) node[left=2pt] {$\varphi_Y$};
+        \filldraw [black] (1,2) circle (2pt) node[left=2pt] {$f$};
+        % Label axes
+        \draw (1,0) node[below] {$Y$};
+        \draw (1,3) node[above] {$X$};
+        \draw (2,0) node[below] {$G$};
+        \draw (2,3) node[above] {$F$};
+        \draw (3.5,1.5) node {$=$};
+    \end{scope} 
+    
+    \begin{scope} [shift={(12.5,0)}]
+        % Draw background
+        \fill[leftcolor] (-0.5,0) rectangle (1,3);
+        \fill[rightcolor] (1,0) rectangle (2.5,3);
+    
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (1,0) -- (1,3);
+        \filldraw [black] (1,2) circle (2pt) node[left=2pt] {$F(f)$};
+        \filldraw [black] (1,1) circle (2pt) node[left=2pt] {$\varphi_Y$};
+        % Label axes
+        \draw (1,0) node[below] {$G(Y)$};
+        \draw (1,3) node[above] {$F(X)$};
+    \end{scope} 
+    \end{tikzpicture}
+    \]
+
 Note that appending the string diagram \begin{tikzpicture}[x=0.3cm,y=0.3cm, baseline=(current bounding box.center)]
     % Define colors
     \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
@@ -805,271 +882,12 @@ Note that appending the string diagram \begin{tikzpicture}[x=0.3cm,y=0.3cm, base
 
     % Draw vertical line and point
     \draw[line width=0.7pt] (2,0) -- (2,2);
-    \filldraw [black] (2,1) circle (2pt) node[anchor=east] {$f$};
+    \filldraw [black] (2,1) circle (1.2pt) node[anchor=east] {$f$};
 
     % Label axes
     \draw (2,0) node[below] {$Y$};
     \draw (2,2) node[above] {$X$};
-\end{tikzpicture} to the left of the string diagram of $\varphi$ is equivalent to evaluating $\varphi$ at $f$.
-
-\section{Limit and Colimit}
-\dfn{Cone}{
-    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C} \arrow[r, "\Delta"] \& {[\mathsf{J},\mathsf{C}]} \& \mathsf{1} \arrow[l, "\Delta F"']
-        \end{tikzcd}
-    \]
-    The comma category $\left(\Delta \downarrow \Delta F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. 
-    \begin{itemize}
-        \item Objects: The objects in $\mathsf{Cone}(\textsf{C},F)$ are all natural transformations 
-        \[
-                \begin{tikzcd}[ampersand replacement=\&]
-                    \mathsf{J} \arrow[r, "\Delta C"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
-                    \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
-                \end{tikzcd}
-        \]
-        where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:\Delta C\Rightarrow F$ is called a \textbf{cone from $C$ to $F$} because it can be viewed as a family of morphisms $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
-        \[
-            \begin{tikzcd}[ampersand replacement=\&]
-                \& C \arrow[ld, "h_i"'] \arrow[rd, "h_j"] \&      \\
-    F(i) \arrow[rr, "F(\lambda)"'] \&                                         \& F(j)
-    \end{tikzcd}
-    \]  
-    \item Morphisms: The morphisms in $\mathsf{Cone}(\textsf{C},F)$ are commutative triangles shown as follows
-    \[
-        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \Delta C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_\bullet"'] \& \\
-            \&  F\\
-            \Delta C' \arrow[ru, Rightarrow, "h^{\prime}"'] \&
-            \end{tikzcd}
-    \] 
-    Equivalently, a morphism from cone $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cone $\left(h_i':C'\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
-    \[
-        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-             C \arrow[rd, "h_i"] \arrow[dd, "f"'] \& \\
-            \&  F(i)\\
-             C' \arrow[ru, "h^{\prime}_i"'] \&
-        \end{tikzcd}
-    \]
-    \end{itemize}
-}
-\dfn{Limit}{
-    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The \textbf{limit} of $F$, denoted by $\varprojlim F$, is the terminal object of $\mathsf{Cone}(\textsf{C},F)$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
-    \[
-        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
-            \&   [-1.5em]                \&[-1em] C \arrow[rdd, draw=cyan, "h_j"] \arrow[ldd, draw=cyan, "h_i"'] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \& [-1em]                  \\[+0.2cm]
-            \&                   \& \varprojlim F\arrow[ld, draw=arrowBlue, shorten <=-3pt, "\phi_i" yshift=4.5pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "\phi_j"' yshift=4pt]               \&                   \\[-0.1cm]
-        \& F(i) \arrow[rr, "F(\lambda)"']\&   \& F(j)
-        \end{tikzcd}
-    \]
-}
-\dfn{Cocone}{
-    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-             \mathsf{1} \arrow[r, "\Delta F"] \& {[\mathsf{J},\mathsf{C}]} \&\mathsf{C} \arrow[l, "\Delta "']
-        \end{tikzcd}
-    \]
-    The comma category $\left(\Delta F \downarrow \Delta\right)$ is called the \textbf{cocone category from $F$ to $\textsf{C}$}, denoted by $\mathsf{Cocone}(F,\textsf{C})$. 
-    \begin{itemize}
-        \item Objects: The objects in $\mathsf{Cocone}(F,\textsf{C})$ are all natural transformations
-        \[
-            \begin{tikzcd}[ampersand replacement=\&]
-                \mathsf{J} \arrow[r, "F"{name=A, above}, bend left] \arrow[r, "\Delta C"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
-                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
-            \end{tikzcd}
-    \]
-    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:F\Rightarrow \Delta C$ is called a \textbf{cocone from $F$ to $C$} because it can be viewed as a family of morphisms $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            \& C\&      \\
-F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                                         \& F(j) \arrow[lu, "h_j"'] 
-\end{tikzcd}
-\]    
-    \item Morphisms: The morphisms in $\mathsf{Cocone}(F,\textsf{C})$ are commutative triangles shown as follows
-    \[
-        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \&\Delta C \arrow[dd, Rightarrow, "f_\bullet"]  \\
-            F \arrow[ru, Rightarrow, "h"]\arrow[rd, Rightarrow, "h^{\prime}"']\&  \\
-            \&\Delta C' 
-            \end{tikzcd}
-    \]
-    \end{itemize}
-    Equivalently, a morphism from cocone $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cocone $\left(h_i':F(i)\to C'\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
-    \[
-        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \&\Delta C \arrow[dd, "f"]  \\
-            F(i) \arrow[ru, "h_I"]\arrow[rd, "h^{\prime}_i"']\&  \\
-            \&\Delta C' 
-            \end{tikzcd}
-    \]
-}
-
-\dfn{Colimit}{
-    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. 
-    The \textbf{colimit} of $F$, denoted by $\varinjlim F$, is the initial object of $\mathsf{Cocone}(F,\textsf{C})$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
-    \[
-        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
-            \&   [-1.5em]                \&[-1em] C \& [-1em]                  \\[+0.2cm]
-            \&                   \& \varinjlim F \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]         \&                   \\[-0.1cm]
-        \& F(i) \arrow[ruu, draw=cyan, "h_i"]\arrow[ru, draw=arrowBlue, shorten >=-3.5pt, "\phi_i"' yshift=4.5pt]        \arrow[rr, "F(\lambda)"']\&   \& F(j)\arrow[luu, draw=cyan, "h_j"']\arrow[lu, draw=arrowBlue, shorten >=-3.7pt, "\phi_j" yshift=4.5pt] 
-        \end{tikzcd}
-    \]
-}
-
-\ex{Limit in $\mathsf{Set}$}{
-    Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Then
-    \begin{align*}
-        \varprojlim F&\cong\left\{(x_i)_{i\in \mathrm{Ob}(\mathsf{J})}\in \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\;\midv \;\forall \lambda:i\to j\text{ in }\mathrm{Hom}_\mathsf{J}(i,j),\,F(\lambda)(x_i)=x_j\right\}
-    \end{align*}
-    where $\alpha$ and $\beta$ are defined by 
-    and the map $\phi_i:\varprojlim F\to F(i)$ is given by the composition
-    \[
-        \varprojlim F\xrightarrow{\quad\iota\quad}\prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi_i\quad}F(i).
-    \]
-    $\varprojlim F$ also can be constructed from product and equalizer 
-    \begin{align*}
-        \varprojlim F\cong \ker\left[
-            \begin{tikzcd}[ampersand replacement=\&]
-                \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[r, "\alpha", shift left] \arrow[r, "\beta"', shift right] \& \prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))
-                \end{tikzcd}
-        \right]
-    \end{align*}
-    where $\alpha$ and $\beta$ are induced by the following diagrams
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            F\left(\mathrm{dom}\left(\lambda\right)\right) \arrow[d, "F(\lambda)"'] \&[+25pt] \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[l, "\pi_{\mathrm{dom}\left(\lambda\right)}"'] \arrow[d, "\alpha", dashed] \&[-15pt]\ni \& [-15pt]      (x_i)_{i\in \mathrm{Ob}(\mathsf{J})}   \arrow[d, "\alpha", mapsto]                    \\ [+10pt]
-            F\left(\mathrm{codom}\left(\lambda\right)\right)        \& {\prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))} \arrow[l, "{\pi_{\lambda}}"]\&\ni\& (F(\lambda)(x_i))_{\lambda:i\to j\in \mathrm{Mor}(\mathsf{J})}
-            \end{tikzcd}
-    \]
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-             \&[+25pt] \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[ld, "\pi_{\mathrm{codom}\left(\lambda\right)}"'] \arrow[d, "\beta", dashed]    \&[-15pt]\ni \&[-15pt]   (x_i)_{i\in \mathrm{Ob}(\mathsf{J})}   \arrow[d, "\beta", mapsto]                                 \\ [+10pt]
-            F\left(\mathrm{codom}\left(\lambda\right)\right)        \& {\prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))} \arrow[l, "{\pi_{\lambda}}"]\&\ni\& (x_j)_{\lambda:i\to j\in \mathrm{Mor}(\mathsf{J})}
-            \end{tikzcd}
-    \]
-}
-
-
-\ex{Colimit in $\mathsf{Set}$}{
-    Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Define a relation $\sim^*$ on $\coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
-    \[
-        (i,x)\sim^* (j,y)\iff \text{there exists }\lambda:i\to j\text{ in }\mathrm{Hom}_\mathsf{J}(i,j)\text{ such that }F(\lambda)(x)=y.
-    \]
-    Let $\sim$ denote the equivalence relation generated by $\sim^*$. Then 
-    \[
-        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
-    \]
-    and the map $\phi_i:F(i)\to \varinjlim F$ is given by the composition
-    \[
-        F(i)\xrightarrow{\quad\iota_i\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim.
-    \]
-    If $\mathsf{J}$ is a filtered category, then the equivalence relation $\sim$ has a explicit description: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
-    \[
-        (i,x)\sim (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
-    \]
-}
-\pf{ 
-    It is easy to show 
-    \[
-        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
-    \]
-    by checking the universal property of $\varinjlim F$. If $\mathsf{J}$ is a filtered category, first we can check 
-    \[
-        (i,x)\approx (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
-    \]
-    is an equivalence relation. To show $\approx\;=\;\sim$, let's assume $\backsimeq$ is any equivalence relation containing $\sim^*$. If $(i,x)\approx(j,y)$, then there exists $\lambda_1:i\to k$ and $\lambda_2:j\to k$ such that $F(\lambda_1)(x)=F(\lambda_2)(y)=z$. Hence 
-    \[
-        (i,x)\sim^* (k,z)\text{ and }(j,y)\sim^* (k,z)\implies(i,x)\backsimeq (k,z)\text{ and }(j,y)\backsimeq (k,z)\implies (i,x)\backsimeq (j,y).
-    \]
-    This implies $\backsimeq$ contains $\approx$. Therefore, $\approx$ is the smallest equivalence relation containing $\sim^*$, which means $\approx$ coincides with $\sim$.
-}
-
-\dfn{Complete Category}{
-    A category $\mathsf{C}$ is \textbf{complete} if it has all small limits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varprojlim F$ exists.
-}
-\dfn{Cocomplete Category}{
-    A category $\mathsf{C}$ is \textbf{cocomplete} if it has all small colimits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varinjlim F$ exists.
-}
-
-\thm{Existance Theorem for Limits}{
-    Let $\mathsf{C}$ be a category and $F:\mathsf{J}\to\mathsf{C}$ be a functor. If a category $\mathsf{C}$ has equalizers and all products indexed by the classes $\mathrm{Ob}(\mathsf{J})$ and $\mathrm{Hom}(\mathsf{J})$, then $\mathsf{C}$ has all limits of shape $\mathsf{J}$.
-}
-
-The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : A \to C$, the value of the limit functor $\lim_{j\in J} F_j : A \to C$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
-
-\prop[ev_functor_preserves_limits]{Evaluation Functor Preserves Limits}{
-    Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
-    \[
-        \mathrm{ev}_a \circ F:\mathsf{J}\xrightarrow{\quad F\quad}\left[\mathsf{A},\mathsf{C}\right]\xrightarrow{\quad\mathrm{ev}_a\quad}\mathsf{C}
-    \]
-    has a limit, then
-    \begin{enumerate}[(i)]
-        \item $\varprojlim F$ exists.
-        \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
-    \end{enumerate}
-}
-
-\prop{Limits commute with limits}{
-    Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
-}
-
-\dfn[filtered_category]{Filtered Category}{
-    A category $\mathsf{J}$ is \textbf{filtered} if 
-    \begin{itemize}
-        \item $\mathsf{J}$ is nonempty.
-        \item For any pair of objects $j_1,j_2\in \mathrm{Ob}(\mathsf{J})$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and morphisms $j_1\to j_3$ and $j_2\to j_3$.
-        \item For any pair of morphisms $f,g:j_1\to j_2$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and a morphism $h:j_2\to j_3$ such that $h\circ f=h\circ g$.
-    \end{itemize}
-}
-\dfn{Cofiltered Category}{
-    A category $\mathsf{J}$ is \textbf{cofiltered} if $\mathsf{J}^{\mathrm{op}}$ is filtered. Equivalently, $\mathsf{J}$ is cofiltered if
-    \begin{itemize}
-        \item $\mathsf{J}$ is nonempty.
-        \item For any pair of objects $j_1,j_2\in \mathrm{Ob}(\mathsf{J})$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and morphisms $j_3\to j_1$ and $j_3\to j_2$.
-        \item For any pair of morphisms $f,g:j_1\to j_2$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and a morphism $h:j_3\to j_2$ such that $f\circ h=g\circ h$.
-    \end{itemize}
-}
-\dfn{Filtered Colimit}{
-    A \textbf{filtered colimit} is a colimit of a functor $F: \mathsf{J} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a filtered category.
-}
-
-\dfn[thin_category]{Thin Category}{
-    A \textbf{thin category} or \textbf{$(0,1)$-category} is a category in which any two objects have at most one morphism between them. 
-
-    A preorder set $(X,\leq)$ can be regarded as a thin category $\mathsf{X}$ with objects being elements of $X$ and morphisms being
-    \begin{align*}
-        \mathrm{Hom}(x,y)=\begin{cases}
-            \{*\} & \text{if }x\leq y\\
-            \varnothing & \text{otherwise}
-        \end{cases}
-    \end{align*}
-    Therefore, we obtain a category isomorphism between the category of preorder sets and the category of thin categories
-    \begin{align*}
-        F:\mathsf{PreOrdSet}&\longrightarrow (0,1)\text{-}\mathsf{Cat}\\
-        (X,\leq)&\longmapsto \mathsf{X}
-    \end{align*}
-}
-
-\ex{Filtered Set}{
-    A filtered set can be regarded as a filtered (0,1)-category with objects being elements of the set and morphisms being
-    \begin{align*}
-        \mathrm{Hom}(x,y)=\begin{cases}
-            \{*\} & \text{if }x\leq y\\
-            \varnothing & \text{otherwise}
-        \end{cases}
-    \end{align*}
-}
-
-\dfn{}{
-    For any class of diagrams $K: \mathsf{J} \rightarrow \mathsf{C}$ valued in $\mathsf{C}$, a functor $F: \mathsf{C} \rightarrow \mathsf{D}$
-    \begin{itemize}
-        \item \textbf{preserves} those limits if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ and limit cone over $K$, the image of this cone defines a limit cone over the composite diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$;
-        \item \textbf{reflects} those limits if any cone over a diagram $K: \mathsf{J} \rightarrow \mathsf{C}$, whose image upon applying $F$ is a limit cone for the diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$, is a limit cone over $K$;
-        \item \textbf{creates} those limits if whenever $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$ has a limit in $\mathsf{D}$, there is some limit cone over $F\circ K$ that can be lifted to a limit cone over $K$, and moreover $F$ reflects the limits in the class of diagrams.
-    \end{itemize}
-}
+\end{tikzpicture} to the left of the string diagram of $\varphi$ is equivalent to evaluating $\varphi$ at $f:X\to Y$.
 
 \section{Representable Functor}
 \dfn{Presheaf}{
@@ -1301,7 +1119,7 @@ The arrows between objects in a category are equivalent to the transformations b
     A \textbf{representation of $F$} is a pair $(A,\phi)$, where $A\in \mathrm{Ob}(\mathsf{C})$ and $\phi:F\stackrel{\sim\;}{\Rightarrow} \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)$ is a natural isomorphism. \\
     According to \hyperref[th:yoneda_lemma]{Yoneda lemma}, $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow  F$ is 1-1 correspondence with an element $\phi_A(\mathrm{id}_A)\in F(A)$. We define an \textbf{universal element of $F$} is a pair $(A,u)$ where $A\in \mathrm{Ob}(\mathsf{C})$ and $u\in F(A)$ such that $u$ corresponds to a natural isomorphism $\phi: \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}F$. Specifying a universal element of $F$ is equivalent to specifying a representation of $F$.
 }
-\prop[universal_element_characterization]{}{
+\prop[universal_element_characterization]{Uniqueness of Universal Element}{
     Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a representable functor. Then $(A,u)$ is a universal element of $F$ if and only if $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}. That is, if $(A,u)$ is a universal element of $F$, then for any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
 }
 \pf{
@@ -1337,6 +1155,280 @@ The arrows between objects in a category are equivalent to the transformations b
     According to \Cref{th:universal_element_characterization},
     $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\Delta \{*\}$ if and only if $\Delta$ is a representable functor with a universal element $(A,*)$.\\
     If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}\Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
+}
+
+
+\section{Limit and Colimit}
+\dfn{Cone}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\Delta"] \& {[\mathsf{J},\mathsf{C}]} \& \mathsf{1} \arrow[l, "\Delta F"']
+        \end{tikzcd}
+    \]
+    The comma category $\left(\Delta \downarrow \Delta F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. 
+    \begin{itemize}
+        \item Objects: The objects in $\mathsf{Cone}(\textsf{C},F)$ are all natural transformations 
+        \[
+                \begin{tikzcd}[ampersand replacement=\&]
+                    \mathsf{J} \arrow[r, "\Delta C"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
+                    \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
+                \end{tikzcd}
+        \]
+        where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:\Delta C\Rightarrow F$ is called a \textbf{cone from $C$ to $F$} because it can be viewed as a family of morphisms $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \& C \arrow[ld, "h_i"'] \arrow[rd, "h_j"] \&      \\
+    F(i) \arrow[rr, "F(\lambda)"'] \&                                         \& F(j)
+    \end{tikzcd}
+    \]  
+    \item Morphisms: The morphisms in $\mathsf{Cone}(\textsf{C},F)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            \Delta C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_\bullet"'] \& \\
+            \&  F\\
+            \Delta C' \arrow[ru, Rightarrow, "h^{\prime}"'] \&
+            \end{tikzcd}
+    \] 
+    Equivalently, a morphism from cone $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cone $\left(h_i':C'\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+             C \arrow[rd, "h_i"] \arrow[dd, "f"'] \& \\
+            \&  F(i)\\
+             C' \arrow[ru, "h^{\prime}_i"'] \&
+        \end{tikzcd}
+    \]
+    \end{itemize}
+}
+\dfn{Limit}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The \textbf{limit} of $F$, denoted by $\varprojlim F$, is the terminal object of $\mathsf{Cone}(\textsf{C},F)$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
+            \&   [-1.5em]                \&[-1em] C \arrow[rdd, draw=cyan, "h_j"] \arrow[ldd, draw=cyan, "h_i"'] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \& [-1em]                  \\[+0.2cm]
+            \&                   \& \varprojlim F\arrow[ld, draw=arrowBlue, shorten <=-3pt, "\phi_i" yshift=4.5pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "\phi_j"' yshift=4pt]               \&                   \\[-0.1cm]
+        \& F(i) \arrow[rr, "F(\lambda)"']\&   \& F(j)
+        \end{tikzcd}
+    \]
+}
+\dfn{Cocone}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+             \mathsf{1} \arrow[r, "\Delta F"] \& {[\mathsf{J},\mathsf{C}]} \&\mathsf{C} \arrow[l, "\Delta "']
+        \end{tikzcd}
+    \]
+    The comma category $\left(\Delta F \downarrow \Delta\right)$ is called the \textbf{cocone category from $F$ to $\textsf{C}$}, denoted by $\mathsf{Cocone}(F,\textsf{C})$. 
+    \begin{itemize}
+        \item Objects: The objects in $\mathsf{Cocone}(F,\textsf{C})$ are all natural transformations
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{J} \arrow[r, "F"{name=A, above}, bend left] \arrow[r, "\Delta C"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
+            \end{tikzcd}
+    \]
+    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:F\Rightarrow \Delta C$ is called a \textbf{cocone from $F$ to $C$} because it can be viewed as a family of morphisms $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \& C\&      \\
+F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                                         \& F(j) \arrow[lu, "h_j"'] 
+\end{tikzcd}
+\]    
+    \item Morphisms: The morphisms in $\mathsf{Cocone}(F,\textsf{C})$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            \&\Delta C \arrow[dd, Rightarrow, "f_\bullet"]  \\
+            F \arrow[ru, Rightarrow, "h"]\arrow[rd, Rightarrow, "h^{\prime}"']\&  \\
+            \&\Delta C' 
+            \end{tikzcd}
+    \]
+    \end{itemize}
+    Equivalently, a morphism from cocone $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cocone $\left(h_i':F(i)\to C'\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            \&\Delta C \arrow[dd, "f"]  \\
+            F(i) \arrow[ru, "h_I"]\arrow[rd, "h^{\prime}_i"']\&  \\
+            \&\Delta C' 
+            \end{tikzcd}
+    \]
+}
+
+\dfn{Colimit}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. 
+    The \textbf{colimit} of $F$, denoted by $\varinjlim F$, is the initial object of $\mathsf{Cocone}(F,\textsf{C})$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
+            \&   [-1.5em]                \&[-1em] C \& [-1em]                  \\[+0.2cm]
+            \&                   \& \varinjlim F \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]         \&                   \\[-0.1cm]
+        \& F(i) \arrow[ruu, draw=cyan, "h_i"]\arrow[ru, draw=arrowBlue, shorten >=-3.5pt, "\phi_i"' yshift=4.5pt]        \arrow[rr, "F(\lambda)"']\&   \& F(j)\arrow[luu, draw=cyan, "h_j"']\arrow[lu, draw=arrowBlue, shorten >=-3.7pt, "\phi_j" yshift=4.5pt] 
+        \end{tikzcd}
+    \]
+}
+
+
+\dfn{Complete Category}{
+    A category $\mathsf{C}$ is \textbf{complete} if it has all small limits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varprojlim F$ exists.
+}
+\dfn{Cocomplete Category}{
+    A category $\mathsf{C}$ is \textbf{cocomplete} if it has all small colimits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varinjlim F$ exists.
+}
+\dfn{Bicomplete Category}{
+    A category $\mathsf{C}$ is \textbf{bicomplete} if it is both complete and cocomplete.
+}
+\ex{Examples of Bicomplete Categories}{
+    The following categories are bicomplete: $\mathsf{Set}$, $\mathsf{Grp}$, $\mathsf{Ab}$, $\mathsf{Ring}$, 
+    $R\text{-}\mathsf{Mod}$, $K\text{-}\mathsf{Vect}$, $\mathsf{Top}$.
+}
+\dfn{Finitely Complete category}{
+    A category $\mathsf{C}$ is \textbf{finitely complete} if it has all finite limits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ a finite category, $\varprojlim F$ exists.
+}
+\dfn{Finitely Cocomplete category}{
+    A category $\mathsf{C}$ is \textbf{finitely cocomplete} if it has all finite colimits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ a finite category, $\varinjlim F$ exists.
+}
+
+\thm{Existance Theorem for Limits}{
+    Let $\mathsf{C}$ be a category and $F:\mathsf{J}\to\mathsf{C}$ be a functor. If a category $\mathsf{C}$ has equalizers and all products indexed by the classes $\mathrm{Ob}(\mathsf{J})$ and $\mathrm{Hom}(\mathsf{J})$, then $\mathsf{C}$ has all limits of shape $\mathsf{J}$.
+}
+
+The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : A \to C$, the value of the limit functor $\lim_{j\in J} F_j : A \to C$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
+
+\prop[ev_functor_preserves_limits]{Evaluation Functor Preserves Limits}{
+    Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
+    \[
+        \mathrm{ev}_a \circ F:\mathsf{J}\xrightarrow{\quad F\quad}\left[\mathsf{A},\mathsf{C}\right]\xrightarrow{\quad\mathrm{ev}_a\quad}\mathsf{C}
+    \]
+    has a limit, then
+    \begin{enumerate}[(i)]
+        \item $\varprojlim F$ exists.
+        \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
+    \end{enumerate}
+}
+
+\prop{Limits commute with limits}{
+    Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
+}
+
+\dfn[filtered_category]{Filtered Category}{
+    A category $\mathsf{J}$ is \textbf{filtered} if 
+    \begin{itemize}
+        \item $\mathsf{J}$ is nonempty.
+        \item For any pair of objects $j_1,j_2\in \mathrm{Ob}(\mathsf{J})$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and morphisms $j_1\to j_3$ and $j_2\to j_3$.
+        \item For any pair of morphisms $f,g:j_1\to j_2$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and a morphism $h:j_2\to j_3$ such that $h\circ f=h\circ g$.
+    \end{itemize}
+}
+\dfn{Cofiltered Category}{
+    A category $\mathsf{J}$ is \textbf{cofiltered} if $\mathsf{J}^{\mathrm{op}}$ is filtered. Equivalently, $\mathsf{J}$ is cofiltered if
+    \begin{itemize}
+        \item $\mathsf{J}$ is nonempty.
+        \item For any pair of objects $j_1,j_2\in \mathrm{Ob}(\mathsf{J})$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and morphisms $j_3\to j_1$ and $j_3\to j_2$.
+        \item For any pair of morphisms $f,g:j_1\to j_2$, there exists an object $j_3\in \mathrm{Ob}(\mathsf{J})$ and a morphism $h:j_3\to j_2$ such that $f\circ h=g\circ h$.
+    \end{itemize}
+}
+\dfn{Filtered Colimit}{
+    A \textbf{filtered colimit} is a colimit of a functor $F: \mathsf{J} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a filtered category.
+}
+
+\dfn[thin_category]{Thin Category}{
+    A \textbf{thin category} or \textbf{$(0,1)$-category} is a category in which any two objects have at most one morphism between them. 
+
+    A preorder set $(X,\leq)$ can be regarded as a thin category $\mathsf{X}$ with objects being elements of $X$ and morphisms being
+    \begin{align*}
+        \mathrm{Hom}(x,y)=\begin{cases}
+            \{*\} & \text{if }x\leq y\\
+            \varnothing & \text{otherwise}
+        \end{cases}
+    \end{align*}
+    Therefore, we obtain a category isomorphism between the category of preorder sets and the category of thin categories
+    \begin{align*}
+        F:\mathsf{PreOrdSet}&\longrightarrow (0,1)\text{-}\mathsf{Cat}\\
+        (X,\leq)&\longmapsto \mathsf{X}
+    \end{align*}
+}
+
+\ex{Filtered Set}{
+    A filtered set can be regarded as a filtered (0,1)-category with objects being elements of the set and morphisms being
+    \begin{align*}
+        \mathrm{Hom}(x,y)=\begin{cases}
+            \{*\} & \text{if }x\leq y\\
+            \varnothing & \text{otherwise}
+        \end{cases}
+    \end{align*}
+}
+
+\dfn{Preserve, Reflect, Create Limits}{
+    For any class of diagrams $K: \mathsf{J} \rightarrow \mathsf{C}$ valued in $\mathsf{C}$, a functor $F: \mathsf{C} \rightarrow \mathsf{D}$
+    \begin{itemize}
+        \item \textbf{preserves} those limits if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ and limit cone over $K$, the image of this cone defines a limit cone over the composite diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$;
+        \item \textbf{reflects} those limits if any cone over a diagram $K: \mathsf{J} \rightarrow \mathsf{C}$, whose image upon applying $F$ is a limit cone for the diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$, is a limit cone over $K$;
+        \item \textbf{creates} those limits if whenever $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$ has a limit in $\mathsf{D}$, there is some limit cone over $F\circ K$ that can be lifted to a limit cone over $K$, and moreover $F$ reflects the limits in the class of diagrams.
+    \end{itemize}
+}
+
+\ex{Limit in $\mathsf{Set}$}{
+    Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Then
+    \begin{align*}
+        \varprojlim F&\cong\left\{(x_i)_{i\in \mathrm{Ob}(\mathsf{J})}\in \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\;\midv \;\forall \lambda:i\to j\text{ in }\mathrm{Hom}_\mathsf{J}(i,j),\,F(\lambda)(x_i)=x_j\right\}
+    \end{align*}
+    where $\alpha$ and $\beta$ are defined by 
+    and the map $\phi_i:\varprojlim F\to F(i)$ is given by the composition
+    \[
+        \varprojlim F\xrightarrow{\quad\iota\quad}\prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi_i\quad}F(i).
+    \]
+    $\varprojlim F$ also can be constructed from product and equalizer 
+    \begin{align*}
+        \varprojlim F\cong \ker\left[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[r, "\alpha", shift left] \arrow[r, "\beta"', shift right] \& \prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))
+                \end{tikzcd}
+        \right]
+    \end{align*}
+    where $\alpha$ and $\beta$ are induced by the following diagrams
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            F\left(\mathrm{dom}\left(\lambda\right)\right) \arrow[d, "F(\lambda)"'] \&[+25pt] \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[l, "\pi_{\mathrm{dom}\left(\lambda\right)}"'] \arrow[d, "\alpha", dashed] \&[-15pt]\ni \& [-15pt]      (x_i)_{i\in \mathrm{Ob}(\mathsf{J})}   \arrow[d, "\alpha", mapsto]                    \\ [+10pt]
+            F\left(\mathrm{codom}\left(\lambda\right)\right)        \& {\prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))} \arrow[l, "{\pi_{\lambda}}"]\&\ni\& (F(\lambda)(x_i))_{\lambda:i\to j\in \mathrm{Mor}(\mathsf{J})}
+            \end{tikzcd}
+    \]
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+             \&[+25pt] \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)  \arrow[ld, "\pi_{\mathrm{codom}\left(\lambda\right)}"'] \arrow[d, "\beta", dashed]    \&[-15pt]\ni \&[-15pt]   (x_i)_{i\in \mathrm{Ob}(\mathsf{J})}   \arrow[d, "\beta", mapsto]                                 \\ [+10pt]
+            F\left(\mathrm{codom}\left(\lambda\right)\right)        \& {\prod\limits_{\lambda \in \mathrm{Mor}(\mathsf{J})}F(\mathrm{codom}\left(\lambda\right))} \arrow[l, "{\pi_{\lambda}}"]\&\ni\& (x_j)_{\lambda:i\to j\in \mathrm{Mor}(\mathsf{J})}
+            \end{tikzcd}
+    \]
+}
+
+
+\ex{Colimit in $\mathsf{Set}$}{
+    Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Define a relation $\sim^*$ on $\coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
+    \[
+        (i,x)\sim^* (j,y)\iff \text{there exists }\lambda:i\to j\text{ in }\mathrm{Hom}_\mathsf{J}(i,j)\text{ such that }F(\lambda)(x)=y.
+    \]
+    Let $\sim$ denote the equivalence relation generated by $\sim^*$. Then 
+    \[
+        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
+    \]
+    and the map $\phi_i:F(i)\to \varinjlim F$ is given by the composition
+    \[
+        F(i)\xrightarrow{\quad\iota_i\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim.
+    \]
+    If $\mathsf{J}$ is a filtered category, then the equivalence relation $\sim$ has a explicit description: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
+    \[
+        (i,x)\sim (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
+    \]
+}
+\pf{ 
+    It is easy to show 
+    \[
+        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
+    \]
+    by checking the universal property of $\varinjlim F$. If $\mathsf{J}$ is a filtered category, first we can check 
+    \[
+        (i,x)\approx (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
+    \]
+    is an equivalence relation. To show $\approx\;=\;\sim$, let's assume $\backsimeq$ is any equivalence relation containing $\sim^*$. If $(i,x)\approx(j,y)$, then there exists $\lambda_1:i\to k$ and $\lambda_2:j\to k$ such that $F(\lambda_1)(x)=F(\lambda_2)(y)=z$. Hence 
+    \[
+        (i,x)\sim^* (k,z)\text{ and }(j,y)\sim^* (k,z)\implies(i,x)\backsimeq (k,z)\text{ and }(j,y)\backsimeq (k,z)\implies (i,x)\backsimeq (j,y).
+    \]
+    This implies $\backsimeq$ contains $\approx$. Therefore, $\approx$ is the smallest equivalence relation containing $\sim^*$, which means $\approx$ coincides with $\sim$.
 }
 
 
@@ -1384,7 +1476,7 @@ Let $\left(L,R,\phi\right)$ be an adjoint pair of functors. The \textbf{adjuncti
         \begin{scope}       
             \clip (-2.5,0.2) rectangle (2.5,3);     
             \fill[fill=green!20] (-2.5,0.2) rectangle (2.5,3);  
-            \draw[fill=blue!20, rounded corners=0.6cm, line width=0.5pt] (-1,-1) rectangle (1, 2); 
+            \draw[fill=blue!20, rounded corners=0.6cm, line width=0.7pt] (-1,-1) rectangle (1, 2); 
         \end{scope}
         \node[below=2pt] at (-1,0.2) {$L$};
         \node[below=2pt] at (1,0.2) {$R$};
@@ -1411,7 +1503,7 @@ The \textbf{adjunction counit} $\varepsilon$ of this adjunction is a natural tra
         \begin{scope} 
             \clip (-2.5,0) rectangle (2.5,2.8);     
             \fill[fill=blue!20] (-2.5,0) rectangle (2.5,2.8);  
-            \draw[fill=green!20, rounded corners=0.6cm, line width=0.5pt] (-1,1) rectangle (1, 4);
+            \draw[fill=green!20, rounded corners=0.6cm, line width=0.7pt] (-1,1) rectangle (1, 4);
         \end{scope}
         \node[above=2pt] at (-1,2.8) {$R$};
         \node[above=2pt] at (1,2.8) {$L$};
@@ -1489,7 +1581,7 @@ Similarly, we can show that for any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, the
             \begin{scope} 
                 \clip (-2.4,0) rectangle (2.4,3);     
                 \fill[fill=green!20] (-2.5,0) rectangle (2.5,3);  
-                \filldraw[fill=blue!20, rounded corners=0.48cm, line width=0.5pt] (-1.2,-1) -- (-1.2, 2.1)-- (0,2.1)-- (0,0.9)-- (1.2,0.9)
+                \filldraw[fill=blue!20, rounded corners=0.48cm, line width=0.7pt] (-1.2,-1) -- (-1.2, 2.1)-- (0,2.1)-- (0,0.9)-- (1.2,0.9)
                    -- (1.2,4)-- (4,4)-- (4,-1)--cycle;
             \end{scope}
         
@@ -1507,7 +1599,7 @@ Similarly, we can show that for any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, the
             \begin{scope} 
                 \clip (4,0) rectangle (6.4,3); 
                 \fill[fill=green!20] (4,0) rectangle (6.4,3); 
-                \filldraw[fill=blue!20, line width=0.5pt] (5.2,-1) rectangle (7,4);  
+                \filldraw[fill=blue!20, line width=0.7pt] (5.2,-1) rectangle (7,4);  
             \end{scope} 
             
             \node[below] at (5.2,0) {$L$};
@@ -1576,8 +1668,8 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
         \fill[fill=blue!20] (-1,0) .. controls (-1,0.4) and (-0.8, 1) .. (0,1)--(0,0)--cycle;
         \fill[fill=green!45] (1,2) .. controls (1,1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
     \end{scope}
-    \draw[line width=0.5pt] (0,0) -- (0,2);
-    \draw[line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
+    \draw[line width=0.7pt] (0,0) -- (0,2);
+    \draw[line width=0.7pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
     
     \node[above=2pt] at (0, 2) {$H$};
     \node[below=2pt] at (0, 0) {$K$};
@@ -1594,8 +1686,8 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
         \fill[fill=blue!20] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0,1)--(0,0)--cycle;
         \fill[fill=blue!40] (1,0) .. controls (1, 0.4) and (0.8, 1) .. (0,1)--(0,0)--cycle;
     \end{scope}
-    \draw[line width=0.5pt] (0,0) -- (0,2);
-    \draw[line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
+    \draw[line width=0.7pt] (0,0) -- (0,2);
+    \draw[line width=0.7pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
     
     \node[above=2pt] at (0, 2) {$H$};
     \node[below=2pt] at (0, 0) {$K$};
@@ -1612,8 +1704,8 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
         \fill[fill=green!20] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0,1)--(0,2)--cycle;
         \fill[fill=green!45] (1,2) .. controls (1, 1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
     \end{scope}
-    \draw[line width=0.5pt] (0,0) -- (0,2);
-    \draw[line width=0.5pt] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
+    \draw[line width=0.7pt] (0,0) -- (0,2);
+    \draw[line width=0.7pt] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
     
     \node[above=2pt] at (0, 2) {$H$};
     \node[below=2pt] at (0, 0) {$K$};
@@ -1630,8 +1722,8 @@ natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\
         \fill[fill=green!20] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0,1)--(0,2)--cycle;
         \fill[fill=blue!40] (1,0) .. controls (1, 0.4) and (0.8, 1) .. (0,1)--(0,0)--cycle;
     \end{scope}
-    \draw[line width=0.5pt] (0,0) -- (0,2);
-    \draw[line width=0.5pt] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
+    \draw[line width=0.7pt] (0,0) -- (0,2);
+    \draw[line width=0.7pt] (-1,2) .. controls (-1, 1.6) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
     
     \node[above=2pt] at (0, 2) {$H$};
     \node[below=2pt] at (0, 0) {$K$};
@@ -1652,8 +1744,8 @@ We only explicit define $\alpha^\triangleright$ here. The other wire bendings ar
         \fill[fill=blue!20] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0,1)--(0,0)--cycle;
         \fill[fill=blue!40] (1,0) .. controls (1, 0.4) and (0.8, 1) .. (0,1)--(0,0)--cycle;
     
-    \draw[line width=0.5pt] (0,0) -- (0,2);
-    \draw[line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
+    \draw[line width=0.7pt] (0,0) -- (0,2);
+    \draw[line width=0.7pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
     
     \node[above=2pt] at (0, 2) {$H$};
     \node[below=2pt] at (0, 0) {$K$};
@@ -1672,13 +1764,13 @@ We only explicit define $\alpha^\triangleright$ here. The other wire bendings ar
             \fill[fill=green!20] (-2,0) rectangle (0,4);  
             \fill[fill=green!45] (0,0) rectangle (4,4);  
             \filldraw[fill=blue!20] (-1,-1) -- (-1,0) .. controls (-1,0.4) and (-0.8, 1) .. (0,1)--(0,-1)--cycle;
-            \filldraw[fill=blue!45, line width=0.5pt] (0, -1) -- 
+            \filldraw[fill=blue!45, line width=0.7pt] (0, -1) -- 
             (0, 1) .. controls (0.8, 1) and (1, 1.6) ..  
             (1, 2) .. controls (1, 2.4) and (1.2, 3) .. 
             (2, 3) .. controls (2.8, 3) and (3, 2.4) .. 
             (3, 2)--(3, -1)--cycle;
     \end{scope}
-        \draw[line width=0.5pt] (0,0) -- (0,4);
+        \draw[line width=0.7pt] (0,0) -- (0,4);
 
         \node[above=2pt] at (0, 4) {$H$};
         \node[below=2pt] at (0, 0) {$K$};
@@ -1731,9 +1823,9 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
                 \fill[fill=blue!20] (0,0) rectangle (2,2); 
                 \fill[fill=green!20] (1,2) .. controls (1,1.6) and (0.8, 1) .. (0,1)--(0,2)--cycle;
             \end{scope}
-            \draw[line width=0.5pt] (0,0) -- (0,2);
-            \draw[dashed, color=black!50, line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) ;
-            \draw[line width=0.5pt]  (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
+            \draw[line width=0.7pt] (0,0) -- (0,2);
+            \draw[dashed, color=black!50, line width=0.7pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1) ;
+            \draw[line width=0.7pt]  (0, 1) .. controls (0.8, 1) and (1, 1.6) .. (1, 2);
             
             \node[above=2pt] at (0, 2) {$X$};
             \node[below=2pt] at (0, 0) {$Y$};
@@ -1750,9 +1842,9 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
               
                 \fill[fill=blue!20] (1,0) .. controls (1, 0.4) and (0.8, 1) .. (0,1)--(0,0)--cycle;
             \end{scope}
-            \draw[line width=0.5pt] (0,0) -- (0,2);
-            \draw[dashed, color=black!40, line width=0.5pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1);
-            \draw[line width=0.5pt] (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
+            \draw[line width=0.7pt] (0,0) -- (0,2);
+            \draw[dashed, color=black!40, line width=0.7pt] (-1,0) .. controls (-1, 0.4) and (-0.8, 1) .. (0, 1);
+            \draw[line width=0.7pt] (0, 1) .. controls (0.8, 1) and (1, 0.4) .. (1, 0);
             \node[above=2pt] at (0, 2) {$X$};
             \node[below=2pt] at (0, 0) {$Y$};
             \node[below=2pt] at (1, 0) {$R$};
@@ -1767,8 +1859,8 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
                 \fill[fill=green!20] (0,0) rectangle (2,2); 
                 \filldraw[fill=blue!20] (1.5,-1)--(1.5,0) .. controls (1.5, 0.5) and (0.7, 2.3) .. (0,1)--(0,-1)--cycle;
             \end{scope}
-            \draw[line width=0.5pt] (0,0) -- (0,2);
-            \draw[dashed, color=black!40, line width=0.5pt] (-0.5,0) .. controls (-0.5, 0.2) and (-0.3, 0.6) .. (0, 1);
+            \draw[line width=0.7pt] (0,0) -- (0,2);
+            \draw[dashed, color=black!40, line width=0.7pt] (-0.5,0) .. controls (-0.5, 0.2) and (-0.3, 0.6) .. (0, 1);
             \node[above=2pt] at (0, 2) {$X$};
             \node[below=2pt] at (0, 0) {$Y$};
             \node[below=2pt] at (1.5, 0) {$R$};
@@ -1785,9 +1877,9 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
          
                 \fill[fill=blue!20] (1.4,0) .. controls (1.4,1) and (1, 1.4) .. (0,1.4)--(0,0)--cycle;
             \end{scope}
-            \draw[line width=0.5pt] (0,0) -- (0,2);
+            \draw[line width=0.7pt] (0,0) -- (0,2);
          
-            \draw[line width=0.5pt] (0, 1.4) .. controls (1, 1.4) and (1.4, 1) .. (1.4, 0);
+            \draw[line width=0.7pt] (0, 1.4) .. controls (1, 1.4) and (1.4, 1) .. (1.4, 0);
             \node[above=2pt] at (0, 2) {$X$};
             \node[below=2pt] at (0, 0) {$Y$};
             \node[below=2pt] at (1.4, 0) {$R$};
@@ -1803,6 +1895,30 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
         \triangleright: \mathrm{Hom}_{\mathsf{D}}\left(L(X), Y\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}(X, R(Y)) 
     \]
     which is natural in both $X$ and $Y$. Hence $\phi$ is a natural isomorphism. It is straightforward to check that $T$ is a bijection.
+}
+
+\prop{Equivalent Definition of Adjoint Functor Using Universal Morphism}{
+    Given pair of functors $\begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[r, "L", bend left] \& \mathsf{D} \arrow[l, "R", bend left]
+        \end{tikzcd}$, then the following are equivalent
+    \begin{enumerate}[(i)]
+        \item $L \dashv R$.
+        \item For every object $X\in\mathrm{Ob}(\mathsf{C})$, there exists $\left(L(X), X\xrightarrow{\eta_X} R(L(X))\right)$ initial in $\left(X\downarrow R\right)$, i.e. there exists a \hyperref[th:universal_morphism]{universal morphism} from $X$ to $R$.
+        \item For every object $Y\in\mathrm{Ob}(\mathsf{D})$, there exists $\left(R(Y), L(R(Y))\xrightarrow{\varepsilon_Y} Y\right)$ terminal in $\left(L\downarrow Y\right)$, i.e. there exists a \hyperref[th:universal_morphism]{universal morphism} from $L$ to $Y$.
+    \end{enumerate} 
+}
+\pf{
+    If $L \dashv R$, then for every $X\in\mathrm{Ob}(\mathsf{C})$, we can let $X\xrightarrow{\eta_X} R(L(X))$ be the unit of the adjunction. Then for any $X\xrightarrow{g} R(Y)$, we have the following commutative diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            X \arrow[rd, "f"'] \arrow[r, "\eta_X"] \& R(L(X))\arrow[d, "{R\left(\phi_{X,Y}^{-1}(g)\right)}"]  \\
+            \&  R(Y) 
+            \end{tikzcd}
+    \]
+    because 
+    \[
+        R\left(\phi_{X,Y}^{-1}(g)\right)\circ \eta_X=R\left(\eta_Y\circ L(g)\right)\circ R\left(\eta_X\right)=R\left(\eta_Y\circ L(g)\circ \eta_X\right)
+    \]
 }
 
 \section{Monoidal Category}
@@ -1848,10 +1964,11 @@ A strict monoidal category is one for which the natural isomorphisms $a$, $\lamb
 
 \dfn{Cartesian/Cocartesian Monoidal Category}{
     \begin{itemize}[leftmargin=8pt]
-        \item A \textbf{cartesian monoidal category} is a monoidal category where the tensor product is the categorical product and the unit object is the terminal object. 
-        \item A \textbf{cocartesian monoidal category} is a monoidal category where the tensor product is the categorical coproduct and the unit object is the initial object.
+        \item A \textbf{cartesian monoidal category} is a monoidal category with finite products endowed with a where the tensor product is the categorical product and the unit object is the terminal object. If a category has all finite products, then we say it is \textbf{cartesian monoidal}. 
+        \item A \textbf{cocartesian monoidal category} is a monoidal category where the tensor product is the categorical coproduct and the unit object is the initial object. If a category has all finite coproducts, then we say it is \textbf{cocartesian monoidal}.
     \end{itemize}
 }
+
 \ex{Category of Endofunctors is a Monoidal Category}{
     Let $\mathsf{C}$ be a category. The \textbf{category of endofunctors} $\left[\mathsf{C},\mathsf{C}\right]$ is a monoidal category with the following structure
     \begin{enumerate}[(i)]
@@ -1901,6 +2018,50 @@ A strict monoidal category is one for which the natural isomorphisms $a$, $\lamb
     \end{enumerate}
 }
 
+\section{2-Category}
+
+\dfn{Strict 2-Category}{
+    Let $\mathsf{Cat}$ be the Cartesian monoidal category consisting of all small categories. A \textbf{strict 2-category} is a $\mathsf{Cat}$-enriched category. We define the following sets
+    \begin{itemize}
+        \item 0-morphism set: $\mathrm{Ob}(\mathsf{C})$
+        \item 1-morphism set: $\mathrm{Hom}_{\mathsf{C}}(X,Y)$ for any $X,Y\in \mathrm{Ob}(\mathsf{C})$
+        \item 2-morphism set: $\mathrm{Hom}_{\mathsf{C}}(f,g)$ for any $X,Y\in \mathrm{Ob}(\mathsf{C})$ and $f,g\in \mathrm{Hom}_{\mathsf{C}}(X,Y)$
+    \end{itemize}
+
+    For any $X,Y,Z\in\mathrm{Ob}(\mathsf{C})$, we have the following composition bifunctor
+    \begin{align*}
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Hom}_{\mathsf{C}}(Y,Z)\times \mathrm{Hom}_{\mathsf{C}}(X,Y)\&[-25pt]\&[+10pt]\&[-30pt] \mathrm{Hom}_{\mathsf{C}}(X,Z)\&[-30pt]\&[-30pt] \\ [-15pt] 
+            (f',f)  \arrow[dd, "{(\theta', \theta)}"{name=L, left},Rightarrow] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]f'\circ f\arrow[dd, "\theta'\circ \theta"{name=R},Rightarrow] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\Theta", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            (g',g)  \& \& \& g'\circ g
+        \end{tikzcd}
+    \end{align*}
+    which are called the horizontal composition of 2-morphisms. The functoriality of $\Theta$ means that given any vertical composition of 2-morphisms
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            { (f',f)} \arrow[d, "{(\theta', \theta)}"', Rightarrow] \\
+            { (g',g)} \arrow[d, "{(\psi', \psi)}"', Rightarrow]     \\
+            { (h',h)}                                              
+        \end{tikzcd}
+    \]
+    we have the following equality
+    \begin{align*}
+        \Theta\left(\left(\psi'\circ\theta'\right),\left(\psi\circ\theta\right)\right)=\left(\psi'\circ\theta'\right)\circ\left(\psi\circ\theta\right)=\Theta\left(\psi',\psi\right)\circ\Theta\left(\theta',\theta\right)=\left(\psi'\circ\psi\right)\circ\left(\theta'\circ\theta\right)
+    \end{align*}
+    which is called the \textbf{interchange law}.
+}
+
+\ex{$\mathsf{Cat}$ as 2-category}{
+    The category $\mathsf{Cat}$ is a strict 2-category with the following structure
+    \begin{itemize}
+        \item 0-morphism set: $\mathrm{Ob}(\mathsf{Cat})$
+        \item 1-morphism set: $\mathrm{Hom}_{\mathsf{Cat}}(\mathsf{C},\mathsf{D}):=[\mathsf{C},\mathsf{D}]$ for any $\mathsf{C},\mathsf{D}\in \mathrm{Ob}(\mathsf{Cat})$
+        \item 2-morphism set: $\mathrm{Hom}_{\mathsf{Cat}}(F,G):=\mathrm{Hom}_{[\mathsf{C},\mathsf{D}]}\left(F,G\right)$ for any $\mathsf{C},\mathsf{D}\in \mathrm{Ob}(\mathsf{Cat})$ and $F,G\in [\mathsf{C},\mathsf{D}]$
+    \end{itemize}
+}
 
 \section{Abelian Category}
 Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We will not use this term in this note.
