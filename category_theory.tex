@@ -1119,8 +1119,99 @@ The arrows between objects in a category are equivalent to the transformations b
     A \textbf{representation of $F$} is a pair $(A,\phi)$, where $A\in \mathrm{Ob}(\mathsf{C})$ and $\phi:F\stackrel{\sim\;}{\Rightarrow} \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)$ is a natural isomorphism. \\
     According to \hyperref[th:yoneda_lemma]{Yoneda lemma}, $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow  F$ is 1-1 correspondence with an element $\phi_A(\mathrm{id}_A)\in F(A)$. We define an \textbf{universal element of $F$} is a pair $(A,u)$ where $A\in \mathrm{Ob}(\mathsf{C})$ and $u\in F(A)$ such that $u$ corresponds to a natural isomorphism $\phi: \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}F$. Specifying a universal element of $F$ is equivalent to specifying a representation of $F$.
 }
-\prop[universal_element_characterization]{Uniqueness of Universal Element}{
-    Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a representable functor. Then $(A,u)$ is a universal element of $F$ if and only if $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}. That is, if $(A,u)$ is a universal element of $F$, then for any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
+\[
+ \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center), line width=0.7pt]
+    \definecolor{leftcolor}{RGB}{255,255,204}
+    \definecolor{midcolor}{HTML}{BBE6FB}
+    \definecolor{rightcolor}{HTML}{F5D4BC}
+    \node at (0, 6) {$\mathrm{Hom}_{\mathsf{C}}\left(A,X\right)$};
+    \node at (4.75, 6) {$\xlongrightarrow{\sim}$};
+    \node at (4.75, -4.75) {$\longmapsfrom$};
+    \node at (4.75, 1.8) {$\longmapsto$};
+    \node at (9.5, 6) {$F(X)$};
+    
+    \begin{scope}[line width=0.7pt]
+        \begin{scope}
+            \clip (-3,0.4) rectangle (3,3.2);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 3.2);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 3.2);  
+            %\draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2);
+        \end{scope}
+        \node[below] at (0, 0.4) {$X$};
+        \node[left=1pt] at (0, 1.8) {$f$};
+        \draw[fill=black] (0, 1.8) circle (0.1);  
+        \draw (0, 3.2) -- (0, 0.4);
+        \node[above] at (0, 3.2) {$A$};
+    \end{scope}
+
+    \begin{scope}[shift={(9.5,0)}]
+    \fill[fill=leftcolor] (-3,-0.4) rectangle (0,4); 
+     \fill[fill=midcolor] (0, -0.4) rectangle (3,4); 
+     \fill[fill=rightcolor] (-1, -0.4) rectangle (1,2); 
+        \begin{scope} 
+            \clip (-2.5,0.4) rectangle (2.5,3.2);     
+            \fill[fill=leftcolor] (-2.5,0) rectangle (0, 3.2);  
+            \fill[fill=rightcolor] (0,0) rectangle (2.5, 3.2);  
+            %\draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2);
+        \end{scope}
+        \draw[line width=1.7pt, color=black!80, rounded corners=2.5pt] (-2.5, 0.4) rectangle (2.5, 3.2); % inner rectangle
+        \node[above,shift={(0.35,0.1)}] at (0, 0.4) {$X$};
+        \node[left=1pt] at (0, 1.8) {$f$};
+        \draw[fill=black] (0, 1.8) circle (0.1);  
+        \draw (0, 4) -- (0, 0.4);
+        \node[below,shift={(0.35,-0.1)}] at (0, 3.2) {$A$};
+        \draw (1, 0.4) -- (1, -0.4);
+        \draw (-1, 0.4) -- (-1, -0.4);
+        \node[above] at (0, 4) {$\{*\}$};
+        \node[below] at (-1, -0.4) {$X$};
+        \node[below] at (1, -0.4) {$F$};
+    \end{scope}
+    
+    \begin{scope}[shift={(0, -6.5)}, line width=0.7pt]
+    \fill[fill=leftcolor] (-3,-0.4) rectangle (0,4); 
+     \fill[fill=midcolor] (0, -0.4) rectangle (3,4); 
+        \begin{scope} 
+            \clip (-2.5,0.4) rectangle (2.5, 3.2);     
+            \fill[fill=leftcolor] (-2.5,0) rectangle (0, 3.2);  
+            \fill[fill=rightcolor] (0,0) rectangle (2.5, 3.2);  
+            \draw[fill=midcolor, rounded corners=0.6cm] (-1, -2) rectangle (1, 2);
+        \end{scope}
+        \node[shift={(-0.35,0.35)}] at (-1, 0.4) {$X$};
+        \node[shift={(0.35,0.35)}] at (1, 0.4) {$F$};
+        \node[below=2pt] at (0, 2) {$s$};
+        \draw[fill=black] (0, 2) circle (0.1);  
+        \draw (0,4) -- (0,2);
+        \draw (0, -0.4) -- (0,0.4);
+        \node[below,shift={(-0.5,0.1)}] at (0, 3) {\scalebox{.8}{$\{*\}$}};
+        \draw[line width=1.7pt, color=black!80, rounded corners=2.5pt] (-2.5, 0.4) rectangle (2.5, 3.2); % inner rectangle
+        \node[above] at (0, 4){$A$};
+        \node[below] at (0, -0.6){$X$};
+    \end{scope}
+
+    \begin{scope}[shift={(9.5, -6.5)}, line width=0.7pt]
+        \begin{scope} 
+            \clip (-3,0.4) rectangle (3,3.2);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 3.2);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 3.2);  
+            \draw[fill=midcolor, rounded corners=0.6cm] (-1, -2) rectangle (1, 2);
+        \end{scope}
+        \node[below] at (-1, 0.4) {$X$};
+        \node[below] at (1, 0.4) {$F$};
+        \node[below=2pt] at (0, 2) {$s$};
+        \draw[fill=black] (0, 2) circle (0.1);  
+        \draw (0,3.2) -- (0,2);
+        \node[above] at (0, 3.2) {$\{*\}$};
+    \end{scope}
+    \end{tikzpicture}
+\]
+\prop[universal_element_characterization]{Equivalent Characterizations of Representable Functor}{
+    Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a functor. Then the following statements are equivalent:
+    \begin{enumerate}[(i)]
+        \item $F$ is representable by universal element $(A,u)$ 
+        \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}.
+        \item $\left(A,\Delta u:\{*\}\to A\right)$ is a universal morphism from $\{*\}$ to $F$.
+        \item For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
+    \end{enumerate}
 }
 \pf{
     Suppose $(A,u)$ is an object of $\int_{\mathsf{C}}F$ and  $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ is the natural isomorphism corresponding to $u\in F(A)$. For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, we have the following commutative diagram
@@ -1143,7 +1234,7 @@ The arrows between objects in a category are equivalent to the transformations b
         &\iff (A,u) \text{ is a universal element of }F.
     \end{align*}
 }
-\cor{Initial Object Characterized by Representable Functor}{
+\cor[initial_object_representable_functor]{Initial Object Characterized by Representable Functor}{
     Suppose $\mathsf{C}$ is a locally small category.
     \begin{itemize}
         \item $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\mathsf{C}$ if and only if the functor $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$.
@@ -1151,10 +1242,14 @@ The arrows between objects in a category are equivalent to the transformations b
     \end{itemize}
 }
 \pf{
-    Let $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ be a constant functor. It is easy to see that the category $\int_\mathsf{C}\Delta \{*\}$ is isomorphic to $\mathsf{C}$. 
-    According to \Cref{th:universal_element_characterization},
-    $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\Delta \{*\}$ if and only if $\Delta$ is a representable functor with a universal element $(A,*)$.\\
-    If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}\Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
+    Let $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ be a constant functor. It is easy to see that the category $\int_\mathsf{C}\Delta \{*\}$ is isomorphic to $\mathsf{C}$ through the functor
+    \begin{align*}
+        p:\int_\mathsf{C}\Delta \{*\}&\longrightarrow \mathsf{C}\\
+        (C,*) &\longmapsto C
+    \end{align*}
+    As established in \Cref{th:universal_element_characterization},
+    $(A,*)\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\Delta \{*\}$ if and only if $\Delta\{*\}$ is a representable functor with a universal element $(A,*)$, which proves the first statement. The second statement can be obtained by applying the first statement to $\mathsf{C}^{\mathrm{op}}$.\\
+    In addition, an alternative ad-hoc proof is conceivable. If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}\Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
 }
 
 
@@ -1205,7 +1300,7 @@ The arrows between objects in a category are equivalent to the transformations b
     \[
         \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
             \&   [-1.5em]                \&[-1em] C \arrow[rdd, draw=cyan, "h_j"] \arrow[ldd, draw=cyan, "h_i"'] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \& [-1em]                  \\[+0.2cm]
-            \&                   \& \varprojlim F\arrow[ld, draw=arrowBlue, shorten <=-3pt, "\phi_i" yshift=4.5pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "\phi_j"' yshift=4pt]               \&                   \\[-0.1cm]
+            \&                   \& \varprojlim F\arrow[ld, draw=arrowBlue, shorten <=-3pt, "\ell_i" yshift=4.5pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "\ell_j"' yshift=4pt]               \&                   \\[-0.1cm]
         \& F(i) \arrow[rr, "F(\lambda)"']\&   \& F(j)
         \end{tikzcd}
     \]
@@ -1259,11 +1354,45 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
         \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
             \&   [-1.5em]                \&[-1em] C \& [-1em]                  \\[+0.2cm]
             \&                   \& \varinjlim F \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]         \&                   \\[-0.1cm]
-        \& F(i) \arrow[ruu, draw=cyan, "h_i"]\arrow[ru, draw=arrowBlue, shorten >=-3.5pt, "\phi_i"' yshift=4.5pt]        \arrow[rr, "F(\lambda)"']\&   \& F(j)\arrow[luu, draw=cyan, "h_j"']\arrow[lu, draw=arrowBlue, shorten >=-3.7pt, "\phi_j" yshift=4.5pt] 
+        \& F(i) \arrow[ruu, draw=cyan, "h_i"]\arrow[ru, draw=arrowBlue, shorten >=-3.5pt, "\ell_i"' yshift=4.5pt]        \arrow[rr, "F(\lambda)"']\&   \& F(j)\arrow[luu, draw=cyan, "h_j"']\arrow[lu, draw=arrowBlue, shorten >=-3.7pt, "\ell_j" yshift=4.5pt] 
         \end{tikzcd}
     \]
 }
 
+\prop{Limit Characterized by Representability}{
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The limit of $F$ exists if and only if the functor $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$ 
+    \begin{align*}
+        \begin{minipage}{.7\textwidth}
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}^{\mathrm{op}}\&[-34pt]\&[+52pt]\&[-30pt] \mathsf{Set}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            C_1  \arrow[dd, "g"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C_1, F\right)\arrow[dd, "\left(\Delta g\right)^*0.-*+9************9"{name=R}] \& \ni \& \left(h_i:C_1\textcolor{arrowBlue}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\arrow[dd,mapsto,"\left(g^*\right)_{i\in \mathrm{Ob}(\mathsf{J})}"]\\ [-3pt] 
+            \&  \phantom{.}\arrow[r, "{\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)}", squigarrow]\&\phantom{.}  \&   \\[-3pt] 
+            C_2  \& \& \& \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C_2, F\right)\& \ni \& \left(h_i\circ g:C_2\textcolor{cyan}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}
+        \end{tikzcd}
+    \end{minipage}
+    \begin{minipage}{.2\textwidth}
+        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt},scale=0.5]
+            \\[-1pt]
+            \&   [-1.5em]                \&[-1em] C_2 \arrow[rdd, draw=cyan, "h_j\circ g"] \arrow[ldd, draw=cyan, "h_i\circ g"'] \arrow[d, draw=red!50!yellow!80, "g"'] \& [-1em]                  \\[+0.1cm]
+            \&                   \& C_1\arrow[ld, draw=arrowBlue, shorten <=-3pt, "h_i" yshift=3.7pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "h_j"' yshift=4pt]               \&                   \\[-0.2cm]
+        \& F(i) \arrow[rr, "F(\lambda)"']\&   \& F(j)
+        \end{tikzcd}
+    \end{minipage}
+    \end{align*}
+     is representable. In this case, the universal element coincides with $\left(\varprojlim F,\left(\ell_i:\varprojlim F\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\right)$ and we have
+     \[
+        \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(-,\varprojlim F\right).
+    \]
+    Dually, the colimit of $F$ exists if and only if the functor $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(F,\Delta\left(-\right)\right):\mathsf{C}\to\mathsf{Set}$ is representable. In this case, the universal element coincides with $\left(\varinjlim F,\left(\ell_i:F(i)\to \varinjlim F\right)_{i\in \mathrm{Ob}(\mathsf{J})}\right)$ and we have
+    \[
+        \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(F,\Delta\left(-\right)\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(\varinjlim F,-\right).
+    \]
+}
+\pf{
+    According to \Cref{th:universal_element_characterization}, $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$ is representable by the universal element $(A,u)$ if and only if $(A,u)$ is initial in $\int_{\mathsf{C}^{\mathrm{op}}}\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$, which is equivalent to saying that for any $C\in\mathrm{Ob}\left(\mathsf{C}\right)$ and $(h_i)\in \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C, F\right)$, there is a unique morphism $f:C\to A$ in $\mathsf{C}$ such that $h_i=f^*(u_i)=u_i\circ f$ for each $i\in \mathrm{Ob}(\mathsf{J})$. This is exactly the universal property of limit.
+}
 
 \dfn{Complete Category}{
     A category $\mathsf{C}$ is \textbf{complete} if it has all small limits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varprojlim F$ exists.
@@ -1303,7 +1432,7 @@ The next result shows that functor categories inherit limits and colimits, defin
     \end{enumerate}
 }
 
-\prop{Limits commute with limits}{
+\prop{Limits Commute with Limits}{
     Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
 }
 
@@ -1369,7 +1498,7 @@ The next result shows that functor categories inherit limits and colimits, defin
         \varprojlim F&\cong\left\{(x_i)_{i\in \mathrm{Ob}(\mathsf{J})}\in \prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\;\midv \;\forall \lambda:i\to j\text{ in }\mathrm{Hom}_\mathsf{J}(i,j),\,F(\lambda)(x_i)=x_j\right\}
     \end{align*}
     where $\alpha$ and $\beta$ are defined by 
-    and the map $\phi_i:\varprojlim F\to F(i)$ is given by the composition
+    and the map $\ell_i:\varprojlim F\to F(i)$ is given by the composition
     \[
         \varprojlim F\xrightarrow{\quad\iota\quad}\prod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi_i\quad}F(i).
     \]
@@ -1406,7 +1535,7 @@ The next result shows that functor categories inherit limits and colimits, defin
     \[
         \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
     \]
-    and the map $\phi_i:F(i)\to \varinjlim F$ is given by the composition
+    and the map $\ell_i:F(i)\to \varinjlim F$ is given by the composition
     \[
         F(i)\xrightarrow{\quad\iota_i\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim.
     \]
@@ -1447,7 +1576,7 @@ The next result shows that functor categories inherit limits and colimits, defin
     which means for any $X\in \mathrm{Ob}(\mathsf{C})$ and $Y\in \mathrm{Ob}(\mathsf{D})$, there is a bijection
     \begin{align*}
         \phi_{X,Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)\\
-        \Big(L(X)\xlongrightarrow{f}Y\Big)&\longmapsto \Big(X\xlongrightarrow{\tilde{f}}R(Y)\Big)
+        \Big(L(X)\xlongrightarrow{f}Y\Big)&\longmapsto \Big(X\xlongrightarrow{f^{\triangleright}}R(Y)\Big)
     \end{align*}
     natural in $X$ and $Y$. $L$ is called the \textbf{left adjoint} of $R$, and $R$ is called the \textbf{right adjoint} of $L$. We write $L\dashv R$ to denote that $L$ is left adjoint to $R$.
 }
