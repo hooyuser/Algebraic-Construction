@@ -392,8 +392,8 @@ Suppose $\varphi:F\Rightarrow G$ is a natural transformation between functors $F
 \begin{center}
     \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
         % Define colors
-        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-        \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+        \definecolor{rightcolor}{RGB}{204, 229, 255}
+        \definecolor{leftcolor}{RGB}{204,255,204}
     
         % Draw background
         \fill[leftcolor] (0,0) rectangle (2,2);
@@ -430,11 +430,11 @@ If two string $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{F}$ has th
 
 
 \begin{center}
-    \begin{tikzpicture}[x=0.6cm,y=0.6cm]
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, line width=0.7pt]
             % Define colors
-        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-        \definecolor{midcolor}{RGB}{204,204,255} % light purple
-        \definecolor{rightcolor}{RGB}{204,255,204}
+        \definecolor{leftcolor}{RGB}{204,255,204}
+        \definecolor{midcolor}{HTML}{FFEBB4} 
+        \definecolor{rightcolor}{RGB}{204, 229, 255}
         \begin{scope}
                 % Draw background
             \fill[leftcolor] (0,0) rectangle (2,4);
@@ -504,19 +504,18 @@ If two string $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{F}$ has th
     \end{tikzpicture}
 \end{center}
 \begin{center}
-    \begin{tikzpicture}[x=0.6cm,y=0.6cm]
-        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-        \definecolor{midcolor}{RGB}{204,204,255} % light purple
-        \definecolor{rightcolor}{RGB}{204,255,204}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, line width=0.7pt]
+        \definecolor{leftcolor}{RGB}{204, 255, 204}
+        \definecolor{midcolor}{HTML}{FFEBB4} 
+        \definecolor{rightcolor}{RGB}{204, 229, 255}
 
         \begin{scope}[shift={(0,0)}]
             \begin{scope}
                 \clip  (0,0) rectangle (6,4);
                     % Draw background
                 \fill[leftcolor] (0,0) rectangle (3,4);
-                %\fill[midcolor] (2,0) rectangle (4,4);
                 \fill[rightcolor] (3,0) rectangle (6,4);
-                \filldraw[fill=blue!20] (2,5)-- (2,4) .. controls (2,2) and (2.5, 1) .. (3,1).. controls (3.5,1) and (4, 2) .. (4,4)--(4,5)--cycle;
+                \filldraw[fill=midcolor] (2,5)-- (2,4) .. controls (2,2) and (2.5, 1) .. (3,1).. controls (3.5,1) and (4, 2) .. (4,4)--(4,5)--cycle;
             \end{scope}
         
             % Draw vertical line and point
@@ -550,7 +549,7 @@ If two string $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{F}$ has th
                     % Draw background
                 \fill[leftcolor] (0,0) rectangle (3,4);
                 \fill[rightcolor] (3,0) rectangle (6,4);
-                \filldraw[fill=blue!20] (2,-1)-- (2,0) .. controls (2,2) and (2.5, 3) .. (3,3).. controls (3.5,3) and (4, 2) .. (4,0)--(4,-1)--cycle;
+                \filldraw[fill=midcolor] (2,-1)-- (2,0) .. controls (2,2) and (2.5, 3) .. (3,3).. controls (3.5,3) and (4, 2) .. (4,0)--(4,-1)--cycle;
             \end{scope}
         
             % Draw vertical line and point
@@ -586,8 +585,8 @@ The vertical composition of natural transformations $\varphi:F\Rightarrow H$ and
 \begin{center}
     \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
         % Define colors
-        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-        \definecolor{rightcolor}{RGB}{204,204,255} % light purple
+        \definecolor{leftcolor}{RGB}{204,255,204}
+        \definecolor{rightcolor}{RGB}{204, 229, 255}
         \begin{scope}
             % Draw background
             \fill[leftcolor] (0,-2) rectangle (2,2);
@@ -628,10 +627,10 @@ To do horizontal composition for natural transformations $\varphi:F\Rightarrow H
 
 \begin{center}
     \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
-        % Define colors
-        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-        \definecolor{midcolor}{RGB}{204,204,255} % light purple
-        \definecolor{rightcolor}{RGB}{204,255,204}
+        \definecolor{leftcolor}{RGB}{204, 255, 204}
+        \definecolor{midcolor}{HTML}{FFEBB4} 
+        \definecolor{rightcolor}{RGB}{204, 229, 255}
+
         \begin{scope}
              % Draw background
             \fill[leftcolor] (0,0) rectangle (2,4);
@@ -663,8 +662,8 @@ To do horizontal composition for natural transformations $\varphi:F\Rightarrow H
                 % Draw background
                 \fill[leftcolor] (0,0) rectangle (3,4);
                 \fill[rightcolor] (3,0) rectangle (6,4);
-                \filldraw[fill=blue!20, line width=0.7pt] (2,5)-- (2,4) .. controls (2, 2.5) and (2.5, 2) .. (3,2).. controls (3.5,2) and (4, 2.5) .. (4,4)--(4,5)--cycle;
-                \filldraw[fill=blue!20, line width=0.7pt] (2,-1)-- (2,0) .. controls (2,1.5) and (2.5, 2) .. (3,2).. controls (3.5,2) and (4, 1.5) .. (4,0)--(4,-1)--cycle;
+                \filldraw[fill=midcolor, line width=0.7pt] (2,5)-- (2,4) .. controls (2, 2.5) and (2.5, 2) .. (3,2).. controls (3.5,2) and (4, 2.5) .. (4,4)--(4,5)--cycle;
+                \filldraw[fill=midcolor, line width=0.7pt] (2,-1)-- (2,0) .. controls (2,1.5) and (2.5, 2) .. (3,2).. controls (3.5,2) and (4, 1.5) .. (4,0)--(4,-1)--cycle;
             \end{scope}
         
             % Draw vertical line and point
@@ -688,9 +687,9 @@ Then we can composite the functors $F$ and $G$ to get a new functor $G\circ F$. 
 
 \begin{center}
     \begin{tikzpicture}[x=0.6cm,y=0.6cm]
-        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
-        \definecolor{midcolor}{RGB}{204,204,255} % light purple
-        \definecolor{rightcolor}{RGB}{204,255,204}
+        \definecolor{leftcolor}{RGB}{204, 255, 204}
+        \definecolor{midcolor}{HTML}{FFEBB4} 
+        \definecolor{rightcolor}{RGB}{204, 229, 255}
 
         \begin{scope}[shift={(0,0)}]
             \begin{scope}
@@ -698,7 +697,7 @@ Then we can composite the functors $F$ and $G$ to get a new functor $G\circ F$. 
                  % Draw background
                 \fill[leftcolor] (0,0) rectangle (3,4);
                 \fill[rightcolor] (3,0) rectangle (6,4);
-                \filldraw[fill=blue!20, line width=0.7pt] (2,5)-- (2,2) .. controls (2,1) and (2.5, 0.6) .. (3,0.6).. controls (3.5,0.6) and (4, 1) .. (4,2)--(4,5)--cycle;
+                \filldraw[fill=midcolor, line width=0.7pt] (2,5)-- (2,2) .. controls (2,1) and (2.5, 0.6) .. (3,0.6).. controls (3.5,0.6) and (4, 1) .. (4,2)--(4,5)--cycle;
             \end{scope}
         
             % Draw vertical line and point
@@ -717,7 +716,6 @@ Then we can composite the functors $F$ and $G$ to get a new functor $G\circ F$. 
         \draw (8,2) node {$=$};
 
         \begin{scope}[shift={(10,0)}]
-            % Draw background
             % Draw background
             \fill[leftcolor] (0,0) rectangle (2,4);
             \fill[rightcolor] (2,0) rectangle (4,4);
@@ -762,7 +760,7 @@ If $f:X\to Y$ is a morphism in $\mathsf{C}$, then the following string diagram s
     \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "f_{\bullet}"]
 \end{tikzcd}
 \end{center}
-
+\subsubsection{Naturality}
 Suppose $\varphi:F\Rightarrow G$ is a natural transformation between functors $F,G:\mathsf{C}\to \mathsf{D}$. Then the functoriality of $\varphi$ can be described by the following string diagram
 \[
     \begin{tikzpicture}[x=0.8cm,y=0.8cm, baseline=(current bounding box.center)]
@@ -889,6 +887,215 @@ Note that appending the string diagram \begin{tikzpicture}[x=0.3cm,y=0.3cm, base
     \draw (2,2) node[above] {$X$};
 \end{tikzpicture} to the left of the string diagram of $\varphi$ is equivalent to evaluating $\varphi$ at $f:X\to Y$.
 
+\subsubsection{Elements of Sets}
+Let $X$ be a set and $x\in X$ be an element of $X$. Then we represents $x$ as a morphism $x:\{*\}\to X$ in $\mathsf{Set}$, which is illustrated as follows
+\begin{center}
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{rightcolor}{HTML}{F5D4BC} % red
+    
+        % Draw background
+        \fill[leftcolor] (0,0) rectangle (2,2);
+        \fill[rightcolor] (2,0) rectangle (4,2);
+    
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (2,0) -- (2,2);
+        \filldraw [black] (2,1) circle (2pt) node[left=1pt] {$x$};
+    
+        % Label axes
+        \draw (2,0) node[below] {$X$};
+        \draw (2,2) node[above] {$\{*\}$};
+    \end{tikzpicture}
+\end{center}
+\subsubsection{Function as Element or Morphism}
+If we have a function $f:X\to Y$, then we can represent $f$ as morphism $f:X\to Y$ in $\mathsf{Set}$, which is illustrated as follows
+\[
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center)]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{rightcolor}{HTML}{F5D4BC}  % red
+    
+        % Draw background
+        \fill[leftcolor] (0,0) rectangle (2,2);
+        \fill[rightcolor] (2,0) rectangle (4,2);
+    
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (2,0) -- (2,2);
+        \filldraw [black] (2,1) circle (2pt) node[anchor=east] {$f$};
+    
+        % Label axes
+        \draw (2,0) node[below] {$Y$};
+        \draw (2,2) node[above] {$X$};
+    \end{tikzpicture}
+\]
+And we can also represent $f$ as an element $f\in \mathrm{Hom}_{\mathsf{Set}}(X,Y)$, which is illustrated as follows
+\[
+    \begin{tikzpicture}[
+        x=0.6cm,
+        y=0.6cm,
+        mydot/.style={
+            circle,
+            fill=white,
+            draw,
+            outer sep=0pt,
+            inner sep=1.7pt,
+            line width=0.7pt
+          }]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{255,255,204} % light yellow
+        \definecolor{rightcolor}{HTML}{F5D4BC}  % red
+    
+        % Draw background
+        \fill[leftcolor] (0,0) rectangle (2,2);
+        \fill[rightcolor] (2,0) rectangle (4,2);
+    
+        % Draw vertical line and point
+        \draw[line width=0.7pt] (2,0) -- (2,2);
+        \draw (2,1) node[mydot] {};
+        \draw (2,1) node[left] {$f$};
+    
+        % Label axes
+        \draw (2,0) node[below] {$\mathrm{Hom}(X,Y)$};
+        \draw (2,2) node[above] {$\{*\}$};
+    \end{tikzpicture}
+\]
+Then we have the following equalities for Hom functor $\llbracket X , -\rrbracket:\mathsf{C}\to \mathsf{Set}$
+\[
+ \begin{tikzpicture}[x=0.6cm,y=0.6cm,line width=0.7pt,hollow/.style={
+            circle,
+            fill=white,
+            draw,
+            outer sep=0pt,
+            inner sep=1.7pt,
+            line width=0.7pt
+          }]
+    \definecolor{leftcolor}{RGB}{255,255,204}
+    \definecolor{midcolor}{HTML}{BBE6FB}
+    \definecolor{rightcolor}{HTML}{F5D4BC}
+
+    \node at (4, 1.8) {$=$};
+    \node at (12, 1.8) {$=$};
+    
+    \begin{scope}
+        \begin{scope} 
+            \clip (-3,0) rectangle (3,3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$f$};
+        \node[below] at (-1, 0) {$Y$};
+        \node[left=-2pt] at (-1, 1.8) {$X$};
+        \node[below] at (1, 0) {$\llbracket X , -\rrbracket$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$\mathrm{id}_X$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    
+    \begin{scope}[shift={(8,0)}]
+        \begin{scope} 
+            \clip (-3,0) rectangle (3,3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2);
+        \node[below] at (-1, 0) {$Y$};
+        \node[below] at (1, 0) {$\llbracket X , -\rrbracket$};
+        \node[hollow] at (0, 2) {};
+        \node[below=2pt] at (0, 2) {$f$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    
+     \begin{scope}[shift={(16,0)}]
+        \begin{scope} 
+            \clip (-3,0) rectangle (3, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (1,0.8) circle (2pt) node[right=1pt] {$f^\star$};
+        \node[below] at (-1, 0) {$Y$};
+        \node[right=-1pt] at (1, 1.8) {$\llbracket Y , -\rrbracket$};
+        \node[below] at (1, 0) {$\llbracket X , -\rrbracket$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$\mathrm{id}_Y$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    
+    \end{tikzpicture}
+\]
+Generally, given $X\xrightarrow{f}Y_1\xrightarrow{g}Y_2$ in $\mathsf{Set}$, we have the following equalities
+\[
+ \begin{tikzpicture}[x=0.6cm,y=0.6cm,line width=0.7pt,hollow/.style={
+            circle,
+            fill=white,
+            draw,
+            outer sep=0pt,
+            inner sep=1.7pt,
+            line width=0.7pt
+          }]
+    \definecolor{leftcolor}{RGB}{255,255,204}
+    \definecolor{midcolor}{HTML}{BBE6FB}
+    \definecolor{rightcolor}{HTML}{F5D4BC}
+
+    \node at (4, 1.8) {$=$};
+    \node at (12, 1.8) {$=$};
+    
+    \begin{scope}
+        \begin{scope} 
+            \clip (-3,0) rectangle (3,3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$g$};
+        \node[below] at (-1, 0) {$Y_2$};
+        \node[left=-2pt] at (-1, 1.8) {$Y_1$};
+        \node[below] at (1, 0) {$\llbracket X , -\rrbracket$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$f$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    
+    \begin{scope}[shift={(8,0)}]
+        \begin{scope} 
+            \clip (-3,0) rectangle (3,3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2);
+        \node[below] at (-1, 0) {$Y_2$};
+        \node[below] at (1, 0) {$\llbracket X , -\rrbracket$};
+        \node[hollow] at (0, 2) {};
+        \node[below=2pt] at (0, 2) {$g\circ f$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    
+     \begin{scope}[shift={(16,0)}]
+        \begin{scope} 
+            \clip (-3,0) rectangle (3, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (1,0.8) circle (2pt) node[right=1pt] {$f^\star$};
+        \node[below] at (-1, 0) {$Y_2$};
+        \node[right=-1pt] at (1, 1.8) {$\llbracket Y_1 , -\rrbracket$};
+        \node[below] at (1, 0) {$\llbracket X , -\rrbracket$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$g$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    
+    \end{tikzpicture}
+\]
 \section{Representable Functor}
 \dfn{Presheaf}{
     Let $\mathsf{C}$ be a category. A \textbf{presheaf} on $\mathsf{C}$ is a functor $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$.
@@ -1075,6 +1282,269 @@ Note that appending the string diagram \begin{tikzpicture}[x=0.3cm,y=0.3cm, base
         &=F_2(g)\circ q_{A_1,F_2}(\psi).
     \end{align*}
 }
+\noindent For the covariant version, the following string diagram shows $\phi$ is determined by $\phi_A\left(\operatorname{id}_A\right)$
+\[
+        \phi_X(f)=F(f)(\phi_A(\mathrm{id}_A)),\quad\forall X\in \mathrm{Ob}(\mathsf{C}),\forall f\in \mathrm{Hom}_{\mathsf{C}}(A,X).
+\]
+\[
+    \begin{tikzpicture}[x=0.8cm,y=0.8cm, line width=0.7pt, hollow/.style={
+            circle,
+            fill=white,
+            draw,
+            outer sep=0pt,
+            inner sep=1.5pt,
+            line width=0.7pt
+          }]
+        % Define colors
+         \definecolor{leftcolor}{RGB}{255,255,204}
+    \definecolor{midcolor}{HTML}{BBE6FB}
+    \definecolor{rightcolor}{HTML}{F5D4BC}
+
+    \node at (-3.75, 1.8) {$=$};
+    \node at (3.75, 1.8) {$=$};
+
+    \begin{scope}[shift={(-7.5,0)}]
+        \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (1,0.8) circle (2pt) node[right=1pt] {$\phi$};
+        \node[below] at (-1, 0) {$X$};
+        \node[right=-1pt] at (1, 1.8) {$\llbracket A , -\rrbracket$};
+        \node[below] at (1, 0) {$F$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$f$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+
+    \begin{scope}[shift={(0,0)}]
+        \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (1,0.8) circle (2pt) node[right=1pt] {$\phi$};
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$f$};
+        \node[below] at (-1, 0) {$X$};
+        \node[right=-1pt] at (1, 1.8) {$\llbracket A , -\rrbracket$};
+        \node[left=1pt] at (-1, 1.8) {$A$};
+        \node[below] at (1, 0) {$F$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$\mathrm{id}_A$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+
+    \begin{scope}[shift={(7.5,0)}]
+        \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -3) rectangle (1, 1.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0, 1.8);
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$f$};
+        \filldraw [black] (0,1.8) circle (2pt) node[below=1pt] {$\phi_A$};
+        \node[below] at (-1, 0) {$X$};
+        \node at (-1.08, 1.6) {$A$};
+        \node[below] at (1, 0) {$F$};
+        \node[hollow] at (0, 2.8) {};
+        \node[right=1pt] at (0, 2.3) {$\llbracket A , A\rrbracket$}; 
+        \node[left=1pt] at (0, 2.8) {$\mathrm{id}_A$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    \end{tikzpicture}
+\]
+
+\noindent For any $u\in F(A)$, we can define $\phi^u:\mathrm{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ by
+
+\[
+    \begin{tikzpicture}[x=0.6cm,y=0.6cm, line width=0.7pt, hollow/.style={
+            circle,
+            fill=white,
+            draw,
+            outer sep=0pt,
+            inner sep=1.5pt,
+            line width=0.7pt
+          }]
+        % Define colors
+    \definecolor{leftcolor}{RGB}{255,255,204}
+    \definecolor{midcolor}{HTML}{BBE6FB}
+    \definecolor{rightcolor}{HTML}{F5D4BC}
+
+    \node at (-3.75, 1.8) {$=$};
+    \draw [|-To, line width=0.5pt] (3.25,1.8) -- (4.25,1.8) node[midway,above] {$\phi^u_X$};
+    \node at (11.25, 1.8) {$:=$};
+
+    \begin{scope}[shift={(-7.5,0)}]
+        \begin{scope} 
+            \clip (-2.75,0) rectangle (2.75, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \node[below] at (-1, 0) {$X$};
+        \node[below] at (1, 0) {$\llbracket A , -\rrbracket$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$f$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+
+    \begin{scope}[shift={(0,0)}]
+        \begin{scope} 
+            \clip (-2.75,0) rectangle (2.75, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$f$};
+        \node[below] at (-1, 0) {$X$};
+        \node[left=1pt] at (-1, 1.8) {$A$};
+        \node[below] at (1, 0) {$\llbracket A , -\rrbracket$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$\mathrm{id}_A$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+
+    \begin{scope}[shift={(7.5,0)}]
+       \begin{scope} 
+            \clip (-2.75,0) rectangle (2.75, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (1,0.8) circle (2pt) node[right=1pt] {$\phi^u$};
+        \node[below] at (-1, 0) {$X$};
+        \node[right=-1.5pt] at (0.9, 2.15) {$\llbracket A , -\rrbracket$};
+        \node[below] at (1, 0) {$F$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$f$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    
+    \begin{scope}[shift={(15,0)}]
+       \begin{scope} 
+            \clip (-2.75,0) rectangle (2.75, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$f$};
+        \filldraw [black] (0, 2.8) circle (2pt) node[below=2pt] {$u$};
+        \node[below] at (-1, 0) {$X$};
+        \node[left=1pt] at (-1, 1.8) {$A$};
+        \node[below] at (1, 0) {$F$};
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    \end{tikzpicture}
+\]
+
+\noindent and check that the naturality of $\phi^u$ as follows
+
+\[
+    \begin{tikzpicture}[x=0.8cm,y=0.8cm, line width=0.7pt, hollow/.style={
+            circle,
+            fill=white,
+            draw,
+            outer sep=0pt,
+            inner sep=1.5pt,
+            line width=0.7pt
+          }]
+        % Define colors
+         \definecolor{leftcolor}{RGB}{255,255,204}
+    \definecolor{midcolor}{HTML}{BBE6FB}
+    \definecolor{rightcolor}{HTML}{F5D4BC}
+
+    \draw [|-To, line width=0.5pt] (-4.75,-5.8) -- (-3.25,-5.8) node[midway,above] {$F(h)$};
+    \draw [|-To, line width=0.5pt] (0,-1.25) -- (0,-2.5) node[midway,right] {$\phi^u_{X_2}$};
+    \draw [|-To, line width=0.5pt] (-4.75,1.8) -- (-3.25,1.8) node[midway,above] {$\llbracket A , h\rrbracket$};
+    \draw [|-To, line width=0.5pt] (-8,-1.25) -- (-8,-2.5) node[midway,right] {$\phi^u_{X_1}$};  
+
+    \begin{scope}[shift={(-8,0)}]
+        \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$g$};
+        \node[below] at (-1, 0) {$X_1$};
+        \node[left=1pt] at (-1, 1.8) {$A$};
+        \node[below] at (1, 0) {$\llbracket A , -\rrbracket$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$\mathrm{id}_A$}; 
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+
+    \begin{scope}[shift={(-8,-7.5)}]
+       \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$g$};
+        \filldraw [black] (0, 2.8) circle (2pt) node[below=2pt] {$u$};
+        \node[below] at (-1, 0) {$X_1$};
+        \node[left=1pt] at (-1, 1.8) {$A$};
+        \node[below] at (1, 0) {$F$};
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+
+    \begin{scope}[shift={(0,-7.5)}]
+        \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \node[below] at (-1, 0) {$X_2$};
+        \node[right] at (-1, 1.3) {$X_1$};
+        \node[below] at (-1, 3) {$A$};
+        \node[below] at (1, 0) {$F$};
+        % \node[hollow] at (0, 2.8) {};
+        % \node[below=2pt] at (0, 2.8) {$u$}; 
+        \filldraw [black] (-1,1.8) circle (2pt) node[left=1pt] {$g$};
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$h$};
+        \filldraw [black] (0, 2.8) circle (2pt) node[below=2pt] {$u$};
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+
+     \begin{scope}[shift={(0,0)}]
+        \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+        \end{scope}
+        \draw (0, 3.6) -- (0,2.8);
+        \node[below] at (-1, 0) {$X_2$};
+        \node[right] at (-1, 1.3) {$X_1$};
+        \node[below] at (-1, 3) {$A$};
+        \node[below] at (1, 0) {$\llbracket A , -\rrbracket$};
+        \node[hollow] at (0, 2.8) {};
+        \node[below=2pt] at (0, 2.8) {$\mathrm{id}_A$}; 
+        \filldraw [black] (-1,1.8) circle (2pt) node[left=1pt] {$g$};
+        \filldraw [black] (-1,0.8) circle (2pt) node[left=1pt] {$h$};
+        \node[above] at (0, 3.6) {$\{*\}$};
+    \end{scope}
+    
+    \end{tikzpicture}    
+\]
+Then it is straightforward to see $\phi^u_{A}\left(\mathrm{id_A}\right)=u$ and $\phi^{\phi_A(\mathrm{id}_A)}=\phi$.
+
+
 \cor{Yoneda Embedding}{
     Let $\mathsf{C}$ be a locally small category. The \hyperref[th:yoneda_embedding_functor]{Yoneda embedding functor} $Y_\mathsf{C}:\mathsf{C}\to \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]$ is fully faithful. That is, for any $A_1,A_2\in\mathrm{Ob}\left(\mathsf{C}\right)$, the morphism set map 
     \begin{align*}
@@ -1116,14 +1586,15 @@ The arrows between objects in a category are equivalent to the transformations b
         \item A functor $F:\mathsf{C}\to \mathsf{Set}$ is called \textbf{representable} if it is naturally isomorphic to $\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)$ for some $A\in \mathrm{Ob}(\mathsf{C})$.
         \item A functor $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is called \textbf{representable} if it is naturally isomorphic to $\operatorname{Hom}_{\mathsf{C}}\left(-,A\right)$ for some $A\in \mathrm{Ob}(\mathsf{C})$.
     \end{itemize}
-    A \textbf{representation of $F$} is a pair $(A,\phi)$, where $A\in \mathrm{Ob}(\mathsf{C})$ and $\phi:F\stackrel{\sim\;}{\Rightarrow} \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)$ is a natural isomorphism. \\
-    According to \hyperref[th:yoneda_lemma]{Yoneda lemma}, $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow  F$ is 1-1 correspondence with an element $\phi_A(\mathrm{id}_A)\in F(A)$. We define an \textbf{universal element of $F$} is a pair $(A,u)$ where $A\in \mathrm{Ob}(\mathsf{C})$ and $u\in F(A)$ such that $u$ corresponds to a natural isomorphism $\phi: \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}F$. Specifying a universal element of $F$ is equivalent to specifying a representation of $F$.
+    A \textbf{representation of $F$} is a pair $(A,\phi)$, where $A\in \mathrm{Ob}(\mathsf{C})$ and $\phi:  \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\xRightarrow{\sim} F$ is a natural isomorphism. \\
+    According to \hyperref[th:yoneda_lemma]{Yoneda lemma}, $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow  F$ is 1-1 correspondence with an element $\phi_A(\mathrm{id}_A)\in F(A)$. We define an \textbf{universal element of $F$} is a pair $(A,u)$ where $A\in \mathrm{Ob}(\mathsf{C})$ and $u\in F(A)$ such that $u$ corresponds to a natural isomorphism $\phi: \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\xRightarrow{\sim} F$. Specifying a universal element of $F$ is equivalent to specifying a representation of $F$.
 }
 \[
  \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center), line width=0.7pt]
     \definecolor{leftcolor}{RGB}{255,255,204}
     \definecolor{midcolor}{HTML}{BBE6FB}
     \definecolor{rightcolor}{HTML}{F5D4BC}
+    \node at (-2.5, 6) {$\phi_{X}:$};
     \node at (0, 6) {$\mathrm{Hom}_{\mathsf{C}}\left(A,X\right)$};
     \node at (4.75, 6) {$\xlongrightarrow{\sim}$};
     \node at (4.75, -4.75) {$\longmapsfrom$};
@@ -1135,7 +1606,6 @@ The arrows between objects in a category are equivalent to the transformations b
             \clip (-3,0.4) rectangle (3,3.2);     
             \fill[fill=leftcolor] (-3,0) rectangle (0, 3.2);  
             \fill[fill=rightcolor] (0,0) rectangle (3, 3.2);  
-            %\draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2);
         \end{scope}
         \node[below] at (0, 0.4) {$X$};
         \node[left=1pt] at (0, 1.8) {$f$};
@@ -1146,13 +1616,12 @@ The arrows between objects in a category are equivalent to the transformations b
 
     \begin{scope}[shift={(9.5,0)}]
     \fill[fill=leftcolor] (-3,-0.4) rectangle (0,4); 
-     \fill[fill=midcolor] (0, -0.4) rectangle (3,4); 
-     \fill[fill=rightcolor] (-1, -0.4) rectangle (1,2); 
+     \fill[fill=rightcolor] (0, -0.4) rectangle (3,4); 
+     \fill[fill=midcolor] (-1, -0.4) rectangle (1,2); 
         \begin{scope} 
             \clip (-2.5,0.4) rectangle (2.5,3.2);     
             \fill[fill=leftcolor] (-2.5,0) rectangle (0, 3.2);  
-            \fill[fill=rightcolor] (0,0) rectangle (2.5, 3.2);  
-            %\draw[fill=midcolor, rounded corners=0.6cm, line width=0.7pt] (-1, -2) rectangle (1, 2);
+            \fill[fill=midcolor] (0,0) rectangle (2.5, 3.2);  
         \end{scope}
         \draw[line width=1.7pt, color=black!80, rounded corners=2.5pt] (-2.5, 0.4) rectangle (2.5, 3.2); % inner rectangle
         \node[above,shift={(0.35,0.1)}] at (0, 0.4) {$X$};
@@ -1204,6 +1673,131 @@ The arrows between objects in a category are equivalent to the transformations b
     \end{scope}
     \end{tikzpicture}
 \]
+
+The naturality diagram of $\phi$ 
+\[
+    \begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
+        \mathrm{Hom}_{\mathsf{C}}(A,X) \arrow[d, "{\phi_X}"'{name=L, left}, "{\sim}"{name=R, right}]  \arrow[rr, "{h_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(A,Y)} \arrow[d, "{\phi_Y}"'{name=L, right}, "{\sim}"{name=R, left}]\\
+        {F(X)}\arrow[rr, "{F(h)}"'] \&  \& {F(Y)}  
+    \end{tikzcd}
+\]
+can be translated into the following calculus rules
+
+\[
+ \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center), line width=0.7pt]
+    \definecolor{leftcolor}{RGB}{255,255,204}
+    \definecolor{rightcolor}{HTML}{BBE6FB}
+    \definecolor{midcolor}{HTML}{F5D4BC}
+
+    \node at (4.75, 1.1) {$=$};
+  
+    \begin{scope}[shift={(9.5,0)}]
+     \fill[fill=leftcolor] (-3,-1.8) rectangle (0,4); 
+     \fill[fill=midcolor] (0, -1.8) rectangle (3,4); 
+     \fill[fill=rightcolor] (-1, -1.8) rectangle (1,2); 
+        \begin{scope} 
+            \clip (-2.5,0.4) rectangle (2.5,3.2);     
+            \fill[fill=leftcolor] (-2.5,0) rectangle (0, 3.2);  
+            \fill[fill=rightcolor] (0,0) rectangle (2.5, 3.2);  
+        \end{scope}
+        \draw[line width=1.7pt, color=black!80, rounded corners=2.5pt] (-2.5, 0.4) rectangle (2.5, 3.2); % inner rectangle
+        \node[above,shift={(0.35,0.1)}] at (0, 0.4) {$X$};
+        \node[left=1pt] at (0, 1.8) {$f$};
+        \draw[fill=black] (0, 1.8) circle (0.1);  
+        \draw (0, 4) -- (0, 0.4);
+        \node[below,shift={(0.35,-0.1)}] at (0, 3.2) {$A$};
+        \draw (1, 0.4) -- (1, -1.8);
+        \draw (-1, 0.4) -- (-1, -1.8);
+        \node[above] at (0, 4) {$\{*\}$};
+        \node[below] at (-1, -1.8) {$Y$};
+        \node[below] at (1, -1.8) {$F$};
+        \node[left=-1pt] at (-1, -0.1) {$X$};
+        \filldraw [black] (-1, -1) circle (0.1) node[left=1pt] {$h$};
+    \end{scope}
+
+    \begin{scope}
+    \fill[fill=leftcolor] (-3,-1.8) rectangle (0,4); 
+     \fill[fill=midcolor] (0, -1.8) rectangle (3,4); 
+     \fill[fill=rightcolor] (-1, -1.8) rectangle (1,2); 
+        \begin{scope} 
+            \clip (-2.5,-0.7) rectangle (2.5,3.2);     
+            \fill[fill=leftcolor] (-2.5,-2) rectangle (0, 3.2);  
+            \fill[fill=rightcolor] (0,-2) rectangle (2.5, 3.2);  
+        \end{scope}
+        \draw[line width=1.7pt, color=black!80, rounded corners=2.5pt] (-2.5, -0.7) rectangle (2.5, 3.2); % inner rectangle
+        \node[right] at (0, 1.25) {$X$};
+        \node[left=1pt] at (0, 1.9) {$f$};
+        \draw[fill=black] (0, 1.8) circle (0.1);  
+        \draw (0, 4) -- (0, -0.7);
+        \node[right] at (0, 2.55) {$A$};
+        \draw (1, -0.7) -- (1, -1.8);
+        \draw (-1, -0.7) -- (-1, -1.8);
+        \node[above] at (0, 4) {$\{*\}$};
+        \node[below] at (-1, -1.8) {$Y$};
+        \node[below] at (1, -1.8) {$F$};
+        \node[right] at (0, -0.05) {$Y$};
+        \filldraw [black] (0, 0.6) circle (0.1) node[left=1pt] {$h$};
+    \end{scope}
+   
+    \end{tikzpicture}
+\]
+\[
+ \begin{tikzpicture}[x=0.6cm,y=0.6cm, baseline=(current bounding box.center), line width=0.7pt]
+    \definecolor{leftcolor}{RGB}{255,255,204}
+    \definecolor{rightcolor}{HTML}{BBE6FB}
+    \definecolor{midcolor}{HTML}{F5D4BC}
+
+    \node at (4.75, 1.1) {$=$};
+  
+    \begin{scope}[shift={(9.5,0)}]
+   \fill[fill=leftcolor] (-3,-1.8) rectangle (0,4); 
+     \fill[fill=rightcolor] (0, -1.8) rectangle (3,4); 
+        \begin{scope} 
+            \clip (-2.5,0.4) rectangle (2.5, 3.2);     
+            \fill[fill=leftcolor] (-2.5,0) rectangle (0, 3.2);  
+            \fill[fill=midcolor] (0,0) rectangle (2.5, 3.2);  
+            \draw[fill=rightcolor, rounded corners=0.6cm] (-1, -2) rectangle (1, 2);
+        \end{scope}
+        \node[shift={(-0.35,0.35)}] at (-1, 0.4) {$X$};
+        \node[shift={(0.35,0.35)}] at (1, 0.4) {$F$};
+        \node[below=2pt] at (0, 2) {$s$};
+        \draw[fill=black] (0, 2) circle (0.1);  
+        \draw (0,4) -- (0,2);
+        \draw (0, -1.8) -- (0,0.4);
+        \node[below,shift={(-0.5,0.1)}] at (0, 3) {\scalebox{.8}{$\{*\}$}};
+        \draw[line width=1.7pt, color=black!80, rounded corners=2.5pt] (-2.5, 0.4) rectangle (2.5, 3.2); % inner rectangle
+        \node[above] at (0, 4){$A$};
+        \node[left] at (0, -0.1){$X$};
+        \node[below] at (0, -1.8){$Y$};
+        \filldraw [black] (0, -0.9) circle (0.1) node[left=1pt] {$h$};
+    \end{scope}
+
+    \begin{scope}
+   \fill[fill=leftcolor] (-3,-1.8) rectangle (0,4); 
+     \fill[fill=rightcolor] (0, -1.8) rectangle (3,4); 
+        \begin{scope} 
+            \clip (-2.5,-0.7) rectangle (2.5, 3.2);     
+            \fill[fill=leftcolor] (-2.5,0) rectangle (0, 3.2);  
+            \fill[fill=midcolor] (0,-1) rectangle (2.5, 3.2);  
+            \draw[fill=rightcolor, rounded corners=0.6cm] (-1, -2) rectangle (1, 2);
+        \end{scope}
+        \node[shift={(-0.35,0.35)}] at (-1, -0.7) {$Y$};
+        \node[shift={(0.35,0.35)}] at (1, -0.7) {$F$};
+        \node[below=2pt] at (0, 2) {$s$};
+        \draw[fill=black] (0, 2) circle (0.1);  
+        \draw (0,4) -- (0,2);
+        \draw (0, -1.8) -- (0, -0.7);
+        \node[below,shift={(-0.5,0.1)}] at (0, 3) {\scalebox{.8}{$\{*\}$}};
+        \draw[line width=1.7pt, color=black!80, rounded corners=2.5pt] (-2.5, -0.7) rectangle (2.5, 3.2); % inner rectangle
+        \node[above] at (0, 4){$A$};
+        \node[left] at (-0.8, 1.65){$X$};
+        \node[below] at (0, -1.8){$Y$};
+        \filldraw [black] (-1, 0.6) circle (0.1) node[left=1pt] {$h$};
+    \end{scope}   
+    \end{tikzpicture}
+\]
+
+
 \prop[universal_element_characterization]{Equivalent Characterizations of Representable Functor}{
     Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a functor. Then the following statements are equivalent:
     \begin{enumerate}[(i)]
@@ -1249,7 +1843,7 @@ The arrows between objects in a category are equivalent to the transformations b
     \end{align*}
     As established in \Cref{th:universal_element_characterization},
     $(A,*)\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\Delta \{*\}$ if and only if $\Delta\{*\}$ is a representable functor with a universal element $(A,*)$, which proves the first statement. The second statement can be obtained by applying the first statement to $\mathsf{C}^{\mathrm{op}}$.\\
-    In addition, an alternative ad-hoc proof is conceivable. If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\stackrel{\sim\;}{\Rightarrow}\Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
+    In addition, an alternative ad-hoc proof is conceivable. If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\xRightarrow{\sim} \Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
 }
 
 
@@ -1367,7 +1961,7 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
             \mathsf{C}^{\mathrm{op}}\&[-34pt]\&[+52pt]\&[-30pt] \mathsf{Set}\&[-30pt]\&[-30pt] \\ [-15pt] 
             C_1  \arrow[dd, "g"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C_1, F\right)\arrow[dd, "\left(\Delta g\right)^*0.-*+9************9"{name=R}] \& \ni \& \left(h_i:C_1\textcolor{arrowBlue}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\arrow[dd,mapsto,"\left(g^*\right)_{i\in \mathrm{Ob}(\mathsf{J})}"]\\ [-3pt] 
+            \& [-30pt]\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C_1, F\right)\arrow[dd, "\left(\Delta g\right)^*"{name=R}] \& \ni \& \left(h_i:C_1\textcolor{arrowBlue}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\arrow[dd,mapsto,"\left(g^*\right)_{i\in \mathrm{Ob}(\mathsf{J})}"]\\ [-3pt] 
             \&  \phantom{.}\arrow[r, "{\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)}", squigarrow]\&\phantom{.}  \&   \\[-3pt] 
             C_2  \& \& \& \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C_2, F\right)\& \ni \& \left(h_i\circ g:C_2\textcolor{cyan}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}
         \end{tikzcd}
@@ -2024,6 +2618,16 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
         \triangleright: \mathrm{Hom}_{\mathsf{D}}\left(L(X), Y\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}(X, R(Y)) 
     \]
     which is natural in both $X$ and $Y$. Hence $\phi$ is a natural isomorphism. It is straightforward to check that $T$ is a bijection.
+}
+
+\prop{}{
+    \begin{enumerate}[(i)]
+        \item A functor $L:\mathsf{C}\to\mathsf{D}$ has right adjoint if and only for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(F(-),Y\right)$ is representable.
+        \item A functor $R:\mathsf{D}\to\mathsf{C}$ has left adjoint if and only for each $X\in \mathrm{Ob}(\mathsf{C})$, $\mathrm{Hom}_{\mathsf{C}}\left(X,G(-)\right)$ is representable.
+    \end{enumerate}
+}
+\pf{
+    If for each $Y\in \mathrm{Ob}(\mathsf{D})$, there exists $R_Y\in \mathrm{Ob}(\mathsf{D})$ such that $\mathrm{Hom}_{\mathsf{D}}\left(F(-),Y\right)\cong \mathrm{Hom}_{\mathsf{D}}\left(-,R_Y\right)$, then we can define $R(Y):=R_Y$ and $\phi_{X,Y}:=\mathrm{Hom}_{\mathsf{D}}\left(F(X),Y\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(X,R(Y)\right)$ to be the isomorphism. It is straightforward to check that $\phi$ is natural in both $X$ and $Y$. Hence $L\dashv R$.
 }
 
 \prop{Equivalent Definition of Adjoint Functor Using Universal Morphism}{
