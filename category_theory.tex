@@ -1560,13 +1560,13 @@ Then it is straightforward to see $\phi^u_{A}\left(\mathrm{id_A}\right)=u$ and $
     \]
     which is given by
     \begin{align*}
-        r_{A_1,Y_{\mathsf{C}}(A_2)}:  \operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right) &\longrightarrow\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right) \\
+        r_{A_1,Y_{\mathsf{C}}(A_2)}:  \operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right) &\xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right) \\
          f & \longmapsto f_\star:\left[\begin{aligned}\left(f_\star\right)_X: \mathrm{Hom}_{\mathsf{C}}(X,A_1)&\longrightarrow \mathrm{Hom}_{\mathsf{C}}(X,A_2)\\
              g&\longmapsto f_*(g)=f\circ g\end{aligned}  \right]
     \end{align*}
     and
     \begin{align*}
-        q_{A_1,Y_{\mathsf{C}}(A_2)}:\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right) & \overset{\sim}{\longrightarrow} \operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right) \\
+        q_{A_1,Y_{\mathsf{C}}(A_2)}:\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right) \\
         {  \left[ \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C}^{\mathrm{op}} \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(-{,}A_1\right)"{name=A, above}, bend left] \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(-{,}A_2\right)"'{name=B, below}, bend right] \&[+30pt] \mathsf{Set}
             \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi"]
@@ -1802,13 +1802,18 @@ can be translated into the following calculus rules
     Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a functor. Then the following statements are equivalent:
     \begin{enumerate}[(i)]
         \item $F$ is representable by universal element $(A,u)$ 
-        \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}.
-        \item $\left(A,\Delta u:\{*\}\to A\right)$ is a universal morphism from $\{*\}$ to $F$.
+        \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}$=\left(\{*\} \downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{1} \arrow[r, "\Delta\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
+        \end{tikzcd}$.
+        \item $(A,\phi^u)$ is initial in the category $\left(  Y_{\mathsf{C}^{\mathrm{op}}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
+           \mathsf{C}^{\mathrm{op}}  \arrow[r, " Y_{\mathsf{C}^{\mathrm{op}}}"] \& \left[\mathsf{C},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\Delta F"']
+        \end{tikzcd}$.
+        \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a universal morphism from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
     \end{enumerate}
 }
 \pf{
-    Suppose $(A,u)$ is an object of $\int_{\mathsf{C}}F$ and  $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ is the natural isomorphism corresponding to $u\in F(A)$. For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, we have the following commutative diagram
+    (i)$\iff$ (ii). Suppose $(A,u)$ is an object of $\int_{\mathsf{C}}F$ and  $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ is the natural isomorphism corresponding to $u\in F(A)$. For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, we have the following commutative diagram
     \[
 		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
 			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(A,X)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
@@ -1827,6 +1832,41 @@ can be translated into the following calculus rules
         &\iff \phi \text{ is a natural isomorphism}\\
         &\iff (A,u) \text{ is a universal element of }F.
     \end{align*}
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+              \& F(A) \arrow[dd, dashed, "F(f)"]\\
+            \{*\}\arrow[ru, "\Delta u"]\arrow[rd, "\Delta x"']\& \\
+             \& F\left(X\right)
+            \end{tikzcd}
+    \]
+    (i)$\iff$ (iii). $\left(A,\phi^u\right)$ is initial in $\left(  Y_{\mathsf{C}^{\mathrm{op}}}\downarrow F\right)$ if and only if for any $ X\in \mathrm{Ob}\left(\mathsf{C}\right)$ and any natural transformation $\psi:\mathrm{Hom}_\mathsf{C}\left(X,-\right)\implies F$, there is a unique $f\in \mathrm{Hom}_{\mathsf{C}}(A,X)$ such that $\phi^u\circ f^\star=\psi$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+               \mathrm{Hom}_{\mathsf{C}}\left(A,-\right) \arrow[rd, "\phi^u"]\&\\
+            \& F\\
+             \mathrm{Hom}_{\mathsf{C}}\left(X,-\right) \arrow[ru, "\psi"']\arrow[uu, dashed, "f^\star"]\& 
+            \end{tikzcd}
+    \]
+    or equivalently
+    \[
+        \psi_X(\mathrm{id}_X)=\left(\phi^u\circ f^\star\right)_X(\mathrm{id}_X)=\phi^u_X(f).
+    \]
+    Suppose $F$ is representable by universal element $(A,u)$. Then $\phi^u:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\xRightarrow{\sim} F$ is a natural isomorphism. Since
+    \begin{align*}
+        \left.Y_{\mathsf{C}^{\mathrm{op}}}\right|_{\operatorname{Hom}_{\mathsf{C}}\left(A,X\right)}:\operatorname{Hom}_{\mathsf{C}}\left(A,X\right) &\xlongrightarrow{\sim}\operatorname{Hom}_{[\mathsf{C},\mathsf{Set}]}\left(\operatorname{Hom}_{\mathsf{C}}\left(X,-\right), \operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\right) \\
+         f & \longmapsto f^\star
+    \end{align*}
+    is a bijection, there is a unique $f\in \mathrm{Hom}_{\mathsf{C}}(A,X)$ such that $f^\star=\left(\phi^u\right)^{-1}\circ\psi$ or equivalently $\phi^u\circ f^\star=\psi$.
+
+    Conversely, suppose $(A,\phi^u)$ is initial in $\left(  Y_{\mathsf{C}^{\mathrm{op}}}\downarrow F\right)$. Then for any $ X\in \mathrm{Ob}\left(\mathsf{C}\right)$ and any $x\in F(X)$, there exist natural transformation $\psi^x:\mathrm{Hom}_\mathsf{C}\left(X,-\right)\implies F$ and unique $f\in \mathrm{Hom}_{\mathsf{C}}(A,X)$ such that $x=\psi_X^x(\mathrm{id}_X)=\phi^u_X(f)$,
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+               \mathrm{Hom}_{\mathsf{C}}\left(A,X\right) \arrow[rd, "\phi^u_X"]\&\\
+            \& F(X)\\
+             \mathrm{Hom}_{\mathsf{C}}\left(X,X\right) \arrow[ru, "\psi_X^x"']\arrow[uu, dashed, "f^*"]\& 
+            \end{tikzcd}
+    \]
+    which implies $\phi^u_X$ is bijective. Thus $\phi^u$ is a natural isomorphism and $(A,u)$ is a universal element of $F$.
 }
 \cor[initial_object_representable_functor]{Initial Object Characterized by Representable Functor}{
     Suppose $\mathsf{C}$ is a locally small category.
@@ -2622,12 +2662,18 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
 
 \prop{}{
     \begin{enumerate}[(i)]
-        \item A functor $L:\mathsf{C}\to\mathsf{D}$ has right adjoint if and only for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(F(-),Y\right)$ is representable.
-        \item A functor $R:\mathsf{D}\to\mathsf{C}$ has left adjoint if and only for each $X\in \mathrm{Ob}(\mathsf{C})$, $\mathrm{Hom}_{\mathsf{C}}\left(X,G(-)\right)$ is representable.
+        \item A functor $L:\mathsf{C}\to\mathsf{D}$ has right adjoint if and only for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable.
+        \item A functor $R:\mathsf{D}\to\mathsf{C}$ has left adjoint if and only for each $X\in \mathrm{Ob}(\mathsf{C})$, $\mathrm{Hom}_{\mathsf{C}}\left(X,R(-)\right)$ is representable.
     \end{enumerate}
 }
 \pf{
-    If for each $Y\in \mathrm{Ob}(\mathsf{D})$, there exists $R_Y\in \mathrm{Ob}(\mathsf{D})$ such that $\mathrm{Hom}_{\mathsf{D}}\left(F(-),Y\right)\cong \mathrm{Hom}_{\mathsf{D}}\left(-,R_Y\right)$, then we can define $R(Y):=R_Y$ and $\phi_{X,Y}:=\mathrm{Hom}_{\mathsf{D}}\left(F(X),Y\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(X,R(Y)\right)$ to be the isomorphism. It is straightforward to check that $\phi$ is natural in both $X$ and $Y$. Hence $L\dashv R$.
+    (i) If $(L, R, \phi)$ is an ajoint pair of functors, then for each $Y\in \mathrm{Ob}(\mathsf{D})$, we have an isomorphism 
+    $$
+    \phi_{\text{-},Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\xRightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(-,R(Y)\right).
+    $$
+    Hence $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable. 
+
+    Conversely, if for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable, then there exists $R_Y\in \mathrm{Ob}(\mathsf{D})$ such that $\mathrm{Hom}_{\mathsf{D}}\left(F(-),Y\right)\cong \mathrm{Hom}_{\mathsf{D}}\left(-,R_Y\right)$. Thus we can define $R(Y):=R_Y$ and $\phi_{X,Y}:=\mathrm{Hom}_{\mathsf{D}}\left(F(X),Y\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(X,R(Y)\right)$ to be the isomorphism. It is straightforward to check that $\phi$ is natural in both $X$ and $Y$. Hence $L\dashv R$.
 }
 
 \prop{Equivalent Definition of Adjoint Functor Using Universal Morphism}{
