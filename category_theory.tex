@@ -1805,31 +1805,43 @@ can be translated into the following calculus rules
         \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}$=\left(\{*\} \downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{1} \arrow[r, "\Delta\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
         \end{tikzcd}$.
-        \item $(A,\phi^u)$ is initial in the category $\left(  Y_{\mathsf{C}^{\mathrm{op}}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
+        \item $(A,\phi^u)$ is initial in the category $\left(  \text{\hyperref[th:yoneda_embedding_functor]{$Y_{\mathsf{C}^{\mathrm{op}}}$}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
            \mathsf{C}^{\mathrm{op}}  \arrow[r, " Y_{\mathsf{C}^{\mathrm{op}}}"] \& \left[\mathsf{C},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\Delta F"']
         \end{tikzcd}$.
         \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a universal morphism from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
     \end{enumerate}
+    Suppose $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is a functor. Then the following statements are equivalent:
+    \begin{enumerate}[(i)]
+        \item $F$ is representable by universal element $(A,u)$ 
+        \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}^{\mathrm{op}}}F$}$=\left(\{*\} \downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{1} \arrow[r, "\Delta\{*\}"] \& \mathsf{Set} \& \mathsf{C}^{\mathrm{op}}  \arrow[l, " F"']
+        \end{tikzcd}$.
+        \item $(A,\phi^u)$ is terminal in the category $\left(  \text{\hyperref[th:yoneda_embedding_functor]{$Y_{\mathsf{C}}$}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
+           \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\Delta F"']
+        \end{tikzcd}$.
+        \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a universal morphism from $\{*\}$ to $F$.
+        \item For any $(X,x)\in \mathrm{Ob}\left(\int_{\mathsf{C}^{\mathrm{op}} }F\right)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}^{\mathrm{op}} }F$ (which is a morphism $f: X\to A$ in $\mathsf{C}$ such that $F(f)(x)=u$).
+    \end{enumerate}
 }
 \pf{
-    (i)$\iff$ (ii). Suppose $(A,u)$ is an object of $\int_{\mathsf{C}}F$ and  $\phi:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ is the natural isomorphism corresponding to $u\in F(A)$. For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, we have the following commutative diagram
+    (i)$\iff$ (ii). Suppose $(A,u)$ is an object of $\int_{\mathsf{C}}F$ and $\phi^u:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ be the natural transformation
+    \[
+        \phi^u_X(f)=F(f)(u),\quad\forall f\in \mathrm{Hom}_{\mathsf{C}}(A,X),
+    \]
+    which can be illustrated by the following diagram
     \[
 		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
-			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A}"']  \arrow[rr, "{f_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(A,X)} \arrow[d, "\phi_X"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
-			u=\phi_A(\mathrm{id}_A)\&\in\&{F(A)}\arrow[rr, "{F(f)}"'] \&  \& {F(X)}  \&\ni\& \phi_X(f)     
+			\mathrm{id}_A\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(A,A) \arrow[d, "{\phi_A^u}"']  \arrow[rr, "{f_*}"] \&[-20pt] \& {\mathrm{Hom}_{\mathsf{C}}(A,X)} \arrow[d, "\phi_X^u"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
+			u=\phi_A^u(\mathrm{id}_A)\&\in\&{F(A)}\arrow[rr, "{F(f)}"'] \&  \& {F(X)}  \&\ni\& \phi_X^u(f)     
 		\end{tikzcd}
-	\]
-    which implies
-    \[
-        F(f)(u)=\phi_X(f),\quad\forall f\in \mathrm{Hom}_{\mathsf{C}}(A,X).
-    \]
+	\]   
     Thus we have
     \begin{align*}
         (A,u)\text{ is initial in }\int_{\mathsf{C}}F&\iff \forall(X,x)\in \mathrm{Ob}\left(\int_{\mathsf{C}}F\right),\;\exists! f\in \mathrm{Hom}_{\mathsf{C}}(A,X),\;F(f)(u)=x\\
-        &\iff\forall X\in \mathrm{Ob}\left(\mathsf{C}\right),\; \forall x\in F(X),\;\exists! f\in \mathrm{Hom}_{\mathsf{C}}(A,X),\;\phi_X(f)=x\\
-        &\iff \forall X\in \mathrm{Ob}\left(\mathsf{C}\right),\;\phi_X \text{ is bijective}\\
-        &\iff \phi \text{ is a natural isomorphism}\\
+        &\iff\forall X\in \mathrm{Ob}\left(\mathsf{C}\right),\; \forall x\in F(X),\;\exists! f\in \mathrm{Hom}_{\mathsf{C}}(A,X),\;\phi_X^u(f)=x\\
+        &\iff \forall X\in \mathrm{Ob}\left(\mathsf{C}\right),\;\phi_X^u \text{ is bijective}\\
+        &\iff \phi^u \text{ is a natural isomorphism}\\
         &\iff (A,u) \text{ is a universal element of }F.
     \end{align*}
     \[
@@ -2197,37 +2209,37 @@ The next result shows that functor categories inherit limits and colimits, defin
 
 \section{Adjoint Functor}
 \dfn{Adjoint Pair of Functors}{
-    An \textbf{adjoint pair of functors} is a tuple $\left(L,R,\phi\right)$ consisting of a pair of functors $\begin{tikzcd}[ampersand replacement=\&]
+    An \textbf{adjoint pair of functors} is a tuple $\left(L,R,\Phi\right)$ consisting of a pair of functors $\begin{tikzcd}[ampersand replacement=\&]
         \mathsf{C} \arrow[r, "L", bend left] \& \mathsf{D} \arrow[l, "R", bend left]
         \end{tikzcd}$
     and a natural isomorphism 
     \[
             \begin{tikzcd}[ampersand replacement=\&]
                 \mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)$}"{name=A, above}, bend left] \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)$}"'{name=B, below}, bend right] \&[+60pt] \mathsf{Set}
-                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi", "\sim\hspace{1.5pt}"']
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\Phi", "\sim\hspace{1.5pt}"']
             \end{tikzcd}
     \]
     which means for any $X\in \mathrm{Ob}(\mathsf{C})$ and $Y\in \mathrm{Ob}(\mathsf{D})$, there is a bijection
     \begin{align*}
-        \phi_{X,Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)\\
+        \Phi_{X,Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)\\
         \Big(L(X)\xlongrightarrow{f}Y\Big)&\longmapsto \Big(X\xlongrightarrow{f^{\triangleright}}R(Y)\Big)
     \end{align*}
     natural in $X$ and $Y$. $L$ is called the \textbf{left adjoint} of $R$, and $R$ is called the \textbf{right adjoint} of $L$. We write $L\dashv R$ to denote that $L$ is left adjoint to $R$.
 }
-The naturality square of $\phi$ means that for any morphism $g:X_2\to X_1$ in $\mathsf{C}$ and $h:Y_1\to Y_2$ in $\mathsf{D}$, the following diagram commutes
+The naturality square of $\Phi$ means that for any morphism $g:X_2\to X_1$ in $\mathsf{C}$ and $h:Y_1\to Y_2$ in $\mathsf{D}$, the following diagram commutes
 \[
     \begin{tikzcd}[ampersand replacement=\&]
-        \mathrm{Hom}_{\mathsf{D}}\left(L(X_1),Y_1\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{D}}\left(L(g){,}h\right)}"] \arrow[d, "\phi_{X_1,Y_1}"', "\sim"] \&[+50pt] \mathrm{Hom}_{\mathsf{D}}\left(L(X_2),Y_2\right) \arrow[d, "\phi_{X_2,Y_2}", "\sim"'] \\[+20pt]
+        \mathrm{Hom}_{\mathsf{D}}\left(L(X_1),Y_1\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{D}}\left(L(g){,}h\right)}"] \arrow[d, "\Phi_{X_1,Y_1}"', "\sim"] \&[+50pt] \mathrm{Hom}_{\mathsf{D}}\left(L(X_2),Y_2\right) \arrow[d, "\Phi_{X_2,Y_2}", "\sim"'] \\[+20pt]
         \mathrm{Hom}_{\mathsf{C}}\left(X_1,R(Y_1)\right) \arrow[r, "{\mathrm{Hom}_{\mathsf{C}}\left(g{,}R(h)\right)}"'] \& \mathrm{Hom}_{\mathsf{C}}\left(X_2,R(Y_2)\right)
     \end{tikzcd}
 \]
 which in turn can be explicitly written as for any $f:L(X_1)\to Y_1$ in $\mathsf{D}$,
 \[
-    \phi_{X_2,Y_2}\left(h\circ f\circ L(g)\right)=R(h)\circ\phi_{X_1,Y_1}(f)\circ g.
+    \Phi_{X_2,Y_2}\left(h\circ f\circ L(g)\right)=R(h)\circ\Phi_{X_1,Y_1}(f)\circ g.
 \]
 
 \dfn{Adjunction Unit and Counit}{
-Let $\left(L,R,\phi\right)$ be an adjoint pair of functors. The \textbf{adjunction unit} $\eta$ of this adjunction is a natural transformation
+Let $\left(L,R,\Phi\right)$ be an adjoint pair of functors. The \textbf{adjunction unit} $\eta$ of this adjunction is a natural transformation
 \begin{center}
     \begin{tikzcd}[ampersand replacement=\&]
         \mathsf{C} \arrow[r, "\scalebox{1.2}{$\mathrm{id}_{\mathsf{C}}$}"{name=A, above}, bend left=40] \arrow[r, "\scalebox{1.2}{$R\circ L$}"'{name=B, below}, bend right=40] 
@@ -2247,10 +2259,10 @@ Let $\left(L,R,\phi\right)$ be an adjoint pair of functors. The \textbf{adjuncti
         \draw[fill=black] (0, 2) circle (0.07);
     \end{tikzpicture}
 \end{center}
-defined by $\eta_X:=\phi_{X,L(X)}\left(\mathrm{id}_{L(X)}\right)$ for any $X\in \mathrm{Ob}(\mathsf{C})$, where $\phi_{X,L(X)}$ is the natural bijection
+defined by $\eta_X:=\Phi_{X,L(X)}\left(\mathrm{id}_{L(X)}\right)$ for any $X\in \mathrm{Ob}(\mathsf{C})$, where $\Phi_{X,L(X)}$ is the natural bijection
 $$
 \begin{aligned}
-    \phi_{X,L(X)}:\operatorname{Hom}_{\mathsf{D}}\left(L(X), L(X)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(X, RL(X)) \\
+    \Phi_{X,L(X)}:\operatorname{Hom}_{\mathsf{D}}\left(L(X), L(X)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(X, RL(X)) \\
 \operatorname{id}_{F(X)} & \longmapsto \eta_X 
 \end{aligned}
 $$
@@ -2274,19 +2286,19 @@ The \textbf{adjunction counit} $\varepsilon$ of this adjunction is a natural tra
         \draw[fill=black] (0, 1) circle (0.07);  
     \end{tikzpicture}
 \end{center}
-defined by $\varepsilon_Y:=\phi_{R(Y),Y}^{-1}\left(\mathrm{id}_{R(Y)}\right)$ for any $Y\in \mathrm{Ob}(\mathsf{D})$, where $\phi_{R(Y),Y}^{-1}$ is the natural bijection
+defined by $\varepsilon_Y:=\Phi_{R(Y),Y}^{-1}\left(\mathrm{id}_{R(Y)}\right)$ for any $Y\in \mathrm{Ob}(\mathsf{D})$, where $\Phi_{R(Y),Y}^{-1}$ is the natural bijection
 $$
 \begin{aligned}
-    \phi_{R(Y),Y}^{-1}:\operatorname{Hom}_{\mathsf{D}}\left(R(Y), R(Y)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(LR(Y), R(Y)) \\
+    \Phi_{R(Y),Y}^{-1}:\operatorname{Hom}_{\mathsf{D}}\left(R(Y), R(Y)\right) & \xlongrightarrow{\sim}\operatorname{Hom}_{\mathsf{C}}(LR(Y), R(Y)) \\
 \mathrm{id}_{R(Y)} & \longmapsto \varepsilon_Y
 \end{aligned}
 $$
 }
 \pf{
-    By naturality of $\phi$, for any morphism $g:X_2\to X_1$ in $\mathsf{C}$, we have the following commutative diagram
+    By naturality of $\Phi$, for any morphism $g:X_2\to X_1$ in $\mathsf{C}$, we have the following commutative diagram
     \[
     \begin{tikzcd}[ampersand replacement=\&]
-        \mathrm{id}_{L(X_1)}\arrow[d,mapsto]\&[-30pt]\ni\&[-29pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_1), L(X_1)\right) } \arrow[d, "{\phi_{X_1,L(X_1)}}"'] \arrow[r,"{\left(L(g)\right)^*}"] \& [+12pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_1)\right) } \arrow[d, "{\phi_{X_2,L(X_1)}}"] \&[+12pt] {\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_2)\right) } \arrow[d, "{\phi_{X_2,L(X_2)}}"] \arrow[l,"{\left(L(g)\right)_*}"'] \&[-28pt]\in\&[-28pt]\mathrm{id}_{L(X_2)}\arrow[d,mapsto]\\[+20pt]
+        \mathrm{id}_{L(X_1)}\arrow[d,mapsto]\&[-30pt]\ni\&[-29pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_1), L(X_1)\right) } \arrow[d, "{\Phi_{X_1,L(X_1)}}"'] \arrow[r,"{\left(L(g)\right)^*}"] \& [+12pt]{\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_1)\right) } \arrow[d, "{\Phi_{X_2,L(X_1)}}"] \&[+12pt] {\operatorname{Hom}_{\mathsf{D}}\left(L(X_2), L(X_2)\right) } \arrow[d, "{\Phi_{X_2,L(X_2)}}"] \arrow[l,"{\left(L(g)\right)_*}"'] \&[-28pt]\in\&[-28pt]\mathrm{id}_{L(X_2)}\arrow[d,mapsto]\\[+20pt]
         \eta_{X_1}\&\ni\&{\operatorname{Hom}_{\mathsf{C}}(X_1, RL(X_1))} \arrow[r,"g^*"]                                                    \& {\operatorname{Hom}_{\mathsf{C}}(X_2, RL(X_1))}                                                   \& {\operatorname{Hom}_{\mathsf{C}}(X_2, RL(X_2))} \arrow[l, "\left(RL(g)\right)_*"']            \&[-30pt]\in\&[-30pt]\eta_{X_2}       
         \end{tikzcd}
         \]
@@ -2296,7 +2308,7 @@ $$
         \]
         we have
         \[
-        g^*(\eta_{X_1})=\phi_{X_2,L(X_1)}(L(g))=\left(RL(g)\right)_*(\eta_{X_2}),
+        g^*(\eta_{X_1})=\Phi_{X_2,L(X_1)}(L(g))=\left(RL(g)\right)_*(\eta_{X_2}),
         \]   
     which implies the naturality square of $\eta$ commutes
 \[
@@ -2314,30 +2326,30 @@ Similarly, we can show that for any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, the
 \]
 }
 \prop{Adjunction Isomorphism Determined by Unit or Counit}{
-    Let $\left(L,R,\phi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then 
+    Let $\left(L,R,\Phi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then 
    \begin{align*}
-\phi_{X,Y}(f) & =R(f) \circ \eta_X: X \rightarrow R(Y), \quad \forall f: L(X) \rightarrow Y , \\
-\phi_{X,Y}^{-1}(g) & =\varepsilon_Y \circ L(g): L(X) \rightarrow Y, \quad \forall g: X \rightarrow R(Y) .
+\Phi_{X,Y}(f) & =R(f) \circ \eta_X: X \rightarrow R(Y), \quad \forall f: L(X) \rightarrow Y , \\
+\Phi_{X,Y}^{-1}(g) & =\varepsilon_Y \circ L(g): L(X) \rightarrow Y, \quad \forall g: X \rightarrow R(Y) .
    \end{align*}
 }
 \pf{
     For any object $X\in \mathrm{Ob}(\mathsf{C})$ and any morphism $f:L(X)\to Y$ in $\mathsf{D}$, we have the following commutative diagram
     \[
 		\begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
-			\mathrm{id}_{L(X)}\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(L(X),L(X)) \arrow[d, "{\phi_{X,L(X)}}"']  \arrow[rr, "{f_*}"] \&[-15pt] \& {\mathrm{Hom}_{\mathsf{C}}(L(X),Y)}\arrow[d, "\phi_{X,Y}"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
-			\eta_X\&\in\&{\mathrm{Hom}_{\mathsf{C}}(X,RL(X))} \arrow[rr, "{\left(R(f)\right)_*}"'] \&  \& {\mathrm{Hom}_{\mathsf{C}}(X,R(Y))}  \&\ni\& \phi_{X,Y}(f)     
+			\mathrm{id}_{L(X)}\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{C}}(L(X),L(X)) \arrow[d, "{\Phi_{X,L(X)}}"']  \arrow[rr, "{f_*}"] \&[-15pt] \& {\mathrm{Hom}_{\mathsf{C}}(L(X),Y)}\arrow[d, "\Phi_{X,Y}"]\&[-25pt]\ni\&[-25pt]f \arrow[d, mapsto]\\
+			\eta_X\&\in\&{\mathrm{Hom}_{\mathsf{C}}(X,RL(X))} \arrow[rr, "{\left(R(f)\right)_*}"'] \&  \& {\mathrm{Hom}_{\mathsf{C}}(X,R(Y))}  \&\ni\& \Phi_{X,Y}(f)     
 		\end{tikzcd}
 	\]
     For any object $Y\in \mathrm{Ob}(\mathsf{D})$ and any morphism $g:X\to R(Y)$ in $\mathsf{C}$, we have the following commutative diagram
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep = 3.5em]
-            \mathrm{id}_{R(Y)}\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{D}}(R(Y),R(Y)) \arrow[d, "{\phi_{R(Y),Y}^{-1}}"']  \arrow[rr, "{g^*}"] \&[-15pt] \& {\mathrm{Hom}_{\mathsf{D}}(X,R(Y))}\arrow[d, "\phi_{R(Y),Y}^{-1}"]\&[-25pt]\ni\&[-25pt]g \arrow[d, mapsto]\\
-            \varepsilon_Y\&\in\&{\mathrm{Hom}_{\mathsf{C}}(LR(Y),Y)} \arrow[rr, "{\left(L(g)\right)^*}"'] \&  \& {\mathrm{Hom}_{\mathsf{C}}(L(X),Y)}  \&\ni\& \phi_{X,Y}^{-1}(g)
+            \mathrm{id}_{R(Y)}\arrow[d, mapsto]\&[-25pt]\in\&[-25pt]\mathrm{Hom}_{\mathsf{D}}(R(Y),R(Y)) \arrow[d, "{\Phi_{R(Y),Y}^{-1}}"']  \arrow[rr, "{g^*}"] \&[-15pt] \& {\mathrm{Hom}_{\mathsf{D}}(X,R(Y))}\arrow[d, "\Phi_{R(Y),Y}^{-1}"]\&[-25pt]\ni\&[-25pt]g \arrow[d, mapsto]\\
+            \varepsilon_Y\&\in\&{\mathrm{Hom}_{\mathsf{C}}(LR(Y),Y)} \arrow[rr, "{\left(L(g)\right)^*}"'] \&  \& {\mathrm{Hom}_{\mathsf{C}}(L(X),Y)}  \&\ni\& \Phi_{X,Y}^{-1}(g)
         \end{tikzcd}
     \]
 }
 \lemm{Snake Equations}{
-    Let $\left(L,R,\phi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then we have the following equalities of natural transformations
+    Let $\left(L,R,\Phi\right)$ be an adjoint pair of functors and $\eta$ and $\varepsilon$ be the adjunction unit and counit respectively. Then we have the following equalities of natural transformations
     \begin{center}
         \begin{tikzpicture}[x=0.8cm,y=0.8cm]
             \node at (-7.4,1.5) {${\left[L \xRightarrow{L \eta}LR L\xRightarrow{\varepsilon L} L\right]=\mathrm{id}_L}$};
@@ -2417,7 +2429,7 @@ There are bijections between the following sets of natural transformations
         { \mathrm{Hom}_{[\mathsf{D}, \mathsf{D'}]}\left(L'HR, K\right)} \arrow[u, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[u, shift right=1pt,leftharpoondown, "\triangleleft"'] \& {\mathrm{Hom}_{[\mathsf{D}, \mathsf{C'}]}(HR, R'K) } \arrow[l, shift left=1pt, rightharpoonup, "\triangleright"]\arrow[l, shift right=1pt,leftharpoondown, "\triangleleft"'] 
         \end{tikzcd}    
 \]
-natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\triangleright\triangleright\triangleright\hspace{2.15pt}\triangleright=\mathrm{id}$. $\triangleright$ is called \textbf{wire bending} because its action can be visualized as bending the wires of adjoint pairs in the following string diagrams
+natural in both $H$ and $K$ such that $\triangleleft=\triangleright^{-1}$ and $\triangleright\triangleright\triangleright\hspace{2.15pt}\triangleright=\triangleright^4=\mathrm{id}$. $\triangleright$ is called \textbf{wire bending} because its action can be visualized as bending the wires of adjoint pairs in the following string diagrams
 
 \begin{center}
 \begin{tikzpicture}[x=0.8cm,y=0.8cm, baseline=(current bounding box.center)]
@@ -2553,15 +2565,16 @@ We only explicit define $\alpha^\triangleright$ here. The other wire bendings ar
 \end{center}
 The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from the snake equations.
 
+
 \prop{Equivalent Definition of Adjoint Functor Using Unit and Counit}{
     Given pair of functors $\begin{tikzcd}[ampersand replacement=\&]
         \mathsf{C} \arrow[r, "L", bend left] \& \mathsf{D} \arrow[l, "R", bend left]
         \end{tikzcd}$
     there is a bijection between the following sets 
     \begin{align*}
-        T:\left\{\text{adjoint pair }\left(L,R,\phi\right)\right\}&\xrightleftharpoons{\;\sim\;}\left\{\left(L,R,\eta,\varepsilon\right)\text{ that satisfies snake equations}\right\}\\
-        \phi&\longmapsto\left(\eta_X:=\phi\left(\mathrm{id}_{L(X)}\right), \varepsilon_Y:=\phi^{-1}\left(\mathrm{id}_{R(Y)}\right)\right)\\
-        \phi_{X,Y}(f):=R(f) \circ \eta_X&\longmapsfrom(\eta, \varepsilon)
+        T:\left\{\text{adjoint pair }\left(L,R,\Phi\right)\right\}&\xrightleftharpoons{\;\sim\;}\left\{\left(L,R,\eta,\varepsilon\right)\text{ that satisfies snake equations}\right\}\\
+        \Phi&\longmapsto\left(\eta_X:=\Phi\left(\mathrm{id}_{L(X)}\right), \varepsilon_Y:=\Phi^{-1}\left(\mathrm{id}_{R(Y)}\right)\right)\\
+        \Phi_{X,Y}(f):=R(f) \circ \eta_X&\longmapsfrom(\eta, \varepsilon)
     \end{align*}
 }
 \pf{
@@ -2653,28 +2666,200 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
         
         \end{tikzpicture}
     \end{center}
-    As the string diagram shows, we find $\phi_{X,Y}$ conincides with the wire bending map
+    As the string diagram shows, we find $\Phi_{X,Y}$ conincides with the wire bending map
     \[
         \triangleright: \mathrm{Hom}_{\mathsf{D}}\left(L(X), Y\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}(X, R(Y)) 
     \]
-    which is natural in both $X$ and $Y$. Hence $\phi$ is a natural isomorphism. It is straightforward to check that $T$ is a bijection.
+    which is natural in both $X$ and $Y$. Hence $\Phi$ is a natural isomorphism. It is straightforward to check that $T$ is a bijection.
 }
 
-\prop{}{
+\prop{Uniqueness of Adjunction}{
+    If $\left(L,R,\eta,\varepsilon\right)$ and $\left(L,R',\eta', \varepsilon\right)$ are two adjoint pairs of functors, then there is a unique natural isomorphism $\psi:R\xRightarrow{\sim} R'$ such that 
+    \[
+        \begin{tikzpicture}[x=0.5cm,y=0.5cm,line width=0.7pt,hollow/.style={
+                   circle,
+                   fill=white,
+                   draw,
+                   outer sep=0pt,
+                   inner sep=1.7pt,
+                   line width=0.7pt
+                 }]
+           \definecolor{leftcolor}{RGB}{204, 255, 204}
+           \definecolor{midcolor}{RGB}{204, 204, 255}
+           
+       
+           \node at (4, 2) {$=$};
+          \node at (20, 2) {$=$};
+           
+           
+            \begin{scope}
+               \begin{scope} 
+                   \clip (-2.5,0) rectangle (2.5, 4);     
+                   \fill[fill=leftcolor] (-3,0) rectangle (3, 4);  
+                    
+                   \draw[fill=midcolor, rounded corners=0.5cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+               \end{scope}
+             
+               \filldraw [black] (1,0.8) circle (0.1) node[right=1pt] {$\psi$};
+               \node[below] at (-1, 0) {$L$};
+               \node[right=-1pt] at (1, 1.8) {$R$};
+               \node[below] at (1, 0) {$R'$};
+               \draw[fill=black] (0, 2.8) circle (0.1);
+               \node[above=1pt] at (0, 2.8) {$\eta$}; 
+             
+           \end{scope}
+           
+           \begin{scope}[shift={(8,0)}]
+               \begin{scope} 
+                   \clip (-2.5,0) rectangle (2.5, 4); 
+                   \fill[fill=leftcolor] (-3,0) rectangle (3, 4);  
+                   \draw[fill=midcolor, rounded corners=0.5cm, line width=0.7pt] (-1, -2) rectangle (1, 2);
+               \end{scope}
+               \node[below] at (-1, 0) {$L$};
+               \node[below] at (1, 0) {$R$};
+               \draw[fill=black] (0, 2) circle (0.1);
+               \node[above=1pt] at (0, 2) {$\eta'$}; 
+           
+           \end{scope}
+           
+           \begin{scope}[shift={(16,0)}]
+               \begin{scope} 
+                   \clip (-2.5,0) rectangle (2.5, 4);     
+                   \fill[fill=midcolor] (-3,0) rectangle (3, 4);  
+                    
+                   \draw[fill=leftcolor, rounded corners=0.5cm, line width=0.7pt] (-1, 6) rectangle (1, 1.2);
+               \end{scope}
+             
+               \filldraw [black] (-1,3.2) circle (0.1) node[right=1pt] {$\psi$};
+               \node[above] at (-1, 4) {$R$};
+               \node[left=-1pt] at (-1, 2.2) {$R'$};
+               \node[above] at (1, 4) {$L$};
+               \draw[fill=black] (0, 1.2) circle (0.1);
+               \node[below=1pt] at (0, 1.2) {$\varepsilon'$}; 
+             
+           \end{scope}
+           
+           \begin{scope}[shift={(24,0)}]
+               \begin{scope} 
+                   \clip (-2.5,0) rectangle (2.5, 4); 
+                   \fill[fill=midcolor] (-3,0) rectangle (3, 4);  
+                   \draw[fill=leftcolor, rounded corners=0.5cm, line width=0.7pt] (-1, 6) rectangle (1, 2);
+               \end{scope}
+               \node[above] at (1, 4) {$L$};
+               \node[above] at (-1, 4) {$R$};
+               \draw[fill=black] (0, 2) circle (0.1);
+               \node[below=1pt] at (0, 2) {$\varepsilon$}; 
+           
+           \end{scope}
+           
+        \end{tikzpicture}
+    \]
+}
+\pf{
+    Consider the diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[dd, "L"', bend right=38] \arrow[r, "\mathrm{id}_{\mathsf{C}}"]  \&[+36pt] \mathsf{C} \arrow[dd, "L"', bend right=38] \\[-5pt]
+            \dashv                                                  \& \dashv                                    \\[-5pt]
+            \mathsf{D} \arrow[uu, "R"', bend right=38] \arrow[r, "\mathrm{id}_{\mathsf{D}}"'] \& \mathsf{D} \arrow[uu, "R'"', bend right=38]
+            \end{tikzcd}    
+    \]
+    Define $\psi:=\mathrm{id}_L^{\:\triangleright\triangleright}$, which is illustrated by the following string diagram
+    \begin{center}
+        \begin{tikzpicture}[x=0.8cm,y=0.8cm]
+            \node at (8, 1.5) {$:=$};
+            \begin{scope}
+                \begin{scope} 
+                    \clip (4,0) rectangle (6.4,3); 
+                    \fill[fill=blue!20] (4,0) rectangle (6.4,3); 
+                    \filldraw[fill=green!20] (5.2,-1) rectangle (7,4);  
+                \end{scope} 
+                \draw[fill=black] (5.2, 1.5) circle (0.07) node[right=1pt] {$\psi$};
+                \node[below] at (5.2,0) {$R'$};
+                \node[above] at (5.2,3) {$R$};
+            \end{scope}
+            \begin{scope}[shift={(12,0)}] 
+                \begin{scope}
+                    \clip (-2.4, 0) rectangle (2.4, 3);     
+                    \fill[fill=blue!20] (-2.5, 0) rectangle (2.5,3);  
+                    \filldraw[fill=green!20, rounded corners=0.48cm] (-1.2, 4) -- (-1.2, 0.9)-- (0, 0.9)-- (0, 2.1)-- (1.2, 2.1)
+                    -- (1.2, -1)-- (4, -1)-- (4, 4)--cycle;
+                \end{scope}
+        
+                \node[below] at (1.2,0) {$R'$};
+                \node[above] at (-1.2,3) {$R$};
+            
+                \draw[fill=black] (0.6, 2.1) circle (0.07);  
+                \node[above=2pt] at (0.6, 2.1) {$\eta'$};
+                
+                \draw[fill=black] (-0.6, 0.9) circle (0.07); 
+                \node[above=2pt] at (-0.6, 0.9) {$\varepsilon$};
+              
+            \end{scope}   
+        \end{tikzpicture}
+    \end{center}
+    $\psi$ is a natural isomorphism since it has inverse $\mathrm{id}_L^{\:\triangleleft\triangleleft}$. The first equality in the statement of the proposition follows from $\psi^{\triangleleft}=\psi^{\triangleright\triangleright\triangleright}=\mathrm{id}_L^{\:\triangleright}=\eta'$. The uniqueness of $\psi$ follows from the injectivity of 
+    $$
+    \triangleleft:\mathrm{Hom}_{\left[\mathsf{D},\mathsf{C}\right]}\left(R,R'\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\left[\mathsf{C},\mathsf{C}\right]}\left(\mathrm{id}_{\mathsf{C}},R'L\right).
+    $$
+    Similarly, the second equality follows from $\psi^{\triangleright}=\psi^{\triangleleft\triangleleft\triangleleft}=\mathrm{id}_L^{\:\triangleleft}=\varepsilon$. And the uniqueness of $\psi$ follows from the injectivity of
+    $$
+    \triangleright:\mathrm{Hom}_{\left[\mathsf{C},\mathsf{D}\right]}\left(L',L\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\left[\mathsf{D},\mathsf{D}\right]}\left(LR,\mathrm{id}_{\mathsf{D}}\right).
+    $$
+}
+
+
+\prop{Equivalent Definition of Adjoint Functor Using Representable Functor}{
     \begin{enumerate}[(i)]
         \item A functor $L:\mathsf{C}\to\mathsf{D}$ has right adjoint if and only for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable.
         \item A functor $R:\mathsf{D}\to\mathsf{C}$ has left adjoint if and only for each $X\in \mathrm{Ob}(\mathsf{C})$, $\mathrm{Hom}_{\mathsf{C}}\left(X,R(-)\right)$ is representable.
     \end{enumerate}
 }
 \pf{
-    (i) If $(L, R, \phi)$ is an ajoint pair of functors, then for each $Y\in \mathrm{Ob}(\mathsf{D})$, we have an isomorphism 
+    We only prove (i) here. The proof of (ii) is similar. 
+    If $(L, R, \Phi)$ is an adjoint pair of functors, then for each $Y\in \mathrm{Ob}(\mathsf{D})$, we have an isomorphism 
     $$
-    \phi_{\text{-},Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\xRightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(-,R(Y)\right).
+    \Phi_{\text{-},Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\xRightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(-,R(Y)\right).
     $$
     Hence $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable. 
 
-    Conversely, if for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable, then there exists $R_Y\in \mathrm{Ob}(\mathsf{D})$ such that $\mathrm{Hom}_{\mathsf{D}}\left(F(-),Y\right)\cong \mathrm{Hom}_{\mathsf{D}}\left(-,R_Y\right)$. Thus we can define $R(Y):=R_Y$ and $\phi_{X,Y}:=\mathrm{Hom}_{\mathsf{D}}\left(F(X),Y\right)\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(X,R(Y)\right)$ to be the isomorphism. It is straightforward to check that $\phi$ is natural in both $X$ and $Y$. Hence $L\dashv R$.
+    Conversely, suppose for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable. Then for each $Y\in \mathrm{Ob}(\mathsf{D})$, there exist a natural isomorphism 
+    $$
+    \phi(Y):\mathrm{Hom}_{\mathsf{D}}\left(-,R_Y\right)\xRightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)
+    $$
+    for some $R_Y\in \mathrm{Ob}(\mathsf{D})$. \Cref{th:universal_element_characterization} implies that $(R_Y,\phi(Y))$ is terminal in the category $\left(Y_{\mathsf{C}}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\right)$, which corresponds to 
+    $$ 
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&[+45pt]  \mathsf{1} \arrow[l, "{\Delta \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)}"']
+    \end{tikzcd}
+    $$ 
+    Given any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, since $(R_{Y_2},\phi(Y_2))$ is terminal in $\left(Y_{\mathsf{C}}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\right)$, there exists a unique morphism $R_h:R_{Y_1}\to R_{Y_2}$  in $\mathsf{C}$ such that the following diagram commutes
+     \[
+     \begin{tikzcd}[ampersand replacement=\&]
+        Y_{\mathsf{C}}\left(R_{Y_1}\right) \arrow[d, "Y_{\mathsf{C}}(R_h)"', dashed] \arrow[r, "\phi\left(Y_1\right)"] \&[+10pt] {\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y_1\right)} \arrow[d, "h_\star"] \\[+15pt]
+        Y_{\mathsf{C}}\left(R_{Y_2}\right) \arrow[r, "\phi\left({Y_2}\right)"']                                                   \& {\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y_2\right)}                 
+    \end{tikzcd}\hspace{3em}=\hspace{3em}
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathrm{Hom}_{\mathsf{C}}\left(-,R_{Y_1}\right)\arrow[d, "\left(R_h\right)_\star"', dashed] \arrow[r, "\phi\left(Y_1\right)"] \&[+10pt] {\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y_1\right)} \arrow[d, "h_\star"] \\[+15pt]
+        \mathrm{Hom}_{\mathsf{C}}\left(-,R_{Y_2}\right) \arrow[r, "\phi\left({Y_2}\right)"']                                                   \& {\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y_2\right)}                 
+    \end{tikzcd}
+    \]
+    Thus we can define a functor $R:\mathsf{D}\to\mathsf{C}$ by $R(Y):=R_Y$ and $R(h):= R_h$. We can also define a natural isomorphism $\Phi: \mathrm{Hom}_{\mathsf{D}}\left(L(-),-\right)\xRightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(-,R(-)\right)$ by
+    \begin{align*}
+        \Phi_{X,Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)\\
+        \Big(L(X)\xlongrightarrow{f}Y\Big)&\longmapsto \Big(X\xlongrightarrow{\left(\phi(Y)_X\right)^{-1}(f)}R(Y)\Big)
+    \end{align*}
+    The naturality of $\Phi$ can be check as follows: for any morphism $g:X_2\to X_1$ in $\mathsf{C}$ and $h:Y_1\to Y_2$ in $\mathsf{D}$, the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Hom}_{\mathsf{D}}\left(L(X_1),Y_1\right) \arrow[r, "L(g)^*"] \arrow[d, "\Phi_{X_1,Y_1}"', "\left(\phi(Y_1)_{X_1}\right)^{-1}"] \&[+40pt]\mathrm{Hom}_{\mathsf{D}}\left(L(X_2),Y_1\right) \arrow[r, "{h_*}"]\arrow[d, "\Phi_{X_2,Y_1}"', "\left(\phi(Y_1)_{X_2}\right)^{-1}"] \&[+40pt] \mathrm{Hom}_{\mathsf{D}}\left(L(X_2),Y_2\right) \arrow[d, "\Phi_{X_2,Y_2}"', "\left(\phi(Y_2)_{X_2}\right)^{-1}"] \\[+20pt]
+            \mathrm{Hom}_{\mathsf{C}}\left(X_1,R(Y_1)\right) \arrow[r, "{g^*}"'] \&\mathrm{Hom}_{\mathsf{C}}\left(X_2,R(Y_1)\right) \arrow[r, "{R(h)_*}"']\& \mathrm{Hom}_{\mathsf{C}}\left(X_2,R(Y_2)\right)
+        \end{tikzcd}
+    \]
+    Therefore, $(L,R,\Phi)$ is an adjoint pair of functors.
 }
+
+
 
 \prop{Equivalent Definition of Adjoint Functor Using Universal Morphism}{
     Given pair of functors $\begin{tikzcd}[ampersand replacement=\&]
@@ -2690,13 +2875,13 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     If $L \dashv R$, then for every $X\in\mathrm{Ob}(\mathsf{C})$, we can let $X\xrightarrow{\eta_X} R(L(X))$ be the unit of the adjunction. Then for any $X\xrightarrow{g} R(Y)$, we have the following commutative diagram
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            X \arrow[rd, "f"'] \arrow[r, "\eta_X"] \& R(L(X))\arrow[d, "{R\left(\phi_{X,Y}^{-1}(g)\right)}"]  \\
+            X \arrow[rd, "f"'] \arrow[r, "\eta_X"] \& R(L(X))\arrow[d, "{R\left(\Phi_{X,Y}^{-1}(g)\right)}"]  \\
             \&  R(Y) 
             \end{tikzcd}
     \]
     because 
     \[
-        R\left(\phi_{X,Y}^{-1}(g)\right)\circ \eta_X=R\left(\eta_Y\circ L(g)\right)\circ R\left(\eta_X\right)=R\left(\eta_Y\circ L(g)\circ \eta_X\right)
+        R\left(\Phi_{X,Y}^{-1}(g)\right)\circ \eta_X=R\left(\eta_Y\circ L(g)\right)\circ R\left(\eta_X\right)=R\left(\eta_Y\circ L(g)\circ \eta_X\right)
     \]
 }
 
