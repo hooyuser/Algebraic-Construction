@@ -105,6 +105,20 @@ It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
     The functor ${}^{\mathrm{op}}$ is an involution, i.e. ${}^{\mathrm{op}}\circ {}^{\mathrm{op}}=\mathrm{id}_{\mathsf{CAT}}$. Hence ${}^{\mathrm{op}}$ is an automorphism of $\mathsf{CAT}$.
 }
 
+\prop{}{
+    $$
+(C \times D)^{\mathrm{op}} \cong C^{\mathrm{op}} \times D^{\mathrm{op}} \text { (see product category) }
+$$
+
+Opposite preserves functors:
+$(\text { Funct }(C, D))^{\mathrm{op}} \cong \operatorname{Funct}\left(C^{\mathrm{op}}, D^{\mathrm{op}}\right)^{[2][3]}$ (see functor category, opposite functor)
+
+Opposite preserves slices:
+$$
+(F \downarrow G)^{\mathrm{op}} \cong\left(G^{\mathrm{op}} \downarrow F^{\mathrm{op}}\right) \text { (see comma category) }
+$$
+}
+
 \dfn{$\mathrm{Hom}$ Functors}{
     Let $\mathsf{C}$ be a locally small category. We can define a functor $\mathrm{Hom}_{\mathsf{C}}\left(-{,}-\right)$ as follows
     \[
@@ -220,7 +234,7 @@ It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
     \]
 }
 \dfn{Diagonal Functor}{
-    Suppose $\mathsf{J}$, $\mathsf{C}$ are categories. The \textbf{diagonal functor} $\Delta:\mathsf{C}\to [\mathsf{J},\mathsf{C}]$ is defined by
+    Suppose $\mathsf{J}$, $\mathsf{C}$ are categories. The \textbf{diagonal functor} $\diagarrow:\mathsf{C}\to [\mathsf{J},\mathsf{C}]$ is defined by
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C}\&[-25pt]\&[+10pt]\&[-30pt][\mathsf{J},\mathsf{C}]\&[-30pt]\&[-30pt] \&\&\&\\ [-15pt] 
@@ -1798,7 +1812,7 @@ can be translated into the following calculus rules
 \]
 
 
-\prop[universal_element_characterization]{Equivalent Characterizations of Representable Functor}{
+\prop[representable_functor_by_universal_element]{Equivalent Characterizations of Representable Functor}{
     Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a functor. Then the following statements are equivalent:
     \begin{enumerate}[(i)]
         \item $F$ is representable by universal element $(A,u)$ 
@@ -1808,7 +1822,7 @@ can be translated into the following calculus rules
         \item $(A,\phi^u)$ is initial in the category $\left(  \text{\hyperref[th:yoneda_embedding_functor]{$Y_{\mathsf{C}^{\mathrm{op}}}$}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
            \mathsf{C}^{\mathrm{op}}  \arrow[r, " Y_{\mathsf{C}^{\mathrm{op}}}"] \& \left[\mathsf{C},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\Delta F"']
         \end{tikzcd}$.
-        \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a universal morphism from $\{*\}$ to $F$.
+        \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
     \end{enumerate}
     Suppose $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is a functor. Then the following statements are equivalent:
@@ -1820,7 +1834,7 @@ can be translated into the following calculus rules
         \item $(A,\phi^u)$ is terminal in the category $\left(  \text{\hyperref[th:yoneda_embedding_functor]{$Y_{\mathsf{C}}$}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
            \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\Delta F"']
         \end{tikzcd}$.
-        \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a universal morphism from $\{*\}$ to $F$.
+        \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}\left(\int_{\mathsf{C}^{\mathrm{op}} }F\right)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}^{\mathrm{op}} }F$ (which is a morphism $f: X\to A$ in $\mathsf{C}$ such that $F(f)(x)=u$).
     \end{enumerate}
 }
@@ -1893,11 +1907,41 @@ can be translated into the following calculus rules
         p:\int_\mathsf{C}\Delta \{*\}&\longrightarrow \mathsf{C}\\
         (C,*) &\longmapsto C
     \end{align*}
-    As established in \Cref{th:universal_element_characterization},
+    As established in \Cref{th:representable_functor_by_universal_element},
     $(A,*)\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\Delta \{*\}$ if and only if $\Delta\{*\}$ is a representable functor with a universal element $(A,*)$, which proves the first statement. The second statement can be obtained by applying the first statement to $\mathsf{C}^{\mathrm{op}}$.\\
     In addition, an alternative ad-hoc proof is conceivable. If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\xRightarrow{\sim} \Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
 }
 
+\prop[universal_morphism_by_representability]{Equivalent Characterizations of Universal Morphism}{
+    Let $F:\mathsf{C}\to \mathsf{D}$ be a functor and $A\in \mathrm{Ob}(\mathsf{D})$. Then the following statements are equivalent:
+    \begin{enumerate}[(i)]
+        \item $(A,u)$ is initial in the category $\left(X \downarrow F\right)$.
+        \item $\mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)$ is representable by universal element $(A,u)$.
+        \item $(A,u)$ is initial in the category $\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)=\left( \{*\}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)\right)$.
+    \end{enumerate}
+ Dually, the following statements are equivalent:
+    \begin{enumerate}[(i)]
+        \item $(A,u)$ is terminal in the category $\left(F \downarrow X\right)$.
+        \item $\mathrm{Hom}_{\mathsf{D}}\left(F(-),X\right)$ is representable by universal element $(A,u)$.
+        \item $(A,u)$ is initial in the category $\int_{\mathsf{C}^{\mathrm{op}}}  \mathrm{Hom}_{\mathsf{D}}\left(F(-),X\right)=\left( \{*\}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(F(-),X\right)\right)$.
+    \end{enumerate}
+}
+\pf{     
+    It suffices to show (i)$\iff$ (iii).
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        X \arrow[r, "u"] \arrow[rd, "g"'] \&[+20pt] F(A) \arrow[d, "F\left(h\right)", dashed]\&[+50pt] \{*\} \arrow[r, "\Delta u"] \arrow[rd, "\Delta g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{D}}\left(X,F(A)\right)\arrow[d, "F(h)_*", dashed] \\[+15pt]\& F(B)\&\&\mathrm{Hom}_{\mathsf{D}}\left(X,F(B)\right)                                              
+    \end{tikzcd}
+    \]
+    \begin{align*}
+        (A,u)\text{ is initial in }\left(X \downarrow F\right)&\iff \forall(B,g)\in \mathrm{Ob}\left(X \downarrow F\right),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)\circ u=g\\
+        &\iff \forall B\in \mathrm{Ob}\left(\mathsf{C}\right),\;\forall g\in \mathrm{Hom}_{\mathsf{C}}(X,F(B)),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)\circ u=g\\
+        &\iff \forall (B,\Delta g)\in \mathrm{Ob}\left(\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)\right),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)_*\circ\Delta u=\Delta g\\
+        &\iff (A,u)\text{ is initial in }\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)
+    \end{align*}
+  The dual version is similar.
+
+}
 
 \section{Limit and Colimit}
 \dfn{Cone}{
@@ -2037,7 +2081,7 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     \]
 }
 \pf{
-    According to \Cref{th:universal_element_characterization}, $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$ is representable by the universal element $(A,u)$ if and only if $(A,u)$ is initial in $\int_{\mathsf{C}^{\mathrm{op}}}\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$, which is equivalent to saying that for any $C\in\mathrm{Ob}\left(\mathsf{C}\right)$ and $(h_i)\in \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C, F\right)$, there is a unique morphism $f:C\to A$ in $\mathsf{C}$ such that $h_i=f^*(u_i)=u_i\circ f$ for each $i\in \mathrm{Ob}(\mathsf{J})$. This is exactly the universal property of limit.
+    According to \Cref{th:representable_functor_by_universal_element}, $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$ is representable by the universal element $(A,u)$ if and only if $(A,u)$ is initial in $\int_{\mathsf{C}^{\mathrm{op}}}\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$, which is equivalent to saying that for any $C\in\mathrm{Ob}\left(\mathsf{C}\right)$ and $(h_i)\in \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C, F\right)$, there is a unique morphism $f:C\to A$ in $\mathsf{C}$ such that $h_i=f^*(u_i)=u_i\circ f$ for each $i\in \mathrm{Ob}(\mathsf{J})$. This is exactly the universal property of limit.
 }
 
 \dfn{Complete Category}{
@@ -2809,10 +2853,10 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
 }
 
 
-\prop{Equivalent Definition of Adjoint Functor Using Representable Functor}{
+\prop[adjunction_by_representability]{Equivalent Definition of Adjoint Functor Using Representable Functor}{
     \begin{enumerate}[(i)]
-        \item A functor $L:\mathsf{C}\to\mathsf{D}$ has right adjoint if and only for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable.
-        \item A functor $R:\mathsf{D}\to\mathsf{C}$ has left adjoint if and only for each $X\in \mathrm{Ob}(\mathsf{C})$, $\mathrm{Hom}_{\mathsf{C}}\left(X,R(-)\right)$ is representable.
+        \item A functor $L:\mathsf{C}\to\mathsf{D}$ has right adjoint if and only for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable. If so, the universal element of $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is $\left(R(Y), \varepsilon_Y\right)$.
+        \item A functor $R:\mathsf{D}\to\mathsf{C}$ has left adjoint if and only for each $X\in \mathrm{Ob}(\mathsf{C})$, $\mathrm{Hom}_{\mathsf{C}}\left(X,R(-)\right)$ is representable. If so, the universal element of $\mathrm{Hom}_{\mathsf{C}}\left(X,R(-)\right)$ is $\left(L(X), \eta_X\right)$.
     \end{enumerate}
 }
 \pf{
@@ -2821,13 +2865,24 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     $$
     \Phi_{\text{-},Y}:\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\xRightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(-,R(Y)\right).
     $$
-    Hence $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable. 
+    where $\Phi_{\text{-},Y}$ is the horizontal composition
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C}^{\mathrm{op}}\times\mathsf{1}\arrow[r,"{\mathrm{id}\times\Delta Y}"]\&[+15pt]\mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)$}"{name=A, above}, bend left] \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)$}"'{name=B, below}, bend right] \&[+60pt] \mathsf{Set}
+            \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\Phi", "\sim\hspace{1.5pt}"']
+        \end{tikzcd}
+\]
+    Since 
+    \[
+        \left(\Phi_{-,Y}^{-1}\right)_{R(Y)}\left(\mathrm{id}_{R(Y)}\right)=\Phi_{R(Y),Y}^{-1}\left(\mathrm{id}_{R(Y)}\right)=\varepsilon_Y,
+    \]
+    we see $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable by $\left(R(Y), \varepsilon_Y\right)$.
 
     Conversely, suppose for each $Y\in \mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable. Then for each $Y\in \mathrm{Ob}(\mathsf{D})$, there exist a natural isomorphism 
     $$
     \phi(Y):\mathrm{Hom}_{\mathsf{D}}\left(-,R_Y\right)\xRightarrow{\sim} \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)
     $$
-    for some $R_Y\in \mathrm{Ob}(\mathsf{D})$. \Cref{th:universal_element_characterization} implies that $(R_Y,\phi(Y))$ is terminal in the category $\left(Y_{\mathsf{C}}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\right)$, which corresponds to 
+    for some $R_Y\in \mathrm{Ob}(\mathsf{D})$. \Cref{th:representable_functor_by_universal_element} implies that $(R_Y,\phi(Y))$ is terminal in the category $\left(Y_{\mathsf{C}}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\right)$, which corresponds to 
     $$ 
     \begin{tikzcd}[ampersand replacement=\&]
         \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&[+45pt]  \mathsf{1} \arrow[l, "{\Delta \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)}"']
@@ -2859,9 +2914,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     Therefore, $(L,R,\Phi)$ is an adjoint pair of functors.
 }
 
-
-
-\prop{Equivalent Definition of Adjoint Functor Using Universal Morphism}{
+\cor{Equivalent Definition of Adjoint Functor Using Universal Morphism}{
     Given pair of functors $\begin{tikzcd}[ampersand replacement=\&]
         \mathsf{C} \arrow[r, "L", bend left] \& \mathsf{D} \arrow[l, "R", bend left]
         \end{tikzcd}$, then the following are equivalent
@@ -2872,16 +2925,21 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     \end{enumerate} 
 }
 \pf{
-    If $L \dashv R$, then for every $X\in\mathrm{Ob}(\mathsf{C})$, we can let $X\xrightarrow{\eta_X} R(L(X))$ be the unit of the adjunction. Then for any $X\xrightarrow{g} R(Y)$, we have the following commutative diagram
+    This is a direct consequence of \Cref{th:adjunction_by_representability}. According to \Cref{th:universal_morphism_by_representability}, for each $X\in\mathrm{Ob}(\mathsf{C})$, $\mathrm{Hom}_{\mathsf{C}}\left(X,R(-)\right)$ is representable by $\left(L(X),\eta_X\right)$ is equivalent to that $\left(L(X), X\xrightarrow{\eta_X} R(L(X))\right)$ is initial in $\left(X\downarrow R\right)$.
+
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            X \arrow[rd, "f"'] \arrow[r, "\eta_X"] \& R(L(X))\arrow[d, "{R\left(\Phi_{X,Y}^{-1}(g)\right)}"]  \\
-            \&  R(Y) 
-            \end{tikzcd}
+            X \arrow[r, "\eta_X"] \arrow[rd, "g"'] \&[+20pt] R(L(X)) \arrow[d, "R\left(g^{\triangleleft}\right)", dashed] \&[+50pt]    \{*\} \arrow[r, "\Delta \eta_X"] \arrow[rd, "\Delta g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{C}}\left(X,R(L(X))\right) \arrow[d, "R\left(g^{\triangleleft}\right)_*", dashed] \\[+20pt]
+            \& R(Y) \&\& \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)     
+        \end{tikzcd}
     \]
-    because 
+
+    Similarly, for each $Y\in\mathrm{Ob}(\mathsf{D})$, $\mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)$ is representable by $\left(R(Y), \varepsilon_Y\right)$ is equivalent to that $\left(R(Y), \varepsilon_Y\right)$ is terminal in $\left(L\downarrow Y\right)$.
     \[
-        R\left(\Phi_{X,Y}^{-1}(g)\right)\circ \eta_X=R\left(\eta_Y\circ L(g)\right)\circ R\left(\eta_X\right)=R\left(\eta_Y\circ L(g)\circ \eta_X\right)
+        \begin{tikzcd}[ampersand replacement=\&]
+            L(X) \arrow[d, "L\left(f^{\triangleright}\right)"', dashed] \arrow[rd, "f"] \&[+20pt]   \&[+50pt]   {\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)}     \&[+15pt]  \\[+20pt]
+            L(R(Y)) \arrow[r, "\eta_Y"']   \& Y \&  {\mathrm{Hom}_{\mathsf{D}}\left(L(R(Y)),Y\right)} \arrow[u, "L\left(f^{\triangleright}\right)^*", dashed] \& \{*\} \arrow[lu, "\Delta f"'] \arrow[l, "\Delta\eta_Y"]
+        \end{tikzcd}
     \]
 }
 
@@ -2943,7 +3001,30 @@ A strict monoidal category is one for which the natural isomorphisms $a$, $\lamb
     \end{enumerate}
 }
 
+\dfn{Braided Monoidal Category}{
+    A \textbf{braided monoidal category} is a monoidal category $\mathsf{V}$ equipped with an isomorphism natural in $X,Y\in \mathrm{Ob}(\mathsf{V})$
+    \[
+        B_{X,Y} : X \otimes Y \to Y \otimes X
+    \]
+    called the \textbf{braiding} such that the following two conditions hold:
+    \begin{enumerate}[(i)]
+        \item The hexagon axiom: the following diagram commutes
+        \[
+            \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+                \&[-50pt] (X\otimes Y)\otimes Z\arrow[rr, "{B_{X\otimes Y,Z}}"]\&[+45pt]  \&[-25pt] Z\otimes (X\otimes Y) \arrow[rd, "{a_{Z,X,Y}^{-1}}"] \&[-50pt] \\[+20pt]
+                X\otimes (Y\otimes Z)\arrow[ru, "{a_{X,Y,Z}^{-1}}"] \arrow[rd, "{\mathrm{id}_X\otimes B_{Y,Z}}"'] \& \& \& \& (Z\otimes X)\otimes Y \\[+35pt]
+                \& X\otimes (Z\otimes Y) \arrow[rr, "{a_{X,Z,Y}^{-1}}"'] \& \& (X\otimes Z)\otimes Y\arrow[ru, "{B_{X,Z}\otimes\mathrm{id}_Y}"']  \& 
+            \end{tikzcd}
+        \]
+    \end{enumerate}
+}
 
+\dfn{Symmetric Monoidal Category}{
+    A \textbf{symmetric monoidal category} is a braided monoidal category $\mathsf{V}$ satisfying the following condition:
+    \[
+        B_{Y,X}\circ B_{X,Y}=\mathrm{id}_{X\otimes Y}.
+    \]
+}
 \section{Enriched Category}
 \dfn{Enriched Category}{
     Let $\mathsf{V}$ be a monoidal category. An \textbf{$\mathsf{V}$-enriched category} $\mathsf{C}$ consists of
@@ -3025,6 +3106,66 @@ A strict monoidal category is one for which the natural isomorphisms $a$, $\lamb
         \item 1-morphism set: $\mathrm{Hom}_{\mathsf{Cat}}(\mathsf{C},\mathsf{D}):=[\mathsf{C},\mathsf{D}]$ for any $\mathsf{C},\mathsf{D}\in \mathrm{Ob}(\mathsf{Cat})$
         \item 2-morphism set: $\mathrm{Hom}_{\mathsf{Cat}}(F,G):=\mathrm{Hom}_{[\mathsf{C},\mathsf{D}]}\left(F,G\right)$ for any $\mathsf{C},\mathsf{D}\in \mathrm{Ob}(\mathsf{Cat})$ and $F,G\in [\mathsf{C},\mathsf{D}]$
     \end{itemize}
+}
+\section{Internalization}
+Traditional Bourbaki-style mathematical structures are formulated within set theory, or put differently, within the ambient category $\mathsf{Set}$. The concept of \textbf{Internalization} entails reformulating these mathematical structures in a broader ambient category $\mathsf{C}$, which typically need some extra structures to express the correponding mathematics. The extra structure required on an ambient category $\mathsf{C}$ is referred to as a \textbf{doctrine} for internalization.
+
+\subsection{Monoid Object}
+Monoids can be internalized in the doctrine of monoidal categories.
+
+\ex{Monoid Objects in Monoidal Categories}{
+    Monoid objects internal to Cartesian monoidal categories
+    \begin{itemize}
+        \item $\mathsf{Set}$: traditional monoid.
+        \item $\mathsf{Cat}$: (small) strict monoidal category.
+        \item $\mathsf{Top}$: topological monoid.
+        \item $\mathsf{Mon}$: commutative monoid.
+    \end{itemize}
+    Monoid objects internal to general monoidal categories
+    \begin{itemize}
+        \item $(R\text{-}\mathsf{Mod},\otimes_{R}, R)$ for $R\in \mathrm{Ob}(\mathsf{CRing})$: associative $R$-algebra.
+        \item $(\mathsf{Ab},\otimes_{\mathbb{Z}}, \mathbb{Z})$: ring.
+        \item $\left(\mathsf{Ch}\left(R\text{-}\mathsf{Mod}\right),\otimes_{R}, (R)_{n\in\mathbb{Z}}\right)$ for $R\in \mathrm{Ob}(\mathsf{CRing})$:  differential graded $R$-algebra.
+        \item $\left([\mathsf{C},\mathsf{C}], \circ, \mathrm{id}_{\mathsf{C}}\right)$ for $\mathsf{C}\in \mathrm{Ob}(\mathsf{Cat})$: monad on $\mathsf{C}$.
+    \end{itemize}
+}
+Commutative monoids can be internalized in the doctrine of symmetric monoidal categories.
+
+
+\subsection{Internal Category}
+
+\dfn{Internal Category}{
+    Let $\mathsf{C}$ be a category with pullbacks. A \textbf{category internal to $\mathsf{C}$} consists of
+    \begin{enumerate}[(i)]
+        \item Object of 0-morphisms: an object $C_0\in \mathrm{Ob}(\mathsf{C})$.
+        \item Object of 1-morphisms: an object $C_1\in \mathrm{Ob}(\mathsf{C})$.
+        \item Source and target morphisms: two morphisms $s,t:C_1\to C_0$.
+        \item Identity assignment: a morphism $e:C_0\to C_1$.
+        \item Composition: a morphism $c:C_1\times_{C_0}C_1\to C_1$.
+    \end{enumerate}
+    such that the following diagrams commute
+    \begin{enumerate}[(i)]
+        \item Source and target of identity morphisms
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \& C_0\arrow[rd, "\mathrm{id}_{C_0}"]  \arrow[ld, "\mathrm{id}_{C_0}"']\arrow[d, "e"] \&   \\
+                C_0  \& C_1  \arrow[l, "s"] \arrow[r, "t"']    \&   C_0
+            \end{tikzcd}
+        \]
+        \item Source and target of composition
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                C_1\arrow[d, "s"'] \&C_1\times_{C_0}C_1 \arrow[d, "c"]\arrow[l, "\pi_1"']\arrow[r, "\pi_2"] \& C_1 \arrow[d, "t"] \\
+                C_0\&C_1 \arrow[l, "s"]\arrow[r, "t"'] \& C_0                  
+            \end{tikzcd}
+        \]
+        \item Associativity of composition 
+        \item Left and right unit laws       
+    \end{enumerate}
+}
+
+\dfn{Double Category}{
+    A \textbf{double category} $\mathsf{D}$ is a category internal to $\mathsf{Cat}$.
 }
 
 \section{Abelian Category}
