@@ -13,7 +13,7 @@
 \usepackage{mathrsfs}
 \usepackage{stmaryrd}
 \usepackage{bbm}
-
+\usepackage{graphicx}
 
 \newcommand{\poscell}[1]{\cellcolor{green!22}#1}
 \newcommand{\negcell}[1]{\cellcolor{red!20}#1}
@@ -52,6 +52,47 @@
 \newcommand{\bld}[1]{\mbox{\boldmath $#1$}}
 \newcommand{\spec}{\operatorname{Spec}}
 \newcommand{\midv}{\,\middle\vert\,}
+
+
+% create new command for \diagfunctor
+% \newlength{\deltaheight}
+% \settowidth{\deltaheight}{$\Delta$}
+\newcommand{\diagfunctor}{%
+\ensuremath{\mathchoice{ % \displaystyle
+    % \operatorname{%
+    %   \begin{tikzpicture}
+    %     \pgfmathsetmacro{\boxsize}{1.48}
+    %     \draw[line width=0.1ex] (0,0) rectangle (\boxsize ex, \boxsize ex);
+    %     \draw[-, line width=0.1ex] (0,0) -- (\boxsize ex, \boxsize ex);
+    %   \end{tikzpicture}
+    % }
+    \mbox{\larger$\boxslash$}
+  }{ % \textstyle
+    % \operatorname{%
+    %   \hspace{0.3ex}
+    %   \begin{tikzpicture}
+    %     \pgfmathsetmacro{\boxsize}{1.48}
+    %     \draw[line width=0.1ex] (0,0) rectangle (\boxsize ex, \boxsize ex);
+    %     \draw[-, line width=0.1ex] (0,0) -- (\boxsize ex, \boxsize ex);
+    %   \end{tikzpicture}
+    % }
+    \mbox{\larger$\boxslash$}
+  }{ % \scriptstyle
+    \boxslash
+  }{ % \scriptscriptstyle
+    \boxslash
+  }}
+}
+% \newcommand{\tikzdiagfunctor}{%
+%     \operatorname{
+%         %\vphantom{\Delta}
+%         \begin{tikzpicture}
+%             \pgfmathsetmacro{\boxsize}{1.7}
+%             \draw[line width=0.1ex] (0,0) rectangle (\boxsize ex, \boxsize ex);
+%             \draw[-, line width=0.1ex] (0,0) -- (\boxsize ex, \boxsize ex);
+%         \end{tikzpicture}
+%     }
+% }
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

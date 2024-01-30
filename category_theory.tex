@@ -221,28 +221,28 @@ $$
     If we fix $X\in \mathsf{A}$, then we have a functor $\mathrm{ev}_X:\left[\mathsf{A},\mathsf{C}\right]\to \mathsf{C}$ defined by $\mathrm{ev}_X(F)=F(X)$. This functor is called the \textbf{evaluation functor at $X$}.
 }
 \dfn{Constant Functor}{
-    Suppose $\mathsf{C}$, $\mathsf{D}$ be categories and $d\in \mathrm{Ob}(\mathsf{D})$. The \textbf{constant functor} $\Delta d:\mathsf{C}\to \mathsf{D}$ is defined by
+    Suppose $\mathsf{C}$, $\mathsf{D}$ be categories and $d\in \mathrm{Ob}(\mathsf{D})$. The \textbf{constant functor} $\diagfunctor d:\mathsf{C}\to \mathsf{D}$ is defined by
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{D}\&[-30pt]\&[-30pt] \\ [-15pt] 
             x  \arrow[dd, "f"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
             \& [-30pt]d\arrow[dd, "\mathrm{id}_{d}"{name=R}] \\ [-10pt] 
-            \&  \phantom{.}\arrow[r, "\Delta d", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            \&  \phantom{.}\arrow[r, "\diagfunctor d", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
             y  \& \& \& d
         \end{tikzcd}
     \]
 }
-\dfn{Diagonal Functor}{
-    Suppose $\mathsf{J}$, $\mathsf{C}$ are categories. The \textbf{diagonal functor} $\diagarrow:\mathsf{C}\to [\mathsf{J},\mathsf{C}]$ is defined by
+\dfn[diagonal_functor]{Diagonal Functor}{
+    Suppose $\mathsf{J}$, $\mathsf{C}$ are categories. The \textbf{diagonal functor} $\diagfunctor:\mathsf{C}\to [\mathsf{J},\mathsf{C}]$ is defined by
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C}\&[-25pt]\&[+10pt]\&[-30pt][\mathsf{J},\mathsf{C}]\&[-30pt]\&[-30pt] \&\&\&\\ [-15pt] 
             x  \arrow[dd, "f"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]\Delta x\arrow[dd, Rightarrow, "f_\bullet"{name=R}] \& \hspace{30pt}\& x\arrow[r, "\mathrm{id}_x"]\arrow[dd, "f"']\&x\arrow[dd, "f"]\\ [-10pt] 
-            \&  \phantom{.}\arrow[r, "\Delta", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-            y  \& \& \& \Delta y\&\& y\arrow[r, "\mathrm{id}_y"']\&y
+            \& [-30pt]\diagfunctor x\arrow[dd, Rightarrow, "f_\bullet"{name=R}] \& \hspace{30pt}\& x\arrow[r, "\mathrm{id}_x"]\arrow[dd, "f"']\&x\arrow[dd, "f"]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\diagfunctor", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            y  \& \& \& \diagfunctor y\&\& y\arrow[r, "\mathrm{id}_y"']\&y
         \end{tikzcd}
     \]
 }
@@ -265,9 +265,9 @@ We can form the comma category $(S\downarrow T)$ as follows:
 \end{itemize}
 }
 \dfn[universal_morphism]{Universal Morphism}{
-    Suupose $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories and $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. The comma category $(\Delta X\downarrow T)$ for the following pair of functors
+    Suupose $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories and $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. The comma category $(\diagfunctor X\downarrow T)$ for the following pair of functors
 $$
-\mathsf{1} \xlongrightarrow{\Delta X} \mathsf{C} \xlongleftarrow{T} \mathsf{B}
+\mathsf{1} \xlongrightarrow{\diagfunctor X} \mathsf{C} \xlongleftarrow{T} \mathsf{B}
 $$
 can be written as $\left(X\downarrow T\right)$ for short. Morphisms in $\left(X\downarrow \mathsf{B}\right)$ can be simplified to commutative triangles
     \[
@@ -279,9 +279,9 @@ can be written as $\left(X\downarrow T\right)$ for short. Morphisms in $\left(X\
     \]
 We say $\left(Y,X\xrightarrow{u} T(Y)\right)$ is a \textbf{universal morphism from $X$ to $T$} if it is initial in $\left(X\downarrow T\right)$.
 
-Similarly, the comma category $(\mathsf{A}\downarrow \Delta X)$ for the following pair of functors
+Similarly, the comma category $\left(\mathsf{A}\downarrow \diagfunctor X\right)$ for the following pair of functors
 $$
-\mathsf{A} \xlongrightarrow{S} \mathsf{C} \xlongleftarrow{\Delta X} \mathsf{1}
+\mathsf{A} \xlongrightarrow{S} \mathsf{C} \xlongleftarrow{\diagfunctor X} \mathsf{1}
 $$
 can be written as $\left(\mathsf{A}\downarrow X\right)$ for short. Morphisms in $\left(\mathsf{A}\downarrow X\right)$ can be simplified to commutative triangles
     \[
@@ -300,7 +300,7 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
     Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} $\left(\mathsf{C} / X\right)$ is the comma category $(\mathrm{id}_{\mathsf{C}} \downarrow X)$, where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \mathsf{1} \arrow[l, "\Delta X"']
+            \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \mathsf{1} \arrow[l, "\diagfunctor X "']
         \end{tikzcd}
     \]
     Morphims in $\left(\mathsf{C} / X\right)$ are commutative triangles shown as follows
@@ -316,7 +316,7 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
     Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[r, "\Delta X"] \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
+            \mathsf{1} \arrow[r, "\diagfunctor"]{} \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
         \end{tikzcd}
     \]
     Morphims in $\left(X / \mathsf{C}\right)$ are commutative triangles shown as follows
@@ -374,7 +374,7 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
     where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[r, "\Delta\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
+            \mathsf{1} \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
         \end{tikzcd}
     \]
     This category is denoted by $\int_\mathsf{C} F$ and can be explicitly described as follows
@@ -770,7 +770,7 @@ If $f:X\to Y$ is a morphism in $\mathsf{C}$, then the following string diagram s
 \end{tikzpicture}
 \hspace{1cm}
 \begin{tikzcd}[ampersand replacement=\&]
-    \mathsf{1} \arrow[r, "\Delta X"{name=A, above}, bend left=40] \arrow[r, "\Delta Y"'{name=B, below}, bend right=40] \&[+30pt] \mathsf{C}
+    \mathsf{1} \arrow[r, "\diagfunctor X"{name=A, above}, bend left=40] \arrow[r, "\diagfunctor Y"'{name=B, below}, bend right=40] \&[+30pt] \mathsf{C}
     \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "f_{\bullet}"]
 \end{tikzcd}
 \end{center}
@@ -1817,24 +1817,24 @@ can be translated into the following calculus rules
     \begin{enumerate}[(i)]
         \item $F$ is representable by universal element $(A,u)$ 
         \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}$=\left(\{*\} \downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[r, "\Delta\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
+            \mathsf{1} \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
         \end{tikzcd}$.
         \item $(A,\phi^u)$ is initial in the category $\left(  \text{\hyperref[th:yoneda_embedding_functor]{$Y_{\mathsf{C}^{\mathrm{op}}}$}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
-           \mathsf{C}^{\mathrm{op}}  \arrow[r, " Y_{\mathsf{C}^{\mathrm{op}}}"] \& \left[\mathsf{C},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\Delta F"']
+           \mathsf{C}^{\mathrm{op}}  \arrow[r, " Y_{\mathsf{C}^{\mathrm{op}}}"] \& \left[\mathsf{C},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\diagfunctor F"']
         \end{tikzcd}$.
-        \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
+        \item $\left(A,\diagfunctor u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
     \end{enumerate}
     Suppose $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is a functor. Then the following statements are equivalent:
     \begin{enumerate}[(i)]
         \item $F$ is representable by universal element $(A,u)$ 
         \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}^{\mathrm{op}}}F$}$=\left(\{*\} \downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[r, "\Delta\{*\}"] \& \mathsf{Set} \& \mathsf{C}^{\mathrm{op}}  \arrow[l, " F"']
+            \mathsf{1} \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}^{\mathrm{op}}  \arrow[l, " F"']
         \end{tikzcd}$.
         \item $(A,\phi^u)$ is terminal in the category $\left(  \text{\hyperref[th:yoneda_embedding_functor]{$Y_{\mathsf{C}}$}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
-           \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\Delta F"']
+           \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\diagfunctor F"']
         \end{tikzcd}$.
-        \item $\left(A,\Delta u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
+        \item $\left(A,\diagfunctor u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}\left(\int_{\mathsf{C}^{\mathrm{op}} }F\right)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}^{\mathrm{op}} }F$ (which is a morphism $f: X\to A$ in $\mathsf{C}$ such that $F(f)(x)=u$).
     \end{enumerate}
 }
@@ -1861,7 +1861,7 @@ can be translated into the following calculus rules
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
               \& F(A) \arrow[dd, dashed, "F(f)"]\\
-            \{*\}\arrow[ru, "\Delta u"]\arrow[rd, "\Delta x"']\& \\
+            \{*\}\arrow[ru, "\diagfunctor u"]\arrow[rd, "\diagfunctor x"']\& \\
              \& F\left(X\right)
             \end{tikzcd}
     \]
@@ -1897,19 +1897,19 @@ can be translated into the following calculus rules
 \cor[initial_object_representable_functor]{Initial Object Characterized by Representable Functor}{
     Suppose $\mathsf{C}$ is a locally small category.
     \begin{itemize}
-        \item $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\mathsf{C}$ if and only if the functor $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$.
-        \item $A\in\mathrm{Ob}(\mathsf{C})$ is terminal in $\mathsf{C}$ if and only if the functor $\Delta \{*\}:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(-,A\right)$.
+        \item $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\mathsf{C}$ if and only if the functor $\diagfunctor \{*\}:\mathsf{C}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$.
+        \item $A\in\mathrm{Ob}(\mathsf{C})$ is terminal in $\mathsf{C}$ if and only if the functor $\diagfunctor \{*\}:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(-,A\right)$.
     \end{itemize}
 }
 \pf{
-    Let $\Delta \{*\}:\mathsf{C}\to \mathsf{Set}$ be a constant functor. It is easy to see that the category $\int_\mathsf{C}\Delta \{*\}$ is isomorphic to $\mathsf{C}$ through the functor
+    Let $\diagfunctor \{*\}:\mathsf{C}\to \mathsf{Set}$ be a constant functor. It is easy to see that the category $\int_\mathsf{C}\diagfunctor \{*\}$ is isomorphic to $\mathsf{C}$ through the functor
     \begin{align*}
-        p:\int_\mathsf{C}\Delta \{*\}&\longrightarrow \mathsf{C}\\
+        p:\int_\mathsf{C}\diagfunctor \{*\}&\longrightarrow \mathsf{C}\\
         (C,*) &\longmapsto C
     \end{align*}
     As established in \Cref{th:representable_functor_by_universal_element},
-    $(A,*)\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\Delta \{*\}$ if and only if $\Delta\{*\}$ is a representable functor with a universal element $(A,*)$, which proves the first statement. The second statement can be obtained by applying the first statement to $\mathsf{C}^{\mathrm{op}}$.\\
-    In addition, an alternative ad-hoc proof is conceivable. If $\Delta\{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\xRightarrow{\sim} \Delta \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\Delta \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \Delta \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\Delta\{*\}$.
+    $(A,*)\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\diagfunctor \{*\}$ if and only if $\diagfunctor \{*\}$ is a representable functor with a universal element $(A,*)$, which proves the first statement. The second statement can be obtained by applying the first statement to $\mathsf{C}^{\mathrm{op}}$.\\
+    In addition, an alternative ad-hoc proof is conceivable. If $\diagfunctor \{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\xRightarrow{\sim} \diagfunctor \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\diagfunctor \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \diagfunctor \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\diagfunctor\{*\}$.
 }
 
 \prop[universal_morphism_by_representability]{Equivalent Characterizations of Universal Morphism}{
@@ -1930,13 +1930,13 @@ can be translated into the following calculus rules
     It suffices to show (i)$\iff$ (iii).
     \[
     \begin{tikzcd}[ampersand replacement=\&]
-        X \arrow[r, "u"] \arrow[rd, "g"'] \&[+20pt] F(A) \arrow[d, "F\left(h\right)", dashed]\&[+50pt] \{*\} \arrow[r, "\Delta u"] \arrow[rd, "\Delta g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{D}}\left(X,F(A)\right)\arrow[d, "F(h)_*", dashed] \\[+15pt]\& F(B)\&\&\mathrm{Hom}_{\mathsf{D}}\left(X,F(B)\right)                                              
+        X \arrow[r, "u"] \arrow[rd, "g"'] \&[+20pt] F(A) \arrow[d, "F\left(h\right)", dashed]\&[+50pt] \{*\} \arrow[r, "\diagfunctor u"] \arrow[rd, "\diagfunctor g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{D}}\left(X,F(A)\right)\arrow[d, "F(h)_*", dashed] \\[+15pt]\& F(B)\&\&\mathrm{Hom}_{\mathsf{D}}\left(X,F(B)\right)                                              
     \end{tikzcd}
     \]
     \begin{align*}
         (A,u)\text{ is initial in }\left(X \downarrow F\right)&\iff \forall(B,g)\in \mathrm{Ob}\left(X \downarrow F\right),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)\circ u=g\\
         &\iff \forall B\in \mathrm{Ob}\left(\mathsf{C}\right),\;\forall g\in \mathrm{Hom}_{\mathsf{C}}(X,F(B)),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)\circ u=g\\
-        &\iff \forall (B,\Delta g)\in \mathrm{Ob}\left(\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)\right),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)_*\circ\Delta u=\Delta g\\
+        &\iff \forall (B,\diagfunctor g)\in \mathrm{Ob}\left(\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)\right),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)_*\circ\diagfunctor u=\diagfunctor g\\
         &\iff (A,u)\text{ is initial in }\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)
     \end{align*}
   The dual version is similar.
@@ -1944,23 +1944,23 @@ can be translated into the following calculus rules
 }
 
 \section{Limit and Colimit}
-\dfn{Cone}{
+\dfn[cone]{Cone}{
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C} \arrow[r, "\Delta"] \& {[\mathsf{J},\mathsf{C}]} \& \mathsf{1} \arrow[l, "\Delta F"']
+            \mathsf{C} \arrow[r, "\diagfunctor"] \& {[\mathsf{J},\mathsf{C}]} \& \mathsf{1} \arrow[l, "\diagfunctor F"']
         \end{tikzcd}
     \]
-    The comma category $\left(\Delta \downarrow \Delta F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. 
+    The comma category $\left(\diagfunctor \downarrow \diagfunctor F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. 
     \begin{itemize}
         \item Objects: The objects in $\mathsf{Cone}(\textsf{C},F)$ are all natural transformations 
         \[
                 \begin{tikzcd}[ampersand replacement=\&]
-                    \mathsf{J} \arrow[r, "\Delta C"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
+                    \mathsf{J} \arrow[r, "\diagfunctor C"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
                     \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
                 \end{tikzcd}
         \]
-        where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:\Delta C\Rightarrow F$ is called a \textbf{cone from $C$ to $F$} because it can be viewed as a family of morphisms $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
+        where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:\diagfunctor C\Rightarrow F$ is called a \textbf{cone from $C$ to $F$} because it can be viewed as a family of morphisms $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
         \[
             \begin{tikzcd}[ampersand replacement=\&]
                 \& C \arrow[ld, "h_i"'] \arrow[rd, "h_j"] \&      \\
@@ -1970,9 +1970,9 @@ can be translated into the following calculus rules
     \item Morphisms: The morphisms in $\mathsf{Cone}(\textsf{C},F)$ are commutative triangles shown as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \Delta C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_\bullet"'] \& \\
+            \diagfunctor C \arrow[rd, Rightarrow, "h"] \arrow[dd, Rightarrow, "f_\bullet"'] \& \\
             \&  F\\
-            \Delta C' \arrow[ru, Rightarrow, "h^{\prime}"'] \&
+            \diagfunctor C' \arrow[ru, Rightarrow, "h^{\prime}"'] \&
             \end{tikzcd}
     \] 
     Equivalently, a morphism from cone $\left(h_i:C\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cone $\left(h_i':C'\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
@@ -1999,19 +1999,19 @@ can be translated into the following calculus rules
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-             \mathsf{1} \arrow[r, "\Delta F"] \& {[\mathsf{J},\mathsf{C}]} \&\mathsf{C} \arrow[l, "\Delta "']
+             \mathsf{1} \arrow[r, "\diagfunctor F"] \& {[\mathsf{J},\mathsf{C}]} \&\mathsf{C} \arrow[l, "\diagfunctor "']
         \end{tikzcd}
     \]
-    The comma category $\left(\Delta F \downarrow \Delta\right)$ is called the \textbf{cocone category from $F$ to $\textsf{C}$}, denoted by $\mathsf{Cocone}(F,\textsf{C})$. 
+    The comma category $\left(\diagfunctor F \downarrow \diagfunctor\right)$ is called the \textbf{cocone category from $F$ to $\textsf{C}$}, denoted by $\mathsf{Cocone}(F,\textsf{C})$. 
     \begin{itemize}
         \item Objects: The objects in $\mathsf{Cocone}(F,\textsf{C})$ are all natural transformations
         \[
             \begin{tikzcd}[ampersand replacement=\&]
-                \mathsf{J} \arrow[r, "F"{name=A, above}, bend left] \arrow[r, "\Delta C"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
+                \mathsf{J} \arrow[r, "F"{name=A, above}, bend left] \arrow[r, "\diagfunctor C"'{name=B, below}, bend right] \&[+30pt] \mathsf{C}
                 \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "h"]
             \end{tikzcd}
     \]
-    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:F\Rightarrow \Delta C$ is called a \textbf{cocone from $F$ to $C$} because it can be viewed as a family of morphisms $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
+    where $C\in \mathrm{Ob}(\mathsf{C})$. Such $h:F\Rightarrow \diagfunctor C$ is called a \textbf{cocone from $F$ to $C$} because it can be viewed as a family of morphisms $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ in $\mathsf{C}$ such that the following diagram commutes for each morphism $\lambda:i\to j$ in $\mathsf{J}$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \& C\&      \\
@@ -2021,18 +2021,18 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     \item Morphisms: The morphisms in $\mathsf{Cocone}(F,\textsf{C})$ are commutative triangles shown as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \&\Delta C \arrow[dd, Rightarrow, "f_\bullet"]  \\
+            \&\diagfunctor C \arrow[dd, Rightarrow, "f_\bullet"]  \\
             F \arrow[ru, Rightarrow, "h"]\arrow[rd, Rightarrow, "h^{\prime}"']\&  \\
-            \&\Delta C' 
+            \&\diagfunctor C' 
             \end{tikzcd}
     \]
     \end{itemize}
     Equivalently, a morphism from cocone $\left(h_i:F(i)\to C\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ to cocone $\left(h_i':F(i)\to C'\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a morphism $f:C\to C'$ in $\mathsf{C}$ such that the following diagram commutes for each $i\in \mathrm{Ob}(\mathsf{J})$
     \[
         \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            \&\Delta C \arrow[dd, "f"]  \\
-            F(i) \arrow[ru, "h_I"]\arrow[rd, "h^{\prime}_i"']\&  \\
-            \&\Delta C' 
+            \& C \arrow[dd, "f"]  \\
+            F(i) \arrow[ru, "h_i"]\arrow[rd, "h^{\prime}_i"']\&  \\
+            \& C' 
             \end{tikzcd}
     \]
 }
@@ -2050,16 +2050,16 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
 }
 
 \prop{Limit Characterized by Representability}{
-    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The limit of $F$ exists if and only if the functor $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$ 
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The limit of $F$ exists if and only if the functor $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$ 
     \begin{align*}
         \begin{minipage}{.7\textwidth}
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C}^{\mathrm{op}}\&[-34pt]\&[+52pt]\&[-30pt] \mathsf{Set}\&[-30pt]\&[-30pt] \\ [-15pt] 
             C_1  \arrow[dd, "g"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C_1, F\right)\arrow[dd, "\left(\Delta g\right)^*"{name=R}] \& \ni \& \left(h_i:C_1\textcolor{arrowBlue}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\arrow[dd,mapsto,"\left(g^*\right)_{i\in \mathrm{Ob}(\mathsf{J})}"]\\ [-3pt] 
-            \&  \phantom{.}\arrow[r, "{\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)}", squigarrow]\&\phantom{.}  \&   \\[-3pt] 
-            C_2  \& \& \& \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C_2, F\right)\& \ni \& \left(h_i\circ g:C_2\textcolor{cyan}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}
+            \& [-30pt]\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor C_1, F\right)\arrow[dd, "\left(\diagfunctor g\right)^*"{name=R}] \& \ni \& \left(h_i:C_1\textcolor{arrowBlue}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\arrow[dd,mapsto,"\left(g^*\right)_{i\in \mathrm{Ob}(\mathsf{J})}"]\\ [-3pt] 
+            \&  \phantom{.}\arrow[r, "{\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)}", squigarrow]\&\phantom{.}  \&   \\[-3pt] 
+            C_2  \& \& \& \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor C_2, F\right)\& \ni \& \left(h_i\circ g:C_2\textcolor{cyan}{\boldsymbol{\longrightarrow}} F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}
         \end{tikzcd}
     \end{minipage}
     \begin{minipage}{.2\textwidth}
@@ -2073,15 +2073,15 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     \end{align*}
      is representable. In this case, the universal element coincides with $\left(\varprojlim F,\left(\ell_i:\varprojlim F\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\right)$ and we have
      \[
-        \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(-,\varprojlim F\right).
+        \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(-,\varprojlim F\right).
     \]
-    Dually, the colimit of $F$ exists if and only if the functor $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(F,\Delta\left(-\right)\right):\mathsf{C}\to\mathsf{Set}$ is representable. In this case, the universal element coincides with $\left(\varinjlim F,\left(\ell_i:F(i)\to \varinjlim F\right)_{i\in \mathrm{Ob}(\mathsf{J})}\right)$ and we have
+    Dually, the colimit of $F$ exists if and only if the functor $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(F,\diagfunctor\left(-\right)\right):\mathsf{C}\to\mathsf{Set}$ is representable. In this case, the universal element coincides with $\left(\varinjlim F,\left(\ell_i:F(i)\to \varinjlim F\right)_{i\in \mathrm{Ob}(\mathsf{J})}\right)$ and we have
     \[
-        \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(F,\Delta\left(-\right)\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(\varinjlim F,-\right).
+        \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(F,\diagfunctor\left(-\right)\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(\varinjlim F,-\right).
     \]
 }
 \pf{
-    According to \Cref{th:representable_functor_by_universal_element}, $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$ is representable by the universal element $(A,u)$ if and only if $(A,u)$ is initial in $\int_{\mathsf{C}^{\mathrm{op}}}\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta\left(-\right), F\right)$, which is equivalent to saying that for any $C\in\mathrm{Ob}\left(\mathsf{C}\right)$ and $(h_i)\in \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\Delta C, F\right)$, there is a unique morphism $f:C\to A$ in $\mathsf{C}$ such that $h_i=f^*(u_i)=u_i\circ f$ for each $i\in \mathrm{Ob}(\mathsf{J})$. This is exactly the universal property of limit.
+    According to \Cref{th:representable_functor_by_universal_element}, $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$ is representable by the universal element $(A,u)$ if and only if $(A,u)$ is initial in $\int_{\mathsf{C}^{\mathrm{op}}}\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$, which is equivalent to saying that for any $C\in\mathrm{Ob}\left(\mathsf{C}\right)$ and $(h_i)\in \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor C, F\right)$, there is a unique morphism $f:C\to A$ in $\mathsf{C}$ such that $h_i=f^*(u_i)=u_i\circ f$ for each $i\in \mathrm{Ob}(\mathsf{J})$. This is exactly the universal property of limit.
 }
 
 \dfn{Complete Category}{
@@ -2104,27 +2104,6 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     A category $\mathsf{C}$ is \textbf{finitely cocomplete} if it has all finite colimits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ a finite category, $\varinjlim F$ exists.
 }
 
-\thm{Existance Theorem for Limits}{
-    Let $\mathsf{C}$ be a category and $F:\mathsf{J}\to\mathsf{C}$ be a functor. If a category $\mathsf{C}$ has equalizers and all products indexed by the classes $\mathrm{Ob}(\mathsf{J})$ and $\mathrm{Hom}(\mathsf{J})$, then $\mathsf{C}$ has all limits of shape $\mathsf{J}$.
-}
-
-The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : A \to C$, the value of the limit functor $\lim_{j\in J} F_j : A \to C$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
-
-\prop[ev_functor_preserves_limits]{Evaluation Functor Preserves Limits}{
-    Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
-    \[
-        \mathrm{ev}_a \circ F:\mathsf{J}\xrightarrow{\quad F\quad}\left[\mathsf{A},\mathsf{C}\right]\xrightarrow{\quad\mathrm{ev}_a\quad}\mathsf{C}
-    \]
-    has a limit, then
-    \begin{enumerate}[(i)]
-        \item $\varprojlim F$ exists.
-        \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
-    \end{enumerate}
-}
-
-\prop{Limits Commute with Limits}{
-    Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
-}
 
 \dfn[filtered_category]{Filtered Category}{
     A category $\mathsf{J}$ is \textbf{filtered} if 
@@ -2173,15 +2152,67 @@ The next result shows that functor categories inherit limits and colimits, defin
     \end{align*}
 }
 
+\ex{Pushforward Cone by Functor}{
+    Let $\mathsf{J},\mathsf{C},\mathsf{D}$ be categories and $K:\mathsf{J}\to\mathsf{C}$, $F:\mathsf{C}\to\mathsf{D}$ be a functor. $F$ induces the following pushforward functor between \hyperref[th:cone]{cone} categories
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Cone}\left(\mathsf{C},K\right) \&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Cone}\left(\mathsf{C},F\circ K\right)\&[-30pt]\&[-30pt] \\ [-15pt] 
+            \diagfunctor C\xRightarrow{h} K  \arrow[dd, "\diagfunctor f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\diagfunctor F(C)\xRightarrow{\mathrm{id}_F\circ h} F\circ K\arrow[dd, "\diagfunctor F(f)"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "F_*", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            \diagfunctor C'\xRightarrow{h'} K  \& \& \& \diagfunctor F\left(C'\right)\xRightarrow{\mathrm{id}_F\circ h'} F\circ K 
+        \end{tikzcd}
+    \]
+    
+}
+
+
 \dfn{Preserve, Reflect, Create Limits}{
-    For any class of diagrams $K: \mathsf{J} \rightarrow \mathsf{C}$ valued in $\mathsf{C}$, a functor $F: \mathsf{C} \rightarrow \mathsf{D}$
+    Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams  valued in $\mathsf{C}$. $K: \mathsf{J} \rightarrow \mathsf{C}$. A functor $F: \mathsf{C} \rightarrow \mathsf{D}$ is said to
     \begin{itemize}
-        \item \textbf{preserves} those limits if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ and limit cone over $K$, the image of this cone defines a limit cone over the composite diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$;
-        \item \textbf{reflects} those limits if any cone over a diagram $K: \mathsf{J} \rightarrow \mathsf{C}$, whose image upon applying $F$ is a limit cone for the diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$, is a limit cone over $K$;
-        \item \textbf{creates} those limits if whenever $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$ has a limit in $\mathsf{D}$, there is some limit cone over $F\circ K$ that can be lifted to a limit cone over $K$, and moreover $F$ reflects the limits in the class of diagrams.
+        \item \textbf{preserves} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and limit cone over $K$, the image of this cone defines a limit cone over the composite diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$;
+        \item \textbf{reflects} limits for $\mathcal{K}$ if any cone over a diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$, whose image upon applying $F$ is a limit cone for the diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$, is a limit cone over $K$;
+        \item \textbf{creates} limits for $\mathcal{K}$ if whenever $K: \mathsf{J} \rightarrow \mathsf{C}$ is a diagram in $\mathcal{K}$ and $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$ has a limit in $\mathsf{D}$, there exists some limit cone over $F\circ K$ that can be lifted to a limit cone over $K$, and moreover $F$ reflects the limits for $\mathcal{K}$.
     \end{itemize}
 }
 
+\prop{}{
+    If $F:\mathsf{C}\to \mathsf{D}$ creates limits for $\mathcal{K}$ and $\varprojlim F\circ K$ exists for all $K\in\mathcal{K}$, then $\varprojlim K$ exists for all $K\in\mathcal{K}$ and $F$ preserves limits for $\mathcal{K}$.
+}
+\pf{
+    For any $K\in\mathcal{K}$, since $\varprojlim F\circ K$ exists and $F$ creates limits for $\mathcal{K}$, there exists a limit cone 
+    \[
+       \left(\ell_i:\varprojlim K\to K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in\mathrm{Cone}\left(\mathsf{C},K\right)    
+    \]
+    such that
+    \[
+        \left(F(\ell_i):F\left(\varprojlim K\right)\to F\circ K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Cone}\left(\mathsf{D},F\circ K\right)
+    \]
+    is terminal in $\mathrm{Cone}\left(\mathsf{D},F\circ K\right)$, i.e it is a limit cone over $F\circ K$. Given any limit cone in $\mathrm{Cone}\left(\mathsf{C},K\right) $, it is isomorphic to $\left(\ell_i\right)_{i\in \mathrm{Ob}(\mathsf{J})}$, which implies that its image under $F$ is isomorphic to $\left(F(\ell_i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$. Thus we show $F$ preserves limits for $\mathcal{K}$.
+}
+
+\thm{Existance Theorem for Limits}{
+    Let $\mathsf{C}$ be a category and $F:\mathsf{J}\to\mathsf{C}$ be a functor. If a category $\mathsf{C}$ has equalizers and all products indexed by the classes $\mathrm{Ob}(\mathsf{J})$ and $\mathrm{Hom}(\mathsf{J})$, then $\mathsf{C}$ has all limits of shape $\mathsf{J}$.
+}
+
+The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : A \to C$, the value of the limit functor $\lim_{j\in J} F_j : A \to C$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
+
+\prop[ev_functor_preserves_limits]{Evaluation Functor Preserves Limits}{
+    Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
+    \[
+        \mathrm{ev}_a \circ F:\mathsf{J}\xrightarrow{\quad F\quad}\left[\mathsf{A},\mathsf{C}\right]\xrightarrow{\quad\mathrm{ev}_a\quad}\mathsf{C}
+    \]
+    has a limit, then
+    \begin{enumerate}[(i)]
+        \item $\varprojlim F$ exists.
+        \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
+    \end{enumerate}
+}
+
+\prop{Limits Commute with Limits}{
+    Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
+}
 \ex{Limit in $\mathsf{Set}$}{
     Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Then
     \begin{align*}
@@ -2625,9 +2656,9 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     Suppose $\left(L,R,\eta,\varepsilon\right)$ satisfies snake equations. Consider the diagram
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[dd, "\mathrm{id}"', bend right=38] \arrow[r, "\Delta X"]  \&[+36pt] \mathsf{C} \arrow[dd, "L"', bend right=38] \\[-5pt]
+            \mathsf{1} \arrow[dd, "\mathrm{id}"', bend right=38] \arrow[r, "\diagfunctor X"]  \&[+36pt] \mathsf{C} \arrow[dd, "L"', bend right=38] \\[-5pt]
             \dashv                                                  \& \dashv                                    \\[-5pt]
-            \mathsf{1} \arrow[uu, "\mathrm{id}"', bend right=38] \arrow[r, "\Delta Y"'] \& \mathsf{D} \arrow[uu, "R"', bend right=38]
+            \mathsf{1} \arrow[uu, "\mathrm{id}"', bend right=38] \arrow[r, "\diagfunctor Y"'] \& \mathsf{D} \arrow[uu, "R"', bend right=38]
             \end{tikzcd}    
     \]
 
@@ -2868,7 +2899,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     where $\Phi_{\text{-},Y}$ is the horizontal composition
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C}^{\mathrm{op}}\times\mathsf{1}\arrow[r,"{\mathrm{id}\times\Delta Y}"]\&[+15pt]\mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)$}"{name=A, above}, bend left] \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)$}"'{name=B, below}, bend right] \&[+60pt] \mathsf{Set}
+            \mathsf{C}^{\mathrm{op}}\times\mathsf{1}\arrow[r,"{\mathrm{id}\times\diagfunctor Y}"]\&[+15pt]\mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)$}"{name=A, above}, bend left] \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)$}"'{name=B, below}, bend right] \&[+60pt] \mathsf{Set}
             \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\Phi", "\sim\hspace{1.5pt}"']
         \end{tikzcd}
 \]
@@ -2885,7 +2916,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     for some $R_Y\in \mathrm{Ob}(\mathsf{D})$. \Cref{th:representable_functor_by_universal_element} implies that $(R_Y,\phi(Y))$ is terminal in the category $\left(Y_{\mathsf{C}}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\right)$, which corresponds to 
     $$ 
     \begin{tikzcd}[ampersand replacement=\&]
-        \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&[+45pt]  \mathsf{1} \arrow[l, "{\Delta \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)}"']
+        \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&[+45pt]  \mathsf{1} \arrow[l, "{\diagfunctor \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)}"']
     \end{tikzcd}
     $$ 
     Given any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, since $(R_{Y_2},\phi(Y_2))$ is terminal in $\left(Y_{\mathsf{C}}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\right)$, there exists a unique morphism $R_h:R_{Y_1}\to R_{Y_2}$  in $\mathsf{C}$ such that the following diagram commutes
@@ -2929,7 +2960,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
 
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            X \arrow[r, "\eta_X"] \arrow[rd, "g"'] \&[+20pt] R(L(X)) \arrow[d, "R\left(g^{\triangleleft}\right)", dashed] \&[+50pt]    \{*\} \arrow[r, "\Delta \eta_X"] \arrow[rd, "\Delta g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{C}}\left(X,R(L(X))\right) \arrow[d, "R\left(g^{\triangleleft}\right)_*", dashed] \\[+20pt]
+            X \arrow[r, "\eta_X"] \arrow[rd, "g"'] \&[+20pt] R(L(X)) \arrow[d, "R\left(g^{\triangleleft}\right)", dashed] \&[+50pt]    \{*\} \arrow[r, "\diagfunctor \eta_X"] \arrow[rd, "\diagfunctor g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{C}}\left(X,R(L(X))\right) \arrow[d, "R\left(g^{\triangleleft}\right)_*", dashed] \\[+20pt]
             \& R(Y) \&\& \mathrm{Hom}_{\mathsf{C}}\left(X,R(Y)\right)     
         \end{tikzcd}
     \]
@@ -2938,7 +2969,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             L(X) \arrow[d, "L\left(f^{\triangleright}\right)"', dashed] \arrow[rd, "f"] \&[+20pt]   \&[+50pt]   {\mathrm{Hom}_{\mathsf{D}}\left(L(X),Y\right)}     \&[+15pt]  \\[+20pt]
-            L(R(Y)) \arrow[r, "\eta_Y"']   \& Y \&  {\mathrm{Hom}_{\mathsf{D}}\left(L(R(Y)),Y\right)} \arrow[u, "L\left(f^{\triangleright}\right)^*", dashed] \& \{*\} \arrow[lu, "\Delta f"'] \arrow[l, "\Delta\eta_Y"]
+            L(R(Y)) \arrow[r, "\eta_Y"']   \& Y \&  {\mathrm{Hom}_{\mathsf{D}}\left(L(R(Y)),Y\right)} \arrow[u, "L\left(f^{\triangleright}\right)^*", dashed] \& \{*\} \arrow[lu, "\diagfunctor f"'] \arrow[l, "\diagfunctor\eta_Y"]
         \end{tikzcd}
     \]
 }
