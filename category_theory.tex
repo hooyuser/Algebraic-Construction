@@ -1897,8 +1897,8 @@ can be translated into the following calculus rules
 \cor[initial_object_representable_functor]{Initial Object Characterized by Representable Functor}{
     Suppose $\mathsf{C}$ is a locally small category.
     \begin{itemize}
-        \item $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\mathsf{C}$ if and only if the functor $\diagfunctor \{*\}:\mathsf{C}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$.
-        \item $A\in\mathrm{Ob}(\mathsf{C})$ is terminal in $\mathsf{C}$ if and only if the functor $\diagfunctor \{*\}:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(-,A\right)$.
+        \item $A\in\mathrm{Ob}(\mathsf{C})$ is initial in $\mathsf{C}$ if and only if the functor $\diagfunctor \{*\}:\mathsf{C}\to \mathsf{Set}$ is representable and naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$.
+        \item $A\in\mathrm{Ob}(\mathsf{C})$ is terminal in $\mathsf{C}$ if and only if the functor $\diagfunctor \{*\}:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ is representable and naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(-,A\right)$.
     \end{itemize}
 }
 \pf{
@@ -1911,6 +1911,7 @@ can be translated into the following calculus rules
     $(A,*)\in\mathrm{Ob}(\mathsf{C})$ is initial in $\int_\mathsf{C}\diagfunctor \{*\}$ if and only if $\diagfunctor \{*\}$ is a representable functor with a universal element $(A,*)$, which proves the first statement. The second statement can be obtained by applying the first statement to $\mathsf{C}^{\mathrm{op}}$.\\
     In addition, an alternative ad-hoc proof is conceivable. If $\diagfunctor \{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\xRightarrow{\sim} \diagfunctor \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\diagfunctor \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \diagfunctor \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\diagfunctor\{*\}$.
 }
+
 
 \prop[universal_morphism_by_representability]{Equivalent Characterizations of Universal Morphism}{
     Let $F:\mathsf{C}\to \mathsf{D}$ be a functor and $A\in \mathrm{Ob}(\mathsf{D})$. Then the following statements are equivalent:
@@ -1940,7 +1941,21 @@ can be translated into the following calculus rules
         &\iff (A,u)\text{ is initial in }\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)
     \end{align*}
   The dual version is similar.
+}
 
+\ex{Identity Functor $\mathrm{id}_{\mathsf{Set}}$ is Representable}{
+    The identity functor $\mathrm{id}_{\mathsf{Set}}:\mathsf{Set}\to \mathsf{Set}$ is representable by $\left(\{*\},\mathrm{id}_{\{*\}}\right)$. The natural isomorphism $\phi:\mathrm{Hom}_{\mathsf{Set}}\left(\{*\},-\right)\xRightarrow{\sim} \mathrm{id}_{\mathsf{Set}}$ is defined by 
+    \begin{align*}
+        \phi_X:\mathrm{Hom}_{\mathsf{Set}}\left(\{*\},X \right)&\xlongrightarrow{\sim} X\\
+        f&\longmapsto f(*)
+    \end{align*}
+    Naturality of $\phi$ is shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Hom}_{\mathsf{Set}}\left(\{*\},X \right)\arrow[r, "h_*"] \arrow[d, "\phi_X"'] \& \mathrm{Hom}_{\mathsf{Set}}\left(\{*\},Y \right) \arrow[d, "\phi_Y"]\\[+10pt]
+            X \arrow[r, "h"'] \& Y
+        \end{tikzcd}
+    \]
 }
 
 \section{Limit and Colimit}
@@ -2084,6 +2099,60 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     According to \Cref{th:representable_functor_by_universal_element}, $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$ is representable by the universal element $(A,u)$ if and only if $(A,u)$ is initial in $\int_{\mathsf{C}^{\mathrm{op}}}\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$, which is equivalent to saying that for any $C\in\mathrm{Ob}\left(\mathsf{C}\right)$ and $(h_i)\in \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor C, F\right)$, there is a unique morphism $f:C\to A$ in $\mathsf{C}$ such that $h_i=f^*(u_i)=u_i\circ f$ for each $i\in \mathrm{Ob}(\mathsf{J})$. This is exactly the universal property of limit.
 }
 
+\dfn{$\varprojlim$ Functor}{
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F:\mathsf{J}\to\mathsf{C}$, $\varprojlim F$ exists, then we have a functor
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            [\mathsf{J},\mathsf{C}]\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+           F  \arrow[dd, "\theta"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\varprojlim F\arrow[dd, "\varprojlim \theta"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\varprojlim", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+        G  \& \& \& \varprojlim G
+        \end{tikzcd}
+    \]
+    where $\varprojlim \theta$ is induced by the universal property of $\varprojlim G$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, background color=mydefinitbg]
+            \& \varprojlim F \arrow[ld] \arrow[rd] \&                             \\[+10pt]
+F(i) \arrow[rr, black!35] \arrow[dd, "\theta_i"'] \&                                                                               \& F(j) \arrow[dd, "\theta_j"] \\[+10pt]
+            \& \varprojlim G \arrow[ld] \arrow[rd]                                           \&                             \\[+10pt]
+G(i) \arrow[rr]                         \&                                                                               \& G(j)      
+    % absulute arrow
+    \arrow[from=1-2, to=3-2, "\varprojlim \theta"', near end, crossing over]                  
+    \end{tikzcd}
+    \]
+}
+\prop{Diagonal is Left Adjoint to Limit $\diagfunctor\dashv \varprojlim$}{
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. Then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\diagfunctor"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+            \left[\mathsf{J},\mathsf{C}\right] \arrow[l, "\varprojlim"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+            \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+        \end{tikzcd}    
+    \]
+    We have a natural isomorphism
+    \[
+        \mathrm{Hom}_{\left[\mathsf{J},\mathsf{C}\right]}\left(\diagfunctor C, F\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(C,\varprojlim F\right)
+    \]
+}
+\prop{Diagonal is Right Adjoint to Colimit $\varinjlim\dashv \diagfunctor$}{
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. Then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \left[\mathsf{J},\mathsf{C}\right]  \arrow[r, "\varinjlim"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+            \mathsf{C}\arrow[l, "\diagfunctor"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+            \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+        \end{tikzcd}    
+    \]
+    We have a natural isomorphism
+    \[
+        \mathrm{Hom}_{\left[\mathsf{J},\mathsf{C}\right]}\left(F,\diagfunctor C\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(\varinjlim F,C\right)
+    \]
+}
+
+
 \dfn{Complete Category}{
     A category $\mathsf{C}$ is \textbf{complete} if it has all small limits. That is, for any functor $F:\mathsf{J}\to \mathsf{C}$ with $\mathsf{J}$ small, $\varprojlim F$ exists.
 }
@@ -2213,6 +2282,16 @@ The next result shows that functor categories inherit limits and colimits, defin
 \prop{Limits Commute with Limits}{
     Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
 }
+
+\dfn{Exact Functor}{
+    Let $F$ be a functor between finitely complete categories categories $\mathsf{C}$ and $\mathsf{D}$.
+    \begin{itemize}
+        \item $F$ is \textbf{left exact} if it preserves finite limits.
+        \item $F$ is \textbf{right exact} if it preserves finite colimits.
+        \item $F$ is \textbf{exact} if it is both left and right exact.
+    \end{itemize}
+}
+
 \ex{Limit in $\mathsf{Set}$}{
     Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Then
     \begin{align*}
@@ -2280,6 +2359,7 @@ The next result shows that functor categories inherit limits and colimits, defin
     \]
     This implies $\backsimeq$ contains $\approx$. Therefore, $\approx$ is the smallest equivalence relation containing $\sim^*$, which means $\approx$ coincides with $\sim$.
 }
+
 
 
 \section{Adjoint Functor}
@@ -2974,6 +3054,164 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     \]
 }
 
+
+\section{Kan Extension}
+
+\dfn{Kan Extension}{
+    Let $\mathsf{C}$, $\mathsf{D}$, $\mathsf{E}$ be categories and $K:\mathsf{C}\to\mathsf{D}$, $F:\mathsf{C}\to\mathsf{E}$ be functors. A \textbf{left Kan extension} of $F$ along $K$ is a pair $\left(\mathrm{Lan}_KF,\eta\right)$ consisting of
+    \begin{itemize}
+        \item a functor $\mathrm{Lan}_KF:\mathsf{D}\to\mathsf{E}$,
+        \item a natural transformation $\eta:F\Rightarrow \left(\mathrm{Lan}_KF\right)\circ K$
+    \end{itemize}
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&, column sep=3em] 
+            % drawing 0- and 1-celss 
+            \mathsf{C} \arrow[dr, "K"'{name=F}] 
+            \arrow[rr, "F", ""{name=H, below}] \&\& \mathsf{E} \\ 
+            \& |[alias=D]| \mathsf{D} \arrow[ur, swap,
+            "\mathrm{Lan}_{K}F"] 
+            % % drawing 2-cells
+            \arrow[Rightarrow, from=H, to=D, "\eta"] 
+        \end{tikzcd} 
+    \end{center}
+    such that for any pair $\left(R,\xi\right)$ consisting of
+    \begin{itemize}
+        \item a functor $R:\mathsf{D}\to\mathsf{E}$,
+        \item a natural transformation $\xi:F\Rightarrow R\circ K$,
+    \end{itemize}
+    there exists a unique natural transformation $\alpha: \mathrm{Lan}_KF\Rightarrow R$ such that
+    \[
+        \begin{tikzpicture}[x=0.8cm,y=0.8cm, line width=0.7pt, hollow/.style={
+                circle,
+                fill=white,
+                draw,
+                outer sep=0pt,
+                inner sep=1.5pt,
+                line width=0.7pt
+              }]
+            % Define colors
+            \definecolor{leftcolor}{RGB}{224, 255, 139}
+            \definecolor{midcolor}{RGB}{255, 222, 142}
+            \definecolor{rightcolor}{RGB}{204, 229, 255}
+    
+        \node at (3.75, 1.8) {$=$};
+    
+        \begin{scope}
+            \begin{scope} 
+                \clip (-2.7,0) rectangle (2.7, 3.6);     
+                \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+                \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+                \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -3) rectangle (1, 1.8);
+            \end{scope}
+            \draw (0, 3.6) -- (0, 1.8);
+            \filldraw [black] (0,1.8) circle (2pt) node[below=1pt] {$\xi$};
+            \node[below] at (-1, 0) {$K$};
+            \node[below] at (1, 0) {$R$};
+            \node[above] at (0, 3.6) {$F$};
+        \end{scope}
+    
+        \begin{scope}[shift={(7.5,0)}]
+            \begin{scope} 
+                \clip (-2.7,0) rectangle (2.7, 3.6);     
+                \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+                \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+                \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, -2) rectangle (1, 2.8);
+            \end{scope}
+            \draw (0, 3.6) -- (0,2.8);
+            \filldraw [black] (1,0.8) circle (2pt) node[right=1pt] {$\alpha$} node[left=1pt] {$\exists!$};
+       
+            \node[below] at (-1, 0) {$K$};
+            \node[right=-1pt] at (1, 1.8) {$\mathrm{Lan}_KF$};
+    
+            \node[below] at (1, 0) {$R$};
+            \filldraw [black] (0, 2.8) circle (2pt) node[below=1pt] {$\eta$};
+        
+           
+            \node[above] at (0, 3.6) {$F$};
+        \end{scope}
+    
+        
+        \end{tikzpicture}
+    \]
+    A \textbf{right Kan extension} of $K$ along $F$ is a pair $\left(\mathrm{Ran}_KF,\varepsilon\right)$ consisting of 
+    \begin{itemize}
+        \item a functor $\mathrm{Ran}_KF:\mathsf{D}\to\mathsf{E}$,
+        \item a natural transformation $\varepsilon: \left(\mathrm{Ran}_KF\right)\circ K\Rightarrow F$
+    \end{itemize}
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&, column sep=3em] 
+            % drawing 0- and 1-celss 
+            \mathsf{C} \arrow[dr, "K"'{name=F}] 
+            \arrow[rr, "F", ""{name=H, below}] \&\& \mathsf{E} \\ 
+            \& |[alias=D]| \mathsf{D} \arrow[ur, swap,
+            "\mathrm{Ran}_{K}F"] 
+            % % drawing 2-cells
+            \arrow[Rightarrow, from=D, to=H, "\varepsilon"'] 
+        \end{tikzcd}
+    \end{center}
+    such that for any pair $\left(L,\theta\right)$ consisting of
+    \begin{itemize}
+        \item a functor $L:\mathsf{D}\to\mathsf{E}$,
+        \item a natural transformation $\theta:L\circ K\Rightarrow F$,
+    \end{itemize}
+    there exists a unique natural transformation $\beta: L\Rightarrow \mathrm{Ran}_KF$ such that
+    \[
+    \begin{tikzpicture}[x=0.8cm,y=0.8cm, line width=0.7pt, hollow/.style={
+            circle,
+            fill=white,
+            draw,
+            outer sep=0pt,
+            inner sep=1.5pt,
+            line width=0.7pt
+          }]
+        % Define colors
+        \definecolor{leftcolor}{RGB}{224, 255, 139}
+        \definecolor{midcolor}{RGB}{255, 222, 142}
+        \definecolor{rightcolor}{RGB}{204, 229, 255}
+
+    \node at (3.75, 1.8) {$=$};
+
+    \begin{scope}
+        \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, 6.6) rectangle (1, 1.8);
+        \end{scope}
+        \draw (0, 0) -- (0, 1.8);
+        \filldraw [black] (0,1.8) circle (2pt) node[above=1pt] {$\theta$};
+        \node[above] at (-1, 3.6) {$K$};
+        \node[above] at (1, 3.6) {$L$};
+        \node[below] at (0, 0) {$F$};
+    \end{scope}
+
+    \begin{scope}[shift={(7.5,0)}]
+        \begin{scope} 
+            \clip (-2.7,0) rectangle (2.7, 3.6);     
+            \fill[fill=leftcolor] (-3,0) rectangle (0, 4);  
+            \fill[fill=rightcolor] (0,0) rectangle (3, 4);  
+            \draw[fill=midcolor, rounded corners=0.8cm, line width=0.7pt] (-1, 5.6) rectangle (1, 0.8);
+        \end{scope}
+        \draw (0, 0) -- (0,0.8);
+        \filldraw [black] (1,2.8) circle (2pt) node[right=1pt] {$\beta$};
+   
+        \node[above] at (-1, 3.6) {$K$};
+        \node[right=-1pt] at (1, 1.8) {$\mathrm{Ran}_KF$};
+
+        \node[above] at (1, 3.6) {$L$};
+        \filldraw [black] (0, 0.8) circle (2pt) node[above=1pt] {$\varepsilon$};
+    
+       
+        \node[below] at (0, 0) {$F$};
+    \end{scope}
+
+    
+    \end{tikzpicture}
+\]
+
+
+}
+
 \section{Monoidal Category}
 \dfn{Monoidal Category}{
     A monoidal category is a category $\mathsf{V}$ equipped with
@@ -3057,7 +3295,7 @@ A strict monoidal category is one for which the natural isomorphisms $a$, $\lamb
     \]
 }
 \section{Enriched Category}
-\dfn{Enriched Category}{
+\dfn[enriched_category]{Enriched Category}{
     Let $\mathsf{V}$ be a monoidal category. An \textbf{$\mathsf{V}$-enriched category} $\mathsf{C}$ consists of
     \begin{enumerate}[(i)]
         \item Object set: a set of objects $\mathrm{Ob}(\mathsf{C})$.
@@ -3090,6 +3328,22 @@ A strict monoidal category is one for which the natural isomorphisms $a$, $\lamb
             {\mathrm{Hom}_{\mathsf{C}}(A,B)\otimes 1} \arrow[rr, "\mathrm{id}_{\mathrm{Hom}_{\mathsf{C}}(A,B)}\otimes\,{\mathcal{I}d}_A "] \arrow[rd, "\cong"'] \&                     \& {\mathrm{Hom}_{\mathsf{C}}(A,B)\otimes \mathrm{Hom}_{\mathsf{C}}(A,A)} \arrow[ld, "\circ"] \\[+10pt]
             \& {\mathrm{Hom}_{\mathsf{C}}(A,B)} \&
     \end{tikzcd}
+        \]
+    \end{enumerate}
+}
+
+\dfn[enriched_functor]{Enriched Functor}{
+    Let $\mathsf{V}$ be a monoidal category and $\mathsf{C}$ and $\mathsf{D}$ be $\mathsf{V}$-enriched categories. An \textbf{$\mathsf{V}$-enriched functor} $F:\mathsf{C}\to\mathsf{D}$ consists of
+    \begin{enumerate}[(i)]
+        \item Object map: a map $F^{\mathrm{Ob}}:\mathrm{Ob}(\mathsf{C})\to \mathrm{Ob}(\mathsf{D})$,
+        \item $\mathrm{Hom}$-object morphisms: for each pair of objects $A,B\in \mathrm{Ob}(\mathsf{C})$, a morphism $F^{\mathrm{Mor}}_{A,B}:\mathrm{Hom}_{\mathsf{C}}(A,B)\to \mathrm{Hom}_{\mathsf{D}}(F(A),F(B))$ in $\mathsf{V}$, such that for any triple of objects $A,B,C\in \mathrm{Ob}(\mathsf{C})$, the following diagram in $\mathsf{V}$ commutes
+        \[
+            \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+                {\mathrm{Hom}\left(Y,Z\right)\otimes \mathrm{Hom}\left(X,Y\right)} \arrow[rr, "\circ"] \arrow[d, "{F^{\mathrm{Mor}}_{Y,Z}\otimes F^{\mathrm{Mor}}_{X,Y}}"'] \& \& {\mathrm{Hom}\left(X,Z\right)} \arrow[d, "{F^{\mathrm{Mor}}_{X,Z}}"] \\[+15pt]
+                {\mathrm{Hom}\left(FY,FZ\right)\otimes \mathrm{Hom}\left(FX,FY\right)} \arrow[rr, "\circ"'] \& \& {\mathrm{Hom}\left(FX,FZ\right)} \\
+                {\mathrm{Hom}(X,X)} \arrow[rr, "{F^{\mathrm{Mor}}_{X, X}}"] \& \& {\mathrm{Hom}(FX,FX)} \\[+15pt]
+                \& |[xshift=-2em,overlay]| 1 \arrow[ur] \arrow[ul] \&
+            \end{tikzcd}
         \]
     \end{enumerate}
 }
@@ -3200,9 +3454,7 @@ Commutative monoids can be internalized in the doctrine of symmetric monoidal ca
 }
 
 \section{Abelian Category}
-Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We will not use this term in this note.
-
-
+We will refer to \hyperref[th:enriched_functor]{$\mathsf{Ab}$-enriched functors} as \textbf{additive functors}. Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We will not use this term in this note. 
 
 \dfn{Biproduct}{
     Let $\mathsf{C}$ be an $\mathsf{Ab}$-category and $X_1$, $X_2$ be objects in $\mathsf{C}$. A \textbf{biproduct} of $X_1$ and $X_2$ is a diagram
@@ -3271,3 +3523,46 @@ Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We
 \prop{}{
     If $\mathsf{A}$ is an abelian category, then $\left[\mathsf{C}^\mathrm{op}, \mathsf{A}\right]$ is abelian for any small category $\mathsf{C}$.
 }
+
+
+\prop[exact_functors_in_abelian_category]{Exact Functors in Abelian Category}{
+    Let $\mathsf{A}$ and $\mathsf{B}$ be abelian categories and $F:\mathsf{A}\to\mathsf{B}$ be an additive functor. Then
+    \begin{enumerate}[(i)]
+        \item $F$ is left exact if and only if $F$ preserves kernels, or equivalently,
+        \[
+        0\longrightarrow X\xlongrightarrow{f} Y\xlongrightarrow{g} Z\text{ is exact}\quad\implies\quad 0\longrightarrow F(X)\xlongrightarrow{F(f)} F(Y)\xlongrightarrow{F(g)} F(Z)\text{ is exact}.    
+        \]
+        \item $F$ is right exact if and only if $F$ preserves cokernels, or equivalently,
+        \[
+        X\xlongrightarrow{f} Y\xlongrightarrow{g} Z\longrightarrow 0\text{ is exact}\quad\implies\quad F(X)\xlongrightarrow{F(f)} F(Y)\xlongrightarrow{F(g)} F(Z)\longrightarrow 0\text{ is exact}.
+        \]
+        \item $F$ is exact if and only if $F$ preserves kernels and cokernels, or equivalently,
+        \[
+        0\longrightarrow X\xlongrightarrow{f} Y\xlongrightarrow{g} Z\longrightarrow 0\text{ is exact}\quad\implies\quad 0\longrightarrow F(X)\xlongrightarrow{F(f)} F(Y)\xlongrightarrow{F(g)} F(Z)\longrightarrow 0\text{ is exact}.
+        \]
+    \end{enumerate}
+}
+
+
+\prop[exact_functor_preserve_cohomology]{Exact Functor Preserve Cohomology}{
+    Let $F:\mathsf{A}\to\mathsf{B}$ be an exact functor between abelian categories. Suppose 
+    \[
+    X \xlongrightarrow{f} Y \xlongrightarrow{g} Z 
+    \]
+    is an exact sequence in $\mathsf{A}$. Then we have the following natural isomorphism
+    \[
+    F\left(\mathrm{H}\left[X \xrightarrow{f} Y\xrightarrow{g} Z\right]\right)  \cong \mathrm{H}\left[F(X) \xrightarrow{F(f)} F(Y)\xrightarrow{F(g)} F(Z)\right].
+    \]
+}
+\pf{
+    $$
+        \begin{aligned}
+        F\left(\mathrm{H}\left[X \xrightarrow{f} Y\xrightarrow{g} Z\right]\right)& =F \operatorname{coker}[\operatorname{im}(f) \rightarrow \operatorname{ker}(g)] \\
+        & \cong \operatorname{coker}[F \operatorname{im}(f) \rightarrow F \operatorname{ker}(g)] \\
+        & \cong \operatorname{coker}[\operatorname{im}(F f) \rightarrow \operatorname{ker}(F g)]\\
+        &=\mathrm{H}\left[F X \xrightarrow{F f} F Y \xrightarrow{F g} Z\right]
+        \end{aligned}
+$$
+}
+
+

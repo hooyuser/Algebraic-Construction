@@ -15,7 +15,10 @@
 }
 A ring is a monoid object in the category $\mathsf{Ab}$. In other words, a ring is an $\mathsf{Ab}$-enriched category with only one object.\\
 A ring $R$ is an $R$-module over itself.\\
-A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra.
+A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra. In fact, we have the following category isomorphism
+\[
+    \mathsf{Ring}\cong \mathbb{Z}\text{-}\mathsf{Alg}.
+\]
 \dfn{Unit Group of a Ring}{
     Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$.
 }
@@ -92,6 +95,8 @@ A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called
 }
 Since the forgetful functor $\mathsf{Ring}\to\mathsf{Set}$ is a right adjoint, it preserves all limits. Hence the underlying set of the terminal object in $\mathsf{Ring}$ is the terminal object in $\mathsf{Set}$, which is the singleton set $\{*\}$.
 
+
+
 \subsection{Quotient Object}
 \dfn{Quotient Ring}{
     Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Equip the additive group \( R / I \) with the following multiplication operation:
@@ -118,6 +123,32 @@ Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R
 \thm{The Fundamental Theorem of Ring Homomorphisms}{
     Let $f:R\to S$ be a ring homomorphism. Then $R/\ker f\cong \mathrm{im}f$.
 }
+
+\subsection{Free Object}
+\dfn{Free Ring}{
+    Let $S$ be a set. The \textbf{free ring} on $S$, denoted by $\mathrm{Free}_{\mathsf{Ring}}(S)$, together with a function $\iota:S\to \mathrm{Free}_{\mathsf{Ring}}(S)$, is defined by the following universal property: for any ring $R$ and any function $f:S\to R$, there exists a unique ring homomorphism $\widetilde{f}:\mathrm{Free}_{\mathsf{Ring}}(S)\to R$ such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Free}_{\mathsf{Ring}}(S)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& R \\[0.3cm]
+            S\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
+        \end{tikzcd}
+    \end{center}
+    The free ring $\mathrm{Free}_{\mathsf{Ring}}(S)$ can be contructed as the free $\mathbb{Z}$-algebra on $\mathrm{Free}_{\mathsf{Mon}}(S)$
+    \[
+        \mathrm{Free}_{\mathsf{Ring}}(S)\cong\bigoplus_{w\in\mathrm{Free}_{\mathsf{Mon}}(S)}\mathbb{Z}w.  
+    \]
+}
+
+\ex{Forgetful Functor $U:\mathsf{Ring}\to\mathsf{Set}$}{
+    The forgetful functor $U:\mathsf{Ring}\to\mathsf{Set}$ forgets the ring structure and retains only the underlying set.
+    \begin{enumerate}[(i)]
+        \item $U$ is representable by $\left(\mathbb{Z}[x],x\right)$.
+        \item $U$ is faithful but not full.
+    \end{enumerate}
+}
+
+
+
 \subsection{Graded Object}
 \dfn{$I$-Graded Ring (Internal Definition)}{
     Let $(I,+)$ be a monoid. An \textbf{$I$-graded ring} is a ring $(R,+,\cdot)$ together with a family of subgroups $(R_i)_{i\in I}$ of $(R,+)$ such that

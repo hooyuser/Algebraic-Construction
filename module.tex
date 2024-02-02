@@ -34,24 +34,24 @@ From the perspective of representation theory, a module is a ring action on an a
         * \& \& \&  M\&
     \end{tikzcd}
 \]
-As a map between objects, $\mathcal{M}$ assigns an abelian group for $\{*\}$. As a map between morphisms, $\mathcal{M}$ specifies a ring homomorphism $\sigma_M:R\to \mathrm{End}_{\mathsf{Ab}}(M)$. Define the ring representation category 
+As a map between objects, $\mathcal{M}$ assigns an abelian group for $\{*\}$. As a map between morphisms, $\mathcal{M}$ specifies a ring homomorphism $\sigma_M:R\to \mathrm{End}_{\mathsf{Ab}}(M)$. Define the ring representation category to be the category of all $\mathsf{Ab}$-enriched functors between $\mathsf{Ab}$-enriched categories $\mathsf{B}R$ and $\mathsf{Ab}$, denoted by
 \[
-\mathrm{Rep}_{\mathsf{Ab}}(R):=[\mathsf{B}R, \mathsf{Ab}]_{\mathsf{Ab}\text{-}\mathsf{Cat}}   
+\mathrm{Rep}_{\mathsf{Ab}}(R):=[\mathsf{B}R, \mathsf{Ab}]_{\mathsf{Ab}\text{-}\mathsf{Cat}}.
 \]
-to be the category of all functors between $\mathsf{Ab}$-enriched categories $\mathsf{B}R$ and $\mathsf{Ab}$. Then we have category isomorphism 
+Then we have category isomorphism 
 \[
     \mathrm{Rep}_{\mathsf{Ab}}(R)\cong R\text{-}\mathsf{Mod}.
 \]
 }
 \prop{Ring homomorphism $R\to S$ induces functor $S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$}{
-    Let $R$ and $S$ be rings with a ring homomorphism $f: R\to S$. Then every $S$-module $M$ is an $R$-module by defining $rm = f(r)m$, or equivalently through $R\to S\to \mathrm{End}_{\mathsf{Ab}}(M)$. This defines a functor $F: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$, which is identify map on objects and morphisms.
+    Let $R$ and $S$ be rings with a ring homomorphism $f: R\to S$. Then every $S$-module $M$ is an $R$-module by defining $rm = f(r)m$, or equivalently through $R\to S\to \mathrm{End}_{\mathsf{Ab}}(M)$. This defines a functor $\mathrm{Res}_{R\to S}: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$, which is identify map on objects and morphisms.
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             S\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
             M  \arrow[dd, "g"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
             \& [-30pt] M\arrow[dd, "g"{name=R}] \&[-30pt]\\ [-10pt] 
-            \&  \phantom{.}\arrow[r, "F", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathrm{Res}_{R\to S}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
             N \& \& \&  N\&
         \end{tikzcd}
         \]  
@@ -93,18 +93,50 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
 \section{Construction}
 \subsection{Free Object}
 \dfn{Free Module}{
-    Let $R$ be a ring and $S$ be a set. The \textbf{free $R$-module } on $S$, denoted by $\mathrm{Free}_{\mathrm{R}\text{-}\mathsf{Mod}}(S)$, together with a map $\iota:S\to \mathrm{Free}_{\mathrm{R}\text{-}\mathsf{Mod}}(S)$, is defined by the following universal property: for any $R$-module $M$ and any map $f:S\to M$, there exists a unique $R$-linear map $\widetilde{f}:\mathrm{Free}_{\mathrm{R}\text{-}\mathsf{Mod}}(S)\to M$ such that the following diagram commutes
+    Let $R$ be a ring and $S$ be a set. The \textbf{free $R$-module } on $S$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)$, together with a map $\iota:S\to \mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)$, is defined by the following universal property: for any $R$-module $M$ and any map $f:S\to M$, there exists a unique $R$-linear map $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)\to M$ such that the following diagram commutes
     \begin{center}
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathrm{Free}_{\mathrm{R}\text{-}\mathsf{Mod}}(S)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& M\\[0.3cm]
+            \mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& M\\[0.3cm]
             S\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
         \end{tikzcd}
     \end{center}
-    The free $R$-module $\mathrm{Free}_{\mathrm{R}\text{-}\mathsf{Mod}}(S)$ can be contructed as the direct sum of copies of $R$ indexed by $S$, i.e. 
+    The free $R$-module $\mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)$ can be contructed as the direct sum of copies of $R$ indexed by $S$, i.e. 
     \[
-        \mathrm{Free}_{\mathrm{R}\text{-}\mathsf{Mod}}(S)\cong \bigoplus_{s\in S}R.
+        \mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)\cong \bigoplus_{s\in S}R.
     \]
 }
+
+\ex{Forgetful Functor $U$}{
+    Let $R$ be a ring. Then the forgetful functor $U:R\text{-}\mathsf{Mod}\to \mathsf{Set}$ forgets the $R$-module structure of an $R$-module. 
+    \begin{enumerate}[(i)]
+        \item $U$ is representable by $\left(R, 1_R\right)$. The natural isomorphism $\phi:\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(R, -\right)\xRightarrow{\sim} U$ is given by 
+        \begin{align*}
+            \phi_M:\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(R, M\right)&\longrightarrow U(M)\\
+            f&\longmapsto f(1_R).
+        \end{align*}
+        An $R$-linear map $f:R\to M$ is uniquely determined by $f(1_R)$, and vice versa.
+        \item $U$ is faithful but not full.
+    \end{enumerate}
+} 
+
+\prop{Free-Forgetful Adjunction $\mathrm{Free}_{R\text{-}\mathsf{Mod}}\dashv U$}{
+    Let $R$ be a ring. Then the free $R$-module functor $\mathrm{Free}_{R\text{-}\mathsf{Mod}}$ is left adjoint to the forgetful functor $U$.
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Mod} \arrow[r, "\mathrm{Free}_{R\text{-}\mathsf{Mod}}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+18pt] 
+            \mathsf{Set} \arrow[l, "{U}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+            \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+        \end{tikzcd}    
+    \]
+    
+    For any set $S$ and any $R$-module $M$, we have a natural isomorphism
+    \[
+        \mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(\mathrm{Free}_{R\text{-}\mathsf{Mod}}(S), M\right)\cong \mathrm{Hom}_{\mathsf{Set}}\left(S, U(M)\right).
+    \]
+}
+
+
+
 
 \dfn{Finitely Generated Module}{
     We say $M$ is a \textbf{finitely generated $R$-module} if 
@@ -142,22 +174,35 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
 \prop{Universal Property of Localization}{
     Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset, an $M$ be an $R$-module. The $R$-linear map
     \begin{align*}
-        \varphi:M&\longrightarrow S^{-1}M\\
+        l_S:M&\longrightarrow S^{-1}M\\
          m&\longmapsto \frac{m}{1}
     \end{align*}
-    satisfies the following universal property: for any $R$-linear map $\psi:M\to N$ such that $S$ act as automorphisms on $N$ (i.e. the induced ring homomorphism $\sigma_{N}:R\to\mathrm{End}_{\mathsf{Ab}}(N)$ satisfies $\sigma_{N}(S)\subseteq \mathrm{Aut}_{\mathsf{Ab}}(N)$), there exists a unique $R$-linear map
-    \begin{align*}
-        \psi':S^{-1}M&\longrightarrow N\\
-        \frac{m}{s}&\longmapsto s^{-1}\psi(m)=\sigma_{N}(s)^{-1}(\psi(m))
-    \end{align*}
-    such that the following diagram commutes
-    \begin{center}
-        \begin{tikzcd}[ampersand replacement=\&]
-         
-            S^{-1}M\arrow[rr, "\psi'", dashed]\&\& N \&  \\             
-            \&M \arrow[ru, "\psi"'] \arrow[lu, "\varphi"] \&                          
-        \end{tikzcd}
-    \end{center}
+    satisfies the any of following universal properties: 
+    \begin{itemize}
+        \item for any $R$-linear map $\psi:M\to N$ such that $S$ act as automorphisms on $N$ (i.e. the induced ring homomorphism $\sigma_{N}:R\to\mathrm{End}_{\mathsf{Ab}}(N)$ satisfies $\sigma_{N}(S)\subseteq \mathrm{Aut}_{\mathsf{Ab}}(N)$), there exists a unique $R$-linear map
+        \begin{align*}
+            \psi':S^{-1}M&\longrightarrow N\\
+            \frac{m}{s}&\longmapsto s^{-1}\psi(m)=\sigma_{N}(s)^{-1}(\psi(m))
+        \end{align*}
+        such that the following diagram commutes in $R\text{-}\mathsf{Mod}$
+        \begin{center}
+            \begin{tikzcd}[ampersand replacement=\&]
+             
+                S^{-1}M\arrow[rr, "\psi'", dashed]\&\& N \&  \\             
+                \&M \arrow[ru, "\psi"'] \arrow[lu, "l_S"] \&                          
+            \end{tikzcd}
+        \end{center}
+        \item for any $S^{-1}R$-module $N$ and $R$-linear map $\psi:M\to \mathrm{Res}(N)$, there exists a unique $S^{-1}R$-linear map $\psi':S^{-1}M\to N$ such that the following diagram commutes in $R\text{-}\mathsf{Mod}$
+        \begin{center}
+            \begin{tikzcd}[ampersand replacement=\&]
+             
+                \mathrm{Res}(S^{-1}M)\arrow[rr, "\mathrm{Res}(\psi')", dashed]\&\& \mathrm{Res}(N) \&  \\             
+                \&M \arrow[ru, "\psi"'] \arrow[lu, "l_S"] \&                          
+            \end{tikzcd}
+        \end{center}
+    \end{itemize}
+    
+    
 }
 \prop{Localization is a Left Adjoint Functor}{ 
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Define the localization functor as follows
@@ -174,9 +219,17 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
         \end{tikzcd}
         \]  
         where $S^{-1}(f)$ is defiend as the composition $S^{-1}M\xrightarrow{f'} N\to S^{-1}N$. \\
-        Let $F: S^{-1}R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ be the functor that regards $S^{-1}R$-modules as $R$-modules. Then we have a pair of adjoint functors $S^{-1}\dashv F: R\text{-}\mathsf{Mod}\leftrightarrows S^{-1}R\text{-}\mathsf{Mod}$ and natural isomorphism
+        Let $\mathrm{Res}_{R\to S^{-1}R}: S^{-1}R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ be the functor that regards $S^{-1}R$-modules as $R$-modules. Then we have a pair of adjoint functors    
         \[
-        \mathrm{Hom}_{S^{-1}R\text{-}\mathsf{Mod}}(S^{-1}M, N)\cong \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(M, F(N)).    
+            \begin{tikzcd}[ampersand replacement=\&]
+                R\text{-}\mathsf{Mod} \arrow[r, "S^{-1}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+                S^{-1}R\text{-}\mathsf{Mod} \arrow[l, "{\mathrm{Res}}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+                \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+            \end{tikzcd}    
+        \]
+         and natural isomorphism
+        \[
+        \mathrm{Hom}_{S^{-1}R\text{-}\mathsf{Mod}}(S^{-1}M, N)\cong \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(M, \mathrm{Res}_{R\to S^{-1}R}(N)).    
         \]
 }
 \prop{Localization is an Exact Functor}{
@@ -206,32 +259,32 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
         0\longrightarrow S^{-1}N\longrightarrow S^{-1}M\longrightarrow S^{-1}(M/N)\longrightarrow 0.
     \]
 }
-\prop{Localization as colimit}{
+\prop{Localization as Colimit}{
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Then we have an isomorphism
     \[
         S^{-1}M\cong \varinjlim_{f\in S}M_f,
     \]
-    where $M_f$ is the localization of $M$ by the multiplicative set $S_f=\{f^n\mid n\in \mathbb{Z}_{\ge0}\}$. 
+    where $M_f$ is the localization of $M$ by the multiplicative set $\langle f\rangle=\{f^n\mid n\in \mathbb{Z}_{\ge0}\}$. 
     
-    Formally, $S$ can be endowed with a preorder relation: $f\mid g$ if and only if $fh=g$ for some $h\in S$, which makes $S$ a thin category $\mathsf{S}$. Then we can define a functor $M_{\text{\textbf{-}}}:\mathsf{S}\to R\text{-}\mathsf{Mod}$
+    Formally, $S$ can be endowed with a preorder relation: $f\mid g$ if and only if $fh=g$ for some $h\in S$, which makes $S$ a \hyperref[thin_category]{thin category} $\mathsf{S}$. Then we can define a functor $M_{\text{\textbf{-}}}:\mathsf{S}\to R\text{-}\mathsf{Mod}$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{S}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
             f  \arrow[dd, ""{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]M_f\arrow[dd, "\varphi_g'"{name=R}] \&[-30pt]\ni
+            \& [-30pt]M_f\arrow[dd, "l_g'"{name=R}] \&[-30pt]\ni
             \&[-30pt]\frac{m}{f^n}\arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
             \&  \phantom{.}\arrow[r, "G", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
             g \&\hspace{-3pt}=fh \& \&  M_g\&[-30pt]\ni
             \&[-30pt]\frac{mh^n}{g^n}
         \end{tikzcd}
         \]  
-        where $\varphi_g'$ is given by the following  universal property
+        where $l_g'$ is given by the following  universal property
         \begin{center}
             \begin{tikzcd}[ampersand replacement=\&]
              
-                M_f\arrow[rr, "\varphi_g'", dashed]\&\& M_g \&  \\             
-                \&M \arrow[ru, "\varphi_g"'] \arrow[lu, "\varphi_f"] \&                          
+                M_f\arrow[rr, "l_g'", dashed]\&\& M_g \&  \\             
+                \&M \arrow[ru, "l_g"'] \arrow[lu, "l_f"] \&                          
             \end{tikzcd}
         \end{center}
         And we have
@@ -240,7 +293,7 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
         \]
 }
 \pf{
-First let's show that the $\varphi'_g$ induced by universal property can be writen as $\varphi'_g:\frac{m}{f^n}\mapsto\frac{mh^n}{g^n}$. Suppose $R$ acts on $M_g$ through
+First let's show that the $l'_g$ induced by universal property can be writen as $l'_g:\frac{m}{f^n}\mapsto\frac{mh^n}{g^n}$. Suppose $R$ acts on $M_g$ through
 \[
     \sigma_{M_g}:R\xrightarrow{}S^{-1}_gR\xrightarrow{\sigma_{M_g'}}\mathrm{End}_{\mathsf{Ab}}(M_g),
 \]
@@ -250,14 +303,14 @@ Then we can check for any $f^n \in S_f$,
 \]
 which means $\sigma_{M_g}(S_f)\subseteq  \mathrm{Aut}_{\mathsf{Ab}}(M_g)$. Thus by universal property of $M_f$, we have
 \[
-    \varphi'_g\left(\frac{m}{f^n}\right)=\sigma_{M_g}(f^n)^{-1}(m)=\sigma_{M_g'}\left(\frac{h^n}{g^n}\right)(m)=\frac{mh^n}{g^n}.
+    l'_g\left(\frac{m}{f^n}\right)=\sigma_{M_g}(f^n)^{-1}(m)=\sigma_{M_g'}\left(\frac{h^n}{g^n}\right)(m)=\frac{mh^n}{g^n}.
 \]
 In a similar way, we can check that $S_f$ can act on $S^{-1}M$ as automorphisms and induce $\psi_f$ by the following universal property
 \begin{center}
     \begin{tikzcd}[ampersand replacement=\&]
      
         M_f\arrow[rr, "\psi_f", dashed]\&\& S^{-1}M\&  \\             
-        \&M \arrow[ru, "\varphi_S"'] \arrow[lu, "\varphi_f"] \&                          
+        \&M \arrow[ru, "l_S"'] \arrow[lu, "l_f"] \&                          
     \end{tikzcd}
 \end{center}
 And we are going to show that $\left(\psi_f:M_f\to S^{-1}M\right)_{f\in S}$ is the colimit of $G$. 
@@ -265,35 +318,52 @@ And we are going to show that $\left(\psi_f:M_f\to S^{-1}M\right)_{f\in S}$ is t
 \begin{tikzcd}[ampersand replacement=\&]
         \& N                                 \&                                                             \\[+15pt]
         \& S^{-1}M \arrow[u, "\nu"', dashed] \&                                                             \\[+10pt]
-M_f \arrow[rr, "\varphi_g'"] \arrow[ru, "\psi_f"] \arrow[ruu, "\mu_f", bend left] \&                                   \& M_g \arrow[lu, "\psi_g"'] \arrow[luu, "\mu_g"', bend right]
+M_f \arrow[rr, "l_g'"] \arrow[ru, "\psi_f"] \arrow[ruu, "\mu_f", bend left] \&                                   \& M_g \arrow[lu, "\psi_g"'] \arrow[luu, "\mu_g"', bend right]
 \end{tikzcd}
 \]
 We can prove
 \[
-   \psi_f=\psi_g\circ \varphi_g'
+   \psi_f=\psi_g\circ l_g'
 \]
 by checking
 \[
-    \left(\psi_g\circ \varphi_g'\right)\circ \varphi_f=\psi_g\circ\varphi_g =\varphi_S=\psi_f\circ \varphi_f
+    \left(\psi_g\circ l_g'\right)\circ l_f=\psi_g\circ l_g =l_S=\psi_f\circ l_f
 \]
 and utilizing the uniqueness of the universal property. \\
-Given any $\left(\mu_f:M_f\to S^{-1}M\right)_{f\in S}$ such that $\mu_f=\mu_g\circ \varphi_g'$, note that $\mu_f\circ \varphi_f=\mu_f\circ \mu_g\circ \varphi_g'=\mu_g\circ \varphi_g$. Thus we can define $\nu$ to be the unique map such that $\nu\circ \varphi_S=\mu_f\circ \varphi_f$.
+Given any $\left(\mu_f:M_f\to S^{-1}M\right)_{f\in S}$ such that $\mu_f=\mu_g\circ l_g'$, note that $\mu_f\circ l_f=\mu_f\circ \mu_g\circ l_g'=\mu_g\circ l_g$. Thus we can define $\nu$ to be the unique map such that $\nu\circ l_S=\mu_f\circ l_f$.
 \[
 \begin{tikzcd}[ampersand replacement=\&]
     \& N                                                  \&                                    \\[+12pt]
 M_f \arrow[rr, "\psi_f"] \arrow[ru, "\mu_f"] \&                                                    \& S^{-1}M \arrow[lu, "\nu"', dashed] \\[+12pt]
-    \& M \arrow[lu, "\varphi_f"] \arrow[ru, "\varphi_S"'] \&                                   
+    \& M \arrow[lu, "l_f"] \arrow[ru, "l_S"'] \&                                   
 \end{tikzcd}
 \]
 Hence we have 
 \[
-\left(\nu\circ \psi_f\right)\circ \varphi_f=\nu\circ\varphi_S =\mu_f\circ \varphi_f.
+\left(\nu\circ \psi_f\right)\circ l_f=\nu\circ l_S =\mu_f\circ l_f.
 \]
-By the uniqueness of the universal property of $M_f$, we have $\mu_f=\nu\circ \psi_f$. If there exists another $\nu'$ such that $\mu_f=\nu'\circ \psi_f$, there must be $\nu'\circ \varphi_S=\nu'\circ \psi_f \circ\varphi_f=\mu_f \circ\varphi_f=\nu\circ \varphi_S$. The uniqueness of such $\nu$ forces $\nu=\nu'$.\\
+By the uniqueness of the universal property of $M_f$, we have $\mu_f=\nu\circ \psi_f$. If there exists another $\nu'$ such that $\mu_f=\nu'\circ \psi_f$, there must be $\nu'\circ l_S=\nu'\circ \psi_f \circ l_f=\mu_f \circ l_f=\nu\circ l_S$. The uniqueness of such $\nu$ forces $\nu=\nu'$.\\
 Therefore we show that $ S^{-1}M\cong \varinjlim_{f\in S}M_f$.
 }
-
 \prop{}{
+     View $S^{\prime-1} M$ as an $R$-module, then $S^{-1}\left(S^{\prime-1} M\right)$ is isomorphic to $\left(S S^{\prime}\right)^{-1} M$.
+}
+\pf{
+    Note that given a $R$-module $M$, we have not proved any universal property for $S^{-1} M$. Hence we cannot reason as in the preceding proof; we have to construct the isomorphism explicitly.
+
+We define the maps as follows
+$$
+\begin{aligned}
+& f: S^{-1}\left(S^{\prime-1} M\right) \longrightarrow\left(S S^{\prime}\right)^{-1} M, \quad \frac{x / s^{\prime}}{s} \mapsto x / s s^{\prime} \\
+& g:\left(S S^{\prime}\right)^{-1} M \longrightarrow S^{-1}\left(S^{\prime-1} M\right), \quad x / t \mapsto \frac{x / s^{\prime}}{s} \text { for some } s \in S, s^{\prime} \in S^{\prime}, \text { and } t=s s^{\prime}
+\end{aligned}
+$$
+
+We have to check that these homomorphisms are well-defined, that is, independent the choice of the fraction. This is easily checked and it is also straightforward to show that they are inverse to each other.
+}
+
+
+\prop[module_localization_glueing_property]{}{
     Let $R$ be a commutative ring and $M$ be a $R$-module. Suppose $x\in M$. Then the following are equivalent:
     \begin{enumerate}[(i)]
         \item $x=0$.
@@ -309,12 +379,36 @@ Therefore we show that $ S^{-1}M\cong \varinjlim_{f\in S}M_f$.
     \] 
     be the annihilator of $x$ in $R$, which is an ideal of $R$. Note $\frac{x}{1}=\frac{0}{1}$ in $M_{\mathfrak{m}}$ if and only if 
     \[
-        \mathrm{Ann}_M \cap \left(R-\mathfrak{m}\right)=\left\{r\in R-\mathfrak{m}\midv rx=0\right\}\neq \varnothing.
+        \mathrm{Ann}_M -\mathfrak{m}=\left\{r\in R-\mathfrak{m}\midv rx=0\right\}\neq \varnothing\iff \mathrm{Ann}_M \subsetneq \mathfrak{m}.
     \]
     If $x$ maps to $0$ in $M_{\mathfrak{m}}$ for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$, then $\mathrm{Ann}_M$ is not contained in any maximal ideal of $R$, which means $\mathrm{Ann}_M(x)=R$. Hence $x=0$.
-
 }
-
+\cor[module_localization_glueing_property_cor]{}{
+    Given an $R$-module $M$, the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $M$ is zero,
+        \item $M_{\mathfrak{p}}$ is zero for all $\mathfrak{p} \in \operatorname{Spec}(R)$,
+        \item $M_{\mathfrak{m}}$ is zero for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$.
+    \end{enumerate} 
+}
+\pf{
+    (iii)$\implies$(i). Suppose $M_{\mathfrak{m}}$ is zero for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$. Given any $x\in M$, since $x$ maps to $0$ in $M_{\mathfrak{m}}$ for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$, there must be $x=0$ by \Cref{th:module_localization_glueing_property}. Thus $M$ is zero.\\
+}
+\cor{}{
+    Given a sequence of $R$-modules $M\to M'\to M''$, the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $M\to M'\to M''$ is exact,
+        \item $M_{\mathfrak{p}}\to M'_{\mathfrak{p}}\to M''_{\mathfrak{p}}$ is exact for all $\mathfrak{p} \in \operatorname{Spec}(R)$,
+        \item $M_{\mathfrak{m}}\to M'_{\mathfrak{m}}\to M''_{\mathfrak{m}}$ is exact for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$.
+    \end{enumerate}
+}
+\pf{
+    (i)$\implies$(ii) because localization is an exact functor. (ii)$\implies$(iii) is clear. It is left to show (iii)$\implies$(i). Let $H=\ker\left(M'\to M''\right)/\operatorname{im}\left(M\to M'\right)$. Since \hyperref[th:exact_functor_preserve_cohomology]{exact functor preserve cohomology}, we have 
+    $$
+    H_{\mathfrak{m}}\cong\ker \left(M'_{\mathfrak{m}}\to M''_{\mathfrak{m}}\right)/\operatorname{im}\left(M_{\mathfrak{m}}\to M'_{\mathfrak{m}}\right)=0
+    $$ 
+    for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$. Thus by \Cref{th:module_localization_glueing_property_cor} we have $H=0$, which implies $M\to M'\to M''$ is exact.
+}
 
 \subsection{Graded Object}
 

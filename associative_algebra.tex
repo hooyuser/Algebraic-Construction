@@ -40,6 +40,21 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     Let $A$ be an $R$-algebra and $\mathfrak{a}$ be a two-sided ideal of $A$. Since $\mathfrak{a}$ is an $R$-submodule of $A$, the quotient ring $A/\mathfrak{a}$ can also be endowed with an $R$-module structure, which makes $A/\mathfrak{a}$ an $R$-algebra. We call $A/\mathfrak{a}$ the \textbf{quotient algebra} of $A$ by $\mathfrak{a}$.
 }
 
+\subsection{Free Object}
+\dfn{Free $R$-Algebra}{
+    Let $S$ be a set and $R$ be a commutative ring. The \textbf{free $R$-algebra} on $S$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)$, together with a function $\iota:S\to \mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)$, is defined by the following universal property: for any $R$-algebra $A$ and any function $f:S\to A$, there exists a unique $R$-algebra homomorphism $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)\to A$ such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A \\[0.3cm]
+            S\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
+        \end{tikzcd}
+    \end{center}
+    The free $R$-algebra $\mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)$ can be contructed by direct sum of copies of $R$
+    \[
+        \mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)\cong\bigoplus_{w\in\mathrm{Free}_{\mathsf{Mon}}(S)}Rw.  
+    \]
+}
+
 \subsection{Graded Object}
 
 \dfn{$I$-Graded Algebra over an Graded Commutative Ring}{
