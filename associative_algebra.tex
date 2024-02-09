@@ -42,16 +42,16 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 
 \subsection{Free Object}
 \dfn{Free $R$-Algebra}{
-    Let $S$ be a set and $R$ be a commutative ring. The \textbf{free $R$-algebra} on $S$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)$, together with a function $\iota:S\to \mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)$, is defined by the following universal property: for any $R$-algebra $A$ and any function $f:S\to A$, there exists a unique $R$-algebra homomorphism $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)\to A$ such that the following diagram commutes
+    Let $X$ be a set and $R$ be a commutative ring. The \textbf{free $R$-algebra} on $X$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{Alg}}(X)$, together with a function $\iota:X\to \mathrm{Free}_{R\text{-}\mathsf{Alg}}(X)$, is defined by the following universal property: for any $R$-algebra $A$ and any function $f:X\to A$, there exists a unique $R$-algebra homomorphism $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{Alg}}(X)\to A$ such that the following diagram commutes
     \begin{center}
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A \\[0.3cm]
-            S\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
+            \mathrm{Free}_{R\text{-}\mathsf{Alg}}(X)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A \\[0.3cm]
+            X\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
         \end{tikzcd}
     \end{center}
-    The free $R$-algebra $\mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)$ can be contructed by direct sum of copies of $R$
+    The free $R$-algebra $\mathrm{Free}_{R\text{-}\mathsf{Alg}}(X)$ can be contructed by direct sum of copies of $R$
     \[
-        \mathrm{Free}_{R\text{-}\mathsf{Alg}}(S)\cong\bigoplus_{w\in\mathrm{Free}_{\mathsf{Mon}}(S)}Rw.  
+        \mathrm{Free}_{R\text{-}\mathsf{Alg}}(X)\cong\bigoplus_{w\in\mathrm{Free}_{\mathsf{Mon}}(X)}Rw.  
     \]
 }
 
@@ -99,6 +99,25 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     $T^{\bullet}(M)$ is an $\mathbb{N}$-graded $R$-algebra with grading $(T^k(M))_{k\ge 0}$.
 }
 
+\prop{Tensor Algebra Functor $T^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Alg}$}{
+    Let $R$ be a commutative ring. The tensor algebra construction $T^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Alg}$ is a functor. 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Alg}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M  \arrow[dd, "g"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] T^{\bullet}(M)\arrow[dd, "T^{\bullet}(g)"{name=R}] \&[-20pt]\ni\& [+10pt]m_1\otimes\cdots\otimes m_k \arrow[dd, mapsto, "g\otimes g\cdots\otimes g"{name=L, right}] 
+            \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "T^{\bullet}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  T^{\bullet}(N)\&[-0pt]\ni\& g(m_1)\otimes\cdots\otimes g(m_k)
+        \end{tikzcd}
+        \]  
+}
+
+\prop{Adjunction $T^{\bullet}\dashv U_{\mathsf{R\text{-}\mathsf{Mod}}}$}{
+    Let $R$ be a commutative ring. Suppose $U:R\text{-}\mathsf{Alg}\to R\text{-}\mathsf{Mod}$ is the forgetful functor. Then the tensor algebra functor $T^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Alg}$ is left adjoint to $U$.
+}
+
 \section{Exterior Algebra and Symmetric Algebra}
 \dfn{Exterior Algebra $\Largewedge^{\bullet} (M)$}{
     Given an $R$-module $M$, 
@@ -121,11 +140,71 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     is called the \textbf{$k$-th exterior power of $M$}.
 }
 
+\dfn{Exterior Algebra Functor: $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}$}{
+    The exterior algebra construction $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Alg}$ is a functor defined as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M  \arrow[dd, "g"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] \Largewedge^{\bullet}(M)\arrow[dd, "\Largewedge^{\bullet}(g)"{name=R}] \&[-20pt]\ni\& [+20pt]m_1\wedge\cdots\wedge m_k \arrow[dd, mapsto, "g\wedge g\cdots\wedge g"{name=L, right}] 
+            \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\Largewedge^{\bullet}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  \Largewedge^{\bullet}(N)\&[-0pt]\ni\& g(m_1)\wedge\cdots\wedge g(m_k)
+        \end{tikzcd}
+    \]  
+}
+
+\prop{Adjunction $\Largewedge^{\bullet}\dashv U_{\mathsf{R\text{-}\mathsf{Mod}}}$}{
+    Let $R$ be a commutative ring. Suppose $U:R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}\to R\text{-}\mathsf{Mod}$ is the forgetful functor. Then the exterior algebra functor $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}$ is left adjoint to $U$.
+}
+
+\prop{}{
+    Suppose $R$ is a commutative ring and $M=\bigoplus_{x\in X}Rx$ is a free $R$-module. Then
+    \begin{enumerate}[(i)]
+        \item $\Largewedge^{\bullet}(M)$ has a basis $\{x_1\wedge\cdots\wedge x_k: x_1,\cdots,x_k\in X, x_i\ne x_j\text{ for all }i\ne j\}$.
+        \item If $M$ has a basis $\{x_1,\cdots,x_n\}$, then we have an $R$-linear isomorphism
+        \begin{align*}
+            \largewedge^{n}(M)&\xlongrightarrow{\sim} R\\
+            x_1 \wedge \cdots \wedge x_n& \longmapsto 1_R.
+        \end{align*}
+        Moreover, we have $\Largewedge^{m}(M)=0$ for all $m>n$.
+    \end{enumerate}
+}
+
+\section{Determinant and Trace}
+
+
+
+\dfn{Determinant of $R$-linear Transformation on Free Module of Finite Rank}{
+    Let $R$ be a commutative ring and $M$ be a free $R$-module of finite rank $n$. The \textbf{determinant} of an $R$-linear map $f:M\to M$ can be defined as one of the following equivalent ways:
+    \begin{enumerate}[(i)]
+        \item The functor $\Largewedge^n:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ induces a hom-set morphism 
+        \begin{align*}
+            \largewedge^n:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right) &\longrightarrow\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)\\
+        f &\longmapsto f\wedge\cdots\wedge f.
+        \end{align*}
+        Note $\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)$ is a 1-dimensional $R$-module with basis $\mathrm{id}_{\largewedge^n(M)}$. And $R$ is a also a 1-dimensional $R$-module with basis $1_R$. We have the following $R$-module isomorphism
+        \begin{align*}
+            s:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)&\xlongrightarrow{\sim} R\\
+            \mathrm{id}_{\largewedge^n(M)} &\longmapsto 1_R.
+        \end{align*}
+        The \textbf{determinant} of $f$ is defined as the composition $\det:=s\circ \largewedge^n$.
+        \item Suppose $\{e_1,\cdots,e_n\}$ is a baisis of $M$, then for any $f\in \mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right)$, it can be uniquely represented by a matrix $A=(a_{ij})$ with respect to the basis $\{e_1,\cdots,e_n\}$. Then the \textbf{determinant} of $f$ is defined as follows
+        \begin{align*}
+            \largewedge^n:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right) &\longrightarrow R\\
+        f &\longmapsto f\wedge\cdots\wedge f.
+        \end{align*}
+    \end{enumerate}
+}
+
+
+
 \section{Commutative Algebra}
 \dfn{Commutative Algebra}{
     Let $R$ be a commutative ring. A \textbf{commutative $R$-algebra} is an $R$-algebra where the multiplication is commutative. Or equivalently, a commutative $R$-algebra is a commutative ring $A$ together with a ring homomorphism $R\to A$. Hence there is a category isomorphism $R\text{-}\mathsf{CAlg}\cong \left(R/\mathsf{CRing}\right)$.
 }
-
+\subsection{Construction}
 
 \dfn{Free Commutative Algebra}{
     Let $X$ be a set and $R$ be a commutative ring. The \textbf{free commutative $R$-algebra} on $X$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, together with a map $\iota:X\to \mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, is defined by the following universal property: for any commutative $R$-algebra $A$ and any map $f:X\to A$, there exists a unique homomorphism $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)\to A$ such that the following diagram commutes
@@ -146,7 +225,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     
 }
 
-\prop{}{
+\prop{Finite Generation Implies Finite Type}{
     Let $A$ be a $R$-algebra. If $A$ is finitely generated as an $R$-module, then $A$ is a finite-type $R$-algebra.
 }
 \pf{

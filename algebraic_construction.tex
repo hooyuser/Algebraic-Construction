@@ -3,6 +3,8 @@
 \input{preamble}
 
 %\includeonly{category_theory}
+%\includeonly{module}
+
 
 %\tikzexternalize % activate!
 \usepackage[page,toc,titletoc,title]{appendix}
@@ -23,6 +25,24 @@
 \DeclareMathOperator*\lowlim{\underline{lim}}
 \DeclareMathOperator*\uplim{\overline{lim}}
 \DeclareMathSymbol{\mhyphen}{\mathord}{AMSa}{"39}
+
+\newcommand*{\boldzero}{\text{\large\usefont{U}{bbold}{m}{n}0}}
+\newcommand*{\boldone}{\text{\large\usefont{U}{bbold}{m}{n}1}}
+
+\newcommand*{\boldtwo}{%
+  \text{%
+    \fontsize{11}{13}\selectfont % Adjust 11pt to your desired size, and 13 as the baselineskip
+    \usefont{U}{bbold}{m}{n}2%
+  }%
+}
+
+\newcommand*{\boldthree}{%
+  \text{%
+    \fontsize{11}{13}\selectfont % Adjust 11pt to your desired size, and 13 as the baselineskip
+    \usefont{U}{bbold}{m}{n}3%
+  }%
+}
+
 % Define \bigcdot
 \makeatletter
 \newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}

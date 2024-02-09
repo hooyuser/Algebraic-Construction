@@ -20,8 +20,23 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra. In fact, we have
     \mathsf{Ring}\cong \mathbb{Z}\text{-}\mathsf{Alg}.
 \]
 \dfn{Unit Group of a Ring}{
-    Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$.
+    Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$. We can define a functor $(-)^\times:\mathsf{Ring}\to\mathsf{Grp}$ that sends a ring to its unit group
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Ring}\ \&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Grp}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            R \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]R^{\times}\arrow[dd, "f|_{R^\times}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "(-)^\times", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            S  \& \& \& S^{\times}
+        \end{tikzcd}
+    \]
 }
+
+\prop{Adjunction $\mathbb{Z}\left[-\right]\dashv \left(-\right)^\times$}{
+    $(-)^\times:\mathsf{Ring}\to\mathsf{Grp}$ has a left adjoint which sends each group $G$ to the group ring $\mathbb{Z}\left[G\right]$.
+}
+
 Next we define the morphisms in the category $\mathsf{Ring}$.
 \dfn{Ring Homomorphism}{
     Let $R$, $S$ be rings. A \textbf{ring homomorphism} from $R$ to $S$ is a map $f:R\to S$ such that
@@ -147,6 +162,10 @@ Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R
     \end{enumerate}
 }
 
+\prop{Free-Forgetful Adjunction $\mathrm{Free}_{\mathsf{Ring}}\dashv U$}{
+    The free ring functor $\mathrm{Free}_{\mathsf{Ring}}$ is left adjoint to the forgetful functor $U:\mathsf{Ring}\to\mathsf{Set}$.
+}
+
 
 
 \subsection{Graded Object}
@@ -196,7 +215,7 @@ which means $\mathfrak{a}$ is a graded ideal.
 }
 
 \section{Category Properties}
-The category Ring is both complete and cocomplete.
+The category $\mathsf{Ring}$ is both complete and cocomplete.
 
 \prop{Equivalence Chracaterization of Monomorphisms in $\mathsf{Ring}$}{
     Let $f:R\to S$ be a ring homomorphism. Then the following are equivalent:
@@ -219,3 +238,6 @@ The category Ring is both complete and cocomplete.
         \item $\ker f=\{0_R\}$ and $\mathrm{im}f=S$. 
     \end{enumerate}
 }
+
+
+

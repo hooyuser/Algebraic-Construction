@@ -267,7 +267,7 @@ We can form the comma category $(S\downarrow T)$ as follows:
 \dfn[universal_morphism]{Universal Morphism}{
     Suupose $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories and $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. The comma category $(\diagfunctor X\downarrow T)$ for the following pair of functors
 $$
-\mathsf{1} \xlongrightarrow{\diagfunctor X} \mathsf{C} \xlongleftarrow{T} \mathsf{B}
+\boldone \xlongrightarrow{\diagfunctor X} \mathsf{C} \xlongleftarrow{T} \mathsf{B}
 $$
 can be written as $\left(X\downarrow T\right)$ for short. Morphisms in $\left(X\downarrow \mathsf{B}\right)$ can be simplified to commutative triangles
     \[
@@ -281,7 +281,7 @@ We say $\left(Y,X\xrightarrow{u} T(Y)\right)$ is a \textbf{universal morphism fr
 
 Similarly, the comma category $\left(\mathsf{A}\downarrow \diagfunctor X\right)$ for the following pair of functors
 $$
-\mathsf{A} \xlongrightarrow{S} \mathsf{C} \xlongleftarrow{\diagfunctor X} \mathsf{1}
+\mathsf{A} \xlongrightarrow{S} \mathsf{C} \xlongleftarrow{\diagfunctor X} \boldone
 $$
 can be written as $\left(\mathsf{A}\downarrow X\right)$ for short. Morphisms in $\left(\mathsf{A}\downarrow X\right)$ can be simplified to commutative triangles
     \[
@@ -300,7 +300,7 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
     Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} $\left(\mathsf{C} / X\right)$ is the comma category $(\mathrm{id}_{\mathsf{C}} \downarrow X)$, where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \mathsf{1} \arrow[l, "\diagfunctor X "']
+            \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \boldone \arrow[l, "\diagfunctor X "']
         \end{tikzcd}
     \]
     Morphims in $\left(\mathsf{C} / X\right)$ are commutative triangles shown as follows
@@ -316,7 +316,7 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
     Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[r, "\diagfunctor"]{} \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
+            \boldone \arrow[r, "\diagfunctor"]{} \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
         \end{tikzcd}
     \]
     Morphims in $\left(X / \mathsf{C}\right)$ are commutative triangles shown as follows
@@ -374,7 +374,7 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
     where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
+            \boldone \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
         \end{tikzcd}
     \]
     This category is denoted by $\int_\mathsf{C} F$ and can be explicitly described as follows
@@ -770,7 +770,7 @@ If $f:X\to Y$ is a morphism in $\mathsf{C}$, then the following string diagram s
 \end{tikzpicture}
 \hspace{1cm}
 \begin{tikzcd}[ampersand replacement=\&]
-    \mathsf{1} \arrow[r, "\diagfunctor X"{name=A, above}, bend left=40] \arrow[r, "\diagfunctor Y"'{name=B, below}, bend right=40] \&[+30pt] \mathsf{C}
+    \boldone \arrow[r, "\diagfunctor X"{name=A, above}, bend left=40] \arrow[r, "\diagfunctor Y"'{name=B, below}, bend right=40] \&[+30pt] \mathsf{C}
     \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "f_{\bullet}"]
 \end{tikzcd}
 \end{center}
@@ -1817,10 +1817,10 @@ can be translated into the following calculus rules
     \begin{enumerate}[(i)]
         \item $F$ is representable by universal element $(A,u)$ 
         \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}}F$}$=\left(\{*\} \downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
+            \boldone \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}  \arrow[l, " F"']
         \end{tikzcd}$.
         \item $(A,\phi^u)$ is initial in the category $\left(  \text{\hyperref[th:yoneda_embedding_functor]{$Y_{\mathsf{C}^{\mathrm{op}}}$}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
-           \mathsf{C}^{\mathrm{op}}  \arrow[r, " Y_{\mathsf{C}^{\mathrm{op}}}"] \& \left[\mathsf{C},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\diagfunctor F"']
+           \mathsf{C}^{\mathrm{op}}  \arrow[r, " Y_{\mathsf{C}^{\mathrm{op}}}"] \& \left[\mathsf{C},\mathsf{Set}\right] \&  \boldone \arrow[l, "\diagfunctor F"']
         \end{tikzcd}$.
         \item $\left(A,\diagfunctor u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}(\int_{\mathsf{C}}F)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}}F$ (which is a morphism $f:A\to X$ in $\mathsf{C}$ such that $F(f)(u)=x$).
@@ -1829,10 +1829,10 @@ can be translated into the following calculus rules
     \begin{enumerate}[(i)]
         \item $F$ is representable by universal element $(A,u)$ 
         \item $(A,u)$ is initial in the category \hyperref[th:category_of_elements]{$\int_{\mathsf{C}^{\mathrm{op}}}F$}$=\left(\{*\} \downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}^{\mathrm{op}}  \arrow[l, " F"']
+            \boldone \arrow[r, "\diagfunctor\{*\}"] \& \mathsf{Set} \& \mathsf{C}^{\mathrm{op}}  \arrow[l, " F"']
         \end{tikzcd}$.
         \item $(A,\phi^u)$ is terminal in the category $\left(  \text{\hyperref[th:yoneda_embedding_functor]{$Y_{\mathsf{C}}$}}\downarrow F\right)$, which corresponds to $ \begin{tikzcd}[ampersand replacement=\&]
-           \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&  \mathsf{1} \arrow[l, "\diagfunctor F"']
+           \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&  \boldone \arrow[l, "\diagfunctor F"']
         \end{tikzcd}$.
         \item $\left(A,\diagfunctor u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}\left(\int_{\mathsf{C}^{\mathrm{op}} }F\right)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}^{\mathrm{op}} }F$ (which is a morphism $f: X\to A$ in $\mathsf{C}$ such that $F(f)(x)=u$).
@@ -1949,7 +1949,7 @@ can be translated into the following calculus rules
         \phi_X:\mathrm{Hom}_{\mathsf{Set}}\left(\{*\},X \right)&\xlongrightarrow{\sim} X\\
         f&\longmapsto f(*)
     \end{align*}
-    Naturality of $\phi$ is shown as follows
+    Naturality of $\phi$ means that for any function $h:X\to Y$, the following diagram commutes
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathrm{Hom}_{\mathsf{Set}}\left(\{*\},X \right)\arrow[r, "h_*"] \arrow[d, "\phi_X"'] \& \mathrm{Hom}_{\mathsf{Set}}\left(\{*\},Y \right) \arrow[d, "\phi_Y"]\\[+10pt]
@@ -1958,12 +1958,65 @@ can be translated into the following calculus rules
     \]
 }
 
+\ex{$\mathrm{Ob}:\mathsf{Cat}\to \mathsf{Set}$ is Representable}{
+    The functor 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Cat}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Set}\&[-30pt]\&[-30pt] \\ [-15pt] 
+           \mathsf{C}  \arrow[dd, "F"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\mathrm{Ob}(\mathsf{C}) \arrow[dd, "F^{\mathrm{Ob}}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathrm{Ob}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            \mathsf{D}  \& \& \& \mathrm{Ob}(\mathsf{D}) 
+        \end{tikzcd}
+    \]
+    $\mathrm{Ob}:\mathsf{Cat}\to \mathsf{Set}$ is representable by $\left(\boldone,\mathrm{id}_{\{*\}}\right)$. The natural isomorphism $\phi:\mathrm{Hom}_{\mathsf{Cat}}\left(\boldone,-\right)\xRightarrow{\sim} \mathrm{Ob}$ is defined by 
+    \begin{align*}
+        \phi_{\mathsf{C}}:\mathrm{Hom}_{\mathsf{Cat}}\left(\boldone,\mathsf{C} \right)&\xlongrightarrow{\sim} \mathrm{Ob}(\mathsf{C})\\
+        F&\longmapsto F^{\mathrm{Ob}}(\bullet)
+    \end{align*}
+    Naturality of $\phi$ means that for any functor $H:\mathsf{C}\to \mathsf{D}$, the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Hom}_{\mathsf{Cat}}\left(\boldone,\mathsf{C} \right)\arrow[r, "H_\star"] \arrow[d, "\phi_{\mathsf{C}}"'] \& \mathrm{Hom}_{\mathsf{Cat}}\left(\boldone,\mathsf{D} \right) \arrow[d, "\phi_{\mathsf{D}}"]\\[+10pt]
+            \mathrm{Ob}(\mathsf{C}) \arrow[r, "H^{\mathrm{Ob}}"'] \& \mathrm{Ob}(\mathsf{D})
+        \end{tikzcd}
+    \]
+
+}
+\ex{$\mathrm{Mor}:  \mathsf{C}\to \mathsf{Set}$ is Representable}{
+    The functor 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Cat}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Set}\&[-30pt]\&[-30pt] \\ [-15pt] 
+           \mathsf{C}  \arrow[dd, "F"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\mathrm{Mor}(\mathsf{C}) \arrow[dd, "F^{\mathrm{Mor}}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathrm{Mor}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            \mathsf{D}  \& \& \& \mathrm{Mor}(\mathsf{D}) 
+        \end{tikzcd}
+    \]
+    $\mathrm{Mor}: \mathsf{Cat}\to \mathsf{Set}$ is representable by $\left(\boldtwo,\bullet\to\bullet\right)$. The natural isomorphism $\phi:\mathrm{Hom}_{\mathsf{Cat}}\left(\boldtwo,-\right)\xRightarrow{\sim} \mathrm{Mor}$ is defined by
+    \begin{align*}
+        \phi_{\mathsf{C}}:\mathrm{Hom}_{\mathsf{Cat}}\left(\boldtwo,\mathsf{C} \right)&\xlongrightarrow{\sim} \mathrm{Mor}(\mathsf{C})\\
+        F&\longmapsto F^{\mathrm{Mor}}\left(\bullet\to\bullet\right)
+    \end{align*}
+    Naturality of $\phi$ means that for any functor $H:\mathsf{C}\to \mathsf{D}$, the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Hom}_{\mathsf{Cat}}\left(\boldtwo,\mathsf{C} \right)\arrow[r, "H_\star"] \arrow[d, "\phi_{\mathsf{C}}"'] \& \mathrm{Hom}_{\mathsf{Cat}}\left(\boldtwo,\mathsf{D} \right) \arrow[d, "\phi_{\mathsf{D}}"]\\[+10pt]
+            \mathrm{Mor}(\mathsf{C}) \arrow[r, "H^{\mathrm{Mor}}"'] \& \mathrm{Mor}(\mathsf{D})
+        \end{tikzcd}
+    \]
+}
+
+
 \section{Limit and Colimit}
 \dfn[cone]{Cone}{
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C} \arrow[r, "\diagfunctor"] \& {[\mathsf{J},\mathsf{C}]} \& \mathsf{1} \arrow[l, "\diagfunctor F"']
+            \mathsf{C} \arrow[r, "\diagfunctor"] \& {[\mathsf{J},\mathsf{C}]} \& \boldone \arrow[l, "\diagfunctor F"']
         \end{tikzcd}
     \]
     The comma category $\left(\diagfunctor \downarrow \diagfunctor F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. 
@@ -2014,7 +2067,7 @@ can be translated into the following calculus rules
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. Consider functors
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-             \mathsf{1} \arrow[r, "\diagfunctor F"] \& {[\mathsf{J},\mathsf{C}]} \&\mathsf{C} \arrow[l, "\diagfunctor "']
+             \boldone \arrow[r, "\diagfunctor F"] \& {[\mathsf{J},\mathsf{C}]} \&\mathsf{C} \arrow[l, "\diagfunctor "']
         \end{tikzcd}
     \]
     The comma category $\left(\diagfunctor F \downarrow \diagfunctor\right)$ is called the \textbf{cocone category from $F$ to $\textsf{C}$}, denoted by $\mathsf{Cocone}(F,\textsf{C})$. 
@@ -2238,9 +2291,9 @@ G(i) \arrow[rr]                         \&                                      
 
 
 \dfn{Preserve, Reflect, Create Limits}{
-    Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams  valued in $\mathsf{C}$. $K: \mathsf{J} \rightarrow \mathsf{C}$. A functor $F: \mathsf{C} \rightarrow \mathsf{D}$ is said to
+    Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams  valued in $\mathsf{C}$. A functor $F: \mathsf{C} \rightarrow \mathsf{D}$ is said to
     \begin{itemize}
-        \item \textbf{preserves} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and limit cone over $K$, the image of this cone defines a limit cone over the composite diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$;
+        \item \textbf{preserves} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and limit cone over $K$, the image of this cone defines a limit cone over the composite diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$; Or equivalently, $F_*$ maps terminal object in $\mathsf{Cone}(\mathsf{C},K)$ to terminal object in $\mathsf{Cone}(\mathsf{D},F\circ K)$;
         \item \textbf{reflects} limits for $\mathcal{K}$ if any cone over a diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$, whose image upon applying $F$ is a limit cone for the diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$, is a limit cone over $K$;
         \item \textbf{creates} limits for $\mathcal{K}$ if whenever $K: \mathsf{J} \rightarrow \mathsf{C}$ is a diagram in $\mathcal{K}$ and $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$ has a limit in $\mathsf{D}$, there exists some limit cone over $F\circ K$ that can be lifted to a limit cone over $K$, and moreover $F$ reflects the limits for $\mathcal{K}$.
     \end{itemize}
@@ -2277,6 +2330,10 @@ The next result shows that functor categories inherit limits and colimits, defin
         \item $\varprojlim F$ exists.
         \item For any $a\in \mathsf{A}$, $\mathrm{ev}_a$ preserves $\varprojlim F$.
     \end{enumerate}
+}
+
+\prop{}{
+    If $\mathsf{A}$ is a small category, then the forgetful functor $U:[\mathsf{A},\mathsf{C}] \rightarrow \left[\mathsf{Disc}\left(\mathrm{Ob} \left(\mathsf{A}\right)\right), \mathsf{C}\right]$ strictly creates all limits and colimits that exist in $\mathsf{C}$. These limits are defined objectwise, meaning that for each $a \in \mathrm{A}$, the evaluation functor $\mathrm{ev}_a:[\mathsf{A},\mathsf{C}]  \rightarrow \mathsf{C}$ preserves all limits and colimits existing in $\mathsf{C}$.
 }
 
 \prop{Limits Commute with Limits}{
@@ -2736,9 +2793,9 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     Suppose $\left(L,R,\eta,\varepsilon\right)$ satisfies snake equations. Consider the diagram
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{1} \arrow[dd, "\mathrm{id}"', bend right=38] \arrow[r, "\diagfunctor X"]  \&[+36pt] \mathsf{C} \arrow[dd, "L"', bend right=38] \\[-5pt]
+            \boldone \arrow[dd, "\mathrm{id}"', bend right=38] \arrow[r, "\diagfunctor X"]  \&[+36pt] \mathsf{C} \arrow[dd, "L"', bend right=38] \\[-5pt]
             \dashv                                                  \& \dashv                                    \\[-5pt]
-            \mathsf{1} \arrow[uu, "\mathrm{id}"', bend right=38] \arrow[r, "\diagfunctor Y"'] \& \mathsf{D} \arrow[uu, "R"', bend right=38]
+            \boldone \arrow[uu, "\mathrm{id}"', bend right=38] \arrow[r, "\diagfunctor Y"'] \& \mathsf{D} \arrow[uu, "R"', bend right=38]
             \end{tikzcd}    
     \]
 
@@ -2979,7 +3036,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     where $\Phi_{\text{-},Y}$ is the horizontal composition
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C}^{\mathrm{op}}\times\mathsf{1}\arrow[r,"{\mathrm{id}\times\diagfunctor Y}"]\&[+15pt]\mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)$}"{name=A, above}, bend left] \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)$}"'{name=B, below}, bend right] \&[+60pt] \mathsf{Set}
+            \mathsf{C}^{\mathrm{op}}\times\boldone\arrow[r,"{\mathrm{id}\times\diagfunctor Y}"]\&[+15pt]\mathsf{C}^{\mathrm{op}}\times\mathsf{D} \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{D}}\left(L(-){,}-\right)$}"{name=A, above}, bend left] \arrow[r, "\scalebox{1.2}{$\mathrm{Hom}_{\mathsf{C}}\left(-{,}R(-)\right)$}"'{name=B, below}, bend right] \&[+60pt] \mathsf{Set}
             \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\Phi", "\sim\hspace{1.5pt}"']
         \end{tikzcd}
 \]
@@ -2996,7 +3053,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
     for some $R_Y\in \mathrm{Ob}(\mathsf{D})$. \Cref{th:representable_functor_by_universal_element} implies that $(R_Y,\phi(Y))$ is terminal in the category $\left(Y_{\mathsf{C}}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\right)$, which corresponds to 
     $$ 
     \begin{tikzcd}[ampersand replacement=\&]
-        \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&[+45pt]  \mathsf{1} \arrow[l, "{\diagfunctor \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)}"']
+        \mathsf{C} \arrow[r, " Y_{\mathsf{C}}"] \& \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right] \&[+45pt]  \boldone \arrow[l, "{\diagfunctor \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)}"']
     \end{tikzcd}
     $$ 
     Given any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, since $(R_{Y_2},\phi(Y_2))$ is terminal in $\left(Y_{\mathsf{C}}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(L(-),Y\right)\right)$, there exists a unique morphism $R_h:R_{Y_1}\to R_{Y_2}$  in $\mathsf{C}$ such that the following diagram commutes
@@ -3453,7 +3510,10 @@ Commutative monoids can be internalized in the doctrine of symmetric monoidal ca
     A \textbf{double category} $\mathsf{D}$ is a category internal to $\mathsf{Cat}$.
 }
 
+\chapter{Homological Algebra}
 \section{Abelian Category}
+
+\subsection{$\mathsf{Ab}$-enriched Category}
 We will refer to \hyperref[th:enriched_functor]{$\mathsf{Ab}$-enriched functors} as \textbf{additive functors}. Some literature refers to $\mathsf{Ab}$-categories as preadditive categories. We will not use this term in this note. 
 
 \dfn{Biproduct}{
@@ -3487,15 +3547,12 @@ We will refer to \hyperref[th:enriched_functor]{$\mathsf{Ab}$-enriched functors}
         \item Zero object (empty biproduct) exists.
     \end{enumerate}
 }
-\prop{$\mathsf{Ab}$-enriched functors preserve biproducts}{
+\prop{$\mathsf{Ab}$-enriched Functors Preserve Biproducts}{
     $\mathsf{Ab}$-enriched functors preserve finite biproducts.
-}
-\dfn{Additive Category}{
-    An $\mathsf{Ab}$-category is \textbf{additive} if it has all finite biproducts.
 }
 
 \dfn{Kernel and Cokernel}{
-    Suppose $\mathsf{C}$ is an abelian category with zero object and $f:X\to Y$ is a morphism in $\mathsf{C}$. The \textbf{kernel} of $f$ is the equalizer of $f$ and the zero morphism, which is denoted by $\ker f$. The universal property of kernel is given by the following diagram
+    Suppose $\mathsf{C}$ is a category with zero object and $f:X\to Y$ is a morphism in $\mathsf{C}$. The \textbf{kernel} of $f$ is the equalizer of $f$ and the zero morphism, which is denoted by $\ker f$. The universal property of kernel is given by the following diagram
     \[
     \begin{tikzcd}[ampersand replacement=\&]
         \& M \arrow[d, "g"] \arrow[rd, "0"] \arrow[ld, "\exists!\widetilde{g}"', dashed] \&   \\
@@ -3512,8 +3569,16 @@ We will refer to \hyperref[th:enriched_functor]{$\mathsf{Ab}$-enriched functors}
 
 }
 
+\subsection{Additive Category}
+\dfn{Additive Category}{
+    An $\mathsf{Ab}$-category is \textbf{additive} if it has all finite biproducts.
+}
+
+
+
+\subsection{Abelian Category}
 \dfn{Abelian Category}{
-    An additive category $\mathsf{C}$ is \textbf{abelian} if 
+    An additive category $\mathsf{A}$ is \textbf{abelian} if 
     \begin{enumerate}[(i)]
         \item Every morphism has both a kernel and a cokernel.
         \item Every monomorphism and every epimorphism is normal. This means that every monomorphism is a kernel of some morphism, and every epimorphism is a cokernel of some morphism.
@@ -3521,10 +3586,8 @@ We will refer to \hyperref[th:enriched_functor]{$\mathsf{Ab}$-enriched functors}
 }
 
 \prop{}{
-    If $\mathsf{A}$ is an abelian category, then $\left[\mathsf{C}^\mathrm{op}, \mathsf{A}\right]$ is abelian for any small category $\mathsf{C}$.
+    If $\mathsf{A}$ is an abelian category, then $\left[\mathsf{C}, \mathsf{A}\right]$ is abelian for any small category $\mathsf{C}$.
 }
-
-
 \prop[exact_functors_in_abelian_category]{Exact Functors in Abelian Category}{
     Let $\mathsf{A}$ and $\mathsf{B}$ be abelian categories and $F:\mathsf{A}\to\mathsf{B}$ be an additive functor. Then
     \begin{enumerate}[(i)]
@@ -3541,8 +3604,23 @@ We will refer to \hyperref[th:enriched_functor]{$\mathsf{Ab}$-enriched functors}
         0\longrightarrow X\xlongrightarrow{f} Y\xlongrightarrow{g} Z\longrightarrow 0\text{ is exact}\quad\implies\quad 0\longrightarrow F(X)\xlongrightarrow{F(f)} F(Y)\xlongrightarrow{F(g)} F(Z)\longrightarrow 0\text{ is exact}.
         \]
     \end{enumerate}
+
 }
 
+\dfn{Cohomology Functor}{
+    Let $\mathsf{A}$ be an abelian category and 
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        X \arrow[r, "f"] \& Y \arrow[r, "g"] \& Z
+    \end{tikzcd}
+    \]
+    be an exact sequence in $\mathsf{A}$. The \textbf{cohomology functor} $\mathrm{H}:\mathsf{Ch}_{}\left(\mathsf{A}\right)\to\mathsf{Ab}$ is defined by
+    \[
+    \mathrm{H}(X\xlongrightarrow{f} Y\xlongrightarrow{g} Z):=\operatorname{coker}[\operatorname{im}(f) \rightarrow \operatorname{ker}(g)].
+    \]
+}
+
+    
 
 \prop[exact_functor_preserve_cohomology]{Exact Functor Preserve Cohomology}{
     Let $F:\mathsf{A}\to\mathsf{B}$ be an exact functor between abelian categories. Suppose 
@@ -3564,5 +3642,188 @@ We will refer to \hyperref[th:enriched_functor]{$\mathsf{Ab}$-enriched functors}
         \end{aligned}
 $$
 }
+
+\section{Complex}
+
+\subsection{Complex in Additive Category}
+\subsubsection{Cochain Complex}
+\dfn{$S$-graded Object of a Category}{
+    Let $\mathsf{C}$ be a category and $S$ be a set. The category of \textbf{$S$-graded object of $\mathsf{C}$} is defined as the functor category $\left[\mathsf{Disc}(S),\mathsf{C}\right]$, denoted by $\mathsf{Gr}_{S}\left(\mathsf{C}\right)$. The explicit description of the category is given as follows
+    \begin{itemize}
+        \item Object: a collection of objects $\left\{X_s\right\}_{s\in S}$ in $\mathsf{C}$.
+        \item Morphism: a collection of morphisms $\left\{f_s:X_s\to Y_s\right\}_{s\in S}$ in $\mathsf{C}$.
+    \end{itemize}
+}
+
+\dfn{Category with Translation}{
+    A \textbf{category with translation} is a category $\mathsf{C}$ equipped with an auto-equivalence functor
+    \[
+    T:\mathsf{C}\longrightarrow\mathsf{C}
+    \]
+    called the \textbf{shift functor} or \textbf{translation functor} or suspension functor.
+}
+
+\ex{Shift Functors on $\mathbb{Z}$-graded Category}{
+    Let $\mathsf{C}$ be a category. Given $k\in \mathbb{Z}$, the \textbf{$k$-th shift functor} on $\mathsf{Gr}_{\mathbb{Z}}\left(\mathsf{C}\right)$ is an endofunctor $[k]$ defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Gr}_{\mathbb{Z}}\left(\mathsf{C}\right)\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Gr}_{\mathbb{Z}}\left(\mathsf{C}\right)\&[-30pt]\&[-30pt] \\ [-15pt] 
+            X=\left(X^i\right)  \arrow[dd, "f=\left(f^i\right)"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] X[k]=\left(X[k]^i\right)=\left(X^{k+i}\right)\arrow[dd, "{f[k]=\left(f^{k+i}\right)}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "{[k]}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            Y=\left(Y^i\right)   \& \& \& Y[k]=\left(Y[k]^i\right)=\left(Y^{k+i}\right)
+        \end{tikzcd}
+    \]
+
+}
+
+\ex{Shift Functors on $\mathbb{Z}^m$-graded Category}{
+    Let $\mathsf{C}$ be a category. In a similar manner, given $k_1,\cdots,k_m\in \mathbb{Z}$, the \textbf{$(k_1,\cdots,k_m)$-th shift functor} on $\mathsf{Gr}_{\mathbb{Z}^m}\left(\mathsf{C}\right)$ is an endofunctor $[k_1,\cdots,k_m]$ defined by
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Gr}_{\mathbb{Z}^m}\left(\mathsf{C}\right)\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Gr}_{\mathbb{Z}^m}\left(\mathsf{C}\right)\&[-30pt]\&[-30pt] \\ [-15pt] 
+            A=\left(A^{i_1,\cdots,i_m}\right)  \arrow[dd, "f=\left(f^{i_1,\cdots,i_m}\right)"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] A[k_1,\cdots,k_m]=\left(A[k_1,\cdots,k_m]^{i_1,\cdots,i_m}\right)=\left(A^{i_1+k_1,\cdots,i_m+k_m}\right)\arrow[dd, "\left(f^{i_1+k_1,\cdots,i_m+k_m}\right)"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "{[k_1,\cdots,k_m]}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            B=\left(B^{i_1,\cdots,i_m}\right)   \& \& \& B[k_1,\cdots,k_m]=\left(B[k_1,\cdots,k_m]^{i_1,\cdots,i_m}\right)=\left(B^{i_1+k_1,\cdots,i_m+k_m}\right)
+        \end{tikzcd}
+    \]
+}
+
+\lemm{}{
+    If $\mathsf{C}$ is an additive category, then $\mathsf{Gr}_{\mathbb{Z}^m}\left(\mathsf{C}\right)=\left[\mathsf{Disc}(\mathbb{Z}^m),\mathsf{C}\right]$ is an additive category.
+}
+
+\dfn{General Differential Object in a Category with Translation}{
+    A \textbf{general differential object} in a category $\mathsf{C}$ with translation $T$ is a pair $\left(X,d_X\right)$ consisting of an object $X$ in $\mathsf{C}$ and a morphism $d_X:X\to T(X)$ in $\mathsf{C}$.
+}
+
+\dfn{Differential Object in an Additive Category with Translation}{
+    A \textbf{differential object} in an additive category $\mathsf{C}$ with translation $T$ is a pair $\left(X,d_X\right)$ consisting of an object $X$ in $\mathsf{C}$ and a morphism $d_X:X\to T(X)$ in $\mathsf{C}$ such that $T(d_X)\circ d_X=0$.
+}
+
+\dfn{Differential $\mathbb{Z}$-Graded Object}{
+    Let $\mathsf{A}$ be an additive category. The category of \textbf{differential $\mathbb{Z}$-graded objects} of $\mathsf{A}$ consists of the following data
+    \begin{itemize}
+        \item Object: differential objects $\left(X,d_X\right)$ in the additive category $\mathsf{Gr}_{\mathbb{Z}}\left(\mathsf{A}\right)$ with translation $[1]$.
+        \item Morphism: morphisms $f:\left(X,d_X\right)\to \left(Y,d_Y\right)$ are morphisms $f:X\to Y$ in $\mathsf{Gr}_{\mathbb{Z}}\left(\mathsf{A}\right)$ such that $f[1]\circ d_X=d_Y\circ f$.
+    \end{itemize}
+}
+
+\dfn{Cochain Complex}{
+    Let $\mathsf{A}$ be an additive category. The category of \textbf{cochain complexes} of $\mathsf{A}$, denoted by $\mathsf{Ch}(\mathsf{A})$, consists of the following data
+    \begin{itemize}
+        \item Object: \textbf{cochain complex} of $\mathsf{A}$, which consists of a collection of objects $X^{\bullet}=\left(X^n\right)_{n\in \mathbb{Z}}$ in $\mathsf{A}$ and a collection of morphisms $d_X^{\bullet}=\left(d^n:X^n\to X^{n+1}\right)_{n\in \mathbb{Z}}$ in $\mathsf{A}$ 
+        \[
+            \cdots \longrightarrow X^n \xlongrightarrow{d^n_X} X^{n+1} \xlongrightarrow{d^{n+1}_X} X^{n+2} \longrightarrow \cdots
+        \]
+        such that $d^{n+1}_X\circ d^n_X=0$ for all $n\in \mathbb{Z}$.
+        \item Morphism: a collection of morphisms $\left(f^n:X^n\to Y^{n}\right)_{n\in \mathbb{Z}}$ in $\mathsf{A}$ such that $f^{n+1}\circ d^n_X=d^n_Y\circ f^n$ for all $n\in \mathbb{Z}$
+        \[
+            \begin{tikzcd}[
+                ampersand replacement=\&,
+                column sep={6em, between origins},
+                row sep={5em, between origins}
+            ]
+                \cdots \arrow[r] \& X^{n} \arrow[r, "d_X^n"] \arrow[d, "f^n"'] \& X^{n+1} \arrow[d, "f^{n+1}"'] \arrow[r, "d_X^{n+1}"] \& X^{n+2} \arrow[d, "f^{n+2}"] \arrow[r] \& \cdots \\
+                \cdots \arrow[r] \& Y^{n} \arrow[r, "d_Y^{n}"'] \& Y^{n+1} \arrow[r, "d_Y^{n+1}"'] \& Y^{n+2} \arrow[r] \& \cdots
+            \end{tikzcd}
+        \]
+    \end{itemize}
+    $\mathsf{Ch}(\mathsf{A})$ is isomorphic to the category of differential $\mathbb{Z}$-graded objects of $\mathsf{A}$.
+}
+
+\subsubsection{Chain Complex}
+\dfn{Homotopy between Morphisms of Chain Complexes}{
+    A homotopy $h$ between a pair of morphisms of chain complexes $f, g: X_{\bullet} \rightarrow Y_{\bullet}$ is a collection of morphisms $h_i: X_i \rightarrow Y_{i+1}$ such that we have
+$$
+f_i-g_i=d_{i+1} \circ h_i+h_{i-1} \circ d_i
+$$
+for all $i$. Two morphisms $f, g: X_{\bullet} \rightarrow Y_{\bullet}$ are said to be homotopic if a homotopy between $f$ and $g$ exists. 
+}
+\subsection{Chain Homotopy}
+
+\dfn{Homotopy between Morphisms of Cochain Complexes}{
+    A \textbf{homotopy $h$ between a pair of morphisms of cochain complexes} $f, g: X^{\bullet} \rightarrow Y^{\bullet}$ is a collection of morphisms $h^i: X^i \rightarrow Y^{i-1}$
+    \[
+        \begin{tikzcd}[
+            ampersand replacement=\&,
+            column sep={6em, between origins},
+            row sep={5em, between origins}
+        ]
+            \cdots \arrow[r, "d_X^{i-1}"]  \& X^{i} \arrow[r, "d_X^i"] \arrow[d, "f^i"'] \arrow[ld, "h^i"'] \& X^{i+1} \arrow[d, "f^{i+1}"'] \arrow[r, "d_X^{i+1}"] \arrow[ld, "h^{i+1}"'] \& X^{i+2} \arrow[d, "f^{i+2}"] \arrow[r, "d_X^{i+2}"] \arrow[ld, "h^{i+2}"'] \& \cdots \arrow[ld, "h^{i+3}"] \\
+            \cdots \arrow[r, "d_Y^{i-1}"'] \& Y^{i} \arrow[r, "d_Y^{i}"']                                   \& Y^{i+1} \arrow[r, "d_Y^{i+1}"']                                             \& Y^{i+2} \arrow[r, "d_Y^{i+2}"']                                            \& \cdots                      
+        \end{tikzcd}
+    \]
+         such that
+$$
+f^i-g^i=d^{i-1}_Y \circ h^i+h^{i+1} \circ d^i_X
+$$
+for all $i\in \mathbb{Z}$. Two morphisms $f, g: X^{\bullet} \rightarrow Y^{\bullet}$ are said to be \textbf{homotopic} if there exists a homotopy between $f$ and $g$. A morphism $f: X^{\bullet} \rightarrow Y^{\bullet}$ is said to be \textbf{null homotopic} if it is homotopic to the zero morphism $0: X^{\bullet} \rightarrow Y^{\bullet}$.
+}
+
+\prop{Additive Functor Preserves Cochain Homotopy}{
+    Let $F:\mathsf{A}\to\mathsf{B}$ be an additive functor between additive categories. Suppose $h$ is a homotopy between a pair of morphisms $f, g: X^{\bullet} \rightarrow Y^{\bullet}$ in $\mathsf{Ch}(\mathsf{A})$. Then $(F(h^i))_{i\in\mathbb{Z}}$ is a homotopy between $F(f),F(g):F\left(\right)$ in $\mathsf{B}$.
+}
+
+
+\dfn{Homotopy Equivalence between Cochain Complexes}{
+    A morphism $f: X^{\bullet} \rightarrow Y^{\bullet}$ of cochain complexes is a \textbf{homotopy equivalence} if there exists a morphism $g: Y^{\bullet} \rightarrow X^{\bullet}$ such that $f\circ g$ and $g\circ f$ are homotopic to the identity morphisms of $X^{\bullet}$ and $Y^{\bullet}$, respectively. We say that $X^{\bullet}$ and $Y^{\bullet}$ are \textbf{homotopy equivalent} if there exists a homotopy equivalence between $X^{\bullet}$ and $Y^{\bullet}$.
+}
+
+
+
+\subsection{Cohomology}
+
+
+\dfn{$n$-th Cohomology Functor}{
+    Let $\mathsf{A}$ be an abelian category. Given any $n\in \mathbb{Z}$, the \textbf{$n$-th cohomology functor} of a cochain complex $X^{\bullet}$ is defined to be the functor
+    \[
+    \mathrm{H}^n(X^{\bullet}):=\ker d^n/\operatorname{im}d^{n-1}.
+    \]
+}
+
+\dfn{Quasi-isomorphism}{
+    A morphism $f: X^{\bullet} \rightarrow Y^{\bullet}$ of cochain complexes is a \textbf{quasi-isomorphism} if the induced morphism $\mathrm{H}^n(f):\mathrm{H}^n(X^{\bullet})\to \mathrm{H}^n(Y^{\bullet})$ is an isomorphism for all $n\in \mathbb{Z}$.
+}
+\lemm{}{
+    If $f: X^{\bullet} \rightarrow Y^{\bullet}$ is null homotopic, then $\mathrm{H}^n(f)=0$ for all $n\in \mathbb{Z}$.
+}
+\pf{
+    Let $h$ be a homotopy between $f$ and the zero morphism. Then we have
+    \[
+    f^n=d^{n-1}_Y \circ h^n+h^{n+1} \circ d^n_X
+    \]
+    for all $n\in \mathbb{Z}$. This implies that $f^n$ induces the zero morphism on cohomology for all $n\in \mathbb{Z}$.
+}
+\prop{Homotopic Morphisms Induce the Same Morphisms on Cohomology}{
+    Let $f, g: X^{\bullet} \rightarrow Y^{\bullet}$ be homotopic morphisms of cochain complexes. Then the induced morphisms $\mathrm{H}^n(f)$ and $\mathrm{H}^n(g)$ on cohomology are the same for all $n\in \mathbb{Z}$.
+}
+\pf{
+    Let $h$ be a homotopy between $f$ and $g$. Then we have
+    \[
+    f^n-g^n=d^{n-1}_Y \circ h^n+h^{n+1} \circ d^n_X
+    \]
+    for all $n\in \mathbb{Z}$. This implies that $f^n$ and $g^n$ induce the same morphism on cohomology for all $n\in \mathbb{Z}$.
+}
+\cor{Homotopy Equivalences are Quasi-Isomorphisms}{
+    A homotopy equivalence of cochain complexes is a quasi-isomorphism.
+}
+
+\dfn{Acyclic Complex}{
+    A cochain complex $X^{\bullet}$ is \textbf{acyclic} if $\mathrm{H}^n(X^{\bullet})=0$ for all $n\in \mathbb{Z}$.
+}
+
+\prop{}{
+    Let $\mathsf{A}$ be an abelian category and $X^{\bullet}\in\mathrm{Ob}\left(\mathsf{Ch}(\mathsf{A})\right)$ be a cochain complex. Then the following are equivalent
+    \begin{enumerate}[(i)]
+        \item $X^{\bullet}$ is acyclic.
+        \item $X^{\bullet}$ is exact, that is, exact at each $X^n$.
+        \item The zero morphism $0 \to X^{\bullet}$ is a quasi-isomorphism.
+    \end{enumerate}
+}
+
 
 
