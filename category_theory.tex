@@ -401,7 +401,7 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
         \end{tikzcd}
     \]
 }
-By viewing sets in $\mathsf{Set}$ as discrete categories, we have an inclusion $\mathsf{Set}\hookrightarrow\mathsf{Cat}$. Hence the category of elements of $F$ is a special case of the Grothendieck construction when the image of $F$ on $\mathrm{Ob}(\mathsf{C})$ on
+By viewing sets in $\mathsf{Set}$ as discrete categories, we have an inclusion $\mathsf{Set}\hookrightarrow\mathsf{Cat}$. Hence the category of elements of $F$ is a special case of the Grothendieck construction.
 
 
 \section{String Diagram}
@@ -3756,7 +3756,7 @@ $$
         \end{tikzcd}
     \]
 }
-\prop{Equivalent Characterizations of Split Exact Sequence}{
+\prop[equivalent_split_exact_sequence]{Equivalent Characterizations of Split Exact Sequence}{
     Let $\mathsf{A}$ be an abelian category and 
     \[
     \begin{tikzcd}[ampersand replacement=\&]
@@ -3766,11 +3766,35 @@ $$
     be an exact sequence in $\mathsf{A}$. Then the following statements are equivalent
     \begin{enumerate}[(i)]
         \item The sequence is split.
-        \item $f$ has right inverse, i.e. there exists a morphism $r:Y\to X$ such that $f\circ r=\mathrm{id}_X$.
-        \item $g$ has left inverse, i.e. there exists a morphism $s:Z\to Y$ such that $s\circ g=\mathrm{id}_Z$.
+        \item $f$ has left inverse, i.e. there exists a morphism $r:Y\to X$ such that $r\circ f=\mathrm{id}_X$.
+        \begin{center}
+            \begin{tikzcd}[ampersand replacement=\&, column sep={4em, between origins}, row sep={4em, between origins}]  
+               0\arrow[r] \&X\arrow[d, "\mathrm{id}_X"']\arrow[r, "f"] \& Y\arrow[ld, "\exists r", dashed] \arrow[r, "g"] \& Z \arrow[r]                               \& 0\\
+               \&X \&   \&   \&   
+            \end{tikzcd}
+        \end{center}
+        \item $g$ has right inverse, i.e. there exists a morphism $s:Z\to Y$ such that $g\circ s=\mathrm{id}_Z$.
+        \begin{center}
+            \begin{tikzcd}[ampersand replacement=\&, column sep={4em, between origins}, row sep={4em, between origins}]
+                \&  \&   \& Z \arrow[d, "\mathrm{id}_Z"] \arrow[ld, "\exists s"', dashed] \&   \\
+               0\arrow[r] \&X\arrow[r, "f"'] \& Y\arrow[r, "g"'] \& Z \arrow[r]                               \& 0
+            \end{tikzcd}
+        \end{center}
         \item The homomorphism $f^*: \mathrm{Hom}_{\mathsf{A}}(Y,A)\to \mathrm{Hom}_{\mathsf{A}}(X,A)$ is surjective for any $A\in \mathrm{Ob}(\mathsf{A})$.
-        \item The homomorphism $g_*: \mathrm{Hom}_{\mathsf{A}}(A,X)\to \mathrm{Hom}_{\mathsf{A}}(A,Y)$ is surjective for any $A\in \mathrm{Ob}(\mathsf{A})$.
+        \item The homomorphism $g_*: \mathrm{Hom}_{\mathsf{A}}(A,Y)\to \mathrm{Hom}_{\mathsf{A}}(A,Z)$ is surjective for any $A\in \mathrm{Ob}(\mathsf{A})$.
     \end{enumerate}
+}
+\pf{
+    (ii) $\implies$ (iv). Suppose $r:Y\to X$ is a left inverse of $f$. Given any $h\in \mathrm{Hom}_{\mathsf{A}}(X,A)$, there exists $h\circ r\in \mathrm{Hom}_{\mathsf{A}}(Y,A)$ such that $f^*(h\circ r)=h\circ r\circ f=h$, which means that $f^*$ is surjective.
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&, column sep={4em, between origins}, row sep={4em, between origins}]  
+           0\arrow[r] \&X\arrow[d, "\mathrm{id}_X"']\arrow[r, "f"] \& Y \arrow[ldd, "h\circ r"]\arrow[ld, "r"', dashed] \arrow[r, "g"] \& Z \arrow[r]                               \& 0\\
+           \&X \arrow[d, "h"']   \&   \&   \&   \\
+           \&A \&   \&   \&
+        \end{tikzcd}
+    \end{center}
+
+    (iv) $\implies$ (ii). Suppose $f^*$ is surjective. Given any $h\in \mathrm{Hom}_{\mathsf{A}}(X,A)$, there exists $h'\in \mathrm{Hom}_{\mathsf{A}}(Y,A)$ such that $f^*(h')=h$. This means that $h'\circ f=h$. Let $r:=h'$, then $r\circ f=h$.
 }
 
 
@@ -3960,12 +3984,12 @@ for all $i\in \mathbb{Z}$. Two morphisms $f, g: X^{\bullet} \rightarrow Y^{\bull
 \subsection{Projective and Injective Objects}
 \dfn{Projective Object}{
     An object $P$ in an abelian category $\mathsf{A}$ is \textbf{projective} if for any epimorphism $f: X \rightarrow Y$ and any morphism $g: P \rightarrow Y$, there exists a morphism $h: P \rightarrow X$ such that $f \circ h = g$.
-        \begin{center}
-            \begin{tikzcd}[ampersand replacement=\&, column sep={5em, between origins}, row sep={5em, between origins}]
-                \& P \arrow[d, "g"] \arrow[ld, "\exists h"', dashed] \&   \\
-X \arrow[r, "f"', two heads] \& Y \arrow[r]                               \& 0
-\end{tikzcd}
-        \end{center}
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&, column sep={5em, between origins}, row sep={5em, between origins}]
+            \& P \arrow[d, "g"] \arrow[ld, "\exists h"', dashed] \&   \\
+        X \arrow[r, "f"', two heads] \& Y \arrow[r]                               \& 0
+        \end{tikzcd}
+    \end{center}
 }
 
 \prop{Equivalent Characterizations of Projective Objects}{
@@ -3985,6 +4009,15 @@ X \arrow[r, "f"', two heads] \& Y \arrow[r]                               \& 0
 }
 \pf{
     (i)$\implies$(ii). Since $\mathrm{Hom}_{\mathsf{A}}(P,-)$ is a left exact functor, it suffices to show that $\mathrm{Hom}_{\mathsf{A}}(P,-)$ preserves epimorphisms. Let $f: X \rightarrow Y$ be an epimorphism in $\mathsf{A}$. We need to show that $f_*:\mathrm{Hom}_{\mathsf{A}}(P,X)\to \mathrm{Hom}_{\mathsf{A}}(P,Y)$ is surjective. Let $g: P \rightarrow Y$ be a morphism in $\mathsf{A}$. Since $P$ is projective, there exists a morphism $h: P \rightarrow X$ such that $f_*(h)=f \circ h = g$. This means that $f_*$ is surjective.
+
+    (i)$\implies$(iii). If $P$ is projective, then for any short exact sequence $0 \to X \xrightarrow{f} Y \xrightarrow{g} P \to 0$, there exists a morphism $h: P \to Y$ such that $h \circ g = \mathrm{id}_P$.
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&, column sep={4em, between origins}, row sep={4em, between origins}]
+            \&  \&   \& P \arrow[d, "\mathrm{id}_P"] \arrow[ld, "\exists h"', dashed] \&   \\
+           0\arrow[r] \&X\arrow[r, "f"'] \& Y\arrow[r, "g"', two heads] \& P \arrow[r]                               \& 0
+        \end{tikzcd}
+    \end{center}
+    By \Cref{th:equivalent_split_exact_sequence}, this implies that the short exact sequence splits.
 }
 
 \dfn{Injective Object}{

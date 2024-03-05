@@ -233,7 +233,15 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
         \]
 }
 \prop{Localization is an Exact Functor}{
-    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$. If $L\xrightarrow {u} M\xrightarrow {v} N$ is an exact sequence of $R$-module, then $S^{-1}L\xrightarrow {S^{-1}(u)} S^{-1}M\xrightarrow {S^{-1}(v)} S^{-1}N$ is an exact sequence of $S^{-1}R$-module.
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$. If 
+    \[
+        L\xlongrightarrow {u} M\xlongrightarrow {v} N    
+    \]
+    is an exact sequence of $R$-module, then 
+    \[
+        S^{-1}L\xlongrightarrow {S^{-1}(u)} S^{-1}M\xlongrightarrow {S^{-1}(v)} S^{-1}N
+    \]
+    is an exact sequence of $S^{-1}R$-module.
 }
 \pf{
     Suppose $\frac{m}{s}\in \ker S^{-1}(v) $. Then we have
@@ -345,21 +353,32 @@ Hence we have
 By the uniqueness of the universal property of $M_f$, we have $\mu_f=\nu\circ \psi_f$. If there exists another $\nu'$ such that $\mu_f=\nu'\circ \psi_f$, there must be $\nu'\circ l_S=\nu'\circ \psi_f \circ l_f=\mu_f \circ l_f=\nu\circ l_S$. The uniqueness of such $\nu$ forces $\nu=\nu'$.\\
 Therefore we show that $ S^{-1}M\cong \varinjlim_{f\in S}M_f$.
 }
-\prop{}{
-     View $S^{\prime-1} M$ as an $R$-module, then $S^{-1}\left(S^{\prime-1} M\right)$ is isomorphic to $\left(S S^{\prime}\right)^{-1} M$.
+\prop[associative_localization]{}{
+    Suppose $R$ is a commutative ring, $S,S'$ are multiplicative sets in $R$, and $M$ is an $R$-module. View $S^{\prime-1} M$ as an $R$-module, then $S^{-1}\left(S^{\prime-1} M\right)$ is isomorphic to $\left(S S^{\prime}\right)^{-1} M$ as $R$-modules.
 }
 \pf{
-    Note that given a $R$-module $M$, we have not proved any universal property for $S^{-1} M$. Hence we cannot reason as in the preceding proof; we have to construct the isomorphism explicitly.
+    Define 
+    $$
+    \begin{aligned}
+     f: S^{-1}\left(S^{\prime-1} M\right) &\longrightarrow\left(S S^{\prime}\right)^{-1} M\\
+     \quad \frac{x / s^{\prime}}{s} &\longmapsto\frac{x}{ss'} 
+    \end{aligned}
+    $$
+    To show that $f$ is well-defined, suppose that $\frac{x/s^{\prime}}{s}=\frac{y/t^{\prime}}{t}$, which means there exists $v\in S$ such that 
+    \[
+        v\left(t\frac{x}{s'} - s\frac{y}{t'}\right)=\frac{vtx}{s'}-\frac{vsy}{t'}=0.
+    \]
+    This further implies that there exists $w\in S'$ such that $w(vtt'x-vss'y)=0$.
+     Then we see there exists $vw\in S S^{\prime}$ such that $vw(tt'x-ss'y)=0$, which means $\frac{x}{ss'}=\frac{y}{tt'}$. Thus $f$ is well-defined.
 
-We define the maps as follows
-$$
-\begin{aligned}
-& f: S^{-1}\left(S^{\prime-1} M\right) \longrightarrow\left(S S^{\prime}\right)^{-1} M, \quad \frac{x / s^{\prime}}{s} \mapsto x / s s^{\prime} \\
-& g:\left(S S^{\prime}\right)^{-1} M \longrightarrow S^{-1}\left(S^{\prime-1} M\right), \quad x / t \mapsto \frac{x / s^{\prime}}{s} \text { for some } s \in S, s^{\prime} \in S^{\prime}, \text { and } t=s s^{\prime}
-\end{aligned}
-$$
-
-We have to check that these homomorphisms are well-defined, that is, independent the choice of the fraction. This is easily checked and it is also straightforward to show that they are inverse to each other.
+    Define
+     \[
+    \begin{aligned}
+     g:\left(S S^{\prime}\right)^{-1} M& \longrightarrow S^{-1}\left(S^{\prime-1} M\right)\\
+      \frac{x}{ss'} &\longmapsto \frac{x / s^{\prime}}{s} \text { for some } s \in S, s^{\prime} \in S^{\prime}
+    \end{aligned}
+    \]
+    and we can check that $g$ is well-defined in a similar way. It is clear that $f$ and $g$ are linear maps inverse to each other.
 }
 
 
@@ -394,7 +413,7 @@ We have to check that these homomorphisms are well-defined, that is, independent
 \pf{
     (iii)$\implies$(i). Suppose $M_{\mathfrak{m}}$ is zero for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$. Given any $x\in M$, since $x$ maps to $0$ in $M_{\mathfrak{m}}$ for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$, there must be $x=0$ by \Cref{th:module_localization_glueing_property}. Thus $M$ is zero.\\
 }
-\cor{}{
+\cor[exactness_is_a_local_property]{Exactness is a Local Property}{
     Given a sequence of $R$-modules $M\to M'\to M''$, the following are equivalent:
     \begin{enumerate}[(i)]
         \item $M\to M'\to M''$ is exact,
@@ -408,6 +427,32 @@ We have to check that these homomorphisms are well-defined, that is, independent
     H_{\mathfrak{m}}\cong\ker \left(M'_{\mathfrak{m}}\to M''_{\mathfrak{m}}\right)/\operatorname{im}\left(M_{\mathfrak{m}}\to M'_{\mathfrak{m}}\right)=0
     $$ 
     for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$. Thus by \Cref{th:module_localization_glueing_property_cor} we have $H=0$, which implies $M\to M'\to M''$ is exact.
+}
+
+\prop{Glueing Functions}{
+    Let $R$ be a ring. Let $f_1, \ldots, f_n$ be elements of $R$ generating the unit ideal. Let $M$ be an $R$-module. The sequence
+$$
+\begin{aligned}
+& 0 \longrightarrow M \xlongrightarrow{\alpha} \bigoplus_{i=1}^n M_{f_i} \xlongrightarrow{\beta} \bigoplus_{i, j=1}^n M_{f_i f_j} \\
+& 
+\end{aligned}
+$$
+is exact, where $\alpha(m)=\left(\frac{m}{1}, \cdots, \frac{m}{1}\right)$ and $\beta\left(\dfrac{m_1}{f_1^{e_1}}, \cdots, \dfrac{m_n}{f_n^{e_n}}\right)=\left(\dfrac{m_i}{f_i^{e_i}}-\dfrac{m_j}{f_j^{e_j}}\right)_{(i, j)}$.
+}
+\pf{
+ According to \Cref{th:exactness_is_a_local_property}, it suffices to show that the localization of the sequence at any maximal ideal $\mathfrak{m}$ is exact. Given any maximal ideal $\mathfrak{m}$ of $R$, since $f_1, \ldots, f_n$ generate the unit ideal, there is an $i$ such that $f_i \notin \mathfrak{m}$. Without loss of generality we may assume $f_1\notin \mathfrak{m}$. Note that \Cref{th:associative_localization} guarantees $\left(M_{f_i}\right)_{\mathfrak{m}}=\left(M_{\mathfrak{m}}\right)_{f_i}$ and $\left(M_{f_i f_j}\right)_{\mathfrak{m}}=\left(M_{\mathfrak{m}}\right)_{f_i f_{j}}$. In particular we have $\left(M_{f_1}\right)_{\mathfrak{m}}=M_{\mathfrak{m}}$ and $\left(M_{f_1 f_i}\right)_{\mathfrak{m}}=\left(M_{\mathfrak{m}}\right)_{f_i}$, because $f_1\in M_{\mathfrak{m}}^{\times}$. Thus it is suffices to show that the sequence
+\[
+    0 \longrightarrow M_{\mathfrak{m}} \xlongrightarrow{\alpha_{\mathfrak{m}}} \bigoplus_{i=1}^n \left(M_{\mathfrak{m}}\right)_{f_i} \xlongrightarrow{\beta_{\mathfrak{m}}} \bigoplus_{i, j=1}^n \left(M_{\mathfrak{m}}\right)_{f_i f_j}
+\]
+ is exact for $f_1=1$.
+
+ Injectivity of $\alpha_{\mathfrak{m}}$ is trivial because the first component of $\alpha_{\mathfrak{m}}$ is the identity map on $M_{\mathfrak{m}}$. 
+
+ For any $\mathbf{x}=\left(x_1, \dfrac{x_2}{f_2^{e_n}},\cdots, \dfrac{x_n}{f_n^{e_n}}\right)\in\ker \beta_{\mathfrak{m}}$ we have $\beta_{\mathfrak{m}}(\mathbf{x})=0$. Consider the $(1,i)$-component of $\beta_{\mathfrak{m}}\left(\mathbf{x}\right)$ for $i=2, \cdots, n$. Then we get
+ \[
+    x_1-\frac{x_i}{f_i^{e_i}}=0\implies \mathbf{x}=\left(x_1,x_1,\cdots,x_1\right)=\alpha_{\mathfrak{m}}\left(x_1\right)\implies \ker \beta_{\mathfrak{m}}\subseteq \operatorname{im}\alpha_{\mathfrak{m}}.
+ \]
+For any $\mathbf{y}=\left(y, y, \cdots, y\right)\in \operatorname{im}\alpha_{\mathfrak{m}}$, we have $\beta_{\mathfrak{m}}\left(\mathbf{y}\right)=0$, which means $\operatorname{im}\alpha_{\mathfrak{m}}\subseteq \ker \beta_{\mathfrak{m}}$. Thus the sequence is exact and we complete the proof.
 }
 
 \subsection{Graded Object}
