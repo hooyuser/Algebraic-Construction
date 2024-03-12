@@ -793,6 +793,41 @@
 % TABLE OF CONTENTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\usepackage{titletoc}
+\usepackage{sectsty} % For customizing section titles if needed
+
+\renewcommand{\contentsname}{\fontfamily{times}\selectfont\Huge\bfseries\sffamily Contents}
+
+% Define custom colors as per tstextbook.cls
+\definecolor{tssteelblue}{RGB}{70,130,180}
+\definecolor{tsorange}{RGB}{255,138,88}
+
+% Customizing the Table of Contents
+
+\contentsmargin{1cm}
+
+% Chapter titles
+\titlecontents{chapter}[0.25cm]
+{\addvspace{2ex}\Large\bfseries\sffamily} % Spacing and font adjustments before the entry
+{\hypersetup{linkcolor=tssteelblue}\color{tssteelblue}\contentslabel[\Large\thecontentslabel]{1.0cm}} % Label (number) formatting
+{\hypersetup{linkcolor=tssteelblue}} % For unnumbered chapters
+{\color{tssteelblue}\titlerule*[1pc]{.}\contentspage} % Dot leader and page number
+
+% Section titles
+\titlecontents{section}[1.5cm] % Indentation
+{\addvspace{0.7ex}\large\bfseries\sffamily} % Spacing and font adjustments before the entry
+{\hypersetup{linkcolor=black}\contentslabel[\thecontentslabel]{1.25cm}} % Label (number) formatting
+{}
+{\sffamily\hfill\color{black}\contentspage}[]
+
+\titlecontents{subsection}[2.65cm] % Adjust the left margin to align with subsection indent
+{\addvspace{0.25em}\sffamily}
+{\hypersetup{linkcolor=black!85}\contentslabel[\thecontentslabel]{3.2em}} % Subsection label formatting
+{} % Unnumbered format
+{\hfill\color{black}\contentspage} % Page number
+
+
 % \usepackage{tikz}
 % \definecolor{doc}{RGB}{0,60,110}
 % \usepackage{titletoc}
