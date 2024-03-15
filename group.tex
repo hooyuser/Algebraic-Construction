@@ -1,37 +1,42 @@
 
 \chapter{Group}
 \section{Basic Concepts}
-\dfn{Group}{
+\begin{definition}{Group}{}
     A \textbf{group} is a set $G$ together with a binary operation $\cdot:G\times G\to G$ such that
     \begin{enumerate}[(i)]
         \item (Associativity) $\forall x,y,z\in G$, $(x\cdot y)\cdot z=x\cdot(y\cdot z)$.
         \item (Identity) $\exists e\in G$ such that $\forall x\in G$, $e\cdot x=x\cdot e=x$.
         \item (Inverse) $\forall x\in G$, $\exists x^{-1}\in G$ such that $x\cdot x^{-1}=x^{-1}\cdot x=e$.
     \end{enumerate}
-}
+\end{definition}
+
 Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
-\dfn{Opposite Group}{
+\begin{definition}{Opposite Group}{}
     Let $G=(G,*)$ be a group. The \textbf{opposite group} of $G$ is the group $G^{\mathrm{op}}=(G,*^{\mathrm{op}})$, where $*^{\mathrm{op}}:G\times G\to G$ is defined by $x*^{\mathrm{op}}y=y\cdot x$. If we consider $G$ as a category $\mathsf{B}G$, then we have category isomorphism
     \[
         \mathsf{B}G^{\mathrm{op}}\cong (\mathsf{B}G)^{\mathrm{op}}.
     \]
-}
-\dfn{Subgroup}{
+\end{definition}
+
+\begin{definition}{Subgroup}{}
     Let $G$ be a group. A subset $H$ of $G$ is called a \textbf{subgroup} of $G$ if $H$ is a group with respect to the binary operation of $G$. In this case, we write $H\le G$.
-}
+\end{definition}
+
 
 
 \section{Group Homomorphism}
-\dfn{Group Homomorphism}{
+\begin{definition}{Group Homomorphism}{}
     Let $G,H$ be groups. A \textbf{group homomorphism} from $G$ to $H$ is a function $\varphi:G\to H$ such that
     \[
         \forall x,y\in G,\quad \varphi(x y)=\varphi(x)\varphi(y).
     \]
-}
-\dfn{Isomorphism}{
+\end{definition}
+
+\begin{definition}{Isomorphism}{}
     Let $G,H$ be groups. A group homomorphism $\varphi:G\to H$ is called an \textbf{isomorphism} if $\varphi$ is bijective. In this case, we say that $G$ and $H$ are \textbf{isomorphic} and write $G\cong H$.
-}
-\prop{Properties of Group Homomorphisms}{
+\end{definition}
+
+\begin{proposition}{Properties of Group Homomorphisms}{}
     Let $G,H$ be groups and $\varphi:G\to H$ be a group homomorphism. Then
     \begin{enumerate}[(i)]
         \item $\varphi(1_G)=1_H$.
@@ -40,23 +45,27 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
         \item If $K\le G$ , then $\varphi(K)\le H$.
         \item If $K\le H$, then $\varphi^{-1}(K)\le G$.
     \end{enumerate}
-}
-\dfn{Kernel of Group Homomorphism}{
+\end{proposition}
+
+\begin{definition}{Kernel of Group Homomorphism}{}
     Let $\varphi:G\to H$ be a group homomorphism. The \textbf{kernel} of $\varphi$ is defined by
     \[
         \ker\varphi=\{x\in G\mid \varphi(x)=1_H\}.
     \]
-}
-\prop{Property of Kernel}{
+\end{definition}
+
+\begin{proposition}{Property of Kernel}{}
     Let $G$ be a group. Then
     \begin{enumerate}[(i)]
         \item Let $\varphi:G\to H$ be a group homomorphism. Then $\varphi$ is injective if and only if $\ker\varphi=\{1_G\}$.
     \end{enumerate}
-}
-\dfn{Normal Subgroup}{
+\end{proposition}
+
+\begin{definition}{Normal Subgroup}{}
     Let $G$ be a group. A subgroup $H$ of $G$ is called a \textbf{normal subgroup} if $gHg^{-1}=H$ for all $g\in G$. In this case, we write $H\lhd G$.
-}
-\prop{Equivalent Definition of Normal Subgroup}{
+\end{definition}
+
+\begin{proposition}{Equivalent Definition of Normal Subgroup}{}
     Let $G$ be a group and $H$ be a subgroup of $G$. Then the following are equivalent:
     \begin{enumerate}[(i)]
         \item $H$ is a normal subgroup of $G$.
@@ -67,8 +76,9 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
         \item $H$ is a union of conjugacy classes.
         \item $H=\ker\varphi$ for some group homomorphism $\varphi:G\to K$.
     \end{enumerate}
-}
-\prop{Properties of Normal Subgroup}{
+\end{proposition}
+
+\begin{proposition}{Properties of Normal Subgroup}{}
     Let $G$ be a group.
     \begin{enumerate}[(i)]
         \item $\{1_G\}$ and $G$ are normal subgroups of $G$.
@@ -79,11 +89,13 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
         \item Normality is preserved on taking finite products: if $N_1 \lhd G_1$ and $N_2 \lhd G_2$, then $N_1 \times N_2 \lhd G_1 \times G_2$.
         \item Given two normal subgroups, $N$ and $M$, of $G$, their intersection $N \cap M$ and their product $N M=\{n m: n \in N$ and $m \in M\}$ are also normal subgroups of $G$.
     \end{enumerate}
-}
-\dfn{Simple Group}{
+\end{proposition}
+
+\begin{definition}{Simple Group}{}
     A group $G$ is called \textbf{simple} if $G$ is nontrivial and the only normal subgroups of $G$ are $\{1_G\}$ and $G$.
-}
-\thm{Fundamental Theorem on Homomorphisms}{
+\end{definition}
+
+\begin{theorem}{Fundamental Theorem on Homomorphisms}{}
     Let $G,H$ be groups and $\varphi:G\to H$ be a group homomorphism. Define natural projection 
     \begin{align*}
         \pi:G&\longrightarrow G/\ker\varphi\\
@@ -97,12 +109,14 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
         \end{tikzcd}
     \end{center}
     Moreover, $\overline{\varphi}$ is injective and we have $ G/\ker\varphi\cong \mathrm{im}\varphi$.
-}
-\cor{First isomorphism theorem}{
-    Let $G,H$ be groups and $\varphi:G\to H$ be surjective group homomorphism. Then $G/\ker\varphi\cong H$.
-}
+\end{theorem}
 
-\prop{Universal Property of Quotient Group}{
+\begin{corollary}{First isomorphism theorem}{}
+    Let $G,H$ be groups and $\varphi:G\to H$ be surjective group homomorphism. Then $G/\ker\varphi\cong H$.
+\end{corollary}
+
+
+\begin{proposition}{Universal Property of Quotient Group}{}
     Let $G$ be a group and $N \lhd G$ be a normal subgroup. Suppose $\pi:G\to G/N$ is the natural projection. Then $\pi$ is initial in the category of group homomorphisms $\varphi:G\to H$ such that $N\subseteq \ker\varphi$. \\
     That is, for any group $H$ and group homomorphism $\varphi:G\to H$ such that $N\subseteq \ker\varphi$, there exists a unique group homomorphism $\widetilde{\varphi}:G/N\to H$ such that the following diagram commutes
     \begin{center}
@@ -111,7 +125,8 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
             G/N \arrow[ru, dashed, "\exists !\,\widetilde{\varphi}"'] \&  
         \end{tikzcd}
     \end{center}
-}
+\end{proposition}
+
 \proof{
     Since $N\subseteq \ker\varphi$, there is a canonical projection 
     \begin{align*}
@@ -126,12 +141,13 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
         \end{tikzcd}
     \end{center}
 }
-\thm{Second Isoomorphism Theorem}{
+\begin{theorem}{Second Isoomorphism Theorem}{}
     Let $G$ be a group and $H,K$ be subgroups of $G$. Then $HK$ is a subgroup of $G$ and $H\cap K$ is a normal subgroup of $H$. Moreover, we have
     \[
         HK/H\cong K/(H\cap K).
     \]
-}
+\end{theorem}
+
 \section{Construction}
 \subsection{Free Object}
 Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of elements of $A$. The \textbf{concatenation} of two strings $\overline{a_1\cdots a_n}$ and $\overline{b_1\cdots b_m}$ is a binary operation $\diamond$ defined by
@@ -141,15 +157,16 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
 \dfn{Word}{
     Let $S$ be a set. Define $S^{-1}=\left\{s^{-1}\midv s\in S\right\}$. A \textbf{word} on $S$ is a string over $S\sqcup S^{-1}\sqcup\{1\}$. $\overline{1}$ is called an \textbf{empty word}. The \textbf{length} of a word $w$ is the number of letters in $w$.
 }
-\dfn{Reduced Word}{
+\begin{definition}{Reduced Word}{}
     Let $W(S)$ be the set of all words on $S$. Define a relation $\approx$ on $W(S)$ as follows: for any $s\in S$
     \begin{align*}
         \overline{s^{-1}s}\approx \overline{1},\quad \overline{ss^{-1}}\approx \overline{1}, \quad \overline{1s}\approx s,\quad \overline{s1}\approx \overline{1}
     \end{align*}
     Define $\sim$ to be the equivalence relation generated by $\approx$. Let $\pi:W(S)\to W(S)/\sim, w\mapsto [w]_\sim$ denote the quotient map. It is easy to see that for any $[w]_\sim\in W(S)/\sim$, there exists a unique representative element $\rho(w)\in W(S)$ which has shortest length among all representatives of $[w]_\sim$. A word $w$ is called \textbf{reduced} if $\rho(w)=w$. 
-}
+\end{definition}
 
-\dfn{Free Group}{
+
+\begin{definition}{Free Group}{}
     Let $S$ be a set. The \textbf{free group} on $S$, denoted by $\mathrm{Free}_{\mathsf{Grp}}(S)$, together with a function $\iota:S\to \mathrm{Free}_{\mathsf{Grp}}(S)$, is defined by the following universal property: for any group $G$ and any function $f:S\to G$, there exists a unique group homomorphism $\widetilde{f}:\mathrm{Free}_{\mathsf{Grp}}(S)\to G$ such that the following diagram commutes
     \begin{center}
         \begin{tikzcd}[ampersand replacement=\&]
@@ -162,9 +179,10 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
     w_1\cdot w_2 = \rho(w_1\diamond w_2).    
     \]
     The identity element is the empty word. The inverse of a word is obtained by reversing the order of the letters and replacing each letter by its inverse.
-}
+\end{definition}
 
-\ex{Forgetful Functor $U:\mathsf{Grp}\to \mathsf{Set}$}{
+
+\begin{example}{Forgetful Functor $U:\mathsf{Grp}\to \mathsf{Set}$}{}
     The forgetful functor $U:\mathsf{Grp}\to \mathsf{Set}$ forgets the group structure of a group and returns the underlying set.
     \begin{enumerate}[(i)]
         \item $U$ is representable by $\left(\mathbb{Z},1\right)$. The natural isomorphism $\phi:\mathrm{Hom}_{\mathsf{Grp}}\left(\mathbb{Z},-\right)\xRightarrow{\sim} U$ is given by
@@ -175,8 +193,9 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
         A group homomorphism from $\mathbb{Z}$ to $G$ is uniquely determined by its action on $1$.
         \item $U$ is faithful but not full. 
     \end{enumerate}
-}
-\pf{
+\end{example}
+
+\begin{prf}
     \begin{enumerate}[(i)]
     \item $\phi:\mathrm{Hom}_{\mathsf{Grp}}\left(\mathbb{Z},-\right)\xRightarrow{\sim} U$ is the composition of the following natural isomorphisms
     \[
@@ -184,9 +203,10 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
     \]
     \item $U$ is not full because not every mapping $f:\mathbb{Z}\to G$ is a group homomorphism. 
     \end{enumerate}
-}
+\end{prf}
 
-\prop{Free-Forgetful Adjunction $\mathrm{Free}_{\mathsf{Grp}}\dashv U$}{
+
+\begin{proposition}{Free-Forgetful Adjunction $\mathrm{Free}_{\mathsf{Grp}}\dashv U$}{}
     The free group functor $\mathrm{Free}_{\mathsf{Grp}}$ is left adjoint to the forgetful functor $U:\mathsf{Grp}\to \mathsf{Set}$
     $$
     \begin{tikzcd}[ampersand replacement=\&]
@@ -198,8 +218,9 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
         \varphi_{S,G}:\mathrm{Hom}_{\mathsf{Grp}}(\mathrm{Free}_{\mathsf{Grp}}(S),G)&\xlongrightarrow{\sim} \mathrm{Hom}_{\mathsf{Set}}(S,U(G))\\
         g&\longmapsto g\circ \iota
     \end{align*}
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
     First we show that $\varphi_{S,G}$ is injective. Suppose $g_1,g_2:\mathrm{Free}_{\mathsf{Grp}}(S)\to G$ are two group homomorphisms such that $g_1\circ \iota=g_2\circ \iota$. By the universal property of free group, we have $g_1=g_2$. Then we show that $\varphi_{S,G}$ is surjective. Suppose $f:S\to U(G)$ is a function. By the universal property there exists a group homomorphism $\widetilde{f}:\mathrm{Free}_{\mathsf{Grp}}(S)\to G$ such that $\varphi_{S,G}(\widetilde{f})=\widetilde{f}\circ \iota=f$. Finally, we show that $\varphi_{S,G}$ is natural in $S$ and $G$. Suppose $h:S_1\to S_2$ is a function and $q:G_1\to G_2$ is a group homomorphism. Then we can check that for any $g\in \mathrm{Hom}_{\mathsf{Grp}}(\mathrm{Free}_{\mathsf{Grp}}(S_2),G_2)$,
     \begin{align*}
         \varphi_{S_1,G_1}(q\circ g\circ \iota_{S_1})&=(q\circ g\circ \iota_{S_1})\circ \iota_{S_1}\\
@@ -207,12 +228,13 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
         &=q\circ g\circ \iota_{S_2}\\
         &=\varphi_{S_2,G_2}(g\circ \iota_{S_2}).
     \end{align*}
-}
+\end{prf}
+
 
 
 
 \subsection{Inverse Limit}
-\dfn[inverse_limit_of_groups]{Inverse Limit in $\mathsf{Grp}$}{
+\begin{definition}{Inverse Limit in $\mathsf{Grp}$}{inverse_limit_of_groups}
     Let $\mathsf{I}$ be a \hyperref[th:filtered_category]{filtered} \hyperref[th:thin_category]{thin category} and $F:\mathsf{I}^{\mathrm{op}}\to \mathsf{Grp}$ be a functor. To unpack the information of $F$, denote $I:=\mathrm{Ob}(\mathsf{I})$, $G_i:=F(i)$ and $f_{ij}:=F(i\to j)$. An \textbf{inverse system} is a pair $\left(\left(G_i\right)_{i \in I},\left(f_{i j}\right)_{i \leq j \in I}\right)$ where $f_{i j}: G_{j} \rightarrow G_{i}$ is a group homomorphism for each $i \leq j$ such that
     \begin{enumerate}[(i)]
         \item $f_{i i}=\mathrm{id}_{G_i}$ for all $i \in I$.
@@ -224,32 +246,36 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
     \]
     equipped with natural projections $\pi_i:\varprojlim_{i\in I}G_i\to G_i$.\\
 
-}
+\end{definition}
 
-\ex{Inverse Limit $\varprojlim_{i\ge 1}G_i$}{
+
+\begin{example}{Inverse Limit $\varprojlim_{i\ge 1}G_i$}{}
     Let $\mathsf{I}=\left(\mathbb{Z}_{\ge 1},\le\right)$ be a filtered thin category and $F:\mathsf{I}^{\mathrm{op}}\to \mathsf{Grp}$ be a functor. To determine an inverse system, it is sufficient to specify $G_i$ and $f_{i,i+1}:G_{i+1}\to G_i$ for all $i\in \mathbb{Z}_{\ge 1}$. The inverse limit of this inverse system is denoted by $\varprojlim_{i\ge 1}G_i$, which we now write as $G$ for simplicity.\\
     $G$ can be imaged as a tree with root layer being $G_0=\{1\}$ and $i$-th layer being $G_i$. Each node in $G_i$ has a unique parent node in $G_{i-1}$, which is determined by $f_{i,i-1}$. An element in $G$ is a path starting from the root and passing through each $G_i$ exactly once along the edges of the tree. The $i$-th component $x_i$ of an element $x\in G$ includes all information of its history path from $G_0$ to $G_i$, which makes $x_1,x_2,\cdots, x_{i-1}$ redundant. 
-}
+\end{example}
+
 
 \section{Group Action}
 \subsection{Definitions}
-\dfn{Symmetric Group}{
+\begin{definition}{Symmetric Group}{}
     The \textbf{symmetric group} on a set $X$ is the group whose elements are all bijections from $X$ to $X$, with the group operation of function composition. The symmetric group on $X$ is denoted by $\mathrm{Sym}(X)$ or $\mathrm{Aut}_{\mathsf{Set}}(X)$. If $X=\{1,2,\cdots,n\}$, then we denote $\mathrm{Sym}(X)$ by $S_n$.
-}
-\dfn{Group Action}{
+\end{definition}
+
+\begin{definition}{Group Action}{}
     Let $G$ be a group and $X$ be a set. A \textbf{group action} of $G$ on $X$ is a group homomorphism
     \begin{align*}
         \sigma:G&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}(X)\\
         g&\longmapsto \sigma_g
     \end{align*}
     If $G$ acts on $X$ by $\sigma$, we say $(X,\sigma)$ is a \textbf{$G$-set}. If there is no ambiguity, we simply say $X$ is a $G$-set.
-}
+\end{definition}
+
 The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have category isomorphism
 \begin{align*}
     G\text{-}\mathsf{Set}&\stackrel{\sim}{\longrightarrow}[\mathsf{B}G, \mathsf{Set}]    \\
     \sigma&\longmapsto \sigma(-)
 \end{align*}
-\prop{Equivalent Definition of Group Actions}{
+\begin{proposition}{Equivalent Definition of Group Actions}{}
     Let $G$ be a group and $X$ be a set. A group action of $G$ on $X$ can be alternatively defined as a map
     \begin{align*}
         \cdot:G\times X&\longrightarrow X\\
@@ -264,18 +290,21 @@ The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have ca
     \[
     \sigma_g(x)=g\cdot x.
     \]
-}
+\end{proposition}
+
 We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
-\ex{Trivial Group Action}{
+\begin{example}{Trivial Group Action}{}
     Let $G$ be a group and $X$ be a set. The \textbf{trivial group action} of $G$ on $X$ is defined as $\sigma_g=\mathrm{id}_X$ for all $g\in G$.
-}
-\ex[acting_on_power_set]{Actions on $X$ Induce Actions on $2^X$}{
+\end{example}
+
+\begin{example}{Actions on $X$ Induce Actions on $2^X$}{acting_on_power_set}
     If a group $G$ acts on a set $X$, then $G$ acts on the power set $2^X$ by
     \[
     g\cdot A=\{ g\cdot x\mid x\in A\}    .
     \]
-}
-\dfn{Equivariant Map}{
+\end{example}
+
+\begin{definition}{Equivariant Map}{}
     Let $G$ be a group and $X,Y$ be $G$-sets. A map $f:X\to Y$ is called \textbf{equivariant} if for all $g\in G$ and $x\in X$, we have
     \[
     f(g\cdot x)=g\cdot f(x)    .
@@ -289,15 +318,17 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
                          \& Y \arrow[rr, "\sigma'_g"']                \&  \& Y                
             \end{tikzcd}
     \]
-}
-\dfn{Product of $G$-Sets}{
+\end{definition}
+
+\begin{definition}{Product of $G$-Sets}{}
     The \textbf{product} of two $G$-sets $X$ and $Y$ is defined as the set $X\times Y$ with the $G$-action
     \[
     g\cdot (x,y)=(g\cdot x, g\cdot y)    .
     \]
     Alternatively, the product of two $G$-sets can be defined as the product of two functors, cf. \Cref{th:ev_functor_preserves_limits}.
-}
-\dfn{Coproduct of $G$-Sets}{
+\end{definition}
+
+\begin{definition}{Coproduct of $G$-Sets}{}
     The \textbf{coproduct} of two $G$-sets $X$ and $Y$ is defined as the set $X\sqcup Y$ with the $G$-action
     \[
     g\cdot a=\begin{cases}
@@ -306,8 +337,9 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     \end{cases} 
     \]
     Alternatively, the coproduct of two $G$-sets can be defined as the coproduct of two functors, cf. \Cref{th:ev_functor_preserves_limits}.
-}
-\ex[aut_acts_on_hom]{$\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ and $\mathrm{Hom}_\mathsf{C}(Y,X)$}{
+\end{definition}
+
+\begin{example}{$\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ and $\mathrm{Hom}_\mathsf{C}(Y,X)$}{aut_acts_on_hom}
     Let $X$ and $Y$ be objects in a category $\mathsf{C}$. Then $\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ by the composition of functors
     \[
     \begin{tikzcd}[ampersand replacement=\&, column sep=5em, row sep=3em]
@@ -334,8 +366,9 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
         \mathrm{Aut}_\mathsf{C}(Y)\times \mathrm{Hom}_\mathsf{C}(Y,X)&\longrightarrow \mathrm{Hom}_\mathsf{C}(Y,X)\\
         (g,f)&\longmapsto g\circ f
     \end{align*}
-}
-\ex[acting_on_functions]{Actions on $X$ Induce Actions on $Y^X$}{
+\end{example}
+
+\begin{example}{Actions on $X$ Induce Actions on $Y^X$}{acting_on_functions}
     If $G$ acts on $X$ through a functor $\sigma(-):\mathsf{B}G\to\mathsf{Set}$, then it also acts on $Y^X$ for any set $Y$ by the composition of functors 
     \[
     \begin{tikzcd}[ampersand replacement=\&, column sep=5em, row sep=3em]
@@ -347,8 +380,9 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
         (g\cdot f)(x)=f(g^{-1}\cdot x).
     \]
     
-}
-\pf{
+\end{example}
+
+\begin{prf}
     We can check that
     \begin{align*}
         (g_1\cdot (g_2\cdot f))(x)&=\left(g_2\cdot f\right)\left(g_1^{-1}\cdot x\right)\\
@@ -357,22 +391,25 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
         &=f\left(\left(g_2^{-1} g_1^{-1}\right)\cdot x\right)\\
         &=\left(\left(g_1g_2\right)\cdot f\right)(x).
     \end{align*}
-}
-\dfn{Orbit of a Group Action}{
+\end{prf}
+
+\begin{definition}{Orbit of a Group Action}{}
     Let $G$ be a group acting on a set $X$. For $x\in X$, the \textbf{orbit} of $x$ is defined as 
     \[
     G x=\{ g\cdot x\mid g\in G\}    .
     \]
-}
+\end{definition}
 
-\dfn{Orbit Space}{
+
+\begin{definition}{Orbit Space}{}
     Let $G$ be a group acting on a set $X$. The \textbf{orbit space} of $G$ acting on $X$ is defined as 
     \[
     X/G=\{ Gx\mid x\in X\}.
     \]
-}
+\end{definition}
+
 If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
-\prop{Orbit Decomposition}{
+\begin{proposition}{Orbit Decomposition}{}
     Let $G$ be a group acting on a set $X$. We define a equivalence relation $\sim$ on $X$ by
     \[
     x\sim y \iff Gx=Gy.
@@ -382,91 +419,103 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     \[
     X=\bigsqcup_{Gx\in X/G}Gx.
     \]
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 We can check that the equivalence class of $x$ is $Gx$. If $y\sim x$, then $y\in Gy=Gx$. If $y\in Gx$, then $Gy\subseteq Gx$ and $x\in Gy$. Note $x\in Gy$ implies $Gx\subseteq Gy$. We have $Gx=Gy$, i.e. $x\sim y$. 
-}
+\end{prf}
+
 
 If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
-\dfn{$G$-invariant element }{
+\begin{definition}{$G$-invariant element }{}
     Let $G$ be a group acting on a set $X$. An element $x\in X$ is called \textbf{$G$-invariant} if $Gx=\{ x\}$. The set of all $G$-invariant elements is denoted by $X^G$
     \[
       X^G=\{ x\in X\mid Gx=\{ x\} \}  .  
     \]
-}
+\end{definition}
 
-\dfn{Stabilizer Subgroup}{
+
+\begin{definition}{Stabilizer Subgroup}{}
     Let $G$ be a group acting on a set $X$. For $x\in X$, the \textbf{stabilizer subgroup} of of $G$ with respect to $x$ is defined as 
     \[
     \mathrm{Stab}_G(x)=\{ g\in G\mid g\cdot x=x\}    .
     \]
     It is easy to see that $\mathrm{Stab}_G(x)$ is a subgroup of $G$.
-}
-\prop{Properties of Stabilizer Subgroup}{
+\end{definition}
+
+\begin{proposition}{Properties of Stabilizer Subgroup}{}
     Let $G$ be a group acting on a set $X$. For $x\in X$, the stabilizer subgroup $\mathrm{Stab}_G(x)$ has the following properties
     \begin{enumerate}[(i)]
         \item $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
         \item $\ker \left(G\to \mathrm{Aut}_{\mathsf{Set}}(X)\right)=\bigcap\limits_{x\in X}\mathrm{Stab}_G(x)$.
     \end{enumerate}
-}
+\end{proposition}
 
 
-\dfn{Faithful Group Action}{
+
+\begin{definition}{Faithful Group Action}{}
     Let $G$ be a group acting on a set $X$. The action is called \textbf{faithful} if any of the following equivalent conditions holds
     \begin{enumerate}[(i)]
         \item $G\to \mathrm{Aut}_{\mathsf{Set}}(X)$ is injective.
         \item $\bigcap\limits_{x\in X}\mathrm{Stab}_G(x)=\{ 1_G\}$.
         \item $\forall x\in X,\;g\cdot x=x\implies g=1_G$.
     \end{enumerate}
-}
+\end{definition}
 
-\dfn{Free Group Action}{
+
+\begin{definition}{Free Group Action}{}
     Let $G$ be a group acting on a set $X$. The action is called \textbf{free} if any of the following equivalent conditions holds
     \begin{enumerate}[(i)]
         \item For all $x\in X$, $\mathrm{Stab}_G(x)=\{ 1_G\}$ .
         \item $\exists x\in X,\;g\cdot x=x\implies g=1_G$.
     \end{enumerate}
-}
+\end{definition}
 
-\dfn{Transitive Group Action}{
+
+\begin{definition}{Transitive Group Action}{}
     Let $G$ be a group acting on a set $X$. The action is called \textbf{transitive} if any of the following equivalent conditions holds
     \begin{enumerate}[(i)]
         \item For any $x,y\in X$, there exists $g\in G$ such that $g\cdot x=y$.
         \item $X$ has only one orbit, i.e. $X= Gx$ for any $x\in X$.
     \end{enumerate}
     If $G$ acts transitively on $X$, then $X$ is called a \textbf{homogeneous space} for $G$.
-}
-\ex{$G$ Acts on Orbit $Gx$ Transitively}{
+\end{definition}
+
+\begin{example}{$G$ Acts on Orbit $Gx$ Transitively}{}
     Let $G$ be a group acting on a set $X$ and $x\in X$. Then $G$ acts on the orbit $Gx$ by left multiplication transitively. And we have a $G$-set isomorphism
     \[
     X\cong \bigsqcup_{Gx\in X/G}Gx,
     \]
     which decomposes any $G$-set into coproduct of transitive $G$-sets.
-}
-\dfn{Regular Group Action}{
+\end{example}
+
+\begin{definition}{Regular Group Action}{}
     Let $G$ be a group acting on a set $X$. The action is called \textbf{regular} if any of the following equivalent conditions holds
     \begin{enumerate}[(i)]
         \item The action is transitive and free.
         \item For any $x,y\in X$, there exists unique $g\in G$ such that $g\cdot x=y$.
     \end{enumerate}
     If $G$ acts regularly on $X$, then $X$ is called a \textbf{principal homogeneous space} for $G$ or a $G$-\textbf{torsor}.
-}
+\end{definition}
+
 \subsection{Coset}
-\ex{Left Multiplication Action}{
+\begin{example}{Left Multiplication Action}{}
     Let $G$ be a group. The \textbf{left multiplication action} of $G$ on itself is defined as 
     \begin{align*}
         m^L:G &\longrightarrow \mathrm{Aut}(G)\\
         g &\longmapsto ( x\longmapsto gx)
     \end{align*}
-}
-\ex{Right Multiplication Action}{
+\end{example}
+
+\begin{example}{Right Multiplication Action}{}
     Let $G$ be a group. The \textbf{right multiplication action} of $G$ on itself is defined as 
     \begin{align*}
         m^R:G^\circ &\longrightarrow \mathrm{Aut}(G)\\
         g &\longmapsto ( x\longmapsto xg)
     \end{align*}
-}
-\dfn{Left Cosets}{
+\end{example}
+
+\begin{definition}{Left Cosets}{}
     Let $G$ be a group and $H$ be a subgroup of $G$. $H^\circ$ can act on $G$ through $H^\circ\hookrightarrow G^\circ\stackrel{m^R}{\longrightarrow} \mathrm{Aut}(G)$, namely
     \begin{align*}
         H^\circ &\longrightarrow \mathrm{Aut}(G)\\
@@ -477,16 +526,18 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
         gH = H^\circ g = \{ gh\mid h\in H\}.
     \]
     The set of all left cosets of $H$ is denoted by $G/H^L$, called the left coset space of $G$ modulo $H$. $G/H^L$ is the orbit space of $G$ under the right multiplication action of $H$.
-}
-\ex{$G$ Acts on $G/H^L$ Transitively}{
+\end{definition}
+
+\begin{example}{$G$ Acts on $G/H^L$ Transitively}{}
     Let $G$ be a group and $H$ be a subgroup of $G$. $G$ acts on $G/H^L$ through
     \begin{align*}
         G &\longrightarrow \mathrm{Aut}(G/H^L)\\
         g &\longmapsto  (xH\longmapsto gxH)
     \end{align*}
     For any $xH,yH\in G/H^L$, we have $yH=gxH$ for some $g=yx^{-1}\in G$. Thus $G$ acts on $G/H^L$ transitively.
-}
-\dfn{Right Cosets}{
+\end{example}
+
+\begin{definition}{Right Cosets}{}
     Let $G$ be a group and $H$ be a subgroup of $G$. $H$ can act on $G$ through $H\hookrightarrow G\stackrel{m^L}{\longrightarrow} \mathrm{Aut}(G)$, namely
     \begin{align*}
         H &\longrightarrow \mathrm{Aut}(G)\\
@@ -497,49 +548,57 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
         Hg = \{ hg\mid h\in H\},
     \]
     which matches notation of orbit. The set of all right cosets of $H$ is denoted by $G/H^R$, called the right coset space of $G$ modulo $H$.
-}
-\dfn{Index of Subgroup}{
-    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{index} of $H$ in $G$ is defined as the cardinality of $G/H^L$ or $G/H^R$, denoted by $[G:H]$.
-}
-\thm{Lagrange's Theorem}{
-    Let $G$ be a finite group and $H$ be a subgroup of $G$. Then $|G|=|H|[G:H]$.
-}
+\end{definition}
 
-\prop[iso_stab_orbit]{$G$-Set Isomorphism $G/\mathrm{Stab}_G(x)^L\cong Gx$}{
+\begin{definition}{Index of Subgroup}{}
+    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{index} of $H$ in $G$ is defined as the cardinality of $G/H^L$ or $G/H^R$, denoted by $[G:H]$.
+\end{definition}
+
+\begin{theorem}{Lagrange's Theorem}{}
+    Let $G$ be a finite group and $H$ be a subgroup of $G$. Then $|G|=|H|[G:H]$.
+\end{theorem}
+
+
+\begin{proposition}{$G$-Set Isomorphism $G/\mathrm{Stab}_G(x)^L\cong Gx$}{iso_stab_orbit}
     Let $G$ be a group acting on a set $X$ and $x\in X$. Then the map
     \begin{align*}
         F:G/\mathrm{Stab}_G(x)^L &\longrightarrow Gx\\
         g\hspace{1pt}\mathrm{Stab}_G(x) &\longmapsto g\cdot x
     \end{align*}
     is a $G$-set isomorphism.
-}
-\pf{ 
+\end{proposition}
+
+\begin{prf} 
     The map is well-defined since for any $h\in \mathrm{Stab}_G(x)$, we have $(gh)\cdot x=g\cdot (h\cdot x)=g\cdot x$. The map is a $G$-set homomorphism since for any $g_1,g_2\in G$, 
     \begin{align*}
         F\left(g_1\cdot g_2\mathrm{Stab}_G(x)\right)=(g_1g_2)\cdot x=g_1\cdot(g_2\cdot x)=g_1\cdot F\left(g_2\mathrm{Stab}_G(x)\right).
     \end{align*}
      The map is injective since for any $g,h\in G$, if $g\cdot x=h\cdot x$, then $h^{-1}g\in \mathrm{Stab}_G(x)$. Hence $g\mathrm{Stab}_G(x)=h\mathrm{Stab}_G(x)$. The map is surjective because for any $g\cdot x\in Gx$, we have $F\left(g\hspace{1pt}\mathrm{Stab}_G(x)\right)=g\cdot x$.
-}
-\thm{Orbit-Stabilizer Theorem}{
+\end{prf}
+
+\begin{theorem}{Orbit-Stabilizer Theorem}{}
     Let $G$ be a group acting on a set $X$. For $x\in X$, we have
     \[
     |G|=|Gx|\cdot |\mathrm{Stab}_G(x)|    .
     \]
-}
-\pf{ 
+\end{theorem}
+
+\begin{prf} 
     According to \Cref{th:iso_stab_orbit}, we have
     \[
 \left|Gx\right|=\left|G/\mathrm{Stab}_G(x)^L\right|=|G|/\left|\mathrm{Stab}_G(x)\right|.
     \]
-}
-\thm[Burnside's_lemma]{Burnside's Lemma}{
+\end{prf}
+
+\begin{theorem}{Burnside's Lemma}{Burnside's_lemma}
     Let $G$ be a finite group acting on a finite set $X$. Then the number of orbits of $G$ on $X$ is equal to
     \[
     |X/G|=\frac{1}{|G|}\sum_{g\in G}|X^g|    ,
     \]
     where $X^g=\{x\in X\mid g\cdot x=x\}$ is the set of fixed points of $g$.
-}
-\pf{ 
+\end{theorem}
+
+\begin{prf} 
     \begin{align*}
     \sum_{g \in G}\left|X^g\right|&=|\{(g, x) \in G \times X \mid g \cdot x=x\}|\\
     &=\sum_{x \in X}\left|\mathrm{Stab}_G(x)\right|\\
@@ -550,11 +609,12 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     &=|G| \cdot|X / G|.
     \end{align*}
 
-}
+\end{prf}
+
 
 
 \subsection{Conjugacy Action}
-\dfn[conjugacy_action]{Conjugacy Action and Inner Automorphism Group}{
+\begin{definition}{Conjugacy Action and Inner Automorphism Group}{conjugacy_action}
     Let $G$ be a group. The \textbf{conjugacy action} of $G$ on itself is defined as 
     \begin{align*}
         \gamma:G &\longrightarrow \mathrm{Aut}_{\mathsf{Grp}}(G)\\
@@ -565,16 +625,18 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     \mathrm{Inn}(G)=\gamma(G)=\{ \gamma_g\mid g\in G\},
     $$ 
     which is a subgroup of $\mathrm{Aut}_{\mathsf{Grp}}(G)$.
-}
-\dfn{Conjugate Subgroups}{
+\end{definition}
+
+\begin{definition}{Conjugate Subgroups}{}
 From \Cref{ex:acting_on_power_set}, we see conjugacy action on $G$ induces an action on its power set $2^G$: \begin{align*}
     G\times 2^G &\longrightarrow 2^G\\
     (g,E)&\longmapsto gEg^{-1}
 \end{align*}
 If $H$ is a subgroup of $G$, then $gHg^{-1}$ is also a subgroup of $G$. We say $H$ and $gHg^{-1}$ are \textbf{conjugate subgroups} of $G$.
-}
-\prop{Equivalent 
-Characterization of Inner Automorphisms}{
+\end{definition}
+
+\begin{proposition}{Equivalent 
+Characterization of Inner Automorphisms}{}
     Let $G$ be a group and $\varphi \in \mathrm{Aut}(G)$. Then $\varphi \in \mathrm{Inn}(G)$ if and only if $\varphi$ satisfies the property: 
     \[
         \text{$G$ is embedded in a group $H$} \implies \text{$\varphi$ extends to an automorphism of $H$}.
@@ -587,31 +649,35 @@ Characterization of Inner Automorphisms}{
             G \arrow[r, hook, "\iota"']                      \& H                             
         \end{tikzcd}
     \]
-}
-\dfn{Conjugacy Class}{
+\end{proposition}
+
+\begin{definition}{Conjugacy Class}{}
     Let $G$ be a group. The orbit of $a$ under conjugacy action is called the \textbf{conjugacy class} of $a$, denoted by 
     \[
       \mathrm{Cl}(a)=\{ gag^{-1}\mid x\in G   \}.
     \]
     Two elements $a,b\in G$ are called \textbf{conjugate} if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
-}
+\end{definition}
 
-\prop{Properties of Conjugacy Class}{
+
+\begin{proposition}{Properties of Conjugacy Class}{}
     Let $G$ be a group. Then the following are true:
     \begin{enumerate}[(i)]
         \item $a\sim b$ if and only if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
         \item $\mathrm{Cl}(a)=\{ a\}$ if and only if $a\in Z_G$.
     \end{enumerate}
-}
+\end{proposition}
 
 
-\dfn{Outer Automorphism Group}{
+
+\begin{definition}{Outer Automorphism Group}{}
     Let $G$ be a group. Then we have $\mathrm{Inn}(G) \lhd \mathrm{Aut}_{\mathsf{Grp}}(G)$. And the \textbf{outer automorphism group} of $G$ is defined as 
     $$
     \mathrm{Out}(G)=\mathrm{coker}\,\gamma=\mathrm{Aut}_{\mathsf{Grp}}(G)/\mathrm{Inn}(G).
     $$ 
-}
-\dfn{Characteristic Subgroup}{
+\end{definition}
+
+\begin{definition}{Characteristic Subgroup}{}
     Let $G$ be a group. A subgroup $H\le G$ is called a \textbf{characteristic subgroup} if 
     \[
         \forall \varphi \in\mathrm{Aut}_{\mathsf{Grp}}(G),\; \varphi(H)\subseteq H.
@@ -620,14 +686,16 @@ Characterization of Inner Automorphisms}{
     \[
         \varphi(H)\subseteq H\implies \varphi^{-1}(H)\subseteq H\implies H\subseteq \varphi(H).
     \]
-}
-\dfn{Fully Characteristic Subgroup}{
+\end{definition}
+
+\begin{definition}{Fully Characteristic Subgroup}{}
     Let $G$ be a group. A subgroup $H\le G$ is called a \textbf{fully characteristic subgroup} if 
     \[
         \forall \varphi \in\mathrm{End}_{\mathsf{Grp}}(G),\; \varphi(H)\subseteq H.
     \]
-}
-\dfn{Word Map}{
+\end{definition}
+
+\begin{definition}{Word Map}{}
     Suppose $G$ is a group and 
     $$
     x=x_{i_1}^{\alpha_{1}}\cdots x_{i_m}^{\alpha_{m}}\in F\langle x_1,\cdots,x_n\rangle
@@ -637,58 +705,66 @@ Characterization of Inner Automorphisms}{
         w_x:G^m &\longrightarrow G\\
         (g_1,\cdots,g_m) &\longmapsto g_{i_1}^{\alpha_1}\cdots g_{i_m}^{\alpha_m}.
     \end{align*}
-}
-\dfn{Verbal Subgroup}{
+\end{definition}
+
+\begin{definition}{Verbal Subgroup}{}
     Let $G$ be a group and $\mathcal{W}$ be a collection of word maps. A subgroup $H\le G$ is called a \textbf{verbal subgroup} if $H$ is the subgroup generated by
     $$
     \left\{ w(g_1,\cdots,g_n)\mid w\in\mathcal{W},\; g_i\in G \right\}.
     $$
-}
-\dfn{Commutator}{
+\end{definition}
+
+\begin{definition}{Commutator}{}
     Let $G$ be a group. The word map induced by $xyx^{-1}y^{-1}$ is a binary operation defined on $G$, denoted by
     \begin{align*}
         [\cdot,\cdot]:G\times G &\longrightarrow G\\
         (x,y) &\longmapsto [x,y]=xyx^{-1}y^{-1}
     \end{align*}
     $[x,y]$ is called the \textbf{commutator} of $x$ and $y$.
-}
-\prop{Properties of Commutator}{
+\end{definition}
+
+\begin{proposition}{Properties of Commutator}{}
     Let $G$ be a group. Then
     \begin{enumerate}[(i)]
         \item $x$ commutes with $y$ if and only if $[x,y]=1_G$.
         \item $[x,y]^{-1}=[y,x]$.
         \item For any homomorphism $f:G\to H$, $f([x,y])=[f(x),f(y)]$.
     \end{enumerate}
-}
-\prop{}{
+\end{proposition}
+
+\begin{proposition}{}{}
     According to the extent that a subgroup is preserved by endomorphisms, we have the following inclusions
     \[
         \left\{\text{verbal subgroups}\right\}\subseteq \left\{\text{fully characteristic subgroups}\right\}\subseteq \left\{\text{characteristic subgroups}\right\}\subseteq\left\{\text{normal subgroups}\right\}.
     \]
-}
+\end{proposition}
 
-\dfn{Commutator Subgroup}{
+
+\begin{definition}{Commutator Subgroup}{}
     Let $G$ be a group. The \textbf{commutator subgroup} or \textbf{derived subgroup} of $G$ is the subgroup generated by all the commutators, denoted by
     $$
     [G,G]=\langle \left\{[x,y]\mid x,y\in G \right\}\rangle.
     $$
-}
-\prop{Properties of Commutator Subgroup}{
+\end{definition}
+
+\begin{proposition}{Properties of Commutator Subgroup}{}
     Let $G$ be a group. Then
     \begin{enumerate}[(i)]
         \item $[G,G]$ is a verbal subgroup with $\mathcal{W}=\left\{ [\cdot,\cdot] \right\}$. Hence $[G,G]\lhd G$.
         \item $[G,G]$ is the smallest normal subgroup of $G$ such that $G/[G,G]$ is abelian.
         \item $[G,G]=\{1_G\}$ if and only if $G$ is abelian.
     \end{enumerate}
-}
+\end{proposition}
 
-\dfn{Abelianization}{
+
+\begin{definition}{Abelianization}{}
     Let $G$ be a group. The \textbf{abelianization} of $G$ is defined as the quotient group
     $$
     G^{\mathrm{ab}}=G/[G,G].
     $$
-}
-\prop{Universal Property of Abelianization}{
+\end{definition}
+
+\begin{proposition}{Universal Property of Abelianization}{}
     Let $G$ be a group and $A$ be an abelian group. Then any group homomorphism $f:G\to A$ factors through $G^{\mathrm{ab}}$ uniquely, that is, there exists a unique homomorphism $\bar{f}:G^{\mathrm{ab}}\to A$ such that the following diagram commutes
     $$
     \begin{tikzcd}[ampersand replacement=\&]
@@ -696,21 +772,25 @@ Characterization of Inner Automorphisms}{
         \& G^{\mathrm{ab}} \arrow[ru, "\bar{f}"'] \& 
     \end{tikzcd}
     $$
-}
-\dfn{Normalizer}{
+\end{proposition}
+
+\begin{definition}{Normalizer}{}
     Let $G$ be a group and $S$ be a subset of $G$. The \textbf{normalizer} of $S$ in $G$ is defined as 
     $$
     \mathrm{N}_G(S)=\left\{ g\in G\mid gSg^{-1}=S \right\}.
     $$ 
     Let $G$ acts on $2^G$ by conjugation (c.f. \Cref{th:conjugacy_action}). Then $\mathrm{N}_G(S)=\mathrm{Stab}_G(S)\le G$.
-}
-\prop{Normalizer of a Subgroup}{
+\end{definition}
+
+\begin{proposition}{Normalizer of a Subgroup}{}
     Let $G$ be a group and $H$ be a subgroup of $G$. Then $H\lhd\mathrm{N}_G(H)$. Moreover, $\mathrm{N}_G(H)$ is the largest subgroup of $G$ in which $H$ is normal, i.e. $$H\lhd K\le G\implies H\lhd K\le \mathrm{N}_G(H)\le G.$$
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
     For all $n\in \mathrm{N}_G(H)$, we have $nHn^{-1}=H$, which implies $H \lhd \mathrm{N}_G(H)$. Suppose $H\lhd K\le G$. Then $\forall k\in K$, $kHk^{-1}=H$. Hence $k\in \mathrm{N}_G(H)$. Therefore we prove the maximality of $\mathrm{N}_G(H)$.
-}
-\dfn{Centralizer}{
+\end{prf}
+
+\begin{definition}{Centralizer}{}
     Let $G$ be a group and $S$ be a subset of $G$. The \textbf{centralizer} of $S$ in $G$ is defined as 
     \[
         \mathrm{C}_G(S)=\left\{g\in G\mid  \forall s\in S,\;gs=sg\right\}.
@@ -720,22 +800,25 @@ Characterization of Inner Automorphisms}{
       \mathrm{C}_G(x)=\{ g\in G\mid gx=xg \}=\{ g\in G\mid gxg^{-1}=x \},
     \]
     which equals $\mathrm{N}_G(x)$.
-}
+\end{definition}
 
-\dfn{Center of a Group}{
+
+\begin{definition}{Center of a Group}{}
     Let $G$ be a group. The \textbf{center} of $G$ is defined as the centralizer of $G$ in $G$, denoted by
     \[
         Z_G=\mathrm{C}_G(G)=\{ g\in G\mid \forall x\in G,\; gx=xg\}.
     \]
-}
-\prop[normalizer_conjugation_action]{Normalizer $\mathrm{N}_G(S)$ Acts on $S$ by Conjugation}{
+\end{definition}
+
+\begin{proposition}{Normalizer $\mathrm{N}_G(S)$ Acts on $S$ by Conjugation}{normalizer_conjugation_action}
     Let $G$ be a group and $S\subseteq G$. Then $\mathrm{N}_G(S)$ acts on $S$ by conjugation, i.e. by the group homomorphism
     \begin{align*}
         \Psi_S: \mathrm{N}_G(S) &\longrightarrow \mathrm{Aut}_{\mathsf{Set}}(S)\\
         g &\longmapsto \gamma_g|_S
     \end{align*}
     where $\gamma_g|_S(s)=gsg^{-1}$ for all $s\in S$. Moreover, we have $\ker\Psi_S=\mathrm{C}_G(S)\lhd \mathrm{N}_G(S)$.
-}
+\end{proposition}
+
 \proof{
     $\Psi_S$ is obtained from restriction $\Psi_S:\mathrm{N}_G(S)\hookrightarrow G\xrightarrow{\gamma}\mathrm{Aut}_{\mathsf{Set}}(G)$. Since for any $g\in \mathrm{N}_G(S)$, $\gamma_g|_S(S)=\left\{gsg^{-1}\in G\mid s \in S\right\}\subseteq S$, we see $\Psi_S(g)=\gamma_g|_S\in \mathrm{Aut}_{\mathsf{Set}}(S)$. The kernel of $\Psi_S$ is 
     \begin{align*}
@@ -743,7 +826,7 @@ Characterization of Inner Automorphisms}{
     \end{align*}
 }
 
-\thm[N/C_theorem]{N/C Theorem}{
+\begin{theorem}{N/C Theorem}{N/C_theorem}
     Let $G$ be a group and $H$ be a subgroup of $G$. By \Cref{th:normalizer_conjugation_action}, $\mathrm{N}_G(H)$ acts on $H$ by conjugation through the group homomorphism $\Psi_H:\mathrm{N}_G(H)\to \mathrm{Aut}_{\mathsf{Set}}(H)$. We assert that 
     \[
         \mathrm{N}_G(H)/\mathrm{C}_G(H) \cong \mathrm{Im}\Psi_H\le \mathrm{Aut}_{\mathsf{Grp}}(H).
@@ -753,37 +836,43 @@ Characterization of Inner Automorphisms}{
         \Psi_H: \mathrm{N}_G(H) &\longrightarrow \mathrm{Aut}_{\mathsf{Grp}}(H)\\
         g &\longmapsto \gamma_g|_H
     \end{align*}
-}
-\cor{}{
+\end{theorem}
+
+\begin{corollary}{}{}
     Let $G$ be a group. Then $G/Z_G\cong \mathrm{Inn}(G)$. That means the conjugation action of a central element is trivial. The kernel and cokernel of the conjugation $\gamma:G\to \mathrm{Aut}_{\mathsf{Grp}}(G)$ can be connected by the following exact sequence
     \[
         1\longrightarrow Z_G\longrightarrow G\xrightarrow{\hspace{5pt}\gamma\hspace{5pt}}\mathrm{Aut}_{\mathsf{Grp}}(G)\longrightarrow \mathrm{Out}(G)\longrightarrow 1.
     \]
-}
-\pf{
+\end{corollary}
+
+\begin{prf}
 Take $H=G$ in \Cref{th:N/C_theorem}.
-}
+\end{prf}
 
 
-\prop{Properties of Centralizer}{
+
+\begin{proposition}{Properties of Centralizer}{}
     Let $G$ be a group and $S$ be a subset of $G$. Then
     \begin{enumerate}[(i)]
         \item $S\subseteq\mathrm{C}_G(\mathrm{C}_G(S))$.
     \end{enumerate}
-}
-\prop{Properties of Center}{
+\end{proposition}
+
+\begin{proposition}{Properties of Center}{}
     Let $G$ be a group. Then
     \begin{enumerate}[(i)]
         \item $Z_G\lhd_{\mathrm{char}} G$.
         \item A group is Abelian if and only if $Z_G=G$.
     \end{enumerate}
-}
+\end{proposition}
 
 
-\prop{}{
+
+\begin{proposition}{}{}
     Let $G$ acts transitively on a set $S$. Choose $s \in S$, and let $H = \mathrm{Stab}_G(s)$. Then we have group isomorphism $\mathrm{N}_G(H)/H\cong \mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
     For any $n \in \mathrm{N}_G(H)$ with image $\bar{n} \in \mathrm{N}_G(H)/H$, since $G$ acts transitively on $S$, we can define a map 
     \begin{align*}
         \phi(\bar{n}):S &\longrightarrow S\\
@@ -810,12 +899,14 @@ Take $H=G$ in \Cref{th:N/C_theorem}.
     \[
     \phi(\bar{n}\bar{m})(g\cdot s)=\phi(\overline{nm})(g\cdot s)=g(nm)^{-1}\cdot s=gm^{-1}n^{-1}\cdot s=\phi(\bar{n})(gm^{-1}\cdot s)=\phi(\bar{n})\circ\phi(\bar{m})(g\cdot s).
     \]
-}
+\end{prf}
 
-\prop{}{
+
+\begin{proposition}{}{}
     A $G$-map $\alpha: G / H \longrightarrow G / K$ has the form $\alpha(g H)=g r K$, where the element $r \in G$ satisfies $r^{-1} H r\subseteq K$.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
     Note
     \[
         \alpha(g H)=\alpha(g 1_G H)=g \alpha(1_G H).
@@ -825,30 +916,34 @@ $$
 r K=\alpha(h1_G H)=h \alpha(1_G H)=hr K\implies r^{-1} h r \in K,
 $$
 we show $r^{-1} H r\subseteq K$.
-}
+\end{prf}
+
 
 \section{Symmetric Groups}
 
-\dfn{$k$-Cycle}{
+\begin{definition}{$k$-Cycle}{}
     Let $n\ge 2$ and $k\ge 1$ be integers. A \textbf{$k$-cycle} in $S_n$ is a permutation $\sigma\in S_n$ such that there exist a subset of $P_n=\{1,2,\cdots,n\}$, denoted by $A=\{a_1,a_2,\cdots,a_k\}$, satisfying
     \begin{enumerate}[(i)]
         \item $\sigma(a_i)=a_{i+1}\text{ for }i=1,2,\cdots,k-1$,
         \item $\sigma(a_k)=a_1$,
         \item $\sigma(x)=x\text{ for }x\in P_n-A$.
     \end{enumerate}
-}
-\dfn{Cycle Decomposition}{
-    Let $n\ge 2$ and $\sigma\in S_n$. A \textbf{cycle decomposition} of $\sigma$ is a product of disjoint cycles $\sigma=\sigma_1\sigma_2\cdots\sigma_r$ such that $\sigma_i$ is a $k_i$-cycle for $i=1,2,\cdots,r$ and $k_1+k_2+\cdots+k_r=n$. $(k_1,k_2,\cdots,k_r)$ is called the \textbf{cycle type} of $\sigma$. Equivalently, a \textbf{cycle decomposition} of $\sigma$ is the decomposition of $P_n$ into orbits under the action of $\langle\sigma\rangle$.
-}
+\end{definition}
 
-\thm[Polya_enumeration_unweighted]{Pólya Enumeration Theorem (Unweighted)}{
+\begin{definition}{Cycle Decomposition}{}
+    Let $n\ge 2$ and $\sigma\in S_n$. A \textbf{cycle decomposition} of $\sigma$ is a product of disjoint cycles $\sigma=\sigma_1\sigma_2\cdots\sigma_r$ such that $\sigma_i$ is a $k_i$-cycle for $i=1,2,\cdots,r$ and $k_1+k_2+\cdots+k_r=n$. $(k_1,k_2,\cdots,k_r)$ is called the \textbf{cycle type} of $\sigma$. Equivalently, a \textbf{cycle decomposition} of $\sigma$ is the decomposition of $P_n$ into orbits under the action of $\langle\sigma\rangle$.
+\end{definition}
+
+
+\begin{theorem}{Pólya Enumeration Theorem (Unweighted)}{Polya_enumeration_unweighted}
     Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors. Suppose a group $G$ acts on $X$ through $\sigma:G\to\mathrm{Aut}_{\mathsf{Set}}(X)$. Then it also acts on $Y^X$ by \Cref{ex:acting_on_functions}. Define that a coloring configuration of $(X,Y,\sigma)$ is an orbit in the $G$-set $Y^X$. Then the number of essentially distinct coloring configurations is
 $$
 \left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}|Y|^{c(g)},
 $$
 where $c(g):=\left|X/\langle \sigma_g\rangle\right|$ denotes the number of cycles in the cycle decomposition of $\sigma_g \in \mathrm{Aut}_{\mathsf{Set}}(X)$.
-}
-\pf{ 
+\end{theorem}
+
+\begin{prf} 
     We apply Burnside's lemma \ref{th:Burnside's_lemma}, which states that
 $$
 \left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}\left|\left(Y^X\right)^g\right| .
@@ -865,15 +960,17 @@ then $f(x)=f(y)\iff Gx=Gy$. By the universal property of the quotient set, there
 \end{tikzcd}
 \]
 Conversely, for any map $h:X/\langle \sigma_g\rangle\to Y$, we can define a map $f:X\to Y$ and checking that $f(g\cdot x)=f(x)$ for all $x\in X$. Hence we have a bijection between $\left(Y^X\right)^g$ and $Y^{X/\langle \sigma_g\rangle}$, which implies that $\left|\left(Y^X\right)^g\right|=|Y|^{c(g)}$.
-}
-\dfn{Cycle Index Polynomial}{
+\end{prf}
+
+\begin{definition}{Cycle Index Polynomial}{}
     Let $G$ be a subgroup of $S_n$. The \textbf{cycle index polynomial} of $G$ is defined as
     $$
     Z(t_1,t_2,\cdots,t_n;G)=\frac{1}{|G|}\sum_{g\in G}t_1^{c_1(g)}t_2^{c_2(g)}\cdots t_n^{c_n(g)},
     $$
     where $c_k(g)$ denotes the number of $k$-cycles in the cycle decomposition of $\sigma_g$. $|G|Z(t_1,t_2,\cdots,t_n;G)$ can be seen as a generating function, where the coefficient of $t_1^{c_1}t_2^{c_2}\cdots t_n^{c_n}$ represents the number of permutations in $G$ with excatly $c_k$ $k$-cycles for $k=1,2,\cdots,n$.
-}
-\thm{Pólya Enumeration Theorem (Weighted)}{
+\end{definition}
+
+\begin{theorem}{Pólya Enumeration Theorem (Weighted)}{}
 Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors.  Suppose $w:Y\to\mathbb{Z}_{\ge 0}^m$ is a weight function which assigns a weight $w(y)=(w_1(y),w_2(y),\cdots,w_m(y))$ to each color $y\in Y$. Consider the genrating function 
 \[
 q(x_1,\cdots,x_m)=\sum_{y\in Y}x_1^{w_1(y)}x_2^{w_2(y)}\cdots x_m^{w_m(y)},
@@ -892,8 +989,9 @@ we see $G$ acts on $W^{-1}(\omega)$ for each $\omega=(\omega_1,\cdots,\omega_m)\
     \mathrm{CGF}\left(x_1, \cdots,x_m\right) &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
      &= Z\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right);G\right).
 \end{align*}
-}
-\pf{ 
+\end{theorem}
+
+\begin{prf} 
     For any $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$, by applying Burnside's lemma \ref{th:Burnside's_lemma} to the $G$-set $W^{-1}(\omega)$, we have
     \[
         \left|W^{-1}(\omega)/G\right| =\frac{1}{|G|}\sum_{g\in G}\left|W^{-1}(\omega)^g\right|.
@@ -915,8 +1013,9 @@ we see $G$ acts on $W^{-1}(\omega)$ for each $\omega=(\omega_1,\cdots,\omega_m)\
         &=\frac{1}{|G|}\sum_{g \in G}q(x_1,  \cdots,x_m)^{c_1(g)} q \left (x_1^2, \cdots,x_m^2 \right )^{c_2(g)} \cdots q \left (x_1^n, \cdots,x_m^n\right )^{c_n(g)}\\
      &= Z\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right);G\right).
     \end{align*}
-}
-\ex{Counting the Isomers of Chlorobenzene}{
+\end{prf}
+
+\begin{example}{Counting the Isomers of Chlorobenzene}{}
     Replacing the H in a benzene ring with Cl, one can consider coloring the 6 vertices of the benzene ring with two colors: H and Cl. The group action is $D_{12}$, which includes 6 rotations: 0°, 60°, ..., 300°, and 6 reflections: 3 along the opposing sides and 3 along the opposing diagonals.
 
     Compute the cycle decomposition for each \(g\):
@@ -952,29 +1051,33 @@ The coefficients give the number of isomers for various chlorobenzene compounds.
     \chemfig[scale=0.1]{*6(=-=(-Cl)-=(-Cl)-=)} \qquad % 1,3-dichlorobenzene
     \chemfig[scale=0.1]{*6(=-(-Cl)=-=(-Cl)-)}     % 1,4-dichlorobenzene
 \end{center}
-}
+\end{example}
+
 
 
 \section{Abelian Group}
-\dfn{Abelian Group}{
+\begin{definition}{Abelian Group}{}
     An \textbf{abelian group} is a group $G$ such that $G$ is commutative. That is, for all $a,b\in G$, $ab=ba$.
-}
+\end{definition}
+
 
 An Abelian group is a $\mathbb{Z}$-module and we have category isomorphism $\mathsf{Ab}\cong\mathbb{Z}\raisebox{0.22ex}{-}\mathsf{Mod}$.
 
-\ex{Forgetful Functor $U_{\mathsf{Grp}}: \mathsf{Ab}\to \mathsf{Grp}$}{
+\begin{example}{Forgetful Functor $U_{\mathsf{Grp}}: \mathsf{Ab}\to \mathsf{Grp}$}{}
     The forgetful functor $U_{\mathsf{Grp}}: \mathsf{Ab}\to \mathsf{Grp}$ is a functor that sends an abelian group to its underlying group. It is a fully faithful functor.
-} 
+\end{example}
+ 
 
-\ex{Forgetful Functor $U: \mathsf{Ab}\to \mathsf{Set}$}{
+\begin{example}{Forgetful Functor $U: \mathsf{Ab}\to \mathsf{Set}$}{}
     The forgetful functor $U: \mathsf{Ab}\to \mathsf{Set}$ forgets the group structure and sends an abelian group to its underlying set. 
     \begin{enumerate}[(i)]
         \item $U$ is representable by $\left(\mathbb{Z}, 1_\mathbb{Z}\right)$.
         \item $U$ is full but not faithful.
     \end{enumerate}
-} 
+\end{example}
+ 
 
-\dfn{Free Abelian Group}{
+\begin{definition}{Free Abelian Group}{}
     A \textbf{free abelian group} generated by a set $X$ is an abelian group denoted by $\mathbb{Z}^{\oplus X}$ which satisfies the following universal property: for any group $G$ and any funtion $f:X\to G$, there exists a unique group homomorphism $\varphi:\mathbb{Z}^{\oplus X}\to G$ such that the following diagram commutes
     \[
     \begin{tikzcd}[ampersand replacement=\&]
@@ -984,7 +1087,8 @@ X \arrow[u, "\iota"] \arrow[ru, "f"']                      \&
     \] 
     where $\iota:X\to \mathbb{Z}^{\oplus X}$ is the canonical injection.
 
-}
+\end{definition}
+
 
 
 
