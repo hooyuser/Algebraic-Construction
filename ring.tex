@@ -20,7 +20,7 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra. In fact, we have
 \[
     \mathsf{Ring}\cong \mathbb{Z}\text{-}\mathsf{Alg}.
 \]
-\dfn{Unit Group of a Ring}{
+\begin{definition}{Unit Group of a Ring}{}
     Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$. We can define a functor $(-)^\times:\mathsf{Ring}\to\mathsf{Grp}$ that sends a ring to its unit group
     \[
         \begin{tikzcd}[ampersand replacement=\&]
@@ -32,11 +32,13 @@ A ring $R$ is a $Z(R)$-algebra and also a $\mathbb{Z}$-algebra. In fact, we have
             S  \& \& \& S^{\times}
         \end{tikzcd}
     \]
-}
+\end{definition}
 
-\prop{Adjunction $\mathbb{Z}\left[-\right]\dashv \left(-\right)^\times$}{
+
+\begin{proposition}{Adjunction $\mathbb{Z}\left[-\right]\dashv \left(-\right)^\times$}{}
     $(-)^\times:\mathsf{Ring}\to\mathsf{Grp}$ has a left adjoint which sends each group $G$ to the group ring $\mathbb{Z}\left[G\right]$.
-}
+\end{proposition}
+
 
 Next we define the morphisms in the category $\mathsf{Ring}$.
 \begin{definition}{Ring Homomorphism}{}

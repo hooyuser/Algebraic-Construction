@@ -1,14 +1,15 @@
 \documentclass{report}
 
+\usepackage[extract=python]{memoize}
+\mmzset{%
+  prefix=memos/,
+  mkdir,
+  auto={tikzcd}{memoize,verbatim},
+  auto={align*}{nomemoize}
+}
+
 \input{preamble}
 
-% \usepackage[extract=python]{memoize}
-% \mmzset{%
-%   prefix=memos/,
-%   mkdir,
-%   % Sašo Živanović: https://chat.stackexchange.com/transcript/message/64689784#64689784
-%   auto={tikzcd}{memoize,verbatim},
-% }
 
 %\includeonly{category_theory}
 %\includeonly{module}
@@ -16,7 +17,6 @@
 %\includeonly{commutative_ring}
 
 
-%\tikzexternalize % activate!
 \usepackage[page,toc,titletoc,title]{appendix}
 \usepackage{chemfig}
 \usepackage{relsize}
@@ -237,43 +237,6 @@ We use sans-serif font for categories. Some common categories are
 \include{field}
 \include{valuation_theory}
 \include{number_theory}
-
-
-
-% \begin{mmdefinition}{This is the theorem title}{labelForTheorem}
-%   Let $p$ be a prime number. The $p$-adic integer topological ring is defined as
-%   \[
-%   \mathbb{Z}_p=\varprojlim_{n}\mathbb{Z}/p^n\mathbb{Z}.    
-%   \]
-%   The universal property of $\mathbb{Z}_p$ is given by the following commutative diagram
-%   \[
-%       \begin{tikzcd}[ampersand replacement=\&, row sep=30pt]
-%             \&                                    \&                  \&                                    \&                  \& G \arrow[d, dashed] \arrow[rdd]                                                    \&                  \\
-%             \&                                    \&                  \&                                    \&                  \& \mathbb{Z}_p \arrow[d] \arrow[lld] \arrow[lllld] \arrow[llllld] \arrow[rd] \&                  \\
-%       \mathbb{Z}/p\mathbb{Z} \& \mathbb{Z}/p^2\mathbb{Z} \arrow[l] \& \cdots \arrow[l] \& \mathbb{Z}/p^n\mathbb{Z} \arrow[l] \& \cdots \arrow[l] \& \mathbb{Z}/p^m\mathbb{Z} \arrow[l]                                                 \& \cdots \arrow[l]
-%       \end{tikzcd}
-%   \]
-% \end{mmdefinition}
-
-\begin{prf}
-  \begin{tikzcd}
-        ABC \arrow[loop right, "x"]{} \arrow[loop left, "y"]{} 
-  \end{tikzcd}
-\end{prf}
-
-% \adddefinition{Sample Definition}{
-%   This is an example of a definition using the custom command to reduce boilerplate code.
-%  { \begin{tikzcd}
-%     ABC \arrow[loop right, "x"]{} \arrow[loop left, "y"]{} 
-%   \end{tikzcd}}
-% }
-% \[
-%   \begin{tikzcd}[ampersand replacement=\&, row sep=30pt]
-%       \&                                    \&                  \&                                    \&                  \& G \arrow[d, dashed] \arrow[rdd]                                                    \&                  \\
-%       \&                                    \&                  \&                                    \&                  \& \mathbb{Z}_p \arrow[d] \arrow[lld] \arrow[lllld] \arrow[llllld] \arrow[rd] \&                  \\
-% \mathbb{Z}/p\mathbb{Z} \& \mathbb{Z}/p^2\mathbb{Z} \arrow[l] \& \cdots \arrow[l] \& \mathbb{Z}/p^n\mathbb{Z} \arrow[l] \& \cdots \arrow[l] \& \mathbb{Z}/p^m\mathbb{Z} \arrow[l]                                                 \& \cdots \arrow[l]
-% \end{tikzcd}
-% \]
 
 
 \include{appendices}

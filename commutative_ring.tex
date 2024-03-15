@@ -4,7 +4,7 @@ A commutative ring $R$ is a commutative $R$-algebra and accordingly a commutativ
 \[
     \mathsf{CRing}\cong \mathbb{Z}\text{-}\mathsf{CAlg}.
 \]
-\dfn[local_commutative_ring]{Local Commutative Ring}{
+\begin{definition}{Local Commutative Ring}{local_commutative_ring}
     Let $R$ be a commutative ring. Then the following are equivalent:
     \begin{enumerate}[(i)]
         \item $R$ is a local ring.
@@ -14,7 +14,8 @@ A commutative ring $R$ is a commutative $R$-algebra and accordingly a commutativ
         \item $R$ is not the zero ring and if $\sum_{i=1}^n r_i\in R^{\times}$, then there exist some $i$ such that $r_i\in R^{\times}$. 
         \item $R$ is not the zero ring and the sum of any two non-units in $R$ is a non-unit.
     \end{enumerate}
-}
+\end{definition}
+
 
 \begin{definition}{Noetherian Commutative Ring}{}
     Let $R$ be a commutative ring. We say $R$ is \textbf{Noetherian} if one of following conditions holds:
@@ -209,14 +210,15 @@ In summary, we have the following chain of inclusions:
 \[
 \left\{\text{maximal ideals of }R\right\} \subseteq \left\{\text{prime ideals of }R\right\} \subseteq \left\{\text{radical ideals of }R\right\} \subseteq \left\{\text{ideals of }R\right\}.
 \]
-\prop{Quotient Preserves Radical, Prime, Maximal Ideals}{
+\begin{proposition}{Quotient Preserves Radical, Prime, Maximal Ideals}{}
     Let $R$ be a commutative ring and $I\subseteq R$ be a proper ideal. Then we have bijections between the following sets:
     \begin{align*}
         \left\{\text{ideals of }R\text{ containing }I\right\}&\longleftrightarrow\left\{\text{ideals of }R/I\right\}\\
         J&\longmapsto J/I
     \end{align*}
     The ideal $J\supseteq I$ is radical, prime, or maximal if and only if $J/I$ is radical, prime, or maximal respectively.
-}
+\end{proposition}
+
 
 \subsection{Prime Elements}
 \begin{definition}{Divisibility}{}
@@ -273,13 +275,14 @@ In summary, we have the following chain of inclusions:
 If $R$ is a general commutative ring, then we only have the implication $(\mathrm i)\implies (\mathrm{ii})$. The converse is not true in general. For example, in $\mathbb{C}[x,y,z]/(x-xyz)$, $\overline{x}\mid \overline{xy}$ and $\overline{xy}\mid \overline{x}$, but there exists no unit $u$ such that $\overline{x}=u\overline{xy}$.
 
 Associatedness can also be described in terms of the action of $R^\times$ on $R$ via multiplication: two elements of $R$ are associates if they are in the same $R^\times$-orbit.
-\dfn{Irreducible Element}{
+\begin{definition}{Irreducible Element}{}
     Let $R$ be an integal domain. An element $a\in R$ is called \textbf{irreducible} if
     \begin{enumerate}[(i)]
         \item $a\notin R^\times$, i.e. $a$ is not a unit.
         \item $a=bc\implies b\in R^\times\text{ or }c\in R^\times$.
     \end{enumerate}    
-}
+\end{definition}
+
 0 is never an irreducible element.
 \begin{proposition}{Prime Element $\implies$ Irreducible Element in Integral Domain}{}
     Let $R$ be an integal domain. Then every prime element in $R$ is irreducible.

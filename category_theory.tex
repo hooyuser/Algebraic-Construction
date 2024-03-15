@@ -71,7 +71,7 @@ Suppose $\mathsf{C}_i$ and $\mathsf{D}_i$ are locally $\mathscr{U}_i$-small cate
 
 There is a looser way to think about a subcategory: $\mathsf{D}$ is a subcategory of $\mathsf{C}$ if there exists a fully faithful functor $F:\mathsf{D}\to \mathsf{C}$ that is injective on objects.\\
 
-\ex{Examples of Full Subcategories}{
+\begin{example}{Examples of Full Subcategories}{}
     Here are some examples of full subcategories:
     \begin{itemize}
         \item $\mathsf{Ab}\subseteq\mathsf{Grp}\subseteq\mathsf{Mon}$
@@ -79,7 +79,8 @@ There is a looser way to think about a subcategory: $\mathsf{D}$ is a subcategor
         \item $K\text{-}\mathsf{Vect}\subseteq K\text{-}\mathsf{Mod}$
         \item $R\text{-}\mathsf{CAlg}\subseteq R\text{-}\mathsf{Alg}$
     \end{itemize}
-}
+\end{example}
+
 
 \begin{definition}{Opposite Category}{}
     Suppose $\mathsf{C}$ is a category. The \textbf{opposite category} $\mathsf{C}^{\mathrm{op}}$ is defined as follows
@@ -1595,14 +1596,15 @@ Generally, given $X\xrightarrow{f}Y_1\xrightarrow{g}Y_2$ in $\mathsf{Set}$, we h
 Then it is straightforward to see $\phi^u_{A}\left(\mathrm{id_A}\right)=u$ and $\phi^{\phi_A(\mathrm{id}_A)}=\phi$.
 
 
-\cor{Yoneda Embedding}{
+\begin{corollary}{Yoneda Embedding}{}
     Let $\mathsf{C}$ be a locally small category. The \hyperref[th:yoneda_embedding_functor]{Yoneda embedding functor} $Y_\mathsf{C}:\mathsf{C}\to \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]$ is fully faithful. That is, for any $A_1,A_2\in\mathrm{Ob}\left(\mathsf{C}\right)$, the morphism set map 
     \begin{align*}
         \left.Y_{\mathsf{C}}\right|_{\operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right)}:\operatorname{Hom}_{\mathsf{C}}\left(A_1,A_2\right) &\longrightarrow\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A_1\right), \operatorname{Hom}_{\mathsf{C}}\left(-,A_2\right)\right) \\
          f & \longmapsto f_\star
     \end{align*}
     is a bijection. That justifies the name ``embedding'' because $\mathsf{C}$ is embedded into $\mathsf{Psh}(\mathsf{C})$ via $Y_\mathsf{C}$ as a full subcategory.
-}
+\end{corollary}
+
 \begin{prf}
     By \hyperref[th:yoneda_lemma]{Yoneda lemma}, there is a natural bijection
     \[
@@ -1850,7 +1852,7 @@ can be translated into the following calculus rules
 \]
 
 
-\prop[representable_functor_by_universal_element]{Equivalent Characterizations of Representable Functor}{
+\begin{proposition}{Equivalent Characterizations of Representable Functor}{representable_functor_by_universal_element}
     Suppose $F:\mathsf{C}\to \mathsf{Set}$ is a functor. Then the following statements are equivalent:
     \begin{enumerate}[(i)]
         \item $F$ is representable by universal element $(A,u)$ 
@@ -1875,7 +1877,8 @@ can be translated into the following calculus rules
         \item $\left(A,\diagfunctor u:\{*\}\to F(A)\right)$ is a \hyperref[th:universal_morphism]{universal morphism} from $\{*\}$ to $F$.
         \item For any $(X,x)\in \mathrm{Ob}\left(\int_{\mathsf{C}^{\mathrm{op}} }F\right)$, there is a unique morphism $(A,u)\to (X,x)$ in $\int_{\mathsf{C}^{\mathrm{op}} }F$ (which is a morphism $f: X\to A$ in $\mathsf{C}$ such that $F(f)(x)=u$).
     \end{enumerate}
-}
+\end{proposition}
+
 \begin{prf}
     (i)$\iff$ (ii). Suppose $(A,u)$ is an object of $\int_{\mathsf{C}}F$ and $\phi^u:\operatorname{Hom}_{\mathsf{C}}\left(A,-\right)\Rightarrow F$ be the natural transformation
     \[
@@ -2601,7 +2604,7 @@ which in turn can be explicitly written as for any $f:L(X_1)\to Y_1$ in $\mathsf
     \Phi_{X_2,Y_2}\left(h\circ f\circ L(g)\right)=R(h)\circ\Phi_{X_1,Y_1}(f)\circ g.
 \]
 
-\dfn{Adjunction Unit and Counit}{
+\begin{definition}{Adjunction Unit and Counit}{}
 Let $\left(L,R,\Phi\right)$ be an adjoint pair of functors. The \textbf{adjunction unit} $\eta$ of this adjunction is a natural transformation
 \begin{center}
     \begin{tikzcd}[ampersand replacement=\&]
@@ -2656,7 +2659,8 @@ $$
 \mathrm{id}_{R(Y)} & \longmapsto \varepsilon_Y
 \end{aligned}
 $$
-}
+\end{definition}
+
 \begin{prf}
     By naturality of $\Phi$, for any morphism $g:X_2\to X_1$ in $\mathsf{C}$, we have the following commutative diagram
     \[

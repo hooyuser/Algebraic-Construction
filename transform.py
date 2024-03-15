@@ -31,10 +31,13 @@ def process_latex_content(latex_content):
         if char == '\\':  # Escape sequence (e.g., LaTeX command)
             # Find the end of the command (space or a curly bracket)
             end_pos = i + 1
-            while end_pos < len(latex_content) and latex_content[end_pos] not in {' ', '{', '['}:
-                end_pos += 1
-
-            cmd = latex_content[i:end_pos]  # Extracted command
+            # if char is the last character, or the next character is not a letter, then break
+            if end_pos >= len(latex_content) or not latex_content[end_pos].isalpha():
+                cmd = 'not a command'
+            else:
+                while end_pos < len(latex_content) and latex_content[end_pos] not in (' ', '{', '[', '\\'):
+                    end_pos += 1
+                cmd = latex_content[i:end_pos]  # Extracted command
 
             if cmd in command_to_env:
                 # Process the recognized command
@@ -120,50 +123,52 @@ def expand_dfn_macro(input_tex_path):
 
 
 test_input = r'''
-
-\thm[yoneda_lemma]{Yoneda Lemma}{
-    Let $\mathsf{C}$ be a locally small category. For any functor $F:\mathsf{C}^{\mathrm{op}}\to \mathsf{Set}$ and any $A\in \mathrm{Ob}(\mathsf{C})$, there is a natural bijection
+\[
+    \overline{a_1\cdots a_n}\diamond \overline{b_1\cdots b_m}=\overline{a_1\cdots a_nb_1\cdots b_m}.
+\]
+\dfn{Word}{
+    Let $S$ be a set. Define $S^{-1}=\left\{s^{-1}\midv s\in S\right\}$. A \textbf{word} on $S$ is a string over $S\sqcup S^{-1}\sqcup\{1\}$. $\overline{1}$ is called an \textbf{empty word}. The \textbf{length} of a word $w$ is the number of letters in $w$.
+}
+Associatedness can also be described in terms of the action of $R^\times$ on $R$ via multiplication: two elements of $R$ are associates if they are in the same $R^\times$-orbit.
+\dfn{Irreducible Element}{
+    Let $R$ be an integal domain. An element $a\in R$ is called \textbf{irreducible} if
+    \begin{enumerate}[(i)]
+        \item $a\notin R^\times$, i.e. $a$ is not a unit.
+        \item $a=bc\implies b\in R^\times\text{ or }c\in R^\times$.
+    \end{enumerate}    
+}
+\[
+\left\{\text{maximal ideals of }R\right\} \subseteq \left\{\text{prime ideals of }R\right\} \subseteq \left\{\text{radical ideals of }R\right\} \subseteq \left\{\text{ideals of }R\right\}.
+\]
+\prop{Quotient Preserves Radical, Prime, Maximal Ideals}{
+    Let $R$ be a commutative ring and $I\subseteq R$ be a proper ideal. Then we have bijections between the following sets:
     \begin{align*}
-        q_{A,F}:\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(\operatorname{Hom}_{\mathsf{C}}\left(-,A\right), F\right) & \overset{\sim}{\longrightarrow} F(A) \\
-        {  \left[ \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C}^{\mathrm{op}} \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(-{,}A\right)"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{Set}
-            \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi"]
-        \end{tikzcd}\right] } & \longmapsto \phi_A\left(\operatorname{id}_A\right)
+        \left\{\text{ideals of }R\text{ containing }I\right\}&\longleftrightarrow\left\{\text{ideals of }R/I\right\}\\
+        J&\longmapsto J/I
     \end{align*}
-    The naturality of $q_{A,F}$ means that 
+    The ideal $J\supseteq I$ is radical, prime, or maximal if and only if $J/I$ is radical, prime, or maximal respectively.
+}
+\[
+    \mathsf{Ring}
+\]
+\dfn{Unit Group of a Ring}{
+    Let $R$ be a ring. The \textbf{unit group} of $R$ is the group of invertible elements of $R$ under multiplication, denoted by $R^\times$. We can define a functor $(-)^\times:\mathsf{Ring}\to\mathsf{Grp}$ that sends a ring to its unit group
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C}^{\mathrm{op}}\times \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]\&[-34pt]\&[+62pt]\&[-25pt] \mathsf{Set}\&[-25pt]\&[-25pt] \\ [-15pt] 
-            (A_1,F_1)  \arrow[dd, "\left(g{,} \eta\right)"{name=L, left}] 
+            \mathsf{Ring}\ \&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Grp}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            R \arrow[dd, "f"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(\mathrm{Hom}_{\mathsf{C}}(-,A_1),F_1)\arrow[dd, ""{name=R}] \& \ni \& \phi \arrow[dd,mapsto]\\ [-8pt] 
-            \&  \phantom{.}\arrow[r, "\operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}\left(Y_\mathsf{C}(-){,}-\right)", squigarrow]\&\phantom{.}  \&   \\[-8pt] 
-            (A_2,F_2)  \& \& \& \operatorname{Hom}_{\mathsf{Psh}(\mathsf{C})}(\mathrm{Hom}_{\mathsf{C}}(-,A_2),F_2)\& \ni \& \eta\circ \phi\circ g_\star
+            \& [-30pt]R^{\times}\arrow[dd, "f|_{R^\times}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "(-)^\times", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            S  \& \& \& S^{\times}
         \end{tikzcd}
     \]
-    is a functor isomorphic to the \hyperref[th:evaluation_functor]{evaluation functor}
-    \begin{align*}
-        \mathrm{ev}:\mathsf{C}^{\mathrm{op}}\times \left[\mathsf{C}^{\mathrm{op}},\mathsf{Set}\right]&\longrightarrow \mathsf{Set}\\
-        \left(A,F\right)&\longmapsto F(A)
-    \end{align*}
-    \textbf{Covariant version}\\
-    For any functor $F:\mathsf{C}\to \mathsf{Set}$ and any $A\in \mathrm{Ob}(\mathsf{C})$, there is a natural bijection
-    \begin{align*}
-        \operatorname{Hom}_{\left[\mathsf{C},\mathsf{Set}\right]}\left(\operatorname{Hom}_{\mathsf{C}}\left(A,-\right), F\right) & \overset{\sim}{\longrightarrow} F(A) \\
-        {  \left[ \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C} \arrow[r, "\operatorname{Hom}_{\mathsf{C}}\left(A{,}-\right)"{name=A, above}, bend left] \arrow[r, "F"'{name=B, below}, bend right] \&[+30pt] \mathsf{Set}
-            \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\phi"]
-        \end{tikzcd}\right] } & \longmapsto \phi_A\left(\operatorname{id}_A\right)
-    \end{align*}
 }
-\cor[module_localization_glueing_property_cor]{}{
-    Given an $R$-module $M$, the following are equivalent:
-    \begin{enumerate}[(i)]
-        \item $M$ is zero,
-        \item $M_{\mathfrak{p}}$ is zero for all $\mathfrak{p} \in \operatorname{Spec}(R)$,
-        \item $M_{\mathfrak{m}}$ is zero for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$.
-    \end{enumerate} 
+
+\prop{Adjunction $\mathbb{Z}\left[-\right]\dashv \left(-\right)^\times$}{
+    $(-)^\times:\mathsf{Ring}\to\mathsf{Grp}$ has a left adjoint which sends each group $G$ to the group ring $\mathbb{Z}\left[G\right]$.
 }
+
 
 '''
 
@@ -174,14 +179,14 @@ filename_list = [
     'set_theory.tex',
     'category_theory.tex',
     'group.tex',
-    'topological_group.tex',
-    'ring.tex',
+    # 'topological_group.tex',
+    #'ring.tex',
     'commutative_ring.tex',
     'module.tex',
-    'associative_algebra.tex',
-    'field.tex',
-    'valuation_theory.tex',
-    'number_theory.tex',
+    # 'associative_algebra.tex',
+    # 'field.tex',
+    # 'valuation_theory.tex',
+    # 'number_theory.tex',
 ]
 
 for input_tex_path in filename_list:

@@ -47,12 +47,13 @@ We have
 	x\in \uplim_{n\to\infty}A_n\iff \forall n\ge1,\exists k\ge n,x\in A_k.
 \]
 
-\dfn{Lower Limit of Sequence of Sets}{
+\begin{definition}{Lower Limit of Sequence of Sets}{}
 	Let $\left(A_n\right)_{n=1}^{\infty}$ be a sequence of sets. The \textbf{lower limit} of $\left(A_n\right)_{n=1}^{\infty}$ is defined as follows
 	\begin{align*}
 		\lowlim_{n\to\infty}A_n&:=\bigcup_{n=1}^\infty\bigcap_{k=n}^\infty A_k=\left\{x:x\text{ belongs to all but finitely many sets in }\left(A_n\right)_{n=1}^{\infty}\right\}\\
 	\end{align*}
-}
+\end{definition}
+
 \begin{proposition}{Property of Upper Limit and Lower limit}{}
 	\[
 		\bigcap_{n=1}^\infty A_n\subseteq\lowlim_{n\to\infty}A_n\subseteq\uplim_{n\to\infty}A_n\subseteq \bigcup_{n=1}^\infty A_n.
