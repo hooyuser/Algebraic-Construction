@@ -1,0 +1,121 @@
+
+\chapter{Number Theory}
+\section{$p$-adic Numbers}
+
+
+\begin{definition}{$p$-adic Integer}{}
+    Let $p$ be a prime number. The $p$-adic integer topological ring is defined as
+    \[
+    \mathbb{Z}_p=\varprojlim_{n}\mathbb{Z}/p^n\mathbb{Z}.    
+    \]
+    The universal property of $\mathbb{Z}_p$ is given by the following commutative diagram
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=30pt]
+            \&                                    \&                  \&                                    \&                  \& G \arrow[d, dashed] \arrow[rdd]                                                    \&                  \\
+            \&                                    \&                  \&                                    \&                  \& \mathbb{Z}_p \arrow[d] \arrow[lld] \arrow[lllld] \arrow[llllld] \arrow[rd] \&                  \\
+\mathbb{Z}/p\mathbb{Z} \& \mathbb{Z}/p^2\mathbb{Z} \arrow[l] \& \cdots \arrow[l] \& \mathbb{Z}/p^n\mathbb{Z} \arrow[l] \& \cdots \arrow[l] \& \mathbb{Z}/p^m\mathbb{Z} \arrow[l]                                                 \& \cdots \arrow[l]
+\end{tikzcd}
+\]
+
+\end{definition}
+
+A $p$-adic integer can be represented as a sequence
+$$
+x=\left(x_1 \bmod p, x_2 \bmod p^2, x_3 \bmod p^3, \ldots\right)
+$$
+such that $x_{n+1}\equiv x_n \bmod p^n$ for all $n\in \mathbb{Z}_{\ge 1}$. Writing in base-$p$ form, $x_n \bmod p^n$ can be represented as 
+\[
+x_n =a_0+a_1p+\cdots+a_{n-1}p^{n-1}= \left(\,\overline{ a_{n-1}\cdots a_1a_0}\,\right)_p.    
+\]
+The condition $x_{n+1}\equiv x_n \bmod p^n$ means that $x_{n+1}$ and $x_n$ have the same last $n$ digits in base-$p$ form. Thus $p$-adic integer $x$ can be thought as a base-$p$ interger with infinite digits
+\[
+x =a_0+a_1p+\cdots+a_{n}p^{n}+\cdots= \left(\,\overline{\cdots a_{n}\cdots a_1a_0}\,\right)_p.
+\]
+The projection map $\pi_n:\mathbb{Z}_p\to \mathbb{Z}/p^n\mathbb{Z}$ is the  truncation map that truncates the last $n$ digits of $x$ in base-$p$ form.
+
+\begin{definition}{$p$-adic Valuation}{}
+    Let $p$ be a prime number. The \textbf{$p$-adic valuation} is defined as
+    \begin{align*}
+        v_p:\mathbb{Q}&\longrightarrow \mathbb{Z}\cup\{\infty\}\\
+        \frac{a}{b}&\longmapsto \begin{cases}
+            \infty & \text{if }a=0,\\
+            \max\{n\in \mathbb{Z}\mid p^n\mid a\}-\max\{n\in \mathbb{Z}\mid p^n\mid b\} & \text{if }a\ne 0.
+        \end{cases}
+    \end{align*}
+
+\end{definition}
+
+
+The \textbf{$p$-adic absolute value} is defined as
+\begin{align*}
+    \left|\,\cdot\,\right|_p:\mathbb{Q}&\longrightarrow \mathbb{R}_{\ge 0}\\
+    x&\longmapsto \begin{cases}
+        0 & \text{if }a=0,\\
+        p^{-v_p(x)} & \text{if }x\ne 0.
+    \end{cases}
+\end{align*}
+
+\begin{definition}{Global Field}{}
+    A \textbf{global field} is a field isomorphic to one of the following:
+    \begin{itemize}
+        \item a \textbf{number field}: finite extension of $\mathbb{Q}$,
+        \item a \textbf{function field} over a finite field $\mathbb{F}_q$: finite extension of $\mathbb{F}_q(t)$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}{Local Field}{}
+    A \textbf{local field} is a field isomorphic to one of the following:
+    \begin{itemize}
+        \item (Character zero): $\mathbb{R}$, $\mathbb{C}$ or a finite extension of $\mathbb{Q}_p$,
+        \item (Character $p>1$): the field of formal Laurent series  $\mathbb{F}_q((t))$, where $q=p^n$.
+    \end{itemize}
+\end{definition}
+
+\section{Dirichlet Charater}
+\begin{definition}{Euler's Totient Function}{}
+    The \textbf{Euler's totient function} is defined as
+    \begin{align*}
+        \varphi:\mathbb{N}&\longrightarrow \mathbb{N}\\
+        n&\longmapsto \left|\left\{a\in \mathbb{N}\mid 1\le a\le n, (a,n)=1\right\}\right|.
+    \end{align*}
+\end{definition}
+
+\begin{proposition}{Euler's Product Formula}{}
+    For any $n\in \mathbb{N}$, we have
+    \[
+        \varphi(n)=\sum_{k=1}^n  \mathds{1}_{(k,n)=1}=n\prod_{p\mid n}\left(1-\frac{1}{p}\right).
+    \]
+\end{proposition}
+
+\begin{proposition}{Properties of Euler's Totient Function}{}
+    For any $m,n\in \mathbb{N}$, we have
+    \begin{enumerate}[(i)]
+        \item $\varphi(mn)=\varphi(m)\varphi(n)$ if $(m,n)=1$.
+        \item $\varphi(n)\mid n$.
+        \item $\varphi(n)=n$ if and only if $n=1$.
+        \item $\varphi(p^k)=p^k-p^{k-1}$ for any prime $p$ and $k\in \mathbb{N}$.
+        \item $\varphi(n)\le n-\sqrt{n}$ for any $n\in \mathbb{N}$.
+    \end{enumerate}
+\end{proposition}
+
+
+\begin{definition}{Dirichlet Character}{}
+    Given any group homomorphism $\rho_m:(\mathbb{Z} / m \mathbb{Z})^{\times} \rightarrow \mathbb{C}^{\times}$, we can define a function $\chi:\mathbb{Z} \rightarrow \mathbb{C}$ by
+    \begin{align*}
+        \chi_m(a)=\left\{\begin{array}{lll}
+            0 & \text { if }[a] \notin(\mathbb{Z} / m \mathbb{Z})^{\times} & \text {i.e. }(a, m)>1 \\
+            \rho([a]) & \text { if }[a] \in(\mathbb{Z} / m \mathbb{Z})^{\times} & \text {i.e. }(a, m)=1
+            \end{array}\right.
+    \end{align*}
+    Such function $\chi_m$ is called a \textbf{Dirichlet character modulo $m$}.
+\end{definition}
+
+\begin{definition}{Principal Dirichlet Character}{}
+    The \textbf{principal Dirichlet character modulo $m$} is the simplest Dirichlet character defined by
+    \begin{align*}
+        \chi_0\left(a\right)=\left\{\begin{array}{lll}
+            0 & \text { if } a \neq 1 \\
+            1 & \text { if } a=1
+            \end{array}\right.
+    \end{align*}
+\end{definition}

@@ -1,0 +1,521 @@
+
+
+\chapter{Module}
+\section{Basic Concepts}
+\begin{definition}{Module}{}
+    Let $R$ be a ring. An left \textbf{$R$-module} is an abelian group $M$ with a binary operation $R\times M\to M$ such that
+    \begin{enumerate}[(i)]
+        \item $r(m+n)=rm+rn$ for all $r\in R$ and $m, n\in M$.
+        \item $(r+s)m=rm+sm$ for all $r, s\in R$ and $m\in M$.
+        \item $(rs)m=r(sm)$ for all $r, s\in R$ and $m\in M$.
+        \item $1m=m$ for all $m\in M$.
+    \end{enumerate}
+    If $R$ is a commutative ring, then $M$ is called a \textbf{commutative $R$-module}.
+\end{definition}
+
+
+\begin{definition}{Homomorphism of $R$-modules}{}
+    Let $R$ be a ring and $M, N$ be $R$-modules. A map $f:M\to N$ is called an \textbf{$R$-module homomorphism} if
+    \begin{enumerate}[(i)]
+        \item $f(m+n)=f(m)+f(n)$ for all $m, n\in M$.
+        \item $f(rm)=rf(m)$ for all $r\in R$ and $m\in M$.
+    \end{enumerate}
+    If $f$ is bijective, then $f$ is called an \textbf{$R$-module isomorphism}. If $M=N$, then $f$ is called an \textbf{$R$-module endomorphism}. If $f$ is bijective, then $f$ is called an \textbf{$R$-module automorphism}. Another name for a homomorphism of $R$-modules is an  \textbf{$R$-linear map}.
+\end{definition}
+
+
+\begin{proposition}{Ring Action on an Abelian Group}{}
+From the perspective of representation theory, a module is a ring action on an abelian group. To be more precise, a ring $R$ can be regarded as an $\mathsf{Ab}$-enriched category with only one object, called the delooping of $R$, denoted $\mathsf{B}R$. $\mathsf{Ab}$ itself is an $\mathsf{Ab}$-enriched category. Thus a left $R$-module $M$ is a functor between $\mathsf{Ab}$-enriched categories $\mathcal{M}:\mathsf{B}R\to \mathsf{Ab}$. 
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{B}R\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{Ab}\&[-30pt]\&[-30pt] \\ [-15pt] 
+        *  \arrow[dd, "r\in R"{name=L, left}] 
+        \&[-25pt] \& [+10pt] 
+        \& [-30pt] M\arrow[dd, "r\cdot\left(-\right)\in \mathrm{End}_{\mathsf{Ab}}(M)"{name=R}] \&[-30pt]\\ [-10pt] 
+        \&  \phantom{.}\arrow[r, "\mathcal{M}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+        * \& \& \&  M\&
+    \end{tikzcd}
+\]
+As a map between objects, $\mathcal{M}$ assigns an abelian group for $\{*\}$. As a map between morphisms, $\mathcal{M}$ specifies a ring homomorphism $\sigma_M:R\to \mathrm{End}_{\mathsf{Ab}}(M)$. Define the ring representation category to be the category of all $\mathsf{Ab}$-enriched functors between $\mathsf{Ab}$-enriched categories $\mathsf{B}R$ and $\mathsf{Ab}$, denoted by
+\[
+\mathrm{Rep}_{\mathsf{Ab}}(R):=[\mathsf{B}R, \mathsf{Ab}]_{\mathsf{Ab}\text{-}\mathsf{Cat}}.
+\]
+Then we have category isomorphism 
+\[
+    \mathrm{Rep}_{\mathsf{Ab}}(R)\cong R\text{-}\mathsf{Mod}.
+\]
+\end{proposition}
+
+\begin{proposition}{Ring homomorphism $R\to S$ induces functor $S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$}{}
+    Let $R$ and $S$ be rings with a ring homomorphism $f: R\to S$. Then every $S$-module $M$ is an $R$-module by defining $rm = f(r)m$, or equivalently through $R\to S\to \mathrm{End}_{\mathsf{Ab}}(M)$. This defines a functor $\mathrm{Res}_{R\to S}: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$, which is identify map on objects and morphisms.
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            S\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M  \arrow[dd, "g"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] M\arrow[dd, "g"{name=R}] \&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathrm{Res}_{R\to S}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  N\&
+        \end{tikzcd}
+        \]  
+\end{proposition}
+
+In particular, ring homomorphism $R\to S$ makes $S$ an $R$-module.
+
+\begin{definition}{Noetherian Module}{}
+Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \textbf{Noetherian} if one of the following equivalent conditions holds:
+\begin{enumerate}[(i)]
+    \item Every submodule of $M$ is finitely generated.
+    \item Every ascending chain of submodules of $M$ stabilizes; that is, if
+    $$
+    N_1 \subseteq N_2 \subseteq N_3 \subseteq \cdots
+    $$
+    is a chain of submodules of $M$, then $\exists i$ such that $N_i=N_{i+1}=N_{i+2}=\ldots$.
+    \item Every nonempty family of submodules of $M$ has a maximal element w.r.t. inclusion.
+\end{enumerate}
+\end{definition}
+
+
+\begin{definition}{Annihilator}{}
+    Let $R$ be a ring, and let $M$ be a left $R$-module. Suppose $S$ is a non-empty subset of $M$. The \textbf{annihilator} of $S$, denoted $\operatorname{Ann}_R(S)$, is a left ideal of $R$ defined by 
+    $$
+    \operatorname{Ann}_R(S)=\{r \in R \mid r s=0 \text { for all } s \in S\}.
+    $$
+    If $N$ is a submodule of $M$, then 
+    \[
+        \operatorname{Ann}_R(N)=\{r \in R \mid r s=0 \text { for all } s \in N\}=\ker \left(R\longrightarrow\mathrm{End}_{\mathsf{Ab}}\left(N\right)\right)  
+    \]
+    is a two-sided ideal of $R$. Through $R/\operatorname{Ann}_R(N)\to \mathrm{End}_{\mathsf{Ab}}\left(N\right)$, we can regard $N$ as an $R/\operatorname{Ann}_R(N)$-module.
+\end{definition}
+
+\begin{proposition}{Properties of Annihilator}{}
+    Let $R$ be a ring, and let $M$ be a left $R$-module. 
+    \begin{enumerate}[(i)]
+        \item If $x\in M$, then $\operatorname{Ann}_R(x)=R$ if and only if $x=0$.
+        \item If $S$ is a non-empty subset of $M$ and $N$ is the submodule generated by $S$, then $\operatorname{Ann}_R(N)\subseteq \operatorname{Ann}_R(S)$. If $R$ is commutative, then $\operatorname{Ann}_R(N)= \operatorname{Ann}_R(S)$.
+    \end{enumerate}
+\end{proposition}
+
+
+\section{Construction}
+\subsection{Free Object}
+\begin{definition}{Free Module}{}
+    Let $R$ be a ring and $S$ be a set. The \textbf{free $R$-module } on $S$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)$, together with a map $\iota:S\to \mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)$, is defined by the following universal property: for any $R$-module $M$ and any map $f:S\to M$, there exists a unique $R$-linear map $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)\to M$ such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& M\\[0.3cm]
+            S\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
+        \end{tikzcd}
+    \end{center}
+    The free $R$-module $\mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)$ can be contructed as the direct sum of copies of $R$ indexed by $S$, i.e. 
+    \[
+        \mathrm{Free}_{R\text{-}\mathsf{Mod}}(S)\cong \bigoplus_{s\in S}R.
+    \]
+\end{definition}
+
+
+\begin{example}{Forgetful Functor $U$}{}
+    Let $R$ be a ring. Then the forgetful functor $U:R\text{-}\mathsf{Mod}\to \mathsf{Set}$ forgets the $R$-module structure of an $R$-module. 
+    \begin{enumerate}[(i)]
+        \item $U$ is representable by $\left(R, 1_R\right)$. The natural isomorphism $\phi:\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(R, -\right)\xRightarrow{\sim} U$ is given by 
+        \begin{align*}
+            \phi_M:\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(R, M\right)&\longrightarrow U(M)\\
+            f&\longmapsto f(1_R).
+        \end{align*}
+        An $R$-linear map $f:R\to M$ is uniquely determined by $f(1_R)$, and vice versa.
+        \item $U$ is faithful but not full.
+    \end{enumerate}
+\end{example}
+ 
+
+\begin{proposition}{Free-Forgetful Adjunction $\mathrm{Free}_{R\text{-}\mathsf{Mod}}\dashv U$}{}
+    Let $R$ be a ring. Then the free $R$-module functor $\mathrm{Free}_{R\text{-}\mathsf{Mod}}$ is left adjoint to the forgetful functor $U$.
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Mod} \arrow[r, "\mathrm{Free}_{R\text{-}\mathsf{Mod}}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+18pt] 
+            \mathsf{Set} \arrow[l, "{U}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+            \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+        \end{tikzcd}    
+    \]
+    
+    For any set $S$ and any $R$-module $M$, we have a natural isomorphism
+    \[
+        \mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(\mathrm{Free}_{R\text{-}\mathsf{Mod}}(S), M\right)\cong \mathrm{Hom}_{\mathsf{Set}}\left(S, U(M)\right).
+    \]
+\end{proposition}
+
+
+
+
+
+\begin{definition}{Finitely Generated Module}{}
+    We say $M$ is a \textbf{finitely generated $R$-module} if 
+    one of the following equivariant conditions holds:
+    \begin{enumerate}[(i)]
+        \item there exist $x_1, \ldots, x_n \in M$ such that every element of $M$ is an $R$-linear combination of the $x_i$. 
+        \item there exists an epimorphism $R^{\oplus n} \rightarrow M$ for some $n \in \mathbb{Z}_+$.
+        \item there exists an exact sequence
+        \[
+        R^{\oplus n}  \rightarrow M \rightarrow 0
+        \]
+        for some $n\in \mathbb{N}$.
+        \item $S\cong R^{\oplus n}/M$ for some $n\in \mathbb{Z}_+$ and some submodule $M$ of $R^{\oplus n}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}{Finitely Presented Module}{}
+    We say $M$ is a \textbf{finitely presented $R$-module} if 
+    there exists an exact sequence
+    \[
+    R^{\oplus m} \rightarrow R^{\oplus n} \rightarrow M \rightarrow 0
+    \]
+    for some $m, n\in \mathbb{Z}_+$.
+\end{definition}
+
+
+\subsection{Localization}
+\begin{definition}{Localization of a Module}{}
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. The \textbf{localization of the module} $M$ by $S$, denoted $S^{-1}M$, is an $S^{-1}R$-module that is constructed exactly as the localization of $R$, except that the numerators of the fractions belong to $M$. That is, as a set, it consists of equivalence classes, denoted $\frac{m}{s}$, of pairs $(m, s)$, where $m\in M$ and $s\in S$, and two pairs $(m, s)$ and $(n, t)$ are equivalent if there is an element $u$ in $S$ such that
+    \[u(sn-tm)=0.\]
+    Addition and scalar multiplication are defined as for usual fractions (in the following formula, $r\in R$, $s,t\in S$, and $m,n\in M$):
+    \[\frac{m}{s} + \frac{n}{t} = \frac{tm+sn}{st},\]
+    \[\frac{r}{s} \frac{m}{t} = \frac{r m}{st}.\]
+\end{definition}
+
+
+
+\begin{proposition}{Universal Property of Localization}{}
+    Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset, an $M$ be an $R$-module. The $R$-linear map
+    \begin{align*}
+        l_S:M&\longrightarrow S^{-1}M\\
+         m&\longmapsto \frac{m}{1}
+    \end{align*}
+    satisfies the any of following universal properties: 
+    \begin{itemize}
+        \item for any $R$-linear map $\psi:M\to N$ such that $S$ act as automorphisms on $N$ (i.e. the induced ring homomorphism $\sigma_{N}:R\to\mathrm{End}_{\mathsf{Ab}}(N)$ satisfies $\sigma_{N}(S)\subseteq \mathrm{Aut}_{\mathsf{Ab}}(N)$), there exists a unique $R$-linear map
+        \begin{align*}
+            \psi':S^{-1}M&\longrightarrow N\\
+            \frac{m}{s}&\longmapsto s^{-1}\psi(m)=\sigma_{N}(s)^{-1}(\psi(m))
+        \end{align*}
+        such that the following diagram commutes in $R\text{-}\mathsf{Mod}$
+        \begin{center}
+            \begin{tikzcd}[ampersand replacement=\&]
+             
+                S^{-1}M\arrow[rr, "\psi'", dashed]\&\& N \&  \\             
+                \&M \arrow[ru, "\psi"'] \arrow[lu, "l_S"] \&                          
+            \end{tikzcd}
+        \end{center}
+        \item for any $S^{-1}R$-module $N$ and $R$-linear map $\psi:M\to \mathrm{Res}(N)$, there exists a unique $S^{-1}R$-linear map $\psi':S^{-1}M\to N$ such that the following diagram commutes in $R\text{-}\mathsf{Mod}$
+        \begin{center}
+            \begin{tikzcd}[ampersand replacement=\&]
+             
+                \mathrm{Res}(S^{-1}M)\arrow[rr, "\mathrm{Res}(\psi')", dashed]\&\& \mathrm{Res}(N) \&  \\             
+                \&M \arrow[ru, "\psi"'] \arrow[lu, "l_S"] \&                          
+            \end{tikzcd}
+        \end{center}
+    \end{itemize}
+    
+    
+\end{proposition}
+
+\begin{proposition}{Localization is a Left Adjoint Functor}{} 
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Define the localization functor as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+           R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] S^{-1}R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] S^{-1}M\arrow[dd, "S^{-1}(f)"{name=R}] \&[-30pt]\ni
+            \&[-30pt]\frac{m}{s}\arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "S^{-1}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  S^{-1}N\&[-30pt]\ni
+            \&[-30pt]\frac{f(m)}{s}
+        \end{tikzcd}
+        \]  
+        where $S^{-1}(f)$ is defiend as the composition $S^{-1}M\xrightarrow{f'} N\to S^{-1}N$. \\
+        Let $\mathrm{Res}_{R\to S^{-1}R}: S^{-1}R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ be the functor that regards $S^{-1}R$-modules as $R$-modules. Then we have a pair of adjoint functors    
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                R\text{-}\mathsf{Mod} \arrow[r, "S^{-1}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+                S^{-1}R\text{-}\mathsf{Mod} \arrow[l, "{\mathrm{Res}}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+                \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+            \end{tikzcd}    
+        \]
+         and natural isomorphism
+        \[
+        \mathrm{Hom}_{S^{-1}R\text{-}\mathsf{Mod}}(S^{-1}M, N)\cong \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(M, \mathrm{Res}_{R\to S^{-1}R}(N)).    
+        \]
+\end{proposition}
+
+\begin{proposition}{Localization is an Exact Functor}{}
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$. If 
+    \[
+        L\xlongrightarrow {u} M\xlongrightarrow {v} N    
+    \]
+    is an exact sequence of $R$-module, then 
+    \[
+        S^{-1}L\xlongrightarrow {S^{-1}(u)} S^{-1}M\xlongrightarrow {S^{-1}(v)} S^{-1}N
+    \]
+    is an exact sequence of $S^{-1}R$-module.
+\end{proposition}
+
+\begin{prf}
+    Suppose $\frac{m}{s}\in \ker S^{-1}(v) $. Then we have
+    \[
+        S^{-1}(v)\left(\frac{m}{s}\right)=\frac{v(m)}{s}=\frac{0}{1},
+    \]
+    which imples that there exists $t\in S$ such that $tv(m)=v(tm)=0$. Thus we have $tm\in \ker v$. By exactness, there exists $l\in L$ such that $u(l)=tm$. Since 
+    \[
+        S^{-1}(u)\left(\frac{l}{ts}\right)=\frac{u(l)}{ts}=\frac{tm}{ts}=\frac{m}{s},
+    \]
+    we see that $\frac{m}{s}\in \operatorname{im}S^{-1}(u)$, which means $\operatorname{im}S^{-1}(u)=\ker S^{-1}(v)$. Hence $S^{-1}$ is exact.
+\end{prf}
+
+\begin{proposition}{Localization Respects Quotients}{}
+    Let $M$ be an $R$-module and $N$ be a submodule of $M$. Then we have an isomorphism $S^{-1}(M/N)\cong (S^{-1}M)/(S^{-1}N)$.
+\end{proposition}
+
+\begin{prf}
+    From the exact sequence
+    \[
+        0\longrightarrow N\longrightarrow M\longrightarrow M/N\longrightarrow 0,
+    \]
+    we have the exact sequence
+    \[
+        0\longrightarrow S^{-1}N\longrightarrow S^{-1}M\longrightarrow S^{-1}(M/N)\longrightarrow 0.
+    \]
+\end{prf}
+
+\begin{proposition}{Localization as Colimit}{}
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Then we have an isomorphism
+    \[
+        S^{-1}M\cong \varinjlim_{f\in S}M_f,
+    \]
+    where $M_f$ is the localization of $M$ by the multiplicative set $\langle f\rangle=\{f^n\mid n\in \mathbb{Z}_{\ge0}\}$. 
+    
+    Formally, $S$ can be endowed with a preorder relation: $f\mid g$ if and only if $fh=g$ for some $h\in S$, which makes $S$ a \hyperref[thin_category]{thin category} $\mathsf{S}$. Then we can define a functor $M_{\text{\textbf{-}}}:\mathsf{S}\to R\text{-}\mathsf{Mod}$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{S}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            f  \arrow[dd, ""{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]M_f\arrow[dd, "l_g'"{name=R}] \&[-30pt]\ni
+            \&[-30pt]\frac{m}{f^n}\arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "G", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            g \&\hspace{-3pt}=fh \& \&  M_g\&[-30pt]\ni
+            \&[-30pt]\frac{mh^n}{g^n}
+        \end{tikzcd}
+        \]  
+        where $l_g'$ is given by the following  universal property
+        \begin{center}
+            \begin{tikzcd}[ampersand replacement=\&]
+             
+                M_f\arrow[rr, "l_g'", dashed]\&\& M_g \&  \\             
+                \&M \arrow[ru, "l_g"'] \arrow[lu, "l_f"] \&                          
+            \end{tikzcd}
+        \end{center}
+        And we have
+        \[
+            S^{-1}M\cong \varinjlim M_{\text{\textbf{-}}}
+        \]
+\end{proposition}
+
+\begin{prf}
+First let's show that the $l'_g$ induced by universal property can be writen as $l'_g:\frac{m}{f^n}\mapsto\frac{mh^n}{g^n}$. Suppose $R$ acts on $M_g$ through
+\[
+    \sigma_{M_g}:R\xrightarrow{}S^{-1}_gR\xrightarrow{\sigma_{M_g'}}\mathrm{End}_{\mathsf{Ab}}(M_g),
+\]
+Then we can check for any $f^n \in S_f$,
+\[
+    \sigma_{M_g}(f^n)\sigma_{M_g'}\left(\frac{h^n}{g^n}\right)=\sigma_{M_g'}\left(\frac{f^nh^n}{g^n}\right)=\sigma_{M_g'}\left(1\right)=1\implies \sigma_{M_g}(f^n)\in \mathrm{Aut}_{\mathsf{Ab}}(M_g),
+\]
+which means $\sigma_{M_g}(S_f)\subseteq  \mathrm{Aut}_{\mathsf{Ab}}(M_g)$. Thus by universal property of $M_f$, we have
+\[
+    l'_g\left(\frac{m}{f^n}\right)=\sigma_{M_g}(f^n)^{-1}(m)=\sigma_{M_g'}\left(\frac{h^n}{g^n}\right)(m)=\frac{mh^n}{g^n}.
+\]
+In a similar way, we can check that $S_f$ can act on $S^{-1}M$ as automorphisms and induce $\psi_f$ by the following universal property
+\begin{center}
+    \begin{tikzcd}[ampersand replacement=\&]
+     
+        M_f\arrow[rr, "\psi_f", dashed]\&\& S^{-1}M\&  \\             
+        \&M \arrow[ru, "l_S"'] \arrow[lu, "l_f"] \&                          
+    \end{tikzcd}
+\end{center}
+And we are going to show that $\left(\psi_f:M_f\to S^{-1}M\right)_{f\in S}$ is the colimit of $G$. 
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+        \& N                                 \&                                                             \\[+15pt]
+        \& S^{-1}M \arrow[u, "\nu"', dashed] \&                                                             \\[+10pt]
+M_f \arrow[rr, "l_g'"] \arrow[ru, "\psi_f"] \arrow[ruu, "\mu_f", bend left] \&                                   \& M_g \arrow[lu, "\psi_g"'] \arrow[luu, "\mu_g"', bend right]
+\end{tikzcd}
+\]
+We can prove
+\[
+   \psi_f=\psi_g\circ l_g'
+\]
+by checking
+\[
+    \left(\psi_g\circ l_g'\right)\circ l_f=\psi_g\circ l_g =l_S=\psi_f\circ l_f
+\]
+and utilizing the uniqueness of the universal property. \\
+Given any $\left(\mu_f:M_f\to S^{-1}M\right)_{f\in S}$ such that $\mu_f=\mu_g\circ l_g'$, note that $\mu_f\circ l_f=\mu_f\circ \mu_g\circ l_g'=\mu_g\circ l_g$. Thus we can define $\nu$ to be the unique map such that $\nu\circ l_S=\mu_f\circ l_f$.
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+    \& N                                                  \&                                    \\[+12pt]
+M_f \arrow[rr, "\psi_f"] \arrow[ru, "\mu_f"] \&                                                    \& S^{-1}M \arrow[lu, "\nu"', dashed] \\[+12pt]
+    \& M \arrow[lu, "l_f"] \arrow[ru, "l_S"'] \&                                   
+\end{tikzcd}
+\]
+Hence we have 
+\[
+\left(\nu\circ \psi_f\right)\circ l_f=\nu\circ l_S =\mu_f\circ l_f.
+\]
+By the uniqueness of the universal property of $M_f$, we have $\mu_f=\nu\circ \psi_f$. If there exists another $\nu'$ such that $\mu_f=\nu'\circ \psi_f$, there must be $\nu'\circ l_S=\nu'\circ \psi_f \circ l_f=\mu_f \circ l_f=\nu\circ l_S$. The uniqueness of such $\nu$ forces $\nu=\nu'$.\\
+Therefore we show that $ S^{-1}M\cong \varinjlim_{f\in S}M_f$.
+\end{prf}
+
+\begin{proposition}{}{associative_localization}
+    Suppose $R$ is a commutative ring, $S,S'$ are multiplicative sets in $R$, and $M$ is an $R$-module. View $S^{\prime-1} M$ as an $R$-module, then $S^{-1}\left(S^{\prime-1} M\right)$ is isomorphic to $\left(S S^{\prime}\right)^{-1} M$ as $R$-modules.
+\end{proposition}
+
+\begin{prf}
+    Define 
+    $$
+    \begin{aligned}
+     f: S^{-1}\left(S^{\prime-1} M\right) &\longrightarrow\left(S S^{\prime}\right)^{-1} M\\
+     \quad \frac{x / s^{\prime}}{s} &\longmapsto\frac{x}{ss'} 
+    \end{aligned}
+    $$
+    To show that $f$ is well-defined, suppose that $\frac{x/s^{\prime}}{s}=\frac{y/t^{\prime}}{t}$, which means there exists $v\in S$ such that 
+    \[
+        v\left(t\frac{x}{s'} - s\frac{y}{t'}\right)=\frac{vtx}{s'}-\frac{vsy}{t'}=0.
+    \]
+    This further implies that there exists $w\in S'$ such that $w(vtt'x-vss'y)=0$.
+     Then we see there exists $vw\in S S^{\prime}$ such that $vw(tt'x-ss'y)=0$, which means $\frac{x}{ss'}=\frac{y}{tt'}$. Thus $f$ is well-defined.
+
+    Define
+     \[
+    \begin{aligned}
+     g:\left(S S^{\prime}\right)^{-1} M& \longrightarrow S^{-1}\left(S^{\prime-1} M\right)\\
+      \frac{x}{ss'} &\longmapsto \frac{x / s^{\prime}}{s} \text { for some } s \in S, s^{\prime} \in S^{\prime}
+    \end{aligned}
+    \]
+    and we can check that $g$ is well-defined in a similar way. It is clear that $f$ and $g$ are linear maps inverse to each other.
+\end{prf}
+
+
+
+\begin{proposition}{}{module_localization_glueing_property}
+    Let $R$ be a commutative ring and $M$ be a $R$-module. Suppose $x\in M$. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $x=0$.
+        \item $x$ maps to $0$ in $M_{\mathfrak{p}}$ for all $\mathfrak{p}\in \spec{R}$. 
+        \item $x$ maps to $0$ in $M_{\mathfrak{m}}$ for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$. 
+    \end{enumerate}
+    As a consequence, $M\to \prod\limits_{\mathfrak{p}\in \spec{R}}M_{\mathfrak{p}}$ is an injective ring homomorphism.
+\end{proposition}
+
+\begin{prf}
+    (i)$\implies$(ii) and (ii)$\implies$(iii) are clear. It is left to show (iii)$\implies$(i). Let $x\in M$ and 
+    \[
+        \mathrm{Ann}_M\left(x\right)=\left\{r\in R\midv rx=0\right\} 
+    \] 
+    be the annihilator of $x$ in $R$, which is an ideal of $R$. Note $\frac{x}{1}=\frac{0}{1}$ in $M_{\mathfrak{m}}$ if and only if 
+    \[
+        \mathrm{Ann}_M -\mathfrak{m}=\left\{r\in R-\mathfrak{m}\midv rx=0\right\}\neq \varnothing\iff \mathrm{Ann}_M \subsetneq \mathfrak{m}.
+    \]
+    If $x$ maps to $0$ in $M_{\mathfrak{m}}$ for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$, then $\mathrm{Ann}_M$ is not contained in any maximal ideal of $R$, which means $\mathrm{Ann}_M(x)=R$. Hence $x=0$.
+\end{prf}
+
+\begin{corollary}{}{module_localization_glueing_property_cor}
+    Given an $R$-module $M$, the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $M$ is zero,
+        \item $M_{\mathfrak{p}}$ is zero for all $\mathfrak{p} \in \operatorname{Spec}(R)$,
+        \item $M_{\mathfrak{m}}$ is zero for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$.
+    \end{enumerate} 
+\end{corollary}
+
+\begin{prf}
+    (iii)$\implies$(i). Suppose $M_{\mathfrak{m}}$ is zero for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$. Given any $x\in M$, since $x$ maps to $0$ in $M_{\mathfrak{m}}$ for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$, there must be $x=0$ by \Cref{th:module_localization_glueing_property}. Thus $M$ is zero.\\
+\end{prf}
+
+\begin{corollary}{Exactness is a Local Property}{exactness_is_a_local_property}
+    Given a sequence of $R$-modules $M\to M'\to M''$, the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $M\to M'\to M''$ is exact,
+        \item $M_{\mathfrak{p}}\to M'_{\mathfrak{p}}\to M''_{\mathfrak{p}}$ is exact for all $\mathfrak{p} \in \operatorname{Spec}(R)$,
+        \item $M_{\mathfrak{m}}\to M'_{\mathfrak{m}}\to M''_{\mathfrak{m}}$ is exact for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{prf}
+    (i)$\implies$(ii) because localization is an exact functor. (ii)$\implies$(iii) is clear. It is left to show (iii)$\implies$(i). Let $H=\ker\left(M'\to M''\right)/\operatorname{im}\left(M\to M'\right)$. Since \hyperref[th:exact_functor_preserve_cohomology]{exact functor preserve cohomology}, we have 
+    $$
+    H_{\mathfrak{m}}\cong\ker \left(M'_{\mathfrak{m}}\to M''_{\mathfrak{m}}\right)/\operatorname{im}\left(M_{\mathfrak{m}}\to M'_{\mathfrak{m}}\right)=0
+    $$ 
+    for all $\mathfrak{m}\in \mathrm{Max}\left(R\right)$. Thus by \Cref{th:module_localization_glueing_property_cor} we have $H=0$, which implies $M\to M'\to M''$ is exact.
+\end{prf}
+
+
+\begin{proposition}{Glueing Functions}{}
+    Let $R$ be a ring. Let $f_1, \ldots, f_n$ be elements of $R$ generating the unit ideal. Let $M$ be an $R$-module. The sequence
+$$
+\begin{aligned}
+& 0 \longrightarrow M \xlongrightarrow{\alpha} \bigoplus_{i=1}^n M_{f_i} \xlongrightarrow{\beta} \bigoplus_{i, j=1}^n M_{f_i f_j} \\
+& 
+\end{aligned}
+$$
+is exact, where $\alpha(m)=\left(\frac{m}{1}, \cdots, \frac{m}{1}\right)$ and $\beta\left(\dfrac{m_1}{f_1^{e_1}}, \cdots, \dfrac{m_n}{f_n^{e_n}}\right)=\left(\dfrac{m_i}{f_i^{e_i}}-\dfrac{m_j}{f_j^{e_j}}\right)_{(i, j)}$.
+\end{proposition}
+
+\begin{prf}
+ According to \Cref{th:exactness_is_a_local_property}, it suffices to show that the localization of the sequence at any maximal ideal $\mathfrak{m}$ is exact. Given any maximal ideal $\mathfrak{m}$ of $R$, since $f_1, \ldots, f_n$ generate the unit ideal, there is an $i$ such that $f_i \notin \mathfrak{m}$. Without loss of generality we may assume $f_1\notin \mathfrak{m}$. Note that \Cref{th:associative_localization} guarantees $\left(M_{f_i}\right)_{\mathfrak{m}}=\left(M_{\mathfrak{m}}\right)_{f_i}$ and $\left(M_{f_i f_j}\right)_{\mathfrak{m}}=\left(M_{\mathfrak{m}}\right)_{f_i f_{j}}$. In particular we have $\left(M_{f_1}\right)_{\mathfrak{m}}=M_{\mathfrak{m}}$ and $\left(M_{f_1 f_i}\right)_{\mathfrak{m}}=\left(M_{\mathfrak{m}}\right)_{f_i}$, because $f_1\in M_{\mathfrak{m}}^{\times}$. Thus it is suffices to show that the sequence
+\[
+    0 \longrightarrow M_{\mathfrak{m}} \xlongrightarrow{\alpha_{\mathfrak{m}}} \bigoplus_{i=1}^n \left(M_{\mathfrak{m}}\right)_{f_i} \xlongrightarrow{\beta_{\mathfrak{m}}} \bigoplus_{i, j=1}^n \left(M_{\mathfrak{m}}\right)_{f_i f_j}
+\]
+ is exact for $f_1=1$.
+
+ Injectivity of $\alpha_{\mathfrak{m}}$ is trivial because the first component of $\alpha_{\mathfrak{m}}$ is the identity map on $M_{\mathfrak{m}}$. 
+
+ For any $\mathbf{x}=\left(x_1, \dfrac{x_2}{f_2^{e_n}},\cdots, \dfrac{x_n}{f_n^{e_n}}\right)\in\ker \beta_{\mathfrak{m}}$ we have $\beta_{\mathfrak{m}}(\mathbf{x})=0$. Consider the $(1,i)$-component of $\beta_{\mathfrak{m}}\left(\mathbf{x}\right)$ for $i=2, \cdots, n$. Then we get
+ \[
+    x_1-\frac{x_i}{f_i^{e_i}}=0\implies \mathbf{x}=\left(x_1,x_1,\cdots,x_1\right)=\alpha_{\mathfrak{m}}\left(x_1\right)\implies \ker \beta_{\mathfrak{m}}\subseteq \operatorname{im}\alpha_{\mathfrak{m}}.
+ \]
+For any $\mathbf{y}=\left(y, y, \cdots, y\right)\in \operatorname{im}\alpha_{\mathfrak{m}}$, we have $\beta_{\mathfrak{m}}\left(\mathbf{y}\right)=0$, which means $\operatorname{im}\alpha_{\mathfrak{m}}\subseteq \ker \beta_{\mathfrak{m}}$. Thus the sequence is exact and we complete the proof.
+\end{prf}
+
+
+\subsection{Graded Object}
+
+\begin{definition}{$I$-Graded Module (External Definition)}{}    
+    Let $R$ be a ring and $I$ be a set. An \textbf{$I$-graded $R$-module} is a family of $R$-modules $\left(M_i\right)_{i\in I}$. The category of $I$-graded $R$-modules, denoted by $R\text{-}\mathsf{Mod}^I$, is simply the functor category $[I, R\text{-}\mathsf{Mod}]$, where $I$ is regarded as a discrete category.
+\end{definition}
+
+\begin{definition}{$I$-Graded Module (Internal Definition)}{graded_module_over_ring_internal}
+    Let $R$ be a ring and $I$ be a set. An \textbf{$I$-graded $R$-module} is an $R$-module $M$ together with a family of submodules $\left(M_i\right)_{i\in I}$ such that
+    \[
+        M=\bigoplus_{i\in I}M_i.
+    \]
+\end{definition}
+
+\begin{proposition}{$R\text{-}\mathsf{Mod}^I$ is a Monoidal Category}{}
+    Let $R$ be a ring and $I$ be a commutative monoid. Then $\left(R\text{-}\mathsf{Mod}^I,\otimes\right)$ is a monoidal category with tensor product defined as
+    \[
+        \left(M\otimes N\right)_i=\bigoplus_{j+k=i}M_j\otimes N_k.
+    \]
+\end{proposition}
+
+
+
+\begin{definition}{$I$-Graded Module over an Graded Ring (Internal Definition)}{graded_module_over_graded_ring_internal}
+    Let $(I,+)$ be a monoid and $R$ be a $I$-graded ring with grading $(R_i)_{i\in I}$. An \textbf{$I$-graded module over graded ring $R$} is an $R$-module $M$ together with a family of submodules $\left(M_i\right)_{i\in I}$ such that
+    \begin{enumerate}[(i)]
+        \item $M=\bigoplus_{i\in I}M_i$.
+        \item $R_iM_j\subseteq M_{i+j}$ for all $i, j\in I$.
+    \end{enumerate}
+\end{definition}
+
+When $I$ is a monoid, \Cref{th:graded_module_over_ring_internal} is a special case of \Cref{th:graded_module_over_graded_ring_internal} because any ring $R$ can be regarded as a graded ring with trivial grading $R_0=R$ and $R_i=0$ for all $i\ne0$.
+
+
