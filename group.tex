@@ -429,9 +429,9 @@ We can check that the equivalence class of $x$ is $Gx$. If $y\sim x$, then $y\in
 
 If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
 \begin{definition}{$G$-invariant element }{}
-    Let $G$ be a group acting on a set $X$. An element $x\in X$ is called \textbf{$G$-invariant} if $Gx=\{ x\}$. The set of all $G$-invariant elements is denoted by $X^G$
+    Let $G$ be a group acting on a set $X$. An element $x\in X$ is called \textbf{$G$-invariant} if $Gx=\{ x\}$ or equivalently $|Gx|=1$. The set of all $G$-invariant elements is denoted by $X^G$
     \[
-      X^G=\{ x\in X\mid Gx=\{ x\} \}  .  
+      X^G=\{ x\in X\mid Gx=\{ x\} \} =  \{ x\in X\mid \forall g\in G, g\cdot x=x \} .
     \]
 \end{definition}
 
@@ -444,10 +444,10 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     It is easy to see that $\mathrm{Stab}_G(x)$ is a subgroup of $G$.
 \end{definition}
 
-\begin{proposition}{Properties of Stabilizer Subgroup}{}
+\begin{proposition}{Properties of Stabilizer Subgroup}{properties_of_stabilizer_subgroup}
     Let $G$ be a group acting on a set $X$. For $x\in X$, the stabilizer subgroup $\mathrm{Stab}_G(x)$ has the following properties
     \begin{enumerate}[(i)]
-        \item $x\in X^G$ if and only if $\mathrm{Stab}_G(x)=G$.
+        \item $x\in X^G\iff \mathrm{Stab}_G(x)=G$.
         \item $\ker \left(G\to \mathrm{Aut}_{\mathsf{Set}}(X)\right)=\bigcap\limits_{x\in X}\mathrm{Stab}_G(x)$.
     \end{enumerate}
 \end{proposition}
@@ -652,22 +652,6 @@ Characterization of Inner Automorphisms}{}
     \]
 \end{proposition}
 
-\begin{definition}{Conjugacy Class}{}
-    Let $G$ be a group. The orbit of $a$ under conjugacy action is called the \textbf{conjugacy class} of $a$, denoted by 
-    \[
-      \mathrm{Cl}(a)=\{ gag^{-1}\mid x\in G   \}.
-    \]
-    Two elements $a,b\in G$ are called \textbf{conjugate} if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
-\end{definition}
-
-
-\begin{proposition}{Properties of Conjugacy Class}{}
-    Let $G$ be a group. Then the following are true:
-    \begin{enumerate}[(i)]
-        \item $a\sim b$ if and only if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
-        \item $\mathrm{Cl}(a)=\{ a\}$ if and only if $a\in Z_G$.
-    \end{enumerate}
-\end{proposition}
 
 
 
@@ -783,7 +767,7 @@ Characterization of Inner Automorphisms}{}
     Let $G$ acts on $2^G$ by conjugation (c.f. \Cref{th:conjugacy_action}). Then $\mathrm{N}_G(S)=\mathrm{Stab}_G(S)\le G$.
 \end{definition}
 
-\begin{proposition}{Normalizer of a Subgroup}{}
+\begin{proposition}{Normalizer of a Subgroup is the Largest Subgroup in which the Subgroup is Normal}{}
     Let $G$ be a group and $H$ be a subgroup of $G$. Then $H\lhd\mathrm{N}_G(H)$. Moreover, $\mathrm{N}_G(H)$ is the largest subgroup of $G$ in which $H$ is normal, i.e. $$H\lhd K\le G\implies H\lhd K\le \mathrm{N}_G(H)\le G.$$
 \end{proposition}
 
@@ -798,10 +782,11 @@ Characterization of Inner Automorphisms}{}
     \]
     The centralizer of $\{x\}$ is the stabilizer subgroup of $x$ under conjugacy action, denoted by 
     \[
-      \mathrm{C}_G(x)=\{ g\in G\mid gx=xg \}=\{ g\in G\mid gxg^{-1}=x \},
+      \mathrm{C}_G(x)=\{ g\in G\mid gx=xg \}=\{ g\in G\mid gxg^{-1}=x \}= \mathrm{Stab}_G(x)=\mathrm{N}_G(x).
     \]
-    which equals $\mathrm{N}_G(x)$.
+
 \end{definition}
+
 
 
 \begin{definition}{Center of a Group}{}
@@ -810,6 +795,8 @@ Characterization of Inner Automorphisms}{}
         Z_G=\mathrm{C}_G(G)=\{ g\in G\mid \forall x\in G,\; gx=xg\}.
     \]
 \end{definition}
+
+
 
 \begin{proposition}{Normalizer $\mathrm{N}_G(S)$ Acts on $S$ by Conjugation}{normalizer_conjugation_action}
     Let $G$ be a group and $S\subseteq G$. Then $\mathrm{N}_G(S)$ acts on $S$ by conjugation, i.e. by the group homomorphism
@@ -839,7 +826,7 @@ Characterization of Inner Automorphisms}{}
     \end{align*}
 \end{theorem}
 
-\begin{corollary}{}{}
+\begin{corollary}{Kernel and Cokernel of Conjugation Action $\gamma:G\to \mathrm{Aut}_{\mathsf{Grp}}(G)$}{kernel_cokernel_of_conjugation}
     Let $G$ be a group. Then $G/Z_G\cong \mathrm{Inn}(G)$. That means the conjugation action of a central element is trivial. The kernel and cokernel of the conjugation $\gamma:G\to \mathrm{Aut}_{\mathsf{Grp}}(G)$ can be connected by the following exact sequence
     \[
         1\longrightarrow Z_G\longrightarrow G\xrightarrow{\hspace{5pt}\gamma\hspace{5pt}}\mathrm{Aut}_{\mathsf{Grp}}(G)\longrightarrow \mathrm{Out}(G)\longrightarrow 1.
@@ -847,8 +834,10 @@ Characterization of Inner Automorphisms}{}
 \end{corollary}
 
 \begin{prf}
-Take $H=G$ in \Cref{th:N/C_theorem}.
+Take $H=G$ in \Cref{th:N/C_theorem} we can get $G/Z_G\cong \mathrm{Inn}(G)$. 
 \end{prf}
+
+
 
 
 
@@ -862,12 +851,59 @@ Take $H=G$ in \Cref{th:N/C_theorem}.
 \begin{proposition}{Properties of Center}{}
     Let $G$ be a group. Then
     \begin{enumerate}[(i)]
+        \item $Z_G=\bigcap_{g \in G} C_G(g)$.
         \item $Z_G\lhd_{\mathrm{char}} G$.
         \item A group is Abelian if and only if $Z_G=G$.
     \end{enumerate}
 \end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item According to \Cref{th:kernel_cokernel_of_conjugation} and \Cref{th:properties_of_stabilizer_subgroup} (ii), we have
+        \[
+            x\in Z_G\iff x\in \ker \gamma\iff x\in 
+            \bigcap\limits_{g\in G}\mathrm{C}_G(g).
+            \]
+    \end{enumerate}
+\end{prf}
+
+\begin{definition}{Conjugacy Class}{}
+    Let $G$ be a group. The orbit of $a$ under conjugacy action is called the \textbf{conjugacy class} of $a$, denoted by 
+    \[
+      \mathrm{Cl}(a)=\{ gag^{-1}\mid x\in G   \}.
+    \]
+    Two elements $a,b\in G$ are called \textbf{conjugate} if $\mathrm{Cl}(a)=\mathrm{Cl}(b)$.
+\end{definition}
 
 
+\begin{proposition}{Conjugacy Class of Element of Center is Singleton}{}
+    Consider a group $G$ under conjugacy action. The $G$-invariant elements under conjugacy action are elements in the center of $G$:
+    \[ 
+        a\in Z_G\iff \mathrm{Cl}(a)=\{ a\}\iff \mathrm{C}_G(a)=\mathrm{Stab}_G(a)=G.
+    \]
+\end{proposition}
+\begin{prf}
+    According to \Cref{th:properties_of_stabilizer_subgroup} (i), $\mathrm{Cl}(a)=\{ a\}\iff \mathrm{Stab}_G(a)=G$.
+    $$
+    \begin{aligned}
+    a  \in Z_G \iff&\forall g \in G,\;g a  =a g \\
+    \iff&\forall g \in G,\;g a g^{-1} =a \\
+    \iff&\mathrm{C}_G(a) =\{a\}
+    \end{aligned}
+    $$
+\end{prf}
+
+\begin{proposition}{Conjugacy Class Equation}{}
+    Suppose $G$ is a finite group. If the distinct conjugacy classes of $G$ which are not singletons are $\mathrm{Cl}(x_1),\cdots,\mathrm{Cl}(x_m)$, then we have the \textbf{conjugacy class equation}
+    \[
+    |G|=|Z(G)|+\sum_{j=1}^m\left[G: Z_G\left(x_j\right)\right]
+    \]
+\end{proposition}
+\begin{prf}
+    With the orbit decomposition of $G$ under conjugacy action, then by orbit-stabilizer theorem we have
+    \[
+        |G|=\sum_{Gx\in G/G}\left|\mathrm{Cl}(x)\right|=\sum_{Gx\in G/G}\left[G: \mathrm{Stab}_G(x)\right]=|Z(G)|+\sum_{j=1}^m\left[G: Z_G\left(x_j\right)\right].
+    \]
+\end{prf}
 
 \begin{proposition}{}{}
     Let $G$ acts transitively on a set $S$. Choose $s \in S$, and let $H = \mathrm{Stab}_G(s)$. Then we have group isomorphism $\mathrm{N}_G(H)/H\cong \mathrm{Aut}_{G\text{-}\mathsf{Set}}(S)$.
