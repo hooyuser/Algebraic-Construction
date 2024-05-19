@@ -4,17 +4,7 @@ A commutative ring $R$ is a commutative $R$-algebra and accordingly a commutativ
 \[
     \mathsf{CRing}\cong \mathbb{Z}\text{-}\mathsf{CAlg}.
 \]
-\begin{definition}{Local Commutative Ring}{local_commutative_ring}
-    Let $R$ be a commutative ring. Then the following are equivalent:
-    \begin{enumerate}[(i)]
-        \item $R$ is a local ring.
-        \item $R$ has a unique maximal ideal.
-        \item $R$ has a maximal ideal $\mathfrak{m}$ and $R - \mathfrak{m}= R^{\times}$.
-        \item $R$ is not the zero ring and for every $x \in R$, $x\in R^{\times}$ or $1-x\in R^{\times}$.
-        \item $R$ is not the zero ring and if $\sum_{i=1}^n r_i\in R^{\times}$, then there exist some $i$ such that $r_i\in R^{\times}$. 
-        \item $R$ is not the zero ring and the sum of any two non-units in $R$ is a non-unit.
-    \end{enumerate}
-\end{definition}
+
 
 
 \begin{definition}{Noetherian Commutative Ring}{}
@@ -260,7 +250,19 @@ In summary, we have the following chain of inclusions:
     \end{align*}
 \end{prf}
 
+\subsection{Local Commutative Ring}
 
+\begin{definition}{Local Commutative Ring}{local_commutative_ring}
+    Let $R$ be a commutative ring. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $R$ is a local ring.
+        \item $R$ has a unique maximal ideal.
+        \item $R$ has a maximal ideal $\mathfrak{m}$ and $R - \mathfrak{m}= R^{\times}$.
+        \item $R$ is not the zero ring and for every $x \in R$, $x\in R^{\times}$ or $1-x\in R^{\times}$.
+        \item $R$ is not the zero ring and if $\sum_{i=1}^n r_i\in R^{\times}$, then there exist some $i$ such that $r_i\in R^{\times}$. 
+        \item $R$ is not the zero ring and the sum of any two non-units in $R$ is a non-unit.
+    \end{enumerate}
+\end{definition}
 
 \section{Integral Domain}
 
