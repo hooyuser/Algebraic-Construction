@@ -1955,30 +1955,56 @@ can be translated into the following calculus rules
     In addition, an alternative ad-hoc proof is conceivable. If $\diagfunctor \{*\}$ is naturally isomorphic to $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ through $\theta:\mathrm{Hom}_\mathsf{C}\left(A,-\right)\xRightarrow{\sim} \diagfunctor \{*\}$, we have no choice but to define $\theta_X(\mathrm{id}_X)=*$. Note that $\diagfunctor \{*\}(A)=\{*\}$.  Yoneda lemma also implies that $\theta$ must correspond to $*\in \diagfunctor \{*\}(A)$ and accordingly $\theta$ is the unique natural isomorphism from $\mathrm{Hom}_\mathsf{C}\left(A,-\right)$ to $\diagfunctor\{*\}$.
 \end{prf}
 
-
+\begin{lemma}{}{isomorphism_between_comma_category_and_Grothendieck_construction}
+    Let $F:\mathsf{C}\to \mathsf{D}$ be a functor and $X\in \mathrm{Ob}(\mathsf{D})$. Consider functors
+    \[
+        \begin{tikzcd}[ampersand replacement=\&,column sep=2.2cm]
+            \boldone \arrow[r, "\diagfunctor X"] \& {\mathsf{D}} \& \mathsf{C}  \arrow[l, "F"']\\
+            \boldone \arrow[r, "\diagfunctor \{*\}"] \& {\mathsf{Set}} \& \mathsf{C}  \arrow[l, "{\mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)}"']
+        \end{tikzcd}
+    \]
+    
+    We have the following category isomorphism 
+    $$
+    \left(X \downarrow F\right)
+    \cong
+    \left( \{*\}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)\right)=\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)
+    $$
+    through the functor $(A,u)\mapsto(A,\diagfunctor u)$, whose action on commutative diagrams is illustrated as follows
+    \[
+    \begin{tikzcd}[ampersand replacement=\&]
+        X \arrow[r, "u"] \arrow[rdd, "g"'] \&[+20pt] F(A) \arrow[dd, "F\left(h\right)", dashed]\&[+10pt]\&[+10pt] \{*\} \arrow[r, "\diagfunctor u"] \arrow[rdd, "\diagfunctor g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{D}}\left(X,F(A)\right)\arrow[dd, "F(h)_*", dashed] \\[-2pt]
+        \& \&\longmapsto\&\&\\[-2pt]
+        \& F(B)\&\&\&\mathrm{Hom}_{\mathsf{D}}\left(X,F(B)\right)          
+    \end{tikzcd}
+    \]
+\end{lemma}
 
 \begin{proposition}{Equivalent Characterizations of Universal Morphism}{universal_morphism_by_representability}
-    Let $F:\mathsf{C}\to \mathsf{D}$ be a functor and $A\in \mathrm{Ob}(\mathsf{D})$. Then the following statements are equivalent:
+    Let $F:\mathsf{C}\to \mathsf{D}$ be a functor, $A,X\in \mathrm{Ob}(\mathsf{D})$ and $u:X\to F(A)$ be a morphism. Then the following statements are equivalent:
     \begin{enumerate}[(i)]
         \item $(A,u)$ is initial in the category $\left(X \downarrow F\right)$.
         \item $\mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)$ is representable by universal element $(A,u)$.
-        \item $(A,u)$ is initial in the category $\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)=\left( \{*\}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)\right)$.
+        \item $(A,\diagfunctor u)$ is initial in the category $\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)=\left( \{*\}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)\right)$.
     \end{enumerate}
  Dually, the following statements are equivalent:
     \begin{enumerate}[(i)]
         \item $(A,u)$ is terminal in the category $\left(F \downarrow X\right)$.
         \item $\mathrm{Hom}_{\mathsf{D}}\left(F(-),X\right)$ is representable by universal element $(A,u)$.
-        \item $(A,u)$ is initial in the category $\int_{\mathsf{C}^{\mathrm{op}}}  \mathrm{Hom}_{\mathsf{D}}\left(F(-),X\right)=\left( \{*\}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(F(-),X\right)\right)$.
+        \item $(A,\diagfunctor u)$ is initial in the category $\int_{\mathsf{C}^{\mathrm{op}}}  \mathrm{Hom}_{\mathsf{D}}\left(F(-),X\right)=\left( \{*\}\downarrow \mathrm{Hom}_{\mathsf{D}}\left(F(-),X\right)\right)$.
     \end{enumerate}
 \end{proposition}
 
 \begin{prf}     
-    It suffices to show (i)$\iff$ (iii).
+    It suffices to show (i)$\iff$ (iii). The category $\left(X \downarrow F\right)$ is isomorphic to $\int_{\mathsf{C}}  \mathrm{Hom}_{\mathsf{D}}\left(X,F(-)\right)$ through the functor 
     \[
     \begin{tikzcd}[ampersand replacement=\&]
-        X \arrow[r, "u"] \arrow[rd, "g"'] \&[+20pt] F(A) \arrow[d, "F\left(h\right)", dashed]\&[+50pt] \{*\} \arrow[r, "\diagfunctor u"] \arrow[rd, "\diagfunctor g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{D}}\left(X,F(A)\right)\arrow[d, "F(h)_*", dashed] \\[+15pt]\& F(B)\&\&\mathrm{Hom}_{\mathsf{D}}\left(X,F(B)\right)                                              
+        X \arrow[r, "u"] \arrow[rdd, "g"'] \&[+20pt] F(A) \arrow[dd, "F\left(h\right)", dashed]\&[+10pt]\&[+10pt] \{*\} \arrow[r, "\diagfunctor u"] \arrow[rdd, "\diagfunctor g"'] \&[+15pt] \mathrm{Hom}_{\mathsf{D}}\left(X,F(A)\right)\arrow[dd, "F(h)_*", dashed] \\[-2pt]
+        \& \&\longmapsto\&\&\\[-2pt]
+        \& F(B)\&\&\&\mathrm{Hom}_{\mathsf{D}}\left(X,F(B)\right)          
     \end{tikzcd}
     \]
+    We can also verify it directly.
     \begin{align*}
         (A,u)\text{ is initial in }\left(X \downarrow F\right)&\iff \forall(B,g)\in \mathrm{Ob}\left(X \downarrow F\right),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)\circ u=g\\
         &\iff \forall B\in \mathrm{Ob}\left(\mathsf{C}\right),\;\forall g\in \mathrm{Hom}_{\mathsf{C}}(X,F(B)),\;\exists! h\in \mathrm{Hom}_{\mathsf{C}}(A,B),\;F(h)\circ u=g\\
@@ -1989,7 +2015,7 @@ can be translated into the following calculus rules
 \end{prf}
 
 
-\begin{example}{Identity Functor $\mathrm{id}_{\mathsf{Set}}$ is Representable}{}
+\begin{example}{Identity Functor $\mathrm{id}_{\mathsf{Set}}$ is Representable}{identity_functor_is_representable}
     The identity functor $\mathrm{id}_{\mathsf{Set}}:\mathsf{Set}\to \mathsf{Set}$ is representable by $\left(\{*\},\mathrm{id}_{\{*\}}\right)$. The natural isomorphism $\phi:\mathrm{Hom}_{\mathsf{Set}}\left(\{*\},-\right)\xRightarrow{\sim} \mathrm{id}_{\mathsf{Set}}$ is defined by 
     \begin{align*}
         \phi_X:\mathrm{Hom}_{\mathsf{Set}}\left(\{*\},X \right)&\xlongrightarrow{\sim} X\\
@@ -2068,7 +2094,10 @@ can be translated into the following calculus rules
             \mathsf{C} \arrow[r, "\diagfunctor"] \& {[\mathsf{J},\mathsf{C}]} \& \boldone \arrow[l, "\diagfunctor F"']
         \end{tikzcd}
     \]
-    The comma category $\left(\diagfunctor \downarrow \diagfunctor F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. 
+    The comma category $\left(\diagfunctor \downarrow \diagfunctor F\right)$ is called the \textbf{cone category from $\textsf{C}$ to $F$}, denoted by $\mathsf{Cone}(\textsf{C},F)$. According to \Cref{th:isomorphism_between_comma_category_and_Grothendieck_construction}, we have category isomorphism
+    \[
+        \mathsf{Cone}(\textsf{C},F)=\left(\diagfunctor \downarrow \diagfunctor F\right)\cong \left( \{*\}\downarrow \mathrm{Hom}_{\mathsf{[\mathsf{J},\mathsf{C}]}}\left(\diagfunctor (-),F\right)\right)=\int_{\mathsf{C}^{\mathrm{op}}}  \mathrm{Hom}_{\mathsf{[\mathsf{J},\mathsf{C}]}}\left(\diagfunctor (-),F\right).
+    \]
     \begin{itemize}
         \item Objects: The objects in $\mathsf{Cone}(\textsf{C},F)$ are all natural transformations 
         \[
@@ -2170,7 +2199,7 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
 \end{definition}
 
 
-\begin{proposition}{Limit Characterized by Representability}{}
+\begin{proposition}{Limit Characterized by Representability}{limit_by_representability}
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The limit of $F$ exists if and only if the functor $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$ 
     \begin{align*}
         \begin{minipage}{.7\textwidth}
@@ -2206,6 +2235,44 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     According to \Cref{th:representable_functor_by_universal_element}, $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$ is representable by the universal element $(A,u)$ if and only if $(A,u)$ is initial in $\int_{\mathsf{C}^{\mathrm{op}}}\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$, which is equivalent to saying that for any $C\in\mathrm{Ob}\left(\mathsf{C}\right)$ and $(h_i)\in \mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor C, F\right)$, there is a unique morphism $f:C\to A$ in $\mathsf{C}$ such that $h_i=f^*(u_i)=u_i\circ f$ for each $i\in \mathrm{Ob}(\mathsf{J})$. This is exactly the universal property of limit.
 \end{prf}
 
+\begin{lemma}{}{}
+    If $\mathsf{J}$ is a small category with a terminal object $t$, then for any functor $F:\mathsf{J}\to \mathsf{C}$, we have $\varinjlim F\cong F(t)$.
+\end{lemma}
+\begin{prf}
+    Since for every $j\in \mathrm{Ob}(\mathsf{J})$, there is a unique morphism $\lambda_j:j\to t$, $\left(F(t),\left(F(\lambda_j):F(j)\to F(t)\right)_{j\in \mathrm{Ob}(\mathsf{J})}\right)$ is a cocone from $F$ to $F(t)$. We need to show that it is initial. Note that $F\left(\lambda_t \right)=F(\mathrm{id}_t)=\mathrm{id}_{F(t)}$. For any cocone $\left(C,\left(h_j:F(j)\to C\right)_{j\in \mathrm{Ob}(\mathsf{J})}\right)$, there is a morphism $h_t:F(t)\to C$ such that for any $j\in \mathrm{Ob}(\mathsf{J})$, $h_t\circ  F(\lambda_j) =h_j$, which means the following diagram commutes
+    \[
+    \begin{tikzcd}
+            & C                                  &                                                    \\[+10pt]
+            & F(t) \arrow[u, "h_t"', dashed] &                                                    \\
+    F(j) \arrow[ru, "F(\lambda_j)"'] \arrow[ruu, "h_j"] \arrow[rr, "F(\lambda_j)"'] &                                    & F(t) \arrow[lu, "\mathrm{id}"] \arrow[luu, "h_t"']
+    \end{tikzcd}
+    \]
+    If there is another morphism $g:F(t)\to C$ such that for any $j\in \mathrm{Ob}(\mathsf{J})$, $g\circ  F(\lambda_j) =h_j$. Take $j=t$, and we have $g=h_t$. Therefore, $\left(F(t),\left(F(\lambda_j):F(j)\to F(t)\right)_{j\in \mathrm{Ob}(\mathsf{J})}\right)$ is the colimit of $F$.
+
+\end{prf}
+
+\begin{example}{}{}
+    Let $\mathsf{C}$ be a category and $X\in \mathrm{Ob}(\mathsf{C})$. Consider the hom functor $\mathrm{Hom}_{\mathsf{C}}(X,-):\mathsf{C}\to\mathsf{Set}$. We have
+    \[
+    \varinjlim \mathrm{Hom}_{\mathsf{C}}(X,-)\cong \{*\}.
+    \]
+\end{example}
+\begin{prf}
+    Let $h^X=\mathrm{Hom}_{\mathsf{C}}(X,-)$.
+    By \Cref{th:limit_by_representability}, we have
+    \[
+        \mathrm{Hom}_{[\mathsf{C},\mathsf{Set}]}\left(h^X,\diagfunctor\left(-\right)\right)\cong \mathrm{Hom}_{\mathsf{Set}}\left(\varinjlim h^X,-\right).
+    \]
+    where $\diagfunctor:\mathsf{Set}\to[\mathsf{C},\mathsf{Set}]$ is the diagonal functor. By \hyperref[th:yoneda_lemma]{Yoneda Lemma}, we have natural isomorphism
+    \[
+        \mathrm{Hom}_{[\mathsf{C},\mathsf{Set}]}\left(h^X,\diagfunctor\left(-\right)\right)\cong \mathrm{Hom}_{[\mathsf{C},\mathsf{Set}]}\left(h^X,-\right)\circ \diagfunctor \cong \mathrm{ev}_X \circ \diagfunctor \cong \mathrm{id}_{\mathsf{Set}}\cong \mathrm{Hom}_{\mathsf{Set}}\left(\{*\},- \right).
+    \]
+    The last isomorphism has been proved in \Cref{ex:identity_functor_is_representable}. Therefore, we have
+    \[
+        \mathrm{Hom}_{\mathsf{Set}}\left(\varinjlim h^X,-\right) \cong \mathrm{Hom}_{\mathsf{Set}}\left(\{*\},- \right).
+    \]
+    Since Yoneda embedding is full and faithful, we have $\varinjlim h^X\cong \{*\}$.
+\end{prf}
 
 \begin{definition}{$\varprojlim$ Functor}{}
     Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F:\mathsf{J}\to\mathsf{C}$, $\varprojlim F$ exists, then we have a functor
@@ -2232,8 +2299,8 @@ G(i) \arrow[rr]                         \&                                      
     \]
 \end{definition}
 
-\begin{proposition}{Diagonal is Left Adjoint to Limit $\diagfunctor\dashv \varprojlim$}{}
-    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. Then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
+\begin{proposition}{Diagonal is Left Adjoint to Limit: $\diagfunctor\dashv \varprojlim$}{}
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F\in[\mathsf{J},\mathsf{C}]$, $\varprojlim F$ exists, then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C} \arrow[r, "\diagfunctor"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
@@ -2247,8 +2314,8 @@ G(i) \arrow[rr]                         \&                                      
     \]
 \end{proposition}
 
-\begin{proposition}{Diagonal is Right Adjoint to Colimit $\varinjlim\dashv \diagfunctor$}{}
-    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. Then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
+\begin{proposition}{Diagonal is Right Adjoint to Colimit:  $\varinjlim\dashv \diagfunctor$}{}
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F\in[\mathsf{J},\mathsf{C}]$, $\varprojlim F$ exists, then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \left[\mathsf{J},\mathsf{C}\right]  \arrow[r, "\varinjlim"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
@@ -2364,21 +2431,31 @@ G(i) \arrow[rr]                         \&                                      
 \begin{definition}{Preserve, Reflect, Create Limits}{}
     Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams  valued in $\mathsf{C}$. A functor $F: \mathsf{C} \rightarrow \mathsf{D}$ is said to
     \begin{itemize}
-        \item \textbf{preserves} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and limit cone over $K$, the image of this cone defines a limit cone over the composite diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$; Or equivalently, $F_*$ maps terminal objects in $\mathsf{Cone}(\mathsf{C},K)$ to terminal objects in $\mathsf{Cone}(\mathsf{D},F\circ K)$;
-        \item \textbf{reflects} limits for $\mathcal{K}$ if any cone over a diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$, whose image upon applying $F$ is a limit cone for the diagram $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$, is a limit cone over $K$;
-        \item \textbf{creates} limits for $\mathcal{K}$ if whenever $K: \mathsf{J} \rightarrow \mathsf{C}$ is a diagram in $\mathcal{K}$ and $F\circ K: \mathsf{J} \rightarrow \mathsf{D}$ has a limit in $\mathsf{D}$, there exists some limit cone over $F\circ K$ that can be lifted to a limit cone over $K$, and moreover $F$ reflects the limits for $\mathcal{K}$.
+        \item \textbf{preserves} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and any cone $\mu\in \mathsf{Cone}(\mathsf{C},K)$, 
+        \[
+        \text{$\mu$ is terminal in $\mathsf{Cone}(\mathsf{C},K)$ $\implies$ $F_*\mu$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$}
+        \]
+        \item \textbf{reflects} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and any cone $\mu\in \mathsf{Cone}(\mathsf{C},K)$, 
+        \[\text{$F_*\mu$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$ $\implies$ $\mu$ is terminal in $\mathsf{Cone}(\mathsf{C},K)$}\]
+        \item \textbf{creates} limits for $\mathcal{K}$ if 
+        \begin{itemize}
+            \item $F$ reflects the limits for $\mathcal{K}$, and
+            \item for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$, if $\eta$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$, then there exists a cone $\mu$ in $\mathsf{Cone}(\mathsf{C},K)$ such that $F_*\mu$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$.
+        \end{itemize}
+        \item \textbf{strictly creates} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and limit cone over $F \circ K: \mathsf{J} \rightarrow \mathsf{D}$,
+        \begin{itemize}
+            \item there exists a unique lift of that cone to a cone over $K$, and
+            \item moreover, this lift defines a limit cone in $\mathsf{C}$.
+        \end{itemize}
     \end{itemize}
 \end{definition}
 
-\begin{definition}{}{}
-    A functor $F: \mathsf{C} \rightarrow \mathsf{D}$ strictly creates limits for a given class of diagrams if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in the class and limit cone over $F K: \mathsf{J} \rightarrow \mathsf{D}$,
-    \begin{itemize}
-        \item there exists a unique lift of that cone to a cone over $K$, and
-        \item moreover, this lift defines a limit cone in $\mathsf{C}$.
-    \end{itemize}
-
-\end{definition}
-
+\begin{proposition}{}{}
+    Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams valued in $\mathsf{C}$. If $F: \mathsf{C} \rightarrow \mathsf{D}$ creates limits for $\mathcal{K}$ and $\varprojlim F\circ K$ exists for each $K \in\mathcal{K}$, then $\varprojlim K$ exists for each $K \in\mathcal{K}$ and $F$ preserves them.
+\end{proposition}
+\begin{proof}
+    For any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$, the hypothesis asserts that there is a cone $\mu: \diagfunctor d \Rightarrow F\circ K$ in $\mathsf{Cone}(\mathsf{D},F\circ K)$. As $F$ creates these limits, there must be a limit cone $\lambda: \diagfunctor c \Rightarrow K$ in $\mathsf{Cone}(\mathsf{C},K)$ such that $F_* \lambda: \diagfunctor F(c) \Rightarrow F\circ K$ is a limit cone. Since $F$ reflects limits, $\lambda$ is a limit cone, which means that $\mathsf{C}$ admits limits for $\mathcal{K}$. To see that $F$ preserves them, consider another limit cone $\lambda^{\prime}: \diagfunctor c^{\prime} \Rightarrow K$. The two limit cones in $\mathsf{Cone}(\mathsf{C},K)$ are isomorphic and by composing isomorphisms we see that the cone $F \lambda^{\prime}: \diagfunctor F c^{\prime} \Rightarrow F\circ K$ is isomorphic to the limit cone $\mu: \diagfunctor d \Rightarrow F\circ K$. This implies that $F \lambda^{\prime}: F c^{\prime} \Rightarrow F K$ is again a limit cone, proving that $F$ preserves these limits.
+\end{proof}
 
 \begin{definition}{Conservative Functor}{}
     A functor $F:\mathsf{C}\to\mathsf{D}$ is \textbf{conservative} if it reflects isomorphisms. Equivalently, $F$ is a conservative functor if for any morphism $f$ in $\mathsf{C}$, 
@@ -2394,21 +2471,21 @@ G(i) \arrow[rr]                         \&                                      
 
 
 \begin{proposition}{Fully Faithful Functor Reflects Limits}{}
-    A full and faithful functor reflects all limits and
+    Any full and faithful functor reflects all limits and
 colimits.
 \end{proposition}
 
 \begin{prf}
     Let $F: \mathsf{C} \rightarrow \mathsf{D}$ be a full and faithful functor. Suppose $K: \mathsf{J} \rightarrow \mathsf{C}$ is a diagram, 
     $$
-    \left(\ell_i: A \rightarrow K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Cone}\left(\mathsf{C},K\right)
+    \left(\ell_i: A \rightarrow K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathsf{Cone}\left(\mathsf{C},K\right)
     $$ 
-    is a cone over $K$, and $\left(F(\ell_i): F(A) \rightarrow F\circ K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a limit cone over $F\circ K$. We want to show that $\left(\ell_i\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is initial in $\mathrm{Cone}\left(\mathsf{C},K\right)$.
+    is a cone over $K$, and $\left(F(\ell_i): F(A) \rightarrow F\circ K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is a limit cone over $F\circ K$. We want to show that $\left(\ell_i\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is initial in $\mathsf{Cone}\left(\mathsf{C},K\right)$.
     
     
-    Suppose $\left(h_i:B \rightarrow K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Cone}\left(\mathsf{C},K\right)$ is another cone over $K$. Then 
+    Suppose $\left(h_i:B \rightarrow K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathsf{Cone}\left(\mathsf{C},K\right)$ is another cone over $K$. Then 
     \[
-    \left( F(h_i): F(B)\longrightarrow F\circ K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Cone}\left(\mathsf{D},F\circ K\right)
+    \left( F(h_i): F(B)\longrightarrow F\circ K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathsf{Cone}\left(\mathsf{D},F\circ K\right)
     \]
     is a cone over $F\circ K$. By the universal property of $F(A)$, there exists a unique morphism $g':F(B)\to F(A)$ such that $F(\ell_i) \circ g' = F(h_i)$ for each $i\in \mathrm{Ob}(\mathsf{J})$
     \[
@@ -2427,7 +2504,7 @@ colimits.
     \[
     \forall i \in\mathrm{Ob}\left(\mathsf{J}\right),\;F\left( \ell_i \circ q\right)=F\left(\ell_i \right)\circ F\left( q\right)=F\left(h_i\right)\implies F\left( q\right)=g'\implies q=g.
     \]
-    Thus we show that $\left(\ell_i:A\to K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is initial in $\mathrm{Cone}\left(\mathsf{C},K\right)$.
+    Thus we show that $\left(\ell_i:A\to K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$ is initial in $\mathsf{Cone}\left(\mathsf{C},K\right)$.
 \end{prf}
 
 
@@ -2438,13 +2515,13 @@ colimits.
 \begin{prf}
     For any $K\in\mathcal{K}$, since $\varprojlim F\circ K$ exists and $F$ creates limits for $\mathcal{K}$, there exists a limit cone 
     \[
-       \left(\ell_i:\varprojlim K\to K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in\mathrm{Cone}\left(\mathsf{C},K\right)    
+       \left(\ell_i:\varprojlim K\to K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in\mathsf{Cone}\left(\mathsf{C},K\right)    
     \]
     such that
     \[
-        \left(F(\ell_i):F\left(\varprojlim K\right)\to F\circ K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Cone}\left(\mathsf{D},F\circ K\right)
+        \left(F(\ell_i):F\left(\varprojlim K\right)\to F\circ K(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}\in \mathsf{Cone}\left(\mathsf{D},F\circ K\right)
     \]
-    is terminal in $\mathrm{Cone}\left(\mathsf{D},F\circ K\right)$, i.e it is a limit cone over $F\circ K$. Given any limit cone in $\mathrm{Cone}\left(\mathsf{C},K\right) $, it is isomorphic to $\left(\ell_i\right)_{i\in \mathrm{Ob}(\mathsf{J})}$, which implies that its image under $F$ is isomorphic to $\left(F(\ell_i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$. Thus we show $F$ preserves limits for $\mathcal{K}$.
+    is terminal in $\mathsf{Cone}\left(\mathsf{D},F\circ K\right)$, i.e it is a limit cone over $F\circ K$. Given any limit cone in $\mathsf{Cone}\left(\mathsf{C},K\right) $, it is isomorphic to $\left(\ell_i\right)_{i\in \mathrm{Ob}(\mathsf{J})}$, which implies that its image under $F$ is isomorphic to $\left(F(\ell_i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$. Thus we show $F$ preserves limits for $\mathcal{K}$.
 \end{prf}
 
 
@@ -2453,7 +2530,7 @@ colimits.
 \end{theorem}
 
 
-The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : A \to C$, the value of the limit functor $\lim_{j\in J} F_j : A \to C$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
+The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : \mathsf{A} \to \mathsf{C}$, the value of the limit functor $\varprojlim_{j\in J} F_j : \mathsf{A} \to \mathsf{C}$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
 
 \begin{proposition}{Evaluation Functor Preserves Limits}{ev_functor_preserves_limits}
     Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
@@ -2469,7 +2546,7 @@ The next result shows that functor categories inherit limits and colimits, defin
 
 
 \begin{proposition}{}{}
-    If $\mathsf{A}$ is a small category, then the forgetful functor $U:[\mathsf{A},\mathsf{C}] \rightarrow \left[\mathsf{Disc}\left(\mathrm{Ob} \left(\mathsf{A}\right)\right), \mathsf{C}\right]\cong \prod\limits_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}\mathsf{C}$
+    Suppose $\mathsf{A}$ is a small category. Denote $\mathsf{Ob}(A)=\mathsf{Disc}\left(\mathrm{Ob} \left(\mathsf{A}\right)\right)$. Then the forgetful functor $U:[\mathsf{A},\mathsf{C}] \rightarrow \left[\mathsf{Ob}(A), \mathsf{C}\right]\cong \prod\limits_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}\mathsf{C}$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             [\mathsf{A},\mathsf{C}] \&[-25pt]\&[+10pt]\&[-30pt]\prod\limits_{i\in \mathrm{Ob} \left(\mathsf{A}\right)}\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
@@ -2569,8 +2646,132 @@ The next result shows that functor categories inherit limits and colimits, defin
     This implies $\backsimeq$ contains $\approx$. Therefore, $\approx$ is the smallest equivalence relation containing $\sim^*$, which means $\approx$ coincides with $\sim$.
 \end{prf}
 
+\begin{definition}{Connected Category}{}
+    A category $\mathsf{C}$ is \textbf{connected} if it is nonempty and for any pair of objects $X,Y\in \mathrm{Ob}(\mathsf{C})$, there exists a zigzag of morphisms $(f_1,f_2,\cdots,f_{2n})$ connecting $X$ and $Y$ as follows
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+            \&  [-3em]   \& Z_1 \arrow[ld, "f_1"', dashed] \arrow[rd, "f_2", dashed] \&     \& Z_3 \arrow[ld, "f_3"', dashed] \arrow[rd, "f_4", dashed] \&        \& Z_{2n-1} \arrow[ld, "f_{2n-1}"', dashed] \arrow[rd, "f_{2n}", dashed] \&        \&  [-3em]   \\
+         X= \& Z_0 \&                                          \& Z_2 \&                                          \& \cdots \&                                                       \& Z_{2n} \& =Y
+         \end{tikzcd}
+         \]
 
+\end{definition}
 
+\begin{definition}{Final Functor}{}
+    A functor $F:\mathsf{C}\to\mathsf{D}$ is \textbf{final} if for every object $d\in \mathsf{D}$, the comma category $(d\downarrow F)$ obtained from
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+             \boldone \arrow[r, "\text{const}_d"] \&[+20pt]\mathsf{D}  \&[+20pt]\mathsf{C} \arrow[l, "F"']
+        \end{tikzcd}
+    \]
+    is connected. That is, given any $d\in \mathrm{Ob}\left(\mathsf{D}\right)$, $(d\downarrow F)$ is nonempty, and for any morphisms $d\to F(c)$ and $d\to F(c')$ there exists a zigzag of morphisms $(f_1,f_2,\cdots,f_{2n})$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            &   [-3em]      &                                                             & d \arrow[lldd, bend right=40] \arrow[rrdd, bend left=36] \arrow[ld] \arrow[rd] \arrow[dd] &                                                                          &           & [-3em]\\
+            &        & F(c_1) \arrow[ld, "f_1", dashed] \arrow[rd, "f_2"', dashed] &                                                                                     & F(d_{2n-1}) \arrow[ld, "f_{2n-1}", dashed] \arrow[rd, "f_{2n}"', dashed] &   &\\
+      F(c)= & F(c_0) &                                                             & \cdots                                                                              &                                                                          & F(c_{2n}) & =F(c')
+      \end{tikzcd}
+    \]
+\end{definition}
+
+\begin{proposition}{Equivalent Characterization of Final Functor}{}
+    Let $F:\mathsf{C}\to\mathsf{D}$ be a functor. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $F$ is final.
+        \item For any functor $G:\mathsf{D}\to\mathsf{E}$, the natural morphism between colimits
+        \[
+            \varinjlim G \circ F \longrightarrow \varinjlim G
+        \]
+        is an isomorphism.
+    \end{enumerate}
+\end{proposition}
+
+Note that $d\in \mathrm{Ob}\left(\mathsf{D}\right)$ is a final object in $\mathsf{D}$ if and only if the functor $\text{const}_d:\boldone \to \mathsf{D}$ is final.
+
+\begin{definition}{Initial Functor}{}
+    A functor $F:\mathsf{C}\to\mathsf{D}$ is \textbf{initial} if the opposite functor $F^{\text{op}}:\mathsf{C}^{\text{op}}\to\mathsf{D}^{\text{op}}$ is final.
+\end{definition}
+
+\subsection{Product and Coproduct}
+\begin{definition}{Binary Product}{}
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+            & X \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[ld, "f_1"', draw=cyan] \arrow[rd, "f_2", draw=cyan] &         \\[+10pt]
+    Y_1 & Y_1\times Y_2 \arrow[l, "\pi_1", draw=arrowBlue] \arrow[r, "\pi_2"', draw=arrowBlue]               & Y_2
+    \end{tikzcd}
+    \end{center}
+\end{definition}
+
+In the diagram $Y_1\xleftarrow{f_1} X \xrightarrow{f_2} Y_2$, the information in $X$ is coarsened through $f_1$ and reinterpreted in $Y_1$, while the same information in $X$ is processed in another coarsening manner through $f_2$ and reinterpreted differently in $Y_2$.
+
+$Y_1\xleftarrow{\pi_1}Y_1\times Y_2 \xrightarrow{\pi_2} Y_2$ is the most refined way to combine the information in $Y_1$ and $Y_2$ such that $Y_1\times Y_2$ exactly captures the mixture of information in $Y_1$ and $Y_2$ and the projections $\pi_1$ and $\pi_2$ can coarsen the information in $Y_1\times Y_2$ exactly to recover the information in $Y_1$ and $Y_2$ respectively.
+
+\begin{example}{Binary Product in $\mathsf{Set}$}{}
+    Let $Y_1$ and $Y_2$ be sets. The binary product $Y_1\times Y_2$ can be constructed as follows
+    \begin{align*}
+        Y_1\times Y_2&=\left\{(y_1,y_2) \midv y_1\in Y_1\text{ and }y_2\in Y_2\right\}.\\
+        \pi_1&:(y_1,y_2)\longmapsto y_1,\\
+        \pi_2&:(y_1,y_2)\longmapsto y_2.
+    \end{align*}
+    Given any $Y_1\xleftarrow{f_1} X \xrightarrow{f_2} Y_2$, there exists a unique map 
+    \begin{align*}
+        f_1\times f_2 :X&\longrightarrow Y_1\times Y_2\\
+        x&\longmapsto (f_1(x),f_2(x))
+    \end{align*}
+    such that $\pi_1\circ (f_1\times f_2)=f_1$ and $\pi_2\circ (f_1\times f_2)=f_2$.
+\end{example}
+
+\begin{definition}{Binary Coproduct}{}
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+                & Y   &         \\[+10pt]
+        X_1 \arrow[r, "\iota_1"', draw=arrowBlue]  \arrow[ru, "f_1", draw=cyan] & X_1 \sqcup X_2  \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]             & X_2 \arrow[l, "\iota_2", draw=arrowBlue]\arrow[lu, "f_2"', draw=cyan]
+        \end{tikzcd}
+    \end{center}
+\end{definition}
+
+\subsection{Fibered Product and Fibered Coproduct}
+\begin{definition}{Fibered Product / Pullback}{}
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+        X \arrow[rd, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[rrd, draw=cyan, bend left] \arrow[rdd, draw=cyan, bend right] &[-2em]                                 &                    \\[5pt]
+                                                                                & Y_1\times_{A} Y_2 \arrow[d, "\pi_1"', draw=arrowBlue] \arrow[r, "\pi_2", draw=arrowBlue] & Y_2 \arrow[d,"f_2"] \\[10pt]
+                                                                                & Y_1 \arrow[r, "f_1"']               & A        
+        \end{tikzcd} 
+    \end{center}
+\end{definition}
+
+\begin{example}{Pullback in $\mathsf{Set}$}{}
+    Let $Y_1$, $Y_2$, and $A$ be sets and $f_1:Y_1\to A$, $f_2:Y_2\to A$ be maps. The fibered product $Y_1\times_{A} Y_2$ can be constructed as follows
+    \begin{align*}
+        Y_1\times_{A} Y_2&=\left\{(y_1,y_2) \midv y_1\in Y_1\text{ and }y_2\in Y_2\text{ such that }f_1(y_1)=f_2(y_2)\right\}.\\
+    \end{align*}
+    Given any $X\xrightarrow{f} Y_1 \xleftarrow{g} Y_2$, there exists a unique map 
+    \begin{align*}
+        X&\longrightarrow Y_1\times_{A} Y_2\\
+        x&\longmapsto (f(x),g(x))
+    \end{align*}
+    such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+            X \arrow[rd, dash pattern=on 4pt off 2pt, draw=arrowRed] \arrow[rrd, draw=cyan, bend left] \arrow[rdd, draw=cyan, bend right] &[-2em]                                 &  [-0.4em]                  \\[5pt]
+                                                                                & Y_1\times_{A} Y_2 \arrow[d, draw=arrowBlue] \arrow[r, draw=arrowBlue] & Y_2 \arrow[d] \\[10pt]
+                                                                                & Y_1 \arrow[r]               & A        
+        \end{tikzcd} 
+    \end{center}
+    
+\end{example}
+
+\begin{definition}{Fibered Coproduct / Pushout}{}
+    \begin{center}
+        \begin{tikzcd}[every arrow/.append style={-latex, line width=1.2pt}]
+                                          &  [-0.4em]                  \\[10pt]
+                                                                                A  \arrow[d] \arrow[r] & X_2 \arrow[d, draw=arrowBlue]\arrow[rdd, draw=cyan, bend left] \\[10pt]
+                                                                                 X_1 \arrow[rrd, draw=cyan, bend right]\arrow[r, draw=arrowBlue]               &   X_1 \sqcup_A X_2  \arrow[rd, dash pattern=on 4pt off 2pt, draw=arrowRed]      \\
+                                                                                 & & Y
+        \end{tikzcd} 
+    \end{center}
+\end{definition}
 
 \section{Adjoint Functor}
 \begin{definition}{Adjoint Pair of Functors}{}

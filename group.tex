@@ -616,16 +616,16 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
 
 \subsection{Conjugacy Action}
 \begin{definition}{Conjugacy Action and Inner Automorphism Group}{conjugacy_action}
-    Let $G$ be a group. The \textbf{conjugacy action} of $G$ on itself is defined as 
+    Let $G$ be a group. The \textbf{conjugacy action} of $G$ on itself is defined as a group homomorphism
     \begin{align*}
         \gamma:G &\longrightarrow \mathrm{Aut}_{\mathsf{Grp}}(G)\\
         g &\longmapsto (\gamma_g: x\longmapsto gxg^{-1})
     \end{align*}
-    The \textbf{inner automorphism group} of $G$ is defined as 
+    The \textbf{inner automorphism group} of $G$ is defined as the image of $\gamma$
     $$
-    \mathrm{Inn}(G)=\gamma(G)=\{ \gamma_g\mid g\in G\},
+    \mathrm{Inn}(G)=\operatorname{im}\gamma=\{ \gamma_g\mid g\in G\}.
     $$ 
-    which is a subgroup of $\mathrm{Aut}_{\mathsf{Grp}}(G)$.
+    And we have inclusion relation $\mathrm{Inn}(G)\hookrightarrow\mathrm{Aut}_{\mathsf{Grp}}(G)\hookrightarrow\mathrm{Aut}_{\mathsf{Set}}(G)$.
 \end{definition}
 
 \begin{definition}{Conjugate Subgroups}{}

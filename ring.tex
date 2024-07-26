@@ -89,11 +89,16 @@ A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called
 
 \begin{proposition}{Examples of Reduced Ring}{}
     \begin{enumerate}[(i)]
-        \item Subrings, products, and localizations of reduced rings are again reduced rings.
+        \item Subrings, products, and localizations of reduced commutative rings are again reduced rings.
         \item Every integral domain is reduced.
         \item $\mathbb{Z}/n\mathbb{Z}$ is reduced if and only if $n=0$ or $n$ is square-free.
     \end{enumerate}
 \end{proposition}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item Let $R$ be a reduced ring and $S$ be a  multiplicative subset of $R$. For any $\frac{f}{s}\in S^{-1}R$, if $\left(\frac{f}{s}\right)^n=\frac{f^n}{s^n}=0$, then there exists $t\in S$ such that $tf^n=0$, which implies $(tf)^n=0$. Since $R$ is reduced, we have $tf=0$, which means $\frac{f}{s}=0$. Hence $S^{-1}R$ is reduced.
+    \end{enumerate}
+\end{proof}
 
 
 \begin{definition}{Local Ring}{}
