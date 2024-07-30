@@ -82,7 +82,7 @@ There is a looser way to think about a subcategory: $\mathsf{D}$ is a subcategor
 \end{example}
 
 
-\begin{definition}{Opposite Category}{}
+\begin{definition}{Opposite Category}{functor_op}
     Suppose $\mathsf{C}$ is a category. The \textbf{opposite category} $\mathsf{C}^{\mathrm{op}}$ is defined as follows
     \begin{itemize}
         \item Objects: $\mathrm{Ob}(\mathsf{C}^{\mathrm{op}})=\mathrm{Ob}(\mathsf{C})$
@@ -120,7 +120,7 @@ It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
             \mathsf{D}  \& \& \& \mathsf{D}^{\mathrm{op}}
         \end{tikzcd}
     \]
-    The functor ${}^{\mathrm{op}}$ is an involution, i.e. ${}^{\mathrm{op}}\circ {}^{\mathrm{op}}=\mathrm{id}_{\mathsf{CAT}}$. Hence ${}^{\mathrm{op}}$ is an automorphism of $\mathsf{CAT}$.
+    The functor ${}^{\mathrm{op}}$ is an involution, i.e. ${}^{\mathrm{op}}\circ {}^{\mathrm{op}}=\mathrm{id}_{\mathsf{CAT}}$. Hence ${}^{\mathrm{op}}\in \mathrm{Aut}(\mathsf{CAT})$.
 \end{example}
 
 
@@ -2530,7 +2530,33 @@ colimits.
 \end{theorem}
 
 
-The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : \mathsf{A} \to \mathsf{C}$, the value of the limit functor $\varprojlim_{j\in J} F_j : \mathsf{A} \to \mathsf{C}$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(C)$.
+\begin{proposition}{}{}
+    Suppose $\mathsf{A}$ is a small category. Denote $\mathsf{Ob}(A)=\mathsf{Disc}\left(\mathrm{Ob} \left(\mathsf{A}\right)\right)$. Then the forgetful functor $U:[\mathsf{A},\mathsf{C}] \rightarrow \left[\mathsf{Ob}(A), \mathsf{C}\right]\cong \prod\limits_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}\mathsf{C}$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            [\mathsf{A},\mathsf{C}] \&[-25pt]\&[+10pt]\&[-30pt]\prod\limits_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            F  \arrow[dd, Rightarrow, "\theta"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\left(F(a)\right)_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}\arrow[dd, "\prod\limits_{a\in \mathrm{Ob} \left(\mathsf{A}\right)} \theta_{a}"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "U", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            G  \& \& \& \left(G(a)\right)_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}
+        \end{tikzcd}
+    \]    
+    strictly creates all limits and colimits that exist in $\mathsf{C}$. These limits are defined objectwise, meaning that for each $a \in \mathrm{A}$, the evaluation functor $\mathrm{ev}_a:[\mathsf{A},\mathsf{C}]  \rightarrow \mathsf{C}$ preserves all limits and colimits existing in $\mathsf{C}$.
+\end{proposition}
+\begin{proof}
+    Given a diagram $F:\mathsf{J}\to [\mathsf{A},\mathsf{C}]$, suppose the limit $\varprojlim U\circ F$ exists and can be written as 
+    \[
+        \left((L(a))_{a \in \operatorname{Ob}(\mathsf{A})},\left(\ell_j=\left(\ell_{j, a}:L(a)\to F(j)(a)\right)_{a \in \operatorname{Ob}(\mathsf{A})}\right)_{j \in \operatorname{Ob}(\mathsf{J})}\right).
+    \]
+    
+\end{proof}
+
+
+The next result shows that functor categories inherit limits and colimits, defined ``objectwise" in the target category: that is, given a $\mathsf{J}$-indexed diagram in $[\mathsf{A},\mathsf{C}]$ whose objects are functors $F_j : \mathsf{A} \to \mathsf{C}$, the value of the limit functor $\varprojlim_{j\in J} F_j : \mathsf{A} \to \mathsf{C}$ at an object $a \in \mathsf{A}$ is the limit of the $\mathsf{J}$-indexed diagram in $\mathsf{C}$ whose objects are the objects $F_j(a) \in \mathrm{Ob}(\mathsf{C})$, which reads as follows:
+\[
+    \left(\varprojlim_{j\in J} F_j\right)(a) = \varprojlim_{j\in J} F_j(a).
+\]
 
 \begin{proposition}{Evaluation Functor Preserves Limits}{ev_functor_preserves_limits}
     Let $\mathsf{A}$ be a small category and $\mathsf{C}$ be a category. Given a diagram $F: \mathsf{J} \to\left[\mathsf{A},\mathsf{C}\right]$ with $\mathsf{J}$ small, if for any $a\in \mathsf{A}$, the diagram 
@@ -2544,21 +2570,6 @@ The next result shows that functor categories inherit limits and colimits, defin
     \end{enumerate}
 \end{proposition}
 
-
-\begin{proposition}{}{}
-    Suppose $\mathsf{A}$ is a small category. Denote $\mathsf{Ob}(A)=\mathsf{Disc}\left(\mathrm{Ob} \left(\mathsf{A}\right)\right)$. Then the forgetful functor $U:[\mathsf{A},\mathsf{C}] \rightarrow \left[\mathsf{Ob}(A), \mathsf{C}\right]\cong \prod\limits_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}\mathsf{C}$
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            [\mathsf{A},\mathsf{C}] \&[-25pt]\&[+10pt]\&[-30pt]\prod\limits_{i\in \mathrm{Ob} \left(\mathsf{A}\right)}\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
-            F  \arrow[dd, Rightarrow, "\theta"{name=L, left}] 
-            \&[-25pt] \& [+10pt] 
-            \& [-30pt]\left(F(a)\right)_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}\arrow[dd, "\prod\limits_{a\in \mathrm{Ob} \left(\mathsf{A}\right)} \theta_{a}"{name=R}] \\ [-10pt] 
-            \&  \phantom{.}\arrow[r, "U", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-            G  \& \& \& \left(G(a)\right)_{a\in \mathrm{Ob} \left(\mathsf{A}\right)}
-        \end{tikzcd}
-    \]    
-    strictly creates all limits and colimits that exist in $\mathsf{C}$. These limits are defined objectwise, meaning that for each $a \in \mathrm{A}$, the evaluation functor $\mathrm{ev}_a:[\mathsf{A},\mathsf{C}]  \rightarrow \mathsf{C}$ preserves all limits and colimits existing in $\mathsf{C}$.
-\end{proposition}
 
 
 \begin{proposition}{Limits Commute with Limits}{}
@@ -2674,6 +2685,22 @@ The next result shows that functor categories inherit limits and colimits, defin
     \]
 \end{definition}
 
+\begin{lemma}{}{}
+    Let $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{E}$ be functors. If both $\varinjlim G \circ F$ and $\varinjlim G$ exist, then there exists a natural morphism between colimits
+        \[
+            \varinjlim G \circ F \longrightarrow \varinjlim G
+        \]
+\end{lemma}
+\begin{proof}
+    Suppose $\mu: G\circ F \Rightarrow \diagfunctor \varinjlim_{\mathsf{C}} G\circ F $ is a colimit cone in $\mathsf{Cocone}(G\circ F,\textsf{E})$ and $\nu: G\Rightarrow \diagfunctor \varinjlim_{\mathsf{D}} G$ is a colimit cone in $\mathsf{Cocone}(G,\textsf{E})$. Then by universal property of $\varinjlim G\circ F$, we can get the following commutative diagram
+    \[
+        \begin{tikzcd}
+            & \varinjlim_{\mathsf{D}} G                          \\
+    G(F(c)) \arrow[r, "\mu_c"'] \arrow[ru, "\nu_{F(c)}"] & \varinjlim_{\mathsf{C}} G\circ F \arrow[u, dashed]
+    \end{tikzcd}
+    \]
+\end{proof}
+
 \begin{proposition}{Equivalent Characterization of Final Functor}{}
     Let $F:\mathsf{C}\to\mathsf{D}$ be a functor. The following are equivalent:
     \begin{enumerate}[(i)]
@@ -2691,6 +2718,8 @@ Note that $d\in \mathrm{Ob}\left(\mathsf{D}\right)$ is a final object in $\maths
 \begin{definition}{Initial Functor}{}
     A functor $F:\mathsf{C}\to\mathsf{D}$ is \textbf{initial} if the opposite functor $F^{\text{op}}:\mathsf{C}^{\text{op}}\to\mathsf{D}^{\text{op}}$ is final.
 \end{definition}
+
+
 
 \subsection{Product and Coproduct}
 \begin{definition}{Binary Product}{}

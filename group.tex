@@ -18,6 +18,11 @@ Since the identity of a group is unique, we denote it by $1_G$ or simply $1$.
     \]
 \end{definition}
 
+\begin{proposition}{Group is Isomorphic to Its Opposite group}{}
+    $G$ is isomorphic to $G^{\mathrm{op}}$ through the isomorphism $x\mapsto x^{-1}$. This is same as saying that $\mathsf{B}G$ is isomorphic to $(\mathsf{B}G)^{\mathrm{op}}$ through the functor ${}^{\mathrm{op}}$ defined in \Cref{th:functor_op}.
+\end{proposition}
+
+
 \begin{definition}{Subgroup}{}
     Let $G$ be a group. A subset $H$ of $G$ is called a \textbf{subgroup} of $G$ if $H$ is a group with respect to the binary operation of $G$. In this case, we write $H\le G$.
 \end{definition}
@@ -344,7 +349,7 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     Let $X$ and $Y$ be objects in a category $\mathsf{C}$. Then $\mathrm{Aut}_\mathsf{C}(X)$ acts on $\mathrm{Hom}_\mathsf{C}(X,Y)$ by the composition of functors
     \[
     \begin{tikzcd}[ampersand replacement=\&, column sep=5em, row sep=3em]
-    \mathsf{B}\mathrm{Aut}_\mathsf{C}(X)\arrow[r] \&[-3em] \mathsf{B}\mathrm{Aut}_\mathsf{C}(X)^{\mathrm{op}} \arrow[r, hook] \&[-2em] \mathsf{C}^{\mathrm{op}} \arrow[r, "{\mathrm{Hom}_{\mathsf{C}}(-,Y)}"] \& \mathsf{Set}\\[-2.3em]
+    \mathsf{B}\mathrm{Aut}_\mathsf{C}(X)\arrow[r,"{(-)}^{-1}"] \&[-3em] \mathsf{B}\mathrm{Aut}_\mathsf{C}(X)^{\mathrm{op}} \arrow[r, hook] \&[-2em] \mathsf{C}^{\mathrm{op}} \arrow[r, "{\mathrm{Hom}_{\mathsf{C}}(-,Y)}"] \& \mathsf{Set}\\[-2.3em]
     \bullet \arrow[r, maps to] \arrow[d, "g"']           \& \bullet \arrow[r, maps to] \arrow[d, "g^{-1}"]                           \& X \arrow[d, "g^{-1}"] \arrow[r, maps to]                               \& {\mathrm{Hom}(X,Y)} \arrow[d, "\left(g^{-1}\right)^*"] \\
     \bullet \arrow[r, maps to]                           \& \bullet \arrow[r, maps to]                                               \& X \arrow[r, maps to]                                                   \& {\mathrm{Hom}(X,Y)}  
     \end{tikzcd}
@@ -369,17 +374,22 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
     \end{align*}
 \end{example}
 
-\begin{example}{Actions on $X$ Induce Actions on $Y^X$}{acting_on_functions}
-    If $G$ acts on $X$ through a functor $\sigma(-):\mathsf{B}G\to\mathsf{Set}$, then it also acts on $Y^X$ for any set $Y$ by the composition of functors 
+\begin{example}{Actions on $X$ Induce Actions on $\mathrm{Hom}_{\mathsf{Set}}(X,Y)$}{acting_on_functions}
+    If $G$ acts on $X$ through a functor $\sigma(-):\mathsf{B}G\to\mathsf{Set}$, then it also acts on $\mathrm{Hom}_{\mathsf{Set}}(X,Y)$ for any set $Y$ by the composition of functors 
     \[
     \begin{tikzcd}[ampersand replacement=\&, column sep=5em, row sep=3em]
-        \mathsf{B}G \arrow[r] \&[-2em] \mathsf{B}G^{\mathrm{op}} \arrow[r, "\sigma(-)^{\mathrm{op}}"] \&[-2.2em] \mathsf{Set}^{\mathrm{op}} \arrow[r, "{\mathrm{Hom}_{\mathsf{Set}}(-,Y)}"] \& \mathsf{Set}
+        \mathsf{B}G \arrow[r,"{(-)}^{-1}"] \&[-2em] \mathsf{B}G^{\mathrm{op}} \arrow[r, "\sigma(-)^{\mathrm{op}}"] \&[-2.2em] \mathsf{Set}^{\mathrm{op}} \arrow[r, "{\mathrm{Hom}_{\mathsf{Set}}(-,Y)}"] \& \mathsf{Set}
         \end{tikzcd}
     \]
-    The action on $Y^X$ is given explicitly as follows: for all $g\in G$, $f\in Y^X$ and $x\in X$,
+    The left action on $\mathrm{Hom}_{\mathsf{Set}}(X,Y)$ is given explicitly as follows: for all $g\in G$, $f\in \mathrm{Hom}_{\mathsf{Set}}(X,Y)$ and $x\in X$,
     \[
         (g\cdot f)(x)=f(g^{-1}\cdot x).
     \]
+    Equivalently, the right action $\star$ on $\mathrm{Hom}_{\mathsf{Set}}(X,Y)$ is given by
+    \[
+        (f\star g)(x)=f(g\cdot x).
+    \]
+   
     
 \end{example}
 
@@ -391,6 +401,14 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
         &=f\left(g_2^{-1}\cdot\left(g_1^{-1}\cdot x\right)\right)\\
         &=f\left(\left(g_2^{-1} g_1^{-1}\right)\cdot x\right)\\
         &=\left(\left(g_1g_2\right)\cdot f\right)(x).
+    \end{align*}
+    and also check that
+    \begin{align*}
+        ((f\star g_1)\star g_2)(x)
+        &=\left(f\star g_1\right)\left(g_2\cdot x\right)\\
+        &=f\left(g_1\cdot\left(g_2\cdot x\right)\right)\\
+        &=f\left((g_1g_2)\cdot x\right)\\
+        &=\left(f\star (g_1 g_2)\right)(x).
     \end{align*}
 \end{prf}
 
@@ -405,20 +423,20 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
 \begin{definition}{Orbit Space}{}
     Let $G$ be a group acting on a set $X$. The \textbf{orbit space} of $G$ acting on $X$ is defined as 
     \[
-    X/G=\{ Gx\mid x\in X\}.
+    G\backslash X=\{ Gx\mid x\in X\}.
     \]
 \end{definition}
 
-If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
+If $G$ acts on $X$, then $G$ acts on $G\backslash X$ trivially by $g\cdot Gx=Gx$.
 \begin{proposition}{Orbit Decomposition}{}
     Let $G$ be a group acting on a set $X$. We define a equivalence relation $\sim$ on $X$ by
     \[
     x\sim y \iff Gx=Gy.
     \]
-    Then the equivalence class of $x$ is exactly $Gx$. The quotient set $X/\sim$ is exactly the orbit space $X/G$.
+    Then the equivalence class of $x$ is exactly $Gx$. The quotient set $X/\sim$ is exactly the orbit space $G\backslash X$.
     And we have a partition of $X$ by the orbits of $G$ acting on $X$
     \[
-    X=\bigsqcup_{Gx\in X/G}Gx.
+    X=\bigsqcup_{Gx\in G\backslash X}Gx.
     \]
 \end{proposition}
 
@@ -427,7 +445,7 @@ We can check that the equivalence class of $x$ is $Gx$. If $y\sim x$, then $y\in
 \end{prf}
 
 
-If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
+If $G$ acts on $X$, then $G$ acts on $G\backslash X$ trivially.
 \begin{definition}{$G$-invariant element }{}
     Let $G$ be a group acting on a set $X$. An element $x\in X$ is called \textbf{$G$-invariant} if $Gx=\{ x\}$ or equivalently $|Gx|=1$. The set of all $G$-invariant elements is denoted by $X^G$
     \[
@@ -485,7 +503,7 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
 \begin{example}{$G$ Acts on Orbit $Gx$ Transitively}{}
     Let $G$ be a group acting on a set $X$ and $x\in X$. Then $G$ acts on the orbit $Gx$ by left multiplication transitively. And we have a $G$-set isomorphism
     \[
-    X\cong \bigsqcup_{Gx\in X/G}Gx,
+    X\cong \bigsqcup_{Gx\in G\backslash X}Gx,
     \]
     which decomposes any $G$-set into coproduct of transitive $G$-sets.
 \end{example}
@@ -526,16 +544,16 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     \[
         gH = H^\circ g = \{ gh\mid h\in H\}.
     \]
-    The set of all left cosets of $H$ is denoted by $G/H^L$, called the left coset space of $G$ modulo $H$. $G/H^L$ is the orbit space of $G$ under the right multiplication action of $H$.
+    The set of all left cosets of $H$ is denoted by $G/H$, called the left coset space of $G$ modulo $H$. $G/H$ is the orbit space of $G$ under the right multiplication action of $H$.
 \end{definition}
 
-\begin{example}{$G$ Acts on $G/H^L$ Transitively}{}
-    Let $G$ be a group and $H$ be a subgroup of $G$. $G$ acts on $G/H^L$ through
+\begin{example}{$G$ Acts on $G/H$ Transitively}{}
+    Let $G$ be a group and $H$ be a subgroup of $G$. $G$ acts on $G/H$ through
     \begin{align*}
-        G &\longrightarrow \mathrm{Aut}(G/H^L)\\
+        G &\longrightarrow \mathrm{Aut}(G/H)\\
         g &\longmapsto  (xH\longmapsto gxH)
     \end{align*}
-    For any $xH,yH\in G/H^L$, we have $yH=gxH$ for some $g=yx^{-1}\in G$. Thus $G$ acts on $G/H^L$ transitively.
+    For any $xH,yH\in G/H$, we have $yH=gxH$ for some $g=yx^{-1}\in G$. Thus $G$ acts on $G/H$ transitively.
 \end{example}
 
 \begin{definition}{Right Cosets}{}
@@ -548,11 +566,11 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     \[
         Hg = \{ hg\mid h\in H\},
     \]
-    which matches notation of orbit. The set of all right cosets of $H$ is denoted by $G/H^R$, called the right coset space of $G$ modulo $H$.
+    which matches notation of orbit. The set of all right cosets of $H$ is denoted by $H\backslash G$, called the right coset space of $G$ modulo $H$.
 \end{definition}
 
 \begin{definition}{Index of Subgroup}{}
-    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{index} of $H$ in $G$ is defined as the cardinality of $G/H^L$ or $G/H^R$, denoted by $[G:H]$.
+    Let $G$ be a group and $H$ be a subgroup of $G$. The \textbf{index} of $H$ in $G$ is defined as the cardinality of $G/H$ or $H\backslash G$, denoted by $[G:H]$.
 \end{definition}
 
 \begin{theorem}{Lagrange's Theorem}{}
@@ -560,10 +578,10 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
 \end{theorem}
 
 
-\begin{proposition}{$G$-Set Isomorphism $G/\mathrm{Stab}_G(x)^L\cong Gx$}{iso_stab_orbit}
+\begin{proposition}{$G$-Set Isomorphism $G/\mathrm{Stab}_G(x)\cong Gx$}{iso_stab_orbit}
     Let $G$ be a group acting on a set $X$ and $x\in X$. Then the map
     \begin{align*}
-        F:G/\mathrm{Stab}_G(x)^L &\longrightarrow Gx\\
+        F:G/\mathrm{Stab}_G(x) &\longrightarrow Gx\\
         g\hspace{1pt}\mathrm{Stab}_G(x) &\longmapsto g\cdot x
     \end{align*}
     is a $G$-set isomorphism.
@@ -587,14 +605,14 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
 \begin{prf} 
     According to \Cref{th:iso_stab_orbit}, we have
     \[
-\left|Gx\right|=\left|G/\mathrm{Stab}_G(x)^L\right|=|G|/\left|\mathrm{Stab}_G(x)\right|.
+\left|Gx\right|=\left|G/\mathrm{Stab}_G(x)\right|=|G|/\left|\mathrm{Stab}_G(x)\right|.
     \]
 \end{prf}
 
 \begin{theorem}{Burnside's Lemma}{Burnside's_lemma}
     Let $G$ be a finite group acting on a finite set $X$. Then the number of orbits of $G$ on $X$ is equal to
     \[
-    |X/G|=\frac{1}{|G|}\sum_{g\in G}|X^g|    ,
+    |G\backslash X|=\frac{1}{|G|}\sum_{g\in G}|X^g|    ,
     \]
     where $X^g=\{x\in X\mid g\cdot x=x\}$ is the set of fixed points of $g$.
 \end{theorem}
@@ -604,10 +622,10 @@ If $G$ acts on $X$, then $G$ acts on $X/G$ trivially.
     \sum_{g \in G}\left|X^g\right|&=|\{(g, x) \in G \times X \mid g \cdot x=x\}|\\
     &=\sum_{x \in X}\left|\mathrm{Stab}_G(x)\right|\\
     &=\sum_{x \in X}\frac{|G|}{\left|G x\right|} \quad \text{by Orbit-Stabilizer Theorem}\\
-    &=|G| \sum_{G y \in X / G}\; \sum_{x \in Gy}\frac{1}{\left|G x\right|}\\
-    &=|G| \sum_{G y \in X / G} \left|Gy\right|\frac{1}{\left|G y\right|}\\
-    &=|G| \sum_{G y \in X / G} 1\\
-    &=|G| \cdot|X / G|.
+    &=|G| \sum_{G y \in G \backslash X}\; \sum_{x \in Gy}\frac{1}{\left|G x\right|}\\
+    &=|G| \sum_{G y \in G \backslash X} \left|Gy\right|\frac{1}{\left|G y\right|}\\
+    &=|G| \sum_{G y \in G \backslash X} 1\\
+    &=|G| \cdot|G \backslash X|.
     \end{align*}
 
 \end{prf}
@@ -901,7 +919,7 @@ Take $H=G$ in \Cref{th:N/C_theorem} we can get $G/Z_G\cong \mathrm{Inn}(G)$.
 \begin{prf}
     With the orbit decomposition of $G$ under conjugacy action, then by orbit-stabilizer theorem we have
     \[
-        |G|=\sum_{Gx\in G/G}\left|\mathrm{Cl}(x)\right|=\sum_{Gx\in G/G}\left[G: \mathrm{Stab}_G(x)\right]=|Z(G)|+\sum_{j=1}^m\left[G: Z_G\left(x_j\right)\right].
+        |G|=\sum_{Gx\in G\backslash G}\left|\mathrm{Cl}(x)\right|=\sum_{Gx\in G\backslash G}\left[G: \mathrm{Stab}_G(x)\right]=|Z(G)|+\sum_{j=1}^m\left[G: Z_G\left(x_j\right)\right].
     \]
 \end{prf}
 
@@ -958,6 +976,10 @@ we show $r^{-1} H r\subseteq K$.
 
 \section{Symmetric Groups}
 
+\begin{definition}{Symmetric Group}{}
+    The \textbf{symmetric group} on a set $X$ is the group of all permutations of $X$, denoted by $S_X=\mathrm{Aut}_{\mathsf{Set}}(X)$. If $X=\{1,2,\cdots,n\}$, then we denote $S_X$ by $S_n$.
+\end{definition}
+
 \begin{definition}{$k$-Cycle}{}
     Let $n\ge 2$ and $k\ge 1$ be integers. A \textbf{$k$-cycle} in $S_n$ is a permutation $\sigma\in S_n$ such that there exist a subset of $P_n=\{1,2,\cdots,n\}$, denoted by $A=\{a_1,a_2,\cdots,a_k\}$, satisfying
     \begin{enumerate}[(i)]
@@ -973,30 +995,31 @@ we show $r^{-1} H r\subseteq K$.
 
 
 \begin{theorem}{Pólya Enumeration Theorem (Unweighted)}{Polya_enumeration_unweighted}
-    Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors. Suppose a group $G$ acts on $X$ through $\sigma:G\to\mathrm{Aut}_{\mathsf{Set}}(X)$. Then it also acts on $Y^X$ by \Cref{ex:acting_on_functions}. Define that a coloring configuration of $(X,Y,\sigma)$ is an orbit in the $G$-set $Y^X$. Then the number of essentially distinct coloring configurations is
+    Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be colored and $Y$ is the set of colors. Suppose a group $G$ acts on $X$ through $\sigma:G\to\mathrm{Aut}_{\mathsf{Set}}(X)$. Then it also acts on $Y^X$ by \Cref{ex:acting_on_functions}. Define that a coloring configuration of $(X,Y,\sigma)$ is an orbit in $Y^X/G$. Then the number of essentially distinct coloring configurations is
 $$
 \left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}|Y|^{c(g)},
 $$
-where $c(g):=\left|X/\langle \sigma_g\rangle\right|$ denotes the number of cycles in the cycle decomposition of $\sigma_g \in \mathrm{Aut}_{\mathsf{Set}}(X)$.
+where $c(g):=\left|\langle g\rangle \backslash X\right|=\left|\langle \sigma_g\rangle \backslash X\right|$ denotes the number of cycles in the cycle decomposition of $\sigma_g \in S_n$.
 \end{theorem}
 
 \begin{prf} 
     We apply Burnside's lemma \ref{th:Burnside's_lemma}, which states that
 $$
-\left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}\left|\left(Y^X\right)^g\right| .
+\left|Y^X / G\right|=\frac{1}{|G|} \sum_{g \in G}\left|\left(Y^X\right)^g\right| 
 $$
-It remains to show that $\left|\left(Y^X\right)^g\right|=|Y|^{c(g)}$. For any map $f:X\to Y$, if 
-\[
-f(g\cdot x)=f(x)   ,\quad\forall x\in X, 
-\]
-then $f(x)=f(y)\iff Gx=Gy$. By the universal property of the quotient set, there exists a unique map $\overline{f}:X/G\to Y$ such that the following diagram commutes
+where
+\begin{align*}
+    \left(Y^X\right)^g&=\left\{ f \in Y^X \mid f(g \cdot x)=f (x)\text{ for all }x \in X\right\}\\
+    &=\left\{ f \in Y^X \mid \langle g\rangle x = \langle g\rangle y\implies f(x)=f(y)\right\}.
+\end{align*}
+Define an equivalence relation $\sim_g$ on $X$ by $x \sim_g y\iff\langle g\rangle x = \langle g\rangle y$. Then we have $X/\sim_g\;=\langle g\rangle \backslash X$. By the universal property of the quotient set, for any map $f:X\to Y$ satisfying $x\sim y\implies f(x)=f(y)$, there exists a unique map $\overline{f}:\langle \sigma_g\rangle \backslash X\to Y$ such that the following diagram commutes
 \[
 \begin{tikzcd}[ampersand replacement=\&]
     X \arrow[rr, "f"] \arrow[rd,"\pi"'] \&  \& Y \\
-    \& X/\langle \sigma_g\rangle \arrow[ru, "\overline{f}"'] \&
+    \& \langle \sigma_g\rangle \backslash X \arrow[ru, "\overline{f}"',dashed] \&
 \end{tikzcd}
 \]
-Conversely, for any map $h:X/\langle \sigma_g\rangle\to Y$, we can define a map $f:X\to Y$ and checking that $f(g\cdot x)=f(x)$ for all $x\in X$. Hence we have a bijection between $\left(Y^X\right)^g$ and $Y^{X/\langle \sigma_g\rangle}$, which implies that $\left|\left(Y^X\right)^g\right|=|Y|^{c(g)}$.
+And we have a natural bijection between $\left(Y^X\right)^g$ and $Y^{\langle g\rangle \backslash X}$, which implies that $\left|\left(Y^X\right)^g\right|=|Y|^{c(g)}$.
 \end{prf}
 
 \begin{definition}{Cycle Index Polynomial}{}
@@ -1012,18 +1035,20 @@ Let $X, Y$ be finite sets, where $X=\{1,2,\cdots,n\}$ is the set of points to be
 \[
 q(x_1,\cdots,x_m)=\sum_{y\in Y}x_1^{w_1(y)}x_2^{w_2(y)}\cdots x_m^{w_m(y)},
 \]
-where the coefficient of the term $x_1^{a_1}x_2^{a_2}\cdots x_m^{a_m}$ is the number of colors with weight $(a_1,a_2,\cdots,a_m)$. For each coloring configuration $f:X\to Y$, define the its weight as $W(f)$, where
+where the coefficient of the term $x_1^{a_1}x_2^{a_2}\cdots x_m^{a_m}$ is the number of colors with weight $(a_1,a_2,\cdots,a_m)$. For each coloring map $f:X\to Y$, define the its weight as $W(f)$, where
 \begin{align*}
     W:Y^X&\longrightarrow\mathbb{Z}_{\ge 0}^m\\
 f&\longmapsto\sum_{x\in X}w(f(x))
 \end{align*}
-Let $G$ be subgroup of $S_n$. Since for all $g\in G$ and $f\in X^Y$,
+Let $G$ be a subgroup of $S_n$. Given any $g\in G$ and $f\in X^Y$, we can check the action of $g$ on $f$ does not change its weight
 \begin{align*}
-    W(g\cdot f)=\sum_{x\in X}w((g\cdot f)(x))=\sum_{x\in X}w(f(g^{-1}\cdot x))=\sum_{x\in X}w(f(x))=W(f),
+    W(f\star g)=\sum_{x\in X}w(( f\star g)(x))=\sum_{x\in X}w(f(g\cdot x))=\sum_{x\in X}w(f(x))=W(f),
 \end{align*}
-we see $G$ acts on $W^{-1}(\omega)$ for each $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$. The generating function for the number of essentially distinct coloring configurations with weight $\omega$ can be expressed as
+which implies that for each $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$, the fiber $W^{-1}(\omega)$ is $G$-invariant. 
+
+Define a coloring configuration of $(X,Y,G)$ as an orbit in $Y^X/G$. The generating function for the number of essentially distinct coloring configurations with weight $\omega$ can be expressed as
 \begin{align*}
-    \mathrm{CGF}\left(x_1, \cdots,x_m\right) &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
+    \mathrm{CGF}\left(x_1, \cdots,x_m\right) &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|G\backslash W^{-1}(\omega)\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
      &= Z\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right);G\right).
 \end{align*}
 \end{theorem}
@@ -1031,22 +1056,31 @@ we see $G$ acts on $W^{-1}(\omega)$ for each $\omega=(\omega_1,\cdots,\omega_m)\
 \begin{prf} 
     For any $\omega=(\omega_1,\cdots,\omega_m)\in\mathbb{Z}_{\ge 0}^m$, by applying Burnside's lemma \ref{th:Burnside's_lemma} to the $G$-set $W^{-1}(\omega)$, we have
     \[
-        \left|W^{-1}(\omega)/G\right| =\frac{1}{|G|}\sum_{g\in G}\left|W^{-1}(\omega)^g\right|.
+        \left|G\backslash W^{-1}(\omega)\right| =\frac{1}{|G|}\sum_{g\in G}\left|W^{-1}(\omega)^g\right|.
     \]
     Similar to \Cref{th:Polya_enumeration_unweighted}, we have a bijection between 
     \[
-        W^{-1}(\omega)^g=\left\{f\in \left(Y^X\right)^g\mid W(f)=\omega\right\}\quad\text{and}\quad\left\{\overline{f}\in Y^{X/\langle g\rangle}\mid W\left(\,\overline{f}\circ\pi\right)=\omega\right\},
+        W^{-1}(\omega)^g=\left\{f\in \left(Y^X\right)^g\mid W(f)=\omega\right\}\quad\text{and}\quad\left\{\overline{f}\in Y^{\langle g\rangle\backslash X}\mid W\left(\,\overline{f}\circ\pi\right)=\omega\right\},
     \]
-    which implies coloring points of $X$ essentially distinctly with colors in $Y$ with weight $\omega=(\omega_1,\cdots,\omega_m)$ is equivalent to coloring orbits $g_1,g_2,\cdots,g_r$ of $X/\langle g\rangle$ with colors in $Y$ with weight $\omega=(|g_1|\omega_{v_1},\cdots,|g_r|\omega_{v_r})$. Hence
+    Suppose $\langle g\rangle\backslash X=\{\langle g\rangle x_1,\cdots,\langle g\rangle x_r\}$. We can give a coloring configuration by $r$ consecutive steps. In the $i$-th step, we just need to choose a color in $y\in Y$ for the $i$-orbit $\langle g\rangle\backslash x_i$, which will contribute a term
+     $$
+     x_1^{|\langle g\rangle x_i| w_1(y)}x_2^{|\langle g\rangle x_i|w_2(y)}\cdots x_m^{|\langle g\rangle x_i| w_m(y)}.
+     $$
+    Thus we have
     \begin{align*}
-        \sum_{\omega\in\mathbb{Z}_{\ge 0}^m} \left |W^{-1}(\omega)^g\right |x_1^{\omega_1} \cdots x_m^{\omega_m} &= \prod_{g_i \in X/\langle g\rangle } q\left (x_1^{|g_i|}, x_2^{|g_i|}, \cdots,x_m^{|g_i|}\right )\\
+        \sum_{\omega\in\mathbb{Z}_{\ge 0}^m} \left |W^{-1}(\omega)^g\right |x_1^{\omega_1} \cdots x_m^{\omega_m} &= \prod_{\langle g\rangle x_i \in \langle g\rangle\backslash X }\left(\sum_{y\in Y}x_1^{|\langle g\rangle x_i|w_1(y)}x_2^{|\langle g\rangle x_i|w_2(y)}\cdots x_m^{|\langle g\rangle x_i|w_m(y)}\right) \\
+        &= \prod_{\langle g\rangle x_i \in \langle g\rangle\backslash X } q\left (x_1^{|\langle g\rangle x_i|}, x_2^{|\langle g\rangle x_i|}, \cdots,x_m^{|\langle g\rangle x_i|}\right )\\
 &= q(x_1,  \cdots,x_m)^{c_1(g)} q \left (x_1^2, \cdots,x_m^2 \right )^{c_2(g)} \cdots q \left (x_1^n, \cdots,x_m^n\right )^{c_n(g)}.
     \end{align*}
-    Therefore, we have
+    where 
+    $$
+    c_k(g)=\sum_{\langle g\rangle x_i \in \langle g\rangle\backslash X}\mathbf{1}_{|\langle g\rangle x_i |=k}
+    $$ 
+    denotes the number of orbits with size $k$. With this equality, we can rewrite the generating function as
     \begin{align*}
-        \mathrm{CGF}\left(x_1, \cdots,x_m\right) &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
+        \mathrm{CGF}\left(x_1, \cdots,x_m\right) &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|G\backslash W^{-1}(\omega)\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
         &=\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\frac{1}{|G|}\sum_{g \in G}\left|W^{-1}(\omega)^g\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
-        &=\frac{1}{|G|}\sum_{g \in G}\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)/G\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
+        &=\frac{1}{|G|}\sum_{g \in G}\sum_{\omega \in \mathbb{Z}_{\ge 0}^m}\left|W^{-1}(\omega)^g\right| x_1^{\omega_1} \cdots x_m^{\omega_m}\\
         &=\frac{1}{|G|}\sum_{g \in G}q(x_1,  \cdots,x_m)^{c_1(g)} q \left (x_1^2, \cdots,x_m^2 \right )^{c_2(g)} \cdots q \left (x_1^n, \cdots,x_m^n\right )^{c_n(g)}\\
      &= Z\left(q\left(x_1, \cdots,x_m\right), q\left(x_1^2, \cdots,x_m^2\right), \cdots, q\left(x_1^n, \cdots,x_m^n\right);G\right).
     \end{align*}
@@ -1070,7 +1104,7 @@ we see $G$ acts on $W^{-1}(\omega)$ for each $\omega=(\omega_1,\cdots,\omega_m)\
     Z(t_1,\cdots,t_6;D_{12})=\frac{1}{12}\left(t_1^6+3 t_1^2 t_2^2+4 t_2^3+2 t_3^2+2 t_6\right)
 \]
 
-Assigning a weight of (1,0) to H and a weight of (0,1) to Cl, the corresponding generating function is \(q(\text{H},\text{Cl})=\text{H}+\text{Cl}\). Finally, the generating function for the number of essentially distinct colorings is:
+Assigning a weight of (1,0) to H and a weight of (0,1) to Cl, the corresponding generating function is \(q(\text{H},\text{Cl})=\text{H}+\text{Cl}\). Finally, the generating function for the number of essentially distinct coloring configurations is:
 
 \[
 \begin{aligned}

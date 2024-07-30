@@ -127,6 +127,8 @@
     is continuous and has a continuous inverse $\rho(g^{-1})$. Hence $\rho(g)\in \mathrm{Aut}_{\mathsf{Top}}(X)$.
 \end{prf}
 
+From the definition, we see if $varpho:G\times X\to X$ is continuous topological group action on topological space $X$, it is also a group action on $X$ by homeomorphisms. If $G$ is discrete, then the converse holds.
+
 \begin{proposition}{Discrete Group Acts Continuously on Topological Space $\iff$ Acts by Homeomorphisms}{}
     Let $G$ be a group acting on the underlying set of a topological space $X$ through a group homomorphism $\rho:G\to \mathrm{Aut}_{\mathsf{Set}}(X)$. Then the following are equivalent:
     \begin{enumerate}[(i)]
@@ -143,24 +145,18 @@
         &=\{(g,x)\in G\times X\mid x\in \rho(g)^{-1}(U)\}\\
         &=\bigcup_{g\in G}\left(\left\{g\right\}\times \rho(g)^{-1}(U) \right)
     \end{align*}
-    Since $\rho(g)$ is a homeomorphism, $\rho(g)^{-1}(U)$ is open for any open set $U$. Since $G$ is discrete,  each $\left\{g\right\}\times \rho(g)^{-1}(U)$ is open in $G\times X$. Hence $\varrho^{-1}(U)$ is open in $G\times X$, which implies $\varrho$ is continuous.
+    Since $\rho(g)$ is a homeomorphism, $\rho(g)^{-1}(U)$ is open for any open set $U$. Since $G$ is discrete,  each $\left\{g\right\}\times \rho(g)^{-1}(U)$ is open in $G\times X$. Hence $\varrho^{-1}(U)$ as a union of open sets is open in $G\times X$, which implies $\varrho$ is continuous.
 \end{prf}
 
 
-
-% \begin{proposition}{}{}
-% 	Let $X$ be a locally compact Hausdorff space and $G$ be a topological group.
-% \end{proposition}
-
-
 \begin{definition}{Orbit Space}{}
-	Let $G$ be a group acting on a topological space $X$. The \textbf{orbit space} of $X$ under the action of $G$ is the quotient space $X / G$ obtained by identifying all points in $X$ that are in the same orbit. $X / G$ is equipped with the quotient topology: a subset $U\subseteq X / G$ is open if and only if $\pi^{-1}(U)$ is open in $X$, where $\pi:X\to X / G$ is the quotient map.
+	Let $G$ be a group acting on a topological space $X$. The \textbf{orbit space} of $X$ under the action of $G$ is the quotient space $G\backslash X $ obtained by identifying all points in $X$ that are in the same orbit. $G\backslash X $ is equipped with the quotient topology: a subset $U\subseteq G\backslash X $ is open if and only if $\pi^{-1}(U)$ is open in $X$, where $\pi:X\to  G\backslash X$ is the quotient map.
 \end{definition}
 
 
 
 \begin{proposition}{}{}
-	For any continuous action of a topological group $G$ on a topological space $E$, the quotient map $p: E \rightarrow E / G$ is an open map.
+	For any continuous action of a topological group $G$ on a topological space $E$, the quotient map $p: E \rightarrow G\backslash E$ is an open map.
 \end{proposition}
 
 \begin{prf}
@@ -168,16 +164,11 @@
 $$
 g \cdot U=\{g \cdot x: x \in U\} .
 $$
-If $U \subseteq M$ is open, then $\pi^{-1}(\pi(U))$ is equal to the union of all sets of the form $g \cdot U$ as $g$ ranges over $G$. Since $p \mapsto g \cdot p$ is a homeomorphism, each such set is open, and therefore $\pi^{-1}(\pi(U))$ is open in $M$. Becaues $\pi$ is a quotient map, this implies that $\pi(U)$ is open in $M / G$, and therefore $\pi$ is an open map.
+If $U \subseteq M$ is open, then $\pi^{-1}(\pi(U))$ is equal to the union of all sets of the form $g \cdot U$ as $g$ ranges over $G$. Since $p \mapsto g \cdot p$ is a homeomorphism, each such set is open, and therefore $\pi^{-1}(\pi(U))$ is open in $M$. Becaues $\pi$ is a quotient map, this implies that $\pi(U)$ is open in $G\backslash M$, and therefore $\pi$ is an open map.
 \end{prf}
 
 
 
-\begin{definition}{Even Action}{}
-    Let $G$ be a topological group acting continuously on a topological space $E$. The action of $E$ is \textbf{even} if each point $y \in Y$ has some neighborhood $U$ such that $gU\cap U=\varnothing$ for all $g\in G-\{1_G\}$. In other words, each point has some neighborhood $U$ such that $U \cap gU \neq \varnothing$ implies $g=1_G$.
-\end{definition}
-
-If $G$ acts continuously and evenly on a topological space $E$, then each subgroup $H$ of $G$ also acts continuously and evenly on $E$.
 
 \section{Topological Ring}
 \begin{definition}{Topological Ring}{}
