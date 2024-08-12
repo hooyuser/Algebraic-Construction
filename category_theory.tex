@@ -2622,7 +2622,7 @@ The next result shows that functor categories inherit limits and colimits, defin
 
 
 
-\begin{example}{Colimit in $\mathsf{Set}$}{}
+\begin{example}{Colimit in $\mathsf{Set}$}{colimit_in_set_category}
     Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor. Define a relation $\sim^*$ on $\coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
     \[
         (i,x)\sim^* (j,y)\iff \text{there exists }\lambda:i\to j\text{ in }\mathrm{Hom}_\mathsf{J}(i,j)\text{ such that }F(\lambda)(x)=y.
@@ -2635,18 +2635,50 @@ The next result shows that functor categories inherit limits and colimits, defin
     \[
         F(i)\xrightarrow{\quad\iota_i\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\xrightarrow{\quad\pi\quad}\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim.
     \]
-    If $\mathsf{J}$ is a filtered category, then the equivalence relation $\sim$ has a explicit description: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
+\end{example}
+
+\begin{prf} 
+    It is straightforward to show
+    \[
+        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
+    \]
+    by checking the universal property of $\varinjlim F$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
+            \&   [-1.5em]                \&[-0em] C \& [-0em]                  \\[+1cm]
+            \&                   \& \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim \arrow[u, "f"', dash pattern=on 4pt off 2pt, draw=arrowRed]         \&                   \\[+0.2cm]
+        \& F(i) \arrow[ruu, draw=cyan, "h_i"]\arrow[ru, draw=arrowBlue, shorten >=-3.5pt, "\pi\circ \iota_i"' yshift=2.5pt]        \arrow[rr, "F(\lambda)"']\&   \& F(j)\arrow[luu, draw=cyan, "h_j"']\arrow[lu, draw=arrowBlue, shorten >=-3.7pt, "\pi\circ \iota_j" yshift=2.5pt] 
+        \end{tikzcd}
+    \]
+   First, we check that for any morphism $\lambda:i\to j$ in $\mathsf{J}$ and any $x\in F(i)$, we have
+   \[
+   \ell_i(x)= \pi\circ \iota_i(x)=[(i,x)]_\sim=[(j,F(\lambda)(x))]_\sim=\pi\circ \iota_j(F(\lambda)(x))=\ell_j\circ F(\lambda)(x).
+   \]
+   Suppose $(C,(h_i)_{i\in \mathrm{Ob}(\mathsf{J})})$ is a cone over $F$, then by the universal property of coproduct, there a unique map $g:\coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)\to C$ defined by $g(i,x)=h_i(x)$ such that $g\circ \iota_i =h_i$. Note that if $(i,x)\sim (j,y)$, then we can suppose there exists $\lambda:i\to j$ such that $F(\lambda)(x)=y$. Hence $h(i,x) = h_i(x)=h_j(F(\lambda)(x))=h_j(y)=
+   h(j,y)$. Then by the universal property of quotient set, there exists a unique map $f:\coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim\;\to C$ such that $f\circ \pi=g$. Thus we have
+   \[
+   f\circ \ell_i=f\circ \pi\circ \iota_i=g\circ \iota_i=h_i.
+   \]
+   What is left is to show that $f$ is unique. Suppose there exists another map $f':\coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim\;\to C$ such that 
+   \[
+   f'\circ \ell_i=f'\circ \pi\circ \iota_i=g\circ \iota_i=h_i.
+   \]
+   By the universal property of coproduct, we have $f'\circ \pi=g=f\circ \pi$. Since $\pi$ is surjective, there must be $f'=f$.
+\end{prf}
+
+\begin{example}{Filtered Colimit in $\mathsf{Set}$}{}
+    Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor and $\mathsf{J}$ is a filtered category, then 
+    the colimit $\varinjlim F$ has an explicit description
+    \begin{align*}
+        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim  
+    \end{align*}
+    where the equivalence relation $\sim$ is defined as follows: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
     \[
         (i,x)\sim (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
     \]
 \end{example}
-
 \begin{prf} 
-    It is easy to show 
-    \[
-        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim
-    \]
-    by checking the universal property of $\varinjlim F$. If $\mathsf{J}$ is a filtered category, first we can check 
+    If $\mathsf{J}$ is a filtered category, first we can check 
     \[
         (i,x)\approx (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
     \]
@@ -2656,7 +2688,6 @@ The next result shows that functor categories inherit limits and colimits, defin
     \]
     This implies $\backsimeq$ contains $\approx$. Therefore, $\approx$ is the smallest equivalence relation containing $\sim^*$, which means $\approx$ coincides with $\sim$.
 \end{prf}
-
 \begin{definition}{Connected Category}{}
     A category $\mathsf{C}$ is \textbf{connected} if it is nonempty and for any pair of objects $X,Y\in \mathrm{Ob}(\mathsf{C})$, there exists a zigzag of morphisms $(f_1,f_2,\cdots,f_{2n})$ connecting $X$ and $Y$ as follows
 \[
