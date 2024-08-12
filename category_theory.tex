@@ -2279,7 +2279,7 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             [\mathsf{J},\mathsf{C}]\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
-           F  \arrow[dd, "\theta"{name=L, left}] 
+           F  \arrow[dd, "\theta"{name=L, left}, Rightarrow] 
             \&[-25pt] \& [+10pt] 
             \& [-30pt]\varprojlim F\arrow[dd, "\varprojlim \theta"{name=R}] \\ [-10pt] 
             \&  \phantom{.}\arrow[r, "\varprojlim", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
@@ -2298,6 +2298,33 @@ G(i) \arrow[rr]                         \&                                      
     \end{tikzcd}
     \]
 \end{definition}
+
+\begin{definition}{$\varinjlim$ Functor}{}
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F:\mathsf{J}\to\mathsf{C}$, $\varinjlim F$ exists, then we have a functor
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            [\mathsf{J},\mathsf{C}]\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+           F  \arrow[dd, "\theta"{name=L, left}, Rightarrow] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]\varinjlim F\arrow[dd, "\varinjlim \theta"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\varinjlim", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+        G  \& \& \& \varinjlim G
+        \end{tikzcd}
+    \]
+    where $\varinjlim \theta$ is induced by the universal property of $\varinjlim F$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, background color=mydefinitbg]
+            \& \varinjlim F   \&                             \\[+10pt]
+F(i) \arrow[ru]\arrow[rr, black!35] \arrow[dd, "\theta_i"'] \&                                                                               \& F(j) \arrow[lu]\arrow[dd, "\theta_j"] \\[+10pt]
+            \& \varinjlim G                                       \&                             \\[+10pt]
+G(i) \arrow[ru]\arrow[rr]                         \&                                                                               \& G(j)\arrow[lu]      
+    % absulute arrow
+    \arrow[from=1-2, to=3-2, "\varinjlim \theta"', near end, crossing over]                  
+    \end{tikzcd}
+    \]
+\end{definition}
+
+
 
 \begin{proposition}{Diagonal is Left Adjoint to Limit: $\diagfunctor\dashv \varprojlim$}{}
     Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F\in[\mathsf{J},\mathsf{C}]$, $\varprojlim F$ exists, then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
