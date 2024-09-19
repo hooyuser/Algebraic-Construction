@@ -276,11 +276,8 @@ Let $A$ be set. Define a \textbf{string} over the $A$ to be a finite sequence of
     If $G$ acts on $X$ by $\sigma$, we say $(X,\sigma)$ is a \textbf{$G$-set}. If there is no ambiguity, we simply say $X$ is a $G$-set.
 \end{definition}
 
-The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have category isomorphism
-\begin{align*}
-    G\text{-}\mathsf{Set} & \stackrel{\sim}{\longrightarrow}[\mathsf{B}G, \mathsf{Set}] \\
-    \sigma                & \longmapsto \sigma(-)
-\end{align*}
+
+
 \begin{proposition}{Equivalent Definition of Group Actions}{}
     Let $G$ be a group and $X$ be a set. A group action of $G$ on $X$ can be alternatively defined as a map
     \begin{align*}
@@ -299,23 +296,13 @@ The $G$-sets and $G$-maps form a category $G\text{-}\mathsf{Set}$ and we have ca
 \end{proposition}
 
 We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
-\begin{example}{Trivial Group Action}{}
-    Let $G$ be a group and $X$ be a set. The \textbf{trivial group action} of $G$ on $X$ is defined as $\sigma_g=\mathrm{id}_X$ for all $g\in G$.
-\end{example}
 
-\begin{example}{Actions on $X$ Induce Actions on $2^X$}{acting_on_power_set}
-    If a group $G$ acts on a set $X$, then $G$ acts on the power set $2^X$ by
-    \[
-        g\cdot A=\{ g\cdot x\mid x\in A\}    .
-    \]
-\end{example}
-
-\begin{definition}{Equivariant Map}{}
-    Let $G$ be a group and $X,Y$ be $G$-sets. A map $f:X\to Y$ is called \textbf{equivariant} if for all $g\in G$ and $x\in X$, we have
+\begin{definition}{$G$-equivariant Map}{}
+    Let $G$ be a group and $(X,\sigma)$, $(Y,\sigma')$ be $G$-sets. A map $f:X\to Y$ is called \textbf{$G$-equivariant} if for all $g\in G$ and $x\in X$, we have
     \[
         f(g\cdot x)=g\cdot f(x)    .
     \]
-    Equivalently, $f$ is equivariant if it is a natural transformation $f:\sigma(-)\implies \sigma'(-)$
+    Equivalently, $f$ is $G$-equivariant if it is a natural transformation $f:\sigma(-)\implies \sigma'(-)$ such that for any $g\in G$, the following naturality diagram commutes
     \[
         \begin{tikzcd}[ampersand replacement=\&, column sep=1.7em, row sep=small]
             \mathsf{B}G  \& \bullet \arrow[rr, "g"]                         \&  \& \bullet                 \\
@@ -325,6 +312,35 @@ We say $X$ is a right $G$-set if $X$ is a left $G^{\mathrm{op}}$-set.
         \end{tikzcd}
     \]
 \end{definition}
+
+\begin{definition}{Category of $G$-sets}{}
+    The categories of left $G$-sets, denoted by $G\text{-}\mathsf{Set}$, are defined as follows:
+    \begin{itemize}
+        \item Objects: $G$-sets.
+        \item Morphisms: $G$-equivariant maps.
+        \item Composition of morphisms is the composition of functions.
+    \end{itemize}
+    $G\text{-}\mathsf{Set}$ can be identified with the functor category $[\mathsf{B}G,\mathsf{Set}]$, given by the following isomorphism of categories
+\begin{align*}
+    G\text{-}\mathsf{Set} & \stackrel{\sim}{\longrightarrow}[\mathsf{B}G, \mathsf{Set}] \\
+    (X,\sigma )               & \longmapsto \left(\bullet \rightarrow X,\;\, \sigma:G\to \mathrm{Aut}_{\mathsf{Set}}(X)\right)
+\end{align*}
+    
+\end{definition}
+
+
+\begin{example}{Trivial Group Action}{}
+    Let $G$ be a group and $X$ be a set. The \textbf{trivial group action} of $G$ on $X$ is defined as $\sigma_g=\mathrm{id}_X$ for all $g\in G$.
+\end{example} 
+
+
+\begin{example}{Actions on $X$ Induce Actions on $2^X$}{acting_on_power_set}
+    If a group $G$ acts on a set $X$, then $G$ acts on the power set $2^X$ by
+    \[
+        g\cdot A=\{ g\cdot x\mid x\in A\}    .
+    \]
+\end{example}
+
 
 \begin{definition}{Product of $G$-Sets}{}
     The \textbf{product} of two $G$-sets $X$ and $Y$ is defined as the set $X\times Y$ with the $G$-action
@@ -467,9 +483,26 @@ If $G$ acts on $X$, then $G$ acts on $G\backslash X$ trivially.
     \begin{enumerate}[(i)]
         \item $x\in X^G\iff \mathrm{Stab}_G(x)=G$.
         \item $\ker \left(G\to \mathrm{Aut}_{\mathsf{Set}}(X)\right)=\bigcap\limits_{x\in X}\mathrm{Stab}_G(x)$.
+        \item $\mathrm{Stab}_G(gx)=g\mathrm{Stab}_G(x)g^{-1}$ for any $g\in G$. Hence, $\{\mathrm{Stab}_G(x)\mid x\in X\}$ is a conjugacy class in $G$.
     \end{enumerate}
+    If $X \curvearrowleft G$ is a right action, then we have $\mathrm{Stab}_G(xg)=g^{-1}\mathrm{Stab}_G(x)g$ for any $g\in G$.
 \end{proposition}
-
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item 
+        $$
+        x \in X^G \iff \forall g \in G, gx = x \iff \mathrm{Stab}_G(x) = G.
+        $$
+        \item 
+        $$
+        g \in \ker \left(G \to \mathrm{Aut}_{\mathsf{Set}}(X) \right) \iff  \forall x \in X ,\; gx = x \iff g \in \bigcap_{x \in X} \mathrm{Stab}_G(x).
+        $$    
+        \item  Let $h \in \mathrm{Stab}_G(gx)$, meaning $h(gx) = gx$.
+        Applying $g^{-1}$ to both sides, we get $g^{-1}h(gx) = g^{-1}(gx)=x$. Thus, $g^{-1}hg \in \mathrm{Stab}_G(x)$, meaning $h \in g \mathrm{Stab}_G(x) g^{-1}$.
+        Conversely, if $h \in g \mathrm{Stab}_G(x) g^{-1}$, then $h = g k g^{-1}$ for some $k \in \mathrm{Stab}_G(x)$. Therefore, $h(gx) = g(kx) = gx$, so $h \in \mathrm{Stab}_G(gx)$.
+        Thus, $\mathrm{Stab}_G(gx) = g \mathrm{Stab}_G(x) g^{-1}$.
+    \end{enumerate}
+\end{proof}
 
 
 \begin{definition}{Faithful Group Action}{}
