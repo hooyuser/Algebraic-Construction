@@ -483,7 +483,12 @@ If $G$ acts on $X$, then $G$ acts on $G\backslash X$ trivially.
     \begin{enumerate}[(i)]
         \item $x\in X^G\iff \mathrm{Stab}_G(x)=G$.
         \item $\ker \left(G\to \mathrm{Aut}_{\mathsf{Set}}(X)\right)=\bigcap\limits_{x\in X}\mathrm{Stab}_G(x)$.
-        \item $\mathrm{Stab}_G(gx)=g\mathrm{Stab}_G(x)g^{-1}$ for any $g\in G$. Hence, $\{\mathrm{Stab}_G(x)\mid x\in X\}$ is a conjugacy class in $G$.
+        \item $\mathrm{Stab}_G(gx)=g\mathrm{Stab}_G(x)g^{-1}$ for any $g\in G$. Hence, we have a bijection between the $G$-orbit of $x$ and the conjugacy class of stabilizer subgroup $\mathrm{Stab}_G(x)$
+        \begin{align*}
+            Gx&\xlongrightarrow{\sim} \mathrm{Cl}(\mathrm{Stab}_G(x))\\
+            gx&\longmapsto  g\mathrm{Stab}_G(x)g^{-1}
+        \end{align*}
+        \item $\mathrm{Stab}_G(gx)=\mathrm{Stab}_G(x)\iff g\in \mathrm{N}_G(\mathrm{Stab}_G(x))$.
     \end{enumerate}
     If $X \curvearrowleft G$ is a right action, then we have $\mathrm{Stab}_G(xg)=g^{-1}\mathrm{Stab}_G(x)g$ for any $g\in G$.
 \end{proposition}
@@ -501,9 +506,12 @@ If $G$ acts on $X$, then $G$ acts on $G\backslash X$ trivially.
         Applying $g^{-1}$ to both sides, we get $g^{-1}h(gx) = g^{-1}(gx)=x$. Thus, $g^{-1}hg \in \mathrm{Stab}_G(x)$, meaning $h \in g \mathrm{Stab}_G(x) g^{-1}$.
         Conversely, if $h \in g \mathrm{Stab}_G(x) g^{-1}$, then $h = g k g^{-1}$ for some $k \in \mathrm{Stab}_G(x)$. Therefore, $h(gx) = g(kx) = gx$, so $h \in \mathrm{Stab}_G(gx)$.
         Thus, $\mathrm{Stab}_G(gx) = g \mathrm{Stab}_G(x) g^{-1}$.
+        \item  
+        \[
+            \mathrm{Stab}_G(gx)=\mathrm{Stab}_G(x)\iff g\mathrm{Stab}_G(x)g^{-1}= \mathrm{Stab}_G(x) \iff g\in \mathrm{N}_G(\mathrm{Stab}_G(x)).
+        \]
     \end{enumerate}
 \end{proof}
-
 
 \begin{definition}{Faithful Group Action}{}
     Let $G$ be a group acting on a set $X$. The action is called \textbf{faithful} if any of the following equivalent conditions holds
@@ -514,6 +522,8 @@ If $G$ acts on $X$, then $G$ acts on $G\backslash X$ trivially.
     \end{enumerate}
 \end{definition}
 
+For any group action, we can always make it faithful by quotienting out the kernel of $G\to \mathrm{Aut}_{\mathsf{Set}}(X)$.
+
 
 \begin{definition}{Free Group Action}{}
     Let $G$ be a group acting on a set $X$. The action is called \textbf{free} if any of the following equivalent conditions holds
@@ -523,7 +533,7 @@ If $G$ acts on $X$, then $G$ acts on $G\backslash X$ trivially.
     \end{enumerate}
 \end{definition}
 
-It is clear that a free action is faithful, but the converse does not hold in general.
+It is clear that a free action is faithful, but the converse does not hold in general. For example, the dihedral group $D_3$ acts on an equilateral triangle faithfully but not freely, since the reflections fix one vertex and swap the other two.
 
 \begin{definition}{Transitive Group Action}{}
     Let $G$ be a group acting on a set $X$. The action is called \textbf{transitive} if any of the following equivalent conditions holds
@@ -531,7 +541,7 @@ It is clear that a free action is faithful, but the converse does not hold in ge
         \item For any $x,y\in X$, there exists $g\in G$ such that $g\cdot x=y$.
         \item $X$ has only one orbit, i.e. $X= Gx$ for any $x\in X$.
     \end{enumerate}
-    If $G$ acts transitively on $X$, then $X$ is called a \textbf{homogeneous space} for $G$.
+    If $G$ acts transitively on $X$, then $X$ is called a \textbf{transitive $G$-set} or \textbf{homogeneous space for $G$}.
 \end{definition}
 
 The following proposition shows that we can understand a group action on a set $X$ by studying the group action on each $G$-orbit $Gx$ separately.
@@ -543,6 +553,98 @@ The following proposition shows that we can understand a group action on a set $
     \]
     which decomposes any $G$-set into coproduct of transitive $G$-sets.
 \end{proposition}
+
+\begin{proposition}{Properties of $G$-equivariant Maps between Transitive $G$-sets}{properties_of_equivariant_maps_between_transitive_sets}
+    Let $G$ be a group acting on a set $X$ and $Y$ transitively. Then we have
+    \begin{enumerate}[(i)]
+        \item Any $G$-equivariant map $f:X\to Y$ is uniquely determined by its value at one point $x\in X$:
+                \[
+                    f(g\cdot x)=g\cdot f( x),\quad \forall g\in G.
+                \]
+        \item If $X\ne \varnothing$, then any $G$-equivariant map $f:X\to Y$ is surjective.
+        \item Assume $x\in X$ and $y\in Y$. Then the following are equivalent:
+        \begin{enumerate}[a)]
+            \item There exists a unique $G$-equivariant map $f:X\to Y$ such that $f(x)=y$.
+            \item There exists a unique $G$-equivariant map $p:G/\mathrm{Stab}_G(x)\to G/\mathrm{Stab}_G(y)$ such that $p(\mathrm{Stab}_G(x))=\mathrm{Stab}_G(y)$.
+            \item $\mathrm{Stab}_G(x)\subseteq \mathrm{Stab}_G(y)$.
+        \end{enumerate}
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item For any $x'\in X$, we can assume $x'=g\cdot x$ for some $g\in G$. Since $f$ is $G$-equivariant, we have
+        \[
+            f(g\cdot x)=g\cdot f(x).
+        \]
+        \item Suppose $x\in X$, and $y=f(x)\in Y$. For any $y'\in Y$, we can assume $y'=g\cdot y$ for some $g\in G$. And we have
+        \[
+            f(g\cdot x)=g\cdot f(x)=g\cdot y=y'.
+        \]
+        \item a)$\implies$c). Suppose $f:X\to Y$ is a $G$-equivariant map such that $f(x)=y$. For any $g\in \mathrm{Stab}_G(x)$, we have
+        \[
+            gy=g f(x)=f(gx)=f(x)=y,
+        \]
+        which implies $g\in \mathrm{Stab}_G(y)$. Thus we show that $\mathrm{Stab}_G(x)\subseteq \mathrm{Stab}_G(y)$.
+
+        c)$\implies$a). suppose $\mathrm{Stab}_G(x)\subseteq \mathrm{Stab}_G(y)$. We can define $f:X\to Y$ by $f(g\cdot x)=g\cdot y$. It is well-defined since
+        \[
+            g_1\cdot x=g_2 \cdot x\implies g_2^{-1}g_1\in \mathrm{Stab}_G(x)\implies g_2^{-1}g_1\in \mathrm{Stab}_G(y)\implies g_1\cdot y=g_2\cdot y.
+        \]
+        a)$\iff$b). It is a direct consequence of \Cref{th:iso_stab_orbit}. 
+    \end{enumerate}
+\end{prf}
+
+
+\begin{corollary}{$G$-maps between Left Coset Spaces}{}
+    Suppose $H,K$ are subgroups of $G$. Then we know $G$ left acts on $G/H$ and $G/K$. 
+    \begin{enumerate}[(i)]
+        \item If $\alpha: G / H \longrightarrow G / K$ is a $G$-map, then $\alpha$ has the form $\alpha(g H)=g r K$, where the element $r \in G$ satisfies $H \subseteq rKr^{-1} $.
+        \item If there exists $r \in G$ such that $H \subseteq rK r^{-1} $, then the map $\alpha: G / H \longrightarrow G / K$ defined by $\alpha(g H)=g r K$ is a $G$-map.
+    \end{enumerate}
+\end{corollary}
+
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Suppose $\alpha: G / H \longrightarrow G / K$ is a $G$-map and $\alpha(H)=r K$. The equivariance condition gives $\alpha(g H)=g r K$. And By \Cref{th:properties_of_equivariant_maps_between_transitive_sets}, we have 
+        \[
+            H=\mathrm{Stab}_G(H)\subseteq \mathrm{Stab}_G(rK)=r\mathrm{Stab}_G(K)r^{-1}=rKr^{-1}.
+        \]
+    \item If there exists $r \in G$ such that 
+    \[ 
+        H=\mathrm{Stab}_G(H)\subseteq r\mathrm{Stab}_G(K)r^{-1}=\mathrm{Stab}_G(rK),
+    \]
+    then by \Cref{th:properties_of_equivariant_maps_between_transitive_sets}, there exists a unique $G$-map $\alpha:G/H\to G/K$ such that $\alpha(H)=rK$. Thus $\alpha(gH)=g rK$ for all $g\in G$.
+    \end{enumerate}
+\end{prf}
+
+\begin{proposition}{Transitive $G$-set Isomorphism Criterion}{}
+    Suppose $X$, $Y$ are transitive $G$-sets and $x\in X$, $y\in Y$. Then we have
+    \begin{enumerate}[(i)]
+        \item There exists a $G$-set isomorphism $f:X\xrightarrow{\sim} Y$ such that $f(x)=y$ if and only if $\mathrm{Stab}_G(x)=\mathrm{Stab}_G(y)$.
+        \item $X\cong Y$ as $G$-sets if and only if $\mathrm{Stab}_G(x)$ and $\mathrm{Stab}_G(y)$ are conjugate subgroups in $G$.
+    \end{enumerate}
+    
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Suppose there exists a $G$-set isomorphism $f:X\xrightarrow{\sim} Y$ such that $f(x)=y$. Then $f^{-1}:Y\xrightarrow{\sim} X$ is also a $G$-set isomorphism such that $f^{-1}(y)=x$. By \Cref{th:properties_of_equivariant_maps_between_transitive_sets}, we have both $\mathrm{Stab}_G(x)\subseteq \mathrm{Stab}_G(y)$ and $\mathrm{Stab}_G(y)\subseteq \mathrm{Stab}_G(x)$, which implies $\mathrm{Stab}_G(x)=\mathrm{Stab}_G(y)$.
+
+        Conversely, suppose $\mathrm{Stab}_G(x)=\mathrm{Stab}_G(y)$. By the previous proposition, there exists a unique $G$-equivariant map $f:X\to Y$ such that $f(x)=y$. There also exists a unique $G$-equivariant map $h:Y\to X$ such that $h(y)=x$. Since for any $g\in G$, we have
+        \[ 
+            h\circ f(g\cdot x)=h(g \cdot y)=g \cdot h(y)=g\cdot x,\quad f\circ h(g\cdot y)=f(g\cdot x)=g\cdot f(x)=g\cdot y,
+        \]
+        we know $h\circ f=\mathrm{id}_X$ and $f\circ h=\mathrm{id}_Y$. Thus $f$ is a $G$-set isomorphism.
+        \item Suppose $X\cong Y$ as $G$-sets. Then there exists a $G$-set isomorphism $f:X\xrightarrow{\sim} Y$. We can assume $f(x)=g\cdot y$ for some $g\in G$. By the previous proposition, we have
+        \[
+            \mathrm{Stab}_G(x)=\mathrm{Stab}_G(f(x))=\mathrm{Stab}_G(g\cdot y)=g\mathrm{Stab}_G(y)g^{-1}.
+        \]
+        Conversely, suppose $\mathrm{Stab}_G(x)$ and $\mathrm{Stab}_G(y)$ are conjugate subgroups in $G$. Then there exists $g\in G$ such that
+        \[
+            \mathrm{Stab}_G(x)=g\mathrm{Stab}_G(y)g^{-1}=\mathrm{Stab}_G(g\cdot y).
+        \]
+        By the previous proposition, we have a $G$-set isomorphism $f:X\xrightarrow{\sim} Y$ such that $f(x)=g\cdot y$. Thus $X\cong Y$ as $G$-sets.
+    \end{enumerate}
+\end{prf}
 
 \begin{example}{The Orbit Decomposition of Subgroup Action}{}
     Let $G$ be a group acting on a set $X$ with orbit decomposition
@@ -573,7 +675,7 @@ The following proposition shows that we can understand a group action on a set $
         \item The action is transitive and free.
         \item For any $x,y\in X$, there exists unique $g\in G$ such that $g\cdot x=y$.
     \end{enumerate}
-    If $G$ acts regularly on $X$, then $X$ is called a \textbf{principal homogeneous space} for $G$ or a $G$-\textbf{torsor}.
+    If $G$ acts regularly on $X$, then $X$ is called a \textbf{principal homogeneous space for $G$} or a $G$-\textbf{torsor}.
 \end{definition}
 
 \subsection{Coset}
@@ -606,13 +708,16 @@ The following proposition shows that we can understand a group action on a set $
     The set of all left cosets of $H$ is denoted by $G/H$, called the left coset space of $G$ modulo $H$. $G/H$ is the orbit space of $G$ under the right multiplication action of $H$.
 \end{definition}
 
-\begin{example}{$G$ Acts on $G/H$ Transitively}{}
+\begin{example}{$G$ Acts on $G/H$ Transitively}{G_act_on_coset_space_transitively}
     Let $G$ be a group and $H$ be a subgroup of $G$. $G$ acts on $G/H$ through
     \begin{align*}
         G & \longrightarrow \mathrm{Aut}(G/H) \\
         g & \longmapsto  (xH\longmapsto gxH)
     \end{align*}
-    For any $xH,yH\in G/H$, we have $yH=gxH$ for some $g=yx^{-1}\in G$. Thus $G$ acts on $G/H$ transitively.
+    For any $xH,yH\in G/H$, we have $yH=gxH$ for some $g=yx^{-1}\in G$. Thus $G$ acts on $G/H$ transitively. The stabilizer subgroup of $xH$ is given by
+    \[
+        \mathrm{Stab}_G(xH)=xHx^{-1}.
+    \]
 \end{example}
 
 \begin{definition}{Right Cosets}{}
@@ -643,9 +748,8 @@ The following proposition shows that we can understand a group action on a set $
         F:G/\mathrm{Stab}_G(x)          & \longrightarrow Gx   \\
         g\hspace{1pt}\mathrm{Stab}_G(x) & \longmapsto g\cdot x
     \end{align*}
-    is a $G$-set isomorphism.
+    is a $G$-set isomorphism. The transitive $G$-set $G/\mathrm{Stab}_G(x)$ is defined in \Cref{ex:G_act_on_coset_space_transitively}.
 \end{proposition}
-
 \begin{prf}
     The map is well-defined since for any $h\in \mathrm{Stab}_G(x)$, we have $(gh)\cdot x=g\cdot (h\cdot x)=g\cdot x$. The map is a $G$-set homomorphism since for any $g_1,g_2\in G$,
     \begin{align*}
@@ -1016,21 +1120,6 @@ $\Psi_S$ is obtained from restriction $\Psi_S:\mathrm{N}_G(S)\hookrightarrow G\x
 \end{prf}
 
 
-\begin{proposition}{$G$-maps between Left Coset Spaces}{}
-    Suppose $H,K$ are subgroups of $G$. Then we know $G$ left acts on $G/H$ and $G/K$. A $G$-map $\alpha: G / H \longrightarrow G / K$ has the form $\alpha(g H)=g r K$, where the element $r \in G$ satisfies $r^{-1} H r\subseteq K$.
-\end{proposition}
-
-\begin{prf}
-    Note
-    \[
-        \alpha(g H)=\alpha(g 1_G H)=g \alpha(1_G H).
-    \]
-    Taking $\alpha(1_G H)=r K$, then we obtain $\alpha(g H)=g r K$. Since for all $h\in H$ we have
-    $$
-        r K=\alpha(h1_G H)=h \alpha(1_G H)=hr K\implies r^{-1} h r \in K,
-    $$
-    we show $r^{-1} H r\subseteq K$.
-\end{prf}
 
 
 \section{Symmetric Groups}
