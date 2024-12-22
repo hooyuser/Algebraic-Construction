@@ -96,6 +96,10 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
     \end{enumerate}
 \end{proposition}
 
+\begin{definition}{Faithful Module}{}
+    Let $R$ be a ring, and let $M$ be a left $R$-module. We say $M$ is \textbf{faithful} if $\operatorname{Ann}_R(M)=0$, or equivalently, the map $R\to \mathrm{End}_{\mathsf{Ab}}(M)$ is injective.
+\end{definition}
+
 
 \section{Construction}
 \subsection{Free Object}
@@ -174,6 +178,43 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
 
 
 \subsection{Localization}
+
+\begin{proposition}{}{}
+    Let $R$ be a commutative ring and $S \subseteq R$ be a multiplicative subset. The category of $S^{-1} R$ modules is equivalent to the category of $R$-modules $M$ with the property that every $s \in S$ acts as an automorphism on $M$. The following functor $F$ gives a equivalence of categories: 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            S^{-1} R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\text{ where }S\text{ act as automorphisms}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] M\arrow[dd, "f"{name=R}] \&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "F", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  N\&
+        \end{tikzcd}
+        \]
+\end{proposition}
+
+\begin{prf}
+    Assume $S$ is a multiplicative subset of communitative ring $R$ and the localization map is $\varphi:R\to S^{-1}R$. Then $R$ can acts on $S^{-1}R$-module $M$ through 
+    \[
+        R\xrightarrow{\varphi}S^{-1}R\xrightarrow{\sigma_M'}\mathrm{End}_{\mathsf{Ab}}(M),
+    \]
+    which enables us to regard $M$ as an $R$-module. Furthermore, since 
+    \[
+        \sigma_M'(\varphi(S))\subseteq \sigma_M' \left(\left(S^{-1}R\right)^\times\right)\subseteq \left(\mathrm{End}_{\mathsf{Ab}}(M)\right)^\times=\mathrm{Aut}_{\mathsf{Ab}}(M),
+    \]
+    every $s \in S$ acts as an automorphism on $M$.\\
+    Conversely, if $M$ is an $R$-module such that every $s\in S$ acts as an automorphism on $M$, i.e. $\sigma_M:R\to\mathrm{End}_{\mathsf{Ab}}(M)$ satisfies $\sigma_M(S)\subseteq \mathrm{Aut}_{\mathsf{Ab}}(M)$, then by unversal property
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+         
+            S^{-1}R\arrow[rr, "\sigma_M'", dashed]\&\& \mathrm{End}_{\mathsf{Ab}}(M) \&  \\             
+            \&R \arrow[ru, "\sigma_M"'] \arrow[lu, "\varphi"] \&                          
+        \end{tikzcd}
+    \end{center}
+    we can define a $S^{-1}R$-module structure on $M$ by lifting $\sigma_M$ to $\sigma_M'$. It is easy to check that these two functors are quasi-inverse to each other.
+\end{prf}
+
+
 \begin{definition}{Localization of a Module}{}
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. The \textbf{localization of the module} $M$ by $S$, denoted $S^{-1}M$, is an $S^{-1}R$-module that is constructed exactly as the localization of $R$, except that the numerators of the fractions belong to $M$. That is, as a set, it consists of equivalence classes, denoted $\frac{m}{s}$, of pairs $(m, s)$, where $m\in M$ and $s\in S$, and two pairs $(m, s)$ and $(n, t)$ are equivalent if there is an element $u$ in $S$ such that
     \[u(sn-tm)=0.\]
@@ -271,16 +312,22 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
     we see that $\frac{m}{s}\in \operatorname{im}S^{-1}(u)$, which means $\operatorname{im}S^{-1}(u)=\ker S^{-1}(v)$. Hence $S^{-1}$ is exact.
 \end{prf}
 
-\begin{proposition}{Localization Respects Quotients}{}
-    Let $M$ be an $R$-module and $N$ be a submodule of $M$. Then we have an isomorphism $S^{-1}(M/N)\cong (S^{-1}M)/(S^{-1}N)$.
+\begin{proposition}{Localization Respects Quotients}{localization_respects_quotients}
+    Let $M$ be an $R$-module and $N$ be a submodule of $M$. Then we have an isomorphism $S^{-1}(M/N)\cong (S^{-1}M)/(S^{-1}N)$ and the following commutative diagram
+    \[
+        \begin{tikzcd}
+            M \arrow[r, "\pi_M"] \arrow[d, "S^{-1}"'] &[+5em] M/N \arrow[d, "S^{-1}"]              \\[+2em]
+            S^{-1}M \arrow[r, "\pi_{S^{-1}N}"']       & S^{-1}(M/N)\cong (S^{-1}M)/(S^{-1}N)
+            \end{tikzcd}
+    \]
 \end{proposition}
 
 \begin{prf}
-    From the exact sequence
+    Since localization is exact, from the exact sequence
     \[
         0\longrightarrow N\longrightarrow M\longrightarrow M/N\longrightarrow 0,
     \]
-    we have the exact sequence
+    we obtain the following exact sequence
     \[
         0\longrightarrow S^{-1}N\longrightarrow S^{-1}M\longrightarrow S^{-1}(M/N)\longrightarrow 0.
     \]

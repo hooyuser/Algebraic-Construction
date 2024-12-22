@@ -212,6 +212,19 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     \end{enumerate}
 \end{definition}
 
+\begin{example}{Left Multiplication Endomorphism}{}
+    Let $R$ be a commutative ring and $A$ be an $R$-Algebra. Suppose $A$ is a free $R$-module of finite rank $n$. Given any $a\in A$, the left multiplication endomorphism $l_a\in\mathrm{End}_{R\text{-}\mathsf{Mod}}(A)$ is defined by
+    \begin{align*}
+        l_a:A &\longrightarrow A\\
+        x &\longmapsto ax.
+    \end{align*}
+\end{example}
+
+
+\begin{definition}{Trace of Elements in $R$-algebra}{}
+    Let $A$ be an $R$-algebra. The \textbf{trace} of an element $a\in A$ is defined as the trace of the left multiplication endomorphism $l_a\in\mathrm{End}_{R\text{-}\mathsf{Mod}}(A)$.
+\end{definition}
+
 
 
 
@@ -230,32 +243,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
             X\arrow[u, "\iota"] \arrow[ru, "f"'] \&  
         \end{tikzcd}
     \end{center}
-    The free $R$-module $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$ can be contructed as the polynomial algebra $R[X]$.
-\end{definition}
-
-\begin{definition}{Finite-type Commutative Algebra}{}
-    Let $R\to A$ be a commutative ring homomorphism. We say $A$ is a \textbf{finite-type $R$-algebra}, or that $R\to A$ is \textbf{of finite type}, if one of the following equivalent conditions holds:
-    \begin{enumerate}[(i)]
-        \item there exists a finite set of elements $a_1,\cdots,a_n$ of A such that every element of $A$ can be expressed as a polynomial in $a1,\cdots,an$, with coefficients in $K$.
-        \item there exists a finite set $X$ such that $A\cong R[X]/I$ as $R$-algebra where $I$ is an ideal of $R[X]$.
-    \end{enumerate}
-    
+    The free commutative $R$-algebra $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$ can be contructed as the polynomial algebra $R[X]$.
 \end{definition}
 
 
-\begin{proposition}{Finite Generation Implies Finite Type}{}
-    Let $A$ be a $R$-algebra. If $A$ is finitely generated as an $R$-module, then $A$ is a finite-type $R$-algebra.
-\end{proposition}
-
-\begin{prf}
-    This holds because if each element of $A$ can be expressed as an $R$-linear combination of finitely many elements of $A$, then each element of $A$ can also be expressed as a polynomial in finitely many elements of $A$ with coefficients in $R$.
-
-    An alternative proof can be given by utilizing the universal property of the free contruction. Suppose $A$ is finitely generated as an $R$-module. Then there exists some a finite set $X=\{x_1,\cdots,x_n\}$ and a surjective $R$-linear map $\varphi:R^{\oplus X}\to A$. Define $f=\varphi\circ \iota$, where $\iota:X\to R^{\oplus X}$ is the inclusion map. 
-     \begin{center}
-        \begin{tikzcd}[ampersand replacement=\&]
-            R^{\oplus X}\arrow[r, dashed, "\exists !\,\widetilde{j}"]  \&R[X]\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A\\[0.3cm]
-            \& X\arrow[ul, "\iota"] \arrow[u, "j"] \arrow[ru, "f:=\varphi\circ \iota"'] \&  
-        \end{tikzcd}
-    \end{center}
-    The universal property of free $R$-module induces a unique $R$-linear map $\widetilde{j}:R^{\oplus}\to R[X]$ such that $j=\widetilde{j}\circ \iota$. And the universal property of free commutative $R$-algebra induces a unique $R$-algebra homomorphism $\widetilde{f}:R[X]\to A$ such that $f=\widetilde{f}\circ j$. Note $f=\varphi\circ \iota=\left(\widetilde{f}\circ \widetilde{j}\right)\circ \iota$. By the uniqueness of the universal property of $R^{\oplus}$, we have $\widetilde{f}\circ \widetilde{j}=\varphi$. Since $\widetilde{f}\circ \widetilde{j}$ is surjective, $\widetilde{f}$ must be surjective, which implies $A$ is a finite-type $R$-algebra.
-\end{prf}

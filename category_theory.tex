@@ -2536,7 +2536,7 @@ colimits.
 
 
 \begin{proposition}{}{}
-    If $F:\mathsf{C}\to \mathsf{D}$ creates limits for $\mathcal{K}$ and $\varprojlim F\circ K$ exists for all $K\in\mathcal{K}$, then $\varprojlim K$ exists for all $K\in\mathcal{K}$ and $F$ preserves limits for $\mathcal{K}$.
+    Suppose $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$. If $F:\mathsf{C}\to \mathsf{D}$ creates limits for $\mathcal{K}$ and $\varprojlim F\circ K$ exists for all $K\in\mathcal{K}$, then $\varprojlim K$ exists for all $K\in\mathcal{K}$ and $F$ preserves limits for $\mathcal{K}$.
 \end{proposition}
 
 \begin{prf}
@@ -2598,10 +2598,6 @@ The next result shows that functor categories inherit limits and colimits, defin
 \end{proposition}
 
 
-
-\begin{proposition}{Limits Commute with Limits}{}
-    Let $\mathsf{C}$ be a category and $F:\mathsf{I}\times \mathsf{J}\to\mathsf{C}$ be a diagram. If $\varprojlim\limits_{i\in \mathsf{I}}\varprojlim\limits_{j\in \mathsf{J}}F(i,j)$ and $\varprojlim\limits_{j\in \mathsf{J}}\varprojlim\limits_{i\in \mathsf{I}}F(i,j)$ exist, then they are naturally isomorphic.
-\end{proposition}
 
 
 \begin{definition}{Exact Functor}{exact_functor}
@@ -2776,6 +2772,113 @@ Note that $d\in \mathrm{Ob}\left(\mathsf{D}\right)$ is a final object in $\maths
 \begin{definition}{Initial Functor}{}
     A functor $F:\mathsf{C}\to\mathsf{D}$ is \textbf{initial} if the opposite functor $F^{\text{op}}:\mathsf{C}^{\text{op}}\to\mathsf{D}^{\text{op}}$ is final.
 \end{definition}
+
+
+\begin{proposition}{Limits Commute with Limits}{}
+    Let $F: \mathsf{I}\times \mathsf{J}\to \mathsf{C}$ be a functor. Suppose for each $i\in \mathrm{Ob}\left(\mathsf{I}\right)$, the limit of the diagram $F(i,-):\mathsf{J}\to \mathsf{C}$ exists and is denoted by $F_{i,\infty}:=\varprojlim F(i,-)$. Define a diagram $F_{-,\infty}:\mathsf{I}\to \mathsf{C}$ as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{I}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            i  \arrow[dd, "\lambda"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]  \varprojlim F(i,-)   \arrow[dd, "F_{-,\infty}(\lambda)"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "F_{-,\infty}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            i'  \& \& \& \varprojlim F(i',-)
+        \end{tikzcd}
+    \]    
+    where $F_{-,\infty}(\lambda)$ is induced by the universal property of $\varprojlim F(i', -)$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, background color=mypropbg!10]
+            \& \varprojlim F(i,-) \arrow[ld] \arrow[rd] \&                             \\[+10pt]
+F(i,j) \arrow[rr, black!35] \arrow[dd, "{F(\lambda, \mathrm{id}_j)}"'] \&                                                                               \& F(i,j') \arrow[dd, "{F(\lambda, \mathrm{id}_{j'})}"] \\[+10pt]
+            \& \varprojlim F(i', -)\arrow[ld]  \arrow[rd]                                      \&                             \\[+10pt]
+F(i',j) \arrow[rr]                         \&                                                                               \& F(i', j')   
+    % absulute arrow
+    \arrow[from=1-2, to=3-2, "F_{-,\infty}(\lambda)"', near end, crossing over]                  
+    \end{tikzcd}
+    \]
+    Then $\varprojlim F_{-,\infty}$ exists if and only if $\varprojlim F$ exists. Moreover, if $\varprojlim F$ exists, we have natural isomorphism
+    \[
+     \varprojlim F\cong \varprojlim F_{-,\infty}.
+    \]
+\end{proposition}
+\begin{prf}
+    For any cone  
+    $$
+    h=\left(c\xlongrightarrow{h_i} F_{i,\infty}\right)_{i \in\mathrm{Ob}\left(\mathsf{I}\right)}\in \mathrm{Ob}\left(\mathsf{Cone}\left(\mathsf{C}, \varprojlim F_{-,\infty}\right)\right),
+    $$
+    we can construct a cone
+    $$
+    \phi(h):=\left( c\xlongrightarrow{h_i} F_{i,\infty}\xlongrightarrow{\pi_{i,j}} F(i,j)\right)_{(i,j) \in\mathrm{Ob}\left(\mathsf{I}\times \mathsf{J}\right)}\in \mathrm{Ob}\left(\mathsf{Cone}\left(\mathsf{C}, \varprojlim F\right)\right).
+    $$
+    To verify it is a cone, we need to check for any morphism $(\lambda, \mu):(i,j)\to (i',j)$ in $\mathsf{I}\times \mathsf{J}$, the following diagram commutes
+    \[
+        \begin{tikzcd}
+            & c \arrow[ld, "h_i"'] \arrow[rd, "h_{i'}"] &                                            \\[+10pt]
+{F_{i,\infty}} \arrow[d, "{\pi_{i,j}}"'] &                                           & {F_{i',\infty}} \arrow[d, "{\pi_{i',j'}}"] \\[+10pt]
+{F(i,j)} \arrow[rr, "{F(\lambda,\mu)}"'] &                                           & {F(i',j')}                                
+\end{tikzcd}
+\]
+Note that $F(\lambda,\mu)= F(\mathrm{id}_{i'},\mu)\circ F(\lambda,\mathrm{id}_{j'})$. It is sufficient to show the following diagram commutes
+    \[
+        \begin{tikzcd}
+            {F(i,j)} \arrow[rrrr, "{F(\lambda,\mathrm{id}_{j'})}"] \arrow[dddd, "{F(\mathrm{id}_i,\mu)}"'] &                                                                                                               &                                           &                                                                           & {F(i',j)} \arrow[dddd, "{F(\mathrm{id}_{i'},\mu)}"] \\
+                                                                                                           &                                                                                                               & c \arrow[ld, "h_i"'] \arrow[rd, "h_{i'}"] &                                                                           &                                                     \\
+                                                                                                           & {F_{i,\infty}} \arrow[rr, "{F_{-,\infty}(\lambda)}"'] \arrow[luu, "{\pi_{i,j}}"'] \arrow[ldd, "{\pi_{i,j'}}"] &                                           & {F_{i',\infty}} \arrow[ruu, "{\pi_{i',j}}"] \arrow[rdd, "{\pi_{i',j'}}"'] &                                                     \\
+                                                                                                           &                                                                                                               &                                           &                                                                           &                                                     \\
+            {F(i,j')} \arrow[rrrr, "{F(\lambda,\mathrm{id}_{j'})}"']                                       &                                                                                                               &                                           &                                                                           & {F(i',j')}                                         
+            \end{tikzcd}
+    \]
+
+    \noindent Conversely, for any cone
+    $$
+    g=\left( c \xlongrightarrow{g_{i,j}} F(i,j)\right)_{(i,j) \in\mathrm{Ob}\left(\mathsf{I}\times \mathsf{J}\right)}\in \mathrm{Ob}\left(\mathsf{Cone}\left(\mathsf{C}, \varprojlim F\right)\right),
+    $$
+     we can construct a cone
+    $$
+    \psi(g):=\left( c\xlongrightarrow{q_i} F_{i,\infty}\right)_{i \in\mathrm{Ob}\left(\mathsf{I}\right)}\in \mathrm{Ob}\left(\mathsf{Cone}\left(\mathsf{C}, \varprojlim F_{-,\infty}\right)\right).
+    $$
+    through the universal property of $\varprojlim F(i,-)$
+    \[
+        \begin{tikzcd}
+            & c \arrow[d, "q_i"', dashed] \arrow[ldd, "{g_{i,j}}"'] \arrow[rdd, "{g_{i,j'}}"] &           \\[+20pt]
+            & {\varprojlim F(i,-)} \arrow[ld, "{\pi_{i,j}}"] \arrow[rd, "{\pi_{i,j'}}"']            &           \\ [+5pt]
+{F(i,j)} \arrow[rr, "{F(\mathrm{id}_i,\mu)}"'] &                                                                                 & {F(i,j')}
+\end{tikzcd}
+\]
+
+
+
+\end{prf}
+
+\begin{proposition}{Colimits Commute with Colimits}{}
+    Let $F: \mathsf{I}\times \mathsf{J}\to \mathsf{C}$ be a functor. Suppose for each $i\in \mathrm{Ob}\left(\mathsf{I}\right)$, the colimit of the diagram $F(i,-):\mathsf{J}\to \mathsf{C}$ exists and is denoted by $F_{i,\infty}:=\varinjlim F(i,-)$. Define a diagram $F_{-,\infty}:\mathsf{I}\to \mathsf{C}$ as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{I}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            i  \arrow[dd, "\lambda"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]  \varinjlim F(i,-)   \arrow[dd, "F_{-,\infty}(\lambda)"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "F_{-,\infty}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            i'  \& \& \& \varinjlim F(i',-)
+        \end{tikzcd}
+    \]    
+    where $F_{-,\infty}(\lambda)$ is induced by the universal property of $\varinjlim F(i,-)$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, background color=mypropbg!10]
+            \& \varinjlim F(i,-)   \&                             \\[+10pt]
+F(i,j) \arrow[ru]\arrow[rr, black!35] \arrow[dd, "{F(\lambda, \mathrm{id}_j)}"'] \&                                                                               \& F(i,j') \arrow[lu]\arrow[dd, "{F(\lambda, \mathrm{id}_{j'})}"] \\[+10pt]
+            \& \varinjlim F(i', -)                                     \&                             \\[+10pt]
+F(i',j) \arrow[ru]\arrow[rr]                         \&                                                                               \& F(i', j')\arrow[lu]      
+    % absulute arrow
+    \arrow[from=1-2, to=3-2, "F_{-,\infty}(\lambda)"', near end, crossing over]                  
+    \end{tikzcd}
+    \]
+    Then $\varinjlim F_{-,\infty}$ exists if and only if $\varinjlim F$ exists. Moreover, if $\varinjlim F$ exists, we have natural isomorphism
+    \[
+     \varinjlim F\cong \varinjlim F_{-,\infty}.
+    \]
+\end{proposition}
 
 
 

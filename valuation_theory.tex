@@ -174,3 +174,184 @@ which satisfies the following properties for all $a, b$ in $K$ :
     \]
 \end{prf}
 
+\section{Absolute Value of Field}
+
+\begin{definition}{Absolute Value}{}
+    An \textbf{absolute value} on a field \( K \) is a function \( |\cdot| : K \to \mathbb{R}_{\geq 0} \) satisfying the following conditions:
+
+\begin{enumerate}[(i)]
+    \item For any \( x \in K \), \( |x| = 0 \iff x = 0 \).
+    \item For any \( x, y \in K \), \( |xy| = |x| \cdot |y| \).
+    \item For any \( x, y \in K \), \( |x + y| \leq |x| + |y| \).
+\end{enumerate}
+
+A field equipped with an absolute value is called a \textbf{normed field}, denoted by \( (K, |\cdot|) \). 
+\end{definition}
+
+A normed field $(K, |\cdot|)$ induces a metric $d(x, y) = |x - y|$ on $K$, making it a Hausdorff topological field. 
+
+\begin{definition}{Trivial Absolute Value}{}
+    An absolute value $|\cdot|$ on a field $K$ is called \textbf{trivial} if 
+    \[
+|x| = \begin{cases}
+    0 & \text{if } x = 0, \\
+    1 & \text{if } x \neq 0.
+\end{cases}
+\]
+    
+\end{definition}
+
+\begin{proposition}{Properties of Absolute Value}{}
+    Let \( (K, |\cdot|) \) be a normed field. Then we have the following properties:
+\begin{enumerate}[(i)]
+    \item $|1| = \left|-1\right| = 1$.
+    \item $|x| = \left|-x\right|$ for all \( x \in K \).
+    \item $|n\cdot 1| \le n$ for all \( n \in \mathbb{Z} \).
+\end{enumerate}
+\end{proposition}
+
+\begin{definition}{Equivalent Absolute Value}{}
+    Two absolute values on a field are said to be \textbf{equivalent} if as topological spaces they are homeomorphic. 
+\end{definition}
+
+\begin{proposition}{Equivalent Characterization of Equivalent Absolute Values}{}
+    Let $K$ be a field and $|\cdot|$ and $ |\cdot|_\star $ are two nontrivial absolute values on $K$. Then the following are equivalent:
+\begin{enumerate}[(i)]
+    \item $|\cdot|$ and $ |\cdot|_\star $ are equivalent absolute values.
+    \item For any $x\in K$, $|x| < 1 \implies |x|_\star < 1$.
+    \item There exists $s > 0$ such that $|\cdot| = |\cdot|_\star^s$.
+\end{enumerate}
+    
+\end{proposition}
+\begin{proof}
+    (i) $\implies$ (ii): For any $x\in K$ such that $|x|<1$, we have 
+    \[  
+    \lim_{n\to \infty} |x^n| =\lim_{n\to \infty} |x|^n= 0 ,
+    \]
+    which implies the sequence $\left(x^n\right)_{n=1}^\infty$ converges to 0 in $(K, |\cdot|)$. Since $(K, |\cdot|)$ and $(K, |\cdot|_\star)$ as topological spaces are homeomorphic, the sequence $\left(x^n\right)_{n=1}^\infty$ also converges to 0 in $(K, |\cdot|_\star)$, which means 
+    \[
+        \lim_{n\to \infty} |x|_\star^n=\lim_{n\to \infty} |x^n|_\star = 0.
+\]
+    Therefore, $|x|_\star<1$.
+
+    (ii) $\implies$ (iii): Assume condition (ii): $|x| < 1 \implies |x|_\star < 1$ for all $x \in K$. By considering the inverse $x^{-1}$, we also conclude that $|x| > 1 \implies |x|_\star > 1$.
+
+    Let $y \in K$ such that $|y| > 1$. For any $x \in K^\times-\{1\}$, there exists a real number $r(x)$ such that
+    \[
+    |x| = |y|^{r(x)},
+    \]
+    with $r(x) \neq 0$.
+    
+    Consider a sequence of rational numbers $\left(\frac{m_i}{n_i}\right)_{i=1}^\infty$ such that $\frac{m_i}{n_i} > r(x)$, $n_i > 0$, and
+    \[
+    \lim_{i \to \infty} \frac{m_i}{n_i} = r(x).
+    \]
+    Then by assumption (ii), we have
+    \[
+    |x| < |y|^{m_i / n_i}\implies
+    \left| \frac{x^{n_i}}{y^{m_i}} \right| < 1\implies \left| \frac{x^{n_i}}{y^{m_i}} \right|_\star < 1\implies
+    |x|_\star < |y|_\star^{m_i / n_i}.
+    \]
+    
+   
+    Taking the limit as $i \to \infty$, we obtain
+    \[
+    |x|_\star \leq |y|_\star^{r(x)}.
+    \]
+    
+    Similarly, by considering a sequence of rational numbers $\left(\frac{m_i}{n_i}\right)_{i=1}^\infty$ such that $\frac{m_i}{n_i} < r(x)$ and $\lim_{i \to \infty} \frac{m_i}{n_i} = r(x)$, we can show that
+    \[
+    |x|_\star \geq |y|_\star^{r(x)}.
+    \]
+    Thus, we conclude that
+    \[
+    |x|_\star = |y|_\star^{r(x)}.
+    \]
+    Taking the logarithm of both sides, we find
+    \[
+    \log |x| = r(x) \log |y| \quad \text{and} \quad \log |x|_\star = r(x) \log |y|_\star.
+    \]
+    Dividing these equations yields
+    \[
+    \frac{\log |x|}{\log |x|_\star} = \frac{\log |y|}{\log |y|_\star}.
+    \]
+    Take $t=\frac{\log |y|}{\log |y|_\star} > 0$. We conclude that for all $x \in K$, $|x| = |x|_\star^t$. This completes the proof.
+
+    (iii) $\implies$ (i): Since $|\cdot| = |\cdot|_\star^s$, we can prove that the identity map $f: (K, |\cdot|)\to (K, |\cdot|_\star)$ is a homeomorphism by checking that both $f$ and $f^{-1}$ are continuous. For any $\epsilon$-ball $B_{|\cdot|_\star}(x,\epsilon)$, we have
+    \[
+    f^{-1}(B_{|\cdot|_\star}(x,\epsilon)) = B_{|\cdot|}(x,\epsilon^{1/s}),
+    \]
+    which is open in $(K, |\cdot|)$. Thus $f$ is continuous. Similarly, $f^{-1}$ is continuous.
+\end{proof}
+
+\begin{definition}{Places of a Field}{}
+    Let $K$ be a field. A \textbf{place} on $K$ is an equivalence classes of non-trivial absolute values on $K$. The set of all places on a field $K$ is denoted by $\mathtt{pl}_K$.
+\end{definition}
+
+\begin{definition}{Archimedean Absolute Value}{}
+    An absolute value is called \textbf{Archimedean} if the set
+    \[
+    \{|n| : n \in \mathbb{Z}\}
+    \] 
+    is unbounded in $\mathbb{R}$ equipped with the Euclidean topology. Otherwise, it is called \textbf{non-Archimedean}.
+\end{definition}
+
+
+\begin{example}{Absolute Value Induced by Harr Measure on Locally Compact Hausdorff Topological Field}{}
+    Let $K$ be a locally compact Hausdorff topological field. Since the additive group $(K, +)$ is a locally compact Hausdorff group, a Haar measure $\mu $ can be defined on it. Using the Haar measure, an absolute value 
+    $$ 
+    |\cdot| : a \longmapsto |a| = \frac{\mu(aX)}{\mu(X)} 
+    $$ 
+    can be defined on the field $K$. The topology induced by this absolute value coincides with the original topology of $K$.
+\end{example}
+
+\begin{proposition}{Classification of Non-discrete, Locally Compact Hausdorff Topological Fields}{}
+    Let $K$ be a non-discrete, locally compact Hausdorff topological field. There are exactly three possibilities for $K$:
+\begin{enumerate}[(i)]
+    \item Archimedean fields: $\mathbb{R}$ and $\mathbb{C}$.
+    \item $p$-adic number fields: finite extensions of $\mathbb{Q}_p$. These are non-Archimedean fields of characteristic 0.
+    \item Function fields over a finite field $\mathbb{F}_q$: finite extensions of the field of formal Laurent series $\mathbb{F}_q(\!(x)\!)$, where $q = p^n$ is a power of a prime. These are non-Archimedean fields of characteristic $p$.
+\end{enumerate}
+\end{proposition}
+
+
+\begin{definition}{Local Field}{}
+    A \textbf{local field} is a non-discrete, locally compact Hausdorff topological field.
+\end{definition}
+
+
+\begin{definition}{Completion of a Normed Field}{}
+    Let \( (K, |\cdot|) \) be a normed field. The \textbf{completion} of \( K \) with respect to the absolute value \( |\cdot| \) is the Cauchy completion of the metric space \( (K, d) \), where \( d(x, y) = |x - y| \).
+\end{definition}
+
+The completion of a normed field is functorial, i.e. it is a functor from the category of normed fields to the category of complete normed fields.
+
+\begin{definition}{Global Field}{}
+    Let $K$ be a field. $K$ is called a \textbf{global field} if it satisfies the following properties:
+    \begin{enumerate}[(i)]
+        \item the completion of $K$ with respect to every place on $K$ is a local field
+        \item product formula:
+        \[
+        \prod_{v\in \mathtt{pl}_K} |x|_v = 1.
+        \]
+    \end{enumerate}
+    It can be proven that there are exactly two types of global fields:
+
+\begin{enumerate}[(i)]
+    \item Number fields: finite extensions of $\mathbb{Q}$.
+    \item Function fields: finite extensions of $\mathbb{F}_q(t)$.
+\end{enumerate}   
+\end{definition}
+
+\begin{definition}{Finite Places of a Global Field}{}
+    Let $K$ be a global field. A place $v$ on $K$ is called \textbf{finite} if either 
+    \begin{enumerate}[(i)]
+        \item $v$ restricts to a $p$-adic place on $\mathbb{Q}$ for some prime $p$, or
+        \item $v$ restricts to a $p(t)$-adic place on $\mathbb{F}_q(t)$ for some prime element $p(t) \in \mathbb{F}_q[t]$.
+    \end{enumerate}
+\end{definition}
+
+
+
+
+

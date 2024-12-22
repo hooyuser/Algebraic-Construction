@@ -2,7 +2,9 @@
 \chapter{Set Theory}
 \thispagestyle{empty}
 \setcounter{page}{1}
-\section{Set}
+
+
+\section{Construction}
 \subsection{Basic Operations}
 \begin{definition}{Family of Sets}{}
     Let $I$ be some index set. A \textbf{family of sets index by $I$} is a function that maps each index $i\in I$ to a set $A_i$, denoted by $\left(A_i\right)_{i\in I}$.
@@ -14,6 +16,21 @@
 		\bigcup_{i\in I} A_i&:=\left\{x:\exists\,i\in I,x\in A_i \right\}\\
 		\bigcap_{i\in I} A_i&:=\left\{x:\forall\,i\in I,x\in A_i \right\}
 	\end{align*}
+\end{definition}
+
+\begin{definition}{Difference and Complement}{}
+    Let $A,B$ be subsets of $X$. The \textbf{complement} of $A$ is defined as follows
+    \begin{align*}
+        A^{\complement}&:=\left\{x\in X:x\notin A \right\}.
+    \end{align*}
+    The \textbf{difference} of $A$ and $B$ is defined as follows 
+    \begin{align*}
+        A-B&:=\left\{x:x\in A\text{ and }x\notin B \right\}.
+    \end{align*}
+    We have
+    \[
+        A^{\complement}=X-A,\qquad A-B   =A\cap B^{\complement}.
+    \]
 \end{definition}
 
 \begin{proposition}{Distribution Law}{}
@@ -83,7 +100,16 @@ We have
 \end{proposition}
 
 
-\subsection{Relation}
+\subsection{Cartesian Product}
+
+\begin{proposition}{Cartesian Product of Intersections of Sets}{}
+    \[
+    \left(\prod_{i \in I} A_i\right) \cap \left(\prod_{i \in I} B_i\right) = \prod_{i \in I} \left(A_i \cap B_i\right).
+    \]
+\end{proposition}
+
+
+\section{Relation}
 \begin{definition}{Relation}{}
     An \textbf{$n$-ary relation} $R$ over sets $X_1, \cdots, X_n$ is a subset of the Cartesian product $X_1 \times \cdots \times X_n$. A \textbf{binary relation} $R$ over sets $X$ and $Y$ is a subset of $X \times Y$. We write $xRy$ to denote that $(x, y) \in R$.
 \end{definition}
