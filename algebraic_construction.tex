@@ -10,11 +10,12 @@
 
 \input{preamble}
 
-
-%\includeonly{category_theory}
+% \includeonly{set_theory, commutative_ring, associative_algebra,field, module, vector_space, valuation_theory}
+%\includeonly{ring, commutative_ring, module}
 %\includeonly{module}
 %\includeonly{topological_group}
-%\includeonly{commutative_ring}
+%\includeonly{set_theory,
+%  group,topological_group,ring, commutative_ring,associative_algebra}
 
 
 \usepackage[page,toc,titletoc,title]{appendix}
@@ -26,6 +27,17 @@
 \usepackage{stmaryrd}
 \usepackage{bbm}
 \usepackage{graphicx}
+
+\usepackage{leftindex}
+
+
+\newcommand{\mathcalo}{\mathchoice
+  {\scalebox{0.7}{$\mathcal{O}$}}% Display style
+  {\scalebox{0.7}{$\mathcal{O}$}}% Text style
+  {\scalebox{0.44}{$\mathcal{O}$}}% Script style
+  {\scalebox{0.3}{$\mathcal{O}$}}% Script script style
+}
+% \newcommand{\mathcalo}{\scalebox{0.7}{$\mathcal{O}$}}
 
 \newcommand{\poscell}[1]{\cellcolor{green!22}#1}
 \newcommand{\negcell}[1]{\cellcolor{red!20}#1}
@@ -62,7 +74,7 @@
 \definecolor{arrowBlue}{RGB}{66, 135, 245}
 \definecolor{arrowRed}{RGB}{245, 93, 66}
 
-\usetikzlibrary{cd, decorations.pathmorphing, nfold}
+\usetikzlibrary{cd, decorations.pathmorphing, nfold, fit}
 \tikzcdset{
   diagrams={/tikz/double/.append style=/tikz/nfold},
 }
@@ -159,20 +171,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \begin{titlepage}
-\begin{center}
-	~\\
-	\vspace{6em}
-	{\fontsize{34}{48}\selectfont\textsc{Algebraic Construction}}
-	~\\
-	\vspace{2.5em}
-	{\Large }
-	~\\
-	\vspace{6em}
-	\textsf{\Large Huyi Chen}
-	~\\
-	\vspace{5in}
-	{\large Latest Update: \today}
-\end{center}
+  \begin{center}
+    ~\\
+    \vspace{6em}
+    {\fontsize{34}{48}\selectfont\textsc{Algebraic Construction}}
+    ~\\
+    \vspace{2.5em}
+    {\Large }
+    ~\\
+    \vspace{6em}
+    \textsf{\Large Huyi Chen}
+    ~\\
+    \vspace{5in}
+    {\large Latest Update: \today}
+  \end{center}
 \end{titlepage}
 
 \makeatletter
@@ -182,11 +194,11 @@
 \def\MT_rightarrow_fill:{%
   \arrowfill@\relbar\relbar\rightarrow}
 \newcommand{\xrightleftarrows}[2][]{\mathrel{%
-  \raise.55ex\hbox{%
-    $\ext@arrow 0359\MT_rightarrow_fill:{\phantom{#1}}{#2}$}%
-  \setbox0=\hbox{%
-    $\ext@arrow 3095\MT_leftarrow_fill:{#1}{\phantom{#2}}$}%
-  \kern-\wd0 \lower.55ex\box0}}
+    \raise.55ex\hbox{%
+      $\ext@arrow 0359\MT_rightarrow_fill:{\phantom{#1}}{#2}$}%
+    \setbox0=\hbox{%
+      $\ext@arrow 3095\MT_leftarrow_fill:{#1}{\phantom{#2}}$}%
+    \kern-\wd0 \lower.55ex\box0}}
 \MHInternalSyntaxOff
 \makeatother
 
@@ -206,34 +218,34 @@
 
 In this book, we use the following notation conventions:
 \begin{itemize}
-    \item $\mathbb{N}$: the set of natural numbers $\{0,1,2,\cdots\}$.
+  \item $\mathbb{N}$: the set of natural numbers $\{0,1,2,\cdots\}$.
 \end{itemize}
 We use sans-serif font for categories. Some common categories are
 \begin{itemize}
-    \item $\mathsf{FinSet}$: the category of finite sets.
-    \item $\mathsf{Set}$: the category of sets.
-    \item $\mathsf{Mon}$: the category of monoids.
-    \item $\mathsf{Grp}$: the category of groups.
-    \item $\mathsf{Ab}$: the category of abelian groups.
-    \item $\mathsf{Ring}$: the category of rings.
-    \item $\mathsf{CRing}$: the category of commutative rings.
-    \item $\mathsf{Field}$: the category of fields.
-    \item $R\text{-}\mathsf{Mod}$: the category of left $R$-modules, where $R\in \mathrm{Ob}\left(\mathsf{Ring}\right)$.
-    \item $K\text{-}\mathsf{Vect}$: the category of $K$-vector spaces, where $K\in \mathrm{Ob}\left(\mathsf{Field}\right)$.
-    \item $R\text{-}\mathsf{Alg}$: the category of associative $R$-algebras, where $R\in \mathrm{Ob}\left(\mathsf{CRing}\right)$.
-    \item $R\text{-}\mathsf{CAlg}$: the category of commutative $R$-algebras, where $R\in \mathrm{Ob}\left(\mathsf{CRing}\right)$.
-    \item $\mathsf{Top}$: the category of topological spaces.
+  \item $\mathsf{FinSet}$: the category of finite sets.
+  \item $\mathsf{Set}$: the category of sets.
+  \item $\mathsf{Mon}$: the category of monoids.
+  \item $\mathsf{Grp}$: the category of groups.
+  \item $\mathsf{Ab}$: the category of abelian groups.
+  \item $\mathsf{Ring}$: the category of rings.
+  \item $\mathsf{CRing}$: the category of commutative rings.
+  \item $\mathsf{Field}$: the category of fields.
+  \item $R\text{-}\mathsf{Mod}$: the category of left $R$-modules, where $R\in \mathrm{Ob}\left(\mathsf{Ring}\right)$.
+  \item $K\text{-}\mathsf{Vect}$: the category of $K$-vector spaces, where $K\in \mathrm{Ob}\left(\mathsf{Field}\right)$.
+  \item $R\text{-}\mathsf{Alg}$: the category of associative $R$-algebras, where $R\in \mathrm{Ob}\left(\mathsf{CRing}\right)$.
+  \item $R\text{-}\mathsf{CAlg}$: the category of commutative $R$-algebras, where $R\in \mathrm{Ob}\left(\mathsf{CRing}\right)$.
+  \item $\mathsf{Top}$: the category of topological spaces.
 \end{itemize}
 
 
 \include{set_theory}
 \include{category_theory}
 \include{group}
-\include{topological_group}
 \include{ring}
 \include{commutative_ring}
 \include{module}
 \include{associative_algebra}
+\include{vector_space}
 \include{field}
 \include{valuation_theory}
 \include{number_theory}

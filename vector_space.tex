@@ -5,8 +5,76 @@
     Let $V, W$ be vector spaces over a field $K$. If either $V$ or $W$ is finite-dimensional, then we have natural isomorphisms
     \[
         \begin{aligned}
-            \mathsf{Hom}_K(V, W) & \cong V^*\otimes W, \\
-            \mathsf{Hom}_K(V, W) & \cong V\otimes W^*.
+            \mathsf{Hom}_{\mathsf{Vect}_K}(V, W) & \cong V^\vee\otimes W.
         \end{aligned}
     \]
 \end{proposition}
+
+If $V$ is a vector space over a field $K$, then the dual space of $V$ is defined to be the vector space
+\[
+    V^\vee = \mathsf{Hom}_{\mathsf{Vect}_K}(V, K).
+\]
+
+\begin{proposition}{}{}
+    Let $V$ be vector spaces over a field $K$ and $A$ is a basis of $V$. Then we have isomorphism
+    \[
+        \begin{aligned}
+            V & \cong \bigoplus_{a\in A} K.
+        \end{aligned}
+    \]
+    And we have isomorphism for the dual space
+    \[
+        \begin{aligned}
+            V^\vee & \cong\left( \bigoplus_{a\in A} K\right)^\vee\cong \prod_{a\in A} K\cong K^A.
+        \end{aligned}
+    \]
+    If $|A|$ is finite, then we have
+    \[
+        \begin{aligned}
+            \dim V^\vee & = |A|.
+        \end{aligned}
+    \]
+    If $|A|$ is infinite, then we have
+    \[
+    \dim V^\vee = |K^A|> |A|.
+    \]
+\end{proposition}
+
+\begin{definition}{Transpose of a Linear Map}{}
+    Let $V, W$ be vector spaces over a field $K$ and $f\in \mathsf{Hom}_{\mathsf{Vect}_K}(V, W)$. The transpose of $f$ is the linear map
+    \[
+        \begin{aligned}
+            f^*: W^\vee & \longrightarrow V^\vee\\
+            \phi & \longmapsto \phi\circ f.
+        \end{aligned}
+    \]
+    The following identity holds for all $\phi\in W^\vee$ and $v\in V$
+    \[
+        \begin{aligned}
+            \langle f^*(\phi),v \rangle= \langle\phi, f(v)\rangle.
+        \end{aligned}
+    \]
+    The map
+    \[
+        \begin{aligned}
+    {}^*: \mathsf{Hom}_{\mathsf{Vect}_K}(V, W) &\longrightarrow \mathsf{Hom}_{\mathsf{Vect}_K}(W^\vee, V^\vee)\\
+    f & \longmapsto f^*
+        \end{aligned}
+    \]
+    is an injective linear map. ${}^*$ is an isomorphism, if and only if $W$ is finite-dimensional. 
+
+    From the viewpoint of category theory, taking the dual of vector spaces and the transpose of linear maps is the contravariant functor $\mathrm{Hom}_{\mathsf{Vect}_K}(-, K)$
+
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            K\text{-}\mathsf{Vect}^{\mathrm{op}}\&[-25pt]\&[+10pt]\&[-30pt] K\text{-}\mathsf{Vect}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            V  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] V^\vee\arrow[dd, "f^*"{name=R}] \&[-20pt]\ni\& [+10pt]\phi \arrow[dd, mapsto, "f^*"{name=L, right}] 
+            \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "{\mathrm{Hom}_{\mathsf{Vect}_K}(-, K)}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            W \& \& \&  W^\vee\&[-0pt]\ni\& \phi\circ f
+        \end{tikzcd}
+        \]  
+    
+\end{definition}

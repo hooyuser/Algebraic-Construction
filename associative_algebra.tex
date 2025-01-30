@@ -235,7 +235,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 
 \subsection{Construction}
 
-\begin{definition}{Free Commutative Algebra}{}
+\begin{definition}{Free Commutative Algebra}{free_commutative_algebra}
     Let $X$ be a set and $R$ be a commutative ring. The \textbf{free commutative $R$-algebra} on $X$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, together with a map $\iota:X\to \mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, is defined by the following universal property: for any commutative $R$-algebra $A$ and any map $f:X\to A$, there exists a unique homomorphism $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)\to A$ such that the following diagram commutes
     \begin{center}
         \begin{tikzcd}[ampersand replacement=\&]
@@ -244,6 +244,27 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
         \end{tikzcd}
     \end{center}
     The free commutative $R$-algebra $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$ can be contructed as the polynomial algebra $R[X]$.
+
+    And we can define a functor
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{CRing}\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{CRing}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            R  \arrow[dd, "\varphi"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] R[X]\arrow[dd, "{{}^{\varphi}\!(-)}"{name=R}] \&[-20pt]\ni\& [+10pt]f(X)=\sum\limits_{\beta} a_\beta x^\beta \arrow[dd, mapsto, ""{name=L, right}] 
+            \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "{\mathrm{Free}_{\bullet\text{-}\mathsf{CAlg}}(X)}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            S\& \& \&  S[X]\&[-0pt]\ni\& ~^\varphi\!f(X)=\sum\limits_{\beta} \varphi(a_\beta) x^\beta
+        \end{tikzcd}
+        \]  
 \end{definition}
+\begin{prf}
+    We can check that $\mathrm{Free}_{\bullet\text{-}\mathsf{CAlg}}(X)$ is a functor
+    \[
+        \leftindex^{\psi\circ \varphi}f(X)=\sum\limits_{\beta} (\psi\circ \varphi)(a_\beta) x^\beta=\sum\limits_{\beta} \psi(\varphi(a_\beta)) x^\beta=\leftindex^\psi(\leftindex^\varphi f)(X).
+    \]
+\end{prf}
+
+
 
 

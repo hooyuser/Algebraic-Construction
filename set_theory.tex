@@ -185,15 +185,16 @@ Here are some important properties that a homogeneous relation $R$ over a set X 
 
 
 \section{Function}
-\begin{proposition}{}{}
+\begin{proposition}{Image and Preimage Laws for Set Operations}{image_preimage_laws}
 Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subseteq X$ and $B_\alpha,B,F\subseteq Y$. We have
 \begin{enumerate}[(i)]
 	\item $f\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)=\bigcup\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)\subseteq\bigcap\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f(E-A)\supseteq f(E)-f(A)$.
-	\item $f^{-1}\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}(F-B)=f^{-1}(F)-f^{-1}(B)$.
+	\item $f^{-1}\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}(F-B)=f^{-1}(F)-f^{-1}(B)$, $f^{-1}\left(B^{\complement}\right)=f^{-1}\left(B\right)^{\complement}$.
 	\item $A\subseteq f^{-1}(f(A))\ $, $B\supseteq f(f^{-1}(B))$.
     \item If $f$ is surjective, then $f\left(f^{-1}(B)\right)=B$.
     \item If $f$ is injective, then $f\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)=\bigcap\limits_{\alpha\in I}f\left(A_\alpha\right)$, where the indexed set $I$ is nonempty.
     \item $f\left(A\cap f^{-1}(B)\right)=f(A)\cap B$.
+    \item $A\subseteq f^{-1}(B) \iff f(A)\subseteq B$.
 \end{enumerate}
 \end{proposition}
 \begin{prf}
@@ -208,6 +209,10 @@ Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subseteq X$ and $B_\alpha,B,
         f\left(A\cap f^{-1}(B)\right)\subseteq f(A)\cap f\left(f^{-1}(B)\right)\subseteq f(A)\cap B.
         \]
         On the other hand, if $y\in f(A)\cap B$, then there exists $x\in A$ such that $f(x)=y$. Since $f(x)\in B$, we have $x\in f^{-1}(B)$, which implies $x\in A\cap f^{-1}(B)$. Therefore, $y\in f\left(A\cap f^{-1}(B)\right)$. Hence, $f(A)\cap B\subseteq f\left(A\cap f^{-1}(B)\right)$.
+        \item  
+        \[
+        A \subseteq f^{-1}(B) \implies f(A) \subseteq f(f^{-1}(B)) \subseteq B, \quad f(A) \subseteq B \implies A \subseteq f^{-1}(f(A)) \subseteq f^{-1}(B).
+        \]
     \end{enumerate}
 \end{prf}
 
