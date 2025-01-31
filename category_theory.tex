@@ -213,6 +213,20 @@ It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
     \end{itemize}
 \end{definition}
 
+\begin{definition}{Initial Object}{}
+    Let $\mathsf{C}$ be a category. An object $c\in \mathrm{Ob}(\mathsf{C})$ is called an \textbf{initial object} if for any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists a unique morphism $c\to X$, or equivalently, $\mathrm{Hom}_{\mathsf{C}}(c,X)$ is a singleton set. 
+\end{definition}
+
+\begin{definition}{Terminal Object}{}
+    Let $\mathsf{C}$ be a category. An object $c\in \mathrm{Ob}(\mathsf{C})$ is called a \textbf{terminal object} if for any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists a unique morphism $X\to c$, or equivalently, $\mathrm{Hom}_{\mathsf{C}}(X,c)$ is a singleton set.
+\end{definition}
+
+\begin{proposition}{}{}
+    Let $\mathsf{C}$ be a category. If $c\in \mathrm{Ob}(\mathsf{C})$  is an initial (or terminal) object then any object isomorphic to $c$ is also an initial (or terminal) object.
+\end{proposition}
+\begin{prf}
+    Suppose $c\in \mathrm{Ob}(\mathsf{C})$ is an initial object and $c'\in \mathrm{Ob}(\mathsf{C})$ is isomorphic to $c$. Then there exists an isomorphism $f:c\to c'$. For any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists a unique morphism $g:c\to X$. Hence there exists a  morphism $c'\to X$ given by $g\circ f^{-1}$. We assert $\mathrm{Hom}_{\mathsf{C}}(c',X)=g\circ f^{-1}$. If there exists a morphism $h:c'\to X$, then $h\circ f:c\to X$ is morphism. $\mathrm{Hom}_{\mathsf{C}}(c,X)=g$ forces $h\circ f=g$, which implies $h=g\circ f^{-1}$. Hence $c'$ is an initial object. The proof for terminal object is similar.
+\end{prf}
 
 
 \begin{definition}{Zero Object}{}

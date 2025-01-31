@@ -41,12 +41,19 @@ A commutative ring $R$ is a commutative $R$-algebra and accordingly a commutativ
 
 
 \begin{definition}{Prime Ideal}{}
-    Let $R$ be a commutative ring. An ideal $I\subseteq R$ is called \textbf{prime} if  and 
+    Let $R$ be a commutative ring. An ideal $I\subseteq R$ is called \textbf{prime} if 
     \begin{enumerate}[(i)]
         \item $I\neq R$, i.e. $I$ is a proper ideal.
         \item $ab\in I\implies a\in I\text{ or }b\in I$, i.e. there exist no two elements in $R$ whose product is in $I$ but neither of them is in $I$.
     \end{enumerate}    
 \end{definition}
+
+\begin{proposition}{}{}
+    Let $R$ be a commutative ring and $\mathfrak{p}$ be a prime ideal of $R$. If $x_1\cdots x_n\in \mathfrak{p}$, then there exists some $i\in\{1,2\cdots,n\}$ such that $x_i\in \mathfrak{p}$.
+\end{proposition}
+\begin{prf}
+    We prove this by induction on $n$. The case $n=1$ is trivial. Suppose the statement holds for $n=k$. If $x_1\cdots x_{k+1}\in \mathfrak{p}$, then $x_1\cdots x_k\in \mathfrak{p}$ or $x_{k+1}\in \mathfrak{p}$. If $x_1\cdots x_k\in \mathfrak{p}$, then there exists some $i\in\{1,2,\cdots,k\}$ such that $x_i\in \mathfrak{p}$. If $x_{k+1}\in \mathfrak{p}$, then we are done. Hence the statement holds for $n=k+1$.
+\end{prf}
 
 \begin{proposition}{Preimage of a Prime Ideal is a Prime Ideal}{}
     Let $f:R\to S$ be a commutative ring homomorphism and $\mathfrak{p}\subseteq S$ be a prime ideal. Then $f^{-1}(\mathfrak{p})$ is a prime ideal of $R$.
@@ -165,6 +172,32 @@ It now just remains to check that $I \neq A$. But $1 \notin J$ for each $J \in \
     \end{enumerate}
 \end{prf}
 
+\begin{definition}{Semiring of Ideals of a Commutative Ring}{}
+    Let $R$ be a commutative ring. Then the set of all ideals of $R$ forms a semiring under the operations of addition and multiplication. The zero ideal $(0)$ is the additive identity and the unit ideal $R$ is the multiplicative identity. 
+\end{definition}
+
+\begin{proposition}{Surjective Ring Homomorphism Induces Semiring Homomorphism of Ideals}{surjective_ring_homomorphism_induces_semiring_homomorphism_of_ideals}
+    If $\varphi:R\to S$ is a surjective ring homomorphism, then $\varphi$ induces a semiring homomorphism from the semiring of ideals of $R$ to the semiring of ideals of $S$.
+\end{proposition}
+\begin{prf}
+    First, we show $\varphi$ preserves addition of ideals. Let $I,J$ be ideals of $R$. Then
+    \begin{align*}
+        \varphi(I+J)&=\varphi\left(\left\{a+b\midv a\in I,b\in J\right\}\right)\\
+        &=\left\{\varphi(a+b)\midv a\in I,b\in J\right\}\\
+        &=\left\{\varphi(a)+\varphi(b)\midv a\in I,b\in J\right\}\\
+        &=\left\{x+y\midv x\in \varphi(I),y\in \varphi(J)\right\}\\
+        &=\varphi(I)+\varphi(J).
+    \end{align*}
+    Then we show $\varphi$ preserves multiplication of ideals. Let $I,J$ be ideals of $R$. We have
+    \begin{align*}
+        \varphi(IJ)&=\varphi\left(\left\{\sum_{i=1}^n a_ib_i\midv n\in\mathbb{Z}_{+},a_i\in I,b_i\in J\right\}\right)\\
+        &=\left\{\varphi\left(\sum_{i=1}^n a_ib_i\right)\midv n\in\mathbb{Z}_{+},a_i\in I,b_i\in J\right\}\\
+        &=\left\{\sum_{i=1}^n \varphi(a_i)\varphi(b_i)\midv n\in\mathbb{Z}_{+},a_i\in I,b_i\in J\right\}\\
+        &=\left\{\sum_{i=1}^n x_iy_i\midv n\in\mathbb{Z}_{+}, x_i\in \varphi(I),y_i\in \varphi(J)\right\}\\
+        &=\varphi(I)\varphi(J).
+    \end{align*}
+    Finally, we show $\varphi$ preserves the multiplicative identity. This follows immediately from the fact that $\varphi$ is surjective.
+\end{prf}
 
 \begin{proposition}{}{prime_ideal_contains_product_iff_contains_at_least_one_factor}
     Let $I$ and $J$ be ideals of a commutative ring $R$ and $\mathfrak{p}$ be a prime ideal of $R$. Then 
@@ -330,6 +363,13 @@ As a result, the minimal number of generators of $M$ is equal to $\dim_{R/\mathf
 \begin{proposition}{Cancellation Laws in Integral Domain}{}
     Let $R$ be an integral domain. Then the following cancellation laws hold: given any $a,b,c\in R$, if $a \ne 0$, then $ab = ac$ implies $b = c$.
 \end{proposition}
+
+\begin{proposition}{Nonzero Subring of Integral Domain is Integral Domain}{}
+    Let $R$ be an integral domain and $S\subseteq R$ be a nonzero subring. Then $S$ is an integral domain.
+\end{proposition}
+\begin{prf}
+    Let $a,b\in S$ be nonzero elements. Since $a,b\in R$, we have $ab=0\implies a=0\text{ or }b=0$. Hence $S$ is an integral domain.
+\end{prf}
 
 \begin{definition}{Associate}{}
     Let $R$ be an integal domain. Two elements $a,b\in R$ are called \textbf{associates} if one of the following equivalent conditions holds:
@@ -837,9 +877,10 @@ Recall the \hyperref[th:free_commutative_algebra]{polynomial ring functor}. Let 
 \end{align*}
 we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[T]$.
 
-\begin{definition}{Integral Element}
+\begin{definition}{Integral Element}{}
     Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. An element $x\in S$ is called \textbf{integral} over $R$ if there exists a monic polynomial $f\in R[T]$ such that $\leftindex^{\varphi}\!f(x)=0$.
 \end{definition}
+
 
 
 \begin{definition}{Generated Subalgebra}{}
@@ -870,6 +911,51 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
 \begin{definition}{Integral Extension}{}
     Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. If every element of $S$ is integral over $R$, then we say $\varphi$ is \textbf{integral} and $S$ is an \textbf{integral extension} of $R$.
 \end{definition}
+
+\begin{definition}{Integral Closure}{integral_closure}
+    Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. The set of all elements in $S$ that are integral over $R$ is called the \textbf{integral closure of $R$ in $S$}. The integral closure of $R$ in $S$ is an $R$-subalgebra of $S$, denoted by $\overline{R}^S$. If $\varphi$ is injective, we say that $R$ is \textbf{integrally closed in $S$} if $\varphi(R)=\overline{R}^S$.
+\end{definition}
+
+\begin{definition}{Integral Closure in Field of Fractions}{integral_closure_in_field_of_fractions}
+    Let $R$ be an integral domain. The \textbf{integral closure of $R$} or \textbf{normalization of $R$} is defined to be the integral closure of $R$ in $\mathrm{Frac}(R)$. We say $R$ is \textbf{integrally closed} if $R$ is integrally closed in $\mathrm{Frac}(R)$.
+\end{definition}
+
+\begin{proposition}{Fraction Field of Integral Closure of Integral domain}{}
+    Let $R$ be an integral domain and $\mathrm{Frac}(R)$ be its field of fractions. If $L/K$ is a finite field extension, and $R'$ is the integral closure of $R$ in $L$, then $L$ is a field of fractions of $R'$.
+\end{proposition}
+\begin{prf}
+    $R'$ is an integral domain because it is a subring of integral domain $L$. Let $l:R'\hookrightarrow \mathrm{Frac}(R') $ be the localization map and $\iota:R'\hookrightarrow L$ be the inclusion. According to the universal property of field of fractions, there exists a unique field homomorphism 
+    \begin{align*}
+        \psi:\mathrm{Frac}(R')&\longrightarrow L\\
+        \frac{a}{b}&\longmapsto \frac{a}{b}
+    \end{align*}
+    such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            \mathrm{Frac}(R') \arrow[r, "\psi", dashed]        & L \\[1em]
+            R' \arrow[u, "l", hook] \arrow[ru, "\iota"', hook] &  
+            \end{tikzcd}
+    \]
+    For any $x\in L$, suppose the minimal polynomial of $x$ is
+    \[
+    f(T) = T^n + a_{n-1}T^{n-1} + \cdots + a_1T + a_0 \in K[T].
+    \]
+    By multiplying $f(T)$ by the product of the denominators of the coefficients of $f(T)$, we get a polynomial $g(T)\in R[T]$ such that 
+    \[
+    g(x)=b_n x^n + b_{n-1}x^{n-1} + \cdots + b_1x + b_0 = 0.
+    \]
+    Multiplying this equation by $b_n^{n-1}$, we get
+    \[
+    (b_n x)^n + b_{n-1}(b_n x)^{n-1} + \cdots + b_1b_n^{n-2}(b_n x) + b_0 = 0,
+    \]
+    which implies $b_n x$ is integral over $R$. Since $R'$ is the integral closure of $R$ in $L$, we have $b_n x\in R'$. Hence 
+    \[
+    x=\psi\left(\frac{b_n x}{b_n}\right)\in \psi(\mathrm{Frac}(R')).
+    \]
+    Therefore, $\psi$ is a isomorphism between $l:R'\hookrightarrow \mathrm{Frac}(R')$ and $\iota:R'\hookrightarrow L$. Since any object isomorphic to an initial object is also initial, we see $L$ is a field of fractions of $R'$.
+ 
+\end{prf}
+
 
 \begin{proposition}{Quotient and Localization Respect Integral Extensions}{quotient_and_localization_respect_integral_extensions}
     Let $R\subseteq T$ be an integral extension of commutative rings. Then 
@@ -934,6 +1020,53 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
 \end{enumerate}
 \end{prf}
 
+The following proposition shows that the property of being integral is preserved under field extension.
+\begin{proposition}{Field Extension Preserves Integral Elements}{field_extension_preserves_integral_elements}
+    Suppose $A\xrightarrow{\varphi} B\xhookrightarrow{\iota} C$ are ring homomorphisms between commutative rings and $\iota$ is injective. For any $b\in B$, $b$ is integral over $A$ if and only if $\iota(b)$ is integral over $A$.
+\end{proposition}
+\begin{prf}
+   Let $c=\iota(b)$. We have the following commutative diagram
+    \[
+        \begin{tikzcd}
+            {C[X]} \arrow[r, "\pi_2", two heads]                                  & {C[X]/\left(X-c\right)} \arrow[r, "\mathrm{ev}_c"]      & C                          \\
+            {B[X]} \arrow[u, "\tilde{\iota}", hook] \arrow[r, "\pi_1", two heads] & {B[X]/(X-b)} \arrow[r, "\mathrm{ev}_b"] \arrow[u, hook] & B \arrow[u, "\iota", hook] \\
+            {A[X]} \arrow[u, "\tilde{\varphi}"]                                   &                                                         &                           
+            \end{tikzcd}
+    \]
+    If $c$ is integral over $A$, there exists a monic polynomial $f\in A[X]$ such that 
+    \[
+    \mathrm{ev}_c\circ\pi_2\circ\tilde{\iota}\circ\tilde{\varphi}(f)=\leftindex^{\varphi\circ\iota}f(c)=0_C,
+    \]
+    which implies 
+    \[
+        \iota\circ\mathrm{ev}_b\circ \pi_1\circ\tilde{\varphi}(f)=\iota(\mathrm{ev}_b\circ \pi_1\circ\tilde{\varphi}(f))=0_C.
+    \]
+    Since $\iota$ is injective, we have $\mathrm{ev}_b\circ \pi_1\circ\tilde{\varphi}(f)=0_B$, which implies $b$ is integral over $A$.
+
+    Conversely, if $b$ is integral over $A$, there exists a monic polynomial $f\in A[X]$ such that
+    \[
+        \mathrm{ev}_b\circ \pi_1\circ\tilde{\varphi}(f)=\leftindex^{\varphi}f(b)=0_B.
+    \]
+    Thus we have
+    \[
+        \leftindex^{\varphi\circ\iota}f(c)=\mathrm{ev}_c\circ\pi_2\circ\tilde{\iota}\circ\tilde{\varphi}(f)=\iota\circ\mathrm{ev}_b\circ \pi_1\circ\tilde{\varphi}(f)=\iota(\mathrm{ev}_b\circ \pi_1\circ\tilde{\varphi}(f))=\iota(0_B)=0_C,
+    \]
+    which implies $c$ is integral over $A$.
+\end{prf}
+
+\begin{proposition}{}{intersection_of_integral_closure_and_field_of_fractions}
+    Suppose $A$ is integrally closed commutative ring with fraction field $K$ and $l:A\hookrightarrow K$ is the localization map. Let $\iota: K\hookrightarrow L$ be a finite field extension. If $B$ is the integral closure of $A$ in $L$, then 
+    \[
+    B\cap \iota(K)=\iota(l(A)).
+    \]
+    Especially, if we have $A\subseteq K\subseteq L$, then $B\cap K=A$.
+\end{proposition}
+\begin{prf}
+    Since for any $a\in A$, there exists monic polynomial $f(x)=x-c\in A[x]$ such that $f(a)=0$, we have $\iota(l(A))\subseteq B$. Since $l(A)\subseteq K$, we have $\iota(l(A))\subseteq \iota(K)$, which implies $\iota(l(A)) \subseteq B\cap \iota(K)$. 
+
+    For any $b\in B\cap \iota(K)$, since $B$ is the integral closure of $A$ in $L$, $b$ is integral over $A$. Since $\iota(K)$ is a field of fractions of $A$ with the localization map $\iota\circ l: A\hookrightarrow \iota(K)$, by the integal closed property of $A$, any integral element over $A$ in $\iota(K)$ must be in $\iota\circ l(A)$. Hence we have $b\in \iota\circ l(A)$, which implies $B\cap \iota(K)\subseteq \iota\circ l(A)$. Therefore, $B\cap \iota(K)=\iota\circ l(A)$.
+\end{prf}
+
 \begin{proposition}{Surjectivity of Spectrum Map of Integral Extension}{surjectivity_of_spectrum_map_of_integral_extension}
     Let $R\subseteq S$ be an integral extension of commutative rings and $\varphi:R\hookrightarrow S$ be the inclusion. Then the map $\varphi^{-1}:\spec (S)\to \spec (R)$ is surjective.
 \end{proposition}
@@ -962,6 +1095,7 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
 \begin{corollary}{}{integral_extension_of_domains_become_field_simultaneously}
     Let $R\subseteq S$ be an integral extension of integal domains. Then $R$ is a field if and only if $S$ is a field.
 \end{corollary}
+
 \begin{prf}
     This is a direct consequence of \Cref{th:condition_for_subring_of_field_to_be_field} and \Cref{th:integal_over_field_is_field}.
 \end{prf}
@@ -973,7 +1107,7 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
     From \Cref{th:quotient_and_localization_respect_integral_extensions} we see $ R/\mathfrak{p}\hookrightarrow S/\mathfrak{q}$ is an integral extension of integral domains. By \Cref{th:integral_extension_of_domains_become_field_simultaneously} we know $R/\mathfrak{p}$ is a field if and only if $S/\mathfrak{q}$ is a field. This implies $\mathfrak{p}$ is maximal if and only if $\mathfrak{q}$ is maximal.
 \end{prf}
 
-\begin{definition}{}
+\begin{definition}{}{}
     Let $R\subseteq S$ be an extension of commutative rings.
     \begin{itemize}
         \item \textbf{lying over property}: If there exist $\mathfrak{p}\in \spec R$ and $\mathfrak{q}\in \spec S$ such that $\mathfrak{q}\cap R=\mathfrak{p}$, we say $\mathfrak{q}$ \textbf{lies over} $\mathfrak{p}$ and $\mathfrak{p}$ \textbf{lies under} $\mathfrak{q}$. We say the extension $R\subseteq S$ satisfies the \textbf{lying over property} if every prime ideal of $R$ lies under some prime ideal of $S$.
@@ -1037,15 +1171,6 @@ The following theorems are also called the Cohen-Seidenberg theorems.
     By \Cref{th:going_up_and_going_down_theorems}, the extension $R\subseteq S$ satisfies the incomparability property. Suppose there exists a nonzero prime ideal $\mathfrak{q}$ of $S$ lying over $(0)$. Since $(0)$ is another prime ideal of $S$ lying over $(0)$, we have $(0)\not\subseteq \mathfrak{q}$, which is a contradiction.
 \end{proof}
 
-\begin{definition}{Integral Closure}{integral_closure}
-    Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. The set of all elements in $S$ that are integral over $R$ is called the \textbf{integral closure of $R$ in $S$}. The integral closure of $R$ in $S$ is an $R$-subalgebra of $S$, denoted by $\overline{R}^S$.
-\end{definition}
-
-
-
-\begin{definition}{Integral Closure in Field of Fractions}{}
-    Let $R$ be an integral domain. The \textbf{integral closure of $R$} is defined to be the integral closure of $R$ in $\mathrm{Frac}(R)$.
-\end{definition}
 
 
 
@@ -1068,8 +1193,10 @@ The following theorems are also called the Cohen-Seidenberg theorems.
 \end{proposition}
 
 \subsection{Normal Ring}
+
+Recall the definition of integral closed domain in \Cref{th:integral_closure_in_field_of_fractions}.
 \begin{definition}{Normal Domain}{}
-    An integral domain $R$ is called \textbf{normal} or \textbf{integrally closed} if $R$ equals its \hyperref[th:integral_closure]{integral closure} in its field of fractions.
+    Suppose $R$ is an integral domain and $\mathrm{Frac}(R)$ is a field of fractions of $R$ which contains $R$. $R$ is called \textbf{normal} or \textbf{integrally closed} if $R$ equals its \hyperref[th:integral_closure]{integral closure} in $\mathrm{Frac}(R)$.
 \end{definition}
 
 \begin{proposition}{Equivalent Definition of Normal Domain}{}
@@ -1311,11 +1438,11 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
     there exists a unique ring homomorphism $\mathcalo/\mathfrak{p}\to \mathcal{O}/\mathfrak{P}_k$ such that the following diagram commutes
     \[
         \begin{tikzcd}
-            o \arrow[r, "\iota", hook] \arrow[d, two heads] & \mathcal{O} \arrow[d, "\pi_k", two heads] \\
-            o/\mathfrak{p} \arrow[r, dashed]                & \mathcal{O}/\mathfrak{P}_k               
+            \mathcalo \arrow[r, "\iota", hook] \arrow[d, two heads] & \mathcal{O} \arrow[d, "\pi_k", two heads] \\
+            \mathcalo/\mathfrak{p} \arrow[r, dashed]                & \mathcal{O}/\mathfrak{P}_k               
             \end{tikzcd}
     \]
-    Since both $\mathcalo/\mathfrak{p}$ and $\mathcal{O}/\mathfrak{P}_k$ are fields, $\mathcalo/\mathfrak{p}\to \mathcal{O}/\mathfrak{P}_k$ is a field extension.
+    Since both $\mathcalo/\mathfrak{p}$ and $\mathcal{O}/\mathfrak{P}_k$ are fields, $\mathcalo/\mathfrak{p}\to \mathcal{O}/\mathfrak{P}_k$ is a field extension. 
 \end{prf}
 
 
@@ -1361,7 +1488,7 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
     Thus $\sigma(\alpha)$ is integral over $\mathcalo$, which means $\sigma(\alpha)\in \mathcal{O}$.
 \end{prf}
 
-\begin{proposition}{Galois Group Acts on $\mathcal{O}$}{}
+\begin{proposition}{Galois Group Acts on $\mathcal{O}$}{galois_group_acts_on_integral_closure}
     Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Then the Galois group $\mathrm{Gal}(L/K)$ acts on $\mathcal{O}$ through the following group homomorphism
     \begin{align*}
         \mathrm{Gal}(L/K)&\longrightarrow \mathrm{Aut}_{\mathcalo\text{-}\mathsf{Alg}}\left(\mathcal{O}\right)\\
@@ -1390,13 +1517,13 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
     which means there exists $x\in E$ such that $x\notin \mathfrak{p}_m$ for any $m=1,\cdots,n$.
 \end{lemma}
 
-\begin{proposition}{Galois Group Acts on $\operatorname{Spec}\left(\mathcal{O}\right)$}{}
+\begin{proposition}{Galois Group Acts on $\operatorname{Spec}\left(\mathcal{O}\right)$}{galois_group_acts_on_spectrum_of_integral_closure}
     Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Then the Galois group $\mathrm{Gal}(L/K)$ acts on $\operatorname{Spec}\left(\mathcal{O}\right)$ through the following group homomorphism
     \begin{align*}
         \mathrm{Gal}(L/K)&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}\left(\operatorname{Spec}\left(\mathcal{O}\right)\right)\\
         \sigma&\longmapsto \left(\mathfrak{P}\longmapsto\sigma\left(\mathfrak{P}\right)\right)
     \end{align*}
-    The orbits of this action are the prime ideals of $\mathcal{O}$ lying over the same prime ideal $\mathfrak{p}$ of $\mathcalo$.
+    The orbits of this action are the prime ideals of $\mathcal{O}$ lying over the same prime ideal $\mathfrak{p}$ of $\mathcalo$. This means the action is transitive on all prime ideals of $\mathcal{O}$ lying over the same prime ideal $\mathfrak{p}\in \spec(\mathcalo)$.
 \end{proposition}
 \begin{prf}
 For any $\sigma,\tau\in \mathrm{Gal}(L/K)$ and any prime ideal $\mathfrak{P}$ of $\mathcal{O}$, we have
@@ -1411,10 +1538,92 @@ which means each orbit of this action can only contain prime ideals of $\mathcal
 
 Use the \hyperref[th:going_up_and_going_down_theorems]{incomparability property} of integral extensions, we see $(0)$ is the only prime ideal of $\mathcal{O}$ lying over $(0)$. Thus the action of $\mathrm{Gal}(L/K)$ on $(0)$ is trivial.
 
-Every nonzero prime ideal of a Dedekind domain is a maximal ideal. Let $\mathfrak{P}$ and $\mathfrak{P}^\prime$ be maximal ideals of $\mathcal{O}$ lying over maximal ideal $\mathfrak{p}\in\spec \mathcalo$. Suppose $\mathfrak{P}$ and $\mathfrak{P}^\prime$ are not in the same orbit. Then for any $\sigma\in \mathrm{Gal}(L/K)$, we have $\sigma(\mathfrak{P})\ne \mathfrak{P}^\prime$. Note ring isomorphism maps maximal ideals to maximal ideals. By maximality of $\sigma(\mathfrak{P})$, we have $\mathfrak{P}'\not\subseteq \sigma(\mathfrak{P})$ for all $\sigma\in\mathrm{Gal}(L/K)$. By the \Cref{th:prime_avoidance_lemma}, there exists $x\in \mathfrak{P}'$ such that $x\notin \sigma(\mathfrak{P})$ for all $\sigma\in\mathrm{Gal}(L/K)$. Hence the norm of $x$
+Every nonzero prime ideal of a Dedekind domain is a maximal ideal. Let $\mathfrak{P}$ and $\mathfrak{P}^\prime$ be maximal ideals of $\mathcal{O}$ lying over maximal ideal $\mathfrak{p}\in\spec \mathcalo$. Suppose $\mathfrak{P}$ and $\mathfrak{P}^\prime$ are not in the same orbit. Then for any $\sigma\in \mathrm{Gal}(L/K)$, we have $\sigma(\mathfrak{P})\ne \mathfrak{P}^\prime$. Note ring isomorphism maps maximal ideals to maximal ideals. By maximality of $\sigma(\mathfrak{P})$, we have $\mathfrak{P}'\not\subseteq \sigma(\mathfrak{P})$ for all $\sigma\in\mathrm{Gal}(L/K)$. By the \Cref{th:prime_avoidance_lemma}, there exists $x\in \mathfrak{P}'$ such that $x\notin \sigma(\mathfrak{P})$ for all $\sigma\in\mathrm{Gal}(L/K)$. 
+
+Since $\mathrm{id}\in \mathrm{Gal}(L/K)$,
 \[
-N_{L/K}(x)=\prod_{\sigma\in \mathrm{Gal}(L/K)}\sigma(x)\notin \sigma(\mathfrak{P})
+N_{L/K}(x)=\prod_{\sigma\in \mathrm{Gal}(L/K)}\sigma(x)=x \prod_{\sigma\in \mathrm{Gal}(L/K)-\{\mathrm{id}\}}\sigma(x)\in \mathfrak{P}'.
 \]
+By the property of norm we see $N_{L/K}(x) \in K$. Since Dedekind domains are integral closed, by \Cref{th:intersection_of_integral_closure_and_field_of_fractions} we have $\mathcal{O}\cap K=\mathcalo$. Combining with $\mathfrak{P}'\subseteq \mathcal{O}$ we get $N_{L/K}(x)\in \mathcal{O}\cap K=\mathcalo$. Hence we get 
+\[
+    N_{L/K}(x)\in \mathfrak{P}' \cap \mathcalo =\mathfrak{p}\subseteq \mathfrak{P}.
+\]
+Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L/K)$ such that $\tau(x)\in \mathfrak{P}$, which means $x\in \tau^{-1}(\mathfrak{P})$. This contradicts the fact that $x\notin \sigma(\mathfrak{P})$ for all $\sigma\in\mathrm{Gal}(L/K)$. Thus $\mathfrak{P}$ and $\mathfrak{P}^\prime$ are in the same orbit.
+\end{prf}
+
+\begin{definition}{Decomposition Group}{}
+    Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. According to \Cref{th:galois_group_acts_on_spectrum_of_integral_closure}, the Galois group $\mathrm{Gal}(L/K)$ acts on $\operatorname{Spec}\left(\mathcal{O}\right)$. Suppose $\mathfrak{P}\in \operatorname{Spec}\left(\mathcal{O}\right)$, then the stabilizer subgroup of $\mathfrak{P}$ under this action is called the \textbf{decomposition group} of $\mathfrak{P}$, denoted by
+    \[
+    D_{\mathfrak{P}}=\left\{ \sigma\in \mathrm{Gal}(L/K)\midv \sigma\left(\mathfrak{P}\right)=\mathfrak{P}\right\}.
+    \] 
+\end{definition}
+
+
+
+\begin{proposition}{}{}
+    Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak p$ is a nonzero prime ideal of $\mathcalo$, and $\mathfrak p\mathcal{O}$ can be factored as
+    \[
+    \mathfrak p\mathcal{O}=\mathfrak P_1^{e_1}\cdots\mathfrak P_r^{e_r}.
+    \]
+    Let $G=\mathrm{Gal}(L/K)$. 
+    Then we have 
+    \[
+    e_1=e_2=\cdots=e_r=e, \quad
+    f_1=f_2=\cdots=f_r=f,\quad [L:K]=efr,
+    \]
+    and
+    \[
+        \mathfrak p\mathcal{O} =\left(  \mathfrak P_1\cdots\mathfrak P_r\right)^e=\left( \prod_{G\cdot \mathfrak P\in G\backslash \!\spec\left(\mathcal{O}\right)}\mathfrak P\right)^e.
+    \]
+    By orbit-stabilizer theorem, we have
+    \[
+    \frac{\left|G\right|}{\left|D_{\mathfrak{P}_1}\right|}=|G \cdot \mathfrak{P}_1|=r\text{ and }\left|D_{\mathfrak{P}_1}\right|=ef,
+    \]
+    So the decomposition group $D_{\mathfrak{P}_1}$ characterizes splitting behavior of $\mathfrak{p}$ in $L$:
+    \begin{align*}
+        D_{\mathfrak{P}_1}=\{\mathrm{id}\}&\iff \mathfrak{p}\text{ splits completely in }L,\\
+        D_{\mathfrak{P}_1}=G&\iff \mathfrak{p}\text{ is nonsplit in }L.
+    \end{align*}
+\end{proposition}
+\begin{prf}
+    Let $\mathfrak{P}=\mathfrak{P}_1$. Suppose $\sigma \in \mathrm{Gal}(L/K)$. Since 
+    \[
+    \ker \left( \pi'\circ \sigma|_{\mathcal{O}}\right)=\sigma^{-1}(\sigma\mathfrak{P})=\mathfrak{P},
+    \]
+    by the \hyperref[th:universal_property_of_quotient_ring]{universal property of quotient ring}, there exists a unique ring homomorphism $\eta:\mathcal{O}/\mathfrak{P}\to \mathcal{O}/\sigma\mathfrak{P}$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            \mathcal{O} \arrow[r, "\sigma|_{\mathcal{O}}"] \arrow[d, "\pi"', two heads] & \mathcal{O} \arrow[d, "\pi'", two heads] \\
+            \mathcal{O}/\mathfrak{P} \arrow[r, "\eta"', dashed]                         & \mathcal{O}/\sigma\mathfrak{P}          
+        \end{tikzcd}
+    \]
+    Furthermore, $\pi'\circ \sigma|_{\mathcal{O}}$ and $\ker \left( \pi'\circ \sigma|_{\mathcal{O}}\right)=\mathfrak{P}$ implies $\eta$ is a an isomorphism of fields. Thus $[\mathcal{O}/\sigma\mathfrak{P}:\mathcalo/\mathfrak{p}]$ is independent of $\sigma$, which implies 
+    \[
+    f_1=f_2=\cdots=f_r=f.
+    \]
+    According to \Cref{th:surjective_ring_homomorphism_induces_semiring_homomorphism_of_ideals}, for any $\sigma\in \mathrm{Gal}(L/K)$, we have
+    \[
+    \sigma\left(\mathfrak{p}\mathcal{O}\right)=\sigma\left(\mathfrak{P}_1^{e_1}\cdots\mathfrak{P}_r^{e_r}\right)=\sigma\left(\mathfrak{P}_1\right)^{e_1}\cdots\sigma\left(\mathfrak{P}_r\right)^{e_r}.
+    \]
+    Since $\sigma$ fix $K$, we have
+    \begin{align*}
+        \sigma\left(\mathfrak{p}\mathcal{O}\right)&=\sigma\left(\left\{ \sum_{i=1}^n a_ix_i \midv n\in\mathbb{Z}_+,a_i\in \mathfrak{p}, x_i\in \mathcal{O}\right\}\right)\\
+        &=\left\{ \sum_{i=1}^n \sigma(a_i)\sigma(x_i) \midv n\in\mathbb{Z}_+,a_i\in \mathfrak{p}, x_i\in \mathcal{O}\right\}\\
+        &=\left\{ \sum_{i=1}^n a_i\sigma(x_i) \midv n\in\mathbb{Z}_+,a_i\in \mathfrak{p}, x_i\in \mathcal{O}\right\}\\
+        &\subseteq \mathfrak{p}\mathcal{O}.
+    \end{align*}
+    Note 
+    \[
+    \sigma^{-1}\left(\mathfrak{p}\mathcal{O}\right)\subseteq \mathfrak{p}\mathcal{O}\implies \mathfrak{p}\mathcal{O}\subseteq \sigma\left(\mathfrak{p}\mathcal{O}\right).
+    \]
+    We have 
+    \[
+    \sigma\left(\mathfrak{p}\mathcal{O}\right)=\mathfrak{p}\mathcal{O}= \mathfrak{P}_1^{e_1}\cdots\mathfrak{P}_r^{e_r}=\sigma\left(\mathfrak{P}_1\right)^{e_1}\cdots\sigma\left(\mathfrak{P}_r\right)^{e_r}.
+    \]
+    For any $1\le m\le r$, there exists some $\sigma \in \mathrm{Gal}(L/K)$ such that $\sigma\left(\mathfrak{P}_m\right)=\mathfrak{P}_1$. By the uniqueness of prime factorization, there must be $e_m=e_1$. Thus we proved
+    \[
+    e_1=e_2=\cdots=e_r=e.
+    \]
 \end{prf}
 
 \section{Absolute Value}

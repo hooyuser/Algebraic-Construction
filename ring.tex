@@ -70,8 +70,9 @@ Next we define the morphisms in the category $\mathsf{Ring}$.
         \item \textbf{Two-sided ideal}: If \( I \) is both a left and a right ideal, then it is called a two-sided ideal.
     \end{itemize}
 
-A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called a \textbf{proper ideal}. In commutative rings, left and right ideals are the same and are simply called ideals.
+A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called a \textbf{proper ideal}. In commutative rings, left and right ideals are the same and are simply called ideals. 
 \end{definition}
+Sometimes we just say ideal to mean two-sided ideal.
 
 \begin{definition}{Kernel of a Ring Homomorphism}{}
     Let $f:R\to S$ be a ring homomorphism. The \textbf{kernel} of $f$ is the set
@@ -80,6 +81,25 @@ A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called
     \]
     It is easy to check that $\ker f$ is a two-sided ideal of $R$.
 \end{definition}
+
+\begin{proposition}{Surjective Ring Homomorphisms Map Ideals to Ideals}{}
+    A ring homomorphism $f:R\to S$ is surjective if and only if maps two-sided ideals to two-sided ideals.
+\end{proposition}
+\begin{prf}
+    First, assume that \( f \) is surjective. Let \( I \) be any two-sided ideal of \( R \). Since $f$ is a homomorphism between addition group $(R,+)$ and $(S,+)$, $(f(I),+)$ is a subgroup of $(S,+)$. Now take any element \( y \in f(I) \) and any \( s \in S \), we are to show $sy\in f(I)$ and $ys\in I$. Since \( f \) is surjective, there exists an \( r \in R \) such that \( s = f(r) \). Also, since \( y \in f(I) \), there exists an \( x \in I \) with \( y = f(x) \). Then
+\[
+s y = f(r) f(x) = f(rx).
+\]
+Because \( I \) is a two-sided ideal in \( R \), we have \( rx \in I \), hence \( f(rx) \in f(I) \). Similarly,
+\[
+y s = f(x) f(r) = f(xr) \in f(I).
+\]
+Thus, \( f(I) \) is a two-sided ideal of \( S \).
+
+Conversely, suppose that for every two-sided ideal \( I \) of \( R \), the set \( f(I) \) is a two-sided ideal in \( S \). In particular, consider the two-sided ideal \( I = R \). Then \( f(R) \) is a two-sided ideal of \( S \). Note that \(1_S\in f(R) \). We have \( f(R) = S \), so \( f \) is surjective.
+
+\end{prf}
+
 
 
 \begin{definition}{Reduced Ring}{}
