@@ -470,6 +470,16 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 
 \section{Construction}
 
+\subsection{Product}
+\begin{definition}{Product of Commutative Rings}{}
+    Let $(R_i)_{i\in I}$ be a family of commutative rings. The \textbf{product} of the family $(R_i)_{i\in I}$ is the set of all families $(r_i)_{i\in I}$ where $r_i\in R_i$ for all $i\in I$. The addition and multiplication are defined componentwise:
+    \begin{align*}
+        (r_i)_{i\in I}+(s_i)_{i\in I}&=(r_i+s_i)_{i\in I},\\
+        (r_i)_{i\in I}\cdot(s_i)_{i\in I}&=(r_i\cdot s_i)_{i\in I}.
+    \end{align*}
+\end{definition}
+
+
 \subsection{Quotient Ring}
 \begin{definition}{Quotient Ring}{}
     Let $R$ be a commutative ring and $I\subseteq R$ be an ideal. The \textbf{quotient ring} of $R$ by $I$, denoted by $R/I$, is the set of equivalence classes of the relation $\sim$ on $R\times R$ defined by $$(a,b)\sim (c,d)\iff a-d\in I.$$ The equivalence class of $(a,b)$ is denoted by $a+I$. The addition and multiplication on $R/I$ are defined as follows:
@@ -520,8 +530,12 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
         \item $a,b\in S\implies ab\in S$.
     \end{enumerate}
 \end{definition}
-
-
+\begin{proposition}
+    Let $\varphi:R\to R'$ be a ring homomorphism and $S\subseteq R$ be a multiplicative subset. Then $\varphi(S)$ is a multiplicative subset of $\subseteq R'$.
+\end{proposition}
+\begin{prf}
+    Since $1\in S$, we have $1'=\varphi(1)\in \varphi(S)$. For any $a',b'\in \varphi(S)$, there exist $a,b\in S$ such that $a'=\varphi(a)$ and $b'=\varphi(b)$. Since $S$ is multiplicative, we have $ab\in S$. Thus $a'b'=\varphi(a)\varphi(b)=\varphi(ab)\in \varphi(S)$. That implies $\varphi(S)$ is a multiplicative subset of $R'$.
+\end{prf}
 
 \begin{definition}{Localization of a Ring}{}
     Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset. The \textbf{localization} of $R$ at $S$ is the ring $S^{-1}R$ defined as the set of equivalence classes of the relation $\sim$ on $R\times S$ defined by $$(a,s)\sim (b,t)\iff \exists u\in S\text{ such that }u(at-bs)=0.$$
@@ -532,6 +546,10 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
     \end{align*}
     The addition identify is $\frac{0}{1}$ and the multiplication identity is $\frac{1}{1}$.
 \end{definition}
+
+The localization of a commutative ring $R$ at a multiplicative subset $S$ is a commutative ring $S^{-1}R$. If we consider $R$ as an $R$-module, then the localization of the $R$-module $R$ at $S$ is an $S^{-1}R$-module $S^{-1}R$. The underlying sets of $S^{-1}R$ as a commutative ring and as an $S^{-1}R$-module are the same. Furthermore, the ring structure of $S^{-1}R$ is compatible with the $S^{-1}R$-module structure, which makes $S^{-1}R$ a commutative $S^{-1}R$-algebra. By composing the localization map $R\to S^{-1}R$, $S^{-1}R$ can also be viewed as a commutative $R$-algebra.
+
+Next we introduce the universal property of localization. It says localization is the most economical way to make a multiplicative subset invertible.
 
 
 \begin{proposition}{Universal Property of Localization}{universal_property_of_localization}
@@ -584,14 +602,86 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
     which implies $\psi'$ is injective.
 \end{prf}
 
+\begin{proposition}{Localization of Commutative Rings as a Functor}{}
+    Let $\mathsf{CRingM}$ be the category, whose objects and morphisms defined as follows:
+    \begin{itemize}
+        \item The objects are pairs $(R,S)$ where $R$ is a commutative ring and $S\subseteq R$ is a multiplicative subset.
+        \item The morphisms from $(R,S)$ to $(R',S')$ are ring homomorphisms $f:R\to R'$ such that $f(S)\subseteq S'$.
+    \end{itemize}
+    Localization of commutative rings is a functor
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{CRingM}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{CRing}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            (R,S)  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] S^{-1}R\arrow[dd, "L(f)"{name=R}] \&[-30pt]\ni
+            \&[-30pt]\frac{a}{s}\arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "L", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            (R',S') \& \& \&  S'^{-1}R'\&[-30pt]\ni
+            \&[-30pt]\frac{f(a)}{f(s)}
+        \end{tikzcd}
+        \]  
+        Let $G:\mathsf{CRing}\to \mathsf{CRingM}$ be functor that sends $R$ to $(R,R^\times)$ and $f:R\to R'$ to $(f,f|_{R^\times})$.
+        Then we have a pair of adjoint functors
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                \mathsf{CRingM} \arrow[r, "L"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+                \mathsf{CRing} \arrow[l, "G"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+                \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+            \end{tikzcd}
+        \]
+        and natural isomorphism
+        \[
+        \mathrm{Hom}_{\mathsf{CRing}}(S^{-1}R, T)\cong \mathrm{Hom}_{\mathsf{CRingM}}((R,S), (T,T^\times)).
+        \]
+\end{proposition}
 
-Localization is the most economical way to make a multiplicative subset invertible.
+
+
+
+\begin{proposition}{Localization Functor for $R\text{-}\mathsf{CAlg}$}{} 
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Define the localization functor as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+           R\text{-}\mathsf{CAlg}\&[-25pt]\&[+10pt]\&[-30pt] S^{-1}R\text{-}\mathsf{CAlg}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            A  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] S^{-1}A\arrow[dd, "S^{-1}(f)"{name=R}] \&[-30pt]\ni
+            \&[-30pt]\frac{a}{s}\arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "S^{-1}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            B \& \& \&  S^{-1}B\&[-30pt]\ni
+            \&[-30pt]\frac{f(a)}{s}
+        \end{tikzcd}
+        \]  
+        Let $\mathrm{Res}_{R\to S^{-1}R}: S^{-1}R\text{-}\mathsf{CAlg}\to R\text{-}\mathsf{CAlg}$ be the functor that regards $S^{-1}R$-algebras as $R$-algebras. Then we have a pair of adjoint functors    
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                R\text{-}\mathsf{CAlg} \arrow[r, "S^{-1}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+                S^{-1}R\text{-}\mathsf{CAlg} \arrow[l, "{\mathrm{Res}}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+                \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+            \end{tikzcd}    
+        \]
+         and natural isomorphism
+        \[
+        \mathrm{Hom}_{S^{-1}R\text{-}\mathsf{CAlg}}(S^{-1}A, B)\cong \mathrm{Hom}_{R\text{-}\mathsf{CAlg}}(A, \mathrm{Res}_{R\to S^{-1}R}(B)).    
+        \]
+        And we have the following commutative diagram in $R\text{-}\mathsf{CAlg}$
+        \[
+            \begin{tikzcd}
+                A \arrow[r, "f"] \arrow[d, "l_1"']      & B \arrow[d, "l_2"] \\
+                S^{-1}A \arrow[r, "S^{-1}(f)"', dashed] & S^{-1}B           
+            \end{tikzcd}
+        \]
+\end{proposition}
+
+
+
 
 
 \begin{proposition}{Properties of Localization of Rings}{prop_of_localization_of_rings}
     Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset. Then
     \begin{enumerate}[(i)]
-        \item $S^{-1}R=0$ if and only if $0\in S$.
+        \item $S^{-1}R=\{0\}$ if and only if $0\in S$.
         \item If $0\notin S$, then $\frac{a}{s}$ is invertible in $S^{-1}R$ if and only if there exists $r\in R$ such that $ra\in S$.
         \item If $0\notin S$, the localization map $\varphi:R\to S^{-1}R$ is injective if and only if $S$ contains no zero divisors.
         \item Localization preserves nilradical: $\mathfrak{N}_{S^{-1}R}=S^{-1}\mathfrak{N}_R$. Especially, $R$ is reduced $\implies$ $S^{-1}R$ is reduced.
@@ -634,7 +724,7 @@ Localization is the most economical way to make a multiplicative subset invertib
 \end{prf}
 
 \begin{definition}{Field of Fractions}{}
-    If $R$ be an integral domain, then $S=R-\{0\}$ is a multiplicative subset. The total ring of fractions $\mathrm{Frac}(R)=S^{-1}R$ is a field, call the \textbf{field of fractions} of $R$.
+    If $R$ be an integral domain, then $S=R-\{0\}$ is a multiplicative subset. The total ring of fractions $\mathrm{Frac}(R)=S^{-1}R=R_{(0)}$ is a field, call the \textbf{field of fractions} of $R$.
 \end{definition}
 
 
@@ -688,11 +778,11 @@ Localization is the most economical way to make a multiplicative subset invertib
 
 
 \begin{proposition}{Localization Respects Quotients}{localization_at_ideal_respects_quotients}
-    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $I$ be an ideal of $R$. Then we have an $R$-algebra isomorphism $S^{-1}(R/I)\cong (S^{-1}R)/(S^{-1}I)$ and the following commutative diagram in $R\text{-}\mathsf{CAlg}$ (and accordingly in $\mathsf{CRing}$)
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $I$ be an ideal of $R$. Let $\pi_I:R\to R/I$ be the projection and $\overline{S}=\pi_I(S)$. Then we have an $R$-algebra isomorphism $\overline{S}^{-1}(R/I)\cong (S^{-1}R)/(S^{-1}I)$ and the following commutative diagram in $R\text{-}\mathsf{CAlg}$ (and accordingly in $\mathsf{CRing}$)
     \[
         \begin{tikzcd}
             R \arrow[r, "\pi_I"] \arrow[d, "l_S"'] &[+5em] R/I \arrow[d, "l_S"]              \\[+2em]
-            S^{-1}R \arrow[r, "\pi_{S^{-1}I}"']       & S^{-1}(R/I)\cong (S^{-1}R)/(S^{-1}I)
+            S^{-1}R \arrow[r, "\pi_{S^{-1}I}"']       & \overline{S}^{-1}(R/I)\cong (S^{-1}R)/(S^{-1}I)
             \end{tikzcd}
     \]
 \end{proposition}
@@ -723,7 +813,7 @@ Localization is the most economical way to make a multiplicative subset invertib
     \[
         \begin{tikzcd}
             R \arrow[r, "\pi_\mathfrak{p}"] \arrow[d, "l_{R-\mathfrak{p}}"'] &[+5em] R/\mathfrak{p} \arrow[d, "l_{R-\mathfrak{p}}"]              \\[+2em]
-            R_\mathfrak{p} \arrow[r, "\pi_{\mathfrak{p}\hspace{-1pt}R_\mathfrak{p}}"']       & (R/\mathfrak{p})_\mathfrak{p}\cong R_\mathfrak{p}/\mathfrak{p} R_\mathfrak{p}
+            R_\mathfrak{p} \arrow[r, "\pi_{\mathfrak{p}\hspace{-1pt}R_\mathfrak{p}}"']       & \mathrm{Frac}(R/\mathfrak{p})\cong R_\mathfrak{p}/\mathfrak{p} R_\mathfrak{p}
             \end{tikzcd}
     \]
 \end{prf}
@@ -861,11 +951,71 @@ Localization is the most economical way to make a multiplicative subset invertib
     The universal property of free $R$-module induces a unique $R$-linear map $\widetilde{j}:R^{\oplus}\to R[X]$ such that $j=\widetilde{j}\circ \iota$. And the universal property of free commutative $R$-algebra induces a unique $R$-algebra homomorphism $\widetilde{f}:R[X]\to A$ such that $f=\widetilde{f}\circ j$. Note $f=\varphi\circ \iota=\left(\widetilde{f}\circ \widetilde{j}\right)\circ \iota$. By the uniqueness of the universal property of $R^{\oplus}$, we have $\widetilde{f}\circ \widetilde{j}=\varphi$. Since $\widetilde{f}\circ \widetilde{j}$ is surjective, $\widetilde{f}$ must be surjective, which implies $A$ is a finite-type $R$-algebra.
 \end{prf}
 
-\begin{corollary}{}{}
+\begin{corollary}{Finite $\implies$ Finite Type}{}
     Let $\varphi:R\to A$ be a finite homomorphism between two commutative rings. Then $\varphi$ is of finite type.
 \end{corollary}
 \begin{prf}
     This is a reformulation of \Cref{th:finite_generation_implies_finite_type}.
+\end{prf}
+
+
+
+\begin{proposition}{Quotient Respect Finiteness}{quotient_and_localization_respect_finiteness}
+    Let $\varphi:R\to T$ be an finite homomorphism of commutative rings. Then 
+    \begin{enumerate}[(i)]
+        \item Suppose $\mathfrak{b}$ is an ideal of $S$, and $\mathfrak{a}:=\varphi^{-1}(\mathfrak{b})$. Then $\overline{\varphi}:R/\mathfrak{a}\to T/\mathfrak{b}$ is finite.
+        \item Suppose $S$ is a multiplicative set of $R$, and $\widetilde{S}=\varphi(S)$. Then $\widetilde{\varphi}:S^{-1}R\to \widetilde{S}^{-1}T$ is finite.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Let $\mathfrak{a}:=\varphi^{-1}(\mathfrak{b})$. Since 
+    \[
+    \ker (\pi_{\mathfrak{b}}\circ \varphi )= \varphi^{-1}\left(\ker \pi_{\mathfrak{b}}\right)=\varphi^{-1}\left(\mathfrak{b}\right)=\mathfrak{a},
+    \]
+    by the universal property of quotient ring, there is an injective ring homomorphism 
+    \begin{align*}
+        \overline{\varphi}:R/\mathfrak{a}&\hookrightarrow T/\mathfrak{b}\\
+        r+\mathfrak{a}&\longmapsto \varphi(r)+\mathfrak{b}.
+    \end{align*}
+     such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            R \arrow[r, "\varphi", hook] \arrow[d, "\pi_{\mathfrak{a}}"', two heads] & T \arrow[d, "\pi_{\mathfrak{b}}", two heads] \\
+            R/\mathfrak{a} \arrow[r, "\overline{\varphi}"', dashed, hook]                & T/\mathfrak{b}             
+            \end{tikzcd}
+    \]
+    Since $T$ is a finitely generated $R$-module, we can suppose the generating set of $T$ is $\{t_1,\cdots,t_n\}$. Then for any $t+\mathfrak{b}\in T/\mathfrak{b}$, there exists $r_1,\cdots,r_n\in R$ such that $t=\sum_{i=1}^n \varphi(r_i)t_i$. Thus we have
+    \[
+    t+\mathfrak{b}=\left(\sum_{i=1}^n \varphi(r_i)t_i\right)+\mathfrak{b}
+    =\sum_{i=1}^n \left(\varphi(r_i)t_i+\mathfrak{b}\right)=\sum_{i=1}^n (\varphi(r_i)+\mathfrak{b})\left(t_i+\mathfrak{b}\right)=\sum_{i=1}^n \overline{\varphi}(r_i+\mathfrak{a})\left(t_i+\mathfrak{b}\right).
+    \]
+    Hence $\{t_1+\mathfrak{b},\cdots,t_n+\mathfrak{b}\}$ generates $T/\mathfrak{b}$. Therefore we proved $T/\mathfrak{b}$ is a finitely generated $R/\mathfrak{a}$-module, which implies $\overline{\varphi}$ is finite.
+    \item Regard $R,T$ as $R$-modules. Since the localization functor $S^{-1}:R\text{-}\mathsf{Mod}\to S^{-1}R\text{-}\mathsf{Mod}$ is exact, from the exact sequence in $R\text{-}\mathsf{Mod}$
+    \[
+    0\longrightarrow R\longrightarrow T
+    \]
+    we get the exact sequence in $S^{-1}R\text{-}\mathsf{Mod}$
+    \[
+    0\longrightarrow S^{-1}R\longrightarrow S^{-1}T.
+    \]
+    Note that the underlying sets of the $S^{-1}R$-module $S^{-1}T$ and the commutative ring $S^{-1}T$ coincide and the two algebraic structures on the same underlying set are compatible, which makes $S^{-1}T$ an $S^{-1}R$-algebra. 
+    For any $\frac{a}{s}\in S^{-1}T$, there exists a monic polynomial
+    \[
+    f(x)=x^n+r_{n-1}x^{n-1}+\cdots+r_0\in R[x]
+    \]
+    such that 
+    \[
+        \leftindex^{\iota}\!f(a)=a^n+r_{n-1}a^{n-1}+\cdots+r_0=0_T.
+    \]
+    This equation can be rewritten as
+    \[
+\left(\frac{a}{s}\right)^n+\frac{r_{n-1}}{s}\left(\frac{a}{s}\right)^{n-1}+\cdots+\frac{r_0}{s^n}=0_{S^{-1}T},
+    \]
+    which implies $\frac{a}{s}$ is an integral element over $S^{-1}R$.
+    
+
+\end{enumerate}
 \end{prf}
 
 \subsection{Integral Commutative Ring Homomorphism}
@@ -960,7 +1110,7 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
 \begin{proposition}{Quotient and Localization Respect Integral Extensions}{quotient_and_localization_respect_integral_extensions}
     Let $R\subseteq T$ be an integral extension of commutative rings. Then 
     \begin{enumerate}[(i)]
-        \item If $\mathfrak{b}$ is an ideal of $S$, then $\mathfrak{a}:= R\cap \mathfrak{b}$ is an ideal of $R$ and $S/\mathfrak{b}$ is integral over $R/\mathfrak{a}$.
+        \item If $\mathfrak{b}$ is an ideal of $T$, then $\mathfrak{a}:= R\cap \mathfrak{b}$ is an ideal of $R$ and $S/\mathfrak{b}$ is integral over $R/\mathfrak{a}$.
         \item If $S$ is a multiplicative set in $R$, then $S^{-1}T$ is integral over $S^{-1}R$.
     \end{enumerate}
 \end{proposition}
@@ -972,7 +1122,7 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
     \]
     by the universal property of quotient ring, there is an injective ring homomorphism 
     \begin{align*}
-        \overline{\iota}:R/\mathfrak{a}&\hookrightarrow S/\mathfrak{b}\\
+        \overline{\iota}:R/\mathfrak{a}&\hookrightarrow T/\mathfrak{b}\\
         r+\mathfrak{a}&\longmapsto r+\mathfrak{b}.
     \end{align*} such that the following diagram commutes
     \[
@@ -1417,9 +1567,9 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
         \mathcalo/\mathfrak{p}&\hookrightarrow \mathcal{O}/\mathfrak{P}_m\\
         a+\mathfrak{p}&\mapsto a+\mathfrak{P}_m.
     \end{align*}
-    The degree of this extension is called the \textbf{inertia degree} of $\mathfrak{P}_m$ over $\mathfrak{p}$, denoted by 
+    Let $\kappa(\mathfrak{p})=\mathcalo/\mathfrak{p}$, $\kappa(\mathfrak{P}_m)=\mathcal{O}/\mathfrak{P}_m$. The degree of the field extension $\kappa(\mathfrak{P}_m)/\kappa(\mathfrak{p})$ is called the \textbf{inertia degree} of $\mathfrak{P}_m$ over $\mathfrak{p}$, denoted by 
     \[
-    f_m=[\mathcal{O}/\mathfrak{P}_m:\mathcalo/\mathfrak{p}].
+    f_m=[\kappa(\mathfrak{P}_m):\kappa(\mathfrak{p})]=[\mathcal{O}/\mathfrak{P}_m:\mathcalo/\mathfrak{p}].
     \]
     \begin{itemize}
         \item The prime ideal $\mathfrak{P}_m$ is called \textbf{unramified over $\mathcalo$} if $e_m=1$ and the field extension $\mathcalo/\mathfrak{p}\hookrightarrow \mathcal{O}/\mathfrak{P}_m$ is separable.
@@ -1556,9 +1706,21 @@ Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L
     \[
     D_{\mathfrak{P}}=\left\{ \sigma\in \mathrm{Gal}(L/K)\midv \sigma\left(\mathfrak{P}\right)=\mathfrak{P}\right\}.
     \] 
+    $D_{\mathfrak{P}}$ as a subgroup of $\mathrm{Gal}(L/K)$ also acts on $L$, and the $D_{\mathfrak{P}}$-invariant elements of $L$ form a subfield of $L$, called the \textbf{decomposition field} of $\mathfrak{P}$, denoted by 
+    \[
+    L^{D_{\mathfrak{P}}}=\left\{ x\in L\midv \sigma(x)=x\text{ for all }\sigma\in D_{\mathfrak{P}}\right\}.
+    \]
 \end{definition}
 
-
+\begin{proposition}{Decomposition Groups for Prime Ideals over $\mathfrak{p}$ are Conjugate}{}
+    Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. For any $\sigma\in \mathrm{Gal}(L/K)$ and any $\mathfrak{P}\in\spec\left(\mathcal{O}\right)$, we have
+    \[
+    D_{\sigma\left(\mathfrak{P}\right)}=\sigma D_{\mathfrak{P}}\sigma^{-1}.
+    \]
+\end{proposition}
+\begin{prf}
+    This is a direct consequence of \Cref{th:properties_of_stabilizer_subgroup}.
+\end{prf}
 
 \begin{proposition}{}{}
     Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak p$ is a nonzero prime ideal of $\mathcalo$, and $\mathfrak p\mathcal{O}$ can be factored as
@@ -1575,15 +1737,15 @@ Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L
     \[
         \mathfrak p\mathcal{O} =\left(  \mathfrak P_1\cdots\mathfrak P_r\right)^e=\left( \prod_{G\cdot \mathfrak P\in G\backslash \!\spec\left(\mathcal{O}\right)}\mathfrak P\right)^e.
     \]
-    By orbit-stabilizer theorem, we have
+    For any $m\in\{1,\cdots, r\}$, by orbit-stabilizer theorem, we have
     \[
-    \frac{\left|G\right|}{\left|D_{\mathfrak{P}_1}\right|}=|G \cdot \mathfrak{P}_1|=r\text{ and }\left|D_{\mathfrak{P}_1}\right|=ef,
+    \frac{\left|G\right|}{\left|D_{\mathfrak{P}_m}\right|}=|G \cdot \mathfrak{P}_m|=r\text{ and }\left|D_{\mathfrak{P}_m}\right|=ef.
     \]
-    So the decomposition group $D_{\mathfrak{P}_1}$ characterizes splitting behavior of $\mathfrak{p}$ in $L$:
-    \begin{align*}
-        D_{\mathfrak{P}_1}=\{\mathrm{id}\}&\iff \mathfrak{p}\text{ splits completely in }L,\\
-        D_{\mathfrak{P}_1}=G&\iff \mathfrak{p}\text{ is nonsplit in }L.
-    \end{align*}
+    So the decomposition group $D_{\mathfrak{P}_m}$ characterizes splitting behavior of $\mathfrak{p}$ in $L$:
+    \begin{alignat*}{4}
+        &D_{\mathfrak{P}_m} = \{\mathrm{id}\} \quad &\iff\quad & L^{D_{\mathfrak{P}_m}} = L \quad &\iff\quad & \mathfrak{p} \text{ splits completely in } L, \\
+        &D_{\mathfrak{P}_m} = G              \quad &\iff\quad & L^{D_{\mathfrak{P}_m}} = K \quad &\iff\quad & \mathfrak{p} \text{ is nonsplit in } L.
+    \end{alignat*}
 \end{proposition}
 \begin{prf}
     Let $\mathfrak{P}=\mathfrak{P}_1$. Suppose $\sigma \in \mathrm{Gal}(L/K)$. Since 
@@ -1624,6 +1786,27 @@ Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L
     \[
     e_1=e_2=\cdots=e_r=e.
     \]
+\end{prf}
+
+\begin{proposition}{}{}
+    Let $A$ be a normal domain with fraction field $K$. Let $L/K$ be a (possibly infinite) Galois extension. Let $G = \text{Gal}(L/K)$ and let
+    $B$ be the integral closure of $A$ in $L$.
+\begin{enumerate}[(i)]
+    \item For any two primes
+    $\mathfrak P, \mathfrak P' \in \spec(B)$ lying over the same prime in $A$, there exists a $\sigma \in G$ with $\sigma(\mathfrak P) = \mathfrak P'$.
+    \item Let $\mathfrak P \in \spec(B) $ be a prime lying over
+    $\mathfrak p \in \spec(A)$. Then $\kappa(\mathfrak P)/\kappa(\mathfrak p)$
+    is an algebraic normal field extension and the map
+    $$
+    D = \{\sigma \in G \mid \sigma(\mathfrak q) = \mathfrak q\}
+    \longrightarrow
+    \text{Aut}(\kappa(\mathfrak q)/\kappa(\mathfrak p))
+    $$
+is surjective.
+\end{enumerate}
+\end{proposition}
+\begin{prf}
+\url{https://stacks.math.columbia.edu/tag/0BRK}
 \end{prf}
 
 \section{Absolute Value}
