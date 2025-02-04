@@ -479,6 +479,23 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
     \end{align*}
 \end{definition}
 
+\begin{proposition}{Ideals of Finite Product of Commutative Rings}{}
+    Let $R_1, R_2, \cdots, R_n$ be commutative rings. Then $I$ is an ideal of the product $R_1\times R_2\times \cdots \times R_n$ if and only if $I=I_1\times I_2\times \cdots \times I_n$ where $I_i$ is an ideal of $R_i$ for all $i=1,2,\cdots,n$.
+\end{proposition}
+\begin{prf}
+    It is sufficient to show this for $n=2$. Let $I$ be an ideal of $R_1\times R_2$. Let $\mathrm{pr}_1:R_1\times R_2\to R_1$ and $\mathrm{pr}_2:R_1\times R_2\to R_2$ be the natural projections. Then $\mathrm{pr}_1(I)$ and $\mathrm{pr}_2(I)$ are ideals of $R_1$ and $R_2$ respectively. It is easy to check that $I\subseteq \mathrm{pr}_1(I)\times \mathrm{pr}_2(I)$. To show the reverse inclusion, let $(a,b)\in \mathrm{pr}_1(I)\times \mathrm{pr}_2(I)$. Then there exist $(a,y)\in I$ such that $\mathrm{pr}_1((a,y))=a$ and $(x,b)\in I$ such that $\mathrm{pr}_2((x,b))=b$. Then 
+    \[
+    (a,b)=(1,0)(a,y)+(0,1)(x,b)\in I.
+    \]
+    This implies $I=\mathrm{pr}_1(I)\times \mathrm{pr}_2(I)$.
+
+    Conversely, let $I_1$ and $I_2$ be ideals of $R_1$ and $R_2$ respectively. Then $I_1\times I_2$ is an additive subgroup of $R_1\times R_2$. For any $(a,b)\in I_1\times I_2$ and $(x,y)\in R_1\times R_2$, we have
+    \[
+    (x,y)(a,b)=(xa,yb)\in I_1\times I_2.
+    \]
+    This implies $I_1\times I_2$ is an ideal of $R_1\times R_2$.
+\end{prf}
+
 
 \subsection{Quotient Ring}
 \begin{definition}{Quotient Ring}{}

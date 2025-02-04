@@ -2147,14 +2147,15 @@ can be translated into the following calculus rules
 \end{definition}
 
 \begin{definition}{Limit}{}
-    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The \textbf{limit} of $F$, denoted by $\varprojlim F$, is the terminal object of $\mathsf{Cone}(\textsf{C},F)$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
+    Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The \textbf{limit} of $F$, denoted by $\varprojlim_\mathsf{J} F$, is the terminal object of $\mathsf{Cone}(\textsf{C},F)$. For each morphism $\lambda:i\to j$ in $\mathsf{J}$, we have the following commutative diagram
     \[
         \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
             \&   [-1.5em]                \&[-1em] C \arrow[rdd, draw=cyan, "h_j"] \arrow[ldd, draw=cyan, "h_i"'] \arrow[d, dash pattern=on 4pt off 2pt, draw=arrowRed] \& [-1em]                  \\[+0.2cm]
-            \&                   \& \varprojlim F\arrow[ld, draw=arrowBlue, shorten <=-3pt, "\ell_i" yshift=4.5pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "\ell_j"' yshift=4pt]               \&                   \\[-0.1cm]
+            \&                   \& \varprojlim_{\mathsf{J}} F\arrow[ld, draw=arrowBlue, shorten <=-3pt, "\ell_i" yshift=4.5pt] \arrow[rd, draw=arrowBlue, shorten <=-4.5pt, "\ell_j"' yshift=4pt]               \&                   \\[-0.1cm]
         \& F(i) \arrow[rr, "F(\lambda)"']\&   \& F(j)
         \end{tikzcd}
     \]
+    For simplicity, we may write $\varprojlim F$ instead of $\varprojlim_\mathsf{J} F$.
 \end{definition}
 
 \begin{definition}{Cocone}{}
@@ -2206,10 +2207,11 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     \[
         \begin{tikzcd}[ampersand replacement=\&, every arrow/.append style={-latex, line width=1.1pt}]
             \&   [-1.5em]                \&[-1em] C \& [-1em]                  \\[+0.2cm]
-            \&                   \& \varinjlim F \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]         \&                   \\[-0.1cm]
+            \&                   \& \varinjlim_\mathsf{J} F \arrow[u, dash pattern=on 4pt off 2pt, draw=arrowRed]         \&                   \\[-0.1cm]
         \& F(i) \arrow[ruu, draw=cyan, "h_i"]\arrow[ru, draw=arrowBlue, shorten >=-3.5pt, "\ell_i"' yshift=4.5pt]        \arrow[rr, "F(\lambda)"']\&   \& F(j)\arrow[luu, draw=cyan, "h_j"']\arrow[lu, draw=arrowBlue, shorten >=-3.7pt, "\ell_j" yshift=4.5pt] 
         \end{tikzcd}
     \]
+    For simplicity, we may write $\varinjlim F$  instead of $\varinjlim_\mathsf{J} F$.
 \end{definition}
 
 
@@ -2288,85 +2290,85 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     Since Yoneda embedding is full and faithful, we have $\varinjlim h^X\cong \{*\}$.
 \end{prf}
 
-\begin{definition}{$\varprojlim$ Functor}{}
-    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F:\mathsf{J}\to\mathsf{C}$, $\varprojlim F$ exists, then we have a functor
+\begin{definition}{$\varprojlim_{\mathsf{J}}$ Functor}{}
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F:\mathsf{J}\to\mathsf{C}$, $\varprojlim_{\mathsf{J}} F$ exists, then we have a functor
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             [\mathsf{J},\mathsf{C}]\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
            F  \arrow[dd, "\theta"{name=L, left}, Rightarrow] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]\varprojlim F\arrow[dd, "\varprojlim \theta"{name=R}] \\ [-10pt] 
-            \&  \phantom{.}\arrow[r, "\varprojlim", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-        G  \& \& \& \varprojlim G
+            \& [-30pt]\varprojlim_{\mathsf{J}} F\arrow[dd, "\varprojlim_{\mathsf{J}} \theta"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\varprojlim_{\mathsf{J}}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+        G  \& \& \& \varprojlim_{\mathsf{J}} G
         \end{tikzcd}
     \]
-    where $\varprojlim \theta$ is induced by the universal property of $\varprojlim G$
+    where $\varprojlim_{\mathsf{J}} \theta$ is induced by the universal property of $\varprojlim_{\mathsf{J}} G$
     \[
         \begin{tikzcd}[ampersand replacement=\&, background color=mydefinitbg]
-            \& \varprojlim F \arrow[ld] \arrow[rd] \&                             \\[+10pt]
+            \& \varprojlim_{\mathsf{J}} F \arrow[ld] \arrow[rd] \&                             \\[+10pt]
 F(i) \arrow[rr, black!35] \arrow[dd, "\theta_i"'] \&                                                                               \& F(j) \arrow[dd, "\theta_j"] \\[+10pt]
-            \& \varprojlim G \arrow[ld] \arrow[rd]                                           \&                             \\[+10pt]
+            \& \varprojlim_{\mathsf{J}} G \arrow[ld] \arrow[rd]                                           \&                             \\[+10pt]
 G(i) \arrow[rr]                         \&                                                                               \& G(j)      
     % absulute arrow
-    \arrow[from=1-2, to=3-2, "\varprojlim \theta"', near end, crossing over]                  
+    \arrow[from=1-2, to=3-2, "\varprojlim_{\mathsf{J}} \theta"', near end, crossing over]                  
     \end{tikzcd}
     \]
 \end{definition}
 
-\begin{definition}{$\varinjlim$ Functor}{}
-    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F:\mathsf{J}\to\mathsf{C}$, $\varinjlim F$ exists, then we have a functor
+\begin{definition}{$\varinjlim_{\mathsf{J}}$ Functor}{}
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F:\mathsf{J}\to\mathsf{C}$, $\varinjlim_{\mathsf{J}} F$ exists, then we have a functor
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             [\mathsf{J},\mathsf{C}]\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
            F  \arrow[dd, "\theta"{name=L, left}, Rightarrow] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]\varinjlim F\arrow[dd, "\varinjlim \theta"{name=R}] \\ [-10pt] 
-            \&  \phantom{.}\arrow[r, "\varinjlim", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-        G  \& \& \& \varinjlim G
+            \& [-30pt]\varinjlim_{\mathsf{J}} F\arrow[dd, "\varinjlim_{\mathsf{J}} \theta"{name=R}] \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\varinjlim_{\mathsf{J}}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+        G  \& \& \& \varinjlim_{\mathsf{J}} G
         \end{tikzcd}
     \]
-    where $\varinjlim \theta$ is induced by the universal property of $\varinjlim F$
+    where $\varinjlim_{\mathsf{J}} \theta$ is induced by the universal property of $\varinjlim_{\mathsf{J}} F$
     \[
         \begin{tikzcd}[ampersand replacement=\&, background color=mydefinitbg]
-            \& \varinjlim F   \&                             \\[+10pt]
+            \& \varinjlim_{\mathsf{J}} F   \&                             \\[+10pt]
 F(i) \arrow[ru]\arrow[rr, black!35] \arrow[dd, "\theta_i"'] \&                                                                               \& F(j) \arrow[lu]\arrow[dd, "\theta_j"] \\[+10pt]
-            \& \varinjlim G                                       \&                             \\[+10pt]
+            \& \varinjlim_{\mathsf{J}} G                                       \&                             \\[+10pt]
 G(i) \arrow[ru]\arrow[rr]                         \&                                                                               \& G(j)\arrow[lu]      
     % absulute arrow
-    \arrow[from=1-2, to=3-2, "\varinjlim \theta"', near end, crossing over]                  
+    \arrow[from=1-2, to=3-2, "\varinjlim_{\mathsf{J}} \theta"', near end, crossing over]                  
     \end{tikzcd}
     \]
 \end{definition}
 
 
 
-\begin{proposition}{Diagonal is Left Adjoint to Limit: $\diagfunctor\dashv \varprojlim$}{}
-    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F\in[\mathsf{J},\mathsf{C}]$, $\varprojlim F$ exists, then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
+\begin{proposition}{Diagonal is Left Adjoint to Limit: $\diagfunctor\dashv \varprojlim_{\mathsf{J}}$}{}
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F\in[\mathsf{J},\mathsf{C}]$, $\varprojlim_{\mathsf{J}} F$ exists, then the functor $\varinjlim_{\mathsf{J}}:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{C} \arrow[r, "\diagfunctor"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
-            \left[\mathsf{J},\mathsf{C}\right] \arrow[l, "\varprojlim"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+            \left[\mathsf{J},\mathsf{C}\right] \arrow[l, "\varprojlim_{\mathsf{J}}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
             \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
         \end{tikzcd}    
     \]
     We have a natural isomorphism
     \[
-        \mathrm{Hom}_{\left[\mathsf{J},\mathsf{C}\right]}\left(\diagfunctor C, F\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(C,\varprojlim F\right)
+        \mathrm{Hom}_{\left[\mathsf{J},\mathsf{C}\right]}\left(\diagfunctor C, F\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(C,\varprojlim_{\mathsf{J}} F\right)
     \]
 \end{proposition}
 
-\begin{proposition}{Diagonal is Right Adjoint to Colimit:  $\varinjlim\dashv \diagfunctor$}{}
-    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F\in[\mathsf{J},\mathsf{C}]$, $\varprojlim F$ exists, then the functor $\varinjlim:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
+\begin{proposition}{Diagonal is Right Adjoint to Colimit:  $\varinjlim_{\mathsf{J}}\dashv \diagfunctor$}{}
+    Let $\mathsf{J}$ be a small category and $\mathsf{C}$ be a category. If for any functor $F\in[\mathsf{J},\mathsf{C}]$, $\varprojlim_{\mathsf{J}} F$ exists, then the functor $\varinjlim_{\mathsf{J}}:\left[\mathsf{J},\mathsf{C}\right]\to\mathsf{C}$ is right adjoint to the diagonal functor $\diagfunctor:\mathsf{C}\to\left[\mathsf{J},\mathsf{C}\right]$
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            \left[\mathsf{J},\mathsf{C}\right]  \arrow[r, "\varinjlim"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+            \left[\mathsf{J},\mathsf{C}\right]  \arrow[r, "\varinjlim_{\mathsf{J}}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
             \mathsf{C}\arrow[l, "\diagfunctor"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
             \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
         \end{tikzcd}    
     \]
     We have a natural isomorphism
     \[
-        \mathrm{Hom}_{\left[\mathsf{J},\mathsf{C}\right]}\left(F,\diagfunctor C\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(\varinjlim F,C\right)
+        \mathrm{Hom}_{\left[\mathsf{J},\mathsf{C}\right]}\left(F,\diagfunctor C\right)\cong \mathrm{Hom}_{\mathsf{C}}\left(\varinjlim_{\mathsf{J}} F,C\right)
     \]
 \end{proposition}
 
@@ -2492,7 +2494,7 @@ G(i) \arrow[ru]\arrow[rr]                         \&                            
 \end{definition}
 
 \begin{proposition}{}{}
-    Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams valued in $\mathsf{C}$. If $F: \mathsf{C} \rightarrow \mathsf{D}$ creates limits for $\mathcal{K}$ and $\varprojlim F\circ K$ exists for each $K \in\mathcal{K}$, then $\varprojlim K$ exists for each $K \in\mathcal{K}$ and $F$ preserves them.
+    Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams valued in $\mathsf{C}$. If $F: \mathsf{C} \rightarrow \mathsf{D}$ creates limits for $\mathcal{K}$ and $\varprojlim_\mathsf{J} F\circ K$ exists for each $K \in\mathcal{K}$, then $\varprojlim_\mathsf{J} K$ exists for each $K \in\mathcal{K}$ and $F$ preserves them.
 \end{proposition}
 \begin{proof}
     For any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$, the hypothesis asserts that there is a cone $\mu: \diagfunctor d \Rightarrow F\circ K$ in $\mathsf{Cone}(\mathsf{D},F\circ K)$. As $F$ creates these limits, there must be a limit cone $\lambda: \diagfunctor c \Rightarrow K$ in $\mathsf{Cone}(\mathsf{C},K)$ such that $F_* \lambda: \diagfunctor F(c) \Rightarrow F\circ K$ is a limit cone. Since $F$ reflects limits, $\lambda$ is a limit cone, which means that $\mathsf{C}$ admits limits for $\mathcal{K}$. To see that $F$ preserves them, consider another limit cone $\lambda^{\prime}: \diagfunctor c^{\prime} \Rightarrow K$. The two limit cones in $\mathsf{Cone}(\mathsf{C},K)$ are isomorphic and by composing isomorphisms we see that the cone $F \lambda^{\prime}: \diagfunctor F c^{\prime} \Rightarrow F\circ K$ is isomorphic to the limit cone $\mu: \diagfunctor d \Rightarrow F\circ K$. This implies that $F \lambda^{\prime}: F c^{\prime} \Rightarrow F K$ is again a limit cone, proving that $F$ preserves these limits.
@@ -2789,31 +2791,35 @@ Note that $d\in \mathrm{Ob}\left(\mathsf{D}\right)$ is a final object in $\maths
 
 
 \begin{proposition}{Limits Commute with Limits}{}
-    Let $F: \mathsf{I}\times \mathsf{J}\to \mathsf{C}$ be a functor. Suppose for each $i\in \mathrm{Ob}\left(\mathsf{I}\right)$, the limit of the diagram $F(i,-):\mathsf{J}\to \mathsf{C}$ exists and is denoted by $F_{i,\infty}:=\varprojlim F(i,-)$. Define a diagram $F_{-,\infty}:\mathsf{I}\to \mathsf{C}$ as follows
+    Let $F: \mathsf{I}\times \mathsf{J}\to \mathsf{C}$ be a functor. Suppose for each $i\in \mathrm{Ob}\left(\mathsf{I}\right)$, the limit of the diagram $F(i,-):\mathsf{J}\to \mathsf{C}$ exists and is denoted by $F_{i,\infty}:=\varprojlim_{\mathsf{J}} F(i,-)$. Define a diagram $F_{-,\infty}:\mathsf{I}\to \mathsf{C}$ as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             \mathsf{I}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{C}\&[-30pt]\&[-30pt] \\ [-15pt] 
             i  \arrow[dd, "\lambda"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt]  \varprojlim F(i,-)   \arrow[dd, "F_{-,\infty}(\lambda)"{name=R}] \\ [-10pt] 
+            \& [-30pt]  \varprojlim_{\mathsf{J}} F(i,-)   \arrow[dd, "F_{-,\infty}(\lambda)"{name=R}] \\ [-10pt] 
             \&  \phantom{.}\arrow[r, "F_{-,\infty}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-            i'  \& \& \& \varprojlim F(i',-)
+            i'  \& \& \& \varprojlim_{\mathsf{J}} F(i',-)
         \end{tikzcd}
     \]    
-    where $F_{-,\infty}(\lambda)$ is induced by the universal property of $\varprojlim F(i', -)$
+    where $F_{-,\infty}(\lambda)$ is induced by the universal property of $\varprojlim_{\mathsf{J}} F(i', -)$
     \[
         \begin{tikzcd}[ampersand replacement=\&, background color=mypropbg!10]
-            \& \varprojlim F(i,-) \arrow[ld] \arrow[rd] \&                             \\[+10pt]
+            \& \varprojlim_{\mathsf{J}} F(i,-) \arrow[ld] \arrow[rd] \&                             \\[+10pt]
 F(i,j) \arrow[rr, black!35] \arrow[dd, "{F(\lambda, \mathrm{id}_j)}"'] \&                                                                               \& F(i,j') \arrow[dd, "{F(\lambda, \mathrm{id}_{j'})}"] \\[+10pt]
-            \& \varprojlim F(i', -)\arrow[ld]  \arrow[rd]                                      \&                             \\[+10pt]
+            \& \varprojlim_{\mathsf{J}} F(i', -)\arrow[ld]  \arrow[rd]                                      \&                             \\[+10pt]
 F(i',j) \arrow[rr]                         \&                                                                               \& F(i', j')   
     % absulute arrow
     \arrow[from=1-2, to=3-2, "F_{-,\infty}(\lambda)"', near end, crossing over]                  
     \end{tikzcd}
     \]
-    Then $\varprojlim F_{-,\infty}$ exists if and only if $\varprojlim F$ exists. Moreover, if $\varprojlim F$ exists, we have natural isomorphism
+    Then $\varprojlim_{\mathsf{I}} F_{-,\infty}$ exists $\iff$ $\varprojlim_{\mathsf{I}\times\mathsf{J}} F$ exists. Moreover, if either $\varprojlim_{\mathsf{I}} F_{-,\infty}$ or $\varprojlim_{\mathsf{I}\times\mathsf{J}} F$ exists, we have natural isomorphism
     \[
-     \varprojlim F\cong \varprojlim F_{-,\infty}.
+     \varprojlim_{\mathsf{I}\times\mathsf{J}} F\cong \varprojlim_{\mathsf{I}} F_{-,\infty}.
+    \]
+    Similarly, Suppose for each $j\in \mathrm{Ob}\left(\mathsf{J}\right)$, the limit of the diagram $F(-,j):\mathsf{I}\to \mathsf{C}$ exists and is denoted by $F_{\infty,j}:=\varprojlim_{\mathsf{I}} F(-,j)$. Then $\varprojlim_{\mathsf{J}} F_{\infty,-}$ exists if and only if $\varprojlim_{\mathsf{I}\times\mathsf{J}} F$ exists. Moreover, if either $\varprojlim_{\mathsf{J}} F_{\infty,-}$ or $\varprojlim_{\mathsf{I}\times\mathsf{J}} F$ exists, we have natural isomorphism
+    \[
+     \varprojlim_{\mathsf{I}\times\mathsf{J}} F\cong \varprojlim_{\mathsf{J}} F_{\infty,-}.
     \]
 \end{proposition}
 \begin{prf}
@@ -2892,6 +2898,97 @@ F(i',j) \arrow[ru]\arrow[rr]                         \&                         
     \[
      \varinjlim F\cong \varinjlim F_{-,\infty}.
     \]
+\end{proposition}
+\begin{prf}
+This can be proved by duality. Here we give another proof. 
+\[
+\begin{tikzcd}
+    \left[\mathsf{I},\mathsf{C}\right]  \arrow[d, "\diagfunctor_\mathsf{J}"'] & \mathsf{C}\arrow[d, "\diagfunctor_{\mathsf{I}\times\mathsf{J}}"'] \arrow[r, "\diagfunctor_\mathsf{J}"] \arrow[l, "\diagfunctor_\mathsf{I}"'] & \left[\mathsf{J},\mathsf{C}\right] \arrow[d, "\diagfunctor_\mathsf{I}"] \\
+    \left[\mathsf{J},\left[\mathsf{I},\mathsf{C}\right]\right] \arrow[r, "\cong"] & \left[\mathsf{I}\times \mathsf{J},\mathsf{C}\right] & \left[\mathsf{I},\left[\mathsf{J},\mathsf{C}\right]\right]\arrow[l, "\cong"']
+    \end{tikzcd}
+    \]
+
+\noindent Using the adjunction between $\varprojlim$ and $\diagfunctor$
+\[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \left[\mathsf{J},\mathsf{C}\right]  \arrow[r, "\varinjlim_\mathsf{J}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+            \mathsf{C}\arrow[l, "\diagfunctor_\mathsf{J}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+            \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+        \end{tikzcd}    
+    \]
+    we have
+    \[
+        \begin{tikzcd}
+            {\left[\mathsf{I},\mathsf{C}\right]} \arrow[r, "\varinjlim_\mathsf{I}"]                         & \mathsf{C}                                                                                                                                        & {\left[\mathsf{J},\mathsf{C}\right]} \arrow[l, "\varinjlim_\mathsf{J}"']                         \\[1em]
+            {\left[\mathsf{J},\left[\mathsf{I},\mathsf{C}\right]\right]} \arrow[u, "\varinjlim_\mathsf{J}"] & {\left[\mathsf{I}\times \mathsf{J},\mathsf{C}\right]} \arrow[u, "\varinjlim_{\mathsf{I}\times\mathsf{J}}"] \arrow[l, "\cong"'] \arrow[r, "\cong"] & {\left[\mathsf{I},\left[\mathsf{J},\mathsf{C}\right]\right]} \arrow[u, "\varinjlim_\mathsf{I}"']
+            \end{tikzcd}
+    \]
+   
+
+
+\end{prf}
+
+\begin{definition}{$\mathsf{I}$-colimits commute with $\mathsf{J}$-limits in $\mathsf{C}$}{}
+    Let $\mathsf{I}$, $\mathsf{J}$, $\mathsf{C}$ be categories. Suppose $\mathsf{C}$ has all $\mathsf{I}$-shaped colimits and all $\mathsf{J}$-shaped limits. Then for any functor $F:\mathsf{I}\times \mathsf{J}\to \mathsf{C}$, there is canonical morphism
+    \[
+        h:\varinjlim_{i\in\mathsf{I}}\varprojlim_{j\in\mathsf{J}} F(i,j)\longrightarrow \varprojlim_{j\in\mathsf{J}}\varinjlim_{i\in\mathsf{I}} F(i,j)
+    \]
+    If this morphism is an isomorphism, we say \textbf{$\mathsf{I}$-colimits commute with $\mathsf{J}$-limits in $\mathsf{C}$}.
+\end{definition}
+\begin{prf}
+First for any $i\in\mathrm{Ob}(\mathsf{I})$, we can construct a cone
+    $$
+    \left( \varprojlim\limits_{j\in\mathsf{I}} F(i,j)\xlongrightarrow{\pi_{i,j}}F(i,j)\xlongrightarrow{\iota_{i,j}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)\right)_{j \in\mathrm{Ob}\left(\mathsf{J}\right)}\in \mathrm{Ob}\left(\mathsf{Cone}\left(\mathsf{C}, \varprojlim\limits_{j\in\mathsf{I}} F(i,j)\right)\right).
+    $$
+    And by the universal property of $\varprojlim\limits_{j\in\mathsf{I}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)$, we can induce a morphism $h_i:\varprojlim\limits_{j\in\mathsf{I}} F(i,j)\to \varprojlim\limits_{j\in\mathsf{I}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            {F(i,j)} \arrow[rrrrr, "{F(\lambda,\mathrm{id}_{j'})}"] \arrow[dddd, "{F(\mathrm{id}_i,\mu)}"'] \arrow[rrrrd, "{\iota_{i,j}}"] &                                                                                                                                                                                                                                                       &  &                                                                                                                            &                                                        & {F(i',j)} \arrow[dddd, "{F(\mathrm{id}_{i'},\mu)}"] \arrow[ld, "{\iota_{i',j}}"'] \\
+                                                                                                                                           &                                                                                                                                                                                                                                                       &  &                                                                                                                            & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[dd] &                                                                                   \\
+                                                                                                                                           & {\varprojlim\limits_{j\in\mathsf{I}} F(i,j)} \arrow[rrru, "{\iota_{i,j}\circ\pi_{i,j}}"] \arrow[luu, "{\pi_{i,j}}"'] \arrow[ldd, "{\pi_{i,j'}}"] \arrow[rrrd, "{\iota_{i,j'}\circ\pi_{i,j'}}"'] \arrow[rr, no head, dashed] \arrow[rr, "h_i", dashed] &  & {\varprojlim\limits_{j\in\mathsf{I}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[ru, "\pi_j"] \arrow[rd, "\pi_{j'}"] &                                                        &                                                                                   \\
+                                                                                                                                           &                                                                                                                                                                                                                                                       &  &                                                                                                                            & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j')}           &                                                                                   \\
+            {F(i,j')} \arrow[rrrrr, "{F(\lambda,\mathrm{id}_{j'})}"'] \arrow[rrrru, "{\iota_{i,j'}}"]                                      &                                                                                                                                                                                                                                                       &  &                                                                                                                            &                                                        & {F(i',j')} \arrow[lu, "{\iota_{i',j'}}"]                                         
+            \end{tikzcd}
+        \]
+        Doing this for each $i\in\mathrm{Ob}(\mathsf{I})$, we can get a cocone
+        $$
+    \left( \varprojlim\limits_{j\in\mathsf{I}} F(i,j)\xlongrightarrow{h_i}\varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)\right)_{i\in\mathrm{Ob}\left(\mathsf{I}\right)}\in \mathrm{Ob}\left(\mathsf{Cocone}\left(\mathsf{C}, \varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)\right)\right),
+    $$
+    which is shown in the following commutative diagram
+    \[
+    \begin{tikzcd}
+        {\varprojlim\limits_{j\in\mathsf{J}} F(i,j)} \arrow[dd, "{\pi_{i,j}}"'] \arrow[r] \arrow[rrrd, "h_i", dashed, bend right=10] & {\varprojlim\limits_{j\in\mathsf{J}} F(i',j)} \arrow[dd, "{\pi_{i',j}}"'] \arrow[rrd, "h_{i'}", dashed, bend left=20] &  &                                                                                           \\
+                                                                                                                      &                                                                                                                    &  & {\varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[d] \\
+        {F(i,j)} \arrow[d] \arrow[r]                                                                                  & {F(i',j)} \arrow[d] \arrow[rr, "{\iota_{i',j}}"]                                                                   &  & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[d]                                     \\
+        {F(i,j')} \arrow[r]                                                                                           & {F(i',j')} \arrow[rr, "{\iota_{i;,j'}}"']                                                                          &  & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j')}                                             
+        \end{tikzcd}
+    \]
+    Finally, by the universal property of $ \varinjlim\limits_{i\in\mathsf{I}}\varprojlim\limits_{j\in\mathsf{J}} F(i,j)$, we can induce a morphism
+    \[
+        \begin{tikzcd}
+            {\varprojlim\limits_{j\in\mathsf{J}} F(i,j)} \arrow[dd, "{\pi_{i,j}}"'] \arrow[r] \arrow[rrrd, "h_i", bend right=15] & {\varprojlim\limits_{j\in\mathsf{J}} F(i',j)} \arrow[dd, "{\pi_{i',j}}"'] \arrow[r] \arrow[rrd, "h_{i'}", bend right=10] & { \varinjlim\limits_{i\in\mathsf{I}}\varprojlim\limits_{j\in\mathsf{J}} F(i,j)} \arrow[rd,"h", dashed] &                                                                                           \\
+                                                                                                                              &                                                                                                                       &                                                                                                    & {\varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[d] \\
+            {F(i,j)} \arrow[d] \arrow[r]                                                                                      & {F(i',j)} \arrow[d] \arrow[rr, "{\iota_{i',j}}"]                                                                      &                                                                                                    & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[d]                                     \\
+            {F(i,j')} \arrow[r]                                                                                               & {F(i',j')} \arrow[rr, "{\iota_{i;,j'}}"']                                                                             &                                                                                                    & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j')}                                             
+            \end{tikzcd}
+            \]
+\end{prf}
+
+\begin{proposition}{}{}
+    Let $\mathsf{I}$, $\mathsf{J}$, $\mathsf{C}$ be categories. Suppose $\mathsf{C}$ has all $\mathsf{I}$-shaped colimits and all $\mathsf{J}$-shaped limits. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $\mathsf{I}$-colimits commute with $\mathsf{J}$-limits in $\mathsf{C}$.
+        \item The functor $\varinjlim_{\mathsf{I}}:[\mathsf{I},\mathsf{C}]\to \mathsf{C}$ preserves all $\mathsf{J}$-shaped limits.
+        \item The functor $\varprojlim_{\mathsf{J}}:[\mathsf{J},\mathsf{C}]\to \mathsf{C}$ preserves all $\mathsf{I}$-shaped colimits.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}{}{}
+    In $\mathsf{Set}$, we have
+    \begin{enumerate}[(i)]
+        \item Filtered colimits commute with finite limits.
+        \item Coproducts commute with connected limits.
+    \end{enumerate}
 \end{proposition}
 
 
@@ -3188,6 +3285,13 @@ Similarly, we can show that for any morphism $h:Y_1\to Y_2$ in $\mathsf{D}$, the
         \end{tikzpicture}
     \end{center}
 \end{lemma}
+
+\begin{proposition}{}{}
+    If $F:\mathsf{C}\to\mathsf{D}$ and $G:\mathsf{D}\to\mathsf{C}$ are inverse functors, which means $F\circ G=\mathrm{id}_{\mathsf{D}}$ and $G\circ F=\mathrm{id}_{\mathsf{C}}$, then we have $F\dashv G$ and $G\dashv F$.
+\end{proposition}
+\begin{prf}
+    The snake equations of the adjunction unit and counit holds trivially because the unit $\eta:\mathrm{id}_{\mathsf{C}}\Rightarrow G\circ F$ and counit $\varepsilon:F\circ G\Rightarrow \mathrm{id}_{\mathsf{D}}$ are identity natural transformations.
+\end{prf}
 
 \begin{definition}{Wire Bending}{}
 Let $\mathsf{C}$, $\mathsf{D}$, $\mathsf{C'}$, $\mathsf{D'}$ be categories and $L,R,L',R',H,K$ be functors shown in the following diagram

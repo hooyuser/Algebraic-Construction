@@ -53,12 +53,13 @@ Next we define the morphisms in the category $\mathsf{Ring}$.
 
 
 
-\begin{definition}{Zero Divisor}{}
+\begin{definition}{Zero Divisor}{zero_divisor}
     Assume that $a$ is an element of a ring $R$. 
     \begin{itemize}
         \item $a$ is called a \textbf{left zero divisor} if there exists a nonzero $x$ in $R$ such that $ax = 0$.
         \item $a$ is called a \textbf{right zero divisor} if there exists a nonzero $x$ in $R$ such that $xa = 0$.
         \item $a$ is called a \textbf{zero divisor} if there exists a nonzero $x$ in $R$ such that $ax = xa = 0$.
+        \item $a$ is called a \textbf{regular element} if it is neither a left zero divisor nor a right zero divisor.
     \end{itemize}
 \end{definition}
 
@@ -164,11 +165,11 @@ Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R
 \end{definition}
 
 \begin{proposition}{Universal Property of Quotient Rings}{}
-    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Then the quotient map $\pi:R\to R/I$ is a surjective ring homomorphism with kernel $I$. Moreover, for any ring $S$ and any ring homomorphism $f:R\to S$ such that $I\subseteq\ker f$, there exists a unique ring homomorphism $\bar{f}:R/I\to S$ such that the following diagram commutes
+    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Then the quotient map $\pi:R\to R/I$ is a surjective ring homomorphism with kernel $I$. Moreover, for any ring $S$ and any ring homomorphism $f:R\to S$ such that $I\subseteq\ker f$, or equivalently $f(I)=\{0\}$, there exists a unique ring homomorphism $\bar{f}:R/I\to S$ such that the following diagram commutes
     \[
     \begin{tikzcd}[ampersand replacement=\&]
         R \arrow[r, "f"] \arrow[d, "\pi"'] \& S \\
-        R/I \arrow[ru, "\exists!\bar{f}"'] \&  
+        R/I \arrow[ru, "\exists!\bar{f}"', dashed] \&  
     \end{tikzcd}
     \] 
 \end{proposition}
