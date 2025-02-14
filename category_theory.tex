@@ -2419,6 +2419,61 @@ G(i) \arrow[ru]\arrow[rr]                         \&                            
     \end{itemize}
 \end{definition}
 
+\begin{lemma}{}{properties_of_filtered_category}
+    Let $\mathsf{C}$ be a filtered category. Then 
+    \begin{enumerate}[(i)]
+        \item Given a finite family of objects $\left(c_i\right)_{i=1}^n\subseteq \mathrm{Ob}(\mathsf{C})$, there exists an object $c\in \mathrm{Ob}(\mathsf{C})$ and morphisms $c_i\to c$ for each $i=1,2,\cdots,n$.
+        \item Given a finite family of morphisms $\left(f_i:c\to c'\right)_{i=1}^n\subseteq \mathrm{Hom}(c,c')$, there exists an object $c''\in \mathrm{Ob}(\mathsf{C})$ and a morphism $g:c'\to c''$ such that $g\circ f_i=g\circ f_j$ for each $i,j=1,2,\cdots,n$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item We prove this by induction on $n$. For $n=1$, we can take $c=c_1$ and $f_i=\mathrm{id}_{c_1}$. Suppose the result is valid in the case of $n=k-1$. Then we can find an object $c'\in \mathrm{Ob}(\mathsf{C})$ and morphisms $g_i:c_i\to c'$ for each $i=1,2,\cdots,k-1$. By the definition of filtered category, there exists an object $c\in \mathrm{Ob}(\mathsf{C})$ and morphisms $h':c'\to c$ and $h:c_k\to c$. Take $f_i=h'\circ g_i$ for each $i=1,2,\cdots,k-1$ and $f_n=h$. Then we prove the case of $n=k$.
+        \item We prove this by induction on $n$. For $n=1$, this holds trivially. Suppose the result is valid in the case of $n=k-1$. Then we can find a morphism $h:c'\to c^*$ such that $h\circ f_i=h\circ f_j$ for each $i,j=1,2,\cdots,k-1$. By the definition of filtered category, there exists an object $c''\in \mathrm{Ob}(\mathsf{C})$ and a morphism $h^*:c^*\to c''$ such that $h^*\circ h\circ f_1=h^*\circ h\circ f_k$. Take $g=h^*\circ h$, then we prove the case of $n=k$.
+    \end{enumerate}
+\end{proof}
+
+\begin{proposition}{Equivalent Characterizations of Filtered Category}{equivalent_characterizations_of_filtered_category}
+    The following are equivalent for a category $\mathsf{C}$.
+    \begin{enumerate}[(i)]
+        \item $\mathsf{C}$ is filtered.
+        \item For any finite category $\mathsf{J}$ and functor $F:\mathsf{J}\to \mathsf{C}$, the exists a cocone from $F$ to an object $c\in \mathrm{Ob}(\mathsf{C})$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    (i)$\implies$(ii). By \Cref{th:properties_of_filtered_category}, there exists an object $a\in \mathrm{Ob}(\mathsf{C})$ and morphisms $f_j:F(j)\to a$ for each $j\in \mathrm{Ob}(\mathsf{J})$. For each morphism $\lambda:j\to j'$ in $\mathsf{J}$, we have a pair of parallel morphisms
+    \[
+    \begin{tikzcd}
+        F(j) \arrow[rr, "f_j"] \arrow[rd, "F(\lambda)"'] &                             & a \\
+                                                         & F(j') \arrow[ru, "f_{j'}"'] &  
+    \end{tikzcd}
+    \]
+    By \Cref{th:properties_of_filtered_category}, there exists an object $a_{\lambda}\in \mathrm{Ob}(\mathsf{C})$ and a morphism $g_\lambda:a\to a_{\lambda}$ such that 
+    \[
+    g_\lambda\circ f_j= g_\lambda\circ f_{j'}\circ F(\lambda).
+    \]
+    Again by \Cref{th:properties_of_filtered_category}, we can find an object $b\in \mathrm{Ob}(\mathsf{C})$ and morphisms $h_\lambda:a_{\lambda}\to b$. Now we have a family of parallel morphisms
+    \[
+    \left(h_\lambda\circ g_\lambda : a\longrightarrow b\right)_{\lambda\in\mathrm{Mor}\left(\mathsf{J}\right)}.
+    \]
+    Again by \Cref{th:properties_of_filtered_category}, there exists an object $c\in \mathrm{Ob}(\mathsf{C})$ and morphisms $h:b\to c$ such that
+    \[
+    h\circ h_\lambda\circ g_\lambda=h\circ h_{\lambda'}\circ g_{\lambda'}.
+    \]
+    Hence $l:=h\circ h_\lambda\circ g_\lambda$ is a well-defined morphism from $a$ to $c$. Since the following diagram commutes for any $\lambda\in\mathrm{Mor}\left(\mathsf{J}\right)$
+    \[
+        \begin{tikzcd}
+            F(j) \arrow[rd, "f_j"] \arrow[dd, "F(\lambda)"'] \arrow[rrrrd, "l\circ f_j", bend left] &                          &                                  &                  &   \\
+                                                                                                    & a \arrow[r, "g_\lambda"] & a_\lambda \arrow[r, "h_\lambda"] & b \arrow[r, "h"] & c \\
+            F(j') \arrow[ru, "f_{j'}"'] \arrow[rrrru, "l\circ f_{j'}"', bend right]                 &                          &                                  &                  &  
+        \end{tikzcd}
+    \]
+    we have constructed a cocone from $F$ to $c$
+    \[
+    \left( l\circ f_j:F(j)\longrightarrow c\right)_{j\in \mathrm{Ob}(\mathsf{J})}.
+    \]
+\end{proof}
+
 \begin{definition}{Filtered Colimit}{}
     A \textbf{filtered colimit} is a colimit of a functor $F: \mathsf{J} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a filtered category.
 \end{definition}
@@ -2707,21 +2762,30 @@ The next result shows that functor categories inherit limits and colimits, defin
 
 \begin{example}{Filtered Colimit in $\mathsf{Set}$}{}
     Let $F:\mathsf{J}\to \mathsf{Set}$ be a functor and $\mathsf{J}$ is a filtered category, then 
-    the colimit $\varinjlim F$ has an explicit description
+    the colimit $\varinjlim_\mathsf{J} F$ has an explicit description
     \begin{align*}
-        \varinjlim F\cong\coprod_{i\in \mathrm{Ob}(\mathsf{J})}F(i)/\sim  
+        \varinjlim_\mathsf{J} F\cong\left(\coprod_{j\in \mathrm{Ob}(\mathsf{J})}F(j)\right)/\sim  
     \end{align*}
     where the equivalence relation $\sim$ is defined as follows: for any $(i,x),(j,y)\in \coprod\limits_{i\in \mathrm{Ob}(\mathsf{J})}F(i)$,
     \[
         (i,x)\sim (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
     \]
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \& \{*\} \arrow[ld, "c_x"'] \arrow[rd, "c_y"] \&                                                               \\[+1.5em]
+F(i) \arrow[rd, "\iota_i"'] \arrow[r, "F(\lambda_1)", dashed] \& F(k) \arrow[d, "\iota_k"]                  \& F(j) \arrow[ld, "\iota_j"] \arrow[l, "F(\lambda_2)"', dashed] \\[+1em]
+            \& \varinjlim_{\mathsf{J}}F                   \&                                                              
+\end{tikzcd}
+\]
 \end{example}
 \begin{prf} 
     If $\mathsf{J}$ is a filtered category, first we can check 
     \[
         (i,x)\approx (j,y)\iff \text{there exists }\lambda_1:i\to k\text{ and }\lambda_2:j\to k\text{ such that }F(\lambda_1)(x)=F(\lambda_2)(y).
     \]
-    is an equivalence relation. To show $\approx\;=\;\sim$, let's assume $\backsimeq$ is any equivalence relation containing $\sim^*$. If $(i,x)\approx(j,y)$, then there exists $\lambda_1:i\to k$ and $\lambda_2:j\to k$ such that $F(\lambda_1)(x)=F(\lambda_2)(y)=z$. Hence 
+    is an equivalence relation that $\approx$ contains $\sim^*$. It is clear an equivalence relation. If $(i,x)\sim^* (j,y)$, then there exists $\lambda:i\to j$ such that $F(\lambda)(x)=y$. Hence there exists $\lambda_1=\lambda$ and $\lambda_2=\mathrm{id}_j$ such that $F(\lambda_1)(x)=F(\lambda_2)(y)$. Thus we have $\sim^*\subseteq\, \approx$.
+    
+    To show $\approx\;=\;\sim$, let's assume $\backsimeq$ is any equivalence relation containing $\sim^*$. If $(i,x)\approx(j,y)$, then there exists $\lambda_1:i\to k$ and $\lambda_2:j\to k$ such that $F(\lambda_1)(x)=F(\lambda_2)(y)=z$. Hence 
     \[
         (i,x)\sim^* (k,z)\text{ and }(j,y)\sim^* (k,z)\implies(i,x)\backsimeq (k,z)\text{ and }(j,y)\backsimeq (k,z)\implies (i,x)\backsimeq (j,y).
     \]
@@ -2990,6 +3054,162 @@ First for any $i\in\mathrm{Ob}(\mathsf{I})$, we can construct a cone
         \item Coproducts commute with connected limits.
     \end{enumerate}
 \end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Let $\mathsf{I}$ be a filtered category and $\mathsf{J}$ be a finite category. Let $F:\mathsf{I}\times \mathsf{J}\to \mathsf{Set}$ be a functor. 
+
+        First we prove the canonical map
+        \begin{align*}
+            h:\varinjlim_{i\in\mathsf{I}}\varprojlim_{j\in\mathsf{J}} F(i,j)&\longrightarrow \varprojlim_{j\in\mathsf{J}}\varinjlim_{i\in\mathsf{I}} F(i,j)\\
+            \left[\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right]&\longmapsto \left(\left[a_j\right]\right)_{j\in\mathrm{Ob}(\mathsf{J})}
+        \end{align*}
+        is injective. Let $a=\left[\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right]$ with $a_j\in F(i,j)$ and $b=\left[\left(b_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right]$ with $b_j\in F(i',j)$. If $h(a)=h(b)$, then for each $j\in \mathrm{Ob}(\mathsf{J})$, we have $[a_j]=[b_j]$, which implies there exists morphisms $\varphi_j:i\to i_j$ and $\psi_j:i'\to i_j$ in $\mathsf{I}$ such that 
+        \[
+        F(\varphi_j,\mathrm{id}_j)(a_j)=F(\psi_j,\mathrm{id}_j)(b_j)
+        \]
+        holds in $F(i_j,j)$. Consider the subcategory $\mathsf{W}$ of $\mathsf{I}$ consisting of $\varphi_j$ and $\psi_j$ for all $j\in \mathrm{Ob}(\mathsf{J})$. By \Cref{th:limit_by_representability}, there exists a cocone from $H:\mathsf{W}\hookrightarrow \mathsf{I}$ to $m\in \mathrm{Ob}(\mathsf{J})$.
+        \[
+            \left( \begin{tikzcd}
+                & m                       &                                            \\
+i \arrow[r, "\varphi_j"'] \arrow[ru, "\varphi"] & i_j \arrow[u, "\eta_j"'] & i' \arrow[l, "\psi_j"] \arrow[lu, "\psi"']
+\end{tikzcd}\right)_{j\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Ob}\left(\mathsf{Cocone}\left(H,\mathsf{I} \right)\right).
+            \]
+            This implies for any $j\in \mathrm{Ob}(\mathsf{J})$, 
+            \begin{align*}
+                F(\varphi,\mathrm{id}_j)(a_j)&=F(\eta_i\circ \varphi_j,\mathrm{id}_j)(a_j)\\
+                &=F(\eta_i,\mathrm{id}_j)\circ F(\varphi_j,\mathrm{id}_j)(a_j)\\
+                &=F(\eta_i,\mathrm{id}_j)\circ F(\psi_j,\mathrm{id}_j)(b_j)\\
+                &=F(\eta_i\circ \psi_j,\mathrm{id}_j)(b_j)\\
+                &=F(\psi,\mathrm{id}_j)(b_j)
+            \end{align*}
+            holds in $F(m,j)$. Consider the functor 
+            \[
+                \begin{tikzcd}[ampersand replacement=\&]
+                    \mathsf{I}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Set}\&[-30pt]\&[-30pt] \\ [-15pt] 
+                    i_1  \arrow[dd, "\lambda"{name=L, left}] 
+                    \&[-25pt] \& [+10pt] 
+                    \& [-30pt]  \varinjlim\limits_{j\in\mathsf{J}} F(i_1,j)   \arrow[dd, "F_{-,\infty}(\lambda)"{name=R}] \\ [-10pt] 
+                    \&  \phantom{.}\arrow[r, "F_{-,\infty}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+                    i_2  \& \& \& \varinjlim\limits_{j\in\mathsf{J}} F(i_2,j)
+                \end{tikzcd}
+            \]    
+            Then there exist morphisms $\varphi:i\to m$ and $\psi:i'\to m$ in $\mathsf{I}$ such that 
+            \[
+                F_{-,\infty}(\varphi)\left(\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)=\varinjlim\limits_{j\in\mathsf{J} }F(\varphi,\mathrm{id}_j)(a_j)=\varinjlim\limits_{j\in\mathsf{J} }F(\psi,\mathrm{id}_j)(b_j)=F_{-,\infty}(\psi)\left(\left(b_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right),
+            \]
+            which implies $a=b$. So the map $h$ is injective.
+        
+        To Specify an element $a$ in the filtered colimit $\varinjlim\limits_{i\in\mathsf{I}}\varprojlim\limits_{j\in\mathsf{J}} F(i,j)$, it is sufficient to specify a map $\{*\}\to \varprojlim\limits_{j\in\mathsf{J}} F(i,j)$ or alternatively a cone
+        \[
+        v:=\left( \{*\}\xlongrightarrow{v_j}   F(i,j)\right)_{j\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Ob}\left(\mathsf{Cone}\left(\mathsf{Set}, \varprojlim\limits_{j\in\mathsf{J}} F(i,-)\right)\right).
+        \]
+        Let $w$ be another cone over $\varprojlim\limits_{j\in\mathsf{J}} F(i',-)$ correponding to $b\in \varinjlim\limits_{i\in\mathsf{I}}\varprojlim\limits_{j\in\mathsf{J}} F(i,j)$. Suppose $h(a)=h(b)$. Then there exists a morphism $\lambda:i\to i'$ in $\mathsf{I}$ such that the following diagram commutes
+
+        Giving an element $x\in \varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)$ is equivalent to giving a map $c_x: \{*\}\to \varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)$. By \Cref{th:limit_by_representability}, this is equivalent to specifying a cone over $\varinjlim\limits_{i\in\mathsf{I}} F(i,-)$
+        \[
+        \left( \{*\}\xlongrightarrow{f_j}  \varinjlim\limits_{i\in\mathsf{I}} F(i,j)\right)_{j\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Ob}\left(\mathsf{Cone}\left(\mathsf{Set}, \varinjlim\limits_{i\in\mathsf{I}} F(i,-)\right)\right).
+        \]
+        By the construction filtered colimits in $\mathsf{Set}$, for each $j\in \mathrm{Ob}(\mathsf{J})$, there exists a $i_j\in \mathrm{Ob}(\mathsf{I})$ and a morphism $g_j:\{*\}\to F(i_j,j)$ such that $f_j=\iota_{i_j,j}\circ g_j$, where $\iota_{i_j,j}: F(i_j,j)\to \varinjlim\limits_{i\in\mathsf{I}}F(i,j)$ are the morphisms in the cocone of colimit. Since $\mathsf{I}$ is filtered and $\mathsf{J}$ is finite, there exists $k\in \mathrm{Ob}(\mathsf{I})$ with morphisms $\lambda_j: i_j\to k$ for each $j\in \mathrm{Ob}(\mathsf{J})$. 
+
+
+        Given any morphism $\mu:j\to j'$ in $\mathsf{J}$, the following two diagrams commutes
+        \[
+            \begin{tikzcd}
+                {F(i_j,j)} \arrow[rr, "\iota_j"]                                                        &  & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[dd] \\
+                \{*\} \arrow[u, "g_{j}"] \arrow[d, "g_{j'}"'] \arrow[rru, "f_j"] \arrow[rrd, "f_{j'}"'] &  &                                                 \\
+                {F(i_{j'},j')} \arrow[rr, "\iota_{j'}"']                                                &  & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j')}          
+                \end{tikzcd}
+        \]
+        \[
+            \begin{tikzcd}
+                & {F(i_j,j)} \arrow[ld, "{F(\mathrm{id},\mu)}"'] \arrow[rr, "{F(\lambda_j,\mathrm{id})}"] \arrow[rrdd, bend right] &                                        & {F(k,j)} \arrow[ld, "{F(\mathrm{id},\mu)}"'] \arrow[dd] &                                                                                                            & {F(i_{j'},j)} \arrow[ld, "{F(\mathrm{id},\mu)}"'] \arrow[ll, "{F(\lambda_{j'},\mathrm{id})}"'] \arrow[lldd, bend left] \\[4em]
+{F(i_{j},j')} \arrow[rr, "{F(\lambda_{j},\mathrm{id})}"] \arrow[rrdd, "{\iota_{i_j,j'}}", bend right] &                                                                                                                  & {F(k,j')} \arrow[dd, "{\iota_{k,j'}}"] &                                                         & {F(i_{j'},j')} \arrow[ll, "{F(\lambda_{j'},\mathrm{id})}"'] \arrow[lldd, "{\iota_{i_{j'},j'}}", bend left] &                                                                                                                        \\[4em]
+                &                                                                                                                  &                                        & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[ld]         &                                                                                                            &                                                                                                                        \\[4em]
+                &                                                                                                                  & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j')}  &                                                         &                                                                                                            &                                                                                                                       
+\end{tikzcd}
+\]
+Combining these two commutative diagrams, we obtain
+\[
+    \iota_{k,j'}\circ F(\lambda_j,\mathrm{id}_{j'})\circ F(\mathrm{id}_{i_j},\mu)\circ g_j=\iota_{k,j'}\circ F(\lambda_{j'},\mathrm{id}_{j'})\circ g_{j'},
+\]
+or equivalently
+\[
+    \iota_{k,j'}\circ F(\lambda_j,\mu)\circ g_j=\iota_{k,j'}\circ F(\lambda_{j'},\mathrm{id}_{j'})\circ g_{j'},
+\]
+which is illustrated in the following diagram
+\[
+\begin{tikzcd}
+    & {F(i_j,j)} \arrow[rd, "{F(\lambda_j,\mu)}"]                      &                                       &                                       \\
+\{*\} \arrow[ru, "g_j"] \arrow[rd, "g_{j'}"'] &                                                                  & {F(k,j')} \arrow[r, "{\iota_{k,j'}}"] & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j')} \\
+    & {F(i_{j'},j')} \arrow[ru, "{F(\lambda_{j'},\mathrm{id}_{j'})}"'] &                                       &                                      
+\end{tikzcd}
+\]
+By the property of filtered colimits in $\mathsf{Set}$, there exists an object $k_\mu\in \mathrm{Ob}(\mathsf{I})$ and morphisms $\alpha_\mu: k\to k_\mu$ and $\beta_\mu: k\to k_\mu$ such that 
+\[
+    F(\alpha_\mu,\mathrm{id}_{j'})\circ F(\lambda_j,\mu)\circ g_j=F(\beta_\mu,\mathrm{id}_{j'})\circ  F(\lambda_{j'},\mathrm{id}_{j'})\circ g_{j'},
+\]
+namely
+\[
+    F(\alpha_\mu\circ \lambda_j,\mu)\circ g_j=F(\beta_\mu\circ \lambda_{j'},\mathrm{id}_{j'})\circ g_{j'}.
+\]
+
+Consider the subcategory $\mathsf{K}$ of $\mathsf{I}$ consisting of $k$, $(k_\mu)_{\mu\in \mathrm{Mor}(\mathsf{I})}$ and morphisms $\alpha_\mu$, $\beta_\mu$ for each $\mu\in \mathrm{Mor}(\mathsf{I})$. By \Cref{th:limit_by_representability}, since the inclusion functor $G:\mathsf{K}\hookrightarrow\mathsf{I}$ is a finite diagram, there exists a cocone from $G$ to $\widehat{k}\in \mathrm{Ob}(\mathsf{I})$
+        \[
+        \left( \begin{tikzcd}
+            & \widehat{k} &                              \\
+k \arrow[rr, "\alpha_\mu", shift left] \arrow[ru, "\gamma"] \arrow[rr, "\beta_\mu"', shift right] &    & k_\mu \arrow[lu, "\xi_\mu"']
+\end{tikzcd}\right)_{\mu\in \mathrm{Mor}(\mathsf{I})}\in \mathrm{Ob}\left(\mathsf{Cocone}\left(G,\mathsf{I} \right)\right).
+        \]
+        Then we can define a cone over $F\left(\widehat{k} ,-\right)$ as follows
+        \[
+        \left( r_j:\{*\}\xlongrightarrow{g_j}  F(i_j,j)\xlongrightarrow{F(\gamma\circ \lambda_j,j)} F\left(\widehat{k} ,j\right)\right)_{j\in \mathrm{Ob}(\mathsf{J})}\in \mathrm{Ob}\left(\mathsf{Cone}\left(\mathsf{Set},  F\left(\widehat{k} ,-\right)\right)\right).
+        \]
+        To verify it is a cone, we need to check for any morphism $\mu:j\to j'$ in $\mathsf{J}$, the following diagram commutes
+        \[
+            \begin{tikzcd}
+                & \{*\} \arrow[ld, "g_j"'] \arrow[rd, "g_{j'}"] &                                                                         \\[1em]
+{F(i_j,j)} \arrow[d, "{F\left(\gamma\circ\lambda_j,\mathrm{id}_j\right)}"'] &                                               & {F(i_{j'},j')} \arrow[d, "{F\left(\gamma\circ\lambda_{j'},\mathrm{id}_{j'}\right)}"] \\[1em]
+{F\left(\widehat{k} ,j\right)} \arrow[rr, "{F(\mathrm{id}_k, \mu)}"']                   &                                               & {F\left(\widehat{k} ,j'\right)}                                                              
+\end{tikzcd}
+        \]
+        This can be derived from the following diagram
+        \[
+            \begin{tikzcd}
+                & \{*\} \arrow[ld, "g_j"'] \arrow[rd, "g_{j'}"] &                                                                                                                                                                                        &  &                                                                       \\[2em]
+{F(i_j,j)} \arrow[d, "{F\left(\lambda_j,\mathrm{id}_j\right)}"']                                     &                                               & {F(i_{j'},j')} \arrow[d, "{F\left(\lambda_{j'},\mathrm{id}_{j'}\right)}"']                                                                                                             &  &                                                                       \\[2em]
+{F(k,j)} \arrow[d, "{F\left(\gamma,\mathrm{id}_j\right)}"'] \arrow[rr, "{F(\mathrm{id}_{{k}},\mu)}"] &                                               & {F(k,j')} \arrow[d, "{F\left(\gamma,\mathrm{id}_{j'}\right)}"'] \arrow[rr, "{F(\alpha_\mu,\mathrm{id}_{j'})}", shift left] \arrow[rr, "{F(\beta_\mu,\mathrm{id}_{j'})}"', shift right] &  & {F(k_\mu,j')} \arrow[lld, "{F(\xi_\mu,\mathrm{id}_{j'})}", bend left] \\[2em]
+{ F\left(\widehat{k} ,j\right)} \arrow[rr, "{F(\mathrm{id}_{\widehat{k}},\mu)}"']                    &                                               & { F\left(\widehat{k} ,j'\right)}                                                                                                                                                       &  &                                                                      
+\end{tikzcd}
+        \]
+        By the universal property of $\varprojlim\limits_{j\in\mathsf{J}} F\left(\widehat{k} ,j\right)$, there exists a unique morphism $r^*:\{*\}\to \varprojlim\limits_{j\in\mathsf{J}} F\left(\widehat{k} ,j\right)$. Compose $r^*$ with the canonical morphism $\varprojlim\limits_{j\in\mathsf{J}} F\left(\widehat{k} ,j\right)\to \varinjlim\limits_{i\in\mathsf{I}}\varprojlim\limits_{j\in\mathsf{J}} F(i,j)$, we obtain a morphism $v:\{*\}\to \varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)$. To prove $h$ is surjective, it is sufficient to verify that the following diagram commutes
+        \[
+            \begin{tikzcd}
+                & \{*\} \arrow[ld, "u"'] \arrow[rd, "c_x"] &                                                                                 \\
+{\varinjlim\limits_{i\in\mathsf{I}}\varprojlim\limits_{j\in\mathsf{J}} F(i,j)} \arrow[rr, "h"'] &                                          & {\varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)}
+\end{tikzcd}
+\]
+We need to check that for any $j \in \mathrm{Ob}\left(\mathsf{J}\right)$, the following diagram commutes
+        \[
+            \begin{tikzcd}
+                & \{*\} \arrow[ldd, "f_j"', bend right] \arrow[d, "u"]                                               \\
+                & {\varinjlim\limits_{i\in\mathsf{I}}\varprojlim\limits_{j\in\mathsf{J}} F(i,j)} \arrow[d, "h"]      \\
+{ \varinjlim\limits_{i\in\mathsf{I}} F(i,j)} & {\varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[l, "\pi_j"]
+\end{tikzcd}
+        \]
+This follows from the commutativity of the outer square and all inter loops but the right one in the following diagram
+\[
+    \begin{tikzcd}
+        {\varprojlim\limits_{j\in\mathsf{J}} F\left(\widehat{k},j\right)} \arrow[ddd, "{\pi_{\widehat{k},j}}"'] \arrow[rd, "h_{\widehat{k}}"] \arrow[rr] &                                                                                                 & {\varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)} \arrow[ddd, "\pi_j"] \\
+                                                                                                                                                         & { \varinjlim\limits_{i\in\mathsf{I}}\varprojlim\limits_{j\in\mathsf{J}} F(i,j)} \arrow[ru, "h"] &                                                                                                      \\
+                                                                                                                                                         & \{*\} \arrow[rd, "f_j"] \arrow[ld, "r_j"'] \arrow[luu, "r^*"', bend left] \arrow[u, "u"']     &                                                                                                      \\
+        {F\left(\widehat{k},j\right)} \arrow[rr, "{\iota_{\widehat{k},j}}"]                                                                              &                                                                                                 & {\varinjlim\limits_{i\in\mathsf{I}} F(i,j)}                                                         
+        \end{tikzcd}
+        \]
+        By the universal property of $\varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)$, $c_x$ is the uniqueness morphism such that $\pi_j\circ c_x=f_j$ for any $j \in \mathrm{Ob}\left(\mathsf{J}\right)$. So we have $c_x = h\circ u$. 
+        
+        
+    \end{enumerate}
+\end{prf}
 
 
 
