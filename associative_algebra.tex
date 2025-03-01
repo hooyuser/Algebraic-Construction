@@ -225,6 +225,62 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     Let $A$ be an $R$-algebra. The \textbf{trace} of an element $a\in A$ is defined as the trace of the left multiplication endomorphism $l_a\in\mathrm{End}_{R\text{-}\mathsf{Mod}}(A)$.
 \end{definition}
 
+\section{Algebra over Field}
+\begin{lemma}{Nonzero Ring Homomorphism from Field is Injective}{nonzero_ring_homomorphism_from_field_is_injective}
+    If $K$ is a field, $R$ is a ring, a ring homomorphism $f:K\to R$ is either injective or the zero map. Furthermore, If $R$ is not a zero ring, then $f$ is injective.
+\end{lemma}
+\begin{prf}
+    Since the only ideals of $K$ are $\{0\}$ and $K$, the kernel of $f$ is either $\{0\}$ or $K$. If $\ker f=\{0\}$, then $f$ is injective. If $\ker f=K$, then $f$ is the zero map. By \Cref{th:kernel_of_ring_homomorphism_is_an_ideal}, if $R$ is not a zero ring, then $\ker f$ is not $K$, so $f$ is injective.
+\end{prf}
+
+\begin{corollary}{}{}
+    If $K$ is a field and $A$ is a nonzero $K$-algebra, then the ring homomorphism $K\to Z(A)$ is injective.
+\end{corollary}
+\begin{prf}
+    This is a direct consequence of \Cref{th:nonzero_ring_homomorphism_from_field_is_injective}.
+\end{prf}
+
+
+\begin{proposition}{}{}
+    Let $K$ be a field, $A$ be a $K$-algebra and $a\in A$. Consider the evaluation ring homomorphism
+    \begin{align*}
+        \mathrm{ev}_a:K[X] &\longrightarrow A\\
+        f &\longmapsto f(a).
+    \end{align*}
+    Since $K[X]$ is a PID, we can suppose $\ker \mathrm{ev}_a=(P_a)$ for some $P_a\in K[X]$. Since $\operatorname{im}\mathrm{ev}_a=K[a]$, we have the following isomorphism in $K$-$\mathsf{Alg}$
+    \[
+        K[a]\cong K[X]/(P_a(X)).
+    \]
+    And it can be divided into two cases:
+    \begin{enumerate}[(i)]
+        \item If $P_a=0$, then $\mathrm{ev}_a$ is injective and $K[a]\cong K[X]$.
+        \item If $P_a\ne 0$, then $\mathrm{ev}_a$ is not injective. If we further assume $A$ is a domain, then $P_a(X)$ is irreducible, $K[a]$ is a field and
+        \[
+        \left[ K[a]:K \right]=\deg P_a(X).
+        \]
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item If $P_a=0$, then $\ker \mathrm{ev}_a=\{0\}$, so $\mathrm{ev}_a$ is injective. And $K[a]\cong K[X]$.
+        \item If $A$ is a domain, then $K[a]$ as a subring of $A$ is an integral domain. This implies $(P_a(X))$ is a nonzero prime ideal of $K[X]$. By \Cref{th:nonzero_prime_ideal_iff_maximal_ideal_in_PID}, $P_a(X)$ is irreducible. Since $K[X]/(P_a(X))$ as $K$-vector space has a basis $\{1,X,X^2,\cdots,X^{\deg P_a(X)-1}\}$, we have $\left[ K[a]:K \right]=\deg P_a(X)$.
+    \end{enumerate}
+   
+\end{prf}
+
+\begin{definition}{Algebraic Element and Transcendental Element}{}
+    Let $K$ be a field and $A$ be a $K$-algebra. Consider the evaluation ring homomorphism
+    \begin{align*}
+        \mathrm{ev}_a:K[X] &\longrightarrow A\\
+        f &\longmapsto f(a).
+    \end{align*}
+    and $\ker \mathrm{ev}_a=(P_a)$ for some $P_a\in K[X]$.
+    \begin{itemize}
+        \item If $P_a=0$, then $a$ is called a \textbf{transcendental element} over $K$. $a$ is not the root of any nonzero polynomial in $K[X]$. 
+        \item If $P_a\ne 0$, then $a$ is called an \textbf{algebraic element} over $K$. Suppose $P_a(X)=\sum_{i=0}^n a_iX^i$. Then $m_a(X)=P_a(X)/a_n$ is called the \textbf{minimal polynomial} of $a$ over $K$.
+    \end{itemize}
+\end{definition}
+
 
 
 

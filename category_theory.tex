@@ -354,7 +354,7 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
     \]
 \end{definition}
 
-\begin{definition}{Coslice Category}{}
+\begin{definition}{Coslice Category}{coslice_category}
     Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
@@ -3063,11 +3063,11 @@ First for any $i\in\mathrm{Ob}(\mathsf{I})$, we can construct a cone
             h:\varinjlim_{i\in\mathsf{I}}\varprojlim_{j\in\mathsf{J}} F(i,j)&\longrightarrow \varprojlim_{j\in\mathsf{J}}\varinjlim_{i\in\mathsf{I}} F(i,j)\\
             \left[\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right]&\longmapsto \left(\left[a_j\right]\right)_{j\in\mathrm{Ob}(\mathsf{J})}
         \end{align*}
-        is injective. Let $a=\left[\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right]$ with $a_j\in F(i,j)$ and $b=\left[\left(b_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right]$ with $b_j\in F(i',j)$. If $h(a)=h(b)$, then for each $j\in \mathrm{Ob}(\mathsf{J})$, we have $[a_j]=[b_j]$, which implies there exists morphisms $\varphi_j:i\to i_j$ and $\psi_j:i'\to i_j$ in $\mathsf{I}$ such that 
+        is injective. Let $a=\left[\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right]$ with $a_j\in F(i,j)$ and $b=\left[\left(b_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right]$ with $b_j\in F(i',j)$. If $h(a)=h(b)$, then for each $j\in \mathrm{Ob}(\mathsf{J})$, we have $[a_j]=[b_j]$ in $\varinjlim\limits_{i\in\mathsf{I}} F(i,j)$, which implies there exists morphisms $\varphi_j:i\to i_j$ and $\psi_j:i'\to i_j$ in $\mathsf{I}$ such that 
         \[
         F(\varphi_j,\mathrm{id}_j)(a_j)=F(\psi_j,\mathrm{id}_j)(b_j)
         \]
-        holds in $F(i_j,j)$. Consider the subcategory $\mathsf{W}$ of $\mathsf{I}$ consisting of $\varphi_j$ and $\psi_j$ for all $j\in \mathrm{Ob}(\mathsf{J})$. By \Cref{th:limit_by_representability}, there exists a cocone from $H:\mathsf{W}\hookrightarrow \mathsf{I}$ to $m\in \mathrm{Ob}(\mathsf{J})$.
+        holds in $F(i_j,j)$. Consider the subcategory $\mathsf{W}$ of $\mathsf{I}$ consisting of $\varphi_j$ and $\psi_j$ for all $j\in \mathrm{Ob}(\mathsf{J})$. By \Cref{th:equivalent_characterizations_of_filtered_category}, there exists a cocone from $H:\mathsf{W}\hookrightarrow \mathsf{I}$ to $m\in \mathrm{Ob}(\mathsf{J})$.
         \[
             \left( \begin{tikzcd}
                 & m                       &                                            \\
@@ -3206,8 +3206,37 @@ This follows from the commutativity of the outer square and all inter loops but 
         \end{tikzcd}
         \]
         By the universal property of $\varprojlim\limits_{j\in\mathsf{J}} \varinjlim\limits_{i\in\mathsf{I}} F(i,j)$, $c_x$ is the uniqueness morphism such that $\pi_j\circ c_x=f_j$ for any $j \in \mathrm{Ob}\left(\mathsf{J}\right)$. So we have $c_x = h\circ u$. 
-        
-        
+    \item Let $\mathsf{I}$ be a discrete category and $\mathsf{J}$ be a connected category. Let $F:\mathsf{I}\times \mathsf{J}\to \mathsf{Set}$ be a functor. 
+
+    First we prove the canonical map
+        \begin{align*}
+            h:\coprod_{i\in\mathsf{I}}\varprojlim_{j\in\mathsf{J}} F(i,j)&\longrightarrow \varprojlim_{j\in\mathsf{J}}\coprod_{i\in\mathsf{I}} F(i,j)\\
+            \left(i,\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)&\longmapsto \left(\left(i,a_j\right)\right)_{j\in\mathrm{Ob}(\mathsf{J})}
+        \end{align*}
+        is injective. Let $a=\left(i,\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)$ with $a_j\in F(i,j)$ and $b=\left(i',\left(b_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)$ with $b_j\in F(i',j)$. If $h(a)=h(b)$, then for each $j\in \mathrm{Ob}(\mathsf{J})$, we have $\left(i,a_j\right)=\left(i',b_j\right)$ in $\coprod\limits_{i\in\mathsf{I}} F(i,j)$, which implies $i=i'$ and $a_j=b_j$. So the map $h$ is injective. 
+
+        Next we prove $h$ is surjective. Let $x=\left(\left(i_j,a_j\right)\right)_{j\in\mathrm{Ob}(\mathsf{J})}$ be an element in $\varprojlim\limits_{j\in\mathsf{J}}\coprod\limits_{i\in\mathsf{I}} F(i,j)$, where $a_j\in F(i_j,j)$. Define the map
+        \begin{align*}
+            \coprod_{i\in\mathsf{I}} F(i,\mu):\coprod_{i\in\mathsf{I}} F(i,j)&\longrightarrow \coprod_{i\in\mathsf{I}} F(i,j')\\
+            \left(i,a\right)&\longmapsto \left(i,F(i,\mu)(a)\right).
+        \end{align*}
+        For any morphism $\mu:j\to j'$ in $\mathsf{J}$, compatibility requires 
+        \[
+            \left(i_{j'},a_{j'}\right)=\coprod_{i\in\mathsf{I}} F(i,\mu) \left(i_j,a_j\right)=\left(i_j,F(i_j,\mu)(a_j)\right)
+        \]
+        which forces
+        \[
+            i_{j'}=i_j\text{ and }a_{j'}=F(i_j,\mu)(a_j).
+        \] 
+        Since $\mathsf{J}$ is connected, we can assume $i_j=i^*$ for all $j\in \mathrm{Ob}(\mathsf{J})$. And we get $\left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\in \varprojlim\limits_{j\in\mathsf{J}} F(i^*,j)$ by checking the compatibility condition
+        \[
+            a_{j'}=F(i^*,\mu)(a_j),  \text{ for any morphism }\mu:j\to j'.
+        \]
+        Thus we have 
+        \[
+            h\left(i^*, \left(a_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)=\left(\left(i_j,a_j\right)\right)_{j\in\mathrm{Ob}(\mathsf{J})}=x.
+        \]
+        This proves the surjectivity of $h$ and hence $h$ is a bijection.
     \end{enumerate}
 \end{prf}
 

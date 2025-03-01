@@ -63,6 +63,15 @@ Next we define the morphisms in the category $\mathsf{Ring}$.
     \end{itemize}
 \end{definition}
 
+\begin{definition}{Domain}{domain}
+    A nonzero ring $R$ is called a \textbf{domain} if one of the following equivalent conditions holds:
+    \begin{enumerate}[(i)]
+        \item 0 is the only left zero divisor in $R$.
+        \item 0 is the only right zero divisor in $R$.
+    \end{enumerate}
+\end{definition}
+
+
 \begin{definition}{Ideal}{}
     Let \( R \) be a ring and \( I \subseteq R \) be an additive subgroup.
     \begin{itemize}
@@ -80,8 +89,15 @@ Sometimes we just say ideal to mean two-sided ideal.
     \[
         \ker f=f^{-1}(0_S)=\{r\in R\mid f(r)=0_S\}.
     \]
-    It is easy to check that $\ker f$ is a two-sided ideal of $R$.
 \end{definition}
+
+\begin{proposition}{Kernel of a Ring Homomorphism is an Ideal}{kernel_of_ring_homomorphism_is_an_ideal}
+    Let $f:R\to S$ be a ring homomorphism. Then $\ker f$ is a two-sided ideal of $R$. If $S$ is not a zero ring, then $\ker f$ is a proper ideal of $R$.
+\end{proposition}
+\begin{prf}
+    Let $a,b\in\ker f$ and $r\in R$. Then $f(a)=f(b)=0_S$. Hence $f(a+b)=f(a)+f(b)=0_S$, $f(ra)=f(r)f(a)=0_S$ and $f(ar)=f(a)f(r)=0_S$. Therefore, $a+b,ra,,ar\in\ker f$.\\
+    If $S$ is not a zero ring, then $1_S\ne 0_S$. Hence $f(1_R)=1_S\ne 0_S$, which implies $1_R\notin\ker f$. Therefore, $\ker f$ is a proper ideal of $R$.
+\end{prf}
 
 \begin{proposition}{Surjective Ring Homomorphisms Map Ideals to Ideals}{}
     A ring homomorphism $f:R\to S$ is surjective if and only if maps two-sided ideals to two-sided ideals.
@@ -133,22 +149,29 @@ Conversely, suppose that for every two-sided ideal \( I \) of \( R \), the set \
 \section{Construction}
 \subsection{Initial Object and Terminal Object}
 \begin{proposition}{Initial Object in $\mathsf{Ring}$}{}
-    The ring $\mathbb{Z}$ is the initial object in $\mathsf{Ring}$. That is, for any ring $R$, there exists a unique ring homomorphism
+    The ring $\mathbb{Z}$ is an initial object in $\mathsf{Ring}$. That is, for any ring $R$, there exists a unique ring homomorphism
     \begin{align*}
         \varphi:\mathbb{Z}&\longrightarrow R\\
         n&\longmapsto n\cdot 1_R
     \end{align*}
 \end{proposition}
+\begin{proof}
+    If $\psi: \mathbb{Z} \to R$ is a ring homomorphism, then $\psi(1) = 1_R$ implies 
+    \[
+        \psi(n) = \psi(1+\cdots+ 1) = \psi(1)+\cdots+ \psi(1) = n \cdot 1_R.
+    \]
+    Therefore, $\psi = \varphi$.
+\end{proof}
 
-\begin{definition}{Characteristic of a Ring}{}
-    Let $R$ be a ring and $\varphi:\mathbb{Z}\to R$ be the unique ring homomorphism. Then $\mathrm{\varphi}\cong \mathbb{Z}/n\mathbb{Z}$, where $n=\in\mathbb{N}$.
+\begin{definition}{Characteristic of a Ring}{characteristic_of_a_ring}
+    Let $R$ be a ring and $\varphi:\mathbb{Z}\to R$ be the unique ring homomorphism. Then $\ker\mathrm{\varphi}= n\mathbb{Z}$ and $\mathrm{im}\varphi=\mathbb{Z}/n\mathbb{Z}$, where $n\in\mathbb{Z}_{\ge 0}$.
     The \textbf{characteristic} of $R$ is defined to be $n$, denoted by $\mathrm{char}(R)$.
 
     Equivalently, $\mathrm{char}(R)$ is the smallest positive integer $n$ such that $n\cdot 1_R=0_R$ if such an integer exists. Otherwise, the characteristic of $R$ is $0$.
 \end{definition}
 
 \begin{proposition}{Terminal Object in $\mathsf{Ring}$}{}
-    The ring $\mathbb{Z}$ is the initial object in $\{0\}$.
+    The ring $\mathbb{Z}$ is an initial object in $\{0\}$.
 \end{proposition}
 
 Since the forgetful functor $\mathsf{Ring}\to\mathsf{Set}$ is a right adjoint, it preserves all limits. Hence the underlying set of the terminal object in $\mathsf{Ring}$ is the terminal object in $\mathsf{Set}$, which is the singleton set $\{*\}$.
@@ -184,6 +207,57 @@ Then \( R / I \) forms a ring, which is called the \textbf{quotient ring of \( R
 
 \begin{theorem}{The Fundamental Theorem of Ring Homomorphisms}{}
     Let $f:R\to S$ be a ring homomorphism. Then $R/\ker f\cong \mathrm{im}f$.
+\end{theorem}
+
+\begin{proposition}{}{}
+    Let $f:R\to S$ be a ring homomorphism. Then we have the following map
+    \begin{align*}
+       \left\{\text{two-sided ideals of }S\right\}&\longrightarrow\left\{\text{two-sided ideals of }R\text{ containing }\ker f\right\}\\
+        I_2&\longmapsto f^{-1}(I_2)
+    \end{align*}
+    Furthermore, if $f$ is surjective, then we obtain a bijection
+    \begin{align*}
+        \left\{\text{two-sided ideals of }S\right\}&\xlongrightarrow{\sim}\left\{\text{two-sided ideals of }R\text{ containing }\ker f\right\}\\
+        I_2&\longmapsto f^{-1}(I_2)\\
+        f(I_1)&\longmapsfrom I_1
+    \end{align*}
+\end{proposition}
+
+
+\begin{corollary}{}{}
+    Let $R$ be a ring and $I$ be a two-sided ideal of $R$. Then we have the following bijection
+    \begin{align*}
+        \left\{\text{two-sided ideals of }R/I\right\}&\xlongrightarrow{\sim}\left\{\text{two-sided ideals of }R\text{ containing }I\right\}\\
+        J/I:=\left\{j+I\mid j\in J\right\} &\longmapsfrom J
+    \end{align*}
+\end{corollary}
+
+
+\begin{example}{}{coset_of_generated_ideals_quotient_generates_ideals}
+    Let $R$ be a commutative ring and $a_1,\cdots,a_n\in R$ be elements in $R$. Then 
+    \[
+    \left(a_1,\cdots,a_n\right)/(a_1) = \left(a_2+(a_1),\cdots,a_n+(a_1)\right)
+    \]
+    is a ideal of $R/(a_1)$.
+\end{example}
+\begin{prf}
+    For any $x=r_1a_1+\cdots+r_na_n+(a_1)\in \left(a_1,\cdots,a_n\right)/(a_1)$, we have
+    \[
+    x=r_1a_1+\cdots+r_na_n+(a_1)=r_2(a_2+(a_1))+\cdots+r_n(a_n+(a_1))\in \left(a_2+(a_1),\cdots,a_n+(a_1)\right).
+    \]
+    This implies $\left(a_1,\cdots,a_n\right)/(a_1)\subseteq \left(a_2+(a_1),\cdots,a_n+(a_1)\right)$.\\
+    Conversely, for any $y=r_2(a_2+(a_1))+\cdots+r_n(a_n+(a_1))\in \left(a_2+(a_1),\cdots,a_n+(a_1)\right)$, we have
+    \[
+    y=r_2a_2+\cdots+r_na_n+(a_1)\in \left(a_1,\cdots,a_n\right)/(a_1).
+    \]
+    This implies $\left(a_2+(a_1),\cdots,a_n+(a_1)\right)\subseteq \left(a_1,\cdots,a_n\right)/(a_1)$. Therefore, we prove the equality.
+\end{prf}
+
+\begin{theorem}{Third Isomorphism Theorem}{}
+    Let $R$ be a ring and $I$ and $J$ be two-sided ideals of $R$ such that $I\subseteq J$. Then $J/I$ is a two-sided ideal of $R/I$ and we have the following isomorphism
+    \[
+        \frac{R/I}{J/I}\cong R/J.
+    \]    
 \end{theorem}
 
 

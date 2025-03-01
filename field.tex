@@ -5,18 +5,239 @@
     A \textbf{field} is a commutative ring $K$ such that $K^{\times}=K-\{0\}$.
 \end{definition}
 
-\begin{proposition}{}{}
-    If $K$ is a field, $R$a ring homomorphism $f:K\to R$.
+\begin{proposition}{Ideals of Field}{}
+    The only ideals of a field $K$ are $\{0\}$ and $K$.
 \end{proposition}
 
-\begin{definition}{Field Extension}{}
-    Let $K$ be a field and $L$ be a commutative ring. 
+
+
+\begin{definition}{Field Homomorphism}{}
+    A \textbf{field homomorphism} is a ring homomorphism between fields.
+\end{definition}
+
+\begin{proposition}{}{}
+    Let $\mathsf{Field}$ denote the category of fields. We have
+    \begin{enumerate}[(i)]
+        \item Monomorphisms in $\mathsf{Field}$ are exactly injective ring homomorphisms of fields.
+        \item Isomorphisms in $\mathsf{Field}$ are exactly bijective ring homomorphisms of fields, i.e. ring isomorphisms of fields.
+        \item Every morphism in $\mathsf{Field}$ is a monomorphism.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    This follows from \Cref{th:nonzero_ring_homomorphism_from_field_is_injective}.
+\end{prf}
+
+\begin{definition}{Subfield}{}
+    Let $L$ be a field and $K\subseteq L$ is a subset of $L$. If $K$ is a field under the operations inherited from $L$, we say $K$ is a \textbf{subfield} of $L$
 \end{definition}
 
 
-\begin{lemma}{Zariski's Lemma}{}
-    If a field is a finite-type $K$-algebra, then it is a finite extension of $K$ (that is, it is also finitely generated as a $K$-linear space).
-\end{lemma}
+\begin{definition}{Field Extension}{}
+    Let $u:L\hookrightarrow K$ be a field monomorphism. We say $K$ is a \textbf{field extension} of $L$. We write $K/L$ to denote the field extension.
+\end{definition}
+\begin{remark}
+    Though in the notation of field extension $K/L$, the function $u:L\hookrightarrow K$ is not given explicitly, $K/L$ is just a simple way to denote $u:L\hookrightarrow K$ and includes totally the same information as $u$. 
+    
+    Note that $u(L)$ is a subfield of $K$. This allows us to think of $L$ as a subfield of $K$.
+\end{remark}
+
+
+\begin{definition}{$K$-embedding and $K$-isomorphism}{}
+ A \textbf{$K$-embedding} is a morphism in the \hyperref[th:coslice_category]{coslice category} $(K/\mathsf{Field})$. A \textbf{$K$-isomorphism} is an isomorphism in $(K/\mathsf{Field})$. We say two field extensions $L_1/K$ and $L_2/K$ are \textbf{$K$-isomorphic} if there exists a $K$-isomorphism between them.
+\end{definition}
+
+\begin{proposition}{Equivalent Characterizations of $K$-embedding}{equivalent_characterizations_of_K_embedding}
+    Let $u_1:F\hookrightarrow K_1$, $u_2:F\hookrightarrow K_2$, $\phi:K_1\hookrightarrow K_2$ be field extensions. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $\phi:K_1\hookrightarrow K_2$ is a $K$-embedding between $u_1$ and $u_2$.
+        \item We have the following commutative diagram:
+        \[
+        \begin{tikzcd}
+            L_1 \arrow[rr, "\phi", hook] &                                                    & L_2 \\
+                                        & K \arrow[lu, "u_1", hook] \arrow[ru, "u_2"', hook] &    
+        \end{tikzcd}
+        \]
+        \item $\phi:K_1\to K_2$ is an $K$-algebra homomorphism.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+Note $(K/\mathsf{Field})$ is a full subcategory of $(K/\mathsf{CRing})\cong K\text{-}\mathsf{CAlg}$. 
+\end{prf}
+
+\begin{corollary}{$K$-endomorphism Fixes Base Field}{}
+    Let $u:K\hookrightarrow L$ be a field extension and $\phi:L\hookrightarrow L$ be a $K$-embedding. Then $\phi|_{u(K)}=\mathrm{id}_{u(K)}$.
+\end{corollary}
+\begin{prf}
+    \Cref{th:equivalent_characterizations_of_K_embedding} implies that $u=\phi\circ u$. So for any $x\in K$, we have $\phi(u(x))=u(x)$. This implies $\phi|_{u(K)}=\mathrm{id}_{u(K)}$.
+\end{prf}
+
+\begin{proposition}{$K$-automorphism Acts on Set of Roots}{K_automorphism_acts_on_set_of_roots}
+    Let $u:K\hookrightarrow L$ be a field extension and $\phi:L\hookrightarrow L$ be a $K$-embedding. Suppose $f(X)\in K[X]$ is a polynomial and 
+    \[
+    S_f = \left\{x\in L\mid f(x)=0\right\}
+    \]
+    be the set of roots of $f$ in $L$. Then $\phi|_{S_f}:S_f\to S_f$ is a bijection and we can define a monoid homomorphism
+    \begin{align*}
+        \mathrm{End}_{(K/\mathsf{Field})}(L/K)&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}\left(S_f\right)\\
+        \phi&\longmapsto \phi|_{S_f}
+    \end{align*}
+    Moreover, $\mathrm{Aut}_{(K/\mathsf{Field})}(L/K)$ acts on $S_f$ through this map.
+\end{proposition}
+\begin{prf}
+    Let $x\in S_f$. Since
+    \[
+    f(\phi(x))=\phi(f(x))=\phi(0)=0,
+    \]
+    we have $\phi(x)\in S_f$. Hence $\phi(S_f)\subseteq S_f$. Since $S_f$ is finite set and $\phi$ is injective, we see $\phi|_{S_f}:S_f\to S_f$ is a bijection. It is easy to check
+    \begin{align*}
+        \mathrm{Aut}_{(K/\mathsf{Field})}(L/K)&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}\left(S_f\right)\\
+        \phi&\longmapsto \phi|_{S_f}
+    \end{align*}
+    is a group homomorphism. 
+
+\end{prf}
+
+\begin{definition}{Subextension}{subextension}
+    Let $u:K\hookrightarrow L$ be a field extension and $M\subseteq L$ be a subfield of $L$. If one of the following equivalent conditions hold:
+    \begin{enumerate}[(i)]
+        \item $u(K)\subseteq M$,
+        \item $M$ is a $K$-subalgebra of $L$,
+    \end{enumerate}    
+    then we can define a map
+    \begin{align*}
+        \tilde{u}:K &\longrightarrow M:\\
+        x&\longmapsto u(x)
+    \end{align*}
+    which shrink the codomain of $u$ to $M$. We say $\tilde{u}:K \rightarrow M$ is a \textbf{subextension} of $u:K\hookrightarrow L$.
+\end{definition}
+\begin{remark}
+    If $u(K)\subseteq M$, we can also say $M$ is a subextension of $L/K$, because $\tilde{u}:K \rightarrow M$ is totally determined by $M$. And we have the following commutative diagram:
+        \[
+        \begin{tikzcd}
+            M \arrow[rr, "\iota", hook] &                                                    & L \\
+                                        & K \arrow[lu, "\tilde{u}", hook] \arrow[ru, "u"', hook] &    
+        \end{tikzcd}
+        \]
+    where $\iota:M\hookrightarrow K$ is the inclusion map.
+\end{remark}
+
+
+
+\begin{proposition}{Characteristic of a Field}{characteristic_of_a_field}
+    The \hyperref[th:characteristic_of_a_ring]{characteristic} of a field is either $0$ or a prime number.
+\end{proposition}
+\begin{prf}
+    Let $K$ be a field and $\varphi:\mathbb{Z}\to K$ be the unique ring homomorphism. Since $(0)$ is a maximal ideal of $K$, $\ker \varphi$ is a maximal ideal of $\mathbb{Z}$. Therefore, $\ker \varphi$is either $(0)$ or $p\mathbb{Z}$ for some prime number $p$, which implies $\mathrm{char}(K)$ is either $0$ or $p$.
+\end{prf}
+
+\begin{proposition}{Field Extension Preserves Characteristic}{field_extension_preserves_characteristic}
+    Leet $L/K$ be a field extension. Then $\mathrm{char}(L)=\mathrm{char}(K)$.
+\end{proposition}
+\begin{prf}
+    Since $\mathbb{Z}$ is an initial object in $\mathsf{CRing}$, there exists unique ring homomorphisms $\varphi_K:\mathbb{Z}\to K$ and $\varphi_L:\mathbb{Z}\to L$ such that the following diagram commutes in $\mathsf{CRing}$
+    \[
+        \begin{tikzcd}
+            K \arrow[rr, "u", hook] &                                                                         & L \\
+                                    & \mathbb{Z} \arrow[lu, "\varphi_K", hook] \arrow[ru, "\varphi_L"', hook] &  
+        \end{tikzcd}
+    \]
+    Thus we have
+    \[
+    \ker \varphi_L = \ker\left(u\circ \varphi_K\right)= \varphi_K^{-1}(0)=\ker \varphi_K,
+    \]
+    which implies $\mathrm{char}(L)=\mathrm{char}(K)$.
+\end{prf}
+
+In field category $\mathsf{Field}$, Let $\mathsf{Field}_0$ denote the full subcategory of fields of characteristic $0$ and $\mathsf{Field}_p$ denote the full subcategory of fields of characteristic $p$. $\mathsf{Field}_0$ and all $\mathsf{Field}_p$ are connected components of $\mathsf{Field}$. Though $\mathsf{Field}$ has no initial objects, $\mathsf{Field}_0$ and $\mathsf{Field}_p$ have initial objects.
+
+\begin{proposition}{Initial Objects in $\mathsf{Field}_0$ and $\mathsf{Field}_p$}{initial_objects_in_field}
+    \begin{enumerate}[(i)]
+        \item $\mathbb{Q}$ is an initial object in $\mathsf{Field}_0$.
+        \item $\mathbb{F}_p:=\mathbb{Z}/p\mathbb{Z}$ is an initial object in $\mathsf{Field}_p$.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Omitted.
+        \item For any field $K$ of characteristic $p$, there exists a uniqueness ring homomorphism
+        \begin{align*}
+            \varphi:\mathbb{Z}&\longrightarrow K\\
+            n&\longmapsto n\cdot 1_K
+        \end{align*}
+        and we have $\ker \varphi=\mathbb{F}_p$. Therefore, by ring homomorphism theorem, there exists a unique field homomorphism 
+        \begin{align*}
+            \psi:\mathbb{F}_p&\longrightarrow K \\
+            n+ p\mathbb{Z} &\longmapsto n\cdot 1_K
+        \end{align*}
+        such that the following diagram commutes
+        \[
+            \begin{tikzcd}
+                \mathbb{Z} \arrow[r, "\varphi", hook] \arrow[d, "\pi"', two heads] & K \\
+                \mathbb{F}_p \arrow[ru, "\psi"', dashed]                           &  
+                \end{tikzcd}
+        \]
+        If $\eta:\mathbb{F}_p\to K$ is field homomorphism, then $\eta(1+p\mathbb{Z})=1_K$ implies
+        \[
+        \eta(n+p\mathbb{Z})=n\cdot \eta(1+p\mathbb{Z})=n\cdot 1_K,
+        \]
+        which implies $\eta=\psi$.
+    \end{enumerate}
+\end{prf}
+
+\begin{corollary}{}{}
+    There is natural bijection between isomorphisms in $\mathsf{Field}_p$ and isomorphisms in $(\mathbb{F}_p/\mathsf{Field})$. There is natural bijection between isomorphisms in $\mathsf{Field}_0$ and isomorphisms in $(\mathbb{Q}/\mathsf{Field})$.
+\end{corollary}
+\begin{prf}
+    This follows from \Cref{th:initial_objects_in_field}.
+\end{prf}
+
+\begin{definition}{Prime Subfield}{prime_subfield}
+    If $K$ is a field, the \textbf{prime subfield} of $K$ is the smallest subfield of $K$ containing $1_K$.
+\end{definition}
+
+\begin{proposition}{Equivalent Characterizations of Prime Subfield}{}
+    Let $K$ be a field and $P$ be a subfield of $K$. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $P$ is the \hyperref[th:prime_subfield]{prime subfield} of $K$.
+        \item \begin{itemize}
+            \item If $\mathrm{char}(K)=0$, $P$ is the image of the unique field extension $\mathbb{Q}\hookrightarrow K$.
+            \item If $\mathrm{char}(K)=p$, $P$ is the image of the unique field extension $\mathbb{F}_p\hookrightarrow K$.
+        \end{itemize}
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    We prove the proposition by discussing the two cases: $\mathrm{char}(K)=0$ and $\mathrm{char}(K)=p$.
+    \begin{itemize}
+        \item Let $K$ be a field with a positive characteristic $p$. From \Cref{th:initial_objects_in_field} we see $\mathbb{F}_p$ is initial in $\mathsf{Field}_p$ and there exists a unique field extension from $\mathbb{F}_p$ to $K$
+        \begin{align*}
+            \psi:\mathbb{F}_p&\xhookrightarrow{\quad} K\\
+                 n + p\mathbb{Z}&\longmapsto n \cdot 1_K
+        \end{align*}
+        If $F$ is any subfield of $K$ containing $1_K$, then $F$ must contains $n \cdot 1_K$ for all $n\in \mathbb{Z}$, which implies $\psi(\mathbb{F}_p)\subseteq F$. Therefore, $\psi(\mathbb{F}_p)$ is the smallest subfield of $K$ containing $1_K$. So we proved $\psi(\mathbb{F}_p)$ is the prime subfield of $K$.
+        \item Let $K$ be a field with characteristic $0$. From \Cref{th:initial_objects_in_field} we see $\mathbb{Q}$ is initial in $\mathsf{Field}_0$ and there exists a unique field extension from $\mathbb{Q}$ to $K$
+        \begin{align*}
+            \psi:\mathbb{Q}&\xhookrightarrow{\quad} K\\
+                 n &\longmapsto n \cdot 1_K
+        \end{align*}
+        If $F$ is any subfield of $K$ containing $1_K$, then $F$ must contains $n \cdot 1_K$ for all $n\in \mathbb{Z}$, which implies $\psi(\mathbb{Q})\subseteq F$. Therefore, $\psi(\mathbb{Q})$ is the smallest subfield of $K$ containing $1_K$. So we proved $\psi(\mathbb{Q})$ is the prime subfield of $K$.
+    \end{itemize}
+    
+\end{prf}
+
+\begin{proposition}{Subfield Contains Prime Subfield}{subfield_contains_prime_subfield}
+    Let $K$ be a field with prime subfield $P$. If $F\subseteq K$ is a subfield of $K$, then
+    \begin{enumerate}[(i)]
+    \item $P\subseteq F$.
+    \item \begin{itemize}[wide]
+        \item If $\mathrm{char}(K)=0$, $F/\mathbb{Q}$ is a subextension of $K/\mathbb{Q}$.
+        \item If $\mathrm{char}(K)=p$, $F/\mathbb{F}_p$ is a subextension of $K/\mathbb{F}_p$.
+    \end{itemize}
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    Let $F$ be a subfield of $K$. Since $F$ is a field, $1_K\in F$. Therefore, $P$ is a subfield of $F$.
+\end{prf}
+
 
 
 \begin{theorem}{Hilbert's Weak Nullstellensatz}{}
@@ -29,8 +250,370 @@
 \end{theorem}
 
 
+
+
+
+
+
+
+\subsection{Algebraic Extension}
+
+\begin{definition}{Algebraic Extension}{}
+    A field extension $L/K$ is \textbf{algebraic} if every element of $L$ is algebraic over $K$. That is, for any $\alpha\in L$, there exists a nonzero polynomial $f\in K[X]$ such that $f(\alpha)=0$.
+\end{definition}
+
+
+\begin{proposition}{}{K_embedding_is_K_isomorphism_for_algebraic_extension}
+    Let $L/K$ be an algebraic extension. Then any $K$-embedding $L\hookrightarrow L$ is an $K$-isomorphism, namely
+    \[
+    \mathrm{End}_{\left(K/\mathsf{Field}\right)}\left(L/K\right) = \mathrm{Aut}_{\left(K/\mathsf{Field}\right)}\left(L/K\right).
+    \]
+\end{proposition}
+\begin{prf}
+    Let $u:L\hookrightarrow L$ be a $K$-embedding. It is sufficient to show $u$ is surjective. Given $\alpha\in L$, suppose $m_\alpha(X)\in K[X]$ is the minimal polynomial of $\alpha$ over $K$. Let
+    \[
+    S_{m_\alpha}=\left\{x \in L\midv m_\alpha(x)=0\right\}=\{ \alpha_1,\cdots,\alpha_m\}
+    \]
+    be the set of roots of $m_\alpha(X)$ in $L$. Let $L_0=K(\alpha_1,\cdots,\alpha_m)$.
+    By \Cref{th:K_automorphism_acts_on_set_of_roots}, $u|_{S_{m_\alpha}}:S_{m_\alpha}\to S_{m_\alpha}$ is a bijection. Therefore, $u(L_0)\subseteq L_0$ and $u|_{L_0}:L_0\to L_0$ is a $K$-embedding. Since $L_0/K$ is a finite extension, $u|_{L_0}$ is an $K$-isomorphism. Therefore, $u|_{L_0}$ is surjective and there exists $\beta\in L_0$ such that $u(\beta)=\alpha$. This implies $u$ is surjective.
+\end{prf}
+If $L/K$ is not algebraic, we have the following counterexample.
+\begin{example}{}{}
+    $\mathbb{Q}(\pi)/\mathbb{Q}$ is a transcendental extension. We can check that 
+    \begin{align*}
+        u:\mathbb{Q}(\pi)&\longrightarrow \mathbb{Q}(\pi)\\
+        \pi&\longmapsto \pi^2
+    \end{align*}
+    is a $\mathbb{Q}$-embedding but not a $\mathbb{Q}$-isomorphism.
+\end{example}
+
+\subsection{Finitely Generated Extension}
+
+
+\begin{definition}{Generated Subextension}{}
+    Let $L/K$ be a field extension and $S\subseteq L$. The \textbf{subextension generated by $S$} is the smallest subextension of $L/K$ containing $S$, denoted by $K(S)$. If $S=\{\alpha_1,\cdots,\alpha_n\}$ is a finite set, we write $K(S)=K(\alpha_1,\cdots,\alpha_n)$.
+\end{definition}
+\begin{prf}
+    Here the smallest means if $M/K$ is another subextension of $L/K$ containing $S$, then $K(S)/K$ is a subextension of $M/K$.
+\end{prf}
+
+\begin{proposition}{Equivalent Characterizations of Generated Subextension}{}
+    Let $L/K$ be a field extension and $S\subseteq L$. Suppose $M/L$ is a subextension of $L/K$. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $M/K=K(S)/K$.
+        \item $M/K$ is the intersection of all subextensions of $L/K$ containing $S$.
+        \item 
+        \[
+        M=\left\{Q(\alpha_1,\cdots,\alpha_n)\in L\midv n\in \mathbb{Z}_{\ge 1}, \; Q\in K(X_1,\cdots,X_n),\; \alpha_i\in S \right\}.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}{Finitely Generated Extension}{}
+    A field extension $L/K$ is \textbf{finitely generated} if there exists a finite set $S\subseteq L$ such that $L=K(S)$.
+\end{definition}
+
+\begin{definition}{Simple Extension}{}
+    A field extension $L/K$ is \textbf{simple} if $L=K(\alpha)$ for some $\alpha\in L$.
+\end{definition}
+
+
+\subsection{Finite Extension}
+
+\begin{definition}{Degree of Field Extension}{}
+    Let $L/K$ be a field extension. The \textbf{degree} of $L/K$ is the dimension of $L$ as a $K$-vector space, denoted by $[L:K]=\dim_K L$.
+\end{definition}
+
+\begin{definition}{Finite Extension}{}
+    A field extension $L/K$ is \textbf{finite} if $[L:K]<\infty$.
+\end{definition}
+
+\begin{proposition}{}{}
+    Let $L/K$ be a finite generated extension and $L=K(\alpha_1,\cdots,\alpha_n)$. If $\alpha_1,\cdots,\alpha_n$ are algebraic elements over $K$, then $L/K$ is a finite extension and $L=K[\alpha_1,\cdots,\alpha_n]$, where $K[\alpha_1,\cdots,\alpha_n]$ denotes the $K$-subalgebra of $L$ generated by $\alpha_1,\cdots,\alpha_n$.
+\end{proposition}
+
+\begin{proposition}{Equivalent Characterization of Finite Extension}{}
+    Let $L/K$ be a field extension. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $L/K$ is a finite extension.
+        \item $L/K$ is a finitely generated algebraic extension.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}{}{}
+    If $L/K$ is a finite extension and $M/L$ be a subextension of $L/K$, then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $M/K=L/K$
+        \item $M/K$ and $L/M$ are $K$-isomorphic.
+        \item $[M:L]=[L:K]$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{lemma}{Zariski's Lemma}{}
+    If a field $L$ is a finite-type $K$-algebra, then $L$ is a finite extension of $K$ (that is, $L$ is also finitely generated as a $K$-linear space).
+\end{lemma}
+
+\section{Algebraic Closure}
+
+\begin{proposition}{Simple Extension by Adjoining a Root of an Irreducible Polynomial}{}
+    Let $K$ be a field and $f\in K[X]$ be a irreducible polynomial. Denote $L:=K[X]/(f)$ and $\alpha:=X+(f(X))\in L$. Then
+    \begin{enumerate}[(i)]
+        \item $u:K\hookrightarrow K[X]\twoheadrightarrow L$ is a field extension of degree $\deg f$.
+        \item $L=K(\alpha)$.
+        \item $\alpha$ is algebraic over $K$ with minimal polynomial $f\in K[X]$.
+    \end{enumerate}  
+\end{proposition}
+\begin{proof}
+    It is easy to check 
+    \[
+    \left\{\alpha^k=X^k+(f(X))\midv k=0,1,\cdots, \deg f-1\right\}
+    \]
+    is a $K$-basis of $L$. Therefore, $[L:K]=\deg f$. Since 
+    \[
+        f(\alpha)=f(X+(f(X)))=f(X)+(f(X))=0+(f(X)).
+    \]
+    $\alpha$ is algebraic over $K$ with minimal polynomial $f$.
+\end{proof}
+
+\begin{proposition}{}{field_isomorphism_lift_uniquely_to_simple_extension}
+    Let $L_1/K_1$ and $L_2/K_2$ be field extensions and $\varphi:K_1\xrightarrow{\sim} K_2$ is a field isomorphism. 
+    \begin{enumerate}[(i)]
+        \item Suppose $\eta:L_1\hookrightarrow L_2$ is field extension such that the following diagram commutes
+        \[
+            \begin{tikzcd}
+                L_1\arrow[r, "\eta"]                    & L_2                   \\
+                K_1 \arrow[u, "u_1", hook] \arrow[r, "\varphi"'] & K_2 \arrow[u, "u_2"', hook]
+                \end{tikzcd}
+        \]
+        If $\alpha\in L_1$ is algebraic over $K_1$ with minimal polynomial $f\in K_1[X]$, then $\eta(\alpha)\in L_2$ is algebraic over $K_2$ with minimal polynomial $\varphi(f)\in K_2[X]$.
+        \item If $\alpha\in L_1$ is algebraic over $K_1$ with minimal polynomial $f_1\in K_1[X]$, and $\beta\in L_2$ is algebraic over $K_2$ with minimal polynomial $f_2:=\varphi(f_1)\in K_2[X]$, then  there exists a field isomorphism $\psi:K_1(\alpha_1)\xrightarrow{\sim} K_2(\alpha_2)$ such that $\psi(\alpha_1)=\alpha_2$ and the following diagram commutes
+        the following diagram commutes
+    \[
+        \begin{tikzcd}
+            K_1(\alpha_1) \arrow[r, "\psi", dashed]                    & K_2(\alpha_2)                        \\
+            K_1 \arrow[u, "u_1", hook] \arrow[r, "\varphi"'] & K_2 \arrow[u, "u_2"', hook]
+            \end{tikzcd}
+    \]
+    \end{enumerate}
+    
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Since
+        \[
+            f(\alpha)=\sum_{k=0}^n c_k\alpha^k=0,
+        \]
+        we have
+        \[
+            \varphi(f)(\eta(\alpha))=\sum_{k=0}^n \varphi(c_k)\eta(\alpha)^k=\sum_{k=0}^n \eta(c_k)\eta(\alpha)^k=\eta\left(\sum_{k=0}^n c_k\alpha^k\right)=\eta(0)=0.
+        \]
+        \item Suppose $\pi_1:K_1[X]\to K_1[X]/(f_1)$ and $\pi_2:K_2[X]\to K_2[X]/(f_2)$ are the canonical projections. Since for any $g\in K_1[X]$, 
+        \[
+        \pi_2(\widetilde{\varphi}(gf_1))=\pi_2(\widetilde{\varphi}(g)\widetilde{\varphi}(f_1))=\pi_2(\widetilde{\varphi}(g)\varphi(f_1))=\pi_2(\widetilde{\varphi}(g)f_2)=\pi_2(\widetilde{\varphi}(g))\pi_2(f_2)=0,
+        \]
+        we see $(f_1)\subseteq \ker (\pi_2\circ \widetilde{\varphi})$. By the universal property of $\pi_1:K_1[X]\to K_1[X]/(f_1)$, there exists a unique ring homomorphism 
+        \begin{align*}
+            \widehat{\varphi}:K_1[X]/(f_1)&\longrightarrow K_2[X]/(f_2)\\
+            g+(f_1)&\longmapsto \widetilde{\varphi}(g)+(f_2)
+        \end{align*}
+        such that the following diagram commutes
+        \[
+            \begin{tikzcd}
+                K_1(\alpha_1) \arrow[r, "\psi"]                                         & K_2(\alpha_2)                           \\
+                {K_1[X]/(f_1)} \arrow[r, "\widehat{\varphi}"] \arrow[u, "\sim"]         & {K_2[X]/(f_2)} \arrow[u, "\sim"']       \\
+                {K_1[X]} \arrow[u, "\pi_1", two heads] \arrow[r, "\widetilde{\varphi}"] & {K_2[X]} \arrow[u, "\pi_2"', two heads] \\
+                K_1 \arrow[r, "\varphi"'] \arrow[u, hook]                               & K_2 \arrow[u, hook]                    
+            \end{tikzcd}
+        \]
+        Let $\psi:K(\alpha)\hookrightarrow L_2$ be the composition of the following maps
+        \[
+        \begin{tikzcd}
+            K_1(\alpha_1) \arrow[r, "\sim"] & K_1[X]/(f_1) \arrow[r, "\widehat{\varphi}"] & K_2[X]/(f_2)\arrow[r,"{\sim}"] &  K_2(\alpha_2)\\[-1.5em]
+            \alpha_1 \arrow[r, mapsto] & X \arrow[r, mapsto] & X \arrow[r, mapsto] & \alpha_2
+        \end{tikzcd}
+        \]
+        Then $\psi$ is a $K$-embedding such that $\psi(\alpha_1)=\alpha_2$. 
+    \end{enumerate}
+\end{prf}
+
+\begin{corollary}{$K$-embedding Preserves Algebraic Element and Minimal Polynomial}{K_embedding_preserves_algebraic_element_and_minimal_polynomial}
+    Let $L_1/K$ and $L_2/K$ be field extensions.
+    \begin{enumerate}[(i)]
+        \item Suppose $u:L_1\hookrightarrow L_2$ is a $K$-embedding. If $\alpha\in L_1$ is algebraic over $K$ with minimal polynomial $f\in K[X]$, then $u(\alpha)\in L_2$ is also algebraic over $K$ with minimal polynomial $f\in K[X]$.
+        \item If $\alpha\in L_1$ and $\beta\in L_2$ are algebraic over $K$ with the same minimal polynomial $f\in K[X]$, then there exists a unique $K$-embedding $\psi:K(\alpha)\hookrightarrow L_2$ such that $\psi(\alpha)=\beta$. Furthermore, $\psi(K(\alpha))=K(\beta)$.
+    \end{enumerate}
+\end{corollary}
+\begin{prf}
+    This a direct consequence of \Cref{th:field_isomorphism_lift_uniquely_to_simple_extension} by setting $K_1=K_2=K$.
+    \begin{enumerate}[(i)]
+        \item Since $f(\alpha)=0$, we have $f(u(\alpha))=u(f(\alpha))=0$. Since $f$ is irreducible over $K$, $f$ is also the minimal polynomial of $u(\alpha)$ over $K$.
+        \item Let $\psi:K(\alpha)\hookrightarrow L_2$ be the composition of the following maps
+        \[
+        \begin{tikzcd}
+            K(\alpha) \arrow[r, "\sim"] & K[X]/(f) \arrow[r, "\sim"] & K(\beta)\arrow[r,hook] & L_2\\[-1.5em]
+            \alpha \arrow[r, mapsto] & X \arrow[r, mapsto] & \beta\arrow[r, mapsto] & \beta
+        \end{tikzcd}
+        \]
+        Then $\psi$ is a $K$-embedding such that $\psi(K(\alpha))=K(\beta)$. 
+        
+        Suppose $\eta:K(\alpha)\hookrightarrow L_2$ is $K$-embedding such that $\eta(\alpha)=\beta$. Since $K(\alpha)$ is generated by $\alpha$ over $K$, $\eta$ is totally determined by $\eta(\alpha)$. Therefore, $\eta(\alpha)=\psi(\alpha)\implies \eta=\psi$.
+      
+    \end{enumerate}
+\end{prf}
+
+\begin{corollary}{}{}
+    Let $L/K$ be a simple extension and $L=K(\alpha)$ for some $\alpha\in L$. Suppose $m(X)\in K[X]$ is the minimal polynomial of $\alpha$ over $K$. Then 
+    \begin{align*}
+        \mathrm{ev}_{\alpha}:\mathrm{Aut}_{(K/\mathsf{Field})}(K(\alpha)/K)&\longrightarrow \left\{ x\in K(\alpha)\midv m(x)=0\right\}\\
+        \sigma&\longmapsto \sigma(\alpha)
+    \end{align*}
+    is a bijection and we have
+    \[
+    |\mathrm{Aut}_{(K/\mathsf{Field})}(K(\alpha)/K)|=\left|\left\{ x\in K(\alpha)\midv m(x)=0\right\}\right|\le \deg m(X),
+    \]
+    with equality if and only if $m(X)$ splits over $K(\alpha)$ into $\deg m(X)$ distinct linear factors.
+\end{corollary}
+\begin{prf}
+    Suppose $\sigma:K(\alpha)\hookrightarrow K(\alpha)$ is a $K$-automorphism. By \Cref{th:K_embedding_preserves_algebraic_element_and_minimal_polynomial}, $u(\alpha)$ is algebraic over $K$ with minimal polynomial $m(X)$. Thus we can define a map
+    \begin{align*}
+        \mathrm{ev}_{\alpha}:\mathrm{Aut}_{(K/\mathsf{Field})}(K(\alpha)/K)&\longrightarrow \left\{ x\in L\midv m(x)=0\right\}\\
+        \sigma&\longmapsto \sigma(\alpha)
+    \end{align*}
+    Since $\sigma$ is totally determined by $\sigma(\alpha)$, for any $\sigma_1, \sigma_2\in \mathrm{Aut}_{(K/\mathsf{Field})}(K(\alpha)/K)$, we have 
+    \[
+    \sigma_1(\alpha)=\sigma_2(\alpha)\implies \sigma_1=\sigma_2.
+    \]
+    Therefore, $\mathrm{ev}_{\alpha}$ is injective. Conversely, for any $\beta\in L$ such that $m(\beta)=0$, $m(X)$ is the minimal polynomial of $\beta$ over $K$ because $m(X)$ is irreducible over $K$. By \Cref{th:K_embedding_preserves_algebraic_element_and_minimal_polynomial}, there exists a unique $K$-embedding $\sigma:K(\alpha)\hookrightarrow K(\alpha)$ such that $\sigma(\alpha)=\beta$. By \Cref{th:K_embedding_is_K_isomorphism_for_algebraic_extension}, $\sigma$ is a $K$-automorphism. Therefore, $\mathrm{ev}_{\alpha}$ is surjective. Thus $\mathrm{ev}_{\alpha}$ is a bijection.
+\end{prf}
+
+\begin{definition}{Algebraic Closed Field}{}
+    A field $K$ is \textbf{algebraically closed} if every nonconstant polynomial $f\in K[X]$ has a root in $K$.
+\end{definition}
+
+\begin{proposition}{Equivalent Characterization of Algebraic Closed Field}{}
+    Let $K$ be a field. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $K$ is algebraically closed.
+        \item Every nonconstant polynomial $f\in K[X]$ splits into linear factors.
+    \end{enumerate}
+    
+\end{proposition}
+
+\begin{proposition}{}{}
+    Let $L/K$ be an algebraic extension and $\overline{K}/K$ be an algebraic closure of $K$. Then there exists a $K$-embedding $\gamma:L\hookrightarrow \overline{K}$, namely
+    \[
+        \mathrm{Hom}_{(K/\mathsf{Field})}(L/K,\overline{K}/K)\ne \varnothing.
+    \]
+    If $L/K$ is a finite extension, then 
+    \[
+    |\mathrm{Hom}_{(K/\mathsf{Field})}(L/K,\overline{K}/K)|\le \left[L:K\right].
+    \]
+\end{proposition}
+\begin{prf}
+    Suppose $\phi:L\hookrightarrow \overline{L}$ is an algebraic closure of $L$. Then $\phi\circ u: K\hookrightarrow \overline{L}$ is an algebraic closure of $K$. By the uniqueness of algebraic closure, there exists a $K$-embedding $\psi:L\hookrightarrow \overline{K}$. Let $\gamma:=\psi\circ \phi$. Since the following diagram commutes
+    \[
+        \begin{tikzcd}
+            L \arrow[r, "\phi", hook]                       & \overline{L} \arrow[d, "\psi"] \\
+            K \arrow[u, "u", hook] \arrow[r, "\eta"', hook] & \overline{K}                  
+            \end{tikzcd}
+    \]
+    we see $\gamma:L\hookrightarrow \overline{K}$ is a $K$-embedding.
+
+    If $L/K$ is a finite extension, then $L=K(\alpha_1,\cdots,\alpha_n)$ for some $\alpha_1,\cdots,\alpha_n\in L$ and we have the following tower of field extensions
+    \[
+        \begin{tikzcd}
+            &                                                 &                                                           &                        &                                                                    & \overline{K}                                    \\[+4em]
+K \arrow[r, hook] \arrow[rrrrru, hook] & K(\alpha_1) \arrow[r, hook] \arrow[rrrru, hook] & {K(\alpha_1,\alpha_2)} \arrow[r, hook] \arrow[rrru, hook] & \cdots \arrow[r, hook] & {K(\alpha_1,\cdots,\alpha_{n-1})} \arrow[r, hook] \arrow[ru, hook] & {K(\alpha_1,\cdots,\alpha_n)=L} \arrow[u, "\gamma"', hook]
+\end{tikzcd}
+    \]
+    Thus we get a chain of restrictions of $\gamma$:
+    \[
+        \begin{tikzcd}
+            {\mathrm{Hom}_{(K/\mathsf{Field})}\left(K(\alpha_1,\cdots,\alpha_n)/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_n"']         & \gamma \arrow[d, maps to]                                      \\
+            {\mathrm{Hom}_{(K/\mathsf{Field})}\left(K(\alpha_1,\cdots,\alpha_{n-1})/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_{n-1}"'] & {\gamma|_{K(\alpha_1,\cdots,\alpha_{n-1})}} \arrow[d, maps to] \\
+            \cdots \arrow[d, "\mathrm{res}_{2}"']                                                                                                 & \cdots \arrow[d,maps to]                                      \\
+            {\mathrm{Hom}_{(K/\mathsf{Field})}\left(K(\alpha_1)/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_1"']                         & \gamma|_{K(\alpha_1)} \arrow[d, maps to]                       \\
+            {\mathrm{Hom}_{(K/\mathsf{Field})}\left(K/K,\overline{K}/K\right)}                                                                & \gamma|_{K}                                                   
+            \end{tikzcd}
+    \]
+\end{prf}
+
+\section{Normal Extension}
+
+\begin{definition}{Splitting of Polynomial over a Field}{}
+    Let $L/K$ be a field extension and $f\in K[X]$ be a polynomial such that $\deg f \ge 1$. We say $f$ \textbf{splits} over $L$ if $f$ can be written as
+    \[
+    f(X)=a(X-\alpha_1)\cdots(X-\alpha_n)
+    \]
+    for some $a\in K^\times$, $\alpha_1,\ldots,\alpha_n\in L$.
+\end{definition}
+
+\begin{definition}{Splitting Field}{}
+    Let $K$ be a field. Suppose $\mathcal{P}$ is a family of polynomials in $K[X]$. If $L/K$ is a field extension such that 
+    \begin{enumerate}[(i)]
+        \item Each $f\in \mathcal{P}$ splits over $L$,
+        \item The set of roots of polynomials in $\mathcal{P}$ 
+        \[
+        S=\{\alpha\in L\mid f(\alpha)=0\text{ for some }f\in \mathcal{P}\}
+        \]
+        is the generating set of $L/K$, that is, $L=K(S)$,
+    \end{enumerate}
+    then we say $L/K$ is a \textbf{splitting field of $\mathcal{P}$ over $K$}. If $\mathcal{P}=\{f\}$ is a singleton, then we say $L/K$ is a \textbf{splitting field of $f$ over $K$}.
+\end{definition}
+\begin{remark}
+    Splitting field is a field extension instead of a field. So this terminology is a little bit misleading. But for historical reasons, we still use it.
+
+    If we explicitly state that $\mathcal{P}\subseteq K[X]$, then we can say $L/K$ is a splitting field of $\mathcal{P}$ and the phrase ``over $K$" becomes redundant information that can be omitted.
+
+    We say $L/K$ is ``a" splitting field of $\mathcal{P}$ instead of ``the" splitting field of $\mathcal{P}$ because the splitting field of $\mathcal{P}$ is only unique up to isomorphism in $K/\mathsf{Field}$, not unique up to unique isomorphism in $K/\mathsf{Field}$.
+\end{remark}
+
+\begin{proposition}{Existance and Uniqueness of Splitting Field}{}
+    Let $K$ be a field and $\mathcal{P}$ be a family of polynomials in $K[X]$. Then the splitting field of $\mathcal{P}$ over $K$ exists and is unique up to $K$-isomorphism.
+    
+\end{proposition}
+
+\begin{proposition}{Properties of Splitting Field}{}
+    Let $K$ be a field. Suppose $\mathcal{P}$ is a family of polynomials in $K[X]$ and $L_\mathcal{P}$ is a splitting field of $\mathcal{P}$ over $K$. Then
+    \begin{enumerate}[(i)]
+        \item $L_\mathcal{P}/K$ is an algebraic extension.
+        \item If $\mathcal{P}$ is finite, then $L_\mathcal{P}/K$ is a finite extension.
+        \item If $\mathcal{P}=\{f\}$ is a singleton, then
+        \[
+        \left[L_f:K\right]\le\left(\deg f\right)!\;,
+        \]
+        where $L_f:=L_{\{f\}}$.
+    \end{enumerate}
+\end{proposition}
+
+% \begin{definition}
+    
+% \end{definition}
+
+\section{Separable Extension}
+
+\begin{proposition}{}{check_multiplicity_of_roots_by_derivative}
+    Let $f\in K[X]$ be a nonzero polynomial. Then $f$ has multiple roots in a splitting field if and only if $\mathrm{gcd}(f,f')\ne 1$.
+\end{proposition}
+
 \begin{definition}{Perfect Field}{perfect_field}
     A field $K$ is \textbf{perfect} if every finite extension of $K$ is separable.
+\end{definition}
+
+\begin{definition}{Equivalent Characterization of Perfect Field}{}
+    Let $K$ be a field. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $K$ is perfect.
+        \item Every irreducible polynomial in $K[X]$ is separable.
+        \item Every algebraic extension of $K$ is separable.
+        \item Either $\mathrm{char}(K)=0$ or $\mathrm{char}(K)=p$ and the Frobenius endomorphism 
+        \begin{align*}
+            \sigma:K&\longrightarrow K\\
+            x&\longmapsto x^p
+        \end{align*}
+        is a automorphism of $K$.
+    \end{enumerate}
+    
 \end{definition}
 
 \begin{example}{Examples of Perfect Fields}{}
@@ -43,13 +626,113 @@
     \end{itemize}
 \end{example}
 
-\begin{definition}{Degree of Field Extension}{}
-    Let $L/K$ be a field extension. The \textbf{degree} of $L/K$ is the dimension of $L$ as a $K$-vector space, denoted by $[L:K]=\dim_K L$.
-\end{definition}
-
-\begin{definition}{Finite Extension}{}
-    A field extension $L/K$ is \textbf{finite} if $[L:K]<\infty$.
-\end{definition}
 
 \section{Trace and Norm of Field Extension}
 
+\section{Finite Field}
+
+\begin{definition}{Finite Field}{}
+    A \textbf{finite field} is a field with a finite number of elements.
+\end{definition}
+It is clear that the characteristic of a finite field is a prime number, otherwise the embedding from $\mathbb{Q}$ would force the field to be infinite.
+
+\begin{lemma}{Existance of Finite Field}{existance_of_finite_field}
+    Assume $p$ be a prime number and $m\in\mathbb{Z}_{\ge1}$. Let $K$ be the splitting field of the polynomial $f(X)=X^{p^m}-X\in \mathbb{F}_p[X]$. Then 
+    \begin{enumerate}[(i)]
+        \item $f(\alpha)=0$ for all $\alpha\in K$.
+        \item $|K|=p^m$.
+        \item $K/\mathbb{F}_p$ is an extension of degree $m$ 
+        
+    \end{enumerate}
+\end{lemma}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Let $f(X)=X^{p^m}-X$ and $K/\mathbb{F}_p$ be a splitting field of $f$. For any $x,y\in K$, we have $(x+y)^{p^m}=x^{p^m}+y^{p^m}=x+y$, which implies the set of roots of $f$ in $K$
+        \[
+        M:=\{\alpha\in K\mid f(x)=0\}=\left\{\alpha\in K\mid \alpha^{p^m}=\alpha\right\}
+        \]
+        is a subfield of $K$. By \Cref{th:subfield_contains_prime_subfield}, $M/\mathbb{F}_p$ is a subextension of $K/\mathbb{F}_p$. Since any subfield of $K$ containing all the roots of $f$ must contain $M$, we see $M/K$ is a splitting field of $f$. By the uniqueness of splitting field, $M/\mathbb{F}_p$ and $K/\mathbb{F}_p$ are $\mathbb{F}_p$-isomorphic. By the finiteness of splitting field, we see $M=K$. Therefore, for all $\alpha\in K$, we have $f(\alpha)=0$.
+        \item Since
+        \[
+        f'(X)=p^mX^{p^m-1}-1=-1\implies \mathrm{gcd}(f,f')=1,
+        \]
+        from \Cref{th:check_multiplicity_of_roots_by_derivative} we see $f$ has $p^m$ distinct roots in $K$, which implies $|K|=|M|=p^m$. 
+        \item From $|K|=|\mathbb{F}_p|^{[K:\mathbb{F}_p]}=p^{[K:\mathbb{F}_p]}=p^m$, we see $[K:\mathbb{F}_p]=m$.
+    \end{enumerate}
+  
+\end{prf}
+
+\begin{proposition}{Uniqueness of Finite Field}{}
+For any prime number $p$ and $m\in\mathbb{Z}_{\ge1}$, there exists a unique finite field of order $q:=p^m$ up to isomorphism, denoted by $\mathbb{F}_{q}$. It is a splitting field of the polynomial $f(X)=X^{q}-X\in \mathbb{F}_p[X]$.
+\end{proposition}
+\begin{prf}
+    The existence of $\mathbb{F}_{q}$ follows from \Cref{th:existance_of_finite_field}. The uniqueness follows the uniqueness of splitting field.
+\end{prf}
+
+
+\begin{proposition}{Properties of Finite Field}{}
+    Let $p$ be a prime number and $m\in\mathbb{Z}_{\ge1}$. Let $q=p^m$. Then
+    \begin{enumerate}[(i)]
+        \item Let $a,b\in\mathbb{Z}_{\ge 0}$ and $\mathbb{F}_{q^a}/\mathbb{F}_{q}$, $\mathbb{F}_{q^b}/\mathbb{F}_{q}$ be field extensions. Then 
+        \[
+        \mathrm{Hom}_{(\mathbb{F}_{q}/\mathsf{Field}_p)}(\mathbb{F}_{q^a}/\mathbb{F}_{q},\mathbb{F}_{q^b}/\mathbb{F}_{q})\neq\varnothing\iff a\divides b.
+        \]
+        If $a\divides b$, then $\left[\mathbb{F}_{q^b}:\mathbb{F}_{q^a}\right]=\frac{b}{a}$.
+        \item For any $n\in\mathbb{Z}_{\ge 0}$, there exists a field extension $\mathbb{F}_{q^n}/\mathbb{F}_q$ of degree $n$.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Let $a,b\in\mathbb{Z}_{\ge 0}$ and $\mathbb{F}_{q^a}/\mathbb{F}_{q}$, $\mathbb{F}_{q^b}/\mathbb{F}_{q}$ be field extensions. If 
+        \item Let $n\in\mathbb{Z}_{\ge 0}$. By \Cref{th:existance_of_finite_field}, there exists a finite field $\mathbb{F}_{q^n}$ of order $q^n$. By the uniqueness of finite field, we see $\mathbb{F}_{q^n}/\mathbb{F}_q$ is a field extension of degree $n$.
+    \end{enumerate}
+\end{prf}
+
+
+\begin{definition}{Frobenius Endomorphism of Commutative $\mathbb{F}_q$-algebra}{}
+    Let $p$ be a prime number and $m\in\mathbb{Z}_{\ge1}$. Let $q=p^m$. The \textbf{Frobenius endomorphism} of $\mathbb{F}_q$-algebra is defined as the following $\mathbb{F}_q$-algebra homomorphism
+    \begin{align*}
+        \mathrm{Fr}_{q,A}:A&\longrightarrow A\\
+        x&\longmapsto x^p
+    \end{align*}
+\end{definition}
+\begin{remark}
+    In the definition of \hyperref[th:frobenius_endomorphism_of_a_commutative_ring]{Frobenius endomorphism of a commutative ring}, we see $\mathrm{Fr}_{q,A}$ is a ring homomorphism. To check $\mathrm{Fr}_{q,A}$ is a $\mathbb{F}_q$-algebra homomorphism, we only need to check $\mathrm{Fr}_{q,A}$ is $\mathbb{F}_q$-linear. This is clear because for any $a\in\mathbb{F}_q$ and $x\in A$, we have
+    \[
+    \mathrm{Fr}_{q,A}(ax)=(ax)^p=a^px^p=a\mathrm{Fr}_{q,A}(x).
+    \]
+\end{remark}
+
+\begin{proposition}{Functoriality of Frobenius Endomorphism}{}
+    Let $p$ be a prime number and $m\in\mathbb{Z}_{\ge1}$. Let $q=p^m$. Let $A,B$ be commutative $\mathbb{F}_q$-algebras and $f:A\to B$ be a $\mathbb{F}_q$-algebra homomorphism. Then the following diagram commutes:
+    \[
+        \begin{tikzcd}
+            A \arrow[d, "{\mathrm{Fr}_{q,A}}"'] \arrow[r, "f"] & B \arrow[d, "{\mathrm{Fr}_{q,B}}"] \\
+            A \arrow[r, "f"']                                  & B                                 
+            \end{tikzcd}
+    \]
+    This implies Frobenius endomorphism gives a natural transformation $\mathrm{Fr}_{q,-}:\mathrm{id}_{\mathbb{F}_q\text{-}\mathsf{CAlg}}\Rightarrow \mathrm{id}_{\mathbb{F}_q\text{-}\mathsf{CAlg}}$.
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathbb{F}_q\text{-}\mathsf{CAlg}\arrow[r, "\mathrm{id}"{name=A, above}, bend left] \arrow[r, "\mathrm{id}"'{name=B, below}, bend right] \&[+30pt] \mathbb{F}_q\text{-}\mathsf{CAlg}
+            \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "\mathrm{Fr}_{q,-}"]
+        \end{tikzcd}
+    \]
+    
+\end{proposition}
+\begin{prf}
+    For any $x\in A$, we have
+    \[
+    \mathrm{Fr}_{q,B}\circ f(x)=f(x)^p=f(x^p)=f\circ \mathrm{Fr}_{q,A}(x).
+    \]
+    \end{prf}
+
+
+\begin{proposition}{Galois Group of Finite Field}{}
+    Let $p$ be a prime number and $m\in\mathbb{Z}_{\ge1}$. Let $q=p^m$. Suppose $L/\mathbb{F}_q$ is a finite extension. Then
+    \begin{enumerate}[(i)]
+        \item $L/\mathbb{F}_q$ is a Galois extension.
+        \item $\mathrm{Gal}(L/\mathbb{F}_q)$ is a cyclic group of order $[L:\mathbb{F}_q]$.
+        \item The Frobenius endomorphism $\mathrm{Fr}_{q,L}$ generates $\mathrm{Gal}(L/\mathbb{F}_q)$.
+    \end{enumerate}
+\end{proposition}
