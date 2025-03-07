@@ -46,19 +46,52 @@ Then we have category isomorphism
 \]
 \end{proposition}
 
-\begin{proposition}{Ring homomorphism $R\to S$ induces functor $S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$}{}
-    Let $R$ and $S$ be rings with a ring homomorphism $f: R\to S$. Then every $S$-module $M$ is an $R$-module by defining $rm = f(r)m$, or equivalently through $R\to S\to \mathrm{End}_{\mathsf{Ab}}(M)$. This defines a functor $\mathrm{Res}_{R\to S}: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$, which is identify map on objects and morphisms.
+\begin{proposition}{Ring Homomorphism $f:R\to S$ Induces Functor $f_*:S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$}{ring_homomorphism_induces_functor}
+    Let $R$ and $S$ be rings with a ring homomorphism $f: R\to S$. Then every $S$-module $M$ is an $R$-module by defining the scalar multiplication as
+    \begin{align*}
+        R\times M&\longrightarrow M\\
+        (r, m)&\longmapsto f(r)m
+    \end{align*}
+    or equivalently through $R\to S\to \mathrm{End}_{\mathsf{Ab}}(M)$. This defines a functor $f_*: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$, which is identify map on objects and morphisms.
     \[
         \begin{tikzcd}[ampersand replacement=\&]
             S\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
             M  \arrow[dd, "g"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt] M\arrow[dd, "g"{name=R}] \&[-30pt]\\ [-10pt] 
-            \&  \phantom{.}\arrow[r, "\mathrm{Res}_{R\to S}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-            N \& \& \&  N\&
+            \& [-30pt] f_*M\arrow[dd, "g"{name=R}] \&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "f_*", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  f_*N\&
         \end{tikzcd}
         \]  
+        The functor $f_*: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ can also be denoted as $\mathrm{Res}_{R\to S}: S\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$. We have the following adjunction
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                R\text{-}\mathsf{Mod} \arrow[r, "f^*=S\otimes_R-"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+22pt] 
+                S\text{-}\mathsf{Mod} \arrow[l, "{f_*=\mathrm{Res}_{R\to S}}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+                \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+            \end{tikzcd}    
+        \]
+        Also we have the following adjunction
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                R\text{-}\mathsf{Mod} \arrow[r, "f^*=S\otimes_R-"{name=U}, bend left=42, start anchor=east, yshift=1.7ex, end anchor=west]\arrow[r, "{f^{!}=\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(S,M\right)}"'{name=D}, bend right=42, start anchor=east, yshift=-1.7ex, end anchor=west] \&[+62pt] 
+                S\text{-}\mathsf{Mod} \arrow[l, "{f_*=\mathrm{Res}_{R\to S}}"{name=M, anchor=north}]
+                \arrow[phantom, from=U, to=M, "\dashv"{rotate=-90}]
+                \arrow[phantom, from=M, to=D, "\dashv"{rotate=-90}]
+            \end{tikzcd}
+        \]
+        Since $f_*$ has both left and right adjoint, it is a exact functor.
 \end{proposition}
+\begin{remark}
+   The notation $f_*$ comes from the case when $R$ and $S$ are commutative rings. $f$ induces a morphism of affine schemes $\mathrm{Spec}(S)\to \mathrm{Spec}(R)$. Let $\widetilde{M}$ be the associated quasi-coherent sheaf on $\mathrm{Spec}(S)$. Then the global section of $\widetilde{M}$ is the $S$-module $M$
+    \[
+        \Gamma\left(\mathrm{Spec}(S), \widetilde{M}\right)=M
+    \]
+    Consider the direct image sheaf $f_*\widetilde{M}$ on $\mathrm{Spec}(R)$. The global section of $f_*\widetilde{M}$ is the $R$-module $f_*M$
+    \[
+        \Gamma\left(\mathrm{Spec}(R), f_*\widetilde{M}\right)=f_*M
+    \]
+\end{remark}
 
 In particular, ring homomorphism $R\to S$ makes $S$ an $R$-module.
 
@@ -369,6 +402,39 @@ which implies $m\in M[\mathfrak{a}^{n+1}]$. Hence $M[\mathfrak{a}^n]$ is a submo
         \item $S\cong R^{\oplus n}/M$ for some $n\in \mathbb{Z}_+$ and some submodule $M$ of $R^{\oplus n}$.
     \end{enumerate}
 \end{definition}
+
+\begin{proposition}{}{finiteness_of_R_module_implies_finiteness_of_S_module}
+    Let $R\to S$ be a ring homomorphism and $M$ be an $S$-module. If $M$ as an $R$-module is finitely generated, then $M$ as an $S$-module is also finitely generated.
+\end{proposition}
+\begin{prf}
+    Since $M$ is finitely generated as an $R$-module, there exists an epimorphism $h:R^{n}\to M$ for some $n\in \mathbb{Z}_+$. Define 
+    \begin{align*}
+        \iota_1:\{1,\cdots,n\}&\longrightarrow R^{n},\\
+        i&\longmapsto e_i,
+    \end{align*}
+    where $e_i$ is the $i$-th standard basis of $R^{n}$ and 
+    \begin{align*}
+        i:\{1,\cdots,n\}&\longrightarrow M,\\
+        i&\longmapsto h(e_i).
+    \end{align*}
+    Then we have $h\circ \iota_1=i$. Define
+    \begin{align*}
+        \iota_2:\{1,\cdots,n\}&\longrightarrow S^{n},\\
+        i&\longmapsto e_i',
+    \end{align*}
+    where $e_i'$ is the $i$-th standard basis of $S^{n}$. By the universal property of free $S$-module, there exists a unique $S$-linear map $g:S^{n}\to M$ such that $g\circ \iota_2=i$. By the universal property of free $R$-module, there exists a unique $R$-linear map $f:R^{n}\to S^{n}$ such that $f\circ \iota_1=\iota_2$. Therefore, we have 
+    \[
+        (g\circ f)\circ \iota_1=g\circ \iota_2=i=h\circ \iota_1.
+    \]
+    By the universal property of free $R$-module, we have $g\circ f=h$. Since $h$ is surjective, $g$ is surjective. Therefore, $M$ is finitely generated as an $S$-module.
+    \[
+        \begin{tikzcd}
+            R^n \arrow[rr, "h", two heads] \arrow[rd, "f"] &                                                                                               & M \\
+                                                           & S^n \arrow[ru, "g"]                                                                           &   \\[+2em]
+                                                           & {\{1,\cdots,n\}} \arrow[luu, "\iota_1", hook'] \arrow[u, "\iota_2"', hook'] \arrow[ruu, "i"'] &  
+            \end{tikzcd}
+    \]
+\end{prf}
 
 \begin{definition}{Finitely Presented Module}{}
     We say $M$ is a \textbf{finitely presented $R$-module} if 
@@ -706,7 +772,7 @@ S^{-1}(-) \quad \text{and} \quad S^{-1}A\otimes_A(-)
 \]
 are naturally isomorphic, i.e.,
 \[
-\boxed{S^{-1}A\otimes_R M \cong S^{-1}M \quad \text{naturally for all } A\text{-modules } M.}
+S^{-1}A\otimes_R M \cong S^{-1}M \quad \text{naturally for all } A\text{-modules } M.
 \]
 \end{prf}
 
@@ -1022,6 +1088,133 @@ For any $R$-module $M$, the functor $-\otimes_R M$ is right exact.
     
 \end{prf}
 
+\section{Module over Commutative Ring}
+\begin{proposition}{$R\text{-}\mathsf{Mod}$ is a Symmetric Monoidal Category for Commutative Ring $R$}{}
+    Let $R$ be a commutative ring. Then the category $R$-$\mathsf{Mod}$ is a \hyperref[th:symmetric_monoidal_category]{symmetric monoidal category} with the following structure:
+    \begin{enumerate}[(i)]
+        \item Tensor product: the functor $\otimes_R:R\text{-}\mathsf{Mod}\times R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ defined by
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                R\text{-}\mathsf{Mod}\times R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
+                (X_1,Y_1)  \arrow[dd, "f\times g"{name=L, left}] 
+                \&[-25pt] \& [+10pt] 
+                \& [-30pt]X_1\otimes_R Y_1\arrow[dd, "f\otimes_R g"{name=R}] \\ [-10pt] 
+                \&  \phantom{.}\arrow[r, "\otimes_R", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+                (X_2,Y_2)  \& \& \& X_2\otimes_R Y_2
+            \end{tikzcd}
+            \]
+        \item Associator: the natural isomorphism $a$
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                R\text{-}\mathsf{Mod} \times R\text{-}\mathsf{Mod}\times R\text{-}\mathsf{Mod} \arrow[r, "(-\otimes-)\otimes-"{name=A, above}, bend left] \arrow[r, "-\otimes(-\otimes-)"'{name=B, below}, bend right] \&[+45pt] R\text{-}\mathsf{Mod}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "a", "\sim\hspace{1pt}"']
+            \end{tikzcd}
+        \]
+        defined by 
+        \begin{align*}
+            a_{(X,Y,Z)}:(X\otimes_R Y)\otimes_R Z&\longrightarrow X\otimes_R (Y\otimes_R Z)\\
+            (x\otimes_R y)\otimes_R z&\longmapsto x\otimes_R (y\otimes_R z)
+        \end{align*}
+        \item Unit object: $R\in \mathrm{Ob}(R\text{-}\mathsf{Mod})$ 
+        \item The isomorphism in $R\text{-}\mathsf{Mod}$: 
+        \begin{align*}
+            \iota:R\otimes_R R &\longrightarrow R\\
+            r\otimes_R s&\longmapsto rs
+        \end{align*}
+        \item Briad isomorphism: the natural isomorphism $B$
+        \[
+            \begin{tikzcd}[ampersand replacement=\&]
+                R\text{-}\mathsf{Mod}\times R\text{-}\mathsf{Mod} \arrow[r, "(-\otimes ?)"{name=A, above}, bend left] \arrow[r, "(? \otimes-)"'{name=B, below}, bend right] \&[+45pt] R\text{-}\mathsf{Mod}
+                \arrow[Rightarrow, shorten <=5.5pt, shorten >=5.5pt, from=A.south-|B, to=B, "B", "\sim\hspace{1pt}"']
+            \end{tikzcd}
+        \]
+        defined by
+        \begin{align*}
+            B_{X,Y}:X\otimes_R Y&\longrightarrow Y\otimes_R X\\
+            x\otimes_R y&\longmapsto y\otimes_R x
+        \end{align*}
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    We could check the following conditions holds
+    \begin{enumerate}[(i)]
+        \item The pentagon axiom: the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+            \& [-50pt]                  \&[-25pt]    ((A\otimes B)\otimes C)\otimes D \arrow[lld, "{a_{(A,B,C)}\otimes \mathrm{id}_D}"'] \arrow[rrd, "{a_{(A\otimes B,C,D)}}"] \& [-25pt]                  \&   [-50pt]                                                                      \\[+20pt]
+(A\otimes( B\otimes C))\otimes D \arrow[rd, "{a_{(A,B\otimes C,D)}}"'] \&                                                                                    \&    \&       \& (A\otimes B)\otimes (C\otimes D) \arrow[ld, "{a_{(A, B, C\otimes D)}}"] \\[+35pt]
+            \& A\otimes( (B\otimes C)\otimes D) \arrow[rr, "{\mathrm{id}_A\otimes a_{(B,C,D)}}"'] \&    \& A\otimes( B\otimes (C\otimes D)) \&                                                                        
+\end{tikzcd}
+    \]
+    \item Unit axiom: the functors $R\otimes_R -:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ and $-\otimes_R R:R\text{-}\mathsf{Mod} \to R\text{-}\mathsf{Mod} $ are category equivalences.
+    \item Hexagon axiom.
+    \item  \[
+        B_{Y,X}\circ B_{X,Y}=\mathrm{id}_{X\otimes_R Y}.
+    \]
+    \end{enumerate}
+\end{prf}
+
+\begin{proposition}{$R$-$\mathsf{Mod}$ is a Self-Enriched Category for Commutative Ring $R$}{}
+    If $R$ is a commutative ring, then the category $R\text{-}\mathsf{Mod}$ is self-enriched. More explicitly, the category $R\text{-}\mathsf{Mod}$ is an $R\text{-}\mathsf{Mod}$-enriched category with the following structure:
+    \begin{enumerate}[(i)]
+        \item $\mathrm{Hom}$-object: for each pair of objects $A,B\in \mathrm{Ob}(R\text{-}\mathsf{Mod})$, the object $\mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,B)\in \mathrm{Ob}(R\text{-}\mathsf{Mod})$, where the $R$-module structure on $\mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,B)$ is defined pointwise as follows:
+        \begin{itemize}
+            \item addition: 
+            \begin{align*}
+                +:\mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,B)\times \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,B)&\longrightarrow \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,B)\\
+                (f,g)&\longmapsto (a\mapsto f(a)+g(a))
+            \end{align*}
+            \item scalar multiplication: 
+            \begin{align*}
+                R\times \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,B)&\longrightarrow \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,B)\\
+                (r,f)&\longmapsto (a\mapsto r\cdot f(a))
+            \end{align*}
+        \end{itemize}
+       
+        \item Composition: for each triple of objects $A,B,C\in \mathrm{Ob}(R\text{-}\mathsf{Mod})$, the composition morphism in $R\text{-}\mathsf{Mod}$ defined by
+        \begin{align*}
+            \circ:\mathrm{Hom}_{R\text{-}\mathsf{Mod}}(B,C)\otimes_R \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,B)&\longrightarrow \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,C)\\
+            g\otimes_R f&\longmapsto g\circ f
+        \end{align*}
+
+        \item Identity: for each object $A\in \mathrm{Ob}(R\text{-}\mathsf{Mod})$, the morphism in $R\text{-}\mathsf{Mod}$ defined by
+        \begin{align*}
+            \mathcal{I}d_A:R&\longrightarrow \mathrm{Hom}_{R\text{-}\mathsf{Mod}}(A,A)\\
+            r&\longmapsto \left(r\cdot \mathrm{id}_A:x\mapsto r\cdot x\right)
+        \end{align*}
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    the following conditions hold
+    \begin{enumerate}[(i)]
+        \item For each quadruple of objects $A,B,C,D\in \mathrm{Ob}(\mathsf{C})$, the following diagram in $R\text{-}\mathsf{Mod}$ commutes
+        \[
+            \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+                    \&[-130pt] {\left(\mathrm{Hom}(C,D)\otimes \mathrm{Hom}(B,C)\right)\otimes \mathrm{Hom}(A,B) } \arrow[ld, "\circ\;\otimes \,\mathrm{id}_{\mathrm{Hom}(A,B)}"'] \arrow[rr, "\cong"] \&  [-30pt]   \&  [-30pt]{\mathrm{Hom}(C,D)\otimes \left(\mathrm{Hom}(B,C)\otimes \mathrm{Hom}(A,B)\right) } \arrow[rd, "\mathrm{id}_{\mathrm{Hom}(C,D)}\,\otimes\;\circ "] \&  [-130pt]  \\[+35pt]
+{\mathrm{Hom}(B,D)\otimes \mathrm{Hom}(A,B) } \arrow[rrd, "\circ"'] \&                                                                                                                                    \&                                               \&                                                                                                               \& {\mathrm{Hom}(C,D)\otimes \mathrm{Hom}(A,C) } \arrow[lld, "\circ"] \\[+20pt]
+                    \&                                                                                                                                    \& {\mathrm{Hom}(A,D)} \&                                                                                                               \&                                                                   
+\end{tikzcd}
+    \]
+    \item For each pair of objects $A,B\in \mathrm{Ob}(\mathsf{C})$, the following diagrams in $\mathsf{V}$ commute
+    \[
+    \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+        {1\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)} \arrow[rr, "{{\mathcal{I}d}_B\otimes\,\mathrm{id}_{\mathrm{Hom}_{\mathsf{C}}(A,B)}}"] \arrow[rd, "\cong"'] \&                     \& {\mathrm{Hom}_{\mathsf{C}}(B,B)\otimes \mathrm{Hom}_{\mathsf{C}}(A,B)} \arrow[ld, "\circ"] \\[+10pt]
+        \& {\mathrm{Hom}_{\mathsf{C}}(A,B)} \&   
+\end{tikzcd}
+    \]
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, column sep=small]
+            {\mathrm{Hom}_{\mathsf{C}}(A,B)\otimes 1} \arrow[rr, "\mathrm{id}_{\mathrm{Hom}_{\mathsf{C}}(A,B)}\otimes\,{\mathcal{I}d}_A "] \arrow[rd, "\cong"'] \&                     \& {\mathrm{Hom}_{\mathsf{C}}(A,B)\otimes \mathrm{Hom}_{\mathsf{C}}(A,A)} \arrow[ld, "\circ"] \\[+10pt]
+            \& {\mathrm{Hom}_{\mathsf{C}}(A,B)} \&
+    \end{tikzcd}
+        \]
+    \end{enumerate}
+\end{prf}
+
+\section{Free Module of Finite Rank over Commutative Ring}
+\subsection{Determinant}
+
+
 \section{Finitely Generated Module over PID}
 
 \begin{proposition}{Torsion-free $\iff$ Free for Finitely Generated Modules over PID}{}
@@ -1042,4 +1235,10 @@ For any $R$-module $M$, the functor $-\otimes_R M$ is right exact.
 \begin{prf}
     Since $M_{\mathrm{tf}}$ is finitely generated, it is a finitely generated torsion-free module over PID, which is free. Then we have $M_{\mathrm{tf}}\cong R^{\oplus n}$ for some $n\in \mathbb{Z}_+$. Let $\{e_1, \ldots, e_n\}$ be a basis of $M_{\mathrm{tf}}$. For any $m\in M$, we have $m=\sum_{i=1}^n r_i e_i$ for some $r_i\in R$. Define $E:=\bigoplus_{i=1}^n Re_i$. Then we have $M=M_{\mathrm{tor}}\oplus E$.
 \end{prf}
+
+
+
+
+
+
 

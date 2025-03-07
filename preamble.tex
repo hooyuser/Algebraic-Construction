@@ -5,6 +5,7 @@
 
 \usepackage[tmargin=2cm,rmargin=1in,lmargin=1in,margin=0.85in,bmargin=1.5cm,footskip=.2in]{geometry}
 \usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools}
+
 % \usepackage[bb=dsserif]{mathalpha}
 % \usepackage{bm}
 \usepackage{dsfont}
@@ -748,7 +749,9 @@
 }
 \makeatother
 
-
+\newenvironment{remark}[1][Remark]{%
+    \par\noindent\textit{#1.}\hspace{1ex}%
+}{\qed\par}
 
 
 \tikzset{

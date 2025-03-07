@@ -4197,7 +4197,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
 
 
 \section{Monoidal Category}
-\begin{definition}{Monoidal Category}{}
+\begin{definition}{Monoidal Category}{monoidal_category}
     A monoidal category is a category $\mathsf{V}$ equipped with
     \begin{enumerate}[(i)]
         \item Tensor product: a functor $\otimes:\mathsf{V}\times\mathsf{V}\to\mathsf{V}$.
@@ -4221,7 +4221,7 @@ The fact that $\triangleleft$ is the inverse of $\triangleright$ follows from th
         \item Unit object: an object $1\in \mathrm{Ob}(\mathsf{V})$ 
         \item An isomorphism in $\mathsf{V}$: $\iota:1\otimes 1\to 1$
     \end{enumerate}
-    such that the following two condition holds
+    such that the following two conditions holds
     \begin{enumerate}[(i)]
         \item The pentagon axiom: the following diagram commutes
     \[
@@ -4276,7 +4276,7 @@ A strict monoidal category is one for which the natural isomorphisms $a$, $\lamb
 \end{definition}
 
 
-\begin{definition}{Symmetric Monoidal Category}{}
+\begin{definition}{Symmetric Monoidal Category}{symmetric_monoidal_category}
     A \textbf{symmetric monoidal category} is a braided monoidal category $\mathsf{V}$ satisfying the following condition:
     \[
         B_{Y,X}\circ B_{X,Y}=\mathrm{id}_{X\otimes Y}.

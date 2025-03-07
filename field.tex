@@ -353,6 +353,24 @@ If $L/K$ is not algebraic, we have the following counterexample.
     If a field $L$ is a finite-type $K$-algebra, then $L$ is a finite extension of $K$ (that is, $L$ is also finitely generated as a $K$-linear space).
 \end{lemma}
 
+\begin{example}{Quadratic Extension}{}
+    Suppose $L/K$ is a quadratic extension and $\mathrm{char}(K)\neq 2$. Then there exists $\sqrt{a}\in L$ such that $L=K(\sqrt{a})$ and the minimal polynomial of $\sqrt{a}$ is $X^2-a\in K[X]$.
+\end{example}
+\begin{prf}
+    Since $L/K$ is a quadratic extension. For any $\alpha\in L-K$, suppose the minimal polynomial of $\alpha$ over $K$ is $m_\alpha(X)\in K[X]$ with $\deg m_\alpha\le 2$. If $\deg m_\alpha=1$, then $m_\alpha(X)=X-\alpha$. This forces $\alpha\in K$, which contradicts the assumption. Thus $\deg m_\alpha=2$. Since $\mathrm{char}(K)\neq 2$, we can write
+    \[
+    m_\alpha(X)=X^2+bX+c=\left(X+\frac{b}{2}\right)^2-\frac{b^2}{4}+c.
+    \]
+    for some $b,c\in K$ and we have
+    \[
+    m_\alpha(\alpha)=\left(\alpha+\frac{b}{2}\right)^2-\frac{b^2}{4}+c=0.
+    \]
+    Take $\sqrt{a}:=\alpha+\frac{b}{2}$ and $f(X):=X^2-b^2/4+c\in K[X]$. We have 
+    \[
+       f\left(\sqrt{a}\right)=\left(\alpha+\frac{b}{2}\right)^2-\frac{b^2}{4}+c=0.
+    \]
+    Note that $\sqrt{a}\notin K$. Otherwise, we have $\alpha=\sqrt{a}-\frac{b}{2}\in K$, which leads to a contradiction. Then the minimal polynomial of $\sqrt{a}$ has degree $2$. Therefore, $f$ is the minimal polynomial of $\sqrt{a}$ over $K$. This means $K(\sqrt{a})$ is a quadratic extension of $K$. Therefore, $K(\sqrt{a})$ is a 2-dimensional $K$-subspace of $L$ and accordingly $K(\sqrt{a})=L$.
+\end{prf}
 \section{Algebraic Closure}
 
 \begin{proposition}{Simple Extension by Adjoining a Root of an Irreducible Polynomial}{}
@@ -490,14 +508,49 @@ If $L/K$ is not algebraic, we have the following counterexample.
     A field $K$ is \textbf{algebraically closed} if every nonconstant polynomial $f\in K[X]$ has a root in $K$.
 \end{definition}
 
-\begin{proposition}{Equivalent Characterization of Algebraic Closed Field}{}
+\begin{proposition}{Equivalent Characterization of Algebraic Closed Field}{equivalent_characterization_of_algebraic_closed_field}
     Let $K$ be a field. The following are equivalent:
     \begin{enumerate}[(i)]
         \item $K$ is algebraically closed.
+        \item If $u:K\hookrightarrow L$ is an algebraic extension, then $u$ is an isomorphism.
         \item Every nonconstant polynomial $f\in K[X]$ splits into linear factors.
     \end{enumerate}
-    
 \end{proposition}
+\begin{prf}
+    (i)$\implies$(ii). For any $x\in L$, suppose $f\in K[X]$ is the minimal polynomial of $x$ over $K$. Since $K$ is algebraically closed, $f$ splits into linear factors in $K[X]$. Since $f$ is irreducible over $K$, there must be $f(X)=c(X-a)$ for some $c\in K^\times$ and $a\in K$. 
+    \[
+    u(f)(x)=u(c)(x-u(a))=0\implies x=u(a).
+    \]
+    Therefore, $u$ is surjective, which implies $u$ is an isomorphism.
+\end{prf}
+
+\begin{definition}{Algebraic Closure}{}
+    An \textbf{algebraic closure} of a field $K$ is an algebraic extension $\overline{K}/K$ such that $\overline{K}$ is algebraically closed.
+\end{definition}
+
+\begin{proposition}{Existence and Uniqueness of Algebraic Closure}{}
+    Let $K$ be a field. There exists an algebraic closure $\overline{K}/K$ and it is unique up to $K$-isomorphism.
+\end{proposition}
+\begin{prf}
+    \textbf{Uniqueness}. Let 
+    \[
+    \mathcal{T}=\left\{(L,\iota)\midv L/K \text{ is a subextension of } \overline{K}/K \text{ and } \iota:L\hookrightarrow \widetilde{K}  \text{ is a $K$-embedding}\right\}.
+    \]
+    We can define a partial order on $\mathcal{T}$ by $(L,\iota)\le (L',\iota')$ if and only if $L\subseteq L'$ and $\iota'|_{L}=\iota$, or equivalently, the following diagram commutes
+    \[
+        \begin{tikzcd}
+            & L' \arrow[ld, "\subseteq"', hook] \arrow[rd, "\iota'", hook]                                   &               \\
+\overline{K} &                                                                                               & \widetilde{K} \\
+            & L \arrow[uu,  "\subseteq"', hook] \arrow[lu, "\subseteq", hook] \arrow[ru, "\iota"', hook]    &               \\
+            & K \arrow[u, "u"', hook] \arrow[luu, "\psi", hook, bend left] \arrow[ruu, "\phi"', bend right] &              
+\end{tikzcd}
+\]
+For each chain $\mathcal{C}=\{(L_i,\iota_i)\}_{i\in I}$ in $\mathcal{T}$, we can define $L_{\mathcal{C}}:=\bigcup_{i\in I}L_i$ and $\iota_{\mathcal{C}}:L_{\mathcal{C}}\hookrightarrow \widetilde{K}$ by $\iota_{\mathcal{C}}(x)=\iota_i(x)$ whenever $x\in L_i$ for some $i\in I$. $\iota_{\mathcal{C}}$ is well-defined because for any $x\in L_i\cap L_j$ for some $i,j\in I$, we can assume $i\le j$ without loss of generality and we have $\iota_i(x)=\iota_j(s(x))$ where $s:L_i\hookrightarrow L_j$ is the inclusion map. Then $(L_{\mathcal{C}},\iota_{\mathcal{C}})$ is an upper bound of $\mathcal{C}$ in $\mathcal{T}$. By Zorn's lemma, there exists a maximal element $(L_{\max},\iota_{\max})$ in $\mathcal{T}$. 
+
+We claim $L_{\max}=\overline{K}$ and prove by contradiction. Suppose $L_{\max}\ne \overline{K}$, then there exists $\alpha\in \overline{K}- L_{\max}$. Since $\alpha$ is algebraic over $L_{\max}$, there exists a minimal polynomial $m_\alpha\in L_{\max}[X]$ such that $m_\alpha(\alpha)=0$. Let $\widetilde{m_\alpha}:={\iota_{\max}}(m_\alpha)\in \widetilde{K}[X]$ be the image of $m_\alpha$ under $\iota_{\max}$. Since $\widetilde{K}$ is algebraically closed, $\widetilde{m_\alpha}$ has a root $\beta\in \widetilde{K}$. Since $m_\alpha\in L_{\max}[X]$ is the minimal polynomial of both $\alpha\in \overline{K}$ and $\beta\in \widetilde{K}$, by \Cref{th:K_embedding_preserves_algebraic_element_and_minimal_polynomial}, there exists a $L_{\max}$-embedding $\eta:L_{\max}(\alpha)\hookrightarrow \widetilde{K}$ such that $\eta(\alpha)=\beta$. Then $(L_{\max}(\alpha),\eta)\in \mathcal{T}$ and $(L_{\max}(\alpha),\eta)\le (L_{\max},\iota_{\max})$ does not hold. This contradicts the maximality of $(L_{\max},\iota_{\max})$. Therefore, $L_{\max}=\overline{K}$.
+
+To show $\eta: \overline{K}\hookrightarrow \widetilde{K}$ is a $K$-isomorphism, it is sufficient to show $\eta(\overline{K})= \widetilde{K}$ is surjective. Since $\widetilde{K}$ is algebraically closed, $\eta(\overline{K})$ is algebraically closed. Since $\widetilde{K}/K$ is an algebraic extension, $K/\eta(\overline{K})$ is also an algebraic extension. According to \Cref{th:equivalent_characterization_of_algebraic_closed_field}, the inclusion $\eta(\overline{K})\hookrightarrow \widetilde{K}$ is an isomorphism, which implies $\eta(\overline{K})=\widetilde{K}$. Therefore, $\overline{K}$ is unique up to $K$-isomorphism.
+\end{prf}
 
 \begin{proposition}{}{}
     Let $L/K$ be an algebraic extension and $\overline{K}/K$ be an algebraic closure of $K$. Then there exists a $K$-embedding $\gamma:L\hookrightarrow \overline{K}$, namely
@@ -570,8 +623,16 @@ K \arrow[r, hook] \arrow[rrrrru, hook] & K(\alpha_1) \arrow[r, hook] \arrow[rrrr
 
 \begin{proposition}{Existance and Uniqueness of Splitting Field}{}
     Let $K$ be a field and $\mathcal{P}$ be a family of polynomials in $K[X]$. Then the splitting field of $\mathcal{P}$ over $K$ exists and is unique up to $K$-isomorphism.
-    
 \end{proposition}
+\begin{prf}
+    Suppose $\overline{K}/K$ is an algebraic closure of $K$. Suppose for each $f\in \mathcal{P}$, $f$ has degree $n_f$ and splits into
+    \[
+    f(X)=c_f(X-\alpha_{f,1})\cdots(X-\alpha_{f,n_f})
+    \]
+    in $\overline{K}$. Let $L_\mathcal{P}=K(\alpha_{f,k}:f\in \mathcal{P}, 1\le k\le n_f)$. Then $L_\mathcal{P}/K$ is a splitting field of $\mathcal{P}$ over $K$. 
+    
+    Suppose $L/K$ is another splitting field of $\mathcal{P}$ over $K$. Since $L$ is generated by the roots of polynomials in $\mathcal{P}$, we have $L\subseteq L_\mathcal{P}$. Since $L_\mathcal{P}$ is generated by the roots of polynomials in $\mathcal{P}$, we have $L_\mathcal{P}\subseteq L$. Therefore, $L=L_\mathcal{P}$.
+\end{prf}
 
 \begin{proposition}{Properties of Splitting Field}{}
     Let $K$ be a field. Suppose $\mathcal{P}$ is a family of polynomials in $K[X]$ and $L_\mathcal{P}$ is a splitting field of $\mathcal{P}$ over $K$. Then
@@ -591,10 +652,37 @@ K \arrow[r, hook] \arrow[rrrrru, hook] & K(\alpha_1) \arrow[r, hook] \arrow[rrrr
 % \end{definition}
 
 \section{Separable Extension}
+\begin{definition}{Separable Polynomial}
+    Let $K$ be a field and $f\in K[X]$ be a nonzero polynomial. We say $f$ is \textbf{separable} if $f$ has no multiple roots in an algebraic closure of $K$. We say $f$ is \textbf{inseparable} if $f$ is not separable.
+\end{definition}
 
-\begin{proposition}{}{check_multiplicity_of_roots_by_derivative}
-    Let $f\in K[X]$ be a nonzero polynomial. Then $f$ has multiple roots in a splitting field if and only if $\mathrm{gcd}(f,f')\ne 1$.
+\begin{proposition}{Equivalent Characterization of Separable Polynomial}{}
+    Let $K$ be a field and $f\in K[X]$ be a nonzero polynomial. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is separable.
+        \item $f$ has no multiple roots in a splitting field of $K$.
+        \item $\mathrm{gcd}(f,f')= 1$
+    \end{enumerate}
 \end{proposition}
+
+\begin{proposition}{Equivalent Characterization of Inseparability for Irreducible Polynomial}{}
+    Let $K$ be a field and $f\in K[X]$ be an irreducible polynomial. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $f$ is inseparable.
+        \item $f$ has multiple roots in a splitting field of $K$.
+        \item $f'=0$.
+        \item $\mathrm{char}(K)=p>0$ and $f(X)=g(X^p)$ for some $g\in K[X]$.
+    \end{enumerate}
+    
+\end{proposition}
+
+\begin{definition}{Separable Element}{}
+    Let $L/K$ be a field extension and $\alpha\in L$ be an algebraic element over $K$. We say $\alpha$ is a \textbf{separable element} over $K$ if the minimal polynomial of $\alpha$ over $K$ is separable. 
+\end{definition}
+
+\begin{definition}{Separable Extension}{}
+    A algebraic extension $L/K$ is \textbf{separable} if every element of $L$ is separable over $K$.
+\end{definition}
 
 \begin{definition}{Perfect Field}{perfect_field}
     A field $K$ is \textbf{perfect} if every finite extension of $K$ is separable.
@@ -662,7 +750,7 @@ It is clear that the characteristic of a finite field is a prime number, otherwi
   
 \end{prf}
 
-\begin{proposition}{Uniqueness of Finite Field}{}
+\begin{proposition}{Uniqueness of Finite Field}{uniqueness_of_finite_field}
 For any prime number $p$ and $m\in\mathbb{Z}_{\ge1}$, there exists a unique finite field of order $q:=p^m$ up to isomorphism, denoted by $\mathbb{F}_{q}$. It is a splitting field of the polynomial $f(X)=X^{q}-X\in \mathbb{F}_p[X]$.
 \end{proposition}
 \begin{prf}
@@ -729,10 +817,15 @@ For any prime number $p$ and $m\in\mathbb{Z}_{\ge1}$, there exists a unique fini
 
 
 \begin{proposition}{Galois Group of Finite Field}{}
-    Let $p$ be a prime number and $m\in\mathbb{Z}_{\ge1}$. Let $q=p^m$. Suppose $L/\mathbb{F}_q$ is a finite extension. Then
+    Let $p$ be a prime number and $m\in\mathbb{Z}_{\ge1}$. Let $q=p^m$. Suppose $L/\mathbb{F}_q$ is a finite extension of degree $n:=[L:\mathbb{F}_q]$. Then
     \begin{enumerate}[(i)]
         \item $L/\mathbb{F}_q$ is a Galois extension.
-        \item $\mathrm{Gal}(L/\mathbb{F}_q)$ is a cyclic group of order $[L:\mathbb{F}_q]$.
-        \item The Frobenius endomorphism $\mathrm{Fr}_{q,L}$ generates $\mathrm{Gal}(L/\mathbb{F}_q)$.
+        \item $\mathrm{Gal}(L/\mathbb{F}_q)$ is a cyclic group of order $n$.
+        \item The Frobenius endomorphism $\mathrm{Fr}_{q,L}$ generates $\mathrm{Gal}(L/\mathbb{F}_q)$, that is,
+        \[
+            \mathrm{Gal}(L/\mathbb{F}_q)=\left\{  \left(\mathrm{Fr}_{q,L}\right)^k\midv k=0,1,\cdots,n-1\right\}.
+        \]
     \end{enumerate}
 \end{proposition}
+
+

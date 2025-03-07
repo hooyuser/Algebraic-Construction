@@ -492,7 +492,7 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 \end{definition}
 
 
-\begin{proposition}{Properties of Polynomial Ring}{}
+\begin{proposition}{Properties of Polynomial Ring}{properties_of_polynomial_ring}
     Let $R$ be a commutative ring.
     \begin{enumerate}
         \item If $R$ is a UFD, then $R[x_1,\cdots.x_n]$ is a UFD.
@@ -1082,115 +1082,6 @@ Next we introduce the universal property of localization. It says localization i
 \end{definition}
 
 
-\subsection{Finite Commutative Ring Homomorphism}
-
-\begin{definition}{Finite Commutative Ring Homomorphism}{}
-    Let $\varphi:R\to S$ be a homomorphism between two commutative rings. We say $\varphi$ is \textbf{finite} if $S$ as an $R$-module is finitely generated.
-\end{definition}
-
-\begin{definition}{Finitely Generated Commutative Algebra}{}
-    Let $R\to A$ be a commutative ring homomorphism. We say $A$ is a \textbf{finitely generated $R$-algebra} or $A$ is \textbf{finite} over $R$ if one of the following equivalent conditions holds:
-    \begin{enumerate}[(i)]
-        \item $R\to A$ is finite.
-        \item $A$ as an $R$-module is finitely generated.
-    \end{enumerate} 
-\end{definition}
-
-\begin{proposition}{}{}
-    Let $\varphi:R\to S$ be a finite homomorphism between two commutative rings. Let $M$ be an $S$-module. Then $M$ is a finitely generated $R$-module if and only if $M$ is a finitely generated $S$-module.
-\end{proposition}
-
-\begin{proposition}{Composition of Finite Ring Homomorphisms is Finite}{}
-    Let $\varphi:R\to S$ and $\psi:S\to T$ be two finite homomorphisms between commutative rings. Then $\psi\circ\varphi:R\to T$ is also finite.
-\end{proposition}
-
-
-
-
-
-\begin{proposition}{Finite Generation Implies Finite Type}{finite_generation_implies_finite_type}
-    Let $A$ be a $R$-algebra. If $A$ is finitely generated as an $R$-module, then $A$ is a finite-type $R$-algebra.
-\end{proposition}
-
-\begin{prf}
-    This holds because if each element of $A$ can be expressed as an $R$-linear combination of finitely many elements of $A$, then each element of $A$ can also be expressed as a polynomial in finitely many elements of $A$ with coefficients in $R$.
-
-    An alternative proof can be given by utilizing the universal property of the free contruction. Suppose $A$ is finitely generated as an $R$-module. Then there exists some a finite set $X=\{x_1,\cdots,x_n\}$ and a surjective $R$-linear map $\varphi:R^{\oplus X}\to A$. Define $f=\varphi\circ \iota$, where $\iota:X\to R^{\oplus X}$ is the inclusion map. 
-     \begin{center}
-        \begin{tikzcd}[ampersand replacement=\&]
-            R^{\oplus X}\arrow[r, dashed, "\exists !\,\widetilde{j}"]  \&R[X]\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A\\[0.3cm]
-            \& X\arrow[ul, "\iota"] \arrow[u, "j"] \arrow[ru, "f:=\varphi\circ \iota"'] \&  
-        \end{tikzcd}
-    \end{center}
-    The universal property of free $R$-module induces a unique $R$-linear map $\widetilde{j}:R^{\oplus}\to R[X]$ such that $j=\widetilde{j}\circ \iota$. And the universal property of free commutative $R$-algebra induces a unique $R$-algebra homomorphism $\widetilde{f}:R[X]\to A$ such that $f=\widetilde{f}\circ j$. Note $f=\varphi\circ \iota=\left(\widetilde{f}\circ \widetilde{j}\right)\circ \iota$. By the uniqueness of the universal property of $R^{\oplus}$, we have $\widetilde{f}\circ \widetilde{j}=\varphi$. Since $\widetilde{f}\circ \widetilde{j}$ is surjective, $\widetilde{f}$ must be surjective, which implies $A$ is a finite-type $R$-algebra.
-\end{prf}
-
-\begin{corollary}{Finite $\implies$ Finite Type}{}
-    Let $\varphi:R\to A$ be a finite homomorphism between two commutative rings. Then $\varphi$ is of finite type.
-\end{corollary}
-\begin{prf}
-    This is a reformulation of \Cref{th:finite_generation_implies_finite_type}.
-\end{prf}
-
-
-
-\begin{proposition}{Quotient Respect Finiteness}{quotient_and_localization_respect_finiteness}
-    Let $\varphi:R\to T$ be an finite homomorphism of commutative rings. Then 
-    \begin{enumerate}[(i)]
-        \item Suppose $\mathfrak{b}$ is an ideal of $S$, and $\mathfrak{a}:=\varphi^{-1}(\mathfrak{b})$. Then $\overline{\varphi}:R/\mathfrak{a}\to T/\mathfrak{b}$ is finite.
-        \item Suppose $S$ is a multiplicative set of $R$, and $\widetilde{S}=\varphi(S)$. Then $\widetilde{\varphi}:S^{-1}R\to \widetilde{S}^{-1}T$ is finite.
-    \end{enumerate}
-\end{proposition}
-\begin{prf}
-    \begin{enumerate}[(i)]
-        \item Let $\mathfrak{a}:=\varphi^{-1}(\mathfrak{b})$. Since 
-    \[
-    \ker (\pi_{\mathfrak{b}}\circ \varphi )= \varphi^{-1}\left(\ker \pi_{\mathfrak{b}}\right)=\varphi^{-1}\left(\mathfrak{b}\right)=\mathfrak{a},
-    \]
-    by the universal property of quotient ring, there is an injective ring homomorphism 
-    \begin{align*}
-        \overline{\varphi}:R/\mathfrak{a}&\hookrightarrow T/\mathfrak{b}\\
-        r+\mathfrak{a}&\longmapsto \varphi(r)+\mathfrak{b}.
-    \end{align*}
-     such that the following diagram commutes
-    \[
-        \begin{tikzcd}
-            R \arrow[r, "\varphi", hook] \arrow[d, "\pi_{\mathfrak{a}}"', two heads] & T \arrow[d, "\pi_{\mathfrak{b}}", two heads] \\
-            R/\mathfrak{a} \arrow[r, "\overline{\varphi}"', dashed, hook]                & T/\mathfrak{b}             
-            \end{tikzcd}
-    \]
-    Since $T$ is a finitely generated $R$-module, we can suppose the generating set of $T$ is $\{t_1,\cdots,t_n\}$. Then for any $t+\mathfrak{b}\in T/\mathfrak{b}$, there exists $r_1,\cdots,r_n\in R$ such that $t=\sum_{i=1}^n \varphi(r_i)t_i$. Thus we have
-    \[
-    t+\mathfrak{b}=\left(\sum_{i=1}^n \varphi(r_i)t_i\right)+\mathfrak{b}
-    =\sum_{i=1}^n \left(\varphi(r_i)t_i+\mathfrak{b}\right)=\sum_{i=1}^n (\varphi(r_i)+\mathfrak{b})\left(t_i+\mathfrak{b}\right)=\sum_{i=1}^n \overline{\varphi}(r_i+\mathfrak{a})\left(t_i+\mathfrak{b}\right).
-    \]
-    Hence $\{t_1+\mathfrak{b},\cdots,t_n+\mathfrak{b}\}$ generates $T/\mathfrak{b}$. Therefore we proved $T/\mathfrak{b}$ is a finitely generated $R/\mathfrak{a}$-module, which implies $\overline{\varphi}$ is finite.
-    \item Regard $R,T$ as $R$-modules. Since the localization functor $S^{-1}:R\text{-}\mathsf{Mod}\to S^{-1}R\text{-}\mathsf{Mod}$ is exact, from the exact sequence in $R\text{-}\mathsf{Mod}$
-    \[
-    0\longrightarrow R\longrightarrow T
-    \]
-    we get the exact sequence in $S^{-1}R\text{-}\mathsf{Mod}$
-    \[
-    0\longrightarrow S^{-1}R\longrightarrow S^{-1}T.
-    \]
-    Note that the underlying sets of the $S^{-1}R$-module $S^{-1}T$ and the commutative ring $S^{-1}T$ coincide and the two algebraic structures on the same underlying set are compatible, which makes $S^{-1}T$ an $S^{-1}R$-algebra. 
-    For any $\frac{a}{s}\in S^{-1}T$, there exists a monic polynomial
-    \[
-    f(x)=x^n+r_{n-1}x^{n-1}+\cdots+r_0\in R[x]
-    \]
-    such that 
-    \[
-        \leftindex^{\iota}\!f(a)=a^n+r_{n-1}a^{n-1}+\cdots+r_0=0_T.
-    \]
-    This equation can be rewritten as
-    \[
-\left(\frac{a}{s}\right)^n+\frac{r_{n-1}}{s}\left(\frac{a}{s}\right)^{n-1}+\cdots+\frac{r_0}{s^n}=0_{S^{-1}T},
-    \]
-    which implies $\frac{a}{s}$ is an integral element over $S^{-1}R$.
-    
-
-\end{enumerate}
-\end{prf}
 
 \subsection{Integral Commutative Ring Homomorphism}
 
@@ -1207,30 +1098,46 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
 
 
 
-\begin{definition}{Generated Subalgebra}{}
-    Let $\varphi:R\to A$ be a ring homomorphism between two commutative rings and $x\in A$. By the universal property of polynomial ring, there exists a unique ring homomorphism $\psi:R[T]\to A$ such that 
-    $\psi(T)=x$.
+\begin{definition}{Generated Subalgebra}{generated_commutative_subalgebra}
+    Let $\varphi:R\to A$ be a ring homomorphism between two commutative rings and $(a_i)_{i\in I}$ where $a_i\in A$. Let $\mathcal{T}=(T_i)_{i\in I}$. Define
+    \begin{align*}
+        \theta: \mathcal{T}&\longrightarrow A\\
+        T_i&\longmapsto a_i
+    \end{align*}
+    By the universal property of polynomial ring, there exists a unique ring homomorphism $\psi:R[\mathcal{T}]\to A$ such that 
+    $\psi(T_i)=a_i$ for all $i\in I$, that is, the following diagram commutes
     \begin{center}
         \begin{tikzcd}[ampersand replacement=\&]
-            R[T]\arrow[r, dashed, "\exists !\,\psi"]  \& A\\[0.3cm]
-            \{T\}\arrow[u, "\iota"] \arrow[ru, "\mathrm{const}_x"'] \&  
+            R[\mathcal{T}]\arrow[r, dashed, "\exists !\,\psi"]  \& A\\[0.3cm]
+            \mathcal{T}\arrow[u, "\iota"] \arrow[ru, "\theta"'] \&  
         \end{tikzcd}
     \end{center}
-    The \textbf{$R$-subalgebra of $A$ generated by $x$} is defined as 
+    The \textbf{$R$-subalgebra of $A$ generated by $(a_i)_{i\in I}$} is defined as 
     \[
-    R[x]:=\psi\left(R[T]\right)=\left\{\sum_{k=0}^n r_k x^k \in A\;\middle|\; r_k\in R\right\}.
+    R[\mathcal{T}]:=\psi\left(R[\mathcal{T}]\right)=\left\{ \sum_{|\alpha|\le n} r_{\alpha} a^{\alpha} \in A\;\middle|\; r_{\alpha}\in R\right\}.
+    \]
+    The \textbf{$R$-subalgebra of $A$ generated by $a$} is defined as 
+    \[
+    R[a]:=\psi\left(R[T]\right)=\left\{\sum_{k=0}^n r_k a^k \in A\;\middle|\; r_k\in R\right\}.
     \]
 \end{definition}
 
-\begin{proposition}{Equivalent Definition of Integral Element}{}
-    Let $\varphi:R\to A$ be a ring homomorphism between two commutative rings and $x\in S$. Let $R[x]$ be the $R$-subalgebra of $A$ generated by $x$. Then $A$ is an $R[x]$-module. And the following statements are equivalent:
+\begin{proposition}{Equivalent Definition of Integral Element}{equivalent_definition_of_integral_element_of_commutative_ring}
+    Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings and $a\in S$. Let $R[a]$ be the \hyperref[th:generated_commutative_subalgebra]{$R$-subalgebra of $S$ generated by $a$}. Then $S$ is an $R[a]$-module. And the following statements are equivalent:
     \begin{enumerate}[(i)]
-        \item $x$ is integral over $R$.
-        \item $R[x]$ is a finitely generated $R$-module.
-        \item There exists a faithful $R[x]$-submodule of $A$ that is finitely generated as an $R$-module and contains $x$.
+        \item $a$ is integral over $R$.
+        \item $R[a]$ is a finitely generated $R$-module.
+        \item There exists a faithful $R[a]$-submodule of $S$ that is finitely generated as an $R$-module and contains $x$.
     \end{enumerate}
-    
+    Suppose $a_1,\cdots,a_n\in S$. Let $R[a_1,\cdots,a_n]$ be the \hyperref[th:generated_commutative_subalgebra]{$R$-subalgebra of $S$ generated by $a_1,\cdots,a_n$}. Then the following statements are equivalent:
+    \begin{enumerate}[(i)]
+        \item $a_1,\cdots,a_n$ are integral over $R$.
+        \item $R[a_1,\cdots,a_n]$ is a finitely generated $R$-module.
+    \end{enumerate}
 \end{proposition}
+\begin{prf}
+    The first part is a special case of \Cref{th:equivalent_definition_of_integral_element}.
+\end{prf}
 
 \begin{definition}{Integral Extension}{}
     Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. If every element of $S$ is integral over $R$, then we say $\varphi$ is \textbf{integral} and $S$ is an \textbf{integral extension} of $R$.
@@ -1239,6 +1146,43 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
 \begin{definition}{Integral Closure}{integral_closure}
     Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. The set of all elements in $S$ that are integral over $R$ is called the \textbf{integral closure of $R$ in $S$}. The integral closure of $R$ in $S$ is an $R$-subalgebra of $S$, denoted by $\overline{R}^S$. If $\varphi$ is injective, we say that $R$ is \textbf{integrally closed in $S$} if $\varphi(R)=\overline{R}^S$.
 \end{definition}
+\begin{remark}
+    Since for any $b\in \varphi(R)$, there exists $a\in R$ such that $b=\varphi(a)$. Let $P(X)=X-a\in R[X]$. Then 
+    \[
+        \leftindex^{\varphi}\!P(X)=X-\varphi(a)\implies \leftindex^{\varphi}\!P(b)=b-\varphi(a)=0.
+    \]
+    Hence $b$ is integral over $R$. Since $\varphi(R)\subseteq \overline{R}^S$, we can define a ring homomorphism $u:R\to \overline{R}^S$ as the composition of $\varphi$ and the inclusion map $\varphi(R)\hookrightarrow \overline{R}^S$. Therefore, integral closure is a ring extension.
+\end{remark}
+\begin{proposition}{Universal Properties of Integral Closure}{}
+    Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. Then for any integral extension $\psi:R\to T$ and any ring homomorphism $f:T\to S$, there exists a unique ring homomorphism $\widetilde{f}:T\to \overline{R}^S$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+                & \overline{R}^S \arrow[rdd, "\iota", hook]      &   \\[+1.5em]
+                & T \arrow[rd, "f"'] \arrow[u, "\widetilde{f}"', dashed] &   \\
+    R \arrow[rr, "\varphi"'] \arrow[ru, "\psi"'] \arrow[ruu, "u"] &                                                & S
+    \end{tikzcd}
+    \]
+    That is, $R\to \overline{R}^S \hookrightarrow \overline{R}^S$ is terminal.
+\end{proposition}
+\begin{prf}
+    First we show $f(T)\subseteq \overline{R}^S$. For any $b\in f(T)$, there exists $a\in T$ such that $b=f(a)$. Since $a$ is integral over $R$, there exists a monic polynomial $P(X)=X^n+r_{n-1}X^{n-1}+\cdots+r_0\in R[X]$ such that $\leftindex^{\psi}\!P(a)=0$. By applying $f$ to both sides of the equation, we get
+    \[
+        f\left(\leftindex^{\psi}\!P(a)\right)=\leftindex^{f\circ \psi}\!P(f(a))=\leftindex^{\varphi}\!P(b)=0,
+    \]
+    which implies $b$ is integral over $R$. Hence $f(T)\subseteq \overline{R}^S$. So we can define a ring homomorphism
+    \begin{align*}
+        \widetilde{f}:T&\longrightarrow \overline{R}^S\\
+        t&\longmapsto f(t)
+    \end{align*}
+   such that $\iota\circ \widetilde{f}=f$. Since $\iota$ is injective,
+   \[
+   \iota\circ \widetilde{f}\circ \psi=f\circ \psi=\varphi=\iota\circ u\implies \widetilde{f}\circ \psi=u.
+   \]
+   Thus we obtain the commutative diagram.
+
+   Suppose there exists another ring homomorphism $g:T\to \overline{R}^S$ such that $\iota\circ g=f$. Since $\iota$ is injective, we have $g=\widetilde{f}$. This means $\widetilde{f}$ is unique.
+\end{prf}
+   
 
 \begin{definition}{Integral Closure in Field of Fractions}{integral_closure_in_field_of_fractions}
     Let $R$ be an integral domain. The \textbf{integral closure of $R$} or \textbf{normalization of $R$} is defined to be the integral closure of $R$ in $\mathrm{Frac}(R)$. We say $R$ is \textbf{integrally closed} if $R$ is integrally closed in $\mathrm{Frac}(R)$.
@@ -1431,7 +1375,7 @@ The following proposition shows that the property of being integral is preserved
     From \Cref{th:quotient_and_localization_respect_integral_extensions} we see $ R/\mathfrak{p}\hookrightarrow S/\mathfrak{q}$ is an integral extension of integral domains. By \Cref{th:integral_extension_of_domains_become_field_simultaneously} we know $R/\mathfrak{p}$ is a field if and only if $S/\mathfrak{q}$ is a field. This implies $\mathfrak{p}$ is maximal if and only if $\mathfrak{q}$ is maximal.
 \end{prf}
 
-\begin{definition}{}{}
+\begin{definition}{}{lying_over_and_going_up_properties}
     Let $R\subseteq S$ be an extension of commutative rings.
     \begin{itemize}
         \item \textbf{lying over property}: If there exist $\mathfrak{p}\in \spec R$ and $\mathfrak{q}\in \spec S$ such that $\mathfrak{q}\cap R=\mathfrak{p}$, we say $\mathfrak{q}$ \textbf{lies over} $\mathfrak{p}$ and $\mathfrak{p}$ \textbf{lies under} $\mathfrak{q}$. We say the extension $R\subseteq S$ satisfies the \textbf{lying over property} if every prime ideal of $R$ lies under some prime ideal of $S$.
@@ -1498,6 +1442,146 @@ The following theorems are also called the Cohen-Seidenberg theorems.
 
 
 
+
+\begin{proposition}{Composition of Integral Ring Homomorphisms is Integral}{}
+    Let $\varphi:R\to S$ and $\psi:S\to T$ be two integral homomorphisms between commutative rings. Then $\psi\circ\varphi:R\to T$ is also integral.
+\end{proposition}
+\begin{prf}
+    Let $t\in T$. Since $\psi$ is integral, there exists a monic polynomial $f(x)=x^n+a_{n-1}x^{n-1}+\cdots+a_0\in S[X]$ such that $f(t)=0_T$. Let $S'=R[a_0,\cdots,a_{n-1}]\subseteq S$. Since $S$ is integral over $R$, we see $a_0,\cdots,a_{n-1}\in S$ are integral over $R$. By \Cref{th:equivalent_definition_of_integral_element_of_commutative_ring}, this implies $S'$ is finite over $R$. Since $t$ is integral over $S'$, again by \Cref{th:equivalent_definition_of_integral_element_of_commutative_ring} $S'[t]$ is finite over $S'$. Thus by \Cref{th:composition_of_finite_ring_homomorphisms_is_finite}, $S'[t]$ is finite over $R$, which implies $S'[t]$ is integral over $R$. Therefore, $t$ is integral over $R$.
+\end{prf}
+
+
+\subsection{Finite Commutative Ring Homomorphism}
+
+\begin{definition}{Finite Commutative Ring Homomorphism}{}
+    Let $\varphi:R\to S$ be a homomorphism between two commutative rings. We say $\varphi$ is \textbf{finite} if $S$ as an $R$-module is finitely generated.
+\end{definition}
+
+\begin{definition}{Finitely Generated Commutative Algebra}{}
+    Let $R\to A$ be a commutative ring homomorphism. We say $A$ is a \textbf{finitely generated $R$-algebra} or $A$ is \textbf{finite} over $R$ if one of the following equivalent conditions holds:
+    \begin{enumerate}[(i)]
+        \item $R\to A$ is finite.
+        \item $A$ as an $R$-module is finitely generated.
+    \end{enumerate} 
+\end{definition}
+
+\begin{proposition}{}{finiteness_of_R_module_iff_finiteness_of_S_module}
+    Let $\varphi:R\to S$ be a finite homomorphism between two commutative rings. Let $M$ be an $S$-module. Then $M$ is a finitely generated $R$-module if and only if $M$ is a finitely generated $S$-module.
+\end{proposition}
+\begin{prf}
+    Suppose $M$ is a finitely generated $R$-module. According to \Cref{th:finiteness_of_R_module_implies_finiteness_of_S_module}, $M$ is a finitely generated $S$-module. 
+    
+    Conversely, suppose $M$ is a finitely generated $S$-module. Then we have exact sequence of $S$-modules
+    \[
+    S^m\longrightarrow M \longrightarrow 0.
+    \]
+    Since \hyperref[th:ring_homomorphism_induces_functor]{the functor: $\varphi_*$ is exact}, the above exact sequence is also exact when we regard $S^m$ as an $R$-module. Since $S$ is a finitely generated $R$-module, we have an exact sequence of $R$-modules
+    \[
+    R^n\longrightarrow S \longrightarrow 0.
+    \]
+    Since direct sum is exact, we have an exact sequence of $R$-modules
+    \[
+    R^{nm}\longrightarrow S^m \longrightarrow 0.
+    \]
+    By composing $R^{nm}\longrightarrow S^m$ with $S^m\longrightarrow M$, we get a surjective $R$-linear map $R^{nm}\longrightarrow M$. Therefore, $M$ is a finitely generated $R$-module.
+\end{prf}
+
+\begin{proposition}{Composition of Finite Ring Homomorphisms is Finite}{composition_of_finite_ring_homomorphisms_is_finite}
+    Let $\varphi:R\to S$ and $\psi:S\to T$ be two finite homomorphisms between commutative rings. Then $\psi\circ\varphi:R\to T$ is also finite.
+\end{proposition}
+\begin{prf}
+    If $\varphi:R\to S$ and $\psi:S\to T$ are finite, according to \Cref{th:finiteness_of_R_module_iff_finiteness_of_S_module}, $T$ is also finite over $R$.
+\end{prf}
+
+
+
+
+\begin{proposition}{Finite Generation Implies Finite Type}{finite_generation_implies_finite_type}
+    Let $A$ be a $R$-algebra. If $A$ is finitely generated as an $R$-module, then $A$ is a finite-type $R$-algebra.
+\end{proposition}
+
+\begin{prf}
+    This holds because if each element of $A$ can be expressed as an $R$-linear combination of finitely many elements of $A$, then each element of $A$ can also be expressed as a polynomial in finitely many elements of $A$ with coefficients in $R$.
+
+    An alternative proof can be given by utilizing the universal property of the free contruction. Suppose $A$ is finitely generated as an $R$-module. Then there exists some a finite set $X=\{x_1,\cdots,x_n\}$ and a surjective $R$-linear map $\varphi:R^{\oplus X}\to A$. Define $f=\varphi\circ \iota$, where $\iota:X\to R^{\oplus X}$ is the inclusion map. 
+     \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            R^{\oplus X}\arrow[r, dashed, "\exists !\,\widetilde{j}"]  \&R[X]\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& A\\[0.3cm]
+            \& X\arrow[ul, "\iota"] \arrow[u, "j"] \arrow[ru, "f:=\varphi\circ \iota"'] \&  
+        \end{tikzcd}
+    \end{center}
+    The universal property of free $R$-module induces a unique $R$-linear map $\widetilde{j}:R^{\oplus}\to R[X]$ such that $j=\widetilde{j}\circ \iota$. And the universal property of free commutative $R$-algebra induces a unique $R$-algebra homomorphism $\widetilde{f}:R[X]\to A$ such that $f=\widetilde{f}\circ j$. Note $f=\varphi\circ \iota=\left(\widetilde{f}\circ \widetilde{j}\right)\circ \iota$. By the uniqueness of the universal property of $R^{\oplus}$, we have $\widetilde{f}\circ \widetilde{j}=\varphi$. Since $\widetilde{f}\circ \widetilde{j}$ is surjective, $\widetilde{f}$ must be surjective, which implies $A$ is a finite-type $R$-algebra.
+\end{prf}
+
+\begin{corollary}{Finite $\implies$ Finite Type}{}
+    Let $\varphi:R\to A$ be a finite homomorphism between two commutative rings. Then $\varphi$ is of finite type.
+\end{corollary}
+\begin{prf}
+    This is a reformulation of \Cref{th:finite_generation_implies_finite_type}.
+\end{prf}
+
+
+
+\begin{proposition}{Quotient Respect Finiteness}{quotient_and_localization_respect_finiteness}
+    Let $\varphi:R\to T$ be an finite homomorphism of commutative rings. Then 
+    \begin{enumerate}[(i)]
+        \item Suppose $\mathfrak{b}$ is an ideal of $S$, and $\mathfrak{a}:=\varphi^{-1}(\mathfrak{b})$. Then $\overline{\varphi}:R/\mathfrak{a}\to T/\mathfrak{b}$ is finite.
+        \item Suppose $S$ is a multiplicative set of $R$, and $\widetilde{S}=\varphi(S)$. Then $\widetilde{\varphi}:S^{-1}R\to \widetilde{S}^{-1}T$ is finite.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Let $\mathfrak{a}:=\varphi^{-1}(\mathfrak{b})$. Since 
+    \[
+    \ker (\pi_{\mathfrak{b}}\circ \varphi )= \varphi^{-1}\left(\ker \pi_{\mathfrak{b}}\right)=\varphi^{-1}\left(\mathfrak{b}\right)=\mathfrak{a},
+    \]
+    by the universal property of quotient ring, there is an injective ring homomorphism 
+    \begin{align*}
+        \overline{\varphi}:R/\mathfrak{a}&\hookrightarrow T/\mathfrak{b}\\
+        r+\mathfrak{a}&\longmapsto \varphi(r)+\mathfrak{b}.
+    \end{align*}
+     such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            R \arrow[r, "\varphi", hook] \arrow[d, "\pi_{\mathfrak{a}}"', two heads] & T \arrow[d, "\pi_{\mathfrak{b}}", two heads] \\
+            R/\mathfrak{a} \arrow[r, "\overline{\varphi}"', dashed, hook]                & T/\mathfrak{b}             
+            \end{tikzcd}
+    \]
+    Since $T$ is a finitely generated $R$-module, we can suppose the generating set of $T$ is $\{t_1,\cdots,t_n\}$. Then for any $t+\mathfrak{b}\in T/\mathfrak{b}$, there exists $r_1,\cdots,r_n\in R$ such that $t=\sum_{i=1}^n \varphi(r_i)t_i$. Thus we have
+    \[
+    t+\mathfrak{b}=\left(\sum_{i=1}^n \varphi(r_i)t_i\right)+\mathfrak{b}
+    =\sum_{i=1}^n \left(\varphi(r_i)t_i+\mathfrak{b}\right)=\sum_{i=1}^n (\varphi(r_i)+\mathfrak{b})\left(t_i+\mathfrak{b}\right)=\sum_{i=1}^n \overline{\varphi}(r_i+\mathfrak{a})\left(t_i+\mathfrak{b}\right).
+    \]
+    Hence $\{t_1+\mathfrak{b},\cdots,t_n+\mathfrak{b}\}$ generates $T/\mathfrak{b}$. Therefore we proved $T/\mathfrak{b}$ is a finitely generated $R/\mathfrak{a}$-module, which implies $\overline{\varphi}$ is finite.
+    \item Regard $R,T$ as $R$-modules. Since the localization functor $S^{-1}:R\text{-}\mathsf{Mod}\to S^{-1}R\text{-}\mathsf{Mod}$ is exact, from the exact sequence in $R\text{-}\mathsf{Mod}$
+    \[
+    0\longrightarrow R\longrightarrow T
+    \]
+    we get the exact sequence in $S^{-1}R\text{-}\mathsf{Mod}$
+    \[
+    0\longrightarrow S^{-1}R\longrightarrow S^{-1}T.
+    \]
+    Note that the underlying sets of the $S^{-1}R$-module $S^{-1}T$ and the commutative ring $S^{-1}T$ coincide and the two algebraic structures on the same underlying set are compatible, which makes $S^{-1}T$ an $S^{-1}R$-algebra. 
+    For any $\frac{a}{s}\in S^{-1}T$, there exists a monic polynomial
+    \[
+    f(x)=x^n+r_{n-1}x^{n-1}+\cdots+r_0\in R[x]
+    \]
+    such that 
+    \[
+        \leftindex^{\iota}\!f(a)=a^n+r_{n-1}a^{n-1}+\cdots+r_0=0_T.
+    \]
+    This equation can be rewritten as
+    \[
+\left(\frac{a}{s}\right)^n+\frac{r_{n-1}}{s}\left(\frac{a}{s}\right)^{n-1}+\cdots+\frac{r_0}{s^n}=0_{S^{-1}T},
+    \]
+    which implies $\frac{a}{s}$ is an integral element over $S^{-1}R$.
+    
+
+\end{enumerate}
+\end{prf}
+
+
+
 \begin{lemma}{Finite $\implies$ Integral}{}
     Let $\varphi:R\to S$ be a finite homomorphism between two commutative rings. Then $\varphi$ is integral.
 \end{lemma}
@@ -1511,12 +1595,7 @@ The following theorems are also called the Cohen-Seidenberg theorems.
     \end{enumerate}
 \end{proposition}
 
-
-\begin{proposition}{Composition of Integral Ring Homomorphisms is Integral}{}
-    Let $\varphi:R\to S$ and $\psi:S\to T$ be two integral homomorphisms between commutative rings. Then $\psi\circ\varphi:R\to T$ is also integral.
-\end{proposition}
-
-\subsection{Normal Ring}
+\section{Normal Ring}
 
 Recall the definition of integral closed domain in \Cref{th:integral_closure_in_field_of_fractions}.
 \begin{definition}{Normal Domain}{}
@@ -1540,7 +1619,7 @@ Recall the definition of integral closed domain in \Cref{th:integral_closure_in_
 A normal ring is integrally closed in its total ring of fractions.
 \end{proposition}
 
-\subsection{Japanese Rings}
+\section{Japanese Rings}
 \begin{definition}{Japanese Ring}{}
     Let $R$ be an integral domain with field of fractions $K=\mathrm{Frac}(R)$.
     \begin{enumerate}[(i)]
@@ -1548,10 +1627,67 @@ A normal ring is integrally closed in its total ring of fractions.
         \item We say $R$ is \textbf{N-2} or \textbf{Japanese} if for any finite extension $L/K$, the \hyperref[th:integral_closure]{integral closure} of $R$ in $L$ is finite over $R$.
     \end{enumerate}
 \end{definition}
+\begin{remark}
+    By definition, a N-2 ring is N-1.
+\end{remark}
+
+\begin{proposition}{N-1 and N-2 are Preserved under Localization}{}
+    Let $R$ be an integral domain and $S$ be a multiplicative set in $R$. If $R$ is N-1 (resp. N-2), then $S^{-1}R$ is N-1 (resp. N-2).
+\end{proposition}
 
 \begin{proposition}{}{}
     Let $R$ be a Noetherian normal domain with fraction field $K=\mathrm{Frac}(R)$. Let $L/K$ be a finite separable field extension. Then the integral closure of $R$ in $L$ is finite over $R$.
 \end{proposition}
+
+\begin{proposition}{}{}
+    A Noetherian integral domain whose fraction field has characteristic zero is N-1 if and only if it is N-2.
+\end{proposition}
+
+\begin{example}{Examples of Japanese Rings}{examples_of_japanese_rings}
+    The following types of rings are Nagata rings:
+    \begin{itemize}
+        \item Dedekind domains with fraction field of characteristic zero.
+        \item $\mathbb{Z}$.
+        \item Fields.
+        \item Noetherian complete local integral domains.
+        \item Polynomial rings over any of the above.
+    \end{itemize}
+\end{example}
+\begin{prf}
+    \Cref{th:properties_of_polynomial_ring} and \Cref{ex:examples_of_nagata_rings}.
+\end{prf}
+
+\begin{definition}{Nagata Ring}{}
+    We say a commutative ring $R$ is a \textbf{Nagata ring} if $R$ is Noetherian and for every prime ideal $\mathfrak{p}$ of $R$, $R/\mathfrak{p}$ is a Japanese ring.
+\end{definition}
+
+\begin{definition}{Universally Japanese Ring}{}
+    We say a commutative ring $R$ is \textbf{universally Japanese} if for any finite type ring homomorphism $R\to S$ with $S$ being an integral domain, $S$ is a Japanese ring.
+\end{definition}
+
+\begin{proposition}{Equivalent Characterization of Nagata Ring}{}
+    Let $R$ be a Noetherian ring. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $R$ is a Nagata ring.
+        \item any finite type $R$-algebra is a Nagata ring.
+        \item $R$ is Noetherian and universally Japanese.
+    \end{enumerate}
+\end{proposition}
+\begin{corollary}{Nataga Domain is Japanese}{}
+    Suppose $R$ is a Nagata ring. Then $R$ is a Japanese ring if and only if it is an integral domain.
+\end{corollary}
+
+\begin{example}{Examples of Nagata Rings}{examples_of_nagata_rings}
+    The following types of rings are Nagata rings:
+    \begin{itemize}
+        \item Dedekind domains with fraction field of characteristic zero.
+        \item $\mathbb{Z}$.
+        \item Fields.
+        \item Noetherian complete local rings.
+        \item Finite type ring extensions of any of the above.
+    \end{itemize}
+\end{example}
+
 
 \section{Krull Dimension}
 \begin{definition}{Length of a Chain of Prime Ideals}{}
@@ -1706,8 +1842,11 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
     \[
     \mathfrak{p}\mathcal{O}=\mathfrak{P}_1^{e_1}\cdots\mathfrak{P}_r^{e_r},
     \]
-    where $\mathfrak{P}_i$ are prime ideals of $\mathcal{O}$. Moreover, $\mathfrak{P}_i$ are exactly those prime ideals of $\mathcal{O}$ lying over $\mathfrak{p}$. 
+    where $\mathfrak{P}_i$ are prime ideals of $\mathcal{O}$. Moreover, $\mathfrak{P}_i$ are exactly those prime ideals of $\mathcal{O}$ \hyperref[th:lying_over_and_going_up_properties]{lying over $\mathfrak{p}$}. 
 \end{proposition}
+\begin{remark}
+    In other words, $\mathfrak{P}_i$ are exactly those prime ideals in $\mathrm{Spec}\left(\mathcal{O}\right)$ such that $\iota^{-1}\left(\mathfrak{P}_i\right)=\mathfrak{p}$, where $\iota:\mathcalo\hookrightarrow \mathcal{O}$ is the embedding. Consider the morphism of affine schemes $\iota^{-1}:\mathrm{Spec}\left(\mathcal{O}\right)\to \mathrm{Spec}\left(\mathcalo\right)$. By \Cref{th:surjectivity_of_spectrum_map_of_integral_extension} we see $\iota^{-1}$ is surjective as a map between the underlying sets. This is equivalent to say the fiber over $\mathfrak{p}$ is $\left\{\mathfrak{P}_1,\cdots, \mathfrak{P}_n\right\}$.
+\end{remark}
 \begin{prf}
     Since $\mathcalo \subseteq \mathcal{O}$ is an integal extension, by the \hyperref[th:going_up_and_going_down_theorems]{going-up theorem}, if $\mathfrak{p}$ is a prime ideal of $\mathcalo$, then there exists a prime ideal $\mathfrak{P}$ of $\mathcal{O}$ such that $\mathfrak{P}\cap \mathcalo=\mathfrak{p}$. Thus we have 
     \[
@@ -1754,6 +1893,9 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
         \item The field extension $L/K$ is called \textbf{unramified} if all prime ideals of $\mathcalo$ are unramified in $L$.
     \end{itemize}
 \end{definition}
+\begin{remark}
+    By \Cref{th:quotient_and_localization_respect_finiteness}, if $\mathcalo\hookrightarrow \mathcal{O}$ is a finite ring homomorphism, then $\kappa(\mathfrak{P}_m)/\kappa(\mathfrak{p})$ is a finite field extension.
+\end{remark}
 \begin{prf}
     By the \hyperref[th:universal_property_of_quotient_ring]{universal property of quotient ring}, since 
     \[
@@ -1770,7 +1912,7 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
 \end{prf}
 
 
-\begin{proposition}{}{}
+\begin{proposition}{Fundamental Identity}{}
     Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite separable field extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak{p}$ is a nonzero prime ideal of $\mathcalo$, and $\mathfrak{p}\mathcal{O}$ can be factored into a product of prime ideals of $\mathcal{O}$ 
     \[
     \mathfrak{p}\mathcal{O}=\mathfrak{P}_1^{e_1}\cdots\mathfrak{P}_r^{e_r},
@@ -1878,7 +2020,7 @@ Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L
 \begin{definition}{Decomposition Group}{}
     Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. According to \Cref{th:galois_group_acts_on_spectrum_of_integral_closure}, the Galois group $\mathrm{Gal}(L/K)$ acts on $\operatorname{Spec}\left(\mathcal{O}\right)$. Suppose $\mathfrak{P}\in \operatorname{Spec}\left(\mathcal{O}\right)$, then the stabilizer subgroup of $\mathfrak{P}$ under this action is called the \textbf{decomposition group} of $\mathfrak{P}$, denoted by
     \[
-    D_{\mathfrak{P}}=\left\{ \sigma\in \mathrm{Gal}(L/K)\midv \sigma\left(\mathfrak{P}\right)=\mathfrak{P}\right\}.
+    D_{\mathfrak{P}}:=\mathrm{Stab}_{\mathrm{Gal}(L/K)}\left(\mathfrak{P}\right)=\left\{ \sigma\in \mathrm{Gal}(L/K)\midv \sigma\left(\mathfrak{P}\right)=\mathfrak{P}\right\}.
     \] 
     $D_{\mathfrak{P}}$ as a subgroup of $\mathrm{Gal}(L/K)$ also acts on $L$, and the $D_{\mathfrak{P}}$-invariant elements of $L$ form a subfield of $L$, called the \textbf{decomposition field} of $\mathfrak{P}$, denoted by 
     \[
@@ -1896,7 +2038,65 @@ Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L
     This is a direct consequence of \Cref{th:properties_of_stabilizer_subgroup}.
 \end{prf}
 
-\begin{proposition}{}{}
+\begin{lemma}{Galois Action Induces Isomorphism of Residue Fields}{galois_action_induces_isomorphism_of_residue_fields}
+    Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak{P}$ is a maximal ideal over $\mathfrak{p}\in \spec\left(\mathcalo\right)$.
+    \begin{enumerate}[(i)]
+        \item If $\sigma\in \mathrm{Gal}(L/K)$, then there exists a unique field isomorphism
+    \begin{align*}
+        \widetilde{\sigma}:\mathcal{O}/\mathfrak{P}&\longrightarrow \mathcal{O}/\sigma\mathfrak{P}\\
+        a+\mathfrak{P}&\longmapsto \sigma(a)+\sigma\mathfrak{P}
+    \end{align*}
+    such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            \mathcal{O} \arrow[r, "\sigma|_{\mathcal{O}}"] \arrow[d, "\pi"', two heads] & \mathcal{O} \arrow[d, "\pi'", two heads] \\
+            \mathcal{O}/\mathfrak{P} \arrow[r, "\widetilde{\sigma}"', dashed]                         & \mathcal{O}/\sigma\mathfrak{P}          
+        \end{tikzcd}
+    \]
+    \item If $\sigma\in D_{\mathfrak{P}}$, then there exists a unique $\mathcalo/\mathfrak{p}$-field automorphism
+    \begin{align*}
+        \widetilde{\sigma}:\mathcal{O}/\mathfrak{P}&\longrightarrow \mathcal{O}/\mathfrak{P}\\
+        a+\mathfrak{P}&\longmapsto \sigma(a)+\mathfrak{P}
+    \end{align*}
+    such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            \mathcal{O} \arrow[r, "\sigma|_{\mathcal{O}}"] \arrow[d, "\pi"', two heads] & \mathcal{O} \arrow[d, "\pi'", two heads] \\
+            \mathcal{O}/\mathfrak{P} \arrow[r, "\widetilde{\sigma}"', dashed]                         & \mathcal{O}/\mathfrak{P}          
+        \end{tikzcd}
+    \]
+    \end{enumerate}
+    
+\end{lemma}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Suppose $\sigma \in \mathrm{Gal}(L/K)$. Since 
+    \[
+    \ker \left( \pi'\circ \sigma|_{\mathcal{O}}\right)=\sigma^{-1}(\sigma\mathfrak{P})=\mathfrak{P},
+    \]
+    by the \hyperref[th:universal_property_of_quotient_ring]{universal property of quotient ring} $\mathcal{O}/\mathfrak{P}$, there exists a unique ring homomorphism 
+    \begin{align*}
+        \widetilde{\sigma}:\mathcal{O}/\mathfrak{P}&\longrightarrow \mathcal{O}/\sigma\mathfrak{P}\\
+        a+\mathfrak{P}&\longmapsto \sigma(a)+\sigma\mathfrak{P}
+    \end{align*}
+    such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            \mathcal{O} \arrow[r, "\sigma|_{\mathcal{O}}"] \arrow[d, "\pi"', two heads] & \mathcal{O} \arrow[d, "\pi'", two heads] \\
+            \mathcal{O}/\mathfrak{P} \arrow[r, "\widetilde{\sigma}"', dashed]                         & \mathcal{O}/\sigma\mathfrak{P}          
+        \end{tikzcd}
+    \]
+    Furthermore, the surjectivity of $\pi'\circ \sigma|_{\mathcal{O}}$ and $\ker \left( \pi'\circ \sigma|_{\mathcal{O}}\right)=\mathfrak{P}$ implies $\widetilde{\sigma}$ is a an isomorphism of fields. 
+    
+    \item If $\sigma\in D_{\mathfrak{P}}$, then $\sigma(\mathfrak{P})=\mathfrak{P}$. For any $x\in \mathcalo$, we have
+    \[
+    \widetilde{\sigma}\left(x +\mathfrak{P}\right)=\sigma(x)+\sigma\mathfrak{P}=x+\mathfrak{P},
+    \]
+    which means $\widetilde{\sigma}$ is an $\mathcalo/\mathfrak{p}$-automorphism of $\mathcal{O}/\mathfrak{P}$, namely $\widetilde{\sigma}\in\mathrm{Aut}_{\left(\kappa(\mathfrak{p})/\mathsf{Field}\right)}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)$.
+    \end{enumerate}
+\end{prf}
+
+\begin{proposition}{Ramification Index and Inertia Degree for finite Galois Extension}{}
     Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak p$ is a nonzero prime ideal of $\mathcalo$, and $\mathfrak p\mathcal{O}$ can be factored as
     \[
     \mathfrak p\mathcal{O}=\mathfrak P_1^{e_1}\cdots\mathfrak P_r^{e_r}.
@@ -1922,18 +2122,7 @@ Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L
     \end{alignat*}
 \end{proposition}
 \begin{prf}
-    Let $\mathfrak{P}=\mathfrak{P}_1$. Suppose $\sigma \in \mathrm{Gal}(L/K)$. Since 
-    \[
-    \ker \left( \pi'\circ \sigma|_{\mathcal{O}}\right)=\sigma^{-1}(\sigma\mathfrak{P})=\mathfrak{P},
-    \]
-    by the \hyperref[th:universal_property_of_quotient_ring]{universal property of quotient ring}, there exists a unique ring homomorphism $\eta:\mathcal{O}/\mathfrak{P}\to \mathcal{O}/\sigma\mathfrak{P}$ such that the following diagram commutes
-    \[
-        \begin{tikzcd}
-            \mathcal{O} \arrow[r, "\sigma|_{\mathcal{O}}"] \arrow[d, "\pi"', two heads] & \mathcal{O} \arrow[d, "\pi'", two heads] \\
-            \mathcal{O}/\mathfrak{P} \arrow[r, "\eta"', dashed]                         & \mathcal{O}/\sigma\mathfrak{P}          
-        \end{tikzcd}
-    \]
-    Furthermore, $\pi'\circ \sigma|_{\mathcal{O}}$ and $\ker \left( \pi'\circ \sigma|_{\mathcal{O}}\right)=\mathfrak{P}$ implies $\eta$ is a an isomorphism of fields. Thus $[\mathcal{O}/\sigma\mathfrak{P}:\mathcalo/\mathfrak{p}]$ is independent of $\sigma$, which implies 
+    According to \Cref{th:galois_action_induces_isomorphism_of_residue_fields}, $[\mathcal{O}/\sigma\mathfrak{P}:\mathcalo/\mathfrak{p}]$ is independent of $\sigma$, which implies 
     \[
     f_1=f_2=\cdots=f_r=f.
     \]
@@ -1962,19 +2151,31 @@ Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L
     \]
 \end{prf}
 
+\begin{definition}{Inertia Group}{}
+    Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak{P}$ is a maximal ideal over $\mathfrak{p}\in \spec\left(\mathcalo\right)$. The \textbf{inertia group} of $\mathfrak{P}$ is defined as the kernel of the surjective group homomorphism
+    \begin{align*}
+        \xi:D_{\mathfrak{P}}&\longrightarrow \mathrm{Aut}_{\left(\kappa(\mathfrak{p})/\mathsf{Field}\right)}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)\\
+        \sigma&\longmapsto \widetilde{\sigma}.
+    \end{align*}
+    denote by $I_{\mathfrak{P}}:=\ker \xi$. And we have the following exact sequence
+    \[
+    1\longrightarrow I_{\mathfrak{P}}\longrightarrow D_{\mathfrak{P}}\longrightarrow \mathrm{Aut}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)\longrightarrow 1.
+    \]
+\end{definition}
+
 \begin{proposition}{}{}
-    Let $A$ be a normal domain with fraction field $K$. Let $L/K$ be a (possibly infinite) Galois extension. Let $G = \text{Gal}(L/K)$ and let
-    $B$ be the integral closure of $A$ in $L$.
+    Let $\mathcalo$ be a normal integral domain with fraction field $K$. Let $L/K$ be a (possibly infinite) Galois extension. Let $G = \text{Gal}(L/K)$ and let
+    $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$.
 \begin{enumerate}[(i)]
     \item For any two primes
-    $\mathfrak P, \mathfrak P' \in \spec(B)$ lying over the same prime in $A$, there exists a $\sigma \in G$ with $\sigma(\mathfrak P) = \mathfrak P'$.
-    \item Let $\mathfrak P \in \spec(B) $ be a prime lying over
-    $\mathfrak p \in \spec(A)$. Then $\kappa(\mathfrak P)/\kappa(\mathfrak p)$
+    $\mathfrak P, \mathfrak P' \in \spec(\mathcal{O})$ lying over the same prime in $\mathcalo$, there exists a $\sigma \in G$ with $\sigma(\mathfrak P) = \mathfrak P'$.
+    \item Let $\mathfrak P \in \spec(\mathcal{O}) $ be a prime lying over
+    $\mathfrak p \in \spec(\mathcalo)$. Then $\kappa(\mathfrak P)/\kappa(\mathfrak p)$
     is an algebraic normal field extension and the map
     $$
-    D = \{\sigma \in G \mid \sigma(\mathfrak q) = \mathfrak q\}
+    D_{\mathfrak P} = \{\sigma \in G \mid \sigma(\mathfrak P) = \mathfrak q\}
     \longrightarrow
-    \text{Aut}(\kappa(\mathfrak q)/\kappa(\mathfrak p))
+    \text{Aut}(\kappa(\mathfrak P)/\kappa(\mathfrak p))
     $$
 is surjective.
 \end{enumerate}
@@ -1982,6 +2183,21 @@ is surjective.
 \begin{prf}
 \url{https://stacks.math.columbia.edu/tag/0BRK}
 \end{prf}
+
+\begin{definition}{Frobenius Element}{}
+    Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak{P}$ is a maximal ideal over $\mathfrak{p}\in \spec\left(\mathcalo\right)$ and $\kappa(\mathfrak{p})$ is a finite field isomorphic to $\mathbb{F}_{q}$. Then $\kappa(\mathfrak{P})/\kappa(\mathfrak{p})$ is a finite Galois extension and we have the following exact sequence
+    \[
+    1\longrightarrow I_{\mathfrak{P}}\longrightarrow D_{\mathfrak{P}}\xlongrightarrow{\xi} \mathrm{Gal}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)\longrightarrow 1.
+    \]
+    \begin{itemize}
+        \item The set of \textbf{Frobenius elements} for $\mathfrak{P}$ is defined as the preimage of the Frobenius automorphism of $\mathrm{Fr}_q:x\mapsto x^q$ in $\mathrm{Gal}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)$, denoted by $\mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}:=\xi^{-1}\left(\mathrm{Fr}_q\right)$.
+        \item The \textbf{Frobenius conjugacy class} for a Frobenius element $\sigma\in \mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ is defined as the conjugacy class of $\sigma$ in $\mathrm{Gal}(\kappa(\mathfrak{P})/\kappa(\mathfrak{p}))$. $\sigma \in \mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ if and only if $\tau \sigma \tau^{-1}\in  \mathrm{Frob}_{\mathfrak{p},\tau \mathfrak{P}}$ for some $\tau\in \mathrm{Gal}(\kappa(\mathfrak{P})/\kappa(\mathfrak{p}))$.
+        \item If $I_{\mathfrak{P}}$ is trivial, then $\mathfrak{p}$ is unramified in $L$ and the Frobenius element $\mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ is unique. We denote the Frobenius conjugacy class of $\mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ by $\mathrm{Frob}_{\mathfrak{p}, L}$ or $\mathrm{Frob}_{\mathfrak{p}}$ for short.
+        \item If $I_{\mathfrak{P}}$ is trivial and $L/K$ is Abelian, then the Frobenius conjugacy class $\mathrm{Frob}_{\mathfrak{p}, L}$ has only one element, which is called the \textbf{Frobenius element} of $\mathfrak{p}$ in $L$.
+    \end{itemize}
+    
+\end{definition}
+
 
 \section{Absolute Value}
 \begin{definition}{Absolute Value on an Integral Ring}{}
