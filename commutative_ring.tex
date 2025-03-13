@@ -403,7 +403,7 @@ As a result, the minimal number of generators of $M$ is equal to $\dim_{R/\mathf
 \end{prf}
 
 \begin{definition}{Associate}{}
-    Let $R$ be an integal domain. Two elements $a,b\in R$ are called \textbf{associates} if one of the following equivalent conditions holds:
+    Let $R$ be an integral domain. Two elements $a,b\in R$ are called \textbf{associates} if one of the following equivalent conditions holds:
     \begin{enumerate}[(i)]
         \item $a=ub$ for some $u\in R^\times$.
         \item $a\mid b$ and $b\mid a$, i.e. $(a)=(b)$.
@@ -414,7 +414,7 @@ If $R$ is a general commutative ring, then we only have the implication $(\mathr
 
 Associatedness can also be described in terms of the action of $R^\times$ on $R$ via multiplication: two elements of $R$ are associates if they are in the same $R^\times$-orbit.
 \begin{definition}{Irreducible Element}{}
-    Let $R$ be an integal domain. An element $a\in R$ is called \textbf{irreducible} if
+    Let $R$ be an integral domain. An element $a\in R$ is called \textbf{irreducible} if
     \begin{enumerate}[(i)]
         \item $a\notin R^\times$, i.e. $a$ is not a unit.
         \item $a=bc\implies b\in R^\times\text{ or }c\in R^\times$.
@@ -423,7 +423,7 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 
 0 is never an irreducible element.
 \begin{proposition}{Prime Element $\implies$ Irreducible Element in Integral Domain}{}
-    Let $R$ be an integal domain. Then every prime element in $R$ is irreducible.
+    Let $R$ be an integral domain. Then every prime element in $R$ is irreducible.
 \end{proposition}
 
 \begin{prf}
@@ -431,7 +431,7 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 \end{prf}
 
 \begin{proposition}{Prime Ideal Equivalent Definition}{}
-    Let $R$ be a commutative ring. An ideal $I\subseteq R$ is prime if and only if $R/I$ is an integal domain.
+    Let $R$ be a commutative ring. An ideal $I\subseteq R$ is prime if and only if $R/I$ is an integral domain.
 \end{proposition}
 
 
@@ -452,6 +452,16 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
     Let $a\in R$ be an irreducible element. Suppose $a\mid bc$ for some $b,c\in R$. Then $bc=ad$ for some $d\in R$. Since $R$ is a UFD, we can write $b=p_1\cdots p_n$ and $c=q_1\cdots q_m$ for some irreducible elements $p_1,\cdots,p_n,q_1,\cdots,q_m\in R$. Then we have $$ad=bc=p_1\cdots p_nq_1\cdots q_m.$$ Since $a$ is irreducible, $a$ must be an associate of one of the $p_i$'s or $q_j$'s. Without loss of generality, we can assume $a\sim p_1$. Then $a\mid b$. That implies $a$ is prime.
 \end{prf}
 
+\begin{proposition}{UFD $\implies$ Normal Domain}{}
+    Every UFD is a \hyperref[th:normal_domain]{normal domain}.
+\end{proposition}
+\begin{prf}
+    Let $R$ be a UFD and $K=\mathrm{Frac}(R)$ be the field of fractions of $R$. Suppose $a/b\in K$ is integral over $R$ and $\gcd\left(a,b\right)=1$. Then $a/b$ satisfies a monic polynomial $f(x)=x^n+r_{n-1}x^{n-1}+\cdots+r_0$ with $r_i\in R$. Multiplying by $b^n$, we have 
+    \[
+        a^n+r_{n-1}a^{n-1}b+\cdots+r_0b^n=0\implies b \mid a^n.
+    \]
+    Since $R$ is a UFD, both $a$ and $b$ can be uniquely written as a product of irreducible elements. Either $b$ is a unit or $b$ has an irreducible factor in common with $a$. Since $\gcd\left(a,b\right)=1$, the latter is impossible. Hence $b\in R^\times$ and $a/b\in R$.
+\end{prf}
 
 \section{Principal Ideal Domain}
 \begin{definition}{Principal Ideal Domain}{}
@@ -1143,6 +1153,20 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
     Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. If every element of $S$ is integral over $R$, then we say $\varphi$ is \textbf{integral} and $S$ is an \textbf{integral extension} of $R$.
 \end{definition}
 
+\begin{proposition}{Descent of Integrality along Ring Homomorphisms}{descent_of_integrality_along_ring_homomorphisms}
+    Let $A\xrightarrow{\varphi}B\xrightarrow{\psi} C$ be ring homomorphisms between commutative rings. 
+    \begin{enumerate}[(i)]
+        \item If $x\in C$ is integral over $A$, then $x$ is integral over $B$.
+        \item If $A\to C$ is integral, then $B\to C$ is integral.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Let $f\in A[T]$ be a monic polynomial such that $\leftindex^{\psi\circ\varphi}\!f(x)=0$. We have $\leftindex^{\varphi}\!f\in B[T]$ and $\leftindex^\psi(\leftindex^\varphi f)(x)=\leftindex^{\psi\circ\varphi}\!f(x)=0$. Hence $x$ is integral over $B$.
+        \item Since $A\to C$ is integral, every element of $C$ is integral over $A$. By (i), every element of $C$ is integral over $B$. Hence $B\to C$ is integral.
+    \end{enumerate}
+\end{prf}
+
 \begin{definition}{Integral Closure}{integral_closure}
     Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. The set of all elements in $S$ that are integral over $R$ is called the \textbf{integral closure of $R$ in $S$}. The integral closure of $R$ in $S$ is an $R$-subalgebra of $S$, denoted by $\overline{R}^S$. If $\varphi$ is injective, we say that $R$ is \textbf{integrally closed in $S$} if $\varphi(R)=\overline{R}^S$.
 \end{definition}
@@ -1151,10 +1175,19 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
     \[
         \leftindex^{\varphi}\!P(X)=X-\varphi(a)\implies \leftindex^{\varphi}\!P(b)=b-\varphi(a)=0.
     \]
-    Hence $b$ is integral over $R$. Since $\varphi(R)\subseteq \overline{R}^S$, we can define a ring homomorphism $u:R\to \overline{R}^S$ as the composition of $\varphi$ and the inclusion map $\varphi(R)\hookrightarrow \overline{R}^S$. Therefore, integral closure is a ring extension.
+    Hence $b$ is integral over $R$. Since $\varphi(R)\subseteq \overline{R}^S$, we can define a ring homomorphism $u:R\to \overline{R}^S$ as the composition of $\varphi$ and the inclusion map $\varphi(R)\hookrightarrow \overline{R}^S$.
+    \[
+    u:= \iota\circ \varphi:R\longrightarrow \overline{R}^S.
+    \]
+    Therefore, integral closure is a ring extension. Furthermore, if $\varphi$ is injective, then $u: R\to \overline{R}^S$ is also injective.
 \end{remark}
-\begin{proposition}{Universal Properties of Integral Closure}{}
-    Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. Then for any integral extension $\psi:R\to T$ and any ring homomorphism $f:T\to S$, there exists a unique ring homomorphism $\widetilde{f}:T\to \overline{R}^S$ such that the following diagram commutes
+\begin{proposition}{Universal Properties of Integral Closure}{universal_properties_of_integral_closure}
+    Let $\varphi:R\to S$ be a ring homomorphism between two commutative rings. Then for any integral extension $\psi:R\to T$ and any ring homomorphism $f:T\to S$, there exists a unique ring homomorphism 
+    \begin{align*}
+        \widetilde{f}:T&\longrightarrow \overline{R}^S\\
+        t&\longmapsto f(t)
+    \end{align*}
+    such that the following diagram commutes
     \[
         \begin{tikzcd}
                 & \overline{R}^S \arrow[rdd, "\iota", hook]      &   \\[+1.5em]
@@ -1162,7 +1195,7 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
     R \arrow[rr, "\varphi"'] \arrow[ru, "\psi"'] \arrow[ruu, "u"] &                                                & S
     \end{tikzcd}
     \]
-    That is, $R\to \overline{R}^S \hookrightarrow \overline{R}^S$ is terminal.
+    That is, $R\to \overline{R}^S \hookrightarrow S$ is terminal.
 \end{proposition}
 \begin{prf}
     First we show $f(T)\subseteq \overline{R}^S$. For any $b\in f(T)$, there exists $a\in T$ such that $b=f(a)$. Since $a$ is integral over $R$, there exists a monic polynomial $P(X)=X^n+r_{n-1}X^{n-1}+\cdots+r_0\in R[X]$ such that $\leftindex^{\psi}\!P(a)=0$. By applying $f$ to both sides of the equation, we get
@@ -1184,24 +1217,27 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
 \end{prf}
    
 
-\begin{definition}{Integral Closure in Field of Fractions}{integral_closure_in_field_of_fractions}
-    Let $R$ be an integral domain. The \textbf{integral closure of $R$} or \textbf{normalization of $R$} is defined to be the integral closure of $R$ in $\mathrm{Frac}(R)$. We say $R$ is \textbf{integrally closed} if $R$ is integrally closed in $\mathrm{Frac}(R)$.
+\begin{definition}{Integral Closure of Integal Domain in Field of Fractions}{integral_closure_in_field_of_fractions}
+    Let $R$ be an integral domain. The \textbf{integral closure of $R$} or \textbf{normalization of $R$} is defined to be the integral closure of $R$ in $\mathrm{Frac}(R)$. 
 \end{definition}
+\begin{remark}
+    We say $R$ is \textbf{integrally closed} or \textbf{normal} if $R$ is integrally closed in $\mathrm{Frac}(R)$. See \Cref{th:normal_domain}
+\end{remark}
 
 \begin{proposition}{Fraction Field of Integral Closure of Integral domain}{}
-    Let $R$ be an integral domain and $\mathrm{Frac}(R)$ be its field of fractions. If $L/K$ is a finite field extension, and $R'$ is the integral closure of $R$ in $L$, then $L$ is a field of fractions of $R'$.
+    Let $R$ be an integral domain and $\mathrm{Frac}(R)$ be its field of fractions. If $L/K$ is a finite field extension, and $\overline{R}^L$ is the integral closure of $R$ in $L$, then $L$ is a field of fractions of $\overline{R}^L$.
 \end{proposition}
 \begin{prf}
-    $R'$ is an integral domain because it is a subring of integral domain $L$. Let $l:R'\hookrightarrow \mathrm{Frac}(R') $ be the localization map and $\iota:R'\hookrightarrow L$ be the inclusion. According to the universal property of field of fractions, there exists a unique field homomorphism 
+    $\overline{R}^L$ is an integral domain because it is a subring of integral domain $L$. Let $l:\overline{R}^L\hookrightarrow \mathrm{Frac}\left(\overline{R}^L\right) $ be the localization map and $\iota:\overline{R}^L\hookrightarrow L$ be the inclusion. According to the universal property of field of fractions, there exists a unique field homomorphism 
     \begin{align*}
-        \psi:\mathrm{Frac}(R')&\longrightarrow L\\
+        \psi:\mathrm{Frac}\left(\overline{R}^L\right) &\longrightarrow L\\
         \frac{a}{b}&\longmapsto \frac{a}{b}
     \end{align*}
     such that the following diagram commutes
     \[
         \begin{tikzcd}
-            \mathrm{Frac}(R') \arrow[r, "\psi", dashed]        & L \\[1em]
-            R' \arrow[u, "l", hook] \arrow[ru, "\iota"', hook] &  
+            \mathrm{Frac}\left(\overline{R}^L\right)  \arrow[r, "\psi", dashed]        & L \\[1em]
+            \overline{R}^L \arrow[u, "l", hook] \arrow[ru, "\iota"', hook] &  
             \end{tikzcd}
     \]
     For any $x\in L$, suppose the minimal polynomial of $x$ is
@@ -1216,11 +1252,11 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
     \[
     (b_n x)^n + b_{n-1}(b_n x)^{n-1} + \cdots + b_1b_n^{n-2}(b_n x) + b_0 = 0,
     \]
-    which implies $b_n x$ is integral over $R$. Since $R'$ is the integral closure of $R$ in $L$, we have $b_n x\in R'$. Hence 
+    which implies $b_n x$ is integral over $R$. Since $\overline{R}^L$ is the integral closure of $R$ in $L$, we have $b_n x\in \overline{R}^L$. Hence 
     \[
-    x=\psi\left(\frac{b_n x}{b_n}\right)\in \psi(\mathrm{Frac}(R')).
+    x=\psi\left(\frac{b_n x}{b_n}\right)\in \psi\left(\mathrm{Frac}\left(\overline{R}^L\right)\right).
     \]
-    Therefore, $\psi$ is a isomorphism between $l:R'\hookrightarrow \mathrm{Frac}(R')$ and $\iota:R'\hookrightarrow L$. Since any object isomorphic to an initial object is also initial, we see $L$ is a field of fractions of $R'$.
+    Therefore, $\psi$ is a isomorphism between $l:\overline{R}^L\hookrightarrow \mathrm{Frac}\left(\overline{R}^L\right) $ and $\iota:\overline{R}^L\hookrightarrow L$. Since any object isomorphic to an initial object is also initial, we see $L$ is a field of fractions of $\overline{R}^L$.
  
 \end{prf}
 
@@ -1289,7 +1325,7 @@ we can define $\leftindex^{\varphi}\!f:=\widetilde{\varphi}(f)$ for any $f\in R[
 \end{prf}
 
 The following proposition shows that the property of being integral is preserved under field extension.
-\begin{proposition}{Field Extension Preserves Integral Elements}{field_extension_preserves_integral_elements}
+\begin{proposition}{Injective Ring Extension Preserves Integral Elements}{injective_ring_extension_preserves_integral_elements}
     Suppose $A\xrightarrow{\varphi} B\xhookrightarrow{\iota} C$ are ring homomorphisms between commutative rings and $\iota$ is injective. For any $b\in B$, $b$ is integral over $A$ if and only if $\iota(b)$ is integral over $A$.
 \end{proposition}
 \begin{prf}
@@ -1322,18 +1358,6 @@ The following proposition shows that the property of being integral is preserved
     which implies $c$ is integral over $A$.
 \end{prf}
 
-\begin{proposition}{}{intersection_of_integral_closure_and_field_of_fractions}
-    Suppose $A$ is integrally closed commutative ring with fraction field $K$ and $l:A\hookrightarrow K$ is the localization map. Let $\iota: K\hookrightarrow L$ be a finite field extension. If $B$ is the integral closure of $A$ in $L$, then 
-    \[
-    B\cap \iota(K)=\iota(l(A)).
-    \]
-    Especially, if we have $A\subseteq K\subseteq L$, then $B\cap K=A$.
-\end{proposition}
-\begin{prf}
-    Since for any $a\in A$, there exists monic polynomial $f(x)=x-c\in A[x]$ such that $f(a)=0$, we have $\iota(l(A))\subseteq B$. Since $l(A)\subseteq K$, we have $\iota(l(A))\subseteq \iota(K)$, which implies $\iota(l(A)) \subseteq B\cap \iota(K)$. 
-
-    For any $b\in B\cap \iota(K)$, since $B$ is the integral closure of $A$ in $L$, $b$ is integral over $A$. Since $\iota(K)$ is a field of fractions of $A$ with the localization map $\iota\circ l: A\hookrightarrow \iota(K)$, by the integal closed property of $A$, any integral element over $A$ in $\iota(K)$ must be in $\iota\circ l(A)$. Hence we have $b\in \iota\circ l(A)$, which implies $B\cap \iota(K)\subseteq \iota\circ l(A)$. Therefore, $B\cap \iota(K)=\iota\circ l(A)$.
-\end{prf}
 
 \begin{proposition}{Surjectivity of Spectrum Map of Integral Extension}{surjectivity_of_spectrum_map_of_integral_extension}
     Let $R\subseteq S$ be an integral extension of commutative rings and $\varphi:R\hookrightarrow S$ be the inclusion. Then the map $\varphi^{-1}:\spec (S)\to \spec (R)$ is surjective.
@@ -1353,19 +1377,19 @@ The following proposition shows that the property of being integral is preserved
     \end{itemize}
 \end{proof}
 
-\begin{proposition}{}{integal_over_field_is_field}
-    Let $\varphi:K\to S$ be a ring homomorphism of integal domains and $K$ be a field. 
+\begin{proposition}{}{integral_over_field_is_field}
+    Let $\varphi:K\to S$ be a ring homomorphism of integral domains and $K$ be a field. 
     \begin{itemize}
         \item If $S$ is integral over $K$, then $S$ is a field.
     \end{itemize}
 \end{proposition}
 
 \begin{corollary}{}{integral_extension_of_domains_become_field_simultaneously}
-    Let $R\subseteq S$ be an integral extension of integal domains. Then $R$ is a field if and only if $S$ is a field.
+    Let $R\subseteq S$ be an integral extension of integral domains. Then $R$ is a field if and only if $S$ is a field.
 \end{corollary}
 
 \begin{prf}
-    This is a direct consequence of \Cref{th:condition_for_subring_of_field_to_be_field} and \Cref{th:integal_over_field_is_field}.
+    This is a direct consequence of \Cref{th:condition_for_subring_of_field_to_be_field} and \Cref{th:integral_over_field_is_field}.
 \end{prf}
 
 \begin{corollary}{}{lying_over_preserves_maximality}
@@ -1394,13 +1418,13 @@ The following theorems are also called the Cohen-Seidenberg theorems.
     Let $R\subseteq T$ be an extension of commutative rings. Then the following hold:
     \begin{enumerate}[(i)]
         \item \textbf{Going-up Theorem}: If $R\subseteq T$ is an integral extension, then it satisfies the going-up property and and the incomparability property.
-        \item \textbf{Going-down Theorem}: If $R\subseteq T$ is an integral extension, $T$ is an integal domain, and $R$ is integrally closed in $T$, then it satisfies the going-down property.
+        \item \textbf{Going-down Theorem}: If $R\subseteq T$ is an integral extension, $T$ is an integral domain, and $R$ is integrally closed in $T$, then it satisfies the going-down property.
     \end{enumerate}
     
 \end{theorem}
 \begin{prf}
     \begin{enumerate}[(i)]
-        \item First we prove the incomparability property. It is sufficient to show if $\mathfrak{q}_1, \mathfrak{q}_2$ are prime ideals of $S$ lying over $\mathfrak{p}\in \spec R$ such that $\mathfrak{q}_1\subseteq \mathfrak{q}_2$, then $\mathfrak{q}_1=\mathfrak{q}_2$. Let $S=R-\mathfrak{p}$. According to \Cref{th:quotient_and_localization_respect_integral_extensions}, we obtain an integal extension
+        \item First we prove the incomparability property. It is sufficient to show if $\mathfrak{q}_1, \mathfrak{q}_2$ are prime ideals of $S$ lying over $\mathfrak{p}\in \spec R$ such that $\mathfrak{q}_1\subseteq \mathfrak{q}_2$, then $\mathfrak{q}_1=\mathfrak{q}_2$. Let $S=R-\mathfrak{p}$. According to \Cref{th:quotient_and_localization_respect_integral_extensions}, we obtain an integral extension
         \begin{align*}
             \iota: R_\mathfrak{p}&\hookrightarrow S^{-1}T\\
             \frac{r}{s}&\longmapsto \frac{r}{s}.
@@ -1490,7 +1514,7 @@ The following theorems are also called the Cohen-Seidenberg theorems.
     Let $\varphi:R\to S$ and $\psi:S\to T$ be two finite homomorphisms between commutative rings. Then $\psi\circ\varphi:R\to T$ is also finite.
 \end{proposition}
 \begin{prf}
-    If $\varphi:R\to S$ and $\psi:S\to T$ are finite, according to \Cref{th:finiteness_of_R_module_iff_finiteness_of_S_module}, $T$ is also finite over $R$.
+    If $\varphi:R\to S$ and $\psi:S\to T$ are finite, according to \Cref{th:finiteness_of_R_module_iff_finiteness_of_S_module}, $T$ is also finite over $R$. 
 \end{prf}
 
 
@@ -1545,7 +1569,7 @@ The following theorems are also called the Cohen-Seidenberg theorems.
         \begin{tikzcd}
             R \arrow[r, "\varphi", hook] \arrow[d, "\pi_{\mathfrak{a}}"', two heads] & T \arrow[d, "\pi_{\mathfrak{b}}", two heads] \\
             R/\mathfrak{a} \arrow[r, "\overline{\varphi}"', dashed, hook]                & T/\mathfrak{b}             
-            \end{tikzcd}
+        \end{tikzcd}
     \]
     Since $T$ is a finitely generated $R$-module, we can suppose the generating set of $T$ is $\{t_1,\cdots,t_n\}$. Then for any $t+\mathfrak{b}\in T/\mathfrak{b}$, there exists $r_1,\cdots,r_n\in R$ such that $t=\sum_{i=1}^n \varphi(r_i)t_i$. Thus we have
     \[
@@ -1597,23 +1621,79 @@ The following theorems are also called the Cohen-Seidenberg theorems.
 
 \section{Normal Ring}
 
-Recall the definition of integral closed domain in \Cref{th:integral_closure_in_field_of_fractions}.
-\begin{definition}{Normal Domain}{}
-    Suppose $R$ is an integral domain and $\mathrm{Frac}(R)$ is a field of fractions of $R$ which contains $R$. $R$ is called \textbf{normal} or \textbf{integrally closed} if $R$ equals its \hyperref[th:integral_closure]{integral closure} in $\mathrm{Frac}(R)$.
+Recall the remark in \Cref{th:integral_closure_in_field_of_fractions}.
+\begin{definition}{Normal Domain}{normal_domain}
+    Suppose $R$ is an integral domain, $\mathrm{Frac}(R)$ be a field of fractions and $l:R\hookrightarrow \mathrm{Frac}(R)$ is the localization map. $R$ is called \textbf{normal} or \textbf{integrally closed} if $l(R)$ equals the \hyperref[th:integral_closure]{integral closure} of $R$ in $\mathrm{Frac}(R)$.
 \end{definition}
 
-\begin{proposition}{Equivalent Definition of Normal Domain}{}
+\begin{proposition}{Equivalent Definition of Normal Domain}{equivalent_definition_of_normal_domain}
     Let $R$ be an integral domain. The following are equivalent:
     \begin{enumerate}[(i)]
         \item $R$ is normal.
+        \item For each $x\in \mathrm{Frac}(R)$ integral over $R$, $x\in l(R)$.
         \item For every prime ideal $\mathfrak{p}$ of $R$, the localization $R_\mathfrak{p}$ is normal.
         \item For every maximal ideal $\mathfrak{m}$ of $R$, the localization $R_\mathfrak{m}$ is normal.
     \end{enumerate}
 \end{proposition}
 
 
+\begin{proposition}{}{intersection_of_integral_closure_and_field_of_fractions}
+    Suppose $A$ is integrally closed commutative ring with fraction field $K=\mathrm{Frac}(A)$ and $l:A\hookrightarrow K$ is the localization map. Let $\iota: K\hookrightarrow L$ be a finite field extension. If $B=\overline{A}^L$ is the integral closure of $A$ in $L$, then we have commutative diagram
+    \[
+        \begin{tikzcd}
+                & K \arrow[rd, "\iota", hook]      &   \\
+    A \arrow[ru, "l", hook] \arrow[rd, "u"', hook] &                                  & L \\
+                & B \arrow[ru, "\subseteq"', hook] &  
+        \end{tikzcd}
+    \]
+    and
+    \[
+    B\cap \iota(K)=\iota(l(A)).
+    \]
+    Especially, if we have $A\subseteq K\subseteq L$, then $B\cap K=A$.
+\end{proposition}
+\begin{prf}
+    Since for any $a\in A$, there exists monic polynomial $f(x)=x-c\in A[x]$ such that $f(a)=0$, we have $\iota(l(A))\subseteq B$. Since $l(A)\subseteq K$, we have $\iota(l(A))\subseteq \iota(K)$, which implies $\iota(l(A)) \subseteq B\cap \iota(K)$. 
+
+    For any $b\in B\cap \iota(K)$, since $B$ is the integral closure of $A$ in $L$, $b$ is integral over $A$. Since $\iota(K)$ is a field of fractions of $A$ with the localization map $\iota\circ l: A\hookrightarrow \iota(K)$, by the integral closed property of $A$, any integral element over $A$ in $\iota(K)$ must be in $\iota\circ l(A)$. Hence we have $b\in \iota\circ l(A)$, which implies $B\cap \iota(K)\subseteq \iota\circ l(A)$. Therefore, $B\cap \iota(K)=\iota\circ l(A)$.
+\end{prf}
+
+\begin{proposition}{}{}
+    Let $\varphi: R\to S$ be a commutative ring homomorphism and $\overline{R}^S$ be the integral closure of $R$ in $S$. If $S$ is a normal integral domain, then $\overline{R}^S$ is a normal integral domain.
+\end{proposition}
+\begin{prf}
+    Let $\overline{R}^S$ be the integral closure of $R$ in $S$. $\overline{R}^S$ is an integral domain because it is a subring of integral domain $S$. Suppose $\mathrm{Frac}\left(\overline{R}^S\right)$ is a field of fractions that contains $\overline{R}^S$ and $l:\overline{R}^S\hookrightarrow \mathrm{Frac}\left(\overline{R}^S\right)$ be the localization map. To show $\overline{R}^S$ is normal, by \Cref{th:equivalent_definition_of_normal_domain} it is sufficient to show that for each $x\in \mathrm{Frac}\left(\overline{R}^S\right)$ integral over $\overline{R}^S$, $x\in \overline{R}^S$. 
+    
+    Suppose $x\in \mathrm{Frac}\left(\overline{R}^S\right)$ is integral over $\overline{R}^S$. Let $\mathrm{Frac}\left(S\right)$ be a field of fractions that contains $S$. By the universal property of the field of fractions, there exists a unique ring homomorphism
+    \begin{align*}
+        \overline{\iota}:\mathrm{Frac}\left(\overline{R}^S\right)&\longrightarrow \mathrm{Frac}\left(S\right)\\
+        \frac{a}{b}&\longmapsto \frac{a}{b}
+    \end{align*}
+    such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+            \overline{R}^S \arrow[r, "\iota", hook] \arrow[d, "l_1"', hook]                       & S \arrow[d, "l_2", hook] \\
+            \mathrm{Frac}\left(\overline{R}^S\right) \arrow[r, "\overline{\iota}"', dashed, hook] & \mathrm{Frac}(S)        
+            \end{tikzcd}
+    \]
+   Since $l_1$ and $l_2\circ \iota$ are injective, $\overline{\iota}$ is injective. According to \Cref{th:injective_ring_extension_preserves_integral_elements}, $\overline{\iota}(x)$ is integral over $\overline{R}^S$ through $\overline{\iota}\circ l_1$, namely  $\overline{\iota}(x)$ is integral over $\overline{R}^S$ through $l_2\circ \iota$. According to \Cref{th:descent_of_integrality_along_ring_homomorphisms}, $\overline{\iota}(x)$ is integral over $S$. Since $S$ is normal, $\overline{\iota}(x)\in S$. Since $\overline{R}^S$ is integral over $S$, we have $\overline{\iota}(x)$ is integral over $R$. Since $\overline{R}^S$ is the integral closure of $R$ in $S$, we have $\overline{\iota}(x)\in \overline{R}^S$. Therefore, $x\in \overline{R}^S$, which completes the proof.
+\end{prf}
+
+\begin{proposition}{Characterization of Integrality via Minimal Polynomials}{characterization_of_integrality_via_minimal_polynomials}
+    Let $R$ be a normal integral domain and $K=\mathrm{Frac}(R)$ be a field of fractions of $R$ that contains $R$. If $L/K$ is a field extension, then $\alpha\in L$ is integral over $R$ if and only if the minimal polynomial of $\alpha$ over $K$ has coefficients in $R$.
+\end{proposition}
+\begin{prf}
+    Suppose $\alpha\in L$ is integral over $R$. Then $\alpha\in L$ is algebraic over $K$. Let $f(X)=X^n+a_{n-1}X^{n-1}+\cdots+a_0\in K[X]$ be the minimal polynomial of $\alpha$ over $K$. Since $\alpha$ is integral over $R$, there exists a monic polynomial $g(X)=X^m+b_{m-1}X^{m-1}+\cdots+b_0\in R[X]$ such that $g(\alpha)=0$. By the definition of the minimal polynomial, $f(X)$ divides $g(X)$ in $K[X]$. Suppose $M=\overline{K(\alpha)}$ is an algebraic closure of $K(\alpha)$ such that $K(\alpha)\subseteq M$. Then $f$ splits into linear factors over $M$ as 
+    \[
+    f(X)=\prod_{i=1}^n (X-\alpha_i)\in M[X],
+    \]
+    with $\alpha=\alpha_k$ for some $k$. Thus we have $g\left(\alpha_i\right)=0$ for $i=1,\cdots,n$, which implies $\alpha_1,\cdots,\alpha_n$ are integral over $R$. By Vieta's formulas, $a_i$ is a symmetric polynomial of $\alpha_1,\cdots,\alpha_n$ for $i=1,\cdots,n$. Hence $a_i$ are also integral over $R$. Since $R$ is normal, we have $a_i\in R$ for $i=1,\cdots,n$, which implies $a \in R$.
+
+    Conversely, suppose the minimal polynomial of $\alpha$ over $K$ has coefficients in $R$. Let $f(X)=X^n+a_{n-1}X^{n-1}+\cdots+a_0\in R[X]$ be the minimal polynomial of $\alpha$ over $K$. Since $f(\alpha)=0$, $\alpha$ is integral over $R$.
+\end{prf}
+
 \begin{definition}{Normal Ring}{}
-    An commutative $R$ is called \textbf{normal} if for every prime ideal $\mathfrak{p}$ of $R$, the localization $R_\mathfrak{p}$ is a normal domain.
+    An commutative $R$ is called \textbf{normal} if for every prime ideal $\mathfrak{p}$ of $R$, the localization $R_\mathfrak{p}$ is a normal integral domain.
 \end{definition}
 \begin{proposition}{}{}
 A normal ring is integrally closed in its total ring of fractions.
@@ -1848,7 +1928,7 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
     In other words, $\mathfrak{P}_i$ are exactly those prime ideals in $\mathrm{Spec}\left(\mathcal{O}\right)$ such that $\iota^{-1}\left(\mathfrak{P}_i\right)=\mathfrak{p}$, where $\iota:\mathcalo\hookrightarrow \mathcal{O}$ is the embedding. Consider the morphism of affine schemes $\iota^{-1}:\mathrm{Spec}\left(\mathcal{O}\right)\to \mathrm{Spec}\left(\mathcalo\right)$. By \Cref{th:surjectivity_of_spectrum_map_of_integral_extension} we see $\iota^{-1}$ is surjective as a map between the underlying sets. This is equivalent to say the fiber over $\mathfrak{p}$ is $\left\{\mathfrak{P}_1,\cdots, \mathfrak{P}_n\right\}$.
 \end{remark}
 \begin{prf}
-    Since $\mathcalo \subseteq \mathcal{O}$ is an integal extension, by the \hyperref[th:going_up_and_going_down_theorems]{going-up theorem}, if $\mathfrak{p}$ is a prime ideal of $\mathcalo$, then there exists a prime ideal $\mathfrak{P}$ of $\mathcal{O}$ such that $\mathfrak{P}\cap \mathcalo=\mathfrak{p}$. Thus we have 
+    Since $\mathcalo \subseteq \mathcal{O}$ is an integral extension, by the \hyperref[th:going_up_and_going_down_theorems]{going-up theorem}, if $\mathfrak{p}$ is a prime ideal of $\mathcalo$, then there exists a prime ideal $\mathfrak{P}$ of $\mathcal{O}$ such that $\mathfrak{P}\cap \mathcalo=\mathfrak{p}$. Thus we have 
     \[
     \mathfrak{p}\mathcal{O}\subseteq \mathfrak{P} \mathcal{O}= \mathfrak{P} \subsetneq \mathcal{O}.
     \]

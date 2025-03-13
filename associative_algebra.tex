@@ -218,46 +218,82 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     \end{enumerate}
 \end{proposition}
 
-\
+\section{Trace and Norm}
 
-\section{Determinant and Trace}
-
-
-
-\begin{definition}{Determinant of $R$-linear Transformation on Free Module of Finite Rank}{}
-    Let $R$ be a commutative ring and $M$ be a free $R$-module of finite rank $n$. The \textbf{determinant} of an $R$-linear map $f:M\to M$ can be defined as one of the following equivalent ways:
-    \begin{enumerate}[(i)]
-        \item The functor $\Largewedge^n:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ induces a hom-set morphism 
-        \begin{align*}
-            \largewedge^n:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right) &\longrightarrow\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)\\
-        f &\longmapsto f\wedge\cdots\wedge f.
-        \end{align*}
-        Note $\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)$ is a 1-dimensional $R$-module with basis $\mathrm{id}_{\largewedge^n(M)}$. And $R$ is a also a 1-dimensional $R$-module with basis $1_R$. We have the following $R$-module isomorphism
-        \begin{align*}
-            s:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)&\xlongrightarrow{\sim} R\\
-            \mathrm{id}_{\largewedge^n(M)} &\longmapsto 1_R.
-        \end{align*}
-        The \textbf{determinant} of $f$ is defined as the composition $\det:=s\circ \largewedge^n$.
-        \item Suppose $\{e_1,\cdots,e_n\}$ is a baisis of $M$, then for any $f\in \mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right)$, it can be uniquely represented by a matrix $A=(a_{ij})$ with respect to the basis $\{e_1,\cdots,e_n\}$. Then the \textbf{determinant} of $f$ is defined as follows
-        \begin{align*}
-            \largewedge^n:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right) &\longrightarrow R\\
-        f &\longmapsto f\wedge\cdots\wedge f.
-        \end{align*}
-    \end{enumerate}
-\end{definition}
-
-\begin{example}{Left Multiplication Endomorphism}{}
-    Let $R$ be a commutative ring and $A$ be an $R$-Algebra. Suppose $A$ is a free $R$-module of finite rank $n$. Given any $a\in A$, the left multiplication endomorphism $l_a\in\mathrm{End}_{R\text{-}\mathsf{Mod}}(A)$ is defined by
+\begin{lemma}{Left Multiplication Endomorphism}{}
+    Let $R$ be a commutative ring and $A$ be an $R$-algebra. For any $a\in A$, we can define the left multiplication endomorphism $l_a\in\mathrm{End}_{R\text{-}\mathsf{Mod}}(A)$ by
     \begin{align*}
         l_a:A &\longrightarrow A\\
         x &\longmapsto ax.
     \end{align*}
-\end{example}
+    Moreover,
+    \begin{align*}
+        l_{-}:A &\longrightarrow \mathrm{End}_{R\text{-}\mathsf{Mod}}(A)\\
+        a &\longmapsto l_a
+    \end{align*}
+    is an $R$-algebra homomorphism.
+\end{lemma}
+\begin{prf}
+    For any $r\in R$, $a,b\in A$ and $x\in A$, we have
+    \begin{align*}
+        l_{ra+b}(x)&=(ra+b)x=r(ax)+bx=(ra)x+bx=l_{ra}(x)+l_b(x),\\
+        l_{ab}(x)&=(ab)x=a(bx)=l_a(l_b(x)),\\
+        l_{1_A}(x)&=1_Ax=x.
+    \end{align*}
+    Hence $l_{-}$ is an $R$-algebra homomorphism.
+\end{prf}
 
 
-\begin{definition}{Trace of Elements in $R$-algebra}{}
-    Let $A$ be an $R$-algebra. The \textbf{trace} of an element $a\in A$ is defined as the trace of the left multiplication endomorphism $l_a\in\mathrm{End}_{R\text{-}\mathsf{Mod}}(A)$.
+\begin{definition}{Trace, Norm and Characteristic Polynomial}{trace_norm_and_characteristic_polynomial}
+    Let $R$ be a commutative ring and $A$ be an $R$-algebra. Suppose $A$ as an $R$-module is free of finite rank. For any $a\in A$, we can define the left multiplication endomorphism $l_a\in\mathrm{End}_{R\text{-}\mathsf{Mod}}(A)$ by
+    \begin{align*}
+        l_a:A &\longrightarrow A\\
+        x &\longmapsto ax.
+    \end{align*}
+    \begin{itemize}
+        \item The \textbf{trace} of $a\in A$ is defined as the trace of $l_a$, denoted by 
+        \[
+        \mathrm{Tr}_{A|R}(a):=\mathrm{Tr}(l_a) \in R.
+        \]
+        That is, $\mathrm{Tr}_{A|R}:A\to R$ is an $R$-module homomorphism through the following composition
+        \[
+            \mathrm{Tr}_{A|R}: A\xrightarrow{l_{-}} \mathrm{End}_{R\text{-}\mathsf{Mod}}(A)\xrightarrow{\mathrm{Tr}} R.
+        \]
+        \item The \textbf{norm} of $a\in A$ is defined as the determinant of $l_a$, denoted by
+        \[
+        \mathrm{N}_{A|R}(a):=\det(l_a) \in R.
+        \]
+        That is, $\mathrm{N}_{A|R}:A\to R$ is a multiplicative monoid homomorphism through the following composition
+        \[
+            \mathrm{N}_{A|R}: A\xrightarrow{l_{-}} \mathrm{End}_{R\text{-}\mathsf{Mod}}(A)\xrightarrow{\det} R.
+        \]
+        \item The \textbf{characteristic polynomial} of $a\in A$ is defined as the characteristic polynomial of $l_a$, denoted by
+        \[
+        \mathrm{char}_{A|R}(a; X):=\mathrm{char}(l_a; X)=\det(X\cdot\mathrm{id}_A-l_a)= \mathrm{N}_{A[X]|R[X]}(X-a)\in R[X]
+        \]
+    \end{itemize}
 \end{definition}
+
+\begin{proposition}{Trace, Norm, and Characteristic Polynomial under Change of Base Ring}{trace_norm_and_characteristic_polynomial_under_change_of_base_ring}
+    Let $R$ be a commutative ring, $A$ be an commutative $R$-algebra and $M$ be a free $R$-module of finite rank. Suppose $A$ as an $R$-module is free of finite rank. Given any $A$-linear transformation $\varphi\in\mathrm{End}_{A\text{-}\mathsf{Mod}}(M)$, by applying the functor of restriction of scalars to $R\to A$, we can regard $\varphi$ as an $R$-linear transformation on $M$ through $\mathrm{End}_{A\text{-}\mathsf{Mod}}(M)\hookrightarrow\mathrm{End}_{R\text{-}\mathsf{Mod}}(M)$. And we have
+    \begin{enumerate}[(i)]
+        \item $\mathrm{Tr}_{R}(\varphi)=\mathrm{Tr}_{A|R}(\mathrm{Tr}_{A}(\varphi))$.
+        \item $\mathrm{N}_{R}(\varphi)=\mathrm{N}_{A|R}(\mathrm{N}_{A}(\varphi))$.
+        \item $\mathrm{char}_{R}(\varphi;X)=\mathrm{N}_{A[X]|R[X]}(\mathrm{char}_{A}(\varphi;X))$.
+    \end{enumerate}
+\end{proposition}
+\begin{corollary}{}{}
+    Let $R$ be a commutative ring, $A$ be an commutative $R$-algebra and $B$ be an $A$-algebra. Suppose $A$ as an $R$-module is free of finite rank and $B$ as an $A$-module is free of finite rank. Then for any $b\in B$, we have
+    \begin{enumerate}[(i)]
+        \item $\mathrm{Tr}_{B|R}(b)=\mathrm{Tr}_{A|R}(\mathrm{Tr}_{B|A}(b))$.
+        \item $\mathrm{N}_{B|R}(b)=\mathrm{N}_{A|R}(\mathrm{N}_{B|A}(b))$.
+        \item $\mathrm{char}_{B|R}(b;X)=\mathrm{N}_{A[X]|R[X]}(\mathrm{char}_{B|A}(b;X))$.
+    \end{enumerate}
+    
+\end{corollary}
+\begin{prf}
+    This is a direct consequence of \Cref{th:trace_norm_and_characteristic_polynomial_under_change_of_base_ring} by taking $M=A$ and $\varphi=l_b$.
+\end{prf}
 
 \section{Algebra over Field}
 \begin{lemma}{Nonzero Ring Homomorphism from Field is Injective}{nonzero_ring_homomorphism_from_field_is_injective}
@@ -302,7 +338,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
    
 \end{prf}
 
-\begin{definition}{Algebraic Element and Transcendental Element}{}
+\begin{definition}{Algebraic Element and Transcendental Element}{algebraic_element_and_transcendental_element}
     Let $K$ be a field and $A$ be a $K$-algebra. Consider the evaluation ring homomorphism
     \begin{align*}
         \mathrm{ev}_a:K[X] &\longrightarrow A\\
@@ -315,7 +351,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     \end{itemize}
 \end{definition}
 
-
+Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$ if and only if $a$ is integral over $K$.
 
 
 \section{Commutative Algebra}

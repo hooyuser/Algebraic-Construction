@@ -673,8 +673,52 @@ K \arrow[r, hook] \arrow[rrrrru, hook] & K(\alpha_1) \arrow[r, hook] \arrow[rrrr
         \item $f'=0$.
         \item $\mathrm{char}(K)=p>0$ and $f(X)=g(X^p)$ for some $g\in K[X]$.
     \end{enumerate}
-    
 \end{proposition}
+\begin{prf}
+    (i)$\implies$(ii). Suppose $f$ is inseparable. If $f$ splits into
+    \[
+    f(X)=c(X-\alpha_1)^{n_1}\cdots(X-\alpha_k)^{n_k}\in \overline{K}[X],
+    \]
+    over $\overline{K}$, then $K(\alpha_1,\ldots,\alpha_k)$ is a splitting field of $f$ over $K$. Hence $f$ has multiple roots in a splitting field of $K$.
+
+    (ii)$\implies$(iii). Suppose $f$ has multiple roots in a splitting field of $K$ and $\alpha$ is a multiple root of $f$. Then $\gcd (f,f')\ne 1$, which implies there exists a common factor of $f$ and $f'$. Note $f$ is irreducible. The only factors of $f$ are $f$ and $1$, up to a unit. Hence $f|f'$. Since $\deg f'<\deg f$, there must be $f'=0$.
+
+    (iii)$\implies$(iv). Suppose 
+    \[
+        f(X)=\sum_{n=0}^N a_n X^n\in K[X]
+    \]
+    is an irreducible polynomial and 
+    \[
+        f'(X)=\sum_{n=1}^N na_n X^{n-1}=0,
+    \]
+    Thus for any $n\in \mathbb{Z}_{\ge 1}$, we have
+    \begin{align*}
+        na_n=0&\implies\left(n\cdot 1_K\right)a_n=0\\
+        &\implies n\cdot 1_K=0\text{ or }a_n=0
+    \end{align*}
+    Note $a_N\ne 0$. There must be $N\cdot 1_K=0$, which implies $\mathrm{char}(K)=p>0$. Furthermore, since $n\cdot 1_K=0\iff p\mid n$, we have
+    \[
+    p \nmid n\iff n\cdot 1_K\ne 0 \implies a_n=0.
+    \]
+    So we can write
+    \[
+    f(X)=\sum_{k=0}^M a_{kp}X^{kp}=g(X^p),
+    \]
+    where 
+    \[
+    g(X)=\sum_{k=0}^M a_{kp}X^k\in K[X].
+    \]
+
+    (iv)$\implies$(i). Suppose $\mathrm{char}(K)=p>0$ and $f(X)=g(X^p)$ for some 
+    \[
+    g(X)=\sum_{k=0}^M b_kX^k\in K[X].
+    \]
+    Suppose $y_1,\cdots, y_M$ are the roots of $g$ in an algebraic closure $\overline{K}$ of $K$. For each $y_i$, we can find $x_i\in \overline{K}$ such that $x_i^p=y_i$. Thus we have
+    \[
+    f(X)=c\prod_{i=1}^M(X^p-y_i)=c\prod_{i=1}^M(X^p-x_i^p)=c\prod_{i=1}^M(X-x_i)^p\in \overline{K}[X],
+    \]
+    which implies $f$ has multiple roots in an algebraic closure of $K$.
+\end{prf}
 
 \begin{definition}{Separable Element}{}
     Let $L/K$ be a field extension and $\alpha\in L$ be an algebraic element over $K$. We say $\alpha$ is a \textbf{separable element} over $K$ if the minimal polynomial of $\alpha$ over $K$ is separable. 
@@ -717,6 +761,29 @@ K \arrow[r, hook] \arrow[rrrrru, hook] & K(\alpha_1) \arrow[r, hook] \arrow[rrrr
 
 \section{Trace and Norm of Field Extension}
 
+
+\begin{definition}{}{}
+    Let $L/K$ be a finite field extension and $\alpha\in L$ be an algebraic element over $K$. We can define a $K$-linear map
+    \begin{align*}
+        l_{\alpha}:L&\longrightarrow L\\
+        x&\longmapsto \alpha x
+    \end{align*}
+    called the \textbf{left multiplication by $\alpha$}.
+    \begin{enumerate}[(i)]
+        \item The \textbf{trace} of $\alpha\in L$ over $K$ is defined as
+        \[
+        \mathrm{Tr}_{L/K}(\alpha):=\mathrm{Tr}\left(l_{\alpha}\right).
+        \]
+        \item The \textbf{norm} of $\alpha\in L$ over $K$ is defined as
+        \[
+        \mathrm{N}_{L/K}(\alpha):=\mathrm{det}\left(l_{\alpha}\right).
+        \]
+
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    This definition is a special case of \Cref{th:trace_norm_and_characteristic_polynomial}.
+\end{remark}
 \section{Finite Field}
 
 \begin{definition}{Finite Field}{}
