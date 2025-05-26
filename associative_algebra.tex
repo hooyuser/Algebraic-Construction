@@ -169,6 +169,18 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     \]  
 \end{definition}
 
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+        \mathsf{PoFin}_I^{\mathrm{op}}\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{Mble}\&[-30pt]\&[-30pt] \\ [-15pt] 
+        J_2  \arrow[dd, ""{name=L, left}] 
+        \&[-25pt] \& [+10pt] 
+        \& [-30pt]\prod\limits_{i \in J_2}(\Omega_i,\mathcal{F}_i)\arrow[dd, "\mathrm{pr}_{J_1\subseteq J_2}"{name=R}] \&[-20pt]\ni\& [+20pt](\omega_i)_{i\in J_2} \arrow[dd, mapsto, ""{name=L, right}] 
+        \\ [-10pt] 
+        \&  \phantom{.}\arrow[r, "U\circ F", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+        J_1\& \& \& \prod\limits_{i \in J_1}(\Omega_i,\mathcal{F}_i)\&[-0pt]\ni\& (\omega_i)_{i\in J_1}
+    \end{tikzcd}
+\]  
+
 
 \begin{proposition}{Adjunction $\Largewedge^{\bullet}\dashv U_{\mathsf{R\text{-}\mathsf{Mod}}}$}{}
     Let $R$ be a commutative ring. Suppose $U:R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}\to R\text{-}\mathsf{Mod}$ is the forgetful functor. Then the exterior algebra functor $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}$ is left adjoint to $U$.
@@ -356,8 +368,163 @@ Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$
 
 \section{Commutative Algebra}
 \begin{definition}{Commutative Algebra}{}
-    Let $R$ be a commutative ring. A \textbf{commutative $R$-algebra} is an $R$-algebra where the multiplication is commutative. Or equivalently, a commutative $R$-algebra is a commutative ring $A$ together with a ring homomorphism $R\to A$. Hence there is a category isomorphism $R\text{-}\mathsf{CAlg}\cong \left(R/\mathsf{CRing}\right)$.
+    Let $R$ be a commutative ring. A \textbf{commutative $R$-algebra} is an $R$-algebra where the multiplication is commutative. Or equivalently, a commutative $R$-algebra is a commutative ring $A$ together with a ring homomorphism $R\to A$. 
 \end{definition}
+
+\begin{remark}
+    There is a category isomorphism $R\text{-}\mathsf{CAlg}\cong \left(R/\mathsf{CRing}\right)$.
+\end{remark}
+
+\subsection{Polynomial Algebra}
+\begin{definition}{Polynomial Ring}{}
+    Let $R$ be a commutative ring. The \textbf{polynomial ring} in $n$ variables over $R$ is the ring $R[x_1,\cdots,x_n]$ defined as the set of all formal sums $$\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha$$ where $a_\alpha\in R$ satisfies $a_\alpha=0$ for all but finitely many $\alpha\in\mathbb{N}^n$ and $x^\alpha:=x_1^{\alpha_1}\cdots x_n^{\alpha_n}$ for $\alpha=(\alpha_1,\cdots,\alpha_n)\in\mathbb{N}^n$. The addition and multiplication are defined as follows: $$\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha+\sum_{\alpha\in\mathbb{N}^n}b_\alpha x^\alpha=\sum_{\alpha\in\mathbb{N}^n}(a_\alpha+b_\alpha)x^\alpha$$ and $$\left(\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha\right)\left(\sum_{\beta\in\mathbb{N}^n}b_\beta x^\beta\right)=\sum_{\gamma\in\mathbb{N}^n}\left(\sum_{\alpha+\beta=\gamma}a_\alpha b_\beta\right)x^\gamma.$$
+\end{definition}
+
+
+\begin{proposition}{Properties of Polynomial Ring}{properties_of_polynomial_ring}
+    Let $R$ be a commutative ring.
+    \begin{enumerate}
+        \item If $R$ is a UFD, then $R[x_1,\cdots.x_n]$ is a UFD.
+        \item $R$ is a field $\iff$ $R[x]$ is a PID $\iff$ $R[x]$ is an Euclidean domain.
+        \item $R$ is an integral domain $\iff$ $R[x]$ is an integral domain.
+        \item $R$ is Noetherian $\implies$ $R[x]$ is Noetherian.
+        \item $R$ is reduced $\implies$ $R[x]$ is reduced.
+    \end{enumerate}
+\end{proposition}
+
+
+
+\begin{proposition}{Division Algorithm in Polynomial Ring}{division_algorithm_in_polynomial_ring}
+    Let $R$ be a commutative ring and $f,g\in R[x]$ be nonzero polynomials. If the leading coefficient of $g$ is in $R^\times$, then there exist unique polynomials $q,r\in R[x]$ such that $f=qg+r$ and $\deg r<\deg g$.
+\end{proposition}
+\begin{prf}
+    We can prove this by induction on $\deg f$. The base case is $\deg f=0$. If $g=a_0\in R^\times$, then we can take $q=f/a_0$ and $r=0$. If $\deg g\ge 1$, then we can take $q=0$ and $r=f$.
+
+    Suppose the statement holds for any $h\in R[x]$ with $\deg h < n$. Let $f\in R[x]$ be a polynomial of degree $n$. If $\deg f<\deg g$, then we can take $q=0$ and $r=f$. If $\deg f\ge \deg g$. Suppose
+    \[
+        f=\sum_{i=0}^n a_ix^i\quad\text{and}\quad g=\sum_{i=0}^m b_ix^i
+    \]
+    where $a_n,b_m\ne 0$. Let $h=f-\frac{a_n}{b_m} x^{n-m}g$. Then $\deg h<\deg f$. By induction hypothesis, there exist $\tilde{q},\tilde{r}\in R[x]$ such that $h=\tilde{q}g+\tilde{r}$ and $\deg \tilde{r}<\deg g$. Thus there exist 
+    \[
+        q=\tilde{q}+\frac{a_n}{b_m} x^{n-m}\quad\text{and}\quad r=\tilde{r}
+    \]
+    such that $f=qg+r$ and $\deg r<\deg g$. If there are $Q$ and $R$ such that $f=Qg+R$ and $\deg R<\deg g$, then we have
+    \[
+    h=f-\frac{a_n}{b_m} x^{n-m}g=\left(Q-\frac{a_n}{b_m} x^{n-m}\right)g+R=\tilde{q}g+\tilde{r}.
+    \]
+    By uniqueness, we have $Q-\frac{a_n}{b_m} x^{n-m}=\tilde{q}$ and $R=\tilde{r}$, which implies $Q=q$ and $R=r$.
+\end{prf}
+
+\begin{corollary}{Polynomial Remainder Theorem}{polynomial_remainder_theorem}
+    Let $R$ be a commutative ring and $f(x)\in R[x]$ be a polynomial. If $a\in R$, then there exist a unique polynomial $q(x)\in R[x]$ such that $f(x)=q(x)(x-a)+f(a)$.
+\end{corollary}
+\begin{prf}
+    This is a direct application of \Cref{th:division_algorithm_in_polynomial_ring}.
+\end{prf}
+
+
+\begin{corollary}{}{}
+    Let $R$ be a commutative ring.
+    \begin{enumerate}[(i)]
+        \item Let $a\in R$ and $f_1(x),\cdots, f_r(x)\in R[x]$ be polynomials. Then we have
+        \[
+        (f_1(x),\cdots,f_r(x),x-a)=(f_1(a),\cdots,f_r(a),x-a).
+        \]
+        \item Let $a\in R$ and $f_1(x),\cdots, f_r(x)\in R[x]$ be polynomials. Then we have 
+    \[
+        \frac{R[x]}{(f_1(x),\cdots,f_r(x),x-a)}\cong \frac{R}{\left(f_1(a),\cdots,f_r(a) \right)}.
+    \]
+    \item Suppose $a_1,\cdots,a_n\in R$. Then we can define a \textbf{evaluation homomorphism} 
+    \begin{align*}
+        \mathrm{ev}_{a_1,\cdots,a_n}:R[x_1,\cdots,x_n]&\longrightarrow R\\
+        \sum_{\alpha\in\mathbb{N}^n}r_\alpha x^\alpha&\longmapsto \sum_{\alpha\in\mathbb{N}^n}r_\alpha a_1^{\alpha_1}\cdots a_n^{\alpha_n}.
+    \end{align*}
+    The kernel of $\mathrm{ev}_{a_1,\cdots,a_n}$ is 
+    \[
+    \ker \mathrm{ev}_{a_1,\cdots,a_n}=(x_1-a_1,\cdots,x_n-a_n)
+    \]
+    and we have
+    \[
+    \frac{R[x_1,\cdots,x_n]}{(x_1-a_1,\cdots,x_n-a_n)}\cong R.
+    \]
+    \end{enumerate}
+    
+    
+\end{corollary}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item 
+        By the \hyperref[th:polynomial_remainder_theorem]{polynomial remainder theorem}, we have
+        \[
+        f_i(x)=q_i(x)(x-a)+f_i(a),\quad i=1,2,\cdots,r,
+        \]
+        which implies
+        \[
+        (f_1(x),\cdots,f_r(x),x-a)=(f_1(a),\cdots,f_r(a),x-a).
+        \]
+        \item First we show the kernel of 
+        \begin{align*}
+            \mathrm{ev}_a:R[x]&\longrightarrow R\\
+            f(x)&\longmapsto f(a)
+        \end{align*}
+        is $\ker \mathrm{ev}_a=(x-a)$.
+        By the \hyperref[th:polynomial_remainder_theorem]{polynomial remainder theorem}, we have
+        \[
+        f(x)=q(x)(x-a)+f(a)
+        \]
+        Note
+        \[
+        f(x)\in \ker \mathrm{ev}_{a} \iff f(a)=0\iff f(x)\in (x-a).
+        \]
+        We have $\ker \mathrm{ev}_a=(x-a)$ and $R[x]/(x-a)\cong R$. 
+
+        From \Cref{ex:coset_of_generated_ideals_quotient_generates_ideals}, we have the following equality of ideals in $R[x]/(x-a)$
+        \[
+            (f_1(x),\cdots,f_r(x),x-a)/(x-a)=\left(f_1(x)+(x-a),\cdots,f_r(x)+(x-a)\right).
+        \]
+        By the third isomorphism theorem, we have
+        \[
+        \frac{R[x]}{(f_1(x),\cdots,f_r(x),x-a)}\cong \frac{R[x]/(x-a)}{\left(f_1(x)+(x-a),\cdots,f_r(x)+(x-a)\right)}.
+        \]
+        Apply the isomorphism 
+        \begin{align*}
+            \overline{\mathrm{ev}_a}:R[x]/(x-a)&\longrightarrow R\\
+            f(x)+(x-a)&\longmapsto f(a)
+        \end{align*}
+        we get
+        \[
+            \frac{R[x]/(x-a)}{\left(f_1(x)+(x-a),\cdots,f_r(x)+(x-a)\right)} \cong \frac{R}{\left(f_1(a),\cdots,f_r(a) \right)}.
+        \]
+        \item We can prove 
+        \[
+        \ker \mathrm{ev}_{a_1,\cdots,a_n}=(x_1-a_1,\cdots,x_n-a_n)
+        \]
+        by induction on $n$. The base case is $n=1$, which has been proved in (ii). Suppose the statement holds for $n-1$. Let $f(x_1,\cdots,x_n)\in R[x_1,\cdots,x_n]$.
+        \[
+        \ker \mathrm{ev}_{a_1,\cdots,a_n}=\ker \left(\mathrm{ev}_{a_n}\circ \mathrm{ev}_{a_1,\cdots,a_{n-1}}\right)= \mathrm{ev}_{a_n}^{-1}(\left(x_1-a_1,\cdots,x_n-a_n\right)).
+        \]
+        
+        By the \hyperref[th:polynomial_remainder_theorem]{polynomial remainder theorem}, we have
+        and we have
+    \[
+    \frac{R[x_1,\cdots,x_n]}{(x_1-a_1,\cdots,x_n-a_n)}\cong R.
+    \]
+    \end{enumerate}
+\end{prf}
+
+\begin{example}{$R$-algebra Endomorphisms of $R[x]$}{}
+    Let $R$ be a commutative ring. By the universal property of free commutative $R$-algebra, we have the following isomorphism
+    \[
+    \mathrm{End}_{R\text{-}\mathsf{CAlg}}(R[x])\cong \mathrm{Hom}_{\mathsf{Set}}(x,R[x])\cong R[x].
+    \]
+    For $f\in R[x]$, or for any function $\mathbf{1}_f:\{x\}\to R[x]$, there exists a unique $R$-algebra homomorphism 
+    \begin{align*}
+        \widetilde{f}:R[x]&\longrightarrow R[x]\\
+        \sum_{k=0}^n a_k x^k &\longmapsto \sum_{k=0}^n a_k f(x)^k
+    \end{align*}
+    
+    If $\deg f\le 0$
+\end{example}
 
 \subsection{Construction}
 

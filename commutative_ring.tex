@@ -96,7 +96,7 @@ A commutative ring $R$ is a commutative $R$-algebra and accordingly a commutativ
 \end{proposition}
 
 \begin{proposition}{}{}
-    If $R$ is a ring and $I$ an ideal of $R$ such that $I \neq R$, then $R$ contains a maximal ideal $\mathfrak{m}$ such that $I \subset \mathfrak{m}$.
+    If $R$ is a ring and $I$ an ideal of $R$ such that $I \neq R$, then $R$ contains a maximal ideal $\mathfrak{m}$ such that $I \subseteq \mathfrak{m}$.
 \end{proposition}
 
 \begin{prf}
@@ -107,12 +107,31 @@ Let $I=\bigcup_{J \in \mathcal{C}} J$. Now suppose $x_1, x_2$ are in $I$. Then t
 It now just remains to check that $I \neq A$. But $1 \notin J$ for each $J \in \mathcal{C}$, so $1 \notin I$ and $I \neq R$ as required.
 \end{prf}
 
-\begin{corollary}{}{}
-    Every non-unit lies in a maximal ideal.
-\end{corollary}
+\begin{proposition}{Non-Unit Elements Lies in Maximal Ideals}{non_unit_elements_lies_in_maximal_ideals}
+    Let $R$ be a commutative ring. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $x\notin R^\times$.
+        \item $(x)\ne R$.
+        \item $x$ lies in a maximal ideal of $R$.
+    \end{enumerate}
+\end{proposition}
 
 \begin{prf}
-    Let $R$ be a commutative ring. If $x\notin R^{\times}$, then $(x)\ne R$. By the proposition above, there exists a maximal ideal $\mathfrak{m}$ such that $(x)\subseteq \mathfrak{m}$.
+    (i)$\implies$(ii). If $(x)\ne R$, then there exists $r\in R$ such that $rx=1$. Hence $x\in R^\times$.
+    
+    (ii)$\implies$(iii). If $(x)\ne R$, by the proposition above, there exists a maximal ideal $\mathfrak{m}$ such that $(x)\subseteq \mathfrak{m}$.
+
+    (iii)$\implies$(i). If $x\in R^{\times}$, then $(x)=R$ and there exists no maximal ideal containing $(x)$.
+\end{prf}
+
+\begin{corollary}{}{}
+    Let $R$ be a commutative ring. Then 
+    \[
+    R-R^\times=\bigcup_{\substack{\mathfrak{m}\in \mathrm{MaxSpec} R}}\mathfrak{m}.
+    \]
+\end{corollary}
+\begin{prf}
+    This is a direct consequence of \Cref{th:non_unit_elements_lies_in_maximal_ideals}.
 \end{prf}
 
 \begin{definition}{Ideal generated from subset}{}
@@ -493,146 +512,6 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 
 
 
-
-
-
-\section{Polynomial Ring}
-\begin{definition}{Polynomial Ring}{}
-    Let $R$ be a commutative ring. The \textbf{polynomial ring} in $n$ variables over $R$ is the ring $R[x_1,\cdots,x_n]$ defined as the set of all formal sums $$\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha$$ where $a_\alpha\in R$ satisfies $a_\alpha=0$ for all but finitely many $\alpha\in\mathbb{N}^n$ and $x^\alpha=x_1^{\alpha_1}\cdots x_n^{\alpha_n}$ for $\alpha=(\alpha_1,\cdots,\alpha_n)\in\mathbb{N}^n$. The addition and multiplication are defined as follows: $$\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha+\sum_{\alpha\in\mathbb{N}^n}b_\alpha x^\alpha=\sum_{\alpha\in\mathbb{N}^n}(a_\alpha+b_\alpha)x^\alpha$$ and $$\left(\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha\right)\left(\sum_{\beta\in\mathbb{N}^n}b_\beta x^\beta\right)=\sum_{\gamma\in\mathbb{N}^n}\left(\sum_{\alpha+\beta=\gamma}a_\alpha b_\beta\right)x^\gamma.$$
-\end{definition}
-
-
-\begin{proposition}{Properties of Polynomial Ring}{properties_of_polynomial_ring}
-    Let $R$ be a commutative ring.
-    \begin{enumerate}
-        \item If $R$ is a UFD, then $R[x_1,\cdots.x_n]$ is a UFD.
-        \item $R$ is a field $\iff$ $R[x]$ is a PID $\iff$ $R[x]$ is an Euclidean domain.
-        \item $R$ is an integral domain $\iff$ $R[x]$ is an integral domain.
-        \item $R$ is Noetherian $\implies$ $R[x]$ is Noetherian.
-        \item $R$ is reduced $\implies$ $R[x]$ is reduced.
-    \end{enumerate}
-\end{proposition}
-
-
-
-\begin{proposition}{Division Algorithm in Polynomial Ring}{division_algorithm_in_polynomial_ring}
-    Let $R$ be a commutative ring and $f,g\in R[x]$ be nonzero polynomials. If the leading coefficient of $g$ is in $R^\times$, then there exist unique polynomials $q,r\in R[x]$ such that $f=qg+r$ and $\deg r<\deg g$.
-\end{proposition}
-\begin{prf}
-    We can prove this by induction on $\deg f$. The base case is $\deg f=0$. If $g=a_0\in R^\times$, then we can take $q=f/a_0$ and $r=0$. If $\deg g\ge 1$, then we can take $q=0$ and $r=f$.
-
-    Suppose the statement holds for any $h\in R[x]$ with $\deg h < n$. Let $f\in R[x]$ be a polynomial of degree $n$. If $\deg f<\deg g$, then we can take $q=0$ and $r=f$. If $\deg f\ge \deg g$. Suppose
-    \[
-        f=\sum_{i=0}^n a_ix^i\quad\text{and}\quad g=\sum_{i=0}^m b_ix^i
-    \]
-    where $a_n,b_m\ne 0$. Let $h=f-\frac{a_n}{b_m} x^{n-m}g$. Then $\deg h<\deg f$. By induction hypothesis, there exist $\tilde{q},\tilde{r}\in R[x]$ such that $h=\tilde{q}g+\tilde{r}$ and $\deg \tilde{r}<\deg g$. Thus there exist 
-    \[
-        q=\tilde{q}+\frac{a_n}{b_m} x^{n-m}\quad\text{and}\quad r=\tilde{r}
-    \]
-    such that $f=qg+r$ and $\deg r<\deg g$. If there are $Q$ and $R$ such that $f=Qg+R$ and $\deg R<\deg g$, then we have
-    \[
-    h=f-\frac{a_n}{b_m} x^{n-m}g=\left(Q-\frac{a_n}{b_m} x^{n-m}\right)g+R=\tilde{q}g+\tilde{r}.
-    \]
-    By uniqueness, we have $Q-\frac{a_n}{b_m} x^{n-m}=\tilde{q}$ and $R=\tilde{r}$, which implies $Q=q$ and $R=r$.
-\end{prf}
-
-\begin{corollary}{Polynomial Remainder Theorem}{polynomial_remainder_theorem}
-    Let $R$ be a commutative ring and $f(x)\in R[x]$ be a polynomial. If $a\in R$, then there exist a unique polynomial $q(x)\in R[x]$ such that $f(x)=q(x)(x-a)+f(a)$.
-\end{corollary}
-\begin{prf}
-    This is a direct application of \Cref{th:division_algorithm_in_polynomial_ring}.
-\end{prf}
-
-
-\begin{corollary}{}{}
-    Let $R$ be a commutative ring.
-    \begin{enumerate}[(i)]
-        \item Let $a\in R$ and $f_1(x),\cdots, f_r(x)\in R[x]$ be polynomials. Then we have
-        \[
-        (f_1(x),\cdots,f_r(x),x-a)=(f_1(a),\cdots,f_r(a),x-a).
-        \]
-        \item Let $a\in R$ and $f_1(x),\cdots, f_r(x)\in R[x]$ be polynomials. Then we have 
-    \[
-        \frac{R[x]}{(f_1(x),\cdots,f_r(x),x-a)}\cong \frac{R}{\left(f_1(a),\cdots,f_r(a) \right)}.
-    \]
-    \item Suppose $a_1,\cdots,a_n\in R$. Then we can define a \textbf{evaluation homomorphism} 
-    \begin{align*}
-        \mathrm{ev}_{a_1,\cdots,a_n}:R[x_1,\cdots,x_n]&\longrightarrow R\\
-        \sum_{\alpha\in\mathbb{N}^n}r_\alpha x^\alpha&\longmapsto \sum_{\alpha\in\mathbb{N}^n}r_\alpha a_1^{\alpha_1}\cdots a_n^{\alpha_n}.
-    \end{align*}
-    The kernel of $\mathrm{ev}_{a_1,\cdots,a_n}$ is 
-    \[
-    \ker \mathrm{ev}_{a_1,\cdots,a_n}=(x_1-a_1,\cdots,x_n-a_n)
-    \]
-    and we have
-    \[
-    \frac{R[x_1,\cdots,x_n]}{(x_1-a_1,\cdots,x_n-a_n)}\cong R.
-    \]
-    \end{enumerate}
-    
-    
-\end{corollary}
-\begin{prf}
-    \begin{enumerate}[(i)]
-        \item 
-        By the \hyperref[th:polynomial_remainder_theorem]{polynomial remainder theorem}, we have
-        \[
-        f_i(x)=q_i(x)(x-a)+f_i(a),\quad i=1,2,\cdots,r,
-        \]
-        which implies
-        \[
-        (f_1(x),\cdots,f_r(x),x-a)=(f_1(a),\cdots,f_r(a),x-a).
-        \]
-        \item First we show the kernel of 
-        \begin{align*}
-            \mathrm{ev}_a:R[x]&\longrightarrow R\\
-            f(x)&\longmapsto f(a)
-        \end{align*}
-        is $\ker \mathrm{ev}_a=(x-a)$.
-        By the \hyperref[th:polynomial_remainder_theorem]{polynomial remainder theorem}, we have
-        \[
-        f(x)=q(x)(x-a)+f(a)
-        \]
-        Note
-        \[
-        f(x)\in \ker \mathrm{ev}_{a} \iff f(a)=0\iff f(x)\in (x-a).
-        \]
-        We have $\ker \mathrm{ev}_a=(x-a)$ and $R[x]/(x-a)\cong R$. 
-
-        From \Cref{ex:coset_of_generated_ideals_quotient_generates_ideals}, we have the following equality of ideals in $R[x]/(x-a)$
-        \[
-            (f_1(x),\cdots,f_r(x),x-a)/(x-a)=\left(f_1(x)+(x-a),\cdots,f_r(x)+(x-a)\right).
-        \]
-        By the third isomorphism theorem, we have
-        \[
-        \frac{R[x]}{(f_1(x),\cdots,f_r(x),x-a)}\cong \frac{R[x]/(x-a)}{\left(f_1(x)+(x-a),\cdots,f_r(x)+(x-a)\right)}.
-        \]
-        Apply the isomorphism 
-        \begin{align*}
-            \overline{\mathrm{ev}_a}:R[x]/(x-a)&\longrightarrow R\\
-            f(x)+(x-a)&\longmapsto f(a)
-        \end{align*}
-        we get
-        \[
-            \frac{R[x]/(x-a)}{\left(f_1(x)+(x-a),\cdots,f_r(x)+(x-a)\right)} \cong \frac{R}{\left(f_1(a),\cdots,f_r(a) \right)}.
-        \]
-        \item We can prove 
-        \[
-        \ker \mathrm{ev}_{a_1,\cdots,a_n}=(x_1-a_1,\cdots,x_n-a_n)
-        \]
-        by induction on $n$. The base case is $n=1$, which has been proved in (ii). Suppose the statement holds for $n-1$. Let $f(x_1,\cdots,x_n)\in R[x_1,\cdots,x_n]$.
-        \[
-        \ker \mathrm{ev}_{a_1,\cdots,a_n}=\ker \left(\mathrm{ev}_{a_n}\circ \mathrm{ev}_{a_1,\cdots,a_{n-1}}\right)= \mathrm{ev}_{a_n}^{-1}(\left(x_1-a_1,\cdots,x_n-a_n\right)).
-        \]
-        
-        By the \hyperref[th:polynomial_remainder_theorem]{polynomial remainder theorem}, we have
-        and we have
-    \[
-    \frac{R[x_1,\cdots,x_n]}{(x_1-a_1,\cdots,x_n-a_n)}\cong R.
-    \]
-    \end{enumerate}
-\end{prf}
-
 \section{Construction}
 
 \subsection{Product}
@@ -702,6 +581,36 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 
 
 \subsection{Free Object}
+
+\begin{proposition}{}{}
+    Define the following free functor
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{Set}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{CRing}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            \mathcal{X}  \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] \mathbb{Z}\left[\mathcal{X}\right] \arrow[dd, "\mathrm{Free}(f)"{name=R}] \&[-30pt]\ni
+            \&[-30pt]\sum\limits_\alpha n_\alpha X_{1}^{\alpha_1}\cdots X_{n}^{\alpha_n}   \arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\mathrm{Free}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            \mathcal{Y}  \& \& \&  \mathbb{Z}\left[\mathcal{Y}\right]\&[-30pt]\ni
+            \&[-30pt]\sum\limits_\alpha n_\alpha f\left(X_{1}\right)^{\alpha_1}\cdots f\left(X_{n}\right)^{\alpha_n}  
+        \end{tikzcd}
+    \]  
+    We have a pair of adjoint functors
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{CRing} \arrow[r, "{\mathrm{Free}}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+12pt] 
+            \mathsf{Set} \arrow[l, "U"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+            \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+        \end{tikzcd}
+    \]
+    and natural isomorphism
+    \[
+    \mathrm{Hom}_{\mathsf{CRing}}(\mathrm{Free}\left(\mathcal{X} \right), R)\cong \mathrm{Hom}_{\mathsf{Set}}(\mathcal{X} , U(R)).
+    \]
+\end{proposition}
+
+
 \begin{definition}{Free Commutative Ring}{}
     Since $\mathsf{CRing}\cong \mathbb{Z}\text{-}\mathsf{CAlg}$, the \textbf{free commutative ring} on a set $X$ is isomorphic to the polynomial ring $\mathbb{Z}[X]$, which coincides with the free commutative $\mathbb{Z}$-algebra on $X$.
 \end{definition}
