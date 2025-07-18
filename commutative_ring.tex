@@ -347,7 +347,7 @@ In summary, we have the following chain of inclusions:
 \begin{prf}
     \begin{align*}
         a\text{ is prime }\iff &a\ne 0\text{ and }a\notin R^\times\text{ and }a\mid bc\implies a\mid b\text{ or }a\mid c\\
-        \iff &(a)\ne 0\text{ and }(a)\ne R^\times\text{ and }bc\in (a)\implies b\in (a)\text{ or }c\in (a)\\
+        \iff &(a)\ne 0\text{ and }(a)\ne R\text{ and }bc\in (a)\implies b\in (a)\text{ or }c\in (a)\\
         \iff &(a)\text{ is a nonzero prime ideal}.
     \end{align*}
 \end{prf}
@@ -1816,11 +1816,11 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
 
 \subsection{Extensions of Dedekind Domains}
 \begin{theorem}{Krull-Akizuki Theorem}{krull_akizuki}
-    Let $\mathcalo$ be a one-dimensional noetherian
+    Let $\mathcalo$ be a one-dimensional Noetherian
     integral domain and $K=\mathrm{Frac}(\mathcalo)$ be its field of fractions. Let $L/K$ be a finite field extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Then $\mathcal{O}$ is a Dedekind domain.
 \end{theorem}
 \begin{prf}
-    We can prove that $\mathcal{O}$ is integrally closed and that every nonzero prime ideal is maximal. It remains to show that $\mathcal{O}$ is noetherian. Let $\omega_1, \ldots, \omega_n$ be a basis of $L/K$ which is contained in $\mathcal{O}$. Then the ring $\mathcal{O}_0=\mathcal{O}\left[\omega_1, \ldots, \omega_n\right]$ is a finitely generated $\mathcal{O}$-module and in particular is noetherian since $\mathcal{O}$ is noetherian. We argue as before that $\mathcal{O}_0$ is one-dimensional and are thus reduced to the case $L=K$. So let $\mathfrak{A}$ be an ideal of $\mathcal{O}$ and $a \in \mathfrak{A} \cap \mathcal{O}, a \neq 0$; then by the above lemma $\mathcal{O} / a \mathcal{O}$ is a finitely generated $\mathcal{O}$-module. Since $\mathcal{O}$ is noetherian, so is the $\mathcal{O}$-submodule $\mathfrak{A} / a \mathcal{O}$, and also the $\mathcal{O}$-module $\mathfrak{A}$.
+    We can prove that $\mathcal{O}$ is integrally closed and that every nonzero prime ideal is maximal. It remains to show that $\mathcal{O}$ is Noetherian. Let $\omega_1, \ldots, \omega_n$ be a basis of $L/K$ which is contained in $\mathcal{O}$. Then the ring $\mathcal{O}_0=\mathcal{O}\left[\omega_1, \ldots, \omega_n\right]$ is a finitely generated $\mathcal{O}$-module and in particular is Noetherian since $\mathcal{O}$ is Noetherian. We argue as before that $\mathcal{O}_0$ is one-dimensional and are thus reduced to the case $L=K$. So let $\mathfrak{A}$ be an ideal of $\mathcal{O}$ and $a \in \mathfrak{A} \cap \mathcal{O}, a \neq 0$; then by the above lemma $\mathcal{O} / a \mathcal{O}$ is a finitely generated $\mathcal{O}$-module. Since $\mathcal{O}$ is Noetherian, so is the $\mathcal{O}$-submodule $\mathfrak{A} / a \mathcal{O}$, and also the $\mathcal{O}$-module $\mathfrak{A}$.
 \end{prf}
 
 
@@ -1972,10 +1972,16 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
     which means there exists $x\in E$ such that $x\notin \mathfrak{p}_m$ for any $m=1,\cdots,n$.
 \end{lemma}
 
+Since we have category isomorphism
+\[
+\mathcalo \text{-}\mathsf{CAlg}\cong \mathcalo \text{-}\mathsf{AffSch}^{\mathrm{op}},
+\]
+we can also view the action of $\mathrm{Gal}(L/K)$ on $\mathcal{O}$ as an action on $\operatorname{Spec}\left(\mathcal{O}\right)$.
+
 \begin{proposition}{Galois Group Acts on $\operatorname{Spec}\left(\mathcal{O}\right)$}{galois_group_acts_on_spectrum_of_integral_closure}
     Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Then the Galois group $\mathrm{Gal}(L/K)$ acts on $\operatorname{Spec}\left(\mathcal{O}\right)$ through the following group homomorphism
     \begin{align*}
-        \mathrm{Gal}(L/K)&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}\left(\operatorname{Spec}\left(\mathcal{O}\right)\right)\\
+        \mathrm{Gal}(L/K)&\longrightarrow \mathrm{Aut}_{\mathcalo \text{-}\mathsf{AffSch}}\left(\operatorname{Spec}\left(\mathcal{O}\right)\right)\\
         \sigma&\longmapsto \left(\mathfrak{P}\longmapsto\sigma\left(\mathfrak{P}\right)\right)
     \end{align*}
     The orbits of this action are the prime ideals of $\mathcal{O}$ lying over the same prime ideal $\mathfrak{p}$ of $\mathcalo$. This means the action is transitive on all prime ideals of $\mathcal{O}$ lying over the same prime ideal $\mathfrak{p}\in \spec(\mathcalo)$.
@@ -2180,7 +2186,7 @@ is surjective.
     \]
     \begin{itemize}
         \item The set of \textbf{Frobenius elements} for $\mathfrak{P}$ is defined as the preimage of the Frobenius automorphism of $\mathrm{Fr}_q:x\mapsto x^q$ in $\mathrm{Gal}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)$, denoted by $\mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}:=\xi^{-1}\left(\mathrm{Fr}_q\right)$.
-        \item The \textbf{Frobenius conjugacy class} for a Frobenius element $\sigma\in \mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ is defined as the conjugacy class of $\sigma$ in $\mathrm{Gal}(\kappa(\mathfrak{P})/\kappa(\mathfrak{p}))$. $\sigma \in \mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ if and only if $\tau \sigma \tau^{-1}\in  \mathrm{Frob}_{\mathfrak{p},\tau \mathfrak{P}}$ for some $\tau\in \mathrm{Gal}(\kappa(\mathfrak{P})/\kappa(\mathfrak{p}))$.
+        \item The \textbf{Frobenius conjugacy class} for a Frobenius element $\sigma\in \mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ is defined as the conjugacy class of $\sigma$ in $\mathrm{Gal}(L/K)$. $\sigma \in \mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ if and only if $\tau \sigma \tau^{-1}\in  \mathrm{Frob}_{\mathfrak{p},\tau \mathfrak{P}}$ for some $\tau\in \mathrm{Gal}(L/K)$.
         \item If $I_{\mathfrak{P}}$ is trivial, then $\mathfrak{p}$ is unramified in $L$ and the Frobenius element $\mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ is unique. We denote the Frobenius conjugacy class of $\mathrm{Frob}_{\mathfrak{p},\mathfrak{P}}$ by $\mathrm{Frob}_{\mathfrak{p}, L}$ or $\mathrm{Frob}_{\mathfrak{p}}$ for short.
         \item If $I_{\mathfrak{P}}$ is trivial and $L/K$ is Abelian, then the Frobenius conjugacy class $\mathrm{Frob}_{\mathfrak{p}, L}$ has only one element, which is called the \textbf{Frobenius element} of $\mathfrak{p}$ in $L$.
     \end{itemize}

@@ -2474,31 +2474,35 @@ G(i) \arrow[ru]\arrow[rr]                         \&                            
     \]
 \end{proof}
 
-\begin{definition}{Filtered Colimit}{}
-    A \textbf{filtered colimit} is a colimit of a functor $F: \mathsf{J} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a filtered category.
+\begin{definition}{Cofiltered limit}{}
+    A \textbf{cofiltered limit} is a limit of a functor $F: \mathsf{J}^{\mathrm{op}} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a \hyperref[th:filtered_category]{filtered category}.
 \end{definition}
 
+\begin{definition}{Filtered Colimit}{}
+    A \textbf{filtered colimit} is a colimit of a functor $F: \mathsf{J} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a \hyperref[th:filtered_category]{filtered category}.
+\end{definition}
 
 \begin{definition}{Thin Category}{thin_category}
     A \textbf{thin category} or \textbf{$(0,1)$-category} is a category in which any two objects have at most one morphism between them. 
 
-    A preorder set $(X,\leq)$ can be regarded as a thin category $\mathsf{X}$ with objects being elements of $X$ and morphisms being
+    A preordered set $(X,\leq)$ can be regarded as a thin category $\mathsf{X}$ with objects being elements of $X$ and morphisms being
     \begin{align*}
         \mathrm{Hom}(x,y)=\begin{cases}
             \{*\} & \text{if }x\leq y\\
             \varnothing & \text{otherwise}
         \end{cases}
     \end{align*}
-    Therefore, we obtain a category isomorphism between the category of preorder sets and the category of thin categories
+    Therefore, we obtain a category isomorphism between the category of preordered sets and the category of thin categories
     \begin{align*}
         F:\mathsf{PreOrdSet}&\longrightarrow (0,1)\text{-}\mathsf{Cat}\\
         (X,\leq)&\longmapsto \mathsf{X}
     \end{align*}
 \end{definition}
 
-
-\begin{example}{Filtered Set}{}
-    A filtered set can be regarded as a filtered (0,1)-category with objects being elements of the set and morphisms being
+\begin{example}{Directed Set}{directed_set}
+    A \textbf{directed set} (or \textbf{filtered set}) is a preordered set in which every finite subset has an upper bound. 
+    
+    A directed set $(X,\le)$ can be regarded as a filtered (0,1)-category with objects being elements of the set $X$ and morphisms being
     \begin{align*}
         \mathrm{Hom}(x,y)=\begin{cases}
             \{*\} & \text{if }x\leq y\\
@@ -2506,6 +2510,19 @@ G(i) \arrow[ru]\arrow[rr]                         \&                            
         \end{cases}
     \end{align*}
 \end{example}
+
+\begin{definition}{Inverse Limit}{inverse_limit}
+    A \textbf{inverse system} is a functor $F: \mathsf{J}^{\mathrm{op}} \rightarrow \mathsf{C}$ where $\mathsf{J}$ is a filtered thin category. 
+
+    According to \Cref{ex:directed_set}, $\mathsf{J}$ can be regarded as a directed set $(J,\le)$. Thus inverse system $F$ can be equivalently defined as a family of objects $\left(F_j\right)_{j\in J}$ in $\mathsf{C}$ together with a family of morphisms $\left(f_{j,j'}:F_{j}\leftarrow F_{j'}\right)_{j\leq j'}$ such that
+    \begin{enumerate}[(i)]
+        \item for any $j\in J$, $f_{j,j}=\mathrm{id}_{F_j}$,
+        \item for any $j\leq j'\leq j''$, $f_{j,j''}=f_{j,j'}\circ f_{j',j''}$.     
+    \end{enumerate}
+    Here, $j\leq j'$ is a short notation for $(j,j')\in \{(j,j')\in J\times J\mid j\le j'\}$.
+    
+    A \textbf{inverse limit} is a limit of a inverse system.
+\end{definition}
 
 
 \begin{example}{Pushforward Cone by Functor}{}
