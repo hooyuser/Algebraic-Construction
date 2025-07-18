@@ -75,6 +75,213 @@ If $V$ is a vector space over a field $K$, then the dual space of $V$ is defined
             \&  \phantom{.}\arrow[r, "{\mathrm{Hom}_{\mathsf{Vect}_K}(-, K)}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
             W \& \& \&  W^\vee\&[-0pt]\ni\& \phi\circ f
         \end{tikzcd}
-        \]  
+        \] 
+\end{definition}
+\section{Inner Product Space}
+\subsection{Sesquilinear Forms}
+
+\begin{definition}{Antilinear Map}{}
+    Let $V$ and $W$ be vector spaces over $\mathbb{C}$. A map $f: V\to W$ is said to be \textbf{antilinear} or \textbf{conjugate linear} if for all $v_1, v_2\in V$ and $\lambda\in \mathbb{C}$, we have
+    \[
+        f(v_1+v_2) = f(v_1) + f(v_2),\quad f(\lambda v) = \overline{\lambda}f(v).
+    \] 
+\end{definition}
+
+\begin{definition}{Sesquilinear Map}{}
+    Let $V$ and $W$ be vector spaces over $\mathbb{C}$. A map $B: V\times V\to W$ is said to be \textbf{sesquilinear} if 
+    \begin{enumerate}[(i)]
+        \item For each $v\in V$, $B(\cdot, v)$ is linear.
+        \item For each $u\in V$, $B(u, \cdot)$ is antilinear.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}{Sesquilinear Form}{}
+    A map $B: V\times V\to \mathbb{C}$ is called a \textbf{sesquilinear form} on $V$ if it is a sesquilinear map.
+\end{definition}
+
+Sesquilinear maps are completely determined by their values on the diagonal, as follows.
+\begin{proposition}{Polarization Identity}{polarization_identity}
+    Suppose $V$ and $W$ be vector spaces over $\mathbb{C}$ and $B: V\times V\to W$ is a sesquilinear form. Let $Q(v) := B(v, v)$. The \textbf{polarization identity} is given by
+    \[
+        \begin{aligned}
+            B(v_1, v_2) = \frac{1}{4}\left(Q(v_1+v_2) - Q(v_1-v_2) + iQ(iv_1+v_2) - iQ(iv_1-v_2)\right).
+        \end{aligned}
+    \]
+\end{proposition}
+
+\begin{definition}{Hermitian Form}{}
+    A sesquilinear form $B: V\times V\to \mathbb{C}$ is called a \textbf{Hermitian form} if it satisfies the condition
+    \[
+        B(v_1, v_2) = \overline{B(v_2, v_1)}.
+    \]
+\end{definition}
+
+\begin{proposition}{Equivalent Characterizations of Hermitian Forms}{}
+    Let $B: V\times V\to \mathbb{C}$ be a sesquilinear form on a complex vector space $V$. The following conditions are equivalent:
+    \begin{enumerate}[(i)]
+        \item $B$ is a Hermitian form.
+        \item For all $v\in V$, we have $B(v, v) \in \mathbb{R}$.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    Let $Q(v) := B(v, v)$.
+    \begin{itemize}
+        \item If $B$ is a Hermitian form, then for all $v\in V$, we have
+        \[
+            B(v, v) = \overline{B(v, v)}.
+        \]
+        Since $B(v, v)$ is a complex number equal to its own conjugate, it must be real.
+
+        \item Conversely, if $Q(v)=B(v, v) \in \mathbb{R}$ for all $v\in V$, then for any $v_1, v_2\in V$, we have
+        \[
+            \begin{aligned}
+                \overline{B(v_2, v_1)}&=  \frac{1}{4} \left(Q(v_2+v_1) - Q(v_2-v_1) + \overline{i}Q(iv_2+v_1) - \overline{i}Q(iv_2-v_1)\right)\\
+                &=  \frac{1}{4} \left(Q(v_2+v_1) - Q(-(v_1-v_2)) - iQ(-i(iv_1-v_2)) + iQ(i(iv_1+v_2))\right)\\
+                &= \frac{1}{4} \left(Q(v_1+v_2) - Q(v_1-v_2) + iQ(iv_1+v_2) - iQ(iv_1-v_2)\right)\\
+                &= B(v_1, v_2),
+            \end{aligned}
+        \]
+        which shows that $B$ is a Hermitian form.
+    \end{itemize}
+\end{prf}
+
+\begin{definition}{Positivity}{}
+    A sesquilinear form $B: V\times V\to \mathbb{C}$ is said to be \textbf{positive} if for all $v\in V$, we have
+    \[
+        B(v, v) \ge 0.
+    \]
+\end{definition}
+
+\begin{proposition}{Properties of Positive Sesquilinear Forms}{}
+    Let $B: V\times V\to \mathbb{C}$ be a positive sesquilinear form and let $Q(v) := B(v, v)$. The following properties hold:
+    \begin{enumerate}[(i)]
+        \item Every positive sesquilinear form is Hermitian.
+        \item (Cauchy-Schwarz Inequality) For all $v_1, v_2\in V$, we have
+        \[
+            |B(v_1, v_2)|^2 \le Q(v_1) Q(v_2).
+        \]
+        \item (Minkowski Inequality) For all $v_1, v_2\in V$, we have
+        \[
+            Q(v_1+v_2)^{\frac12} \le Q(v_1)^{\frac12}+ Q(v_2)^{\frac12}.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\subsection{Inner Product Space}
+
+\begin{definition}{Positive Definiteness}{}
+    Let $B: V\times V\to \mathbb{C}$ be a sesquilinear form on a $\mathbb{C}$-linear space $V$. The form $B$ is said to be \textbf{positive-definite} if  for all $v\in V-\{0\}$, we have
+    \[        
+        B(v, v)> 0.
+    \]
+\end{definition}
+
+\begin{definition}{Inner Product Space}{}
+    Let $\Bbbk=\mathbb{R}\text{ or } \mathbb{C}$. A \textbf{inner product space} is a $\Bbbk$-linear space $V$ equipped with a map $\langle\cdot,\cdot\rangle: V\times V\to \Bbbk$ such that the following conditions hold:
+    \begin{enumerate}[(i)]
+        \item (Linearity in the first argument): For all $v_1, v_2\in V$ and $\lambda\in \Bbbk$, we have
+        \[            \langle v_1 + v_2, v_3 \rangle = \langle v_1, v_3 \rangle + \langle v_2, v_3 \rangle,\quad \langle \lambda v_1, v_2   \rangle = \lambda \langle v_1, v_2 \rangle.
+        \]
+        \item (Conjugate symmetry): For all $v_1, v_2\in V$, we have
+        \[            \langle v_1, v_2 \rangle = \overline{\langle v_2, v_1 \rangle}.
+        \]
+        \item (Positive-definiteness): For all $v\in V-\{0\}$, we have
+        \[            \langle v, v \rangle > 0.
+        \]
+    \end{enumerate}
+    The map $\langle\cdot,\cdot\rangle: V\times V\to \Bbbk$ is called the \textbf{inner product} on $V$.
+\end{definition}
+
+\begin{definition}{Complex Inner Product Space}{}
+    A \textbf{complex inner product space} is a complex vector space $V$ equipped with a positive-definite Hermitian form $\langle\cdot,\cdot\rangle: V\times V\to \mathbb{C}$, which is called the \textbf{inner product} on $V$.
+\end{definition}
+
+\begin{proposition}{Parallelogram Law}{}
+    Let $V$ be an inner product space over $\Bbbk$. Then for all $v_1, v_2\in V$, we have
+    \[
+        \Vert v_1+v_2\Vert^2 + \Vert v_1-v_2 \Vert^2 = 2\Vert v_1 \Vert^2 + 2\Vert v_2 \Vert^2.
+    \]
+\end{proposition}
+
+\subsection{Orthogonality}
+
+\begin{definition}{Orthogonality}{}
+    Let $V$ be an inner product space. 
+    \begin{itemize}
+        \item Two vectors $v_1, v_2\in V$ are said to be \textbf{orthogonal} if
+        \[
+            \langle v_1, v_2 \rangle = 0,
+        \]
+        which is denoted by $v_1\perp v_2$.
+        \item A vector $v\in V$ is said to be \textbf{orthogonal to a subspace} $W\subseteq V$ if 
+        \[          
+         \langle v, w \rangle = 0 \text{ for all } w\in W,
+        \]
+        which is denoted by $v\perp W$.
+        \item Let $W_1, W_2\subseteq V$ be subspaces of $V$. We say that $W_1$ and $W_2$ are \textbf{orthogonal} if
+        \[
+            \langle w_1, w_2 \rangle = 0 \text{ for all } w_1\in W_1 \text{ and } w_2\in W_2,
+        \]
+        which is denoted by $W_1\perp W_2$.
+    \end{itemize}
     
 \end{definition}
+
+\begin{proposition}{}{}
+    Let $V$ be an inner product space over $\Bbbk$. Then we have 
+    \begin{enumerate}[(i)]
+        \item Let $x,y,z\in V$. If $x\perp z$ and $y\perp z$, then $(a x+b y)\perp z$ for all $a,b\in \Bbbk$.
+        \item Let $x\in V$. We have
+        \[
+        x \perp x\iff x=0.
+        \]
+        \item Let $W_1, W_2\subseteq V$ be subspaces. If $W_1\perp W_2$, Then
+        \[
+        W_1\cap W_2 = \{0\}.    
+        \]
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Let $x,y,z\in V$ and $a,b\in \Bbbk$. Then we have
+        \[            \begin{aligned}
+                \langle ax+by, z \rangle &= a\langle x, z \rangle + b\langle y, z \rangle\\
+                &= a\cdot 0 + b\cdot 0 = 0.
+            \end{aligned}
+        \]
+        Thus, $ax+by\perp z$.   
+        \item Let $x\in V$ and assume $x\perp x$. Then we have
+        \[            \begin{aligned}
+                \langle x, x \rangle &= 0.
+            \end{aligned}           
+        \]
+        Since the inner product is positive-definite, we have $\langle x, x \rangle > 0$ for all $x\in V-\{0\}$. Therefore, $x$ must be the zero vector, i.e., $x=0$. Conversely, if $x=0$, then we have $\langle 0, 0 \rangle = 0$, which implies $0\perp 0$.
+        \item Let $W_1, W_2\subseteq V$ be subspaces and assume $W_1\perp W_2$. Let $x\in W_1\cap W_2$. Then we have $x\in W_1$ and $x\in W_2$. By the definition of orthogonality, we have $x \perp x$. By the previous part, we have $x=0$. Thus, $W_1\cap W_2 = \{0\}$. 
+    \end{enumerate}
+\end{prf}
+
+\begin{definition}{Orthogonal Complement}{}
+    Let $V$ be an inner product space and $W\subseteq V$ be a subspace. The \textbf{orthogonal complement} of $W$, denoted by $W^\perp$, is defined as
+    \[
+        W^\perp = \{ v\in V \mid v\perp W\}.
+    \]
+    The orthogonal complement is a closed subspace of $V$.
+\end{definition}
+
+\begin{proposition}{Properties of Orthogonal Complements}{}
+    Let $V$ be an inner product space and $W\subseteq V$ be a subspace. The following properties hold:
+    \begin{enumerate}[(i)]
+        \item $W\perp W^\perp$.
+        \item $W\cap W^\perp = \{0\}$.
+        \item If $W_1\subseteq W_2\subseteq V$ are subspaces, then
+        \[
+            W_2^\perp \subseteq W_1^\perp.
+        \]
+        \item 
+        \[
+            W^{\perp} = \left(\overline{W}\right)^\perp=\left(\overline{\mathrm{span}(W)}\right)^\perp.
+        \]
+        \item If $W$ is finite-dimensional, then $\dim W + \dim W^\perp = \dim V$.
+    \end{enumerate}
+\end{proposition}
+
