@@ -195,6 +195,7 @@ Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subseteq X$ and $B_\alpha,B,
     \item If $f$ is injective, then $f\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)=\bigcap\limits_{\alpha\in I}f\left(A_\alpha\right)$, where the indexed set $I$ is nonempty.
     \item $f\left(A\cap f^{-1}(B)\right)=f(A)\cap B$.
     \item $A\subseteq f^{-1}(B) \iff f(A)\subseteq B$.
+    \item $(f\circ g)^{-1}(U) = g^{-1}\left(f^{-1}(U)\right)$.
 \end{enumerate}
 \end{proposition}
 \begin{prf}
@@ -213,6 +214,13 @@ Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subseteq X$ and $B_\alpha,B,
         \[
         A \subseteq f^{-1}(B) \implies f(A) \subseteq f(f^{-1}(B)) \subseteq B, \quad f(A) \subseteq B \implies A \subseteq f^{-1}(f(A)) \subseteq f^{-1}(B).
         \]
+        \item 
+        \begin{align*}
+            x \in (f \circ g)^{-1}(U) &\iff (f \circ g)(x) \in U \\
+            &\iff f(g(x)) \in U \\
+            &\iff g(x) \in f^{-1}(U) \\
+            &\iff x \in g^{-1}(f^{-1}(U)).
+        \end{align*}
     \end{enumerate}
 \end{prf}
 
