@@ -63,6 +63,17 @@ Next we define the morphisms in the category $\mathsf{Ring}$.
     \end{itemize}
 \end{definition}
 
+$0$ is never a regular element.
+
+\begin{proposition}{Set of Regular Elements is a Multiplicative Set}{set_of_regular_elements_is_a_multiplicative_set}
+    The set of regular elements in a ring $R$ is a multiplicative set.
+\end{proposition}
+\begin{prf}
+    Let $a,b$ be regular elements in $R$. We are to show that $ab$ is also a regular element. Suppose that there exists a nonzero $x\in R$ such that $(ab)x=0$. Then $a(bx)=0$. Since $a$ is a regular element, we have $bx=0$. Since $b$ is also a regular element, we have $x=0$. This is a contradiction. 
+    
+    Similarly, if there exists a nonzero $y\in R$ such that $y(ab)=0$, then we can deduce that $(ya)b=0$. Since $b$ is a regular element, we have $ya=0$. Since $a$ is also a regular element, we have $y=0$. This is also a contradiction. Therefore, $ab$ is a regular element.
+\end{prf}
+
 \begin{definition}{Domain}{domain}
     A nonzero ring $R$ is called a \textbf{domain} if one of the following equivalent conditions holds:
     \begin{enumerate}[(i)]
@@ -83,6 +94,16 @@ Next we define the morphisms in the category $\mathsf{Ring}$.
 A left, right, or two-sided ideal \( I \) that satisfies \( I \ne R \) is called a \textbf{proper ideal}. In commutative rings, left and right ideals are the same and are simply called ideals. 
 \end{definition}
 Sometimes we just say ideal to mean two-sided ideal.
+
+\begin{proposition}{Equivalent Characterizations of Ideals}{equivalent_characterizations_of_ideals}
+    Let \( R \) be a ring. Then
+    \begin{enumerate}[(i)]
+        \item Submodules of the left \( R \)-module \( R \) are precisely the left ideals of \( R \).
+        \item Submodules of the right \( R \)-module \( R \) are precisely the right ideals of \( R \).
+        \item Sub-bimodules of the \( R \)-\( R \) bimodule \( R \) are precisely the two-sided ideals of \( R \).
+    \end{enumerate}
+    Especially, if \( R \) is commutative, then the ideals of \( R \) are precisely the submodules of the \( R \)-module \( R \).
+\end{proposition}
 
 \begin{definition}{Kernel of a Ring Homomorphism}{}
     Let $f:R\to S$ be a ring homomorphism. The \textbf{kernel} of $f$ is the set

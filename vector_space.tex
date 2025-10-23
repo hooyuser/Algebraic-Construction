@@ -1,4 +1,69 @@
 \chapter{Vector Space}
+\section{Basic Definitions and Properties}
+\begin{definition}{Vector Space}{vector_space}
+    Let $K$ be a field. A \textbf{$K$-vector space} is an abelian group $(V, +)$ equipped with a map (called \textbf{scalar multiplication})
+    \[
+        \begin{aligned}
+            K\times V & \longrightarrow V\\
+            (\lambda, v) & \longmapsto \lambda v
+        \end{aligned}
+    \]
+    such that the following conditions hold for all $u,v,w\in V$ and $\lambda, \mu\in K$:
+    \begin{enumerate}[(i)]
+        \item (Distributivity over vector addition) $\lambda(v+w) = \lambda v + \lambda w$.
+        \item (Distributivity over field addition) $(\lambda+\mu)v = \lambda v + \mu v$.
+        \item (Compatibility of scalar multiplication) $(\lambda\mu)v = \lambda(\mu v)$.
+        \item (Identity element of scalar multiplication) $1_K v = v$, where $1_K$ is the multiplicative identity in $K$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}{}{inverse_inclusion_under_scalar_multiplication}
+    Let $V$ be a $K$-vector space and $S,T$ be subsets of $V$.
+    \begin{enumerate}[(i)]
+        \item Suppose $\lambda \in K^\times$. Then we have
+    \[
+    \lambda S \subseteq T \implies S \subseteq \lambda^{-1}T.
+    \]
+      \item For all $c_1, c_2\in K$ we have
+      \[
+      c_1 (c_2 S) = (c_1 c_2)S
+      \]
+      \item Suppose $\lambda \in K^\times$. Then we have
+    \[
+    S = T \iff \lambda S =\lambda T.
+    \]
+    \item $1_K S = S$.
+    \end{enumerate} 
+\end{lemma}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item 
+    Suppose $\lambda S \subseteq T$. Then we have
+    \begin{align*}
+        s \in S & \implies \lambda s \in \lambda S\\
+        & \implies \lambda s \in T\\
+        & \implies \exists t\in T,\; \lambda s = t  \\
+        & \implies s = \lambda^{-1}t \in \lambda^{-1}T \\
+        & \implies s \in \lambda^{-1}T,
+    \end{align*}
+    which implies $S \subseteq \lambda^{-1}T$.
+    \item 
+    For all $s\in S$, we have
+    \[
+        \begin{aligned}
+            x \in c_1 (c_2 S) & \iff \exists s\in S,\; x = c_1(c_2 s)\\
+            & \iff \exists s\in S,\; x = (c_1 c_2)s\\
+            & \iff x \in (c_1 c_2)S.
+        \end{aligned}
+    \]
+    \item \begin{align*}
+         \lambda S = \lambda T & \implies \lambda S \subseteq \lambda T \text{ and } \lambda T \subseteq \lambda S  \\
+         & \implies S \subseteq \lambda^{-1}(\lambda T) \text{ and } T \subseteq \lambda^{-1}(\lambda S)\\
+            & \implies S \subseteq T \text{ and } T \subseteq S\\
+            & \implies S = T.
+    \end{align*}
+    \end{enumerate} 
+\end{prf}
 
 \section{Tensor Product of Vector Spaces}
 \begin{proposition}{}{}

@@ -80,7 +80,7 @@ Then we have category isomorphism
                 \arrow[phantom, from=M, to=D, "\dashv"{rotate=-90}]
             \end{tikzcd}
         \]
-        Since $f_*$ has both left and right adjoint, it is a exact functor.
+        Since $f_*$ has both left and right adjoint, it is an exact functor.
 \end{proposition}
 \begin{remark}
    The notation $f_*$ comes from the case when $R$ and $S$ are commutative rings. $f$ induces a morphism of affine schemes $\mathrm{Spec}(S)\to \mathrm{Spec}(R)$. Let $\widetilde{M}$ be the associated quasi-coherent sheaf on $\mathrm{Spec}(S)$. Then the global section of $\widetilde{M}$ is the $S$-module $M$
@@ -152,157 +152,8 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
 
 
 
-\begin{definition}{Torsion Element of a Module}{}
-    Let $R$ be a ring, and let $M$ be a left $R$-module. An element $m\in M$ is called a \textbf{torsion element of $M$} if there exists a \hyperref[th:zero_divisor]{regular element} $r\in R$ such that $rm=0$. 
-    
-    If $R$ is an integral domain, an element $m\in M$ is called a \textbf{torsion element of $M$} if one of the following equivalent conditions holds:
-    \begin{enumerate}[(i)]
-        \item There exists a element $r\in R-\{0\}$ such that $rm=0$.
-        \item $\operatorname{Ann}_R(m)\neq \{0_R\}$.
-    \end{enumerate}
-\end{definition}
 
 
-\begin{definition}{Torsion Submodule}{}
-    Let $R$ be a commutative ring, and let $M$ be a $R$-module. The \textbf{torsion submodule of $M$}, denoted by $M_{\mathrm{tor}}$, is the submodule of $M$ consisting of all torsion elements of $M$.
-\end{definition}
-\begin{prf}
-    We can check that $M_{\mathrm{tor}}$ is a submodule of $M$. For any $m_1, m_2\in M_{\mathrm{tor}}$, there exist $r_1, r_2\in R-\{0\}$ such that $r_1m_1=0$ and $r_2m_2=0$. Then we have
-    \[
-        r_1r_2(m_1+m_2)=r_1r_2m_1+r_1r_2m_2=0+0=0\implies m_1+m_2\in M_{\mathrm{tor}},
-    \]
-    Let $m\in M_{\mathrm{tor}}$ and $r\in R-\{0\}$ such that $rm=0$. Then for any $s\in R$, we have
-    \[
-        r(sm)=s(rm)=s\cdot 0=0\implies sm\in M_{\mathrm{tor}}.
-    \]
-\end{prf}
-
-\begin{definition}{Torsion Module}{}
-    Let $R$ be a ring, and let $M$ be a $R$-module. We say $M$ is a \textbf{torsion module} if all elements of $M$ are torsion elements. If $R$ is commutative, then $M$ is a torsion module if and only if $M=M_{\mathrm{tor}}$.
-\end{definition}
-
-\begin{example}{}{}
-    Let $R$ be a commutative ring, and let $M$ be a $R$-module. Then the torsion submodule $M_{\mathrm{tor}}$ is a torsion module.
-\end{example}
-
-
-\begin{definition}{Torsion-free Module}{}
-    Let $R$ be a ring, and let $M$ be a $R$-module. We say $M$ is a \textbf{torsion-free module} if $0$ is the only torsion element of $M$. If $R$ is commutative, then $M$ is a torsion-free module if and only if $M_{\mathrm{tor}}=\{0_M\}$.
-\end{definition}
-
-\begin{definition}{Torsion-free Quotient}{}
-    Let $R$ be a commutative ring, and let $M$ be a $R$-module. Then the quotient module $M_{\mathrm{tf}}:=M/M_{\mathrm{tor}}$ is a torsion-free module, called the \textbf{torsion-free quotient of $M$}. This gives a functor $\mathrm{tf}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            R\text{-}\mathsf{Mod}\&[-25pt]\&[+30pt]\&[-30pt] R\text{-}\mathsf{Mod}_{\mathrm{tf}}\&[-30pt]\&[-30pt] \\ [-15pt] 
-            M \arrow[dd, "f"{name=L, left}] 
-            \&[-25pt] \& [+10pt] 
-            \& [-30pt]M_{\mathrm{tf}}\arrow[dd, "{\overline{f}}"{name=R}] \&[-30pt]\ni
-            \&[-30pt]m + M_{\mathrm{tor}}\arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
-            \&  \phantom{.}\arrow[r, "{\mathrm{tf}}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-            N \& \& \&  N_{\mathrm{tf}}\&[-30pt]\ni
-            \&[-30pt]f(m) + N_{\mathrm{tor}}
-        \end{tikzcd}
-    \]  
-    $R\text{-}\mathsf{Mod}_{\mathrm{tf}}$ is a full subcategory of $R\text{-}\mathsf{Mod}$ consisting of all torsion-free modules. And we have the adjunction 
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            R\text{-}\mathsf{Mod} \arrow[r, "\mathrm{tf}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+18pt] 
-            R\text{-}\mathsf{Mod}_{\mathrm{tf}} \arrow[l, "{U}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
-            \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
-        \end{tikzcd}
-    \]
-    where $U:R\text{-}\mathsf{Mod}_{\mathrm{tf}}\to R\text{-}\mathsf{Mod}$ is the inclusion functor.
-\end{definition}
-\begin{prf}
-    Let $m+M_{\mathrm{tor}}\in M/M_{\mathrm{tor}}$ be a torsion element of $M/M_{\mathrm{tor}}$. Then there exists a regular element $r\in R$ such that 
-    \[
-    r\left(m+M_{\mathrm{tor}} \right)=rm+M_{\mathrm{tor}}=0+M_{\mathrm{tor}},
-    \]
-    which implies $rm\in M_{\mathrm{tor}}$. Thus there exists a regular element $s\in R$ such that $srm=0$. Since $sr$ is a regular element, we get
-    $m\in M_{\mathrm{tor}}$, which implies $m+M_{\mathrm{tor}}=0+M_{\mathrm{tor}}$. Therefore, $M/M_{\mathrm{tor}}$ is a torsion-free module.
-
-    Next we are to show $f(M_{\mathrm{tor}})\subseteq N_{\mathrm{tor}}$. For any $m\in M_{\mathrm{tor}}$, there exists a regular element $r\in R$ such that $rm=0_M$. Then we have
-    \[
-        rf(m)=f(rm)=f(0_M)=0_N,
-    \]
-    which implies $f(m)\in N_{\mathrm{tor}}$. Hence $f(M_{\mathrm{tor}})\subseteq N_{\mathrm{tor}}$ and accordingly $\pi_N\circ f(M_{\mathrm{tor}})=\{0\}$, by the universal property of quotient module $M/M_{\mathrm{tor}}$, we have the following commutative diagram
-    \[
-        \begin{tikzcd}
-            M \arrow[r, "f"] \arrow[d, "\pi_M"'] & N \arrow[d, "\pi_N"] \\
-            M/M_{\mathrm{tor}} \arrow[r, "\overline{f}"', dashed] & N/N_{\mathrm{tor}}
-        \end{tikzcd}
-    \]
-    Therefore, $\overline{f}$ is well-defined.
-\end{prf}
-
-
-
-\begin{definition}{$\mathfrak{a}$-Torsion}{}
-    Let $R$ be a ring, $M$ be a left $R$-module and $\mathfrak{a}$ be a right ideal of $R$. The $\mathfrak{a}$-torsion of $M$ is a submodule of $M$ defined as
-    \[
-        M[\mathfrak{a}]:=\left\{m\in M\midv \forall a\in \mathfrak{a}, am=0\right\}.
-    \]
-\end{definition}
-\begin{prf}
-    We can check that $M[\mathfrak{a}]$ is a submodule of $M$. For any $m_1, m_2\in M[\mathfrak{a}]$, we have
-    \[
-        a(m_1+m_2)=am_1+am_2=0+0=0,\quad \forall a\in \mathfrak{a},
-    \]
-    which implies $m_1+m_2\in M[\mathfrak{a}]$. For any $m\in M[\mathfrak{a}]$ and $r\in R$, we have
-    \[
-        a(rm)=(ar)m=0,\quad \forall a\in \mathfrak{a},
-    \]
-    which implies $rm\in M[\mathfrak{a}]$. Therefore, $M[\mathfrak{a}]$ is a submodule of $M$.
-\end{prf}
-
-\begin{definition}{$\mathfrak{a}$-Power Torsion}{}
-    Let $R$ be a ring, $M$ be a left $R$-module and $\mathfrak{a}$ be a right ideal of $R$. The $\mathfrak{a}$-power torsion of $M$ is a submodule of $M$ defined as
-    \[
-        M[\mathfrak{a}^\infty]:=\left\{m\in M\midv \exists n\in \mathbb{Z}_+, \forall a\in \mathfrak{a}^n, am=0\right\}=\bigcup_{n \ge 1}M[\mathfrak{a}^n]=\varinjlim_{n\ge 1}M[\mathfrak{a}^n].
-    \]
-\end{definition}
-\begin{prf}
-  We can show that $M[\mathfrak{a}^n]\subseteq M[\mathfrak{a}^{n+1}]$ for all $n\in \mathbb{Z}_+$. For any $m\in M[\mathfrak{a}^n]$ and any $c \in \mathfrak{a}^n$, we have
-    \[
-        c m = 0.
-\]
-Hence for any $b \in \mathfrak{a}^{n+1}$, there exist $a \in \mathfrak{a}$ and $c' \in \mathfrak{a}^n$ such that $b = a c'$. Then we have
-\[
-    b m = a c' m = 0 ,
-\]
-which implies $m\in M[\mathfrak{a}^{n+1}]$. Hence $M[\mathfrak{a}^n]$ is a submodule of $M[\mathfrak{a}^{n+1}]$.
-  \begin{center}
-    \begin{tikzcd}
-        &                                           &                             & {\varinjlim\limits_{n\ge 1}M[\mathfrak{a}^n]} &                   \\
-{M[\mathfrak{a}]} \arrow[r] \arrow[rrru] & {M[\mathfrak{a}^2]} \arrow[r] \arrow[rru] & \cdots \arrow[r] \arrow[ru] & {M[\mathfrak{a}^n]} \arrow[r] \arrow[u]     & \cdots \arrow[lu]
-\end{tikzcd}
-  \end{center}
-  Therefore, the colimit $M[\mathfrak{a}^\infty]=\varinjlim_{n\ge 1}M[\mathfrak{a}^n]$ is a submodule of $M$
-\end{prf}
-
-\begin{proposition}{}{}
-    Let $R$ be an integral domain, $M$ be a $R$-module and $S=R-\{0\}$ be the multiplicative set of $R$. Then the followings are equivalent:
-    \begin{enumerate}[(i)]
-        \item $M$ is a torsion-free module.
-        \item $M\to S^{-1}M$ is injective.
-        \item We have the following exact sequence
-        \[
-            0\longrightarrow M\longrightarrow M\otimes_R \mathrm{Frac}(R).
-        \]
-    \end{enumerate}
-\end{proposition}
-
-\begin{proposition}{}{}
-    Let $R$ be an integral domain and $M$ be a finitely generated $R$-module. Then $M$ is a torsion-free module if and only if $M$ is a submodule of a finitely generated free $R$-module.
-\end{proposition}
-
-\begin{proposition}{}{}
-    Let $R$ be an Dedekind domain. Then we have
-    \begin{enumerate}[(i)]
-        \item An $R$-module is torsion-free if and only if it is flat.
-    \end{enumerate}
-\end{proposition}
 
 \begin{definition}{Cyclic Module}{}
     Let $R$ be a ring, and let $M$ be a left $R$-module. We say $M$ is a \textbf{cyclic module} if there exists an element $m\in M$ such that 
@@ -350,7 +201,7 @@ which implies $m\in M[\mathfrak{a}^{n+1}]$. Hence $M[\mathfrak{a}^n]$ is a submo
 \begin{prf}
     We prove $(i)\Rightarrow(ii)\Rightarrow(iii)\Rightarrow(i)$.
 
-\paragraph{\boldmath$(i)\;\Rightarrow\;(ii)$}
+\paragraph{$(i)\;\Rightarrow\;(ii)$}
 Assume $M$ is simple and let $0\neq m\in M$.  
 The set $Rm$ is a submodule of $M$ containing $m$, hence non–zero.  
 By simplicity, the only non–zero submodule is $M$ itself; therefore $Rm=M$.
@@ -439,7 +290,7 @@ Thus $(i)\Leftrightarrow(ii)\Leftrightarrow(iii)$, completing the proof.
 \end{proposition}
 
 \begin{definition}{Basis of a Module}{}
-    Let $R$ be a ring, $M$ be a $R$-module and $S\subseteq M$ be a subset. The inclusion map $i:S\hookrightarrow M$ induces a map $\widetilde{i}:R^{\oplus S}\to M$ by the universal property of free $R$-module. 
+    Let $R$ be a ring, $M$ be an $R$-module and $S\subseteq M$ be a subset. The inclusion map $i:S\hookrightarrow M$ induces a map $\widetilde{i}:R^{\oplus S}\to M$ by the universal property of free $R$-module. 
     \begin{center}
         \begin{tikzcd}[ampersand replacement=\&]
             R^{\oplus S}\arrow[r, dashed, "\exists !\,\widetilde{i}"]  \& M\\[0.3cm]
@@ -663,8 +514,8 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
 \end{prf}
 
 
-\begin{definition}{Localization of a Module}{}
-    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. The \textbf{localization of the module} $M$ by $S$, denoted $S^{-1}M$, is an $S^{-1}R$-module that is constructed exactly as the localization of $R$, except that the numerators of the fractions belong to $M$. That is, as a set, it consists of equivalence classes, denoted $\frac{m}{s}$, of pairs $(m, s)$, where $m\in M$ and $s\in S$, and two pairs $(m, s)$ and $(n, t)$ are equivalent if there is an element $u$ in $S$ such that
+\begin{definition}{Localization of a Module}{localization_of_module}
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. The \textbf{localization of the module} $M$ by $S$, denoted $S^{-1}M$, is an $S^{-1}R$-module that is constructed exactly as the localization of $R$, except that the numerators of the fractions belong to $M$. That is, as a set, it consists of equivalence classes, denoted $\frac{m}{s}$, of pairs $(m, s)$, where $m\in M$ and $s\in S$, and two pairs $(m, s)$ and $(n, t)$ are equivalent if there is an element $u\in S$ such that
     \[u(sn-tm)=0.\]
     Addition and scalar multiplication are defined as for usual fractions (in the following formula, $r\in R$, $s,t\in S$, and $m,n\in M$):
     \[\frac{m}{s} + \frac{n}{t} = \frac{tm+sn}{st},\]
@@ -705,6 +556,40 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
     \end{itemize}
 \end{proposition}
 
+
+\begin{proposition}{Kernel of Localization Map}{kernel_of_localization_map}
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Suppose
+    \begin{align*}
+        l_S:M&\longrightarrow S^{-1}M\\
+         m&\longmapsto \frac{m}{1}
+    \end{align*}
+    is the localization map. Then
+    \[
+    \ker l_S=\left\{m\in M \midv \exists s\in S,\; sm=0\right\}.
+    \]
+\end{proposition}
+\begin{prf}
+    If $m\in \ker l_S$, then we have $\frac{m}{1}=\frac{0}{1}$ in $S^{-1}M$. By the definition of \hyperref[th:localization_of_module]{localization}, there exists $s\in S$ such that 
+    \[
+    s(1\cdot 0-1\cdot m)=-sm=0.
+    \]
+    Thus we have 
+    \[
+        \ker l_S\subseteq \left\{m\in M \midv \exists s\in S,\; sm=0\right\}.
+    \]
+    Conversely, if $m\in M$ such that there exists $s\in S$ with $sm=0$, then we have
+    \[
+        l_S(m)=\frac{m}{1}=\frac{sm}{s}=\frac{0}{s}=\frac{0}{1},
+    \]
+    which means $m\in \ker l_S$. Thus we have 
+    \[
+        \left\{m\in M \midv \exists s\in S,\; sm=0\right\}\subseteq \ker l_S.
+    \]
+    Therefore, we conclude that 
+    \[
+        \ker l_S=\left\{m\in M \midv \exists s\in S,\; sm=0\right\}.
+    \]
+\end{prf}
 
 \begin{proposition}{Localization is a Left Adjoint Functor}{} 
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Define the localization functor as follows
@@ -1004,7 +889,7 @@ Therefore we show that $ S^{-1}M\cong \varinjlim_{f\in S}M_f$.
 
 
 \begin{proposition}{}{module_localization_glueing_property}
-    Let $R$ be a commutative ring and $M$ be a $R$-module. Suppose $x\in M$. Then the following are equivalent:
+    Let $R$ be a commutative ring and $M$ be an $R$-module. Suppose $x\in M$. Then the following are equivalent:
     \begin{enumerate}[(i)]
         \item $x=0$.
         \item $x$ maps to $0$ in $M_{\mathfrak{p}}$ for all $\mathfrak{p}\in \spec{R}$. 
@@ -1116,28 +1001,244 @@ For any $\mathbf{y}=\left(y, y, \cdots, y\right)\in \operatorname{im}\alpha_{\ma
 
 When $I$ is a monoid, \Cref{th:graded_module_over_ring_internal} is a special case of \Cref{th:graded_module_over_graded_ring_internal} because any ring $R$ can be regarded as a graded ring with trivial grading $R_0=R$ and $R_i=0$ for all $i\ne0$.
 
+\section{Torsion-Free Modules}
 
-\section{Projective Modules}
-$\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P, -\right)$ is a left exact functor.
-\begin{definition}{Projective Module}{projective_module}
-    Let $R$ be a ring. An $R$-module $P$ is called \textbf{projective} if $\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P, -\right)$ is a exact functor.
+\begin{definition}{Torsion Element of a Module}{}
+    Let $R$ be a ring, and let $M$ be a left $R$-module. An element $m\in M$ is called a \textbf{torsion element of $M$} if there exists a \hyperref[th:zero_divisor]{regular element} $r\in R$ such that $rm=0$. 
+    
+    If $R$ is an integral domain, an element $m\in M$ is called a \textbf{torsion element of $M$} if one of the following equivalent conditions holds:
+    \begin{enumerate}[(i)]
+        \item There exists a element $r\in R-\{0\}$ such that $rm=0$.
+        \item $\operatorname{Ann}_R(m)\neq \{0_R\}$.
+    \end{enumerate}
 \end{definition}
 
-\begin{proposition}{Equivalent Definitions of Projective Module}{}
-    Let $R$ be a ring and $P$ be an $R$-module. The following are equivalent:
+
+\begin{definition}{Torsion Submodule}{}
+    Let $R$ be a ring, and let $M$ be an $R$-module. The \textbf{torsion subset of $M$} is the subset of $M$ consisting of all torsion elements of $M$, denoted by $M_{\mathrm{tor}}$. If $R$ is commutative, then $M_{\mathrm{tor}}$ is a submodule of $M$, called the \textbf{torsion submodule of $M$}. If $R$ is an integral domain, then 
+     \[
+    M_{\mathrm{tor}}=\{m\in M \mid \exists r\in R-\{0\},\; rm=0\}.
+    \]
+\end{definition}
+\begin{prf}
+    We can check that $M_{\mathrm{tor}}$ is a submodule of $M$ when $R$ is commutative. For any $m_1, m_2\in M_{\mathrm{tor}}$, there exist regular elements $r_1, r_2\in R$ such that $r_1m_1=0$ and $r_2m_2=0$. By \Cref{th:set_of_regular_elements_is_a_multiplicative_set}, $r_1r_2$ is also a regular element. Then we have 
+    \[
+        r_1r_2(m_1+m_2)=r_1r_2m_1+r_1r_2m_2=0+0=0\implies m_1+m_2\in M_{\mathrm{tor}},
+    \]
+    Let $m\in M_{\mathrm{tor}}$ and $r\in R$ be a regular element such that $rm=0$. Then for any $s\in R$, we have
+    \[
+        r(sm)=s(rm)=s\cdot 0=0\implies sm\in M_{\mathrm{tor}}.
+    \]
+\end{prf}
+
+\begin{definition}{Torsion Module}{}
+    Let $R$ be a ring, and let $M$ be an $R$-module. We say $M$ is a \textbf{torsion module} if all elements of $M$ are torsion elements, i.e. $M=M_{\mathrm{tor}}$.
+\end{definition}
+
+\begin{example}{}{}
+    Let $R$ be a commutative ring, and let $M$ be an $R$-module. Then the torsion submodule $M_{\mathrm{tor}}$ is a torsion module.
+\end{example}
+
+
+\begin{definition}{Torsion-free Module}{}
+    Let $R$ be a ring, and let $M$ be an $R$-module. We say $M$ is a \textbf{torsion-free module} if $0$ is the only torsion element of $M$, i.e. $M_{\mathrm{tor}}=\{0_M\}$.
+\end{definition}
+
+\begin{proposition}{Characterization of Torsion-Free Modules via Localization}{}
+    Let $R$ be an integral domain, $M$ be an $R$-module and $S=R-\{0\}$ be the multiplicative set of $R$. Then the followings are equivalent:
     \begin{enumerate}[(i)]
-        \item $P$ is projective.
-        \item For any surjective $R$-module homomorphism $f:M\to N$, the induced map $f^*:\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P,M\right)\to \mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P,N\right)$ is surjective.
-        \item For any surjective $R$-module homomorphism $f:M\to N$ and any $R$-module homomorphism $g:P\to N$, there exists an $R$-module homomorphism $h:P\to M$ such that the following diagram commutes
-       \begin{center}
-           \begin{tikzcd}[ampersand replacement=\&]
-               \& P \arrow[d, "g"] \arrow[ld, "h"', dashed] \\
-               M \arrow[r, "f"'] \& N \arrow[r] \& 0
-           \end{tikzcd}
-       \end{center}
-        \item $P$ is a direct summand of a free module.
+        \item $M$ is a torsion-free module.
+        \item $M\to S^{-1}M$ is injective.
+        \item We have the following exact sequence
+        \[
+            0\longrightarrow M\longrightarrow M\otimes_R \mathrm{Frac}(R).
+        \]
     \end{enumerate}
 \end{proposition}
+\begin{prf}
+    (i) $\iff$ (ii). Suppose $M$ is a torsion-free module. Suppose
+    \begin{align*}
+        l_S:M&\longrightarrow S^{-1}M\\
+         m&\longmapsto \frac{m}{1}
+    \end{align*}
+    is the localization map. Then according to \Cref{th:kernel_of_localization_map}, we have
+    \[
+    \ker l_S=\left\{m\in M \midv \exists s\in S,\; sm=0\right\}=M_{\mathrm{tor}}.
+    \]
+    Thus
+    \[
+    M\text{ is torsion-free}\iff M_{\mathrm{tor}}=\{0_M\}\iff \ker l_S=\{0_M\}\iff l_S\text{ is injective}.
+    \]
+\end{prf}
+
+\begin{definition}{Torsion-free Quotient}{}
+    Let $R$ be a commutative ring, and let $M$ be an $R$-module. Then the quotient module $M_{\mathrm{tf}}:=M/M_{\mathrm{tor}}$ is a torsion-free module, called the \textbf{torsion-free quotient of $M$}. This gives a functor $\mathrm{tf}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Mod}\&[-25pt]\&[+30pt]\&[-30pt] R\text{-}\mathsf{Mod}_{\mathrm{tf}}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]M_{\mathrm{tf}}\arrow[dd, "{\overline{f}}"{name=R}] \&[-30pt]\ni
+            \&[-30pt]m + M_{\mathrm{tor}}\arrow[dd,mapsto]\&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "{\mathrm{tf}}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  N_{\mathrm{tf}}\&[-30pt]\ni
+            \&[-30pt]f(m) + N_{\mathrm{tor}}
+        \end{tikzcd}
+    \]  
+    $R\text{-}\mathsf{Mod}_{\mathrm{tf}}$ is a full subcategory of $R\text{-}\mathsf{Mod}$ consisting of all torsion-free modules. And we have the adjunction 
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Mod} \arrow[r, "\mathrm{tf}"{name=U}, bend left, start anchor=east, yshift=1.7ex, end anchor=west] \&[+18pt] 
+            R\text{-}\mathsf{Mod}_{\mathrm{tf}} \arrow[l, "{U}"{name=D, anchor=north}, bend left, start anchor=west, yshift=-1.5ex, end anchor=east]
+            \arrow[phantom, from=U, to=D, "\dashv"{rotate=-90}]
+        \end{tikzcd}
+    \]
+    where $U:R\text{-}\mathsf{Mod}_{\mathrm{tf}}\to R\text{-}\mathsf{Mod}$ is the inclusion functor.
+\end{definition}
+\begin{prf}
+    Let $m+M_{\mathrm{tor}}\in M/M_{\mathrm{tor}}$ be a torsion element of $M/M_{\mathrm{tor}}$. Then there exists a regular element $r\in R$ such that 
+    \[
+    r\left(m+M_{\mathrm{tor}} \right)=rm+M_{\mathrm{tor}}=0+M_{\mathrm{tor}},
+    \]
+    which implies $rm\in M_{\mathrm{tor}}$. Thus there exists a regular element $s\in R$ such that $srm=0$. Since $sr$ is a regular element, we get
+    $m\in M_{\mathrm{tor}}$, which implies $m+M_{\mathrm{tor}}=0+M_{\mathrm{tor}}$. Therefore, $M/M_{\mathrm{tor}}$ is a torsion-free module.
+
+    Next we are to show $f(M_{\mathrm{tor}})\subseteq N_{\mathrm{tor}}$. For any $m\in M_{\mathrm{tor}}$, there exists a regular element $r\in R$ such that $rm=0_M$. Then we have
+    \[
+        rf(m)=f(rm)=f(0_M)=0_N,
+    \]
+    which implies $f(m)\in N_{\mathrm{tor}}$. Hence $f(M_{\mathrm{tor}})\subseteq N_{\mathrm{tor}}$ and accordingly $\pi_N\circ f(M_{\mathrm{tor}})=\{0\}$, by the universal property of quotient module $M/M_{\mathrm{tor}}$, we have the following commutative diagram
+    \[
+        \begin{tikzcd}
+            M \arrow[r, "f"] \arrow[d, "\pi_M"'] & N \arrow[d, "\pi_N"] \\
+            M/M_{\mathrm{tor}} \arrow[r, "\overline{f}"', dashed] & N/N_{\mathrm{tor}}
+        \end{tikzcd}
+    \]
+    Therefore, $\overline{f}$ is well-defined.
+\end{prf}
+
+
+
+\begin{definition}{$\mathfrak{a}$-Torsion}{}
+    Let $R$ be a ring, $M$ be a left $R$-module and $\mathfrak{a}$ be a right ideal of $R$. The $\mathfrak{a}$-torsion of $M$ is a submodule of $M$ defined as
+    \[
+        M[\mathfrak{a}]:=\left\{m\in M\midv \forall a\in \mathfrak{a}, am=0\right\}.
+    \]
+\end{definition}
+\begin{prf}
+    We can check that $M[\mathfrak{a}]$ is a submodule of $M$. For any $m_1, m_2\in M[\mathfrak{a}]$, we have
+    \[
+        a(m_1+m_2)=am_1+am_2=0+0=0,\quad \forall a\in \mathfrak{a},
+    \]
+    which implies $m_1+m_2\in M[\mathfrak{a}]$. For any $m\in M[\mathfrak{a}]$ and $r\in R$, we have
+    \[
+        a(rm)=(ar)m=0,\quad \forall a\in \mathfrak{a},
+    \]
+    which implies $rm\in M[\mathfrak{a}]$. Therefore, $M[\mathfrak{a}]$ is a submodule of $M$.
+\end{prf}
+
+\begin{lemma}{}{filtration_of_a_torsion}
+    Let $R$ be a ring, $M$ be a left $R$-module and $\mathfrak{a}$ be a right ideal of $R$. Then for any $n\in \mathbb{Z}_+$, we have
+    \[
+        M[\mathfrak{a}^n]\subseteq M[\mathfrak{a}^{n+1}].
+    \]
+\end{lemma}
+\begin{prf}
+    For any $m\in M[\mathfrak{a}^n]$ and any $c \in \mathfrak{a}^n$, we have
+    \[
+        c m = 0.
+\]
+Hence for any $b \in \mathfrak{a}^{n+1}$, there exist $a \in \mathfrak{a}$ and $c' \in \mathfrak{a}^n$ such that $b = a c'$. Then we have
+\[
+    b m = a c' m = 0 ,
+\]
+which implies $m\in M[\mathfrak{a}^{n+1}]$. Hence $M[\mathfrak{a}^n]$ is a submodule of $M[\mathfrak{a}^{n+1}]$.
+\end{prf}
+
+\begin{definition}{$\mathfrak{a}$-Power Torsion}{}
+    Let $R$ be a ring, $M$ be a left $R$-module and $\mathfrak{a}$ be a right ideal of $R$. The $\mathfrak{a}$-power torsion of $M$ is a submodule of $M$ defined as
+    \[
+        M[\mathfrak{a}^\infty]:=\left\{m\in M\midv \exists n\in \mathbb{Z}_+, \forall a\in \mathfrak{a}^n, am=0\right\}=\bigcup_{n \ge 1}M[\mathfrak{a}^n]=\varinjlim_{n\ge 1}M[\mathfrak{a}^n].
+    \]
+\end{definition}
+\begin{prf}
+  By \Cref{th:filtration_of_a_torsion} we see $M[\mathfrak{a}^n]\subseteq M[\mathfrak{a}^{n+1}]$ for all $n\in \mathbb{Z}_+$. 
+  \begin{center}
+    \begin{tikzcd}
+        &                                           &                             & {\varinjlim\limits_{n\ge 1}M[\mathfrak{a}^n]} &                   \\
+{M[\mathfrak{a}]} \arrow[r] \arrow[rrru] & {M[\mathfrak{a}^2]} \arrow[r] \arrow[rru] & \cdots \arrow[r] \arrow[ru] & {M[\mathfrak{a}^n]} \arrow[r] \arrow[u]     & \cdots \arrow[lu]
+\end{tikzcd}
+  \end{center}
+  Therefore, the colimit $M[\mathfrak{a}^\infty]=\varinjlim_{n\ge 1}M[\mathfrak{a}^n]$ is a submodule of $M$
+\end{prf}
+
+
+
+\begin{proposition}{}{}
+    Let $R$ be an integral domain and $M$ be a finitely generated $R$-module. Then $M$ is a torsion-free module if and only if $M$ is a submodule of a finitely generated free $R$-module.
+\end{proposition}
+
+\begin{proposition}{Module Homomorphism Induced by Scalar Multiplication}{module_homomorphism_induced_by_scalar_multiplication}
+   Let $R$ be a ring and $M$ be a left $R$-module. Suppose $N$ is an $R$-submodule of $M$, and $r\in R$. Then
+    \begin{align*}
+        \mu_r:N&\longrightarrow M,\\
+         n&\longmapsto rn .
+    \end{align*}
+    is an $R$-module homomorphism and we have
+    \[
+    N/\ker\mu_r \cong \operatorname{im}\mu_r= rN=\{rn \mid n\in N\}.
+    \]
+    And the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item For any $n\in N$, if $rn=0$, then $n=0$.
+        \item $\mu_r$ is injective.
+        \item $N\cong rN$.
+    \end{enumerate}
+\end{proposition}
+\begin{corollary}{}{equivalent_characterization_of_regular_element}
+    Let $R$ be a commutative ring and $r\in R$. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $r$ is a \hyperref[th:zero_divisor]{regular element}.
+        \item 
+        \[
+        0\longrightarrow R \xlongrightarrow{\mu_r} R  \xlongrightarrow{\pi} R/rR \longrightarrow 0
+        \]
+        is a short exact sequence of $R$-modules.
+    \end{enumerate}
+\end{corollary}
+\begin{prf}
+    (i)$\implies$(ii). Suppose $r\in R$ is a regular element. Then $r\ne 0$. If there exists $n\in R$ such that $r n=0$, there must be $n=0$. Thus by \Cref{th:module_homomorphism_induced_by_scalar_multiplication} we have $\mu_r$ is injective. Since $\operatorname{im}\mu_r=rR=\ker \pi$, the sequence is exact.
+
+    (ii)$\implies$(i). Suppose the sequence is exact. Then $\mu_r$ is injective, which by \Cref{th:module_homomorphism_induced_by_scalar_multiplication} implies that for any $n\in R$, if $rn=0$, then $n=0$. Thus $r$ is a regular element.
+\end{prf}
+
+
+\begin{proposition}{}{}
+    \begin{enumerate}[(i)]
+        \item If $R$ is a commutative ring, then any flat $R$-module is torsion-free.
+        \item If $R$ is a Dedekind domain. Then an $R$-module is flat if and only if it is torsion-free.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item 
+    If there exists $m \in M$ such that $rm = 0$ for some regular element $r \in R$, then by \Cref{th:equivalent_characterization_of_regular_element},
+    \[
+    0\longrightarrow R \xlongrightarrow{\mu_r} R  \xlongrightarrow{\pi} R/rR \longrightarrow 0
+    \]
+    is a short exact sequence of $R$-modules. Since $M$ is flat, the functor $-\otimes_R M$ is exact. Thus we have the following exact sequence
+    \[
+        0\longrightarrow R\otimes_R M \xlongrightarrow{\mu_r\otimes 1} R\otimes_R M  \xlongrightarrow{\pi\otimes 1} (R/rR) \otimes_R M \longrightarrow 0,
+    \]
+    which is isomorphic to
+    \[
+        0\longrightarrow M \xlongrightarrow{\mu_r} M  \xlongrightarrow{\pi} M/rM \longrightarrow 0.
+    \]
+    According to \Cref{th:module_homomorphism_induced_by_scalar_multiplication}, the injectivity of $\mu_r:M\to M$ implies $m=0$. Therefore, $M$ is torsion-free.
+    \end{enumerate}
+\end{prf}
+
+
 
 \section{Flat Modules}
 For any $R$-module $M$, the functor $-\otimes_R M$ is right exact.
@@ -1166,13 +1267,35 @@ For any $R$-module $M$, the functor $-\otimes_R M$ is right exact.
     where the rows are exact. Then we have the following commutative diagram
     \[
         \begin{tikzcd}
-            0 \arrow[r] & \bigoplus_{i\in I}A\otimes M_i \arrow[r] \arrow[d, "\bigoplus_{i\in I}f\otimes 1"] & \bigoplus_{i\in I}B\otimes M_i \arrow[r] \arrow[d, "\bigoplus_{i\in I}g\otimes 1"] & \bigoplus_{i\in I}C\otimes M_i \arrow[r] \arrow[d, "\bigoplus_{i\in I}h\otimes 1"] & 0 \\
-            0 \arrow[r] & \bigoplus_{i\in I}A'\otimes M_i \arrow[r] & \bigoplus_{i\in I}B'\otimes M_i \arrow[r] & \bigoplus_{i\in I}C'\otimes M_i \arrow[r] & 0
+            0 \arrow[r] & \bigoplus\limits_{i\in I}A\otimes M_i \arrow[r] \arrow[d, "\bigoplus\limits_{i\in I}f\otimes 1"] & \bigoplus\limits_{i\in I}B\otimes M_i \arrow[r] \arrow[d, "\bigoplus\limits_{i\in I}g\otimes 1"] & \bigoplus\limits_{i\in I}C\otimes M_i \arrow[r] \arrow[d, "\bigoplus\limits_{i\in I}h\otimes 1"] & 0 \\ [1.5em]
+            0 \arrow[r] & \bigoplus\limits_{i\in I}A'\otimes M_i \arrow[r] & \bigoplus\limits_{i\in I}B'\otimes M_i \arrow[r] & \bigoplus\limits_{i\in I}C'\otimes M_i \arrow[r] & 0
         \end{tikzcd}
     \]
     where the rows are exact. Thus $\bigoplus_{i\in I}M_i$ is flat.
     
 \end{prf}
+
+\section{Projective Modules}
+$\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P, -\right)$ is a left exact functor.
+\begin{definition}{Projective Module}{projective_module}
+    Let $R$ be a ring. An $R$-module $P$ is called \textbf{projective} if $\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P, -\right)$ is an exact functor.
+\end{definition}
+
+\begin{proposition}{Equivalent Definitions of Projective Module}{}
+    Let $R$ be a ring and $P$ be an $R$-module. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $P$ is projective.
+        \item For any surjective $R$-module homomorphism $f:M\to N$, the induced map $f^*:\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P,M\right)\to \mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P,N\right)$ is surjective.
+        \item For any surjective $R$-module homomorphism $f:M\to N$ and any $R$-module homomorphism $g:P\to N$, there exists an $R$-module homomorphism $h:P\to M$ such that the following diagram commutes
+       \begin{center}
+           \begin{tikzcd}[ampersand replacement=\&]
+               \& P \arrow[d, "g"] \arrow[ld, "h"', dashed] \\
+               M \arrow[r, "f"'] \& N \arrow[r] \& 0
+           \end{tikzcd}
+       \end{center}
+        \item $P$ is a direct summand of a free module.
+    \end{enumerate}
+\end{proposition}
 
 \section{Module over Commutative Ring}
 \begin{proposition}{$R\text{-}\mathsf{Mod}$ is a Symmetric Monoidal Category for Commutative Ring $R$}{}
@@ -1334,7 +1457,7 @@ For any $R$-module $M$, the functor $-\otimes_R M$ is right exact.
 \end{proposition}
 
 \begin{proposition}{}{}
-    Let $R$ be a PID and $M$ be a $R$-module. If $M_{\mathrm{tf}}=M/M_{\mathrm{tor}}$ is finitely generated, then 
+    Let $R$ be a PID and $M$ be an $R$-module. If $M_{\mathrm{tf}}=M/M_{\mathrm{tor}}$ is finitely generated, then 
     \begin{enumerate}[(i)]
         \item $M_{\mathrm{tf}}$ is free.
         \item $M=M_{\mathrm{tor}}\oplus E$, where $E$ is a free submodule of $M$ with $\mathrm{rk}_R(E)<\infty$.
@@ -1344,6 +1467,23 @@ For any $R$-module $M$, the functor $-\otimes_R M$ is right exact.
     Since $M_{\mathrm{tf}}$ is finitely generated, it is a finitely generated torsion-free module over PID, which is free. Then we have $M_{\mathrm{tf}}\cong R^{\oplus n}$ for some $n\in \mathbb{Z}_+$. Let $\{e_1, \ldots, e_n\}$ be a basis of $M_{\mathrm{tf}}$. For any $m\in M$, we have $m=\sum_{i=1}^n r_i e_i$ for some $r_i\in R$. Define $E:=\bigoplus_{i=1}^n Re_i$. Then we have $M=M_{\mathrm{tor}}\oplus E$.
 \end{prf}
 
+
+\begin{proposition}{Smith Normal Form}{}
+    Let $R$ be a PID and $M \in \operatorname{Mat}_{m \times n}(R)$ be an $m \times n$ matrix with entries in $R$. Then there exist invertible matrices $P \in \mathrm{GL}_m(R)$ and $Q \in \mathrm{GL}_n(R)$ such that
+    \[
+        PMQ = \begin{bmatrix}
+            d_1 & 0 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+            0 & d_2 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+            0 & 0 & d_3 & \cdots & 0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \cdots & d_r & 0 & \cdots & 0 \\
+            0 & 0 & 0 & \cdots & 0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \cdots & 0 & 0 & \cdots & 0
+        \end{bmatrix}
+    \]
+    where $d_i \in R$ are such that $d_i \mid d_{i+1}$ for all $1 \leq i < r$ and $r = \operatorname{rank}(M)$.
+\end{proposition}
 
 
 
