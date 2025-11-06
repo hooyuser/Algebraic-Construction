@@ -366,7 +366,8 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$ if and only if $a$ is integral over $K$.
 
 
-\section{Commutative Algebra}
+\chapter{Commutative Unital Algebra}
+\section{Basic Properties}
 \begin{definition}{Commutative Algebra}{}
     Let $R$ be a commutative ring. A \textbf{commutative $R$-algebra} is an $R$-algebra where the multiplication is commutative. Or equivalently, a commutative $R$-algebra is a commutative ring $A$ together with a ring homomorphism $R\to A$. 
 \end{definition}
@@ -375,7 +376,7 @@ Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$
     There is a category isomorphism $R\text{-}\mathsf{CAlg}\cong \left(R/\mathsf{CRing}\right)$.
 \end{remark}
 
-\subsection{Polynomial Algebra}
+\section{Polynomial Algebra}
 \begin{definition}{Polynomial Ring}{}
     Let $R$ be a commutative ring. The \textbf{polynomial ring} in $n$ variables over $R$ is the ring $R[x_1,\cdots,x_n]$ defined as the set of all formal sums $$\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha$$ where $a_\alpha\in R$ satisfies $a_\alpha=0$ for all but finitely many $\alpha\in\mathbb{N}^n$ and $x^\alpha:=x_1^{\alpha_1}\cdots x_n^{\alpha_n}$ for $\alpha=(\alpha_1,\cdots,\alpha_n)\in\mathbb{N}^n$. The addition and multiplication are defined as follows: $$\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha+\sum_{\alpha\in\mathbb{N}^n}b_\alpha x^\alpha=\sum_{\alpha\in\mathbb{N}^n}(a_\alpha+b_\alpha)x^\alpha$$ and $$\left(\sum_{\alpha\in\mathbb{N}^n}a_\alpha x^\alpha\right)\left(\sum_{\beta\in\mathbb{N}^n}b_\beta x^\beta\right)=\sum_{\gamma\in\mathbb{N}^n}\left(\sum_{\alpha+\beta=\gamma}a_\alpha b_\beta\right)x^\gamma.$$
 \end{definition}
@@ -526,7 +527,9 @@ Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$
     If $\deg f\le 0$
 \end{example}
 
-\subsection{Construction}
+\section{Construction}
+
+\subsection{Free Object}
 
 \begin{definition}{Free Commutative Algebra}{free_commutative_algebra}
     Let $X$ be a set and $R$ be a commutative ring. The \textbf{free commutative $R$-algebra} on $X$, denoted by $\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, together with a map $\iota:X\to \mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)$, is defined by the following universal property: for any commutative $R$-algebra $A$ and any map $f:X\to A$, there exists a unique homomorphism $\widetilde{f}:\mathrm{Free}_{R\text{-}\mathsf{CAlg}}(X)\to A$ such that the following diagram commutes
@@ -557,6 +560,8 @@ Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$
         \leftindex^{\psi\circ \varphi}f(X)=\sum\limits_{\beta} (\psi\circ \varphi)(a_\beta) x^\beta=\sum\limits_{\beta} \psi(\varphi(a_\beta)) x^\beta=\leftindex^\psi(\leftindex^\varphi f)(X).
     \]
 \end{prf}
+
+\subsection{Coproduct}
 
 
 

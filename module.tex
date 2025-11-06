@@ -93,7 +93,7 @@ Then we have category isomorphism
     \]
 \end{remark}
 
-In particular, ring homomorphism $R\to S$ makes $S$ an $R$-module.
+\noindent In particular, ring homomorphism $R\to S$ makes $S$ an $R$-module.
 
 \begin{definition}{Noetherian Module}{}
 Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \textbf{Noetherian} if one of the following equivalent conditions holds:
@@ -333,7 +333,7 @@ Thus $(i)\Leftrightarrow(ii)\Leftrightarrow(iii)$, completing the proof.
         \item there exists an epimorphism $R^{\oplus n} \rightarrow M$ for some $n \in \mathbb{Z}_+$.
         \item there exists an exact sequence
         \[
-        R^{\oplus n}  \rightarrow M \rightarrow 0
+        R^{\oplus n}  \longrightarrow M \longrightarrow 0
         \]
         for some $n\in \mathbb{N}$.
         \item $S\cong R^{\oplus n}/M$ for some $n\in \mathbb{Z}_+$ and some submodule $M$ of $R^{\oplus n}$.
@@ -377,12 +377,20 @@ Thus $(i)\Leftrightarrow(ii)\Leftrightarrow(iii)$, completing the proof.
     We say $M$ is a \textbf{finitely presented $R$-module} if 
     there exists an exact sequence
     \[
-    R^{\oplus m} \rightarrow R^{\oplus n} \rightarrow M \rightarrow 0
+    R^{\oplus m} \longrightarrow R^{\oplus n} \longrightarrow M \longrightarrow 0
     \]
     for some $m, n\in \mathbb{Z}_+$.
 \end{definition}
 
 \subsection{Tensor Product}
+
+\begin{definition}{Bimodule}{bimodule}
+    Let $R$ and $S$ be rings. An ($R$,$S$)-\textbf{bimodule} is an abelian group $M$ together with a structure of left $R$-module and a structure of right $S$-module such that
+    \[
+        r(ms)=(rm)s     
+    \]
+    for all $r\in R$, $s\in S$, and $m\in M$.
+\end{definition}
 
 \begin{definition}{Balanced Product}{}
     Let $R$ be a ring, $M$ be a right $R$-module, $N$ be a left $R$-module and $G$ be an abelian group. A map $b:M\times N\to G$ is called a \textbf{$R$-balanced product} if 
@@ -416,7 +424,12 @@ Thus $(i)\Leftrightarrow(ii)\Leftrightarrow(iii)$, completing the proof.
 \begin{definition}{Category $\mathsf{Bal}_R(M,N)$}{}
     Let $R$ be a ring, $M$ be a right $R$-module, and $N$ be a left $R$-module. The \textbf{category of $R$-balanced products} from $M$ and $N$, denoted by $\mathsf{Bal}_R(M, N)$, is defined as follows:
     \begin{itemize}
-        \item The objects of $\mathsf{Bal}_R(M, N)$ are $R$-balanced products from $M\times N$ to $G$.
+        \item The objects of $\mathsf{Bal}_R(M, N)$ are $R$-balanced products from $M\times N$ to $G$
+        \[
+        \mathrm{Ob}\left(\mathsf{Bal}_R(M, N)\right) = \left\{
+            b:M\times N\to G \midv G\in \mathrm{Ob}(\mathsf{Ab}),\,b\in\mathrm{Bal}_R(M, N; G) 
+        \right\}
+        \]
         \item The morphisms from $b_1:M\times N\to G_1$ to $b_2:M\times N\to G_2$ are group homomorphisms $f:G_1\to G_2$ such that $f\circ b_1=b_2$.
         \[
             \begin{tikzcd}[ampersand replacement=\&]
@@ -444,7 +457,7 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
     \end{enumerate}
     Then the tensor product $\otimes :M\times N\to M\otimes_R N$ can be constructed as the composition
     \[
-        \otimes :M\times N\xrightarrow{\iota}F \xrightarrow{\pi}F/K
+        \otimes :M\times N\xlongrightarrow{\iota}F \xlongrightarrow{\pi}F/K
     \]
     and $M\otimes_R N:=F/K$.
 \end{definition}
@@ -472,13 +485,47 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
     To show the uniqueness, assume there exists another group homomorphism $\tilde{b}':F/K\to G$ such that $\tilde{b}'\circ\pi\circ\iota=b$. Since $\hat{b}\circ \iota=b$, by the uniqueness of $\tilde{b}$, we have $\tilde{b}'\circ\pi=\hat{b}$. Then by the uniqueness of $\tilde{b}$, we have $\tilde{b}=\tilde{b}'$. Thus the tensor product $F/K$ is the initial object in the category $\mathsf{Bal}_R(M, N)$.
 \end{prf}
 
-\begin{proposition}{Base Change Functor}{}
-    Let $\varphi:R\to S$ be a ring homomorphism. 
+\begin{example}{Base Change Functor}{}
+    Let $\varphi:R\to S$ be a ring homomorphism. The \textbf{base change functor} $-\otimes_R S:R\text{-}\mathsf{Mod}\to S\text{-}\mathsf{Mod}$ is defined as follows:
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Mod} \&[-25pt]\&[+30pt]\&[-30pt] S\text{-}\mathsf{Mod}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]M\otimes_R S\arrow[dd, "f\otimes_R \mathrm{id}_{S}"{name=R}] \&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "-\otimes_R S", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            N \& \& \&  N\otimes_R S\&
+        \end{tikzcd}
+        \]
+    where the $S$-module structure on $M\otimes_R S$ is given by
+    \[
+        s'\cdot (m\otimes s):=m\otimes (s's)
+    \]
+    for all $s', s\in S$ and $m\in M$.
+\end{example}
+
+\begin{proposition}{Tensoring with the Base Ring}{tensoring_with_base_ring}
+    Let $R$ be a ring and $M$ be a left $R$-module. Then there is a natural isomorphism of $R$-modules
+    \begin{align*}
+        \lambda_M: R\otimes_R M &\overset{\sim}{\longrightarrow} M\\
+        r\otimes m &\longmapsto r\cdot m
+    \end{align*}
 \end{proposition}
+\begin{prf}
+    Define the map
+    \begin{align*}
+        \rho_M: M &\longrightarrow R\otimes_R M\\
+        m &\longmapsto 1_R\otimes m.
+    \end{align*}
+    $\rho_M$ is an $R$-linear map since for any $r\in R$ and $m, n\in M$, 
+    \[
+    \rho_M(rm)=1_R\otimes (rm) = r\otimes m = r\cdot (1_R\otimes m) = r\cdot \rho_M(m).
+    \]
+\end{prf}
 
 \subsection{Localization}
 
-\begin{proposition}{}{}
+\begin{proposition}{}{equivalence_of_S_inverse_R_modules_and_R_modules_where_S_act_as_automorphisms}
     Let $R$ be a commutative ring and $S \subseteq R$ be a multiplicative subset. The category of $S^{-1} R$ modules is equivalent to the category of $R$-modules $M$ with the property that every $s \in S$ acts as an automorphism on $M$. The following functor $F$ gives a equivalence of categories: 
     \[
         \begin{tikzcd}[ampersand replacement=\&]
@@ -524,7 +571,7 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
 
 
 
-\begin{proposition}{Universal Property of Localization}{}
+\begin{proposition}{Universal Property of Localization}{universal_property_of_localization}
     Let $R$ be a commutative ring and $S\subseteq R$ be a multiplicative subset, an $M$ be an $R$-module. The $R$-linear map
     \begin{align*}
         l_S:M&\longrightarrow S^{-1}M\\
@@ -554,6 +601,7 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
             \end{tikzcd}
         \end{center}
     \end{itemize}
+    We have two equivalent universal properties because of the equivalence of categories in \Cref{th:equivalence_of_S_inverse_R_modules_and_R_modules_where_S_act_as_automorphisms}.
 \end{proposition}
 
 
@@ -591,7 +639,7 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
     \]
 \end{prf}
 
-\begin{proposition}{Localization is a Left Adjoint Functor}{} 
+\begin{proposition}{Localization is a Left Adjoint Functor}{localization_is_a_left_adjoint_functor}
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Define the localization functor as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
@@ -644,20 +692,26 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
     we see that $\frac{m}{s}\in \operatorname{im}S^{-1}(u)$, which means $\operatorname{im}S^{-1}(u)=\ker S^{-1}(v)$. Hence $S^{-1}$ is exact.
 \end{prf}
 
-\begin{proposition}{Localization as Tensor Product}{}
-    Let \(R\) be a ring, \(S \subseteq R\) a multiplicative subset. The localization functor $S^{-1}:R\text{-}\mathsf{Mod}\to S^{-1}R\text{-}\mathsf{Mod}$ is isomorphic to the tensor product functor $ S^{-1}R \otimes_R -$.
+\begin{proposition}{Localization of Module as Tensor Product}{localization_of_module_as_tensor_product}
+    Let \(R\) be a ring, \(S \subseteq R\) a multiplicative subset. The localization functor $S^{-1}:R\text{-}\mathsf{Mod}\to S^{-1}R\text{-}\mathsf{Mod}$ is isomorphic to the tensor product functor $ S^{-1}R \otimes_R -$. And we have isomorphisms
+    \begin{align*}
+        \theta_M : S^{-1}R \otimes _ R M &\overset{\sim}{\longrightarrow} S^{-1}M\\
+        \frac{a}{s} \otimes m &\longmapsto \frac{am}{s}
+    \end{align*}
+    naturally for all $R$-modules $M$.
 \end{proposition}
 \begin{prf}
-Define the map
+\noindent\textbf{Step 1. Constructing the Isomorphism \(\theta_M\)}\\
+\noindent Define the map
 \begin{align*}
     b_M: S^{-1}R \times M &\longrightarrow S^{-1}M\\
     \left(\frac{a}{s}, m\right) &\longmapsto \frac{am}{s}.
 \end{align*}
 This map is well-defined because for any \(\frac{a}{s} = \frac{a'}{s'}\), there exists \(u \in S\) such that \(u(s'a - sa') = 0\), so that 
 \[
-u(s'a - sa')m = u(s'(am) - s(a'm))=0 \quad \implies \frac{am}{s} = \frac{a'm}{s'}.
+u(s'(am) - s(a'm))=u(s'a - sa')m =0\implies \frac{am}{s} = \frac{a'm}{s'}.
 \]
-It is straightforward to check that \(b_M\) is an \(R\)-balanced product. By the universal property of the tensor product, there exists a unique \(R\)-linear map
+It is straightforward to check that \(b_M\) is an \(R\)-balanced product. By the \hyperlink{th:universal_property_of_localization}{universal property of the tensor product}, there exists a unique \(R\)-linear map
 \begin{align*}
     \theta_M: S^{-1}R\otimes_R M &\longrightarrow S^{-1}M\\
     \frac{a}{s} \otimes m &\longmapsto \frac{am}{s}\qquad(a \in A, s \in S, m \in M).
@@ -669,52 +723,47 @@ such that the following diagram commutes
                                                         & S^{-1}R\times M \arrow[ru, "b_M"'] \arrow[lu, "\otimes"] &        
         \end{tikzcd}
 \]
+
+\vspace{1em}
+\noindent\textbf{Step 2. Constructing the Inverse}\\
+\noindent Define the $R$-linear map 
+\begin{align*}
+    1\otimes -: M &\longrightarrow S^{-1}R \otimes_R M\\
+    m &\longmapsto 1_{S^{-1}R} \otimes m.
+\end{align*}
+Through the universal property of localization, we obtain a unique \(S^{-1}R\)-linear map
+\begin{align*}
+    \psi_M: S^{-1}M &\longrightarrow S^{-1}R \otimes_R M\\
+    \frac{m}{s} &\longmapsto \frac{1}{s} \otimes m.
+\end{align*}
+such that the following diagram commutes
 \[
     \begin{tikzcd}
         S^{-1}M \arrow[rr, "\psi_M", dashed] &                                          & S^{-1}R\otimes_R M \\
                                              & M \arrow[lu, "l"] \arrow[ru, "1\otimes -"'] &                   
         \end{tikzcd}
 \]
-
+We can verify that \(\theta_M\) and \(\psi_M\) are Inverses:
+\begin{itemize}
+    \item Composition \(\theta_M \circ \psi_M\): For any \(\frac{m}{s} \in S^{-1}M\),
+    \[
+    (\theta_M \circ \psi_M)\left(\frac{m}{s}\right) = \theta_M\left(\frac{1}{s} \otimes m\right) = \frac{1\cdot m}{s} = \frac{m}{s}.
+    \]
+    \item Composition \(\psi_M \circ \theta_M\): For any \(\frac{a}{s} \otimes m \in S^{-1}R \otimes_R M\), by \(R\)-linearity of the tensor product, we have
+    \[
+    (\psi_M \circ \theta_M)\Big(\frac{a}{s} \otimes m\Big) = \psi_M\left(\frac{am}{s}\right) = \frac{1}{s} \otimes am= \frac{a}{s} \otimes m.
+    \]
+\end{itemize}
 \vspace{1em}
-\textbf{Step 2. Constructing the Inverse}
-
-Define the inverse map
+\noindent\textbf{Step 3. Naturality}\\
+\noindent Let \(f: M \to N\) be a morphism of \(R\)-modules. We need to show that the following diagram commutes:
 \[
-\psi_M: S^{-1}M \longrightarrow S^{-1}R \otimes_R M
-\]
-by
-\[
-\psi_M\left(\frac{m}{s}\right) = \frac{1}{s} \otimes m.
-\]
-
-\textbf{Verification that \(\theta_M\) and \(\psi_M\) are Inverses:}
-
-\textbf{(i) Composition \(\theta_M \circ \psi_M\):} For any \(\frac{m}{s} \in S^{-1}M\),
-\[
-(\theta_M \circ \psi_M)\left(\frac{m}{s}\right) = \theta_M\left(\frac{1}{s} \otimes m\right) = \frac{1\cdot m}{s} = \frac{m}{s}.
-\]
-
-\textbf{(ii) Composition \(\psi_M \circ \theta_M\):} For any \(\frac{a}{s} \otimes m \in S^{-1}R \otimes_R M\),
-\[
-(\psi_M \circ \theta_M)\Big(\frac{a}{s} \otimes m\Big) = \psi_M\left(\frac{am}{s}\right) = \frac{1}{s} \otimes am.
-\]
-By \(A\)-linearity of the tensor product, we have
-\[
-\frac{1}{s} \otimes am = \frac{a}{s} \otimes m,
-\]
-so that \(\psi_M \circ \theta_M\) is the identity on \(S^{-1}R \otimes_R M\).
-
-\vspace{1em}
-\textbf{Step 3. Naturality}
-
-Let \(f: M \to N\) be a morphism of \(A\)-modules. We need to show that the following diagram commutes:
-\[
-\begin{array}{ccc}
-S^{-1}R \otimes_R M & \xrightarrow{\theta_M} & S^{-1}M \\[1ex]
-\downarrow{1\otimes f} &  & \downarrow{S^{-1}f} \\[1ex]
-S^{-1}R \otimes_R N & \xrightarrow{\phi_N} & S^{-1}N.
-\end{array}
+\begin{tikzcd}[column sep=large, row sep=large]
+S^{-1}R \otimes_R M \arrow[r, "\mathrm{id}\otimes f"] \arrow[d, "\theta_M"']
+  & S^{-1}R \otimes_R N \arrow[d, "\theta_N"] \\
+ S^{-1}M \arrow[r, "S^{-1}f"']
+  & S^{-1}N
+\end{tikzcd}
 \]
 For any \(\frac{a}{s} \otimes m \in S^{-1}R \otimes_R M\), we have
 \[
@@ -727,29 +776,25 @@ and
 Thus, the diagram commutes, and the isomorphism is natural.
 
 \vspace{1em}
-\textbf{Conclusion}
-
-We have constructed a natural isomorphism
+\noindent\textbf{Conclusion}\\
+\noindent We have constructed a natural isomorphism
 \[
 \theta_M: S^{-1}R \otimes_R M \xrightarrow{\sim} S^{-1}M,
 \]
-given by
-\[
-\theta_M\left(\frac{a}{s} \otimes m\right) = \frac{am}{s}.
-\]
-This establishes that the functors
+which establishes that the functors
 \[
 S^{-1}(-) \quad \text{and} \quad S^{-1}A\otimes_A(-)
 \]
-are naturally isomorphic, i.e.,
-\[
-S^{-1}A\otimes_R M \cong S^{-1}M \quad \text{naturally for all } A\text{-modules } M.
-\]
+are isomorphic.
 \end{prf}
 
 
 \begin{proposition}{Localization Respects Quotients}{localization_respects_quotients}
-    Let $M$ be an $R$-module and $N$ be a submodule of $M$. Then we have an isomorphism $S^{-1}(M/N)\cong (S^{-1}M)/(S^{-1}N)$ and the following commutative diagram
+    Let $M$ be an $R$-module and $N$ be a submodule of $M$. Then we have an isomorphism 
+    \[
+    S^{-1}(M/N)\cong (S^{-1}M)/(S^{-1}N)
+    \]
+    and the following commutative diagram
     \[
         \begin{tikzcd}
             M \arrow[r, "\pi_M"] \arrow[d, "S^{-1}"'] &[+5em] M/N \arrow[d, "S^{-1}"]              \\[+2em]
@@ -768,6 +813,25 @@ S^{-1}A\otimes_R M \cong S^{-1}M \quad \text{naturally for all } A\text{-modules
         0\longrightarrow S^{-1}N\longrightarrow S^{-1}M\longrightarrow S^{-1}(M/N)\longrightarrow 0.
     \]
 \end{prf}
+
+
+\begin{proposition}{Localization Commutes with Tensor Product}{localization_commutes_with_tensor_product}
+    Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M,N$ be $R$-modules. Then we have an isomorphism
+    \begin{align*}
+        f : S^{-1}M \otimes _{S^{-1}R}S^{-1}N &\overset{\sim}{\longrightarrow} S^{-1}(M \otimes _ R N)\\
+        \frac{m}{s} \otimes \frac{n}{t} &\longmapsto \frac{m \otimes n}{st}
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    \begin{align*} 
+         S^{-1}(M \otimes _ R N) &  \cong S^{-1}R \otimes _ R (M \otimes _ R N) &(\text{by \Cref{th:localization_of_module_as_tensor_product}})\\ 
+         &\cong (S^{-1}R \otimes _ R M) \otimes _ R N &(\text{by associativity of tensor product})\\
+         &  \cong S^{-1}M \otimes _ R N &(\text{by \Cref{th:localization_of_module_as_tensor_product}})\\
+          &  \cong (S^{-1}M \otimes _{S^{-1}R}S^{-1}R)\otimes _ R N&(\text{by \Cref{th:tensoring_with_base_ring}})\\
+          &  \cong S^{-1}M \otimes _{S^{-1}R}(S^{-1}R \otimes _ R N) &(\text{by associativity of tensor product})\\
+          &  \cong S^{-1}M \otimes _{S^{-1}R}S^{-1}N &(\text{by \Cref{th:localization_of_module_as_tensor_product}})
+    \end{align*}
+\end{proof}
 
 \begin{proposition}{Localization as Colimit}{}
     Let $R$ be a commutative ring, $S$ be a multiplicative set in $R$, and $M$ be an $R$-module. Then we have an isomorphism

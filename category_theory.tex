@@ -218,7 +218,7 @@ It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
 \end{definition}
 
 \begin{definition}{Terminal Object}{}
-    Let $\mathsf{C}$ be a category. An object $c\in \mathrm{Ob}(\mathsf{C})$ is called a \textbf{terminal object} if for any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists a unique morphism $X\to c$, or equivalently, $\mathrm{Hom}_{\mathsf{C}}(X,c)$ is a singleton set.
+    Let $\mathsf{C}$ be a category. An object $c\in \mathrm{Ob}(\mathsf{C})$ is called a \textbf{terminal object} or \textbf{final object} if for any object $X\in \mathrm{Ob}(\mathsf{C})$, there exists a unique morphism $X\to c$, or equivalently, $\mathrm{Hom}_{\mathsf{C}}(X,c)$ is a singleton set.
 \end{definition}
 
 \begin{proposition}{}{}
@@ -285,6 +285,17 @@ It is easy to see that $\left(F^{\mathrm{op}}\right)^{\mathrm{op}}=F$.
     \]
 \end{definition}
 
+\begin{definition}{Connected Category}{connected_category}
+    A category $\mathsf{C}$ is \textbf{connected} if it is nonempty and for any pair of objects $X,Y\in \mathrm{Ob}(\mathsf{C})$, there exists a zigzag of morphisms $(f_1,f_2,\cdots,f_{2n})$ connecting $X$ and $Y$ as follows
+\[
+    \begin{tikzcd}[ampersand replacement=\&]
+            \&  [-3em]   \& Z_1 \arrow[ld, "f_1"', dashed] \arrow[rd, "f_2", dashed] \&     \& Z_3 \arrow[ld, "f_3"', dashed] \arrow[rd, "f_4", dashed] \&        \& Z_{2n-1} \arrow[ld, "f_{2n-1}"', dashed] \arrow[rd, "f_{2n}", dashed] \&        \&  [-3em]   \\
+         X= \& Z_0 \&                                          \& Z_2 \&                                          \& \cdots \&                                                       \& Z_{2n} \& =Y
+         \end{tikzcd}
+         \]
+
+\end{definition}
+
 \begin{definition}{Comma Category}{comma_category}
     Suppose that $\mathsf{A}, \mathsf{B}$, and $\mathsf{C}$ are categories, and $S$ and $T$ (for source and target) are functors:
 $$
@@ -336,45 +347,6 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
 
 
 
-
-\begin{definition}{Slice Category}{}
-    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} $\left(\mathsf{C} / X\right)$ is the comma category $(\mathrm{id}_{\mathsf{C}} \downarrow X)$, where functors are illustrated as follows
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \boldone \arrow[l, "\diagfunctor X "']
-        \end{tikzcd}
-    \]
-    Morphims in $\left(\mathsf{C} / X\right)$ are commutative triangles shown as follows
-    \[
-        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-            C \arrow[rd, "h"] \arrow[dd, "f"'] \& \\
-            \& X\\
-            C^{\prime} \arrow[ru, "h^{\prime}"'] \&
-            \end{tikzcd}
-    \]
-\end{definition}
-
-\begin{definition}{Coslice Category}{coslice_category}
-    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
-    \[
-        \begin{tikzcd}[ampersand replacement=\&]
-            \boldone \arrow[r, "\diagfunctor"]{} \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
-        \end{tikzcd}
-    \]
-    Morphims in $\left(X / \mathsf{C}\right)$ are commutative triangles shown as follows
-    \[
-        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
-              \& C \arrow[dd, "f"]\\
-            X\arrow[ru, "h"]\arrow[rd, "h^{\prime}"']\& \\
-             \& C^{\prime} 
-            \end{tikzcd}
-    \]
-\end{definition}
-
-
-\begin{definition}{Category of Pointed Objects}{}
-    Suppose $\mathsf{C}$ is a category with terminal object $\bullet$. The coslice category $\left(\bullet / \mathsf{C}\right)$ is called the \textbf{category of pointed objects} of $\mathsf{C}$ and is denoted by $\mathsf{C}_\bullet$.
-\end{definition}
 
 
 \begin{example}{$\mathsf{Disc}$ Functor}{}
@@ -443,6 +415,215 @@ We say $\left(Y,S(Y)\xrightarrow{u} X\right)$ is a \textbf{universal morphism fr
 \end{definition}
 
 By viewing sets in $\mathsf{Set}$ as discrete categories, we have an inclusion $\mathsf{Set}\hookrightarrow\mathsf{Cat}$. Hence the category of elements of $F$ is a special case of the Grothendieck construction.
+
+
+\subsection{Slice Category}
+
+
+\begin{definition}{Slice Category}{}
+    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{slice category} or \textbf{over category} $\left(\mathsf{C} / X\right)$ is the \hyperref[th:comma_category]{comma category} $(\mathrm{id}_{\mathsf{C}} \downarrow X)$, where functors are illustrated as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{C} \arrow[r, "\mathrm{id}_{\mathsf{C}}"] \& \mathsf{C} \& \boldone \arrow[l, "\diagfunctor X "']
+        \end{tikzcd}
+    \]
+    Morphims in $\left(\mathsf{C} / X\right)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+            C \arrow[rd, "h"] \arrow[dd, "f"'] \& \\
+            \& X\\
+            C^{\prime} \arrow[ru, "h^{\prime}"'] \&
+            \end{tikzcd}
+    \]
+\end{definition}
+
+If $\mathsf{C}$ has a terminal object $\top_{\mathsf{C}}$, then the slice category $\left(\mathsf{C} / \top_{\mathsf{C}}\right)$ is isomorphic to $\mathsf{C}$.
+
+\begin{definition}{Coslice Category}{coslice_category}
+    Suppose $\mathsf{C}$ is a category and $X\in\mathrm{Ob}(\mathsf{C})$. The \textbf{coslice category} $\left(X / \mathsf{C}\right)$ is the comma category $(X \downarrow\mathrm{id}_{\mathsf{C}})$, where functors are illustrated as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \boldone \arrow[r, "\diagfunctor"]{} \& \mathsf{C} \& \mathsf{C} \arrow[l, "\mathrm{id}_{\mathsf{C}}"']
+        \end{tikzcd}
+    \]
+    Morphims in $\left(X / \mathsf{C}\right)$ are commutative triangles shown as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&, row sep=9pt]
+              \& C \arrow[dd, "f"]\\
+            X\arrow[ru, "h"]\arrow[rd, "h^{\prime}"']\& \\
+             \& C^{\prime} 
+            \end{tikzcd}
+    \]
+\end{definition}
+
+If $\mathsf{C}$ has an initial object $\varnothing$, then the coslice category $\left(\varnothing/ \mathsf{C}\right)$ is isomorphic to $\mathsf{C}$.
+
+\begin{definition}{Category of Pointed Objects}{}
+    Suppose $\mathsf{C}$ is a category with terminal object $\bullet$. The coslice category $\left(\bullet / \mathsf{C}\right)$ is called the \textbf{category of pointed objects} of $\mathsf{C}$ and is denoted by $\mathsf{C}_\bullet$.
+\end{definition}
+
+\begin{proposition}{}{}
+    Let $\mathsf{C}$ be a category. Fix some object $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. Then
+    \begin{enumerate}[(i)]
+        \item The forgetful functor $U: \mathsf{C}/X \to \mathsf{C}$ \hyperref[th:preserve_reflect_create_limits]{strictly creates} all colimits. If $\varinjlim (U\circ F)$ exists for some diagram $F:\mathsf{J}\to X/\mathsf{C}$, then $\varinjlim F$ exists and we have natural isomorphism
+        \[
+            U\left( \varinjlim F\right) \cong \varinjlim (U\circ F).
+        \]
+        \item The forgetful functor $U: \mathsf{C}/X \to \mathsf{C}$ \hyperref[th:preserve_reflect_create_limits]{strictly creates} all \hyperref[th:connected_limit]{connected limits}. If $\varprojlim (U\circ F)$ exists for some connected diagram $F:\mathsf{J}\to \mathsf{C}/X$, then $\varprojlim F$ exists and we have natural isomorphism
+        \[
+            U\left( \varprojlim F\right) \cong \varprojlim (U\circ F).
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Let $F:\mathsf{J}\to \mathsf{C}/X$ be a diagram. Write $F(j)=(f_j:A_j\to X)$ for each object $j\in \mathrm{Ob}(\mathsf{J})$. For each morphism $\lambda:j\to j'$ in $\mathsf{J}$, we have $F(\lambda):A_j\to A_{j'}$ such that the following diagram commutes
+        \[
+            \begin{tikzcd}
+            A_j \arrow[rd, "f_j"'] \arrow[rr, "F(\lambda)"] &   & A_{j'} \arrow[ld, "f_{j'}"] \\
+                                                            & X &                      
+            \end{tikzcd}
+        \]
+        \textbf{Lift the Limit Cocone}. Suppose the colimit of $U\circ F$ exists and the cocone
+        \[
+        C:=\left(\varinjlim U\circ F,\left(\mu_j:A_j\longrightarrow \varinjlim U\circ F\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+        \] 
+        is initial in $\mathsf{Cocone}\left(U\circ F,\mathsf{C}\right)$. Then by the universal property of colimits, there exists a unique morphism $q:\varinjlim (U\circ F)\to X$ such that for each morphism $\lambda:j\to j'$ in $\mathsf{J}$ the following diagram commutes
+        \[
+        \begin{tikzcd}
+            A_j \arrow[rdd, "f_j"'] \arrow[rr, "F(\lambda)"] \arrow[rd, "\mu_j"] &                                            & A_{j'} \arrow[ldd, "f_{j'}"] \arrow[ld, "\mu_{j'}"'] \\
+                                                                                & \varinjlim (U\circ F) \arrow[d, "q", dashed] &                                                      \\[1em]
+                                                                                & X                                          &                                                     
+            \end{tikzcd}
+        \]
+        This commutative diagram implies
+        \[
+        Q:=\left(q:\varinjlim (U\circ F)\longrightarrow X,\left(\mu_j:A_j\longrightarrow \varinjlim U\circ F\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+        \] 
+        is a cocone in $\mathsf{Cocone}\left(F,\mathsf{C}/X\right)$ and the \hyperref[th:pushforward_cone_by_functor]{pushforward cocone} $U_*Q$ is exactly $C$. 
+        
+        \textbf{Uniqueness of Lift}. To show $Q$ is the unique cocone in $\mathsf{Cocone}\left(F,\mathsf{C}/X\right)$ such that $U_*Q=C$, let 
+        \[
+        R=\left(r:\varinjlim (U\circ F)\longrightarrow X,\left(\mu_j:A_j\longrightarrow \varinjlim U\circ F\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+        \]
+        be any cocone in $\mathsf{Cocone}\left(F,\mathsf{C}/X\right)$ such that $U_*R=C$. The cocone condition implies for each morphism $\lambda:j\to j'$ in $\mathsf{J}$ the following diagram commutes
+         \[
+        \begin{tikzcd}
+            A_j \arrow[rdd, "f_j"'] \arrow[rr, "F(\lambda)"] \arrow[rd, "\mu_j"] &                                            & A_{j'} \arrow[ldd, "f_{j'}"] \arrow[ld, "\mu_{j'}"'] \\
+                                                                                & \varinjlim (U\circ F) \arrow[d, "r"] &                                                      \\[1em]
+                                                                                & X                                          &                                                     
+            \end{tikzcd}
+        \]
+        By the uniqueness part of the universal property of colimits, we have $r=q$. Hence $Q$ is the unique cocone in $\mathsf{Cocone}\left(F,\mathsf{C}/X\right)$ such that $U_*Q=C$.
+
+        \textbf{Lifted Cocone is Initial}. To show $Q$ is initial in $\mathsf{Cocone}\left(F,\mathsf{C}/X\right)$, let
+        \[
+        S=\left(s: Y \longrightarrow X, \left(\nu_j:A_j\longrightarrow Y \right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+        \]
+        be any cocone in $\mathsf{Cocone}\left(F,\mathsf{C}/X\right)$. Since for each morphism $\lambda:j\to j'$ in $\mathsf{J}$, the following diagram commutes
+        \[
+        \begin{tikzcd}
+        A_j \arrow[rddd, "f_j"', bend right] \arrow[rr, "F(\lambda)"] \arrow[rd, "\mu_j"] \arrow[rdd, "\nu_j"'] &                                              & A_{j'} \arrow[lddd, "f_{j'}", bend left] \arrow[ld, "\mu_{j'}"'] \arrow[ldd, "\nu_{j'}"] \\
+                                                                                                                & \varinjlim (U\circ F) \arrow[d, "u", dashed] &                                                                                          \\
+                                                                                                                & Y \arrow[d, "s"]                             &                                                                                          \\
+                                                                                                                & X                                            &                                                                                         
+        \end{tikzcd}
+        \]
+        where $u:\varinjlim (U\circ F)\to Y$ is the morphism induced by the universal property of colimits such that $u\circ \mu_j=\nu_j$ for each $j\in \mathrm{Ob}(\mathsf{J})$. By the uniqueness part of the universal property of colimits, we have $s\circ u=q$. Thus we have the following commutative diagram
+        \[
+        \begin{tikzcd}
+                                                                &[2em]   &[-1em]Y \arrow[ld, "s"]                                       \\[2em]
+A_j \arrow[rru, "\nu_j"] \arrow[r, "f_j"{pos=0.6}] \arrow[rrd, "\mu_j"'] & X &                                                         \\[2em]
+                                                                &   & \varinjlim (U\circ F) \arrow[uu, "u"'] \arrow[lu, "q"']
+\end{tikzcd}
+        \]
+        which implies $u: \varinjlim (U\circ F)\to Y$ is a morphism in $\mathsf{Cocoone}(F,\mathsf{C}/X)$ from $Q$ to $S$. To show uniqueness of such morphism, let $u': \varinjlim (U\circ F)\to Y$ be any morphism in $\mathsf{Cocoone}(F,\mathsf{C}/X)$ from $Q$ to $S$. Then for each $j\in \mathrm{Ob}(\mathsf{J})$, we have $u'\circ \mu_j=\nu_j$. By the uniqueness part of the universal property of colimits, we have $u'=u$. Hence $Q$ is initial in $\mathsf{Cocone}\left(F,\mathsf{C}/X\right)$.
+        \item  Let $F:\mathsf{J}\to \mathsf{C}/X$ be a diagram with $J$ being connected. Write $F(j)=(f_j:A_j\to X)$ for each object $j\in \mathrm{Ob}(\mathsf{J})$. For each morphism $\lambda:j\to j'$ in $\mathsf{J}$, we have $F(\lambda):A_j\to A_{j'}$ such that the following diagram commutes
+        \[
+            \begin{tikzcd}
+            A_j \arrow[rd, "f_j"'] \arrow[rr, "F(\lambda)"] &   & A_{j'} \arrow[ld, "f_{j'}"] \\
+                                                            & X &                      
+            \end{tikzcd}
+        \]
+         \textbf{Lift the Limit Cone}. Suppose the limit of $U\circ F$ exists and the cone
+         \[
+         L:=\left(h: \varprojlim (U\circ F), \left(\pi_j:\varprojlim (U\circ F)\to A_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+         \]
+         is final in $\mathsf{Cone}\left(\mathsf{C},U\circ F\right)$. Then by the universal property of limits, for each morphism $\lambda:j\to j'$ in $\mathsf{J}$, the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \& \varprojlim (U\circ F) \arrow[ld, "\pi_j"'] \arrow[rd, "\pi_{j'}"] \& \\[1em]
+        A_j\arrow[rd, "f_j"'] \arrow[rr, "F(\lambda)"] \& \& A_{j'}\arrow[ld, "f_{j'}"] \\[1em]
+            \& X \&
+        \end{tikzcd}
+    \]
+    and we have
+    \[
+       f_j \circ \pi_j = f_{j'}\circ \pi_{j'}.
+    \]
+    Since $\mathsf{J}$ is connected, $f_j \circ \pi_j = f_{j'}\circ \pi_{j'}$ holds for any $j, j'\in\mathrm{Ob}(\mathsf{J})$. Since connected category is nonempty, there exists $j_0\in \mathrm{Ob}(\mathsf{J})$. Define $h:=f_{j_0}\circ \pi_{j_0}$. Then 
+    \[
+    H=\left(h: \varprojlim (U\circ F) \longrightarrow X, \left(\pi_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+    \]
+    is a cone in $\mathsf{Cone}\left(\mathsf{C}/X, F\right)$ and the \hyperref[th:pushforward_cone_by_functor]{pushforward cone} $U_*H$ is exactly $L$.
+
+    \textbf{Uniqueness of Lift}. To show $H$ is the unique cone in $\mathsf{Cone}\left(\mathsf{C}/X, F\right)$ such that $U_*H=L$, let 
+    \[
+    H'=\left(h': \varprojlim (U\circ F) \longrightarrow X, \left(\pi_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+    \]
+    be any cone in $\mathsf{Cone}\left(\mathsf{C}/X, F\right)$ such that $U_*H'=L$. Since $h':\varprojlim (U\circ F) \to X$ is a morphism in $\mathsf{C}/X$, we have $h'=f_{j_0}\circ \pi_{j_0}=h$. Hence $H'=H$.
+
+    \textbf{Lifted Cone is Final}. To show $H$ is final in $\mathsf{Cone}\left(\mathsf{C}/X, F\right)$, let
+    \[
+    P=\left(p: Y \longrightarrow X, \left(\rho_j:Y\longrightarrow A_j \right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+    \]
+    be any cone in $\mathsf{Cone}\left(\mathsf{C}/X, F\right)$. Since for each morphism $\lambda:j\to j'$ in $\mathsf{J}$, the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \& Y\arrow[dd, "p"', out=180, in=180, looseness=2.2] \arrow[ld, "\rho_j"'] \arrow[rd, "\rho_{j'}"] \& \\[1em]
+        A_j\arrow[rd, "f_j"'] \arrow[rr, "F(\lambda)"] \& \& A_{j'}\arrow[ld, "f_{j'}"] \\[1em]
+            \& X \&
+        \end{tikzcd}
+    \]
+    we see
+    \[
+    \left(\rho_j:Y \longrightarrow A_j \right)_{j\in\mathrm{Ob}(\mathsf{J})}
+    \]
+    is a cone in $\mathsf{Cone}\left(\mathsf{C}, F\right)$. By universal property of $\varprojlim (U\circ F)$, there exists a unique morphism $u:Y\to \varprojlim (U\circ F)$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \& Y\arrow[d, "u"] \arrow[ldd, "\rho_j"'] \arrow[rdd, "\rho_{j'}"]\&  \\[1.2em]
+            \& \varprojlim (U\circ F) \arrow[ld, "\pi_j"] \arrow[rd, "\pi_{j'}"'] \& \\[1em]
+        A_j\arrow[rd, "f_j"'] \arrow[rr, "F(\lambda)"] \& \& A_{j'}\arrow[ld, "f_{j'}"] \\[1em]
+            \& X \&
+        \end{tikzcd}
+    \]
+    for each $j\in \mathrm{Ob}(\mathsf{J})$. Since
+    \[
+    h \circ u = f_{j_0}\circ \pi_{j_0}\circ u = f_{j_0}\circ \rho_{j_0}= p,
+    \]
+    we see $u:Y\to \varprojlim (U\circ F)$ is a morphism in $\mathsf{C}/X$ such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+                            &[2em]   &[-1em] Y \arrow[ld, "p"] \arrow[dd, "u"] \arrow[lld, "\rho_j"']      \\[2em]
+        A_j \arrow[r, "f_j"{pos=0.6}] & X &                                                               \\[2em]
+                            &   & \varprojlim (U\circ F)  \arrow[lu, "h"'] \arrow[llu, "\pi_j"]
+        \end{tikzcd}
+    \]
+    for each $j\in \mathrm{Ob}(\mathsf{J})$. Hence $u:Y\to \varprojlim (U\circ F)$ is a morphism in $\mathsf{Cone}\left(\mathsf{C}/X, F\right)$ from $P$ to $H$. 
+    
+    If $u':Y\to \varprojlim (U\circ F)$ is a morphism in $\mathsf{Cone}\left(\mathsf{C}/X, F\right)$ from $P$ to $H$, then by forgetting the morphism to $\mathsf{C}$, we see $u'$ is also a morphism in $\mathsf{Cone}\left(\mathsf{C}, U\circ F\right)$ from
+    \[
+    \left(Y, \left(\rho_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right)
+    \]
+    to
+    \[
+    \left(\varprojlim (U\circ F), \left(\pi_j\right)_{j\in\mathrm{Ob}(\mathsf{J})}\right).
+    \]
+    Thus we have $u'=u$ by the universal property of $\varprojlim (U\circ F)$. Therefore $H$ is final in $\mathsf{Cone}\left(\mathsf{C}/X, F\right)$.
+    \end{enumerate}
+\end{prf}
 
 
 \section{String Diagram}
@@ -2214,6 +2395,10 @@ F(i)\arrow[ru, "h_i"]  \arrow[rr, "F(\lambda)"'] \&                             
     For simplicity, we may write $\varinjlim F$  instead of $\varinjlim_\mathsf{J} F$.
 \end{definition}
 
+\begin{definition}{Connected Limit}{connected_limit}
+    Let $\mathsf{J}$ be a category. Then a $\mathsf{J}$-shaped limit (resp. colimit) is called a \textbf{connected limit} (resp. \textbf{connected colimit}) if the category $\mathsf{J}$ is \hyperref[th:connected_category]{connected}.
+\end{definition}
+
 
 \begin{proposition}{Limit Characterized by Representability}{limit_by_representability}
     Let $\mathsf{J},\mathsf{C}$ be categories and $F:\mathsf{J}\to\mathsf{C}$ be a functor. The limit of $F$ exists if and only if the functor $\mathrm{Hom}_{[\mathsf{J},\mathsf{C}]}\left(\diagfunctor\left(-\right), F\right)$ 
@@ -2525,7 +2710,7 @@ G(i) \arrow[ru]\arrow[rr]                         \&                            
 \end{definition}
 
 
-\begin{example}{Pushforward Cone by Functor}{}
+\begin{example}{Pushforward Cone by Functor}{pushforward_cone_by_functor}
     Let $\mathsf{J},\mathsf{C},\mathsf{D}$ be categories and $K:\mathsf{J}\to\mathsf{C}$, $F:\mathsf{C}\to\mathsf{D}$ be a functor. $F$ induces the following pushforward functor between \hyperref[th:cone]{cone} categories
     \[
         \begin{tikzcd}[ampersand replacement=\&]
@@ -2543,27 +2728,31 @@ G(i) \arrow[ru]\arrow[rr]                         \&                            
 
 
 
-\begin{definition}{Preserve, Reflect, Create Limits}{}
-    Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams  valued in $\mathsf{C}$. A functor $F: \mathsf{C} \rightarrow \mathsf{D}$ is said to
+\begin{definition}{Preserve, Reflect, Create Limits}{preserve_reflect_create_limits}
+    Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $K: \mathsf{J} \rightarrow \mathsf{C}$ is a diagram. A functor $F: \mathsf{C} \rightarrow \mathsf{D}$ is said to
     \begin{itemize}
-        \item \textbf{preserves} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and any cone $\mu\in \mathsf{Cone}(\mathsf{C},K)$, 
+        \item \textbf{preserves} the limit of $K$ if for any cone $\mu\in \mathsf{Cone}(\mathsf{C},K)$, 
         \[
         \text{$\mu$ is terminal in $\mathsf{Cone}(\mathsf{C},K)$ $\implies$ $F_*\mu$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$}
         \]
-        \item \textbf{reflects} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and any cone $\mu\in \mathsf{Cone}(\mathsf{C},K)$, 
+        \item \textbf{reflects} the limit of $K$ if for any cone $\mu\in \mathsf{Cone}(\mathsf{C},K)$, 
         \[\text{$F_*\mu$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$ $\implies$ $\mu$ is terminal in $\mathsf{Cone}(\mathsf{C},K)$}\]
-        \item \textbf{creates} limits for $\mathcal{K}$ if 
+        \item \textbf{creates} the limit of $K$ if 
         \begin{itemize}
-            \item $F$ reflects the limits for $\mathcal{K}$, and
-            \item for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$, if $\eta$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$, then there exists a cone $\mu$ in $\mathsf{Cone}(\mathsf{C},K)$ such that $F_*\mu$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$.
+            \item $F$ reflects the limit of $K$, and
+            \item if $\eta$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$, then there exists a cone $\mu$ in $\mathsf{Cone}(\mathsf{C},K)$ such that $F_*\mu$ is terminal in $\mathsf{Cone}(\mathsf{D},F\circ K)$.
         \end{itemize}
-        \item \textbf{strictly creates} limits for $\mathcal{K}$ if for any diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$ and limit cone over $F \circ K: \mathsf{J} \rightarrow \mathsf{D}$,
+        \item \textbf{strictly creates} the limit of $K$ if for any terminal object $\eta\in \mathsf{Cone}(\mathsf{D},F\circ K)$,
         \begin{itemize}
-            \item there exists a unique lift of that cone to a cone over $K$, and
-            \item moreover, this lift defines a limit cone in $\mathsf{C}$.
+            \item there exists a unique cone $\mu$ in $\mathsf{Cone}(\mathsf{C},K)$ such that $F_*\mu=\eta$, and
+            \item moreover, $\mu$ is terminal in $\mathsf{Cone}(\mathsf{C},K)$.
         \end{itemize}
     \end{itemize}
+    Suppose $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams valued in $\mathsf{C}$. We say that $F$ preserves (reflects, creates, strictly creates) limits for $\mathcal{K}$ if it preserves (reflects, creates, strictly creates) limits for each diagram $K: \mathsf{J} \rightarrow \mathsf{C}$ in $\mathcal{K}$.
+
+    We say that $F$ preserves (reflects, creates, strictly creates) limits of shape $\mathsf{J}$ if it preserves (reflects, creates, strictly creates) limits for all diagrams $K: \mathsf{J} \rightarrow \mathsf{C}$.
 \end{definition}
+It is clear from the definition that if a functor $F$ strictly creates the limit of a diagram $K$, then it creates the limit of $K$.
 
 \begin{proposition}{}{}
     Suppose $\mathsf{J}$, $\mathsf{C}$, $\mathsf{D}$ are categories and $\mathcal{K}\subseteq\mathrm{Ob}\left([\mathsf{J}, \mathsf{C}]\right)$ is a class of diagrams valued in $\mathsf{C}$. If $F: \mathsf{C} \rightarrow \mathsf{D}$ creates limits for $\mathcal{K}$ and $\varprojlim_\mathsf{J} F\circ K$ exists for each $K \in\mathcal{K}$, then $\varprojlim_\mathsf{J} K$ exists for each $K \in\mathcal{K}$ and $F$ preserves them.
@@ -2808,16 +2997,7 @@ F(i) \arrow[rd, "\iota_i"'] \arrow[r, "F(\lambda_1)", dashed] \& F(k) \arrow[d, 
     \]
     This implies $\backsimeq$ contains $\approx$. Therefore, $\approx$ is the smallest equivalence relation containing $\sim^*$, which means $\approx$ coincides with $\sim$.
 \end{prf}
-\begin{definition}{Connected Category}{}
-    A category $\mathsf{C}$ is \textbf{connected} if it is nonempty and for any pair of objects $X,Y\in \mathrm{Ob}(\mathsf{C})$, there exists a zigzag of morphisms $(f_1,f_2,\cdots,f_{2n})$ connecting $X$ and $Y$ as follows
-\[
-    \begin{tikzcd}[ampersand replacement=\&]
-            \&  [-3em]   \& Z_1 \arrow[ld, "f_1"', dashed] \arrow[rd, "f_2", dashed] \&     \& Z_3 \arrow[ld, "f_3"', dashed] \arrow[rd, "f_4", dashed] \&        \& Z_{2n-1} \arrow[ld, "f_{2n-1}"', dashed] \arrow[rd, "f_{2n}", dashed] \&        \&  [-3em]   \\
-         X= \& Z_0 \&                                          \& Z_2 \&                                          \& \cdots \&                                                       \& Z_{2n} \& =Y
-         \end{tikzcd}
-         \]
 
-\end{definition}
 
 \begin{definition}{Final Functor}{}
     A functor $F:\mathsf{C}\to\mathsf{D}$ is \textbf{final} if for every object $d\in \mathsf{D}$, the comma category $(d\downarrow F)$ obtained from
