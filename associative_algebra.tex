@@ -89,7 +89,120 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     Let $R$ be a commutative ring and $X_1,\cdots,X_n$ be indeterminates. Then $R[X_1,\cdots,X_n]$ is an $\mathbb{N}$-graded $R$-algebra with grading $R[X_1,\cdots,X_n]_i$ being the set of homogeneous polynomials of degree $i$.
 \end{example}
 
+\subsection{Tensor Product}
+\begin{definition}{Tensor Product of Algebras}{}
+    Let $R$ be a commutative ring and $A$, $B$ be $R$-algebras. The \textbf{tensor product of $R$-algebras $A$ and $B$} is defined by the following universal property: for any triple $(C, f_A, f_B)$, where $C$ is an $R$-algebra and $f_A:A\to C$, $f_B:B\to C$ are $R$-algebra homomorphisms which satisfy
+    \[
+        f_A(a)f_B(b)=f_B(b)f_A(a),\quad \forall a\in A, b\in B,
+    \]
+    the tensor product
+    \[
+    (A\otimes_R B, \iota_A: A \times B \to A\otimes_R B, \iota_B: A \times B \to A\otimes_R B)
+    \]
+    is initial among such triples, i.e. there exists a unique $R$-algebra homomorphism \begin{align*}
+        \phi: A\otimes_R B &\longrightarrow C
+    \end{align*}
+    
+    such that the following diagram commutes
+    \[
+        \begin{tikzcd}
+        A \arrow[r, "\iota_A"] \arrow[rd, "f_A"'] & A\otimes_R B \arrow[d, "\exists! \phi", dashed] & B \arrow[l, "\iota_B"'] \arrow[ld, "f_B"] \\[0.5em]
+                                                & C                                               &                                          
+        \end{tikzcd}
+    \]
 
+    Concretely, $A\otimes_R B$ can be constructed as the tensor product of $R$-modules $A\otimes_R B$ together with multiplication defined as
+    \[
+        (a_1\otimes b_1)(a_2\otimes b_2):=(a_1a_2)\otimes(b_1b_2),\quad \forall a_1,a_2\in A, b_1,b_2\in B
+    \]
+    and unity 
+    \[
+          1_{A\otimes_R B}:=1_A\otimes 1_B.
+    \]
+    And the $R$-algebra homomorphisms $\iota_A$, $\iota_B$ are defined as
+    \begin{align*}
+        \iota_A : A &\longrightarrow A\otimes_R B\\
+        a &\longmapsto a\otimes 1_B,
+    \end{align*}
+    \begin{align*}
+        \iota_B : B &\longrightarrow A\otimes_R B\\
+        b &\longmapsto 1_A\otimes b.
+    \end{align*}
+    The unique $R$-algebra homomorphism $\phi:A\otimes_R B\to C$ is defined as
+    \begin{align*}
+        \phi: A\otimes_R B &\longrightarrow C\\
+        a\otimes b &\longmapsto f_A(a)f_B(b).
+    \end{align*}
+\end{definition}
+\begin{remark}
+    It is straightforward to check that the multiplication defined above is well-defined and makes $A\otimes_R B$ an $R$-algebra. According to \Cref{th:pure_tensors_generate_tensor_product}, since $(a,b)\mapsto f_A(a)f_B(b)$ is $\mathbb{Z}$-bilinear, $\phi$ is a well-defined abelian group homomorphism. We can further check that $\phi$ is an $R$-algebra homomorphism:
+    \[
+    \phi(r(a\otimes b))=\phi((r a)\otimes b)=f_A(r a)f_B(b)=r f_A(a)f_B(b)=r \phi(a\otimes b)
+    \]
+    \[
+    \phi\left((a_1\otimes b_1)(a_2\otimes b_2)\right)=\phi\left((a_1a_2)\otimes(b_1b_2)\right)= f_A(a_1a_2)f_B(b_1b_2)=f_A(a_1)f_A(a_2)f_B(b_1)f_B(b_2)=\phi(a_1\otimes b_1)\phi(a_2\otimes b_2)
+    \]
+    \[
+\phi\left(1_{A\otimes_R B}\right)=\phi\left(1_A\otimes 1_B\right)=f_A(1_A)f_B(1_B)=1_C
+    \]
+\end{remark}
+
+\begin{definition}{Tensor Product of $R$-algebra Homomorphisms}{}
+    Let $R$ be a commutative ring and $A_1$, $A_2$, $B_1$, $B_2$ be $R$-algebras. Given two $R$-algebra homomorphisms $f:A_1\to A_2$ and $g:B_1\to B_2$, the \textbf{tensor product of $R$-algebra homomorphisms} is defined as the $R$-algebra homomorphism 
+    \begin{align*}
+        f\otimes_R g: A_1\otimes_R B_1 &\longrightarrow A_2\otimes_R B_2\\
+        a\otimes b &\longmapsto f(a)\otimes g(b).
+    \end{align*}
+    which is induced by the universal property of tensor product $A_1\otimes_R B_1$ through the following commutative diagram:
+    \[
+    \begin{tikzcd}
+        A_1 \arrow[r, "\iota_{A_1}"] \arrow[d, "f"']                              & A_1\otimes_R B_1 \arrow[d, "f\otimes_R g", dashed] & B_2 \arrow[l, "\iota_{B_1}"'] \arrow[d, "g"] \\[0.7em]
+        A_2  \arrow[r, "\iota_{A_2}"'] & A_2\otimes_R B_2                                   & B_2 \arrow[l, "\iota_{B_2}"]                
+        \end{tikzcd}
+    \] 
+\end{definition}
+
+
+\begin{proposition}{Symmetric Monoidal Structure on $R$-$\mathsf{Alg}$}{}
+    Let $R$ be a commutative ring. The tensor product $\otimes_R$ defines a symmetric monoidal structure on the category $R$-$\mathsf{Alg}$, with unit object $R$.
+    \begin{enumerate}[(i)]
+        \item Tensor product: the tensor product functor is 
+        \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Alg}\times R\text{-}\mathsf{Alg}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Alg}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            (A_1, B_1)  \arrow[dd, "f\times g"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt] A_1\otimes_R B_1\arrow[dd, "f\otimes_R g"{name=R}] \&[-30pt]\\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\otimes_R", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+            (A_2, B_2) \& \& \&  A_2\otimes_R B_2\&
+        \end{tikzcd}
+        \]  
+        \item Associator: for any $R$-algebras $A$, $B$, $C$, there is a natural isomorphism
+        \begin{align*}
+            \alpha_{A,B,C}:(A\otimes_R B)\otimes_R C &\xlongrightarrow{\sim}A\otimes_R (B\otimes_R C)\\
+            (a\otimes b)\otimes c &\longmapsto a\otimes (b\otimes c)
+        \end{align*}
+        \item Unit object: $R$.
+        \item An isomorphism in $R$-$\mathsf{Alg}$:
+        \begin{align*}
+            \iota: R \otimes_R R &\xlongrightarrow{\sim} R\\
+            r\otimes r' &\longmapsto rr'
+        \end{align*}
+        \item Symmetry: for any $R$-algebras $A$, $B$, there is a natural isomorphism
+        \begin{align*}
+            \gamma_{A,B}: A\otimes_R B &\xlongrightarrow{\sim} B\otimes_R A\\
+            a\otimes b &\longmapsto b\otimes a
+        \end{align*}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}{}{}
+    Let $R$ be a commutative ring and $A_1$, $A_2$ be $R$-algebras. Let $I_1\subseteq A_1$, $I_2\subseteq A_2$ be two-sided ideals of $A_1$, $A_2$ respectively. Then we have an $R$-algebra isomorphism
+    \[
+        (A_1\otimes_R A_2)/(I_1\otimes_R A_2 + A_1\otimes_R I_2) \cong (A_1/I_1)\otimes_R (A_2/I_2).
+    \]
+    
+\end{proposition}
 
 \subsection{Tensor Algebra}
 \begin{definition}{Tensor Algebra $T^{\bullet}(M)$}{}

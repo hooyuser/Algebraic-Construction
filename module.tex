@@ -199,7 +199,7 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
 \end{proposition}
 
 \begin{prf}
-    We prove $(i)\Rightarrow(ii)\Rightarrow(iii)\Rightarrow(i)$.
+    We prove $\text{(i)}\Rightarrow(ii)\Rightarrow(iii)\Rightarrow(i)$.
 
 \paragraph{$(i)\;\Rightarrow\;(ii)$}
 Assume $M$ is simple and let $0\neq m\in M$.  
@@ -385,12 +385,25 @@ Thus $(i)\Leftrightarrow(ii)\Leftrightarrow(iii)$, completing the proof.
 \subsection{Tensor Product}
 
 \begin{definition}{Bimodule}{bimodule}
-    Let $R$ and $S$ be rings. An ($R$,$S$)-\textbf{bimodule} is an abelian group $M$ together with a structure of left $R$-module and a structure of right $S$-module such that
+    Let $R$ and $S$ be rings. An $(R, S)$-\textbf{bimodule} is an abelian group $M$ together with a structure of left $R$-module and a structure of right $S$-module such that
     \[
         r(ms)=(rm)s     
     \]
     for all $r\in R$, $s\in S$, and $m\in M$.
 \end{definition}
+
+\begin{example}{Examples of Bimodule}{}
+    Let $R$ and $S$ be rings.
+    \begin{itemize}
+        \item If $M$ is a left $R$-module, then $M$ is an $(R,\mathbb{Z})$-bimodule. 
+        \item If $M$ is a right $S$-module, then $M$ is a $(\mathbb{Z},S)$-bimodule.
+        \item If $R$ is a commutative ring, then every left $R$-module is an $(R,R)$-bimodule, and every right $R$-module is also an $(R,R)$-bimodule. In particular, every abelian group is a $\mathbb{Z}$-module, hence a $(\mathbb{Z},\mathbb{Z})$-bimodule.
+        \item Any two-sided ideal of a ring $R$ is an $(R,R)$-bimodule, with the ring multiplication both as the left and as the right multiplication. In particular, $R$ itself is an $(R,R)$-bimodule.
+        \item If $M$ is a right $R$-module, then $M$ is an $(\mathrm{End}_{\mathsf{Mod}\text{-}R}(M),R)$-bimodule, where the left multiplication is given by function application.
+        \item If $M$ is a left $R$-module, then $M$ is an $(R,\mathrm{End}_{R\text{-}\mathsf{Mod}}(M)^{\mathrm{op}})$-bimodule, where the right multiplication is given by function application.
+    \end{itemize}
+    
+\end{example}
 
 \begin{definition}{Balanced Product}{}
     Let $R$ be a ring, $M$ be a right $R$-module, $N$ be a left $R$-module and $G$ be an abelian group. A map $b:M\times N\to G$ is called a \textbf{$R$-balanced product} if 
@@ -484,6 +497,144 @@ M\times N \arrow[ru, "b_1"] \arrow[rd, "b_2"'] \&                   \\
 
     To show the uniqueness, assume there exists another group homomorphism $\tilde{b}':F/K\to G$ such that $\tilde{b}'\circ\pi\circ\iota=b$. Since $\hat{b}\circ \iota=b$, by the uniqueness of $\tilde{b}$, we have $\tilde{b}'\circ\pi=\hat{b}$. Then by the uniqueness of $\tilde{b}$, we have $\tilde{b}=\tilde{b}'$. Thus the tensor product $F/K$ is the initial object in the category $\mathsf{Bal}_R(M, N)$.
 \end{prf}
+
+\begin{proposition}{Pure Tensors Generate Tensor Product}{pure_tensors_generate_tensor_product}
+    Let $R$ be a ring, $M$ be a right $R$-module, and $N$ be a left $R$-module. The elements of the image of the tensor product map $\otimes :M\times N\to M\otimes_R N$
+    \[
+       \mathrm{im}(\otimes) = \{m\otimes n \mid m\in M, n\in N\}.
+    \]
+    are called \textbf{pure tensors}.
+    \begin{enumerate}[(i)]
+        \item $\mathrm{im}(\otimes)$ generates $M\otimes_R N$ as an abelian group:
+        \[
+            M\otimes_R N = \langle \mathrm{im}(\otimes) \rangle_{\mathsf{Ab}}:=\left\{
+                \sum_{i=1}^k m_i\otimes n_i \mid k\in \mathbb{Z}_{\ge 1}, m_i\in M, n_i\in N
+            \right\}.
+        \]
+        \item Let $F:=\mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes))$. Then we have
+        \[
+        M\otimes_R N \cong F/\langle X_M\cup X_N\rangle,
+        \]
+        where
+        \begin{align*}
+            X_M&=\left\{[(m+m')\otimes n]-[m\otimes n]-[m'\otimes n]\in F\midv m,m'\in M,n\in N\right\},\\
+            X_N&=\left\{[m\otimes(n+n')]-[m\otimes n]-[m\otimes n']\in F\midv m\in M, n,n'\in N\right\}.
+        \end{align*}
+        \item Let $f:\mathrm{im}(\otimes)\to G$ be a map. If and only if the map
+        \begin{align*}
+            M \times N &\longrightarrow G \\
+            (m,n)&\longmapsto f(m\otimes n)
+        \end{align*}
+        is $\mathbb{Z}$-bilinear, i.e.
+        \begin{align*}
+            f\left((m_1+m_2)\otimes n\right)&=f\left(m_1\otimes n\right)+f\left(m_2\otimes n\right),\\
+            f\left(m\otimes (n_1+n_2)\right)&=f\left(m\otimes n_1\right)+f\left(m\otimes n_2\right),
+        \end{align*}
+        there exists a group homomorphism $\tilde{f}:M\otimes_R N\to G$ such that the following diagram commutes
+        \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathrm{im}(\otimes) \arrow[r, "i", hook] \arrow[rd, "f"']  \& M\otimes_R N \arrow[d, dashed, "\tilde{f}"] \\[0.3cm]
+            \&  G
+        \end{tikzcd}
+        \]
+        If such $\tilde{f}$ exists, then it is unique and is totally determined by $f$ as follows:
+        \begin{align*}
+            \tilde{f}:M\otimes_R N&\longrightarrow G\\
+            \sum_{i=1}^k m_i\otimes n_i &\longmapsto \sum_{i=1}^k f(m_i\otimes n_i).
+        \end{align*}
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item 
+    Let $\mathrm{pr}:M\otimes_R N\to M\otimes_R N/\langle \mathrm{im}(\otimes) \rangle_{\mathsf{Ab}}$ be the canonical projection. Then we have the following commutative diagram
+    \[
+     \begin{tikzcd}[ampersand replacement=\&]
+            M\times N \arrow[r, "\otimes"] \arrow[rd, "0"']  \& M\otimes_R N \arrow[d, "\mathrm{pr}", two heads] \\[2em]
+            \&  M\otimes_R N/\langle \mathrm{im}(\otimes) \rangle_{\mathsf{Ab}}
+        \end{tikzcd}
+    \]
+    Note $0= 0\circ \otimes$. By the uniqueness in the universal property of tensor product, we have $\mathrm{pr}=0$. Therefore, $M\otimes_R N=\langle \mathrm{im}(\otimes) \rangle_{\mathsf{Ab}}$.
+
+    \item Define
+    \begin{align*}
+        j:\mathrm{im}(\otimes)&\longrightarrow  \mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes))\\
+         m\otimes n &\longmapsto [m\otimes n]
+    \end{align*}
+    By the universal property of free abelian group, the inclusion $i:\mathrm{im}(\otimes)\hookrightarrow M\otimes_R N $ induces a group homomorphism $\widehat{i}:\mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes))\to M\otimes_R N$.
+    \[
+    \begin{tikzcd}
+                &[-1em] \mathrm{im}(\otimes) \arrow[d, "j", hook] \arrow[rd, "f"] \arrow[ld, "i"', hook]                                                                                   &   \\[3em]
+    M\otimes_R N & \mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes)) \arrow[d, "p", two heads] \arrow[r, "\widehat{f}", dashed] \arrow[l, "\widehat{i}"', dashed]                         & G \\[3em]
+                & \mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes))/\langle X_M\cup X_N\rangle_{\mathsf{Ab}}. \arrow[ru, "\overline{f}"', dashed] \arrow[lu, "\overline{i}", dashed] &  
+    \end{tikzcd}
+    \]
+    Since 
+    \[
+    \widehat{i}\left(X_M\right)=\widehat{i}\left(X_N\right)=\{0\}\implies   X_M\cup X_N \subseteq \ker \widehat{i}\implies \langle X_M\cup X_N\rangle_{\mathsf{Ab}}\subseteq \ker \widehat{i}
+    \]
+    there exists a unique group homomorphism $\overline{i}:\mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes))/\langle X_M\cup X_N\rangle_{\mathsf{Ab}}\to M\otimes_R N $ such that $\overline{i}\circ p= \widehat{i}$. Since $\widehat{i}$ is surjective, $\overline{i}$ is also surjective. Define
+    \begin{align*}
+        \beta:M\times N&\longrightarrow \mathrm{Free}_{\mathsf{Ab}}\left(\mathrm{im}(\otimes)\right)/\langle X_M\cup X_N\rangle_{\mathsf{Ab}}\\
+         (m,n)&\longmapsto \overline{\left[m \otimes n\right]}
+    \end{align*}
+    We can check that $\beta$ is a balanced product
+    \begin{align*}
+       \beta\left(m_1+m_2,n\right)&=\overline{\left[(m_1+m_2) \otimes n\right]}=\overline{\left[m_1 \otimes n\right]}+\overline{\left[m_2 \otimes n\right]} = \beta\left(m_1,n\right)+\beta\left(m_2,n\right),\\
+       \beta\left(m, n_1+n_2\right)&= \overline{\left[m \otimes \left(n_1+n_2\right)\right]}= \overline{\left[m \otimes n_1\right]}+\overline{\left[m \otimes n_2\right]}=\beta\left(m, n_1\right)+\beta\left(m, n_2\right),
+       \\
+       \beta\left(mr, n\right)&= \overline{\left[(mr) \otimes n\right]}= \overline{\left[m \otimes (rn)\right]}=\beta\left(m, rn\right).
+    \end{align*}
+    By the universal property of tensor product $M \otimes_R N$, there exists a unique group homomorphism
+    \begin{align*}
+        \varphi:M\otimes_R N&\longrightarrow \mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes))/\langle X_M\cup X_N\rangle,\\
+         m\otimes n &\longmapsto \overline{[m\otimes n]}.
+    \end{align*}
+    such that $\varphi\circ \otimes=\beta$. Note 
+    \begin{align*}
+    \varphi\circ \overline{i}\left(\overline{[m_1\otimes n_1]+\cdots [m_k\otimes n_k]}\right)&=\varphi\circ \overline{i}\circ p\left([m_1\otimes n_1]+\cdots [m_k\otimes n_k]\right)\\
+    &=\varphi\circ \widehat{i}\left([m_1\otimes n_1]+\cdots [m_k\otimes n_k]\right)\\
+    &=\varphi\left(m_1\otimes n_1\right)+\cdots +\varphi\left(m_k\otimes n_k\right)\\
+    &=\overline{[m_1\otimes n_1]}+\cdots +\overline{[m_k\otimes n_k]}\\
+    &=\overline{[m_1\otimes n_1]+\cdots +[m_k\otimes n_k]}.
+    \end{align*}
+    We have $\varphi\circ \overline{i}=\mathrm{id}$, which implies that $\overline{i}$ is injective. Therefore, $\overline{i}$ is an isomorphism.
+    \item If there exists a group homomorphism $\tilde{f}:M\otimes_R N\to G$ such that $f=\tilde{f}\circ i$, then we can check that the map $(m,n)\mapsto f(m\otimes n)$ is $\mathbb{Z}$-bilinear:
+    \begin{align*}
+        f\left((m_1+m_2)\otimes n\right)&=\tilde{f}\left(i\left((m_1+m_2)\otimes n\right)\right)=\tilde{f}\left(m_1\otimes n+m_2\otimes n\right)=f\left(m_1\otimes n\right)+f\left(m_2\otimes n\right),\\
+        f\left(m\otimes (n_1+n_2)\right)&=\tilde{f}\left(i\left(m\otimes (n_1+n_2)\right)\right)=\tilde{f}\left(m\otimes n_1+m\otimes n_2\right)=f\left(m\otimes n_1\right)+f\left(m\otimes n_2\right).
+    \end{align*}
+    Conversely, if the map $(m,n)\mapsto f(m\otimes n)$ is $\mathbb{Z}$-bilinear, then we have
+    \begin{align*}
+        \widehat{f}\left([(m+m')\otimes n]-[m\otimes n]-[m'\otimes n]\right)&=\widehat{f}\left([(m+m')\otimes n]\right)-\widehat{f}\left([m\otimes n]\right)-\widehat{f}\left([m'\otimes n]\right)\\
+        &=f\left((m+m')\otimes n\right)-f\left(m\otimes n\right)-f\left(m'\otimes n\right)=0,\\
+        \widehat{f}\left([m\otimes(n+n')]-[m\otimes n]-[m\otimes n']\right)&=\widehat{f}\left([m\otimes(n+n')]\right)-\widehat{f}\left([m\otimes n]\right)-\widehat{f}\left([m\otimes n']\right)\\
+        &=f\left(m\otimes(n+n')\right)-f\left(m\otimes n\right)-f\left(m\otimes n'\right)=0,
+    \end{align*}
+    which implies
+    \[
+    \widehat{f}\left(X_M\right)=\widehat{f}\left(X_N\right)=\{0\}\implies X_M\cup X_N \subseteq \ker \widehat{f}\implies \langle X_M\cup X_N\rangle_{\mathsf{Ab}}\subseteq \ker \widehat{f}.
+    \]
+    Thus by the universal property of quotient group, there exists a unique group homomorphism 
+    \begin{align*}
+        \overline{f}: \mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes))/\langle X_M\cup X_N\rangle_{\mathsf{Ab}}&\longrightarrow G\\
+        \overline{[m\otimes n]}&\longmapsto f(m\otimes n)
+    \end{align*}
+    such that $\overline{f}\circ p=\widehat{f}$. Composing $\overline{f}$ with the isomorphism $\varphi:M\otimes_R N\to \mathrm{Free}_{\mathsf{Ab}}(\mathrm{im}(\otimes))/\langle X_M\cup X_N\rangle$ in (ii), we obtain a group homomorphism
+    \begin{align*}
+        \tilde{f}:M\otimes_R N&\longrightarrow G\\
+        m\otimes n &\longmapsto f(m\otimes n).
+    \end{align*}
+    \end{enumerate}
+\end{prf}
+
+\begin{proposition}{}{}
+    Let $Q$, $R$, and $S$ be commutative rings, $M$ be a $(Q,R)$-bimodule, and $N$ be a $(R,S)$-bimodule. Then $M\otimes_R N$ has a natural $(Q,S)$-bimodule structure given by
+    \[
+        q\cdot (m\otimes n):=(q\cdot m)\otimes n,\quad (m\otimes n)\cdot s:=m\otimes (n\cdot s)
+    \]
+    for all $q\in Q$, $s\in S$, $m\in M$, and $n\in N$.
+\end{proposition}
 
 \begin{example}{Base Change Functor}{}
     Let $\varphi:R\to S$ be a ring homomorphism. The \textbf{base change functor} $-\otimes_R S:R\text{-}\mathsf{Mod}\to S\text{-}\mathsf{Mod}$ is defined as follows:
