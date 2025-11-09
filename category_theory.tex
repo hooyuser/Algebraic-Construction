@@ -462,7 +462,7 @@ If $\mathsf{C}$ has an initial object $\varnothing$, then the coslice category $
     Suppose $\mathsf{C}$ is a category with terminal object $\bullet$. The coslice category $\left(\bullet / \mathsf{C}\right)$ is called the \textbf{category of pointed objects} of $\mathsf{C}$ and is denoted by $\mathsf{C}_\bullet$.
 \end{definition}
 
-\begin{proposition}{}{}
+\begin{proposition}{Limits and Colimits in Slice Categories}{limits_and_colimits_in_slice_categories}
     Let $\mathsf{C}$ be a category. Fix some object $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. Then
     \begin{enumerate}[(i)]
         \item The forgetful functor $U: \mathsf{C}/X \to \mathsf{C}$ \hyperref[th:preserve_reflect_create_limits]{strictly creates} all colimits. If $\varinjlim (U\circ F)$ exists for some diagram $F:\mathsf{J}\to X/\mathsf{C}$, then $\varinjlim F$ exists and we have natural isomorphism
@@ -472,6 +472,14 @@ If $\mathsf{C}$ has an initial object $\varnothing$, then the coslice category $
         \item The forgetful functor $U: \mathsf{C}/X \to \mathsf{C}$ \hyperref[th:preserve_reflect_create_limits]{strictly creates} all \hyperref[th:connected_limit]{connected limits}. If $\varprojlim (U\circ F)$ exists for some connected diagram $F:\mathsf{J}\to \mathsf{C}/X$, then $\varprojlim F$ exists and we have natural isomorphism
         \[
             U\left( \varprojlim F\right) \cong \varprojlim (U\circ F).
+        \]
+        \item If 
+        \[
+        \left(\varprojlim U\circ F\right)\times_{\varprojlim_{j\in{\mathsf{J}}}X} X
+        \]
+        exists for some diagram $F:\mathsf{J}\to \mathsf{C}/X$, then $\varprojlim F$ exists and can be given as 
+        \[
+             \left(\varprojlim U \circ F\right)\times_{\varprojlim_{j\in{\mathsf{J}}}X} X \longrightarrow X.
         \]
     \end{enumerate}
 \end{proposition}
@@ -625,6 +633,26 @@ A_j \arrow[rru, "\nu_j"] \arrow[r, "f_j"{pos=0.6}] \arrow[rrd, "\mu_j"'] & X &  
     \end{enumerate}
 \end{prf}
 
+\begin{corollary}{Initial and Terminal Objects in Slice Categories}{}
+      Let $\mathsf{C}$ be a category and fix some object $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. 
+     \begin{itemize}
+        \item If $\mathsf{C}$ has an initial object $\bot$, then the slice category $\mathsf{C}/X$ has an initial object $\left(\bot \to X\right)$. 
+        \item The slice category $\mathsf{C}/X$ has a terminal object $\mathrm{id}_{X}:X \to X$.
+        \item If $\mathsf{C}$ has a terminal object $\top$, then we have a natural isomorphism of categories $\mathsf{C}/\top \cong \mathsf{C}$.
+    \end{itemize}
+\end{corollary}
+
+
+\begin{corollary}{}{}
+    Let $\mathsf{C}$ be a category and fix some object $X\in\mathrm{Ob}\left(\mathsf{C}\right)$. 
+    \begin{itemize}
+        \item If $\mathsf{C}$ is complete, then the slice category $\mathsf{C}/X$ is also complete. 
+        \item  If $\mathsf{C}$ is cocomplete, then the slice category $\mathsf{C}/X$ is also cocomplete.
+    \end{itemize}
+\end{corollary}
+\begin{prf}
+    According to \Cref{th:limits_and_colimits_in_slice_categories}, the equalizers and products in $\mathsf{C}/X$ can be constructed from limits in $\mathsf{C}$. By \Cref{th:existance_theorem_for_limits}, $\mathsf{C}/X$ is also complete. The dual argument shows that if $\mathsf{C}$ is cocomplete, then $\mathsf{C}/X$ is also cocomplete.
+\end{prf}
 
 \section{String Diagram}
 String diagrams are a convenient way to represent the composition of natural transformations. From top to bottom, a string diagram represents a series of vertical compositions of natural transformations. 
@@ -2829,7 +2857,7 @@ colimits.
 \end{prf}
 
 
-\begin{theorem}{Existance Theorem for Limits}{}
+\begin{theorem}{Existance Theorem for Limits}{existance_theorem_for_limits}
     Let $\mathsf{C}$ be a category and $F:\mathsf{J}\to\mathsf{C}$ be a functor. If a category $\mathsf{C}$ has equalizers and all products indexed by the classes $\mathrm{Ob}(\mathsf{J})$ and $\mathrm{Hom}(\mathsf{J})$, then $\mathsf{C}$ has all limits of shape $\mathsf{J}$.
 \end{theorem}
 
@@ -3164,7 +3192,7 @@ F(i',j) \arrow[ru]\arrow[rr]                         \&                         
 This can be proved by duality. Here we give another proof. 
 \[
 \begin{tikzcd}
-    \left[\mathsf{I},\mathsf{C}\right]  \arrow[d, "\diagfunctor_\mathsf{J}"'] & \mathsf{C}\arrow[d, "\diagfunctor_{\mathsf{I}\times\mathsf{J}}"'] \arrow[r, "\diagfunctor_\mathsf{J}"] \arrow[l, "\diagfunctor_\mathsf{I}"'] & \left[\mathsf{J},\mathsf{C}\right] \arrow[d, "\diagfunctor_\mathsf{I}"] \\
+    \left[\mathsf{I},\mathsf{C}\right]  \arrow[d, "\diagfunctor_\mathsf{J}"'] & \mathsf{C}\arrow[d, "\diagfunctor_{\mathsf{I}\times\mathsf{J}}"'] \arrow[r, "\diagfunctor_\mathsf{J}"] \arrow[l, "\diagfunctor_\mathsf{I}"'] & \left[\mathsf{J},\mathsf{C}\right] \arrow[d, "\diagfunctor_\mathsf{I}"] \\[1em]
     \left[\mathsf{J},\left[\mathsf{I},\mathsf{C}\right]\right] \arrow[r, "\cong"] & \left[\mathsf{I}\times \mathsf{J},\mathsf{C}\right] & \left[\mathsf{I},\left[\mathsf{J},\mathsf{C}\right]\right]\arrow[l, "\cong"']
     \end{tikzcd}
     \]
@@ -3508,6 +3536,61 @@ $Y_1\xleftarrow{\pi_1}Y_1\times Y_2 \xrightarrow{\pi_2} Y_2$ is the most refined
     \end{center}
     
 \end{example}
+
+\begin{proposition}{}{}
+    Let $\mathsf{C}$ be a category which admits fibered products. Let $\sigma: S\to T$, $f: X\to S$, and $g:Y\to S$ be morphisms in $\mathsf{C}$. Then there is an  isomorphism
+    \[
+      X \times_{S} Y \cong \left(X \times_{T} Y\right) \times_{(S \times_{T} S)} S.
+    \]
+    Dually, let $\mathsf{C}$ be a category which admits fibered coproducts. Let $\sigma: T\to S$, $f: S\to X$, and $g:S\to Y$ be morphisms in $\mathsf{C}$. Then there is an  isomorphism
+    \[
+      X \sqcup_{S} Y \cong \left(X \sqcup_{T} Y\right) \sqcup_{(S \sqcup_{T} S)} S.
+    \]
+\end{proposition}
+\begin{prf}
+    \[
+        \begin{tikzcd}
+Z \arrow[rrddd, "b"', bend right=49] \arrow[rrrdd, "b", bend left=49] \arrow[rd, "b"] &                                                                                                             &                                               &                       \\[2em]
+                                                                                      & S \arrow[rdd, "\mathrm{id}"', bend right] \arrow[rrd, "\mathrm{id}", bend left] \arrow[rd, "\Delta_\sigma"] &                                               &                       \\[2em]
+                                                                                      &                                                                                                             & S \times_{T} S \arrow[r, "p"] \arrow[d, "p"'] & S \arrow[d, "\sigma"] \\[2em]
+                                                                                      &                                                                                                             & S \arrow[r, "\sigma"']                        & T                    
+\end{tikzcd}\hspace{5em} 
+    \begin{tikzcd}
+Z \arrow[rddd, "a_1"', bend right] \arrow[rrrd, "a_2", bend left] \arrow[rd, "a"] &                                                                         &                                            &                       \\[2em]
+                                                                                  & X\times_T Y \arrow[rr, "\pi_Y"] \arrow[dd, "\pi_X"'] \arrow[rd, "h", dashed] &                                            & Y \arrow[d, "g"]      \\[2em]
+                                                                                  &                                                                         & S\times_T S \arrow[d, "p"'] \arrow[r, "p"] & S \arrow[d, "\sigma"] \\[2em]
+                                                                                  & X \arrow[r, "f"']                                                       & S \arrow[r, "\sigma"']                     & T                    
+\end{tikzcd}
+    \]
+    \[
+    \begin{tikzcd}
+Z \arrow[rd, dashed] \arrow[rdd, "a"', bend right] \arrow[rrd, "b", bend left] &                                                                              &                              \\[2em]
+      &  \left(X \times_{T} Y\right) \times_{(S \times_{T} S)} S \arrow[d] \arrow[r] & S \arrow[d, "\Delta_\sigma"] \\[3em]
+       & X \times_{T} Y \arrow[r, "h"']   & S \times_{T} S              
+\end{tikzcd}
+    \]
+    We have the following isomorphisms natural in $Z$:
+    \begin{align*}
+        &\hspace{1.3em}\mathrm{Hom}(Z,\left(X \times_{T} Y\right) \times_{S \times_{T} S} S)\\
+        &\cong
+\mathrm{Hom}(Z,X \times_{T} Y)\times_{\mathrm{Hom}(Z,S\times_T S)}\mathrm{Hom}(Z,S)\\
+&\cong \left\{(a,b)\midv a\in \mathrm{Hom}(Z,X \times_{T} Y),\, b\in\mathrm{Hom}(Z,S),\, h\circ a=\Delta_\sigma\circ b\right\}\\
+&\cong \left\{(a,b)\midv a\in \mathrm{Hom}(Z,X)\times_{\mathrm{Hom}(Z,T)}\mathrm{Hom}(Z,Y),\, b\in\mathrm{Hom}(Z,S),\, h\circ a=\Delta_\sigma\circ b\right\}\\
+&\cong \left\{(a_1,a_2,b)\midv a_1\in \mathrm{Hom}(Z,X),\, a_2\in \mathrm{Hom}(Z,Y),\, b\in\mathrm{Hom}(Z,S),\, \sigma\circ f\circ a_1=\sigma\circ g\circ a_2 ,\,  f\circ a_1= g\circ a_2 = b\right\}\\
+&\cong \left\{(a_1,a_2)\midv a\in \mathrm{Hom}(Z,X ),\, b\in\mathrm{Hom}(Z,Y),\,  f\circ a_1=  g\circ a_2\right\}\\
+&\cong \mathrm{Hom}(Z,X )\times_{\mathrm{Hom}(Z,S)}\mathrm{Hom}(Z,Y)\\
+&\cong \mathrm{Hom}(Z,X \times_{S} Y)
+    \end{align*}
+    where the forth isomorphism follows from the natural isomorphism
+    \begin{align*}
+        \mathrm{Hom}(Z,S\times_T S)&\xlongrightarrow{\sim} \mathrm{Hom}(Z,S)\times_{\mathrm{Hom}(Z,T)}\mathrm{Hom}(Z,S)\\
+         \phi&\longmapsto \left(p\circ \phi, p\circ \phi\right).
+    \end{align*}
+    By Yoneda lemma, we have the desired isomorphism
+    \[
+      X \times_{S} Y \cong \left(X \times_{T} Y\right) \times_{(S \times_{T} S)} S.
+    \]
+\end{prf}
 
 \begin{definition}{Fibered Coproduct / Pushout}{}
     \begin{center}

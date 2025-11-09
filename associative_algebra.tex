@@ -90,7 +90,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \end{example}
 
 \subsection{Tensor Product}
-\begin{definition}{Tensor Product of Algebras}{}
+\begin{definition}{Tensor Product of Algebras}{tensor_product_of_algebras}
     Let $R$ be a commutative ring and $A$, $B$ be $R$-algebras. The \textbf{tensor product of $R$-algebras $A$ and $B$} is defined by the following universal property: for any triple $(C, f_A, f_B)$, where $C$ is an $R$-algebra and $f_A:A\to C$, $f_B:B\to C$ are $R$-algebra homomorphisms which satisfy
     \[
         f_A(a)f_B(b)=f_B(b)f_A(a),\quad \forall a\in A, b\in B,
@@ -196,13 +196,101 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     \end{enumerate}
 \end{proposition}
 
-\begin{proposition}{}{}
+\begin{proposition}{Tensor Product of Quotient Algebras}{tensor_product_of_quotient_algebras}
     Let $R$ be a commutative ring and $A_1$, $A_2$ be $R$-algebras. Let $I_1\subseteq A_1$, $I_2\subseteq A_2$ be two-sided ideals of $A_1$, $A_2$ respectively. Then we have an $R$-algebra isomorphism
+    \begin{align*}
+        (A_1/I_1)\otimes_R (A_2/I_2) &\xlongrightarrow{\sim}(A_1\otimes_R A_2)/(I_1\otimes_R A_2 + A_1\otimes_R I_2)\\
+        \overline{a_1}\otimes \overline{a_2} &\longmapsto \overline{a_1\otimes a_2}
+    \end{align*}
+    Here, given inclusion $i_1: I_1\hookrightarrow A_1$, the $R$-module $I_1\otimes_R A_2$ is identified as the image of $i_1\otimes_R \mathrm{id}_{A_2}:I_1\otimes_R A_2 \to A_1\otimes_R A_2$
     \[
-        (A_1\otimes_R A_2)/(I_1\otimes_R A_2 + A_1\otimes_R I_2) \cong (A_1/I_1)\otimes_R (A_2/I_2).
+        \mathrm{im}\left(i_1\otimes_R \mathrm{id}_{A_2}\right)=\left\{\sum_{n=1}^m x_n\otimes y_n\in A_1\otimes_R A_2\midv m\in\mathbb{Z}_{\ge 1},\,x_n\in I_1,\, y_n\in A_2\right\},
     \]
-    
+    which is a two-sided ideal of $A_1\otimes_R A_2$. The similar identification applies to $A_1\otimes_R I_2$. 
 \end{proposition}
+\begin{prf}
+    Let $J:=I_1\otimes_R A_2 + A_1\otimes_R I_2$. Define
+    \begin{align*}
+        \iota_1: A_1/I_1 &\longrightarrow (A_1\otimes_R A_2)/J\\
+        a_1 + I_1 &\longmapsto (a_1\otimes 1_{A_2}) + J,
+    \end{align*}
+    If $a_1, a_1'\in A_1$ satisfy $a_1-a_1'\in I_1$, then 
+    \[
+    (a_1\otimes 1_{A_2}) - (a_1'\otimes 1_{A_2}) = (a_1 - a_1')\otimes 1_{A_2} \in I_1\otimes_R A_2 \subseteq J\implies (a_1\otimes 1_{A_2}) + J = (a_1'\otimes 1_{A_2}) + J,
+    \]
+    which shows that $\iota_1$ is well-defined. And we can check that $\iota_1$ is an $R$-algebra homomorphism. Similarly, we can define an $R$-algebra homomorphism
+    \begin{align*}
+        \iota_2: A_2/I_2 &\longrightarrow (A_1\otimes_R A_2)/J\\
+        a_2 + I_2 &\longmapsto (1_{A_1}\otimes a_2) + J.
+    \end{align*}
+    Moreover, the images of $\iota_1$ and $\iota_2$ commute in $(A_1\otimes_R A_2)/J$: for any $a_1\in A_1$, $a_2\in A_2$,
+    \begin{align*}
+        \iota_1(a_1 + I_1)\iota_2(a_2 + I_2) &= \left((a_1\otimes 1_{A_2}) + J\right)\left((1_{A_1}\otimes a_2) + J\right)\\
+        &= (a_1\otimes a_2) + J\\
+        &= \left((1_{A_1}\otimes a_2) + J\right)\left((a_1\otimes 1_{A_2}) + J\right) \\
+        &= \iota_2(a_2 + I_2)\iota_1(a_1 + I_1).
+    \end{align*}   
+    Thus by the \hyperref[th:tensor_product_of_algebras]{universal property of tensor product}, there exists a unique $R$-algebra homomorphism
+    \begin{align*}
+        \varphi: (A_1/I_1)\otimes_R (A_2/I_2) &\longrightarrow (A_1\otimes_R A_2)/J\\
+        (a_1 + I_1)\otimes (a_2 + I_2) &\longmapsto (a_1\otimes a_2) + J.
+    \end{align*}
+    Next, we construct the inverse of $\varphi$. Given the quotient maps $\pi_1:A_1\to A_1/I_1$ and $\pi_2:A_2\to A_2/I_2$, we can define an $R$-algebra homomorphism $\psi:=\pi_1\otimes_R \pi_2$ as
+    \begin{align*}
+        \psi: A_1\otimes_R A_2 &\longrightarrow (A_1/I_1)\otimes_R (A_2/I_2)\\
+        a_1\otimes a_2 &\longmapsto (a_1 + I_1)\otimes (a_2 + I_2).
+    \end{align*}
+    Since for any $x\in I_1$, $y\in A_2$, we have
+    \[
+        \psi(x\otimes y)=(0 + I_1)\otimes (y + I_2)=0
+    \]
+    and for any $x\in A_1$, $y\in I_2$, we have
+    \[
+        \psi(x\otimes y)=(x + I_1)\otimes (0 + I_2)=0,
+    \]
+    we have $J\subseteq \ker(\psi)$. Thus, by the universal property of quotient algebra, there exists a unique $R$-algebra homomorphism
+    \begin{align*}
+        \widetilde{\psi}: (A_1\otimes_R A_2)/J &\longrightarrow (A_1/I_1)\otimes_R (A_2/I_2)\\
+        (a_1\otimes a_2) + J &\longmapsto (a_1 + I_1)\otimes (a_2 + I_2).
+    \end{align*}
+    We can check that $\widetilde{\psi}$ is the inverse of $\varphi$:
+    \begin{align*}
+        \widetilde{\psi}\circ \varphi\left((a_1 + I_1)\otimes (a_2 + I_2)\right) &= \widetilde{\psi}\left((a_1\otimes a_2) + J\right) = (a_1 + I_1)\otimes (a_2 + I_2),\\
+        \varphi\circ \widetilde{\psi}\left((a_1\otimes a_2) + J\right) &= \varphi\left((a_1 + I_1)\otimes (a_2 + I_2)\right) = (a_1\otimes a_2) + J.
+    \end{align*}
+    Therefore, we show that $\varphi$ is an $R$-algebra isomorphism.
+\end{prf}
+
+\begin{corollary}{$mod\; I$ Reduction of $R$-Algebras}{}
+    Let $R$ be a commutative ring and $I\subseteq R$ be an ideal of $R$. For any $R$-algebra $A$, there is an isomorphism of $R$-algebras
+    \begin{align*}
+        A/IA &\xlongrightarrow{\sim} A\otimes_R (R/I) \\
+        \overline{a} &\longmapsto  a\otimes \overline{1_R}\\
+        \overline{ra}&\longmapsfrom a\otimes \overline{r}
+    \end{align*}
+    where
+    \[
+    IA:= \left\{ r a \in A\midv r\in I,\, a\in A\right\}
+    \]
+    is the two-sided ideal of $A$ generated by $I$.
+\end{corollary}
+\begin{prf}
+    Apply \Cref{th:tensor_product_of_quotient_algebras} with $A_1=A$, $A_2=R$, $I_1=\{0\}$, $I_2=I$. We obtain an $R$-algebra isomorphism
+    \begin{align*}
+        A \otimes_R (R/I) &\xlongrightarrow{\sim} (A\otimes_R R)/( 0\otimes_R R+A\otimes_R I)\\
+        a \otimes (r+I) &\longmapsto (a\otimes r) + (A\otimes_R I).
+    \end{align*}
+    Under the canonical isomorphism 
+    \begin{align*}
+        \phi:  A\otimes_R R &\xlongrightarrow{\sim} A\\
+        a\otimes r &\longmapsto r a,
+    \end{align*}
+    $A \otimes_R I$ is mapped to $IA$. Thus we have an $R$-algebra isomorphism
+    \begin{align*}
+        A \otimes_R (R/I) &\xlongrightarrow{\sim} A/IA\\
+        a \otimes (r+I) &\longmapsto r a + IA.
+    \end{align*}
+\end{prf}
 
 \subsection{Tensor Algebra}
 \begin{definition}{Tensor Algebra $T^{\bullet}(M)$}{}
