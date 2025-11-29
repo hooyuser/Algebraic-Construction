@@ -7,3 +7,9 @@
 **Download Here**: [algebraic_construction.pdf](https://github.com/hooyuser/Algebraic-Construction/releases/latest/download/algebraic_construction.pdf)
 
 Notes on Algebraic Construction
+
+<div align="center">
+  <h3>Project Growth</h3>
+  <img src="https://raw.githubusercontent.com/hooyuser/github-badges/main/diagrams/hooyuser-Algebraic-Construction.svg" width="600px" />
+  <p><i>Tracking Lines of Code over time</i></p>
+</div>
