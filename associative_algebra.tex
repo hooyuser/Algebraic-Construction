@@ -158,7 +158,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     \begin{tikzcd}
         A_1 \arrow[r, "\iota_{A_1}"] \arrow[d, "f"']                              & A_1\otimes_R B_1 \arrow[d, "f\otimes_R g", dashed] & B_2 \arrow[l, "\iota_{B_1}"'] \arrow[d, "g"] \\[0.7em]
         A_2  \arrow[r, "\iota_{A_2}"'] & A_2\otimes_R B_2                                   & B_2 \arrow[l, "\iota_{B_2}"]                
-        \end{tikzcd}
+    \end{tikzcd}
     \] 
 \end{definition}
 
@@ -195,6 +195,18 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
         \end{align*}
     \end{enumerate}
 \end{proposition}
+
+% \begin{proposition}{}{}
+%     Let $R$ be a commutative ring, and $A$, $B$, $C$ be $R$-algebras. Suppose $\otimes_R:A\times B\to A\otimes_R B$ is the tensor product map. Let $f:\mathrm{im}(\otimes_R)\to C$ be a map. Define
+%     \[
+%     \beta:A\times B\longrightarrow C,\qquad \beta(a,b)\coloneqq f(a\otimes b).
+%     \]
+% then find equivalent consitions for that there exists a $R$-algebra homomorphism $\tilde{f}:A\otimes_R B\to C$ such that the following diagram commutes 
+%     \[ 
+%     \begin{tikzcd}[ampersand replacement=\&] \mathrm{im}(\otimes) \arrow[r, "i", hook] \arrow[rd, "f"'] \& A\otimes_R B \arrow[d, dashed, "\tilde{f}"] \\[0.3cm] \& C 
+%     \end{tikzcd} 
+%     \]
+% \end{proposition}
 
 \begin{proposition}{Tensor Product of Quotient Algebras}{tensor_product_of_quotient_algebras}
     Let $R$ be a commutative ring and $A_1$, $A_2$ be $R$-algebras. Let $I_1\subseteq A_1$, $I_2\subseteq A_2$ be two-sided ideals of $A_1$, $A_2$ respectively. Then we have an $R$-algebra isomorphism
@@ -261,7 +273,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     Therefore, we show that $\varphi$ is an $R$-algebra isomorphism.
 \end{prf}
 
-\begin{corollary}{$mod\; I$ Reduction of $R$-Algebras}{}
+\begin{corollary}{$mod\; I$ Reduction of $R$-Algebras}{mod_I_reduction_of_R_algebras}
     Let $R$ be a commutative ring and $I\subseteq R$ be an ideal of $R$. For any $R$-algebra $A$, there is an isomorphism of $R$-algebras
     \begin{align*}
         A/IA &\xlongrightarrow{\sim} A\otimes_R (R/I) \\
@@ -290,6 +302,26 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
         A \otimes_R (R/I) &\xlongrightarrow{\sim} A/IA\\
         a \otimes (r+I) &\longmapsto r a + IA.
     \end{align*}
+\end{prf}
+
+\begin{corollary}{}{}
+   Let $R$ be a commutative ring and $I\subseteq R$ be an ideal of $R$. We have a cononical isomorphism of $R$-algebras
+    \begin{align*}
+          (R/I)\otimes_R (R/I) &\xlongrightarrow{\sim} R/I\\
+          (r+I)\otimes (r'+I) &\longmapsto rr' + I.
+    \end{align*}
+\end{corollary}
+\begin{prf}
+    By \Cref{th:mod_I_reduction_of_R_algebras}, we have an $R$-algebra isomorphism
+    \begin{align*}
+        (R/I)\otimes_R (R/I) &\xlongrightarrow{\sim} (R/I)/ (I(R/I))\\
+        (r+I)\otimes (r'+I) &\longmapsto rr' + I(R/I).
+    \end{align*}
+    Since for any $r\in I$, $r'+I\in R/I$, we have
+    \[
+        r(r'+I)=rr' + I = 0 + I,
+    \]
+    which shows that $I(R/I)=\{0\}$. Thus we obtain the desired isomorphism.
 \end{prf}
 
 \subsection{Tensor Algebra}
@@ -524,7 +556,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \end{prf}
 
 
-\begin{proposition}{}{}
+\begin{proposition}{Structure of $K[a]$}{structure_of_K_a}
     Let $K$ be a field, $A$ be a $K$-algebra and $a\in A$. Consider the evaluation ring homomorphism
     \begin{align*}
         \mathrm{ev}_a:K[X] &\longrightarrow A\\
@@ -537,18 +569,25 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     And it can be divided into two cases:
     \begin{enumerate}[(i)]
         \item If $P_a=0$, then $\mathrm{ev}_a$ is injective and $K[a]\cong K[X]$.
-        \item If $P_a\ne 0$, then $\mathrm{ev}_a$ is not injective. If we further assume $A$ is a domain, then $P_a(X)$ is irreducible, $K[a]$ is a field and
+        \item If $P_a\ne 0$, then $\mathrm{ev}_a$ is not injective. If we further assume $A$ is a \hyperref[th:domain]{domain}, then $P_a(X)$ is irreducible, $K[a]$ is a field and
         \[
         \left[ K[a]:K \right]=\deg P_a(X).
         \]
     \end{enumerate}
+    Moreover, 
+    \[
+    \deg P_a(X) = 0\iff A \text{ is a zero ring}.
+    \]
 \end{proposition}
 \begin{prf}
     \begin{enumerate}[(i)]
         \item If $P_a=0$, then $\ker \mathrm{ev}_a=\{0\}$, so $\mathrm{ev}_a$ is injective. And $K[a]\cong K[X]$.
         \item If $A$ is a domain, then $K[a]$ as a subring of $A$ is an integral domain. This implies $(P_a(X))$ is a nonzero prime ideal of $K[X]$. By \Cref{th:nonzero_prime_ideal_iff_maximal_ideal_in_PID}, $P_a(X)$ is irreducible. Since $K[X]/(P_a(X))$ as $K$-vector space has a basis $\{1,X,X^2,\cdots,X^{\deg P_a(X)-1}\}$, we have $\left[ K[a]:K \right]=\deg P_a(X)$.
     \end{enumerate}
-   
+   And we have
+   \[
+   \deg P_a(X) = 0\iff P_a\in K^\times \iff \ker \mathrm{ev}_a=(P_a)=K[X] \iff \mathrm{ev}_a \text{ is the zero map } \iff A \text{ is a zero ring}.
+   \]
 \end{prf}
 
 \begin{definition}{Algebraic Element and Transcendental Element}{algebraic_element_and_transcendental_element}
@@ -557,14 +596,30 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
         \mathrm{ev}_a:K[X] &\longrightarrow A\\
         f &\longmapsto f(a).
     \end{align*}
-    and $\ker \mathrm{ev}_a=(P_a)$ for some $P_a\in K[X]$.
+    and $\ker \mathrm{ev}_a=(P_a)$ for some $P_a\in K[X]$. Polynomials in $\ker \mathrm{ev}_a$ are called \textbf{annihilating polynomials} of $a$ over $K$.
     \begin{itemize}
         \item If $P_a=0$, then $a$ is called a \textbf{transcendental element} over $K$. $a$ is not the root of any nonzero polynomial in $K[X]$. 
-        \item If $P_a\ne 0$, then $a$ is called an \textbf{algebraic element} over $K$. Suppose $P_a(X)=\sum_{i=0}^n a_iX^i$. Then $m_a(X)=P_a(X)/a_n$ is called the \textbf{minimal polynomial} of $a$ over $K$.
+        \item If $P_a\ne 0$, then $a$ is called an \textbf{algebraic element} over $K$. Suppose $P_a(X)=\sum_{i=0}^n a_iX^i$ with $a_n\in K^\times$. Then the monic polynomial $m_a(X)=P_a(X)/a_n$ is called the \textbf{minimal polynomial}\index{minimal polynomial} of $a$ over $K$. According to \Cref{th:structure_of_K_a}, if we further assume $A$ is a \hyperref[th:domain]{domain}, then $m_a(X)$ is irreducible.
     \end{itemize}
 \end{definition}
 
-Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$ if and only if $a$ is integral over $K$.
+If $K$ is a field and $A=\{0_A\}$ is a zero $K$-algebra, then $0_A\in A$ is algebraic over $K$ with minimal polynomial $m_{0_A}(X)=1_K$.
+
+\begin{proposition}
+{Algebraic Element is Integral}{algebraic_element_is_integral}
+    Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$ if and only if $a$ is integral over $K$.
+\end{proposition}
+\begin{prf}
+Suppose $a$ is algebraic over $K$. Then the minimal polynomial $m_a(X)\in K[X]$ is a monic polynomial such that $m_a(a)=0$. Thus $a$ is integral over $K$.
+\end{prf}
+
+\begin{proposition}{Monic Irreducible Annihilating Polynomial is Minimal Polynomial}{irreducible_annihilating_polynomial_is_minimal_polynomial}
+    Let $K$ be a field, $A$ be a nonzero $K$-algebra and $a\in A$ be an algebraic element over $K$. If $f_a(X)\in K[X]$ is a monic irreducible annihilating polynomial of $a$ over $K$, then $f_a(X)$ is the minimal polynomial of $a$ over $K$.
+\end{proposition}
+\begin{prf}
+    Let $m_a(X)$ be the minimal polynomial of $a$ over $K$. Since $f_a$ is irreducible and $f_a \in \ker \mathrm{ev}_a = (m_a)$, by \Cref{th:dividing_irreducible_element_in_PID_implies_associate_or_unit}, either $m_a\in K[X]^\times=K^\times$ or $f_a$ and $m_a$ are associates. If $m_a\in K^\times$, then $\deg m_a=0$, which implies that $A$ is a zero ring by \Cref{th:structure_of_K_a}, contradicting the assumption. Thus $f_a$ and $m_a$ are associates. Since both $f_a$ and $m_a$ are monic, we have $f_a=m_a$.
+\end{prf}
+
 
 
 \chapter{Commutative Unital Algebra}
@@ -764,6 +819,156 @@ Let $K$ be a field and $A$ be a $K$-algebra. Then $a\in A$ is algebraic over $K$
 
 \subsection{Coproduct}
 
+\begin{definition}{Coproduct of Commutative Algebras}{coproduct_of_commutative_algebras}
+    Let $R$ be a commutative ring and $\left(A_i\right)_{i\in I}$ be a family of commutative $R$-algebras. The \textbf{coproduct} of $\left(A_i\right)_{i\in I}$ in $R$-$\mathsf{CAlg}$, denoted by $\bigotimes_{i\in I} A_i$, together with a family of $R$-algebra homomorphisms
+    \[
+    \left(\iota_j:A_j\to \bigotimes_{i\in I} A_i\right)_{j\in I},
+    \]
+    is the tensor product of $\left(A_i\right)_{i\in I}$ over $R$. 
+    
+    It is defined by the following universal property: for any commutative $R$-algebra $B$ and any family of $R$-algebra homomorphisms $\{f_j:A_j\to B\}_{j\in I}$, there exists a unique $R$-algebra homomorphism $\widetilde{f}:\bigotimes_{i\in I} A_i\to B$ such that the following diagram commutes for all $j\in I$
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            \bigotimes_{i\in I} A_i\arrow[r, dashed, "\exists !\,\widetilde{f}"]  \& B\\[0.3cm]
+            A_j\arrow[u, "\iota_j"] \arrow[ru, "f_j"'] \&  
+        \end{tikzcd}
+    \end{center}
+\end{definition}
 
+\begin{proposition}{Diagonal Base Change for Commutative Algebras}{}
+    If $\varphi:R\to S$, $f:S\to A$, $g:S\to B$ are ring homomorphisms of commutative rings. Denote $T:=S\otimes_{R} S$. Then we have the following isomorphism in $S$-$\mathsf{CAlg}$
+    \begin{align*}
+        \theta:A\otimes_{S} B &\xlongrightarrow{\sim} \left(A\otimes_{R} B\right) \otimes_{S\otimes_{R} S} S\\
+        a\otimes_S b &\longmapsto (a\otimes_R b)\otimes_T 1_S\\
+        (a\cdot s)\otimes_S b= a\otimes_S (s\cdot b) &\longmapsfrom (a\otimes_R b)\otimes_T s.
+    \end{align*}
+\end{proposition}
+\begin{prf}
+    This is a direct consequence of \Cref{th:diagonal_base_change_fibered_product}. Here we give another proof by explicit construction.
+
+    First, there exists a unique $R$-algebra homomorphism
+    \begin{align*}
+        f\otimes_R g:S\otimes_R S &\longrightarrow A\otimes_R B\\
+        s\otimes_R s' &\longmapsto f(s)\otimes_R g(s').
+    \end{align*}
+    such that the following diagram commutes
+    \[
+    \begin{tikzcd}
+        S \arrow[r, "\iota_{S}"] \arrow[d, "f"']                              & S\otimes_R S \arrow[d, "f\otimes_R g", dashed] & S \arrow[l, "\iota_{S}"'] \arrow[d, "g"] \\[0.7em]
+        A  \arrow[r, "\iota_{A}"'] & A\otimes_R B                                  & B \arrow[l, "\iota_{B}"]                
+    \end{tikzcd}
+    \] 
+    This makes $A\otimes_R B$ an $S\otimes_R S$-algebra. Similarly, there exists a unique $R$-algebra homomorphism
+    \begin{align*}
+        \mu_S:S\otimes_R S &\longrightarrow S\\
+        s\otimes_R s' &\longmapsto ss'.
+    \end{align*}
+    such that the following diagram commutes
+    \[
+    \begin{tikzcd}
+        S \arrow[r, "\iota_{S}"] \arrow[dr, "\mathrm{id}_S"']                              & S\otimes_R S \arrow[d, "\mu_S", dashed] & S \arrow[l, "\iota_{S}"'] \arrow[ld, "\mathrm{id}_S"] \\[0.7em]
+        & S  &          
+    \end{tikzcd}
+    \] 
+    This makes $S$ an $S\otimes_R S$-algebra. 
+
+    Given any $S$-algebra $C$ and any $S$-algebra homomorphisms $h_A:A\to C$, $h_B:B\to C$ such that $h_A\circ f=h_B\circ g$, by the universal property of tensor product $A\otimes_R B$, there exists a unique $R$-algebra homomorphism 
+    \begin{align*}
+        \eta:A\otimes_R B &\longrightarrow C\\
+        a\otimes_R b &\longmapsto h_A(a)h_B(b)
+    \end{align*}
+    such that 
+    \[
+    h_A = \eta\circ \iota_A,\quad h_B = \eta\circ \iota_B.
+    \]
+    \[
+    \begin{tikzcd}
+R \arrow[dd, "f\circ \varphi"'] \arrow[rr, "g \circ \varphi"] \arrow[rd, "\varphi"] &                                  &  [-10pt] B \arrow[dd, "\iota_A"] \arrow[rddd, "h_B", bend left] &   \\[8pt]
+                                                                                    & S \arrow[ld, "f"'] \arrow[ru, "g"] &                                                        &   \\[8pt]
+A \arrow[rr, "\iota_B"'] \arrow[rrrd, "h_A"', bend right]                           &                                    & A\otimes_R B \arrow[rd, "\eta", dashed]                &   \\[8pt]
+                                                                                    &                                    &                                                        & C
+\end{tikzcd}
+    \]
+    Take $C:=A\otimes_S B$ and we get an $R$-algebra homomorphism 
+    \begin{align*}
+        \eta:A\otimes_R B &\longrightarrow A\otimes_S B\\
+        a\otimes_R b &\longmapsto a\otimes_S b.
+    \end{align*}
+Since for any $s\otimes_R s'\in S\otimes_R S$, we have
+\begin{align*}
+    \mu\circ (f\otimes_R g)(s\otimes_R s') &= \mu(f(s)\otimes_R g(s'))\\
+    &= f(s)\otimes_S g(s')\\
+    &=\left(f(s)\otimes_S 1_B\right) \left(1_A\otimes_S g(s')\right)\\
+    &=\left(f(s)\otimes_S 1_B\right) \left(f(s')\otimes_S 1_B\right)\\
+    &= \left(f(s)f(s')\right)\otimes_S 1_B\\
+    &= f(ss')\otimes_S 1_B\\
+    &= \iota_{A}'\circ f\circ \mu_S(s\otimes_R s'),
+\end{align*}
+by the universal property of the tensor product $ \left(A\otimes_{R} B\right) \otimes_{S\otimes_{R} S} S$, there exists a unique $S\otimes_{R} S$-algebra homomorphism
+\begin{align*}
+    \psi: \left(A\otimes_{R} B\right) \otimes_{S\otimes_{R} S} S &\longrightarrow A\otimes_S B\\
+    (a\otimes_R b)\otimes s &\longmapsto (a\otimes_S b) \left(f(s)\otimes_S 1_B\right)= (a\cdot s)\otimes_S b.
+\end{align*}
+such that the following diagram commutes
+\[
+\begin{tikzcd}
+S\otimes_R S \arrow[d, "f\otimes_R g"'] \arrow[r, "\mu_S"]                      & S \arrow[d, "\iota_S'"] \arrow[rdd, bend left,"\iota_{A}'\circ f"]                                    &                  \\[4em]
+A\otimes_R B \arrow[r, "\iota_{A\otimes_R B}"'] \arrow[rrd, "\eta"', bend right] & \left(A\otimes_{R} B\right) \otimes_{S\otimes_{R} S} S \arrow[rd, "\psi", dashed] &                  \\[3.5em] 
+                                                                                &                                                                                   &  A\otimes_{S} B 
+\end{tikzcd}
+\]
+Define
+\begin{align*}
+    j_A:A &\longrightarrow \left(A\otimes_{R} B\right) \otimes_{S\otimes_{R} S} S\\
+    a &\longmapsto (a\otimes_R 1_B)\otimes_T 1_S,
+\end{align*}
+and
+\begin{align*}
+    j_B:B &\longrightarrow \left(A\otimes_{R} B\right) \otimes_{S\otimes_{R} S} S\\
+    b &\longmapsto (1_A\otimes_R b)\otimes_T 1_S.
+\end{align*}
+Note that for any $s\otimes s'\in S$, we have
+\begin{align*}
+    (f(s)\otimes_R g(s'))\otimes_T 1_S &=  \iota_{A\otimes_R B}\circ (f\otimes_R g)(s\otimes_R s') \\
+    &= \iota_S'\circ \mu_S (s\otimes_R s')\\
+     &= \left(1_A\otimes_R 1_B\right)\otimes_T ss'.
+\end{align*}
+Then for any $s\in S$, we have
+\begin{align*}
+    j_A\circ f(s) &= ( f(s)\otimes_R 1_B)\otimes_T 1_S\\
+    &= ( f(s)\otimes_R g(1_S))\otimes_T 1_S\\
+    &= ( 1_A\otimes_R 1_B)\otimes_T (s1_S)\\
+    &= ( 1_A\otimes_R 1_B)\otimes_T (1_Ss)\\
+    &= (f(1_S)\otimes_R g(s))\otimes_T 1_S\\
+    &= (1_A\otimes_R g(s))\otimes_T 1_S\\
+    &= j_B\circ g(s).
+\end{align*}
+By the universal property of the coproduct $A \otimes_{S} B$, there exists a unique $S$-algebra homomorphism
+\begin{align*}
+    \theta:A\otimes_S B &\longrightarrow \left(A\otimes_{R} B\right) \otimes_{S\otimes_{R} S} S\\
+    a\otimes_S b &\longmapsto (a\otimes_R b)\otimes_T 1_S
+\end{align*}
+such that the following diagram commutes
+\[
+\begin{tikzcd}
+S \arrow[d, "f"'] \arrow[r, "g"]                           & B \arrow[d, "\iota_{B}'"] \arrow[rdd, "j_B", bend left] &                                                        \\[2em]
+A \arrow[r, "\iota_{A}'"'] \arrow[rrd, "j_A"', bend right] &  A\otimes_{S} B  \arrow[rd, "\theta", dashed]           &                                                        \\[2em]
+                                                           &                                                         & \left(A\otimes_{R} B\right) \otimes_{S\otimes_{R} S} S
+\end{tikzcd}
+\]
+Then it is straightforward to check that $\psi$ and $\theta$ are inverse to each other:
+\[
+    \psi\circ \theta (a\otimes_S b) = \psi((a\otimes_R b)\otimes_T 1_S) = (a\cdot 1_S)\otimes_S b = a\otimes_S b,
+\]
+and
+\begin{align*}
+     \theta\circ \psi((a\otimes_R b)\otimes_T s) &= \theta((a\cdot s)\otimes_S b) \\
+     &= \left((a\cdot s)\otimes_S b\right)\otimes_T 1_S\\
+     & = \left((a\otimes_S b)\cdot(s\otimes_R 1_S)\right)\otimes_T 1_S \\
+     &= \left(a\otimes_S b\right)\otimes_T \left((s\otimes_R 1_S)\cdot 1_S\right)\\
+     &=(a\otimes_R b)\otimes_T s.
+\end{align*}
+
+\end{prf}
 
 

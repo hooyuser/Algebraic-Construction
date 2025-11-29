@@ -1,11 +1,117 @@
 \chapter{Galois Theory}
+\section{Basic Definitions}
+\begin{definition}{Galois Extension}{galois_extension}
+  Let $K$ be a field and $L/K$ be a field extension. The extension $L/K$ is called a \textbf{Galois extension} if it is normal and separable.
+\end{definition}
+
+\begin{proposition}{Properties of Galois Extension}{properties_of_galois_extension}
+  \begin{enumerate}[(i)]
+    \item Suppose $L/E/F$ is a tower of field extensions. If $L/F$ is Galois, then $L/E$ is Galois.
+    \item Suppose $L_1/F$ and $L_2/F$ are subextension of a extension $\Omega/F$. If $L_1/F$ is Galois, then $L_1L_2/L_2$ is Galois.
+    \item Suppose $(L_i/F)_{i\in I}$ is a family of subextensions of a extension $\Omega/F$. If each $L_i/F$ is Galois, then the compositum 
+    \[
+    \left(\bigvee_{i\in I} L_i \right)/F
+    \]
+    is Galois.
+  \end{enumerate}
+\end{proposition}
+
+\begin{definition}{Fixed Field}{fixed_field}
+  Let $L/K$ be a field extension and $H\leq \operatorname{Aut}(L/K)$ be a subgroup of the automorphism group of $L/K$. The \textbf{fixed field} of $H$ is defined as
+  \[
+    L^{H} := \left\{ x\in L \midv \sigma(x) = x, \forall \sigma \in H \right\}.
+  \]
+\end{definition}
+
+\begin{proposition}{}{}
+  Let $L/K$ be a field extension. Define 
+  \begin{align*}
+    \mathsf{Subextension}(L/K) &:= \left\{E/K \midv E/K \text{ is a subextension of } L/K \right\}\\
+  \mathsf{Subgroup}\left(\operatorname{Aut}(L/K)\right)&:= \left\{H \midv  H\leq \operatorname{Aut}(L/K) \right\}
+  \end{align*}
+  the following maps
+  \begin{align*}
+    \Phi:\mathsf{Subextension}(L/K) &\longrightarrow  \mathsf{Subgroup}\left(\operatorname{Aut}(L/K)\right)\\
+    E/K &\longmapsto \operatorname{Aut}(L/E)
+  \end{align*}
+  \begin{align*}
+    \Psi:\mathsf{Subgroup}\left(\operatorname{Aut}(L/K)\right) &\longrightarrow \mathsf{Subextension}(L/K)\\
+    H &\longmapsto L^{H} := \left\{ x\in L \midv \sigma(x) = x, \forall \sigma \in H \right\}
+  \end{align*}
+  \begin{enumerate}[(i)]
+    \item Both the $\left(\mathsf{Subgroup}\left(\operatorname{Aut}(L/K)\right),\le\right)$ and $(\mathsf{Subextension}(L/K),\subseteq)$ are partially ordered sets. The maps $\Phi$ and $\Psi$ are inclusion-reversing, i.e. 
+    \begin{align*}
+      H_1 \le H_2 &\implies \Psi(H_2) \subseteq \Psi(H_1) \iff L^{H_2} \subseteq L^{H_1}\\
+      E_1 \subseteq E_2 &\implies \Phi(E_2) \le \Phi(E_1) \iff \operatorname{Aut}(L/E_2) \le \operatorname{Aut}(L/E_1)
+    \end{align*}
+    \item For any subextension $E/K$ of $L/K$ and any subgroup $H \leq \operatorname{Aut}(L/K)$, we have
+    \begin{align*}
+      E &\subseteq \Psi \circ \Phi (E) = L^{\operatorname{Aut}(L/E)}\\
+      H &\le \Phi \circ \Psi (H) = \operatorname{Aut}(L/L^{H})
+    \end{align*}
+    \item The group $\operatorname{Aut}(L/K)$ acts on the set of subextensions $\mathsf{Subextension}(L/K)$ by
+    \begin{align*}
+      \operatorname{Aut}(L/K)\times \mathsf{Subextension}(L/K) &\longrightarrow \mathsf{Subextension}(L/K)\\
+      (\sigma, E/K) &\longmapsto \sigma \cdot E:= \sigma(E) = \left\{ \sigma(x) \midv x\in E \right\}
+    \end{align*}
+    The group $\operatorname{Aut}(L/K)$ also acts on the set of subgroups $\mathsf{Subgroup}\left(\operatorname{Aut}(L/K)\right)$ by
+    \begin{align*}
+      \operatorname{Aut}(L/K)\times \mathsf{Subgroup}\left(\operatorname{Aut}(L/K)\right) &\longrightarrow \mathsf{Subgroup}\left(\operatorname{Aut}(L/K)\right)\\
+      (\sigma, H) &\longmapsto \sigma \cdot H=\sigma H \sigma^{-1} = \left\{ \sigma \tau \sigma^{-1} \midv \tau \in H \right\}
+    \end{align*}
+
+    The maps $\Phi$ and $\Psi$ are equivariant with respect to this action. That is, for any $\sigma \in \operatorname{Aut}(L/K)$, $E/K \in \mathsf{Subextension}(L/K)$ and $H \leq \operatorname{Aut}(L/K)$, we have
+    \begin{align*}
+      \Phi(\sigma \cdot E) &= \sigma \cdot \Phi(E)\\
+      \Psi(\sigma \cdot H) &= \sigma \cdot \Psi(H)
+    \end{align*}
+    namely,
+    \begin{align*}
+      \operatorname{Aut}(L/\sigma(E)) &= \sigma \operatorname{Aut}(L/E) \sigma^{-1}\\
+      L^{\sigma H \sigma^{-1}} &= \sigma(L^{H})
+    \end{align*}
+    \item If $L\supseteq K$ is a Galois extension, then 
+    \[
+    \Psi\circ \Phi(K/K)= L^{\mathrm{Gal}\left(L/K\right)}= K,
+    \]
+    and 
+    \begin{align*}
+      \Phi:\mathsf{Subextension}(L/K) &\longrightarrow  \mathsf{Subgroup}\left(\operatorname{Aut}(L/K)\right)\\
+      E/K &\longmapsto \operatorname{Gal}(L/E)
+    \end{align*}
+    is injective.
+  \end{enumerate}
+\end{proposition}
+\begin{prf}
+  \begin{itemize}
+    \item[(iv)] Suppose $L/K$ is Galois. In (ii), we already have $K \subseteq L^{\mathrm{Gal}(L/K)}$. To show $L^{\mathrm{Gal}(L/K)}= K$, it suffices to show that $L^{\mathrm{Gal}(L/K)}\subseteq K$. Take any $x\in L^{\mathrm{Gal}(L/K)}$. Then we have
+    \[
+    \sigma(\alpha) = \alpha \quad \text{for all } \sigma \in \mathrm{Gal}(L/K).
+    \]
+    Let $P_x \in K[T]$ be the minimal polynomial of $x$ over $K$. Suppose $\deg P_x =n$. Since $L/K$ is normal and separable, $P_x$ has $n$ distinct roots in $L$. Let these roots be $x_1, x_2, \ldots, x_n \in L$. From \Cref{th:irreducible_annihilating_polynomial_is_minimal_polynomial}, we know $P_x$ is also the minimal polynomial of each $x_i$ over $K$ for $i=1,2,\ldots,n$.
+    By \Cref{th:K_embedding_preserves_algebraic_element_and_minimal_polynomial}, for each $i=1,2,\ldots,n$, there exists an automorphism $\sigma_i \in \mathrm{Gal}(L/K)$ such that $\sigma_i(x) = x_i$. However, since $x \in L^{\mathrm{Gal}(L/K)}$, we have $\sigma_i(x) = x$ for all $i$. This implies that all roots of $P_x$ are equal to $x$, which forces $\deg P_x = 1$ and accordingly $x \in K$. Therefore, we conclude that $L^{\mathrm{Gal}(L/K)} = K$.
+  \end{itemize}
+\end{prf}
+
 
 \section{Infinite Galois Correspondence}
 
-\begin{definition}{Krull Topology}
-  Let $K$ be a field and $L/K$ a Galois extension. The \textbf{Krull topology} on $\operatorname{Gal}(L/K)$ is given by the neighborhood basis of the identity $\operatorname{id}_{L/K}$, which consists of the sets
+\begin{definition}{Krull Topology}{krull_topology}
+  Let $K$ be a field and $L\supseteq K$ a Galois extension. The \textbf{Krull topology} on $\operatorname{Gal}(L/K)$ is given by the neighborhood basis of the identity $\operatorname{id}_{L}$, which consists of the sets
   \[
-    \operatorname{Gal}(L/K)_{\mathfrak{p}} = \left\{\sigma \in \operatorname{Gal}(L/K) \mid \sigma\text{ fixes }K(\mathfrak{p})\right\}
+    \operatorname{Gal}(L/E)
   \]
-    
+  where $E$ runs over all intermediate extensions $L\supseteq E \supseteq K$ with $E/K$ being finite Galois. Equipping $\operatorname{Gal}(L/K)$ with this topology makes it a topological group.
 \end{definition}
+
+\begin{remark}
+  First we check the collection of sets defined above indeed forms a neighborhood basis of identity. First we have $\mathrm{id}_L \in \operatorname{Gal}(L/E)$ for any intermediate extension $E/K$. Next, there exists at least one such intermediate extension, namely $E=K$. Finally, given two such intermediate extensions $E_1\subseteq K$, $E_2\subseteq K$, we can take $E_3:=E_1E_2$ to be the compositum of $E_1$ and $E_2$. Then $E_3/K$ is an also finite Galois extension.
+\end{remark}
+
+Intuitively, the Krull topology says that two automorphisms $\sigma$ and $\tau$ in $\operatorname{Gal}(L/K)$ are close if they agree on a sufficiently large finite Galois subextension $E/ K$ of $L/ K$, i.e.
+\[
+\sigma|_{E} = \tau|_{E}.
+\]
+
+
+

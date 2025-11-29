@@ -1,5 +1,6 @@
 \documentclass{report}
 
+
 % \usepackage[extract=python]{memoize}
 % \mmzset{%
 %   prefix=memos/,
@@ -11,17 +12,9 @@
 \input{preamble}
 
 
-\usepackage[page,toc,titletoc,title]{appendix}
-\usepackage{chemfig}
-\usepackage{relsize}
-\usepackage{multirow}
-\usepackage{colortbl}
-\usepackage{mathrsfs}
-\usepackage{stmaryrd}
-\usepackage{bbm}
-\usepackage{graphicx}
 
-\usepackage{leftindex}
+% make index
+\makeindex[columns=2, title=Index, intoc]
 
 \newcommand{\divides}{\mid}
 
@@ -161,6 +154,8 @@
   \csname qendmydef\endcsname
 }
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Start document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -249,6 +244,8 @@ We use sans-serif font for categories. Some common categories are
 
 
 \include{appendices}
+
+\printindex
 
 % \begin{Theorem}{Title}{label}
 %     This is the statement of the theorem.

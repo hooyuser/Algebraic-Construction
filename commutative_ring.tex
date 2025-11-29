@@ -318,10 +318,10 @@ In summary, we have the following chain of inclusions:
 \end{definition}
 
 
-\begin{proposition}{}{}
+\begin{proposition}{}{divisibility_ideal_characterization}
     Let $R$ be a commutative ring.
     \begin{enumerate}[(i)]
-        \item $a \mid b\iff(b) \subseteq (a)$.
+        \item $a \divides b\iff(b) \subseteq (a)$.
         \item $u\in R^\times \iff (u) = R  \iff \forall r\in R,\,u\mid r$.
     \end{enumerate}
 \end{proposition}
@@ -337,7 +337,7 @@ In summary, we have the following chain of inclusions:
 
 
 
-\begin{proposition}{Prime Element and Prime Ideal}{equivalent_characterization_of_prime_element}
+\begin{proposition}{Prime Element and Nonzero Prime Ideal}{equivalent_characterization_of_prime_element}
     Suppose $R$ is a commutative ring and $a\in R$. Then
     \[
         a\text{ is prime }\iff (a)\text{ is a nonzero prime ideal}.
@@ -433,7 +433,7 @@ If $R$ is a general commutative ring, then we only have the implication $(\mathr
 
 Associatedness can also be described in terms of the action of $R^\times$ on $R$ via multiplication: two elements of $R$ are associates if they are in the same $R^\times$-orbit.
 \begin{definition}{Irreducible Element}{}
-    Let $R$ be an integral domain. An element $a\in R$ is called \textbf{irreducible} if
+    Let $R$ be an integral domain. An non-zero element $a\in R$ is called \textbf{irreducible} if
     \begin{enumerate}[(i)]
         \item $a\notin R^\times$, i.e. $a$ is not a unit.
         \item $a=bc\implies b\in R^\times\text{ or }c\in R^\times$.
@@ -441,6 +441,20 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 \end{definition}
 
 0 is never an irreducible element.
+
+\begin{proposition}{Dividing Irreducible Element in PID Implies Associate or Unit}{dividing_irreducible_element_in_PID_implies_associate_or_unit}
+    Let $R$ be an integral domain and $f,g\in R$. If $f$ is irreducible and $f \in (g)$, then one of the following holds:
+    \begin{enumerate}[(i)]
+        \item $g \in R^\times$, i.e. $(g) = R$.
+        \item $g$ is an associate of $f$, i.e. $(g) = (f)$.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    Since $f \in (g)$, there exists $h \in R$ such that $f = gh$. Since $f$ is irreducible, we have $g \in R^\times$ or $h \in R^\times$. If $g \in R^\times$, then $(g) = R$. If $h \in R^\times$, then $g$ is an associate of $f$ and $(g) = (f)$.
+\end{prf}
+
+
+
 \begin{proposition}{Prime Element $\implies$ Irreducible Element in Integral Domain}{prime_element_implies_irreducible_element_in_integral_domain}
     Let $R$ be an integral domain. Then every prime element in $R$ is irreducible.
 \end{proposition}
@@ -505,16 +519,30 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
 
 
 \begin{proposition}{Nonzero Prime Ideal $\iff$ Maximal Ideal in PID}{nonzero_prime_ideal_iff_maximal_ideal_in_PID}
-    Let $R$ be a PID and $(p)$ be any nonzero prime ideal in $R$. Then $(p)$ is a maximal ideal and $p$ is an irreducible element.
+    Let $R$ be a PID and $p\in R$. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $p$ is a prime element.
+        \item $p$ is an irreducible element.
+        \item $(p)$ is a nonzero prime ideal.
+        \item $(p)$ is a maximal ideal.
+    \end{enumerate}
 \end{proposition}
 
 \begin{prf}
-    Let $I=(p)\subseteq R$ be a prime ideal. We only need to show $R/I$ is a field. Let $\overline{a}\in R/I$ be a nonzero element. Then $a\notin I$. Since $I$ is prime, $a$ is not a multiple of any prime element in $R$. Thus $a$ is irreducible. Since $R$ is a PID, $a$ is prime. Thus $\overline{a}$ is prime in $R/I$. Since $R/I$ is an integral domain, $\overline{a}$ is a maximal ideal in $R/I$. That implies $R/I$ is a field. Hence $I$ is a maximal ideal.
+    By \Cref{th:equivalent_characterization_of_prime_element}, (i)$\iff$(iii). Since \hyperref[th:irreducible_element_iff_prime_element_in_UFD]{ in UFD, prime elements are irreducible elements}, (i)$\iff$(ii). Since maximal ideals are prime, (iv)$\implies$(iii).
 
-    By \Cref{th:equivalent_characterization_of_prime_element}, $p$ is a prime element. Since \hyperref[th:irreducible_element_iff_prime_element_in_UFD]{ in UFD, prime elements are irreducible elements}, we conclude $p$ is irreducible.
+
+    To show (ii)$\implies$(iv), suppose $p$ is irreducible. Let $I$ be an ideal of $R$ such that 
+    \[
+    (p)\subseteq I \subseteq R.
+    \]
+    Since $R$ is a PID, there exists some $a\in R$ such that $I=(a)$. Then we have $(p)\subseteq (a)$, which implies there exists $r\in R$ such that $p=ra$ by \Cref{th:divisibility_ideal_characterization}. Because $p$ is irreducible, by definition we have $a\in R^\times$ or $r\in R^\times$. 
+    \begin{itemize}
+        \item If $a\in R^\times$, then $I=(a)=R$.
+        \item If $r\in R^\times$, then $a=r^{-1}p$, which implies $(a)\subseteq (p)$ and thus $I=(a)=(p)$.
+    \end{itemize}
+    This shows that there are no ideals strictly between $(p)$ and $R$. Hence $(p)$ is maximal.
 \end{prf}
-
-
 
 
 \section{Construction}
@@ -546,6 +574,20 @@ Associatedness can also be described in terms of the action of $R^\times$ on $R$
     \]
     This implies $I_1\times I_2$ is an ideal of $R_1\times R_2$.
 \end{prf}
+
+\subsection{Coproduct}
+Since we have the isomorphisms of categories
+$$
+\mathsf{CRing}\cong (\mathsf{CRing}/\mathbb{Z})\cong \mathbb{Z}\hspace{0.5pt}{\text -}\mathsf{CAlg},
+$$
+the coproduct in the category of commutative rings is given by the tensor product of commutative $\mathbb{Z}$-algebras.
+\begin{definition}{Coproduct of Commutative Rings}{}
+    Let $R$, $S$ be commutative rings. The \textbf{coproduct} of $R$ and $S$, denoted by $R\otimes_{\mathbb{Z}} S$, is the tensor product of $R$ and $S$ over $\mathbb{Z}$. The addition and multiplication are defined as follows:
+    \begin{align*}
+        (r_1\otimes s_1)+(r_2\otimes s_2)&=(r_1+r_2)\otimes (s_1+s_2)-r_1\otimes s_2 - r_2\otimes s_1,\\
+        (r_1\otimes s_1)\cdot(r_2\otimes s_2)&=(r_1r_2)\otimes (s_1s_2).
+    \end{align*}
+\end{definition}
 
 
 \subsection{Quotient Ring}
@@ -902,12 +944,12 @@ Next we introduce the universal property of localization. It says localization i
 \begin{prf}
     Note
     \[
-        \{I \in \operatorname{Spec} R: I \cap S=\varnothing\}=\{I \in \operatorname{Spec} R: I \cap (R-\frak{p})=\varnothing\}=\{I \in \operatorname{Spec} R: I\subseteq \frak{p}\}.
+        \{I \in \operatorname{Spec} R: I \cap S=\varnothing\}=\{I \in \operatorname{Spec} R: I \cap (R-\mathfrak{p})=\varnothing\}=\{I \in \operatorname{Spec} R: I\subseteq \mathfrak{p}\}.
     \]
     For any ideal $S^{-1}I \in \spec S^{-1}R$, where
     $I\in  \{I \in \operatorname{Spec} R: I \cap S=\varnothing\}$, we have $I\subseteq \mathfrak{p}$, which implies $S^{-1}I\subseteq  S^{-1}\mathfrak{p}$. Thus we see $S^{-1}\mathfrak{p}$ is the unique maximal ideal of $S^{-1}R$. 
     
-    According to \Cref{th:localization_at_ideal_respects_quotients}, we have an isomorphism $(R/\frak{p})_{\frak{p}}\cong R_\frak{p}/\frak{p}R_\frak{p}$ and the following commutative diagram in $R\text{-}\mathsf{CAlg}$ 
+    According to \Cref{th:localization_at_ideal_respects_quotients}, we have an isomorphism $(R/\mathfrak{p})_{\mathfrak{p}}\cong R_\mathfrak{p}/\mathfrak{p}R_\mathfrak{p}$ and the following commutative diagram in $R\text{-}\mathsf{CAlg}$ 
     \[
         \begin{tikzcd}
             R \arrow[r, "\pi_\mathfrak{p}"] \arrow[d, "l_{R-\mathfrak{p}}"'] &[+5em] R/\mathfrak{p} \arrow[d, "l_{R-\mathfrak{p}}"]              \\[+2em]

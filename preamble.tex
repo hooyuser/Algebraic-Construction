@@ -3,41 +3,63 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% --- 1. SETUP & FUNDAMENTALS (Load these first to define page/colors) ---
+% Load xcolor FIRST to avoid "Option Clash" with tikz/tcolorbox
+\usepackage[table]{xcolor} 
 \usepackage[tmargin=2cm,rmargin=1in,lmargin=1in,margin=0.85in,bmargin=1.5cm,footskip=.2in]{geometry}
-\usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools}
+\usepackage{etoolbox}
+\usepackage{anyfontsize}
 
-% \usepackage[bb=dsserif]{mathalpha}
-% \usepackage{bm}
+
+% --- 2. MATH PACKAGES ---
+\usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools}
+\usepackage{cancel}
+\usepackage{leftindex}
+\usepackage{relsize}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+
+% --- 3. FONTS ---
 \usepackage{dsfont}
-\usepackage{bookmark} 
-\usepackage{booktabs}
-\usepackage{enumerate}
-\usepackage[shortlabels]{enumitem}
-\usepackage{hyperref,theoremref}
-\usepackage[table]{xcolor}
-\usepackage[most,many,breakable]{tcolorbox}
-\usepackage{xcolor}
+\usepackage{bbm}
+% \usepackage[bb=dsserif]{mathalpha}
+\usepackage{bm}
+
+% --- 4. GRAPHICS & DRAWING ---
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
-\usepackage{varwidth}
-\usepackage{varwidth}
-\usepackage{etoolbox}
-%\usepackage{authblk}
-\usepackage{nameref}
-\usepackage{multicol,array}
 \usepackage{tikz-cd}
-\usepackage{cancel}
+\usepackage{chemfig}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{patchplots}
-\usepackage{anyfontsize}
+
+
+% --- 5. TABLES, BOXES & LISTS ---
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{multicol,array}
+\usepackage{varwidth}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+% Load tcolorbox after xcolor to ensure it sees the colors correctly
+\usepackage[most,many,breakable]{tcolorbox}
+
+
+% --- 6. STRUCTURE & UTILITIES ---
+\usepackage{imakeidx}
 \usepackage{sectsty}
-%\usepackage{import}
-%\usepackage{xifthen}
-%\usepackage{pdfpages}
-%\usepackage{transparent}
-\usepackage[nameinlink]{cleveref}
 \usepackage{fancyhdr}
+\usepackage[page,toc,titletoc,title]{appendix}
+
+% --- 7. HYPERLINKS & REFERENCES (MUST be last) ---
+% Hyperref goes last (with very few exceptions)
+\usepackage[hidelinks]{hyperref} 
+% Packages that MUST go AFTER hyperref:
+\usepackage{bookmark}
+\usepackage{nameref}
+\usepackage[nameinlink]{cleveref}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -76,7 +98,7 @@
 
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{calc}
-\usepackage{anyfontsize}
+
 
 \definecolor{myg}{RGB}{56, 140, 70}
 \definecolor{myb}{RGB}{45, 111, 177}
@@ -151,26 +173,6 @@
 }
 {th}
 
-% \newtcbtheorem[number within=chapter]{definition}{Definition}
-% {%
-%     enhanced
-%     ,breakable
-%     ,colback = mydefinitbg
-%     ,frame hidden
-%     ,boxrule = 0sp
-%     ,borderline west = {2pt}{0pt}{mydefinitfr}
-%     ,sharp corners
-%     ,detach title
-%     ,before upper = \tcbtitle\par\smallskip
-%     ,coltitle = mydefinitfr!85!black
-%     ,fonttitle = \bfseries\sffamily
-%     ,description font = \mdseries
-%     ,separator sign none
-%     ,segmentation style={solid, mydefinitfr!85!black}
-% 	,label type=definition
-% }
-% {th}
-
 \setlength{\parindent}{0.5cm}
 %================================
 % THEOREM BOX
@@ -197,28 +199,6 @@
 }
 {th}
 
-% \tcbuselibrary{theorems,skins,hooks}
-% \newtcbtheorem[number within=chapter]{theorem}{Theorem}
-% {%
-% 	enhanced,
-% 	breakable,
-% 	colback = mytheorembg,
-% 	frame hidden,
-% 	boxrule = 0sp,
-% 	borderline west = {2pt}{0pt}{mytheoremfr},
-% 	sharp corners,
-% 	detach title,
-% 	before upper = \tcbtitle\par\smallskip,
-% 	coltitle = mytheoremfr,
-% 	fonttitle = \bfseries\sffamily,
-% 	description font = \mdseries,
-% 	separator sign none,
-% 	segmentation style={solid, mytheoremfr},
-% 	label type=theorem
-% }
-% {th}
-
-
 \tcbuselibrary{theorems,skins,hooks}
 \newtcolorbox{Theoremcon}
 {%
@@ -235,7 +215,7 @@
 
 
 %================================
-% Corollery
+% Corollary
 %================================
 \tcbuselibrary{theorems,skins,hooks}
 \newtcbtheorem[use counter from=definition, number within=section]{corollary}{Corollary}
@@ -257,26 +237,6 @@
 	,label type=corollary
 }
 {th}
-% \tcbuselibrary{theorems,skins,hooks}
-% \newtcbtheorem[number within=chapter]{corollary}{Corollary}
-% {%
-% 	enhanced
-% 	,breakable
-% 	,colback = myp!10
-% 	,frame hidden
-% 	,boxrule = 0sp
-% 	,borderline west = {2pt}{0pt}{myp!85!black}
-% 	,sharp corners
-% 	,detach title
-% 	,before upper = \tcbtitle\par\smallskip
-% 	,coltitle = myp!85!black
-% 	,fonttitle = \bfseries\sffamily
-% 	,description font = \mdseries
-% 	,separator sign none
-% 	,segmentation style={solid, myp!85!black}
-% 	,label type=corol
-% }
-% {th}
 
 %================================
 % CLAIM
@@ -348,25 +308,6 @@
 }
 {th}
 
-% \newtcbtheorem[number within=chapter]{Proposition}{Proposition}
-% {%
-% 	enhanced
-% 	,breakable
-% 	,colback = mypropbg!10
-% 	,frame hidden
-% 	,boxrule = 0sp
-% 	,borderline west = {2pt}{0pt}{mypropfr!85!black}
-% 	,sharp corners
-% 	,detach title
-% 	,before upper = \tcbtitle\par\smallskip
-% 	,coltitle = mypropfr!85!black
-% 	,fonttitle = \bfseries\sffamily
-% 	,description font = \mdseries
-% 	,separator sign none
-% 	,segmentation style={solid, mypropfr!85!black}
-% 	,label type=proposition
-% }
-% {th}
 %================================
 % LEMMA
 %================================
@@ -392,25 +333,6 @@
 }
 {th}
 
-% \newtcbtheorem[number within=chapter]{Lemma}{Lemma}
-% {%
-% 	enhanced
-% 	,breakable
-% 	,colback = mylemmabg!10
-% 	,frame hidden
-% 	,boxrule = 0sp
-% 	,borderline west = {2pt}{0pt}{mylemmafr!85!black}
-% 	,sharp corners
-% 	,detach title
-% 	,before upper = \tcbtitle\par\smallskip
-% 	,coltitle = mylemmafr!85!black
-% 	,fonttitle = \bfseries\sffamily
-% 	,description font = \mdseries
-% 	,separator sign none
-% 	,segmentation style={solid, mylemmafr!85!black}
-% 	,label type=lemma
-% }
-% {th}
 %================================
 % EXAMPLE BOX
 %================================
@@ -426,9 +348,7 @@
 	,detach title
 	,before upper=\tcbtitle\par\smallskip
 	,fonttitle = \bfseries\sffamily
-	%,fonttitle = \bfseries
 	,description font = \mdseries\sffamily
-	%,description font = \mdseries
 	,separator sign none
 	%,description delimiters parenthesis
 	,label type=example
@@ -762,11 +682,8 @@
 		}
 }
 
-%\usepackage{framed}
-%\usepackage{titletoc}
-%\usepackage{etoolbox}
-%\usepackage{lmodern}
 
+%\usepackage{titletoc}
 
 %\patchcmd{\tableofcontents}{\contentsname}{\sffamily\contentsname}{}{}
 
@@ -802,7 +719,7 @@
 \usepackage{titletoc}
 \usepackage{sectsty} % For customizing section titles if needed
 
-\renewcommand{\contentsname}{\fontfamily{times}\selectfont\Huge\bfseries\sffamily Contents}
+\renewcommand{\contentsname}{\selectfont\Huge\bfseries\sffamily Contents}
 
 % Define custom colors as per tstextbook.cls
 \definecolor{tssteelblue}{RGB}{70,130,180}
@@ -832,204 +749,3 @@
 {} % Unnumbered format
 {\hfill\color{black}\contentspage} % Page number
 
-
-% \usepackage{tikz}
-% \definecolor{doc}{RGB}{0,60,110}
-% \usepackage{titletoc}
-% \contentsmargin{0cm}
-% \titlecontents{chapter}[3.7pc]
-% {\addvspace{30pt}%
-% 	\begin{tikzpicture}[remember picture, overlay]%
-% 		\draw[fill=doc!60,draw=doc!60] (-7,-.1) rectangle (-0.7,.5);%
-% 		\pgftext[left,x=-3.6cm,y=0.2cm]{\color{white}\Large\sc\bfseries Chapter\ \thecontentslabel};%
-% 	\end{tikzpicture}\color{doc!60}\large\sc\bfseries}%
-% {}
-% {}
-% {\;\titlerule\;\large\sc\bfseries Page \thecontentspage
-% 	\begin{tikzpicture}[remember picture, overlay]
-% 		\draw[fill=doc!60,draw=doc!60] (2pt,0) rectangle (4,0.1pt);
-% 	\end{tikzpicture}}%
-% \titlecontents{section}[3.7pc]
-% {\addvspace{2pt}}
-% {\contentslabel[\thecontentslabel]{2pc}}
-% {}
-% {\hfill\small \thecontentspage}
-% []
-% \titlecontents*{subsection}[3.7pc]
-% {\addvspace{-1pt}\small}
-% {}
-% {}
-% {\ --- \small\thecontentspage}
-% [ \textbullet\ ][]
-
-% \makeatletter
-% \renewcommand{\tableofcontents}{%
-% 	\chapter*{%
-% 	  \vspace*{-20\p@}%
-% 	  \begin{tikzpicture}[remember picture, overlay]%
-% 		  \pgftext[right,x=15cm,y=0.2cm]{\color{doc!60}\Huge\sc\bfseries \contentsname};%
-% 		  \draw[fill=doc!60,draw=doc!60] (13,-.75) rectangle (20,1);%
-% 		  \clip (13,-.75) rectangle (20,1);
-% 		  \pgftext[right,x=15cm,y=0.2cm]{\color{white}\Huge\sc\bfseries \contentsname};%
-% 	  \end{tikzpicture}}%
-% 	\@starttoc{toc}}
-% \makeatother
-
-% \newcommand{\mytitlea}[4]{
-% 	\begin{tikzpicture}[remember picture,overlay]
-% 		%%%%%%%%%%%%%%%%%%%% Background %%%%%%%%%%%%%%%%%%%%%%%%
-% 		\fill[orange] (current page.south west) rectangle (current page.north east);
-		
-		
-		
-		
-% 		%%%%%%%%%%%%%%%%%%%% Background Polygon %%%%%%%%%%%%%%%%%%%%
-		
-% 		\foreach \i in {2.5,...,22}
-% 		{
-% 			\node[rounded corners,orange!60,draw,regular polygon,regular polygon sides=6, minimum size=\i cm,ultra thick] at ($(current page.west)+(2.5,-5)$) {} ;
-% 		}
-		
-% 		\foreach \i in {0.5,...,22}
-% 		{
-% 			\node[rounded corners,orange!60,draw,regular polygon,regular polygon sides=6, minimum size=\i cm,ultra thick] at ($(current page.north west)+(2.5,0)$) {} ;
-% 		}
-		
-% 		\foreach \i in {0.5,...,22}
-% 		{
-% 			\node[rounded corners,orange!90,draw,regular polygon,regular polygon sides=6, minimum size=\i cm,ultra thick] at ($(current page.north east)+(0,-9.5)$) {} ;
-% 		}
-		
-		
-% 		\foreach \i in {21,...,6}
-% 		{
-% 			\node[orange!85,rounded corners,draw,regular polygon,regular polygon sides=6, minimum size=\i cm,ultra thick] at ($(current page.south east)+(-0.2,-0.45)$) {} ;
-% 		}
-		
-		
-% 		%%%%%%%%%%%%%%%%%%%% Title of the Report %%%%%%%%%%%%%%%%%%%% 
-% 		\node[left,black,minimum width=0.625*\paperwidth,minimum height=3cm, rounded corners] at ($(current page.north east)+(0,-9.5)$)
-% 		{
-% 			{\fontsize{25}{30} \selectfont \bfseries #1}
-% 		};
-		
-% 		%%%%%%%%%%%%%%%%%%%% Subtitle %%%%%%%%%%%%%%%%%%%% 
-% 		\node[left,black,minimum width=0.625*\paperwidth,minimum height=2cm, rounded corners] at ($(current page.north east)+(0,-11)$)
-% 		{
-% 			{\huge \textit{#2}}
-% 		};
-		
-% 		%%%%%%%%%%%%%%%%%%%% Author Name %%%%%%%%%%%%%%%%%%%% 
-% 		\node[left,black,minimum width=0.625*\paperwidth,minimum height=2cm, rounded corners] at ($(current page.north east)+(0,-13)$)
-% 		{
-% 			{\Large \textsc{#3}}
-% 		};
-		
-% 		%%%%%%%%%%%%%%%%%%%% Year %%%%%%%%%%%%%%%%%%%% 
-% 		\node[rounded corners,fill=orange!70,text =black,regular polygon,regular polygon sides=6, minimum size=2.5 cm,inner sep=0,ultra thick] at ($(current page.west)+(2.5,-5)$) {\LARGE \bfseries #4};
-		
-% 	\end{tikzpicture}
-% }
-% \newcommand{\mytitleb}[4]{\begin{tikzpicture}[overlay,remember picture]
-		
-% 		% Background color
-% 		\fill[
-% 		black!2]
-% 		(current page.south west) rectangle (current page.north east);
-		
-% 		% Rectangles
-% 		\shade[
-% 		left color=Dandelion, 
-% 		right color=Dandelion!40,
-% 		transform canvas ={rotate around ={45:($(current page.north west)+(0,-6)$)}}] 
-% 		($(current page.north west)+(0,-6)$) rectangle ++(9,1.5);
-		
-% 		\shade[
-% 		left color=lightgray,
-% 		right color=lightgray!50,
-% 		rounded corners=0.75cm,
-% 		transform canvas ={rotate around ={45:($(current page.north west)+(.5,-10)$)}}]
-% 		($(current page.north west)+(0.5,-10)$) rectangle ++(15,1.5);
-		
-% 		\shade[
-% 		left color=lightgray,
-% 		rounded corners=0.3cm,
-% 		transform canvas ={rotate around ={45:($(current page.north west)+(.5,-10)$)}}] ($(current page.north west)+(1.5,-9.55)$) rectangle ++(7,.6);
-		
-% 		\shade[
-% 		left color=orange!80,
-% 		right color=orange!60,
-% 		rounded corners=0.4cm,
-% 		transform canvas ={rotate around ={45:($(current page.north)+(-1.5,-3)$)}}]
-% 		($(current page.north)+(-1.5,-3)$) rectangle ++(9,0.8);
-		
-% 		\shade[
-% 		left color=red!80,
-% 		right color=red!80,
-% 		rounded corners=0.9cm,
-% 		transform canvas ={rotate around ={45:($(current page.north)+(-3,-8)$)}}] ($(current page.north)+(-3,-8)$) rectangle ++(15,1.8);
-		
-% 		\shade[
-% 		left color=orange,
-% 		right color=Dandelion,
-% 		rounded corners=0.9cm,
-% 		transform canvas ={rotate around ={45:($(current page.north west)+(4,-15.5)$)}}]
-% 		($(current page.north west)+(4,-15.5)$) rectangle ++(30,1.8);
-		
-% 		\shade[
-% 		left color=RoyalBlue,
-% 		right color=Emerald,
-% 		rounded corners=0.75cm,
-% 		transform canvas ={rotate around ={45:($(current page.north west)+(13,-10)$)}}]
-% 		($(current page.north west)+(13,-10)$) rectangle ++(15,1.5);
-		
-% 		\shade[
-% 		left color=lightgray,
-% 		rounded corners=0.3cm,
-% 		transform canvas ={rotate around ={45:($(current page.north west)+(18,-8)$)}}]
-% 		($(current page.north west)+(18,-8)$) rectangle ++(15,0.6);
-		
-% 		\shade[
-% 		left color=lightgray,
-% 		rounded corners=0.4cm,
-% 		transform canvas ={rotate around ={45:($(current page.north west)+(19,-5.65)$)}}]
-% 		($(current page.north west)+(19,-5.65)$) rectangle ++(15,0.8);
-		
-% 		\shade[
-% 		left color=OrangeRed,
-% 		right color=red!80,
-% 		rounded corners=0.6cm,
-% 		transform canvas ={rotate around ={45:($(current page.north west)+(20,-9)$)}}] 
-% 		($(current page.north west)+(20,-9)$) rectangle ++(14,1.2);
-		
-% 		% Year
-% 		\draw[ultra thick,gray]
-% 		($(current page.center)+(5,2)$) -- ++(0,-3cm) 
-% 		node[
-% 		midway,
-% 		left=0.25cm,
-% 		text width=5cm,
-% 		align=right,
-% 		black!75
-% 		]
-% 		{
-% 			{\fontsize{25}{30} \selectfont \bf  Lecture\\[10pt] Notes}
-% 		} 
-% 		node[
-% 		midway,
-% 		right=0.25cm,
-% 		text width=6cm,
-% 		align=left,
-% 		orange]
-% 		{
-% 			{\fontsize{72}{86.4} \selectfont #4}
-% 		};
-		
-% 		% Title
-% 		\node[align=center] at ($(current page.center)+(0,-5)$) 
-% 		{
-% 			{\fontsize{60}{72} \selectfont {{#1}}} \\[1cm]
-% 			{\fontsize{16}{19.2} \selectfont \textcolor{orange}{ \bf #2}}\\[3pt]
-% 			#3};
-% \end{tikzpicture}
-% }
