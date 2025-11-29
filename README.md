@@ -1,5 +1,5 @@
 # Algebraic-Construction
-![Lines of code](https://tokei.rs/b1/github/hooyuser/Algebraic-Construction) ![](https://img.shields.io/github/repo-size/hooyuser/Algebraic-Construction?style=plastic
+![Lines of Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hooyuser/github-badges/main/badges/hooyuser-Algebraic-Construction.json) ![](https://img.shields.io/github/repo-size/hooyuser/Algebraic-Construction?style=plastic
 )
 
 **Preview Here**: [algebraic_construction.pdf](https://hooyuser.github.io/Algebraic-Construction/algebraic_construction.pdf)
