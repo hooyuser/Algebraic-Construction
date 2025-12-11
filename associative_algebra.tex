@@ -402,18 +402,6 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     \]  
 \end{definition}
 
-\[
-    \begin{tikzcd}[ampersand replacement=\&]
-        \mathsf{PoFin}_I^{\mathrm{op}}\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{Mble}\&[-30pt]\&[-30pt] \\ [-15pt] 
-        J_2  \arrow[dd, ""{name=L, left}] 
-        \&[-25pt] \& [+10pt] 
-        \& [-30pt]\prod\limits_{i \in J_2}(\Omega_i,\mathcal{F}_i)\arrow[dd, "\mathrm{pr}_{J_1\subseteq J_2}"{name=R}] \&[-20pt]\ni\& [+20pt](\omega_i)_{i\in J_2} \arrow[dd, mapsto, ""{name=L, right}] 
-        \\ [-10pt] 
-        \&  \phantom{.}\arrow[r, "U\circ F", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-        J_1\& \& \& \prod\limits_{i \in J_1}(\Omega_i,\mathcal{F}_i)\&[-0pt]\ni\& (\omega_i)_{i\in J_1}
-    \end{tikzcd}
-\]  
-
 
 \begin{proposition}{Adjunction $\Largewedge^{\bullet}\dashv U_{\mathsf{R\text{-}\mathsf{Mod}}}$}{}
     Let $R$ be a commutative ring. Suppose $U:R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}\to R\text{-}\mathsf{Mod}$ is the forgetful functor. Then the exterior algebra functor $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}$ is left adjoint to $U$.
@@ -591,7 +579,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \end{prf}
 
 \begin{definition}{Algebraic Element and Transcendental Element}{algebraic_element_and_transcendental_element}
-    Let $K$ be a field and $A$ be a $K$-algebra. Consider the evaluation ring homomorphism
+    Let $K$ be a field, $A$ be a $K$-algebra, and $a \in A$. Consider the evaluation ring homomorphism
     \begin{align*}
         \mathrm{ev}_a:K[X] &\longrightarrow A\\
         f &\longmapsto f(a).

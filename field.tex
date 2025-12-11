@@ -43,7 +43,7 @@
 
 
 \begin{definition}{$K$-embedding and $K$-isomorphism}{}
- A \textbf{$K$-embedding} is a morphism in the \hyperref[th:coslice_category]{coslice category} $(K/\mathsf{Field})$. A \textbf{$K$-isomorphism} is an isomorphism in $(K/\mathsf{Field})$. We say two field extensions $L_1/K$ and $L_2/K$ are \textbf{$K$-isomorphic} if there exists a $K$-isomorphism between them.
+ A \textbf{$K$-embedding} is a morphism in the \hyperref[th:coslice_category]{coslice category} $(\mathsf{Field}/K)$. A \textbf{$K$-isomorphism} is an isomorphism in $(\mathsf{Field}/K)$. We say two field extensions $L_1/K$ and $L_2/K$ are \textbf{$K$-isomorphic} if there exists a $K$-isomorphism between them.
 \end{definition}
 
 \begin{proposition}{Equivalent Characterizations of $K$-embedding}{equivalent_characterizations_of_K_embedding}
@@ -61,7 +61,7 @@
     \end{enumerate}
 \end{proposition}
 \begin{prf}
-Note $(K/\mathsf{Field})$ is a full subcategory of $(K/\mathsf{CRing})\cong K\text{-}\mathsf{CAlg}$. 
+Note $(\mathsf{Field}/K)$ is a full subcategory of $(K/\mathsf{CRing})\cong K\text{-}\mathsf{CAlg}$. 
 \end{prf}
 
 \begin{corollary}{$K$-endomorphism Fixes Base Field}{}
@@ -78,10 +78,10 @@ Note $(K/\mathsf{Field})$ is a full subcategory of $(K/\mathsf{CRing})\cong K\te
     \]
     be the set of roots of $f$ in $L$. Then $\phi|_{S_f}:S_f\to S_f$ is a bijection and we can define a monoid homomorphism
     \begin{align*}
-        \mathrm{End}_{(K/\mathsf{Field})}(L/K)&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}\left(S_f\right)\\
+        \mathrm{End}_{(\mathsf{Field}/K)}(L/K)&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}\left(S_f\right)\\
         \phi&\longmapsto \phi|_{S_f}
     \end{align*}
-    Moreover, $\mathrm{Aut}_{(K/\mathsf{Field})}(L/K)$ acts on $S_f$ through this map.
+    Moreover, $\mathrm{Aut}_{(\mathsf{Field}/K)}(L/K)$ acts on $S_f$ through this map.
 \end{proposition}
 \begin{prf}
     Let $x\in S_f$. Since
@@ -90,7 +90,7 @@ Note $(K/\mathsf{Field})$ is a full subcategory of $(K/\mathsf{CRing})\cong K\te
     \]
     we have $\phi(x)\in S_f$. Hence $\phi(S_f)\subseteq S_f$. Since $S_f$ is finite set and $\phi$ is injective, we see $\phi|_{S_f}:S_f\to S_f$ is a bijection. It is easy to check
     \begin{align*}
-        \mathrm{Aut}_{(K/\mathsf{Field})}(L/K)&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}\left(S_f\right)\\
+        \mathrm{Aut}_{(\mathsf{Field}/K)}(L/K)&\longrightarrow \mathrm{Aut}_{\mathsf{Set}}\left(S_f\right)\\
         \phi&\longmapsto \phi|_{S_f}
     \end{align*}
     is a group homomorphism. 
@@ -251,18 +251,66 @@ In field category $\mathsf{Field}$, Let $\mathsf{Field}_0$ denote the full subca
     If $\Bbbk$ is any field and $\mathfrak{m}$ is a maximal ideal of $\Bbbk\left[x_1, \ldots, x_n\right]$, then $\Bbbk\left[x_1, \ldots, x_n\right]/\mathfrak{m}$ is a finite extension of $\Bbbk$.
 \end{theorem}
 
+\begin{proposition}{}{}
+    If $K$ is a field, then any finite subgroup of $K^\times$ is cyclic.
+\end{proposition}
 
-
-
+\begin{prf}
+    Let $G$ be any subgroup of $K^\times$. By the structure theorem for finite abelian groups, we can write
+    \[
+     G\cong C_{n_1}\times C_{n_2}\times\cdots \times C_{n_r}
+    \]
+    with $n_1\divides n_2 \divides\cdots\divides n_r$. Let $n=G=n_1n_2\cdots n_r$. It is sufficient to show that $r=1$. Since for any $g=(g_1,\cdots, g_r)\in C_{n_1}\times C_{n_2}\times\cdots \times C_{n_r}$, we have
+    \[
+      g^{n_r}-1=(g_1^{n_r},g_2^{n_r},\cdots, g_r^{n_r})-(1,1,\cdots, 1)=0,
+    \]
+    we know the polynomial $f(X)=X^{n_r}-1$ has $n$ distinct roots in $K$. Since 
+    \[
+    n\le \deg f= n_r,
+    \]
+    there must be $n=n_r$ and $r=1$.
+\end{prf}
 
 
 
 
 \subsection{Algebraic Extension}
 
+\begin{definition}{Algebraic Element and Transcendental Element}{algebraic_element_and_transcendental_element_for_field_extension}
+    Let $L/K$ be a field extension and $\alpha \in L$. Consider the evaluation ring homomorphism
+    \begin{align*}
+        \mathrm{ev}_\alpha:K[X] &\longrightarrow L\\
+        f &\longmapsto f(\alpha).
+    \end{align*}
+    and $\ker \mathrm{ev}_\alpha=(P_\alpha)$ for some $P_\alpha\in K[X]$. Polynomials in $\ker \mathrm{ev}_\alpha$ are called \textbf{annihilating polynomials} of $\alpha$ over $K$.
+    \begin{itemize}
+        \item If $P_\alpha=0$, then $\alpha$ is called a \textbf{transcendental element} over $K$. In this case, zero polynomial is the only annihilating polynomial of $\alpha$ over $K$.
+        \item If $P_\alpha\ne 0$, then $\alpha$ is called an \textbf{algebraic element} over $K$. Suppose $P_\alpha(X)=\sum_{i=0}^n a_iX^i$ with $a_n\in K^\times$. Then the monic polynomial $m_\alpha(X)=P_\alpha(X)/a_n$ is called the \textbf{minimal polynomial}\index{minimal polynomial} of $\alpha$ over $K$, which is irreducible in $K[X]$.
+    \end{itemize}
+\end{definition}
+\begin{remark}
+    This definition is a special case of \Cref{th:algebraic_element_and_transcendental_element}.
+\end{remark}
+
 \begin{definition}{Algebraic Extension}{}
     A field extension $L/K$ is \textbf{algebraic} if every element of $L$ is \hyperref[th:algebraic_element_and_transcendental_element]{algebraic} over $K$. That is, for any $\alpha\in L$, there exists a nonzero polynomial $f\in K[X]$ such that $f(\alpha)=0$.
 \end{definition}
+
+\begin{proposition}{}{}
+    Let $L/K$ be a field extension and $\alpha\in L$ be an algebraic element over $K$. Suppose $P(X)\in K[X]$ is an irreducible annihilating polynomial of $\alpha$, or equivalently $P(X)\in K[X]-\{0\}$ is a constant multiple of the minimal polynomial $m_\alpha(X)$ of $\alpha$ over $K$. Then
+    \[
+    K(\alpha)\cong K[X]/(P(X))
+    \]
+    and $[K(\alpha):K]=\deg P(X)$. 
+\end{proposition}
+\begin{prf}
+    The equivalence between irreducible annihilating polynomial and constant multiple of minimal polynomial follows from \Cref{th:irreducible_annihilating_polynomial_is_minimal_polynomial}. According to \Cref{th:structure_of_K_a}, we see
+    \[
+    K[X]/(P(X))\cong K[\alpha]=\left\{ f(\alpha) \in L\midv f\in K[X]
+    \right\},
+    \]
+    $K[\alpha]$ is a field and $[K[\alpha]:K]=\deg P(X)$. It is sufficient to show $K(\alpha)=K[\alpha]$. It is clear that $K[\alpha]\subseteq K(\alpha)$. Since $K(\alpha)$ is the smallest subfield of $L$ containing $K$ and $\alpha$, we have $K(\alpha)\subseteq K[\alpha]$. Therefore, $K(\alpha)=K[\alpha]$.
+\end{prf}
 
 
 \begin{proposition}{}{K_embedding_is_K_isomorphism_for_algebraic_extension}
@@ -387,6 +435,9 @@ If $L/K$ is not algebraic, we have the following counterexample.
     Let $K$ be a field and $f\in K[X]$ be a irreducible polynomial. Denote $L:=K[X]/(f)$ and $\alpha:=X+(f(X))\in L$. Then
     \begin{enumerate}[(i)]
         \item $u:K\hookrightarrow K[X]\twoheadrightarrow L$ is a field extension of degree $\deg f$.
+        \[
+         [L:K]=\deg f.
+        \]
         \item $L=K(\alpha)$.
         \item $\alpha$ is algebraic over $K$ with minimal polynomial $f\in K[X]$.
     \end{enumerate}  
@@ -491,24 +542,24 @@ If $L/K$ is not algebraic, we have the following counterexample.
 \end{prf}
 
 \begin{corollary}{}{}
-    Let $L/K$ be a simple extension and $L=K(\alpha)$ for some $\alpha\in L$. Suppose $m(X)\in K[X]$ is the minimal polynomial of $\alpha$ over $K$. Then 
+    Let $L/K$ be a simple extension and $L=K(\alpha)$ for some $\alpha\in L$. Suppose $m_\alpha(X)\in K[X]$ is the minimal polynomial of $\alpha$ over $K$. Then 
     \begin{align*}
-        \mathrm{ev}_{\alpha}:\mathrm{Aut}_{(K/\mathsf{Field})}(K(\alpha)/K)&\longrightarrow \left\{ x\in K(\alpha)\midv m(x)=0\right\}\\
+        \mathrm{ev}_{\alpha}:\mathrm{Aut}_{(\mathsf{Field}/K)}(K(\alpha)/K)&\longrightarrow \left\{ x\in K(\alpha)\midv m_\alpha(x)=0\right\}\\
         \sigma&\longmapsto \sigma(\alpha)
     \end{align*}
     is a bijection and we have
     \[
-    |\mathrm{Aut}_{(K/\mathsf{Field})}(K(\alpha)/K)|=\left|\left\{ x\in K(\alpha)\midv m(x)=0\right\}\right|\le \deg m(X),
+    |\mathrm{Aut}_{(\mathsf{Field}/K)}(K(\alpha)/K)|=\left|\left\{ x\in K(\alpha)\midv m_\alpha(x)=0\right\}\right|\le \deg m_\alpha(X),
     \]
-    with equality if and only if $m(X)$ splits over $K(\alpha)$ into $\deg m(X)$ distinct linear factors.
+    with equality if and only if $m_\alpha(X)$ splits over $K(\alpha)$ into $\deg m_\alpha(X)$ distinct linear factors.
 \end{corollary}
 \begin{prf}
     Suppose $\sigma:K(\alpha)\hookrightarrow K(\alpha)$ is a $K$-automorphism. By \Cref{th:K_embedding_preserves_algebraic_element_and_minimal_polynomial}, $u(\alpha)$ is algebraic over $K$ with minimal polynomial $m(X)$. Thus we can define a map
     \begin{align*}
-        \mathrm{ev}_{\alpha}:\mathrm{Aut}_{(K/\mathsf{Field})}(K(\alpha)/K)&\longrightarrow \left\{ x\in L\midv m(x)=0\right\}\\
+        \mathrm{ev}_{\alpha}:\mathrm{Aut}_{(\mathsf{Field}/K)}(K(\alpha)/K)&\longrightarrow \left\{ x\in L\midv m(x)=0\right\}\\
         \sigma&\longmapsto \sigma(\alpha)
     \end{align*}
-    Since $\sigma$ is totally determined by $\sigma(\alpha)$, for any $\sigma_1, \sigma_2\in \mathrm{Aut}_{(K/\mathsf{Field})}(K(\alpha)/K)$, we have 
+    Since $\sigma$ is totally determined by $\sigma(\alpha)$, for any $\sigma_1, \sigma_2\in \mathrm{Aut}_{(\mathsf{Field}/K)}(K(\alpha)/K)$, we have 
     \[
     \sigma_1(\alpha)=\sigma_2(\alpha)\implies \sigma_1=\sigma_2.
     \]
@@ -566,11 +617,11 @@ To show $\eta: \overline{K}\hookrightarrow \widetilde{K}$ is a $K$-isomorphism, 
 \begin{proposition}{Embed Algebraic Extension into Algebraic Closure}{embed_algebraic_extension_into_algebraic_closure}
     Let $L/K$ be an algebraic extension and $\overline{K}/K$ be an algebraic closure of $K$. Then there exists a $K$-embedding $\gamma:L\hookrightarrow \overline{K}$, namely
     \[
-        \mathrm{Hom}_{(\mathsf{Field}/K)}(L/K,\overline{K}/K)\ne \varnothing.
+        \mathrm{Hom}_{(\mathsf{Field}/K)}(L,\overline{K})\ne \varnothing.
     \]
     If $L/K$ is a finite extension, then 
     \[
-    |\mathrm{Hom}_{(\mathsf{Field}/K)}(L/K,\overline{K}/K)|\le \left[L:K\right].
+    |\mathrm{Hom}_{(\mathsf{Field}/K)}(L,\overline{K})|\le \left[L:K\right].
     \]
 \end{proposition}
 \begin{prf}
@@ -593,11 +644,11 @@ K \arrow[r, hook] \arrow[rrrrru, hook] & K(\alpha_1) \arrow[r, hook] \arrow[rrrr
     Thus we get a chain of restrictions of $\gamma$:
     \[
         \begin{tikzcd}
-            {\mathrm{Hom}_{(K/\mathsf{Field})}\left(K(\alpha_1,\cdots,\alpha_n)/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_n"']         & \gamma \arrow[d, maps to]                                      \\
-            {\mathrm{Hom}_{(K/\mathsf{Field})}\left(K(\alpha_1,\cdots,\alpha_{n-1})/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_{n-1}"'] & {\gamma|_{K(\alpha_1,\cdots,\alpha_{n-1})}} \arrow[d, maps to] \\
+            {\mathrm{Hom}_{(\mathsf{Field}/K)}\left(K(\alpha_1,\cdots,\alpha_n)/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_n"']         & \gamma \arrow[d, maps to]                                      \\
+            {\mathrm{Hom}_{(\mathsf{Field}/K)}\left(K(\alpha_1,\cdots,\alpha_{n-1})/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_{n-1}"'] & {\gamma|_{K(\alpha_1,\cdots,\alpha_{n-1})}} \arrow[d, maps to] \\
             {\raisebox{1.5ex}{$\vdots$}}  \arrow[d, "\mathrm{res}_{2}"']                                                                                                 & {\raisebox{1.5ex}{$\vdots$}}  \arrow[d,maps to]                                      \\
-            {\mathrm{Hom}_{(K/\mathsf{Field})}\left(K(\alpha_1)/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_1"']                         & \gamma|_{K(\alpha_1)} \arrow[d, maps to]                       \\
-            {\mathrm{Hom}_{(K/\mathsf{Field})}\left(K/K,\overline{K}/K\right)}                                                                & \gamma|_{K}                                                   
+            {\mathrm{Hom}_{(\mathsf{Field}/K)}\left(K(\alpha_1)/K,\overline{K}/K\right)} \arrow[d, "\mathrm{res}_1"']                         & \gamma|_{K(\alpha_1)} \arrow[d, maps to]                       \\
+            {\mathrm{Hom}_{(\mathsf{Field}/K)}\left(K/K,\overline{K}/K\right)}                                                                & \gamma|_{K}                                                   
             \end{tikzcd}
     \]
 \end{prf}
@@ -729,6 +780,13 @@ E \arrow[ru, "\sigma", hook] \arrow[rr, "\iota_2", hook] &                      
     Let $K$ be a field and $f\in K[X]$ be a nonzero polynomial. We say $f$ is \textbf{separable} if $f$ has no multiple roots in an algebraic closure of $K$. We say $f$ is \textbf{inseparable} if $f$ is not separable.
 \end{definition}
 
+\begin{definition}{Separable Degree of Irreducible Polynomial}{separable_degree_of_irreducible_polynomial}
+ Let $K$ be a field and $f\in K[x]$ be an irreducible polynomial. The \textbf{separable degree} of $f$ is the cardinality of the set of roots of $f$ in any algebraic closure $\overline{K}$ of $K$, which is denoted by
+ \[
+ \deg_s(f):= \left|\left\{\alpha \in \overline{K} : f(\alpha) = 0\right\}\right|
+ \]
+\end{definition}
+
 \begin{proposition}{Equivalent Characterization of Separable Polynomial}{equivalent_characterization_of_separable_polynomial}
     Let $K$ be a field and $f\in K[X]$ be a nonzero polynomial. The following are equivalent:
     \begin{enumerate}[(i)]
@@ -801,6 +859,50 @@ E \arrow[ru, "\sigma", hook] \arrow[rr, "\iota_2", hook] &                      
     A algebraic extension $L/K$ is \textbf{separable} if every element of $L$ is separable over $K$.
 \end{definition}
 
+
+\begin{lemma}{}{}
+    Let $L/K$ be a finite extension such that $L=K(\alpha_1,\cdots,\alpha_n)$ for some $\alpha_1,\cdots,\alpha_n\in L$. Suppose $\overline{K}/K$ is an algebraic closure of $K$. Define $K_0:=K$ and $K_i:=K_{i-1}(\alpha_i)$ for $1\le i\le n$. Denote the minimal polynomial of $\alpha_i$ over $K_{i-1}$ by $m_{\alpha_i}\in K_{i-1}[X]$. 
+    \begin{enumerate}[(i)]
+        \item If $m_{\alpha_i}$ is separable for any $1\le i\le n$, then 
+        \[
+        \left|\mathrm{Hom}_{\left(\mathsf{Field}/K\right)}(L,\overline{K})\right| = [L:K]
+        \]
+        and $L/K$ is separable.
+        \item If there exists $1\le j\le n$ such that $m_{\alpha_j}$ is inseparable, then
+        \[
+        \left|\mathrm{Hom}_{\left(\mathsf{Field}/K\right)}(L,\overline{K})\right| < [L:K].
+        \]
+    \end{enumerate}
+\end{lemma}
+\begin{prf}
+    If $\alpha_i$ is separable over $K_{i-1}$, then the minimal polynomial $m_{\alpha_i}$ is separable, which implies 
+    \[
+    \operatorname{deg}_s\left(m_{\alpha_i}\right)=\operatorname{deg}\left(m_{\alpha_i}\right)=\left[K_i: K_{i-1}\right]
+    \] 
+    (last equality by Lemma 9.9.2). By multiplicativity (Lemma 9.7.7) we have
+
+    $$
+    [K: F]=\prod\left[K_i: K_{i-1}\right]=\prod \operatorname{deg}\left(m_{\alpha_i}\right)=\prod \operatorname{deg}_s\left(m_{\alpha_i}\right)=\left|\operatorname{Mor}_F(K, \bar{F})\right|
+    $$
+
+    where the last equality is Lemma 9.12.9. By the exact same argument we get the strict inequality $\left|\operatorname{Mor}_F(K, \bar{F})\right|<[K: F]$ if one of the $\alpha_i$ is not separable over $K_{i-1}$.
+
+    Finally, assume again that each $\alpha_i$ is separable over $K_{i-1}$. We will show $K / F$ is separable. Let $\gamma=\gamma_1 \in K$ be arbitrary. Then we can find additional elements $\gamma_2, \ldots, \gamma_m$ such that $K=F\left(\gamma_1, \ldots, \gamma_m\right)$ (for example we could take $\gamma_2=\alpha_1, \ldots, \gamma_{n+1}=\alpha_n$ ). Then we see by the last part of the lemma (already proven above) that if $\gamma$ is not separable over $F$ we would have the strict inequality $\left|\operatorname{Mor}_F(K, \bar{F})\right|<[K: F]$ contradicting the very first part of the lemma (already prove above as well).
+\end{prf}
+\begin{proposition}{Equivalent Characterization of Finite Separable Extension}{}
+    Let $L/K$ be a finite field extension. The following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $L/K$ is a separable extension.
+        \item $L=K(\alpha_1,\cdots,\alpha_n)$ for some separable elements $\alpha_1,\cdots,\alpha_n\in L$ over $K$.
+        \item Let $\overline{K}/K$ be an algebraic closure of $K$.  
+        \[
+        \left|\mathrm{Hom}_{\left(\mathsf{Field}/K\right)}(L,\overline{K})\right| = [L:K]
+        \]
+        \item The trace pairing is \hyperref[th:nondegenerate_bilinear_form]{nondegenerate}.
+        \item $L \otimes_K \overline{K} \;\cong\; \overline{K} \times \cdots \times \overline{K}$
+    \end{enumerate}
+\end{proposition}
+
 \begin{definition}{Perfect Field}{perfect_field}
     A field $K$ is \textbf{perfect} if every finite extension of $K$ is separable.
 \end{definition}
@@ -835,7 +937,7 @@ E \arrow[ru, "\sigma", hook] \arrow[rr, "\iota_2", hook] &                      
 \section{Trace and Norm of Field Extension}
 
 
-\begin{definition}{}{}
+\begin{definition}{Trace and Norm of Finite Extension}{}
     Let $L/K$ be a finite field extension and $\alpha\in L$ be an algebraic element over $K$. We can define a $K$-linear map
     \begin{align*}
         l_{\alpha}:L&\longrightarrow L\\
@@ -857,6 +959,19 @@ E \arrow[ru, "\sigma", hook] \arrow[rr, "\iota_2", hook] &                      
 \begin{remark}
     This definition is a special case of \Cref{th:trace_norm_and_characteristic_polynomial}.
 \end{remark}
+
+
+\begin{definition}{Trace Pairing}{}
+    Let $L/K$ be a finite extension. The \textbf{trace pairing} is the symmetric $K$-bilinear form
+    \begin{align*}
+        \mathrm{Tr}_{L/K}:L\times L&\longrightarrow K\\
+        (x,y)&\longmapsto \mathrm{Tr}_{L/K}(xy).
+    \end{align*}
+\end{definition}
+
+
+
+
 \section{Finite Field}
 
 \begin{definition}{Finite Field}{}

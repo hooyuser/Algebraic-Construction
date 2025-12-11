@@ -44,7 +44,7 @@
 \usepackage{enumerate}
 \usepackage[shortlabels]{enumitem}
 % Load tcolorbox after xcolor to ensure it sees the colors correctly
-\usepackage[most,many,breakable]{tcolorbox}
+\usepackage[most]{tcolorbox}
 
 
 % --- 6. STRUCTURE & UTILITIES ---
@@ -336,24 +336,104 @@
 %================================
 % EXAMPLE BOX
 %================================
-
 \newtcbtheorem[number within=section]{example}{Example}
 {%
-	colback = myexamplebg
-	,breakable
-	,colframe = myexamplefr
-	,coltitle = myexampleti
-	,boxrule = 1pt
-	,sharp corners
-	,detach title
-	,before upper=\tcbtitle\par\smallskip
-	,fonttitle = \bfseries\sffamily
-	,description font = \mdseries\sffamily
-	,separator sign none
-	%,description delimiters parenthesis
-	,label type=example
+    enhanced, % Required for extras and borderline
+    colback = myexamplebg,
+    breakable,
+    colframe = myexamplefr,
+    coltitle = myexampleti,
+    boxrule = 1pt,
+    sharp corners,
+    detach title,
+    before upper=\tcbtitle\par\smallskip,
+    fonttitle = \bfseries\sffamily,
+    description font = \mdseries\sffamily,
+    separator sign={}, % Correct way to remove the separator
+    label type=example,
+    %
+    % --- THE FIX IS HERE ---
+    extras first={
+        bottomrule=0pt, % 1. Turn off the solid frame at bottom
+        borderline south={1pt}{0pt}{ % 2. Draw the dashed line
+            myexamplefr, 
+            dashed, 
+            dash pattern=on 5pt off 5pt % <--- Makes dashes visible!
+        } 
+    },
+    extras last={
+        toprule=0pt, % 1. Turn off the solid frame at top
+        borderline north={1pt}{0pt}{
+            myexamplefr, 
+            dashed, 
+            dash pattern=on 5pt off 5pt
+        }
+    },
+    extras middle={
+        bottomrule=0pt,
+        toprule=0pt,
+        borderline south={1pt}{0pt}{
+            myexamplefr, dashed, dash pattern=on 5pt off 5pt
+        },
+        borderline north={1pt}{0pt}{
+            myexamplefr, dashed, dash pattern=on 5pt off 5pt
+        }
+    }
 }
 {ex}
+% \newtcbtheorem[number within=section]{example}{Example}
+% {%
+%     enhanced % <--- 1. REQUIRED: Enables advanced border handling
+%     ,colback = myexamplebg
+%     ,breakable
+%     ,colframe = myexamplefr
+%     ,coltitle = myexampleti
+%     ,boxrule = 1pt
+%     ,sharp corners
+%     ,detach title
+%     ,before upper=\tcbtitle\par\smallskip
+%     ,fonttitle = \bfseries\sffamily
+%     ,description font = \mdseries\sffamily
+%     ,separator sign none
+%     ,label type=example
+%     %
+%     % --- 2. THE BREAKING LOGIC ---
+%     ,extras first={
+%         bottomrule=0pt, % Remove solid bottom line
+%         % Draw dashed line using your frame color
+%         borderline south={1pt}{0pt}{dashed, myexamplefr} 
+%     }
+%     ,extras last={
+%         toprule=0pt, % Remove solid top line
+%         borderline north={1pt}{0pt}{dashed, myexamplefr}
+%     }
+%     ,extras middle={
+%         bottomrule=0pt,
+%         toprule=0pt,
+%         borderline south={1pt}{0pt}{dashed, myexamplefr},
+%         borderline north={1pt}{0pt}{dashed, myexamplefr}
+%     }
+% }
+% {ex}
+
+%%%%%%%%%% temp comment out
+% \newtcbtheorem[number within=section]{example}{Example}
+% {%
+% 	colback = myexamplebg
+% 	,breakable
+% 	,colframe = myexamplefr
+% 	,coltitle = myexampleti
+% 	,boxrule = 1pt
+% 	,sharp corners
+% 	,detach title
+% 	,before upper=\tcbtitle\par\smallskip
+% 	,fonttitle = \bfseries\sffamily
+% 	,description font = \mdseries\sffamily
+% 	,separator sign none
+% 	%,description delimiters parenthesis
+% 	,label type=example
+% }
+% {ex}
 
 % \newtcbtheorem[number within=chapter]{example}{Example}
 % {%

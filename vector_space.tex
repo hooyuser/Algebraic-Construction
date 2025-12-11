@@ -65,6 +65,8 @@
     \end{enumerate} 
 \end{prf}
 
+
+
 \section{Tensor Product of Vector Spaces}
 \begin{proposition}{}{}
     Let $V, W$ be vector spaces over a field $K$. If either $V$ or $W$ is finite-dimensional, then we have natural isomorphisms
@@ -142,6 +144,58 @@ If $V$ is a vector space over a field $K$, then the dual space of $V$ is defined
         \end{tikzcd}
         \] 
 \end{definition}
+
+\section{Bilinear Forms}
+
+\begin{definition}{Bilinear Map}{bilinear_map}
+    Let $V$ and $W$ be vector spaces over a field $K$. A map $B: V\times W\to K$ is said to be \textbf{bilinear} if 
+    \begin{enumerate}[(i)]
+        \item For all $w\in W$, the map
+        \begin{align*}
+            B(\cdot, w): V &\longrightarrow K\\
+            v &\longmapsto B(v, w)
+        \end{align*}
+        is linear.
+        \item For all $v\in V$, the map
+        \begin{align*}
+            B(v, \cdot): W &\longrightarrow K\\
+            w &\longmapsto B(v, w)
+        \end{align*}
+        is linear.
+    \end{enumerate}
+\end{definition}
+
+
+\begin{definition}{Bilinear Form}{bilinear_form}
+    A bilinear map $B: V\times V\to K$ is called a \textbf{bilinear form} on $V$.
+\end{definition}
+
+\begin{definition}{Nondegenerate Bilinear Form}{nondegenerate_bilinear_form}
+    A bilinear form $B: V\times V\to K$ is said to be \textbf{nondegenerate} if the linear map
+    \begin{align*}
+        V &\longrightarrow V^\vee\\
+        v &\longmapsto B(\cdot, v)
+    \end{align*}
+    is an injection. 
+\end{definition}
+
+\begin{proposition}{Equivalent Characterizations of Nondegenerate Bilinear Forms}{}
+    Let $V$ be a finite-dimensional vector space over a field $K$ and $B: V\times V\to K$ be a bilinear form. The following conditions are equivalent:
+    \begin{enumerate}[(i)]
+        \item $B$ is nondegenerate.
+        \item The linear map
+    \begin{align*}
+        V &\longrightarrow V^\vee\\
+        v &\longmapsto B(\cdot, v)
+    \end{align*}
+    is an isomorphism.
+    \item  
+    \[
+    \left(\forall y\in V,\; B(x,y)=0 \right)\implies x=0.
+    \]
+    \end{enumerate}
+\end{proposition}
+
 \section{Inner Product Space}
 \subsection{Sesquilinear Forms}
 

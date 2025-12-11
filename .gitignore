@@ -8,6 +8,10 @@
 *.thm
 *.auxlock
 *.mmz
+*.idx
+*.ilg
+*.ind
+*.bbl
 
 .history/*
 .idea/*
