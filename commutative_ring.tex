@@ -1864,16 +1864,85 @@ A regular local ring is a field if and only if it has Krull dimension $0$. A reg
     uniquely up to permutation of the $\mathfrak{p}_i$.
 \end{definition}
 
-\begin{proposition}{Equivalent Definition of Dedekind Domain}{}
+\begin{proposition}{Equivalent Definition of Dedekind Domain}{equivalent_definition_of_dedekind_domain}
     Let $R$ be a commutative ring. The following are equivalent:
     \begin{enumerate}[(i)]
         \item $R$ is a Dedekind domain.
         \item $R$ is Noetherian domain and for every nonzero maximal ideal $\mathfrak{m}$ of $R$, the localization $R_{\mathfrak{m}}$ is a DVR.
         \item $R$ a Noetherian, normal domain, and $\dim R\le 1$.
         \item Every non-zero fractional ideal of $R$ is invertible.
+        \item For any two ideals $I$ and $J$, 
+         \[
+         I \subseteq J \iff J\text{ divides } I.
+         \]
+         Here $J$ divides $I$ means there exists an ideal $H$ such that $I=JH$.
     \end{enumerate}
     
 \end{proposition}
+
+\begin{corollary}{Containment and Divisibility of Prime Powers}{containment_and_divisibility_of_prime_powers}
+    Let $R$ be a Dedekind domain, $\mathfrak{p}$ be a nonzero prime ideal of $R$ and $n\in\mathbb{Z}_{\ge 1}$. If $I$ is a ideal Then we have
+    \[
+    \mathfrak{p}^n\subseteq I \iff I = \mathfrak{p}^m\text{ for some }0\le m \le n
+    \]
+    and
+    \[
+    I \subseteq\mathfrak{p}^n \iff I = \mathfrak{p}^m\text{ for some } m \ge n.
+    \]
+    Here $\mathfrak{p}^0:=(1_R)=R$.
+\end{corollary}
+\begin{prf}
+    Suppose $\mathfrak{p}^n\subseteq I$. By \Cref{th:equivalent_definition_of_dedekind_domain} we have
+    \[
+    \mathfrak{p}^n = IJ 
+    \]
+    for some ideal $J$. Suppose $I$ and $J$ has prime ideal factorization, 
+    \[
+    I= \mathfrak{a}_1^{e_1}\cdots \mathfrak{a}_r^{e_r}
+    \]
+    \[
+    J= \mathfrak{b}_1^{v_1}\cdots \mathfrak{b}_s^{v_s}
+    \]
+    By the uniqueness of prime ideal factorization, we have $r=s=1$, $\mathfrak{a}_1=\mathfrak{b}_1=\mathfrak{p}$. Thus
+    \[
+    \mathfrak{p}^n=\mathfrak{p}^{e_1}\mathfrak{p}^{v_1}=\mathfrak{p}^{e_1+v_1}\implies n=e_1+v_1\implies 0\le e_1 \le n.
+    \]
+\end{prf}
+
+\begin{proposition}{Properties of Dedekind Domains}{properties_of_dedekind_domains}
+    Let $R$ be a Dedekind domain.   
+    \begin{enumerate}[(i)]
+        \item Every nonzero prime ideal of $R$ is maximal.
+        \item If $\mathfrak{p}$ is a maximal ideal of $R$, then $\mathfrak{p}^{n}/\mathfrak{p}^{n+1}$ is 1-dimensional $R/\mathfrak{p}$-vector space.
+    \end{enumerate}
+\end{proposition}
+\begin{prf}
+    \begin{enumerate}[(i)]
+        \item Suppose $\mathfrak{p}$ is a nonzero prime ideal of $R$, In an integral domain, $(0)$ is a prime ideal, and we have chain of ideals
+        \[
+        (0)\subseteq \mathfrak{p}.
+        \]
+        Since the Krull dimension of $R$ is at most $1$, there is no prime ideal strictly between $(0)$ and $\mathfrak{p}$. Thus $\mathfrak{p}$ is maximal.
+        \item Since $\mathfrak{p}^{n+1}$ is an $R$-submodule of $\mathfrak{p}^n$, the quotient module $\mathfrak{p}^n/\mathfrak{p}^{n+1}$ is an $R$-module. We need to show that $\mathfrak{p}^n/\mathfrak{p}^{n+1}$ is an $R/\mathfrak{p}$-module.
+        
+        For any $a\in \mathfrak{p}$ and $x+\mathfrak{p}^{n+1}\in \mathfrak{p}^n/\mathfrak{p}^{n+1}$, we have
+        \[
+        a\left(x+\mathfrak{p}^{n+1}\right) = ax + \mathfrak{p}^{n+1} = 0+\mathfrak{p}^{n+1},
+        \]
+        which implies
+        \[
+        \mathfrak{p}\subseteq \mathrm{Ann}_R\left(\mathfrak{p}^n/\mathfrak{p}^{n+1}\right).
+        \]
+        Thus according to \Cref{th:annihilator_and_induced_module_structures}, $\mathfrak{p}^n/\mathfrak{p}^{n+1}$ is an $R/\mathfrak{p}$-module. Since $R/\mathfrak{p}$ is a field, $\mathfrak{p}^n/\mathfrak{p}^{n+1}$ is an $R/\mathfrak{p}$-vector space. Let $W\subseteq \mathfrak{p}^n/\mathfrak{p}^{n+1}$ be any $R/\mathfrak{p}$-subspace. $W$ is also an $R$-submodule of $\mathfrak{p}^n/\mathfrak{p}^{n+1}$. Since we have the following bijection of sets
+        \begin{align*}
+       &\left\{W\midv W \text{ is an }R\text{-submodules of }\mathfrak{p}^n/\mathfrak{p}^{n+1}\right\}  \\
+       \longleftrightarrow & \left\{V\midv V \text{ is an }R\text{-submodules of }\mathfrak{p}^n \text{ and }\mathfrak{p}^{n+1}\subseteq V\right\} \\
+       \longleftrightarrow & \left\{V\midv V \text{ is an }R\text{-submodules of }R\text{ and }\mathfrak{p}^{n+1}\subseteq V\subseteq \mathfrak{p}^{n}\right\} \\
+       \longleftrightarrow& \left\{I\mid I \text{ is an ideal of }R\text{ and }\mathfrak{p}^{n+1}\subseteq I \subseteq \mathfrak{p}^n\right\} 
+        \end{align*}
+        $W$ corresponds to an ideal $I$ of $R$ such that $\mathfrak{p}^{n+1}\subseteq I \subseteq \mathfrak{p}^n$. By the \Cref{th:containment_and_divisibility_of_prime_powers}, we have $I=\mathfrak{p}^n$ or $I=\mathfrak{p}^{n+1}$. Thus $W=\mathfrak{p}^n/\mathfrak{p}^{n+1}$ or $W=0$. This implies that $\mathfrak{p}^n/\mathfrak{p}^{n+1}$ is a 1-dimensional $R/\mathfrak{p}$-vector space.
+    \end{enumerate}
+\end{prf}
 
 \subsection{Extensions of Dedekind Domains}
 \begin{theorem}{Krull-Akizuki Theorem}{krull_akizuki}

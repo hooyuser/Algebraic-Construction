@@ -120,7 +120,7 @@ Let $R$ be a commutative ring, and let $M$ be an $R$-module. We say $M$ is \text
     $$
 \end{definition}
 
-\begin{proposition}{}{}
+\begin{proposition}{Annihilator and Induced Module Structures}{annihilator_and_induced_module_structures}
     If $N$ is a submodule of $M$, then 
     \[
         \operatorname{Ann}_R(N)=\{r \in R \mid r s=0 \text { for all } s \in N\}=\ker \left(R\longrightarrow\mathrm{End}_{\mathsf{Ab}}\left(N\right)\right)  
@@ -1578,6 +1578,8 @@ $\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P, -\right)$ is a left exact functor.
     \end{enumerate}
 \end{prf}
 
+$R$-$\mathsf{Mod}$ is an abelian category, so it is $\mathsf{Ab}$-enriched. When $R$ is a commutative ring, $R$-$\mathsf{Mod}$ is even self-enriched.
+
 \begin{proposition}{$R$-$\mathsf{Mod}$ is a Self-Enriched Category for Commutative Ring $R$}{}
     If $R$ is a commutative ring, then the category $R\text{-}\mathsf{Mod}$ is self-enriched. More explicitly, the category $R\text{-}\mathsf{Mod}$ is an $R\text{-}\mathsf{Mod}$-enriched category with the following structure:
     \begin{enumerate}[(i)]
@@ -1641,21 +1643,30 @@ $\mathrm{Hom}_{R\text{-}\mathsf{Mod}}\left(P, -\right)$ is a left exact functor.
 \begin{definition}{Determinant of $R$-linear Transformation on Free Module of Finite Rank}{}
     Let $R$ be a commutative ring and $M$ be a free $R$-module of finite rank $n$. The \textbf{determinant} of an $R$-linear map $f:M\to M$ can be defined as one of the following equivalent ways:
     \begin{enumerate}[(i)]
-        \item The functor $\Largewedge^n:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ induces a hom-set morphism 
+        \item The \hyperref[ex:take_degree_k_functor]{functor $\Largewedge^n:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$} induces a map between hom-sets 
         \begin{align*}
             \largewedge^n:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right) &\longrightarrow\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)\\
         f &\longmapsto f\wedge\cdots\wedge f.
         \end{align*}
         Note $\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)$ is a 1-dimensional $R$-module with basis $\mathrm{id}_{\largewedge^n(M)}$. And $R$ is a also a 1-dimensional $R$-module with basis $1_R$. We have the following $R$-module isomorphism
         \begin{align*}
-            s:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)&\xlongrightarrow{\sim} R\\
+            \mathrm{coor}_{\mathrm{id}_{\largewedge^n(M)}}:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(\largewedge^n(M)\right)&\xlongrightarrow{\sim} R\\
             \mathrm{id}_{\largewedge^n(M)} &\longmapsto 1_R.
         \end{align*}
-        The \textbf{determinant} of $f$ is defined as the composition $\det:=s\circ \largewedge^n$.
-        \item Suppose $\{e_1,\cdots,e_n\}$ is a baisis of $M$, then for any $f\in \mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right)$, it can be uniquely represented by a matrix $A=(a_{ij})$ with respect to the basis $\{e_1,\cdots,e_n\}$. Then the \textbf{determinant} of $f$ is defined as follows
+        The \textbf{determinant} map is defined as the composition
+         \begin{align*}
+        \det:=\mathrm{coor}_{\mathrm{id}_{\largewedge^n(M)}}\circ \largewedge^n: \mathrm{End}_{R\text{-}\mathsf{Mod}}(M)&\longrightarrow R\\
+        f &\longmapsto \det(f):= \mathrm{coor}_{\mathrm{id}_{\largewedge^n(M)}}\left(f\wedge\cdots\wedge f\right).
+        \end{align*}
+        $\det(f)$ is called the determinant of $f$.
+        \item Suppose $\{e_1,\cdots,e_n\}$ is a baisis of $M$, then for any $f\in \mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right)$, it can be uniquely represented by a matrix $A=(a_{ij})$ with respect to the basis $\{e_1,\cdots,e_n\}$
+        \[
+        (f(e_1), \cdots, f(e_n))=(e_1, \cdots, e_n)A.
+        \]
+        Then the \textbf{determinant} of $f$ is defined as follows
         \begin{align*}
-            \largewedge^n:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right) &\longrightarrow R\\
-        f &\longmapsto f\wedge\cdots\wedge f.
+            \det:\mathrm{End}_{R\text{-}\mathsf{Mod}}\left(M\right) &\longrightarrow R\\
+            f &\longmapsto \sum_{\sigma\in S_n}\mathrm{sgn}(\sigma)\prod_{i=1}^n a_{i,\sigma(i)}.
         \end{align*}
     \end{enumerate}
 \end{definition}

@@ -41,10 +41,24 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \section{Construction}
 \subsection{Quotient Object}
 
-\begin{definition}{Quotient Algebra}{}
+\begin{definition}{Quotient Algebra}{quotient_algebra}
     Let $A$ be an $R$-algebra and $\mathfrak{a}$ be a two-sided ideal of $A$. Since $\mathfrak{a}$ is an $R$-submodule of $A$, the quotient ring $A/\mathfrak{a}$ can also be endowed with an $R$-module structure, which makes $A/\mathfrak{a}$ an $R$-algebra. We call $A/\mathfrak{a}$ the \textbf{quotient algebra} of $A$ by $\mathfrak{a}$.
 \end{definition}
-
+\begin{proposition}{Universal Property of Quotient Algebra}{universal_property_of_quotient_algebra}
+    Let $A$ be an $R$-algebra and $\mathfrak{a}$ be a two-sided ideal of $A$. Let $\pi:A\to A/\mathfrak{a}$ be the canonical projection. For any $R$-algebra homomorphism $f:A\to B$ such that $\mathfrak{a}\subseteq \ker(f)$
+    or equivalently $f(\mathfrak{a})=\{0\}$, there exists a unique $R$-algebra homomorphism $\widetilde{f}:A/\mathfrak{a}\to B$ such that the following diagram commutes
+    \begin{center}
+        \begin{tikzcd}
+                                                                 & A \arrow[ld, "\pi"'] \arrow[rd, "f"] &   \\
+A/\mathfrak{a} \arrow[rr, "{\exists !\,\widetilde{f}}"', dashed] &                                      & B
+\end{tikzcd}
+    \end{center}
+    The unique $R$-algebra homomorphism $\widetilde{f}:A/\mathfrak{a}\to B$ is defined as
+    \begin{align*}
+        \widetilde{f}: A/\mathfrak{a} &\longrightarrow B\\
+        a + \mathfrak{a} &\longmapsto f(a).
+    \end{align*}
+\end{proposition}
 
 \subsection{Free Object}
 \begin{definition}{Free $R$-Algebra}{}
@@ -65,24 +79,81 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \subsection{Graded Object}
 
 \begin{definition}{$I$-Graded Algebra over an Graded Commutative Ring}{}
-    Let $(I,+)$ be a monoid and $R$ be a $I$-graded commutative ring with grading $(R_i)_{i\in I}$. An \textbf{$I$-graded algebra over graded ring $R$} is an $R$-algebra $A$ together with a family of subalgebras $\left(A_i\right)_{i\in I}$ such that
+    Let $(I,+)$ be a monoid and $R$ be a \hyperref[th:I_graded_ring]{$I$-graded commutative ring} with grading $(R_i)_{i\in I}$. An \textbf{$I$-graded algebra over graded ring $R$} is an $R$-algebra $A$ together with a family of subalgebras $\left(A_i\right)_{i\in I}$ such that
     \begin{enumerate}[(i)]
         \item $A=\bigoplus_{i\in I}A_i$.
         \item $A_iA_j\subseteq A_{i+j}$ for all $i, j\in I$.
         \item $R_iA_j\subseteq A_{i+j}$ for all $i, j\in I$.
     \end{enumerate}
-    Elements in $A_i$ are called \textbf{homogeneous elements of degree $i$}.
+    Elements in $A_i$ are called \textbf{homogeneous elements of degree $i$}. 
 \end{definition}
 
-
-\begin{proposition}{Graded Algebra Quotients out Graded Ideal}{}
-    Let $A$ be an $I$-graded algebra over graded ring $R$ with grading $(A_i)_{i\in I}$ and $\mathfrak{a}$ be a graded two-sided ideal of $A$. Then $A/\mathfrak{a}$ has decomposition
+\begin{definition}{Degree-preserving $R$-algebra homomorphism}{degree_preserving_R_algebra_homomorphism}
+    Let $(I,+)$ be a monoid and let $R=\bigoplus_{i\in I} R_i$ be an $I$-graded commutative ring. Let $A=\bigoplus_{i\in I} A_i$ and $B=\bigoplus_{i\in I} B_i$ be $I$-graded $R$-algebras. 
+    An $R$-algebra homomorphism $f:A\to B$ is called \textbf{degree-preserving} (or \textbf{graded}) if for every $i\in I$,
     \[
-    A/ \mathfrak{a}=\bigoplus_{i\in I}A_i/\left(\mathfrak{a}\cap A_i\right),    
+    f(A_i)\subseteq B_i.
     \]
-    which makes $A/\mathfrak{a}$ an $I$-graded algebra.
-\end{proposition}
+    We write $\mathsf{GrAlg}^I_R$ for the category whose objects are $I$-graded $R$-algebras and whose morphisms are degree-preserving $R$-algebra homomorphisms.
+\end{definition}
 
+\begin{proposition}{Graded Algebra Quotients out Graded Ideal}{graded_algebra_quotients_out_graded_ideal}
+    Let $A$ be an $I$-graded algebra over graded ring $R$ with grading $(A_i)_{i\in I}$ and $\mathfrak{a}$ be a \hyperref[th:graded_ideal]{$I$-graded two-sided ideal} of $A$. Then we have an $R$-module isomorphism
+    \begin{align*}
+        A_i/\left(\mathfrak{a}\cap A_i\right)&\xlongrightarrow{\sim} \left( A_i+\mathfrak{a}\right)/\mathfrak{a}\\
+         a + \left(\mathfrak{a}\cap A_i\right) &\longmapsto a + \mathfrak{a},
+    \end{align*}
+    and the \hyperref[th:quotient_algebra]{quotient algebra} $A/\mathfrak{a}$ has a decomposition
+    \[
+    A/ \mathfrak{a}=\bigoplus_{i\in I}\left( A_i+\mathfrak{a}\right)/\mathfrak{a}\cong \bigoplus_{i\in I}A_i/\left(\mathfrak{a}\cap A_i\right),    
+    \]
+    which makes $A/\mathfrak{a}$ an $I$-graded $R$-algebra.
+\end{proposition}
+\begin{prf}
+    By the definition of graded ideal, we have
+    \[
+    \mathfrak{a}=\bigoplus_{i\in I}\mathfrak{a}_i,\quad \mathfrak{a}_i:=\mathfrak{a}\cap A_i.
+    \]
+    Let $\pi:A\to A/\mathfrak{a}$ be the canonical projection. Restrict $\pi$ to $A_i$, we have an $R$-module homomorphism
+    \begin{align*}
+        \pi|_{A_i}: A_i &\longrightarrow \pi(A_i)\\
+    \end{align*}
+    with kernel 
+    \[
+        \ker\left(\pi|_{A_i}\right)=\left\{ x\in A_i \midv \pi(x)=0 + \mathfrak{a} \right\}=\left\{ x\in A_i \midv x\in  \mathfrak{a} \right\} = A_i \cap \mathfrak{a} = \mathfrak{a}_i.
+    \]
+    Thus we have an $R$-module isomorphism
+    \begin{align*}
+        A_i/\mathfrak{a}_i&\xlongrightarrow{\sim} \pi(A_i)\\
+         a + \mathfrak{a}_i &\longmapsto a + \mathfrak{a}.
+    \end{align*}
+    Take any $\pi(a)\in A/\mathfrak{a}$, where $a\in A$. Since $A=\bigoplus_{i\in I} A_i$, we can write $a=\sum_{i\in I} a_i$ with $a_i\in A_i$ and only finitely many $a_i$ being nonzero. Thus
+    \[
+    \pi(a)=\pi\left(\sum_{i\in I} a_i\right)=\sum_{i\in I} \pi(a_i)\in \sum_{i\in I}\pi(A_i),
+    \]
+    which means $A/\mathfrak{a}\subseteq \sum_{i\in I}\pi(A_i)$. On the other hand, we have $\sum_{i\in I}\pi(A_i)\subseteq A/\mathfrak{a}$. Therefore, we have $A/\mathfrak{a}=\sum_{i\in I}\pi(A_i)$.
+    
+    Moreover, if $\sum_{i\in I}\pi(a_i)=0$ with $a_i\in A_i$, then $\pi\left(\sum_{i\in I} a_i\right)=0$, which means $\sum_{i\in I} a_i\in \mathfrak{a}$. According to \Cref{th:membership_criterion_for_graded_ideals}, this implies $a_i\in \mathfrak{a}\cap A_i $ for all $i\in I$. Thus we have $\pi(a_i)=0$ for all $i\in I$. Therefore, the sum $A/\mathfrak{a}=\sum_{i\in I}\pi(A_i)$ is direct, which means
+    \[
+     A/\mathfrak{a}=\bigoplus_{i\in I}\pi(A_i).
+    \]
+    Note 
+    \[
+    \pi(A_i) =\left\{x+\mathfrak{a}\midv x\in A_i\right\} = \left\{x+a +\mathfrak{a}\midv x\in A_i, a\in \mathfrak{a}\right\}= \left( A_i+\mathfrak{a}\right)/\mathfrak{a}.
+    \]
+    Combining these results, we have the $R$-module isomorphism
+    \[
+    A/ \mathfrak{a}=\bigoplus_{i\in I}\pi(A_i)=\bigoplus_{i\in I}\left( A_i+\mathfrak{a}\right)/\mathfrak{a}\cong \bigoplus_{i\in I}A_i/\left(\mathfrak{a}\cap A_i\right).
+    \]
+    Finally, we can check that the multiplication and scalar multiplication respect the grading:
+    \[
+        \left(a_i + \mathfrak{a}\right)\left(a_j + \mathfrak{a}\right)=a_ia_j + \mathfrak{a}\in \left(A_{i+j}+\mathfrak{a}\right)/\mathfrak{a},\quad \forall a_i\in A_i, a_j\in A_j,
+    \]
+    \[
+        r\cdot\left(a_i + \mathfrak{a}\right)=ra_i + \mathfrak{a}\in \left(A_{i+j}+\mathfrak{a}\right)/\mathfrak{a},\quad \forall r\in R_j, a_i\in A_i.
+    \]
+
+\end{prf}
 
 
 \begin{example}{Polynomial Algebra $R[X_1,\cdots,X_n]$}{}
@@ -147,7 +218,7 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     \]
 \end{remark}
 
-\begin{definition}{Tensor Product of $R$-algebra Homomorphisms}{}
+\begin{definition}{Tensor Product of $R$-algebra Homomorphisms}{tensor_product_of_R_algebra_homomorphisms}
     Let $R$ be a commutative ring and $A_1$, $A_2$, $B_1$, $B_2$ be $R$-algebras. Given two $R$-algebra homomorphisms $f:A_1\to A_2$ and $g:B_1\to B_2$, the \textbf{tensor product of $R$-algebra homomorphisms} is defined as the $R$-algebra homomorphism 
     \begin{align*}
         f\otimes_R g: A_1\otimes_R B_1 &\longrightarrow A_2\otimes_R B_2\\
@@ -328,12 +399,12 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \begin{definition}{Tensor Algebra $T^{\bullet}(M)$}{}
     Given a $R$-module $M$, the \textbf{$k$-th tensor power of $M$} is defined as
     \begin{align*}
-        T^k(M)&=M^{\otimes k}=\underbrace{M\otimes_R\cdots\otimes_R M}_{k\text{ times}},\\
-        T^0(M)&=R.
+        T^k(M)&:=M^{\otimes k}=\underbrace{M\otimes_R\cdots\otimes_R M}_{k\text{ times}},\\
+        T^0(M)&:=R.
     \end{align*}
     The \textbf{tensor algebra} of $M$ is defined as
     \[
-        T^{\bullet}(M)=\bigoplus_{k=0}^{\infty}T^k(M)
+        T^{\bullet}(M):=\bigoplus_{k=0}^{\infty}T^k(M)
     \]
     with multiplication $\otimes$ defined as
     \[
@@ -343,11 +414,11 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \end{definition}
 
 
-\begin{proposition}{Tensor Algebra Functor $T^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Alg}$}{}
-    Let $R$ be a commutative ring. The tensor algebra construction $T^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Alg}$ is a functor. 
+\begin{proposition}{Tensor Algebra Functor $T^{\bullet}:R\text{-}\mathsf{Mod}\to \mathsf{GrAlg}^{\mathbb{N}}_R$}{}
+    Let $R$ be a commutative ring. The tensor algebra construction $T^{\bullet}:R\text{-}\mathsf{Mod}\to \mathsf{GrAlg}^{\mathbb{N}}_R$ is a functor defined as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{Alg}\&[-30pt]\&[-30pt] \\ [-15pt] 
+            R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{GrAlg}^{\mathbb{N}}_R\&[-30pt]\&[-30pt] \\ [-15pt] 
             M  \arrow[dd, "g"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
             \& [-30pt] T^{\bullet}(M)\arrow[dd, "T^{\bullet}(g)"{name=R}] \&[-20pt]\ni\& [+10pt]m_1\otimes\cdots\otimes m_k \arrow[dd, mapsto, "g\otimes g\cdots\otimes g"{name=L, right}] 
@@ -357,6 +428,19 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
         \end{tikzcd}
         \]  
 \end{proposition}
+\begin{prf}
+    According to \Cref{th:tensor_product_of_R_algebra_homomorphisms}, for each $k\ge 0$, we can define an $R$-module homomorphism $T^k(g):=g^{\otimes k}$ on degree-$k$ component:
+    \begin{align*}
+        T^k(g): T^k(M) &\longrightarrow T^k(N)\\
+        m_1\otimes\cdots\otimes m_k &\longmapsto g(m_1)\otimes\cdots\otimes g(m_k).
+    \end{align*}
+    Then we can define a \hyperref[th:degree_preserving_R_algebra_homomorphism]{degree-preserving $R$-algebra homomorphism} $T^{\bullet}(g):=\bigoplus_{k=0}^{\infty} T^k(g)$ as follows:
+    \begin{align*}
+        T^{\bullet}(g): T^{\bullet}(M) &\longrightarrow T^{\bullet}(N)\\
+        (x_0, x_1, x_2, \cdots) &\longmapsto \left(T^0(g)(x_0),\, T^1(g)(x_1),\, T^2(g)(x_2), \cdots\right).
+    \end{align*}
+    It is straightforward to check that $T^{\bullet}(\mathrm{id}_M)=\mathrm{id}_{T^{\bullet}(M)}$ and $T^{\bullet}(g_2\circ g_1)=T^{\bullet}(g_2)\circ T^{\bullet}(g_1)$ for any $R$-module homomorphisms $g_1:M\to N$, $g_2:N\to P$. Thus, $T^{\bullet}$ is a functor.
+\end{prf}
 
 
 \begin{proposition}{Adjunction $T^{\bullet}\dashv U_{\mathsf{R\text{-}\mathsf{Mod}}}$}{}
@@ -368,44 +452,128 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
 \begin{definition}{Exterior Algebra $\Largewedge^{\bullet} (M)$}{}
     Given an $R$-module $M$, 
     \begin{align*}
-        I_{\largewedge}(M) & :=\langle x \otimes x: x \in M\rangle
+        I_{\largewedge}(M) & :=\langle x \otimes x: x \in M\rangle=\left\{\sum_{i=1}^m a_i (x_i \otimes x_i) b_i \midv m\in\mathbb{Z}_{\ge 1},\, a_i,b_i\in T^{\bullet}(M),\, x_i\in M\right\}
     \end{align*}
     is a graded two-sided ideal of $T^{\bullet}(M)$. The \textbf{exterior algebra} of $M$ is defined as
     \[
         \largewedge^{\bullet} (M)=T^{\bullet}(M)/I_{\largewedge}(M).
     \]
-    The multiplication of $\Largewedge^{\bullet} (M)$ is denoted by $\wedge$ and is called the \textbf{wedge product}.
-    The grading of $\Largewedge^{\bullet} (M)$ is given by 
-    \begin{align*}
-        \largewedge^{\bullet} (M)=\bigoplus_{k=0}^{\infty}\largewedge^k(M),
-    \end{align*}
-    where 
+    According to \Cref{th:graded_algebra_quotients_out_graded_ideal}, $\largewedge^{\bullet} (M)$ is a graded $R$-algebra with grading 
     \[
-        \largewedge^k(M)=T^k(M)/\left(I_{\largewedge}(M)\cap T^k(M)\right)
+        \largewedge^{\bullet} (M)\cong \bigoplus_{k=0}^{\infty} \largewedge^k(M)
+    \]
+    where
+    \[
+        \largewedge^k(M):=T^k(M)/\left(I_{\largewedge}(M)\cap T^k(M)\right)
     \] 
-    is called the \textbf{$k$-th exterior power of $M$}.
+    is an $R$-module and is called the \textbf{$k$-th exterior power of $M$}. Especially, we have $\Largewedge^0(M)\cong R$ and $\Largewedge^1(M)\cong M$ as $R$-modules, and we identify them directly.
+    
+    The multiplication of $\Largewedge^{\bullet} (M)$ is denoted by 
+    \begin{align*}
+        \wedge: \Largewedge^{\bullet} (M)\times \Largewedge^{\bullet} (M) &\longrightarrow \Largewedge^\bullet (M)\\
+        (a + I_{\wedge}(M), b + I_{\wedge}(M)) &\longmapsto (a\otimes b) + I_{\wedge}(M).
+    \end{align*}
+    and is called the \textbf{wedge product}. The graded version of the wedge product for degree-1 elements is given by
+    \begin{align*}
+        \wedge: \Largewedge^1 (M)\times \Largewedge^1 (M) &\longrightarrow \Largewedge^{2} (M)\\
+        (m_1, m_2) &\longmapsto m_1\wedge m_2 := (m_1\otimes m_2) + I_{\wedge}(M)\cap T^{2}(M)
+    \end{align*}
+    We can prove $\Largewedge^{k} (M)$ is an $R$-module generated by the elements of the form
+    \[
+        m_1\wedge m_2\wedge \cdots \wedge m_k = (m_1\otimes m_2\otimes \cdots \otimes m_k) + I_{\wedge}(M)\cap T^k(M)
+    \]
+    for $m_1, m_2, \cdots, m_k \in M$. The wedge product for degree-$k$ and degree-$l$ elements is given by
+    \begin{align*}
+        \wedge: \Largewedge^k (M)\times \Largewedge^l (M) &\longrightarrow \Largewedge^{k+l} (M)\\
+        (m_1\wedge\cdots\wedge m_k,\, m_{k+1}\wedge\cdots\wedge m_{k+l}) &\longmapsto m_1\wedge\cdots\wedge m_k \wedge m_{k+1}\wedge\cdots\wedge m_{k+l}
+    \end{align*}
+    where $m_i\in M$ for $1\le i \le k+l$.
 \end{definition}
+\begin{remark}
+    Since $T^k(M)$ is an $R$-module generated by the pure tensors of the form $m_1\otimes m_2\otimes \cdots \otimes m_k$ for $m_i\in M$, the quotient module $\Largewedge^k(M)=T^k(M)/\left(I_{\largewedge}(M)\cap T^k(M)\right)$ is generated by the elements of the form $(m_1\otimes m_2\otimes \cdots \otimes m_k) + I_{\wedge}(M)\cap T^k(M)$. And by induction on $k$, we can show that 
+    \[
+    m_1 \wedge m_2 \wedge \cdots m_k = (m_1\otimes m_2\otimes \cdots \otimes m_k) + I_{\wedge}(M)\cap T^k(M).
+    \]
+\end{remark}
+
+\begin{proposition}{}{}
+     Given an $R$-module $M$ and $m_1, m_2 \in M$, we have
+    \[
+        m_1 \wedge m_2 = - m_2 \wedge m_1.
+    \]
+    For any homogeneous elements $x, y \in \Largewedge^{\bullet}(M)$ , we have
+    \[
+        x \wedge y = (-1)^{\deg(x)\deg(y)} y \wedge x.
+    \]
+\end{proposition}
 
 
-\begin{definition}{Exterior Algebra Functor: $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}$}{}
-    The exterior algebra construction $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Alg}$ is a functor defined as follows
+
+\begin{definition}{Exterior Algebra Functor: $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to \mathsf{GrAlg}^{\mathbb{N}}_R$}{}
+    The exterior algebra construction $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to \mathsf{GrAlg}^{\mathbb{N}}_R$ is a functor defined as follows
     \[
         \begin{tikzcd}[ampersand replacement=\&]
-            R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}\&[-30pt]\&[-30pt] \\ [-15pt] 
-            M  \arrow[dd, "g"{name=L, left}] 
+            R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt] \mathsf{GrAlg}^{\mathbb{N}}_R\&[-30pt]\&[-30pt] \\ [-15pt] 
+            M  \arrow[dd, "f"{name=L, left}] 
             \&[-25pt] \& [+10pt] 
-            \& [-30pt] \Largewedge^{\bullet}(M)\arrow[dd, "\Largewedge^{\bullet}(g)"{name=R}] \&[-20pt]\ni\& [+20pt]m_1\wedge\cdots\wedge m_k \arrow[dd, mapsto, "g\wedge g\cdots\wedge g"{name=L, right}] 
+            \& [-30pt] \Largewedge^{\bullet}(M)\arrow[dd, "\Largewedge^{\bullet}(f)"{name=R}] \&[-20pt]\ni\& [+20pt]m_1\wedge\cdots\wedge m_k \arrow[dd, mapsto, "f\wedge f\wedge\cdots\wedge f"{name=L, right}] 
             \\ [-10pt] 
             \&  \phantom{.}\arrow[r, "\Largewedge^{\bullet}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-            N \& \& \&  \Largewedge^{\bullet}(N)\&[-0pt]\ni\& g(m_1)\wedge\cdots\wedge g(m_k)
+            N \& \& \&  \Largewedge^{\bullet}(N)\&[-0pt]\ni\& f(m_1)\wedge\cdots\wedge f(m_k)
         \end{tikzcd}
     \]  
+    where $\Largewedge^{\bullet}(f)$ is induced by the \hyperref[th:universal_property_of_quotient_algebra]{universal property of the quotient algebra} $T^{\bullet}(M)/I_\wedge(M)$ through the following commutative diagram
+    \[
+        \begin{tikzcd}
+    T^{\bullet}(M) \arrow[r, "T^{\bullet}(f)"] \arrow[d, "\pi_M"']                &[1em] T^{\bullet}(N) \arrow[d, "\pi_N"] \\[2em]
+    T^{\bullet}(M)/I_\wedge(M)  \arrow[r, "\wedge^\bullet(f)"',dashed] & T^{\bullet}(N)/I_\wedge(N)       
+    \end{tikzcd}
+    \]
 \end{definition}
-
+\begin{remark}
+    Since for any $x\in M$,
+    \begin{align*}
+        \pi_N\circ T^{\bullet}(f)(x\otimes x) &= \pi_N(f(x)\otimes f(x))=f(x)\wedge f(x) + I_\wedge(N)=0+ I_\wedge(N),
+    \end{align*}
+    we see each generator of $I_\wedge(M)$ is mapped to $0$ in $\pi_N\circ T^{\bullet}(f)$. Thus, we have $I_\wedge(M)\subseteq \ker(\pi_N\circ T^{\bullet}(f))$, which guarantees that there exists a unique $R$-algebra homomorphism 
+    \begin{align*}
+        \Largewedge^{\bullet}(f): \Largewedge^{\bullet}(M) &\longrightarrow \Largewedge^{\bullet}(N)\\
+        m_1\wedge\cdots\wedge m_k &\longmapsto f(m_1)\wedge\cdots\wedge f(m_k).
+    \end{align*}
+    such that $\Largewedge^{\bullet}(f)\circ \pi_M = \pi_N \circ T^{\bullet}(f)$.
+\end{remark}
 
 \begin{proposition}{Adjunction $\Largewedge^{\bullet}\dashv U_{\mathsf{R\text{-}\mathsf{Mod}}}$}{}
-    Let $R$ be a commutative ring. Suppose $U:R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}\to R\text{-}\mathsf{Mod}$ is the forgetful functor. Then the exterior algebra functor $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{AcAlg_{\mathbb{Z}}}$ is left adjoint to $U$.
+    Let $R$ be a commutative ring. Suppose $U_{\mathsf{R\text{-}\mathsf{Mod}}}:\mathsf{GrAlg}^{\mathbb{N}}_R\to R\text{-}\mathsf{Mod}$ is the forgetful functor. Then the exterior algebra functor $\Largewedge^{\bullet}:R\text{-}\mathsf{Mod}\to \mathsf{GrAlg}^{\mathbb{N}}_R$ is left adjoint to $U$.
 \end{proposition}
+
+
+\begin{example}{Take Degree $k$ Functor}{take_degree_k_functor}
+    Let $R$ be a commutative ring and $M$ be an $R$-module. The \textbf{take degree $k$ functor} is defined as
+     \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            \mathsf{GrAlg}^{\mathbb{N}}_R\&[-25pt]\&[+10pt]\&[-30pt]R\text{-}\mathsf{Mod} \\ [-15pt] 
+            A=\bigoplus\limits_{i=0}^{\infty} A_i\arrow[dd, "g"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]  A_k\arrow[dd, "g|_{A_k}"{name=R}]  \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\left(-\right)_k", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+              B=\bigoplus\limits_{i=0}^{\infty} B_i \& \& \&  B_k 
+        \end{tikzcd}
+    \]  
+    In particular, we have the composition functor $\Largewedge^{k} := (-)_k \circ \bigwedge^\bullet : R\text{-}\mathsf{Mod}\to R\text{-}\mathsf{Mod}$ defined as follows
+    \[
+        \begin{tikzcd}[ampersand replacement=\&]
+            R\text{-}\mathsf{Mod}\&[-25pt]\&[+10pt]\&[-30pt]R\text{-}\mathsf{Mod} \&[-30pt]\&[-30pt] \\ [-15pt] 
+            M \arrow[dd, "f"{name=L, left}] 
+            \&[-25pt] \& [+10pt] 
+            \& [-30pt]  \Largewedge^{k}(M)\arrow[dd, "\Largewedge^{k}(f)"{name=R}] \&[-20pt]\ni\& [+20pt]m_1\wedge\cdots\wedge m_k \arrow[dd, mapsto, "f\wedge f\cdots\wedge f"{name=L, right}] 
+            \\ [-10pt] 
+            \&  \phantom{.}\arrow[r, "\Largewedge^{k}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+             N \& \& \&  \Largewedge^{k}(N)\&[-0pt]\ni\& f(m_1)\wedge\cdots\wedge f(m_k)
+        \end{tikzcd}
+    \]  
+    
+\end{example}
 
 
 \begin{proposition}{}{}
@@ -528,6 +696,354 @@ In particular, commutative ring homomorphism $R\to S$ makes $S$ an $R$-algebra.
     This is a direct consequence of \Cref{th:trace_norm_and_characteristic_polynomial_under_change_of_base_ring} by taking $M=A$ and $\varphi=l_b$.
 \end{prf}
 
+\begin{definition}{Trace Pairing}{trace_pairing}
+    Let $R$ be a commutative ring and $A$ be an $R$-algebra. Suppose $A$ as an $R$-module is free of finite rank. The \textbf{trace pairing} is the symmetric $R$-bilinear form
+    \begin{align*}
+        \langle \cdot,\cdot \rangle_{A|R}:A\times A&\longrightarrow R\\
+        (x,y)&\longmapsto \mathrm{Tr}_{A|R}(xy).
+    \end{align*}
+\end{definition}
+
+\subsection{Discriminant}
+We first define the discriminant of a polynomial.
+
+\begin{definition}{Resultant}{}
+    Let $R$ be a commutative ring and 
+    \begin{align*}
+        f(X)&=a_n X^n + a_{n-1}X^{n-1} + \cdots + a_1 X + a_0 \in R[X],\\
+        g(X)&=b_m X^m + b_{m-1}X^{m-1} + \cdots + b_1 X + b_0 \in R[X]
+    \end{align*}
+    be two polynomials of degree $n$ and $m$ respectively. The \textbf{resultant} of $f(X)$ and $g(X)$ is defined as
+    \[
+    \mathrm{Res}(f,g):= \det \left[
+\begin{array}{c@{\;}c}
+  \underbrace{
+    \begin{matrix}
+      a_n     & 0       & \cdots & 0       \\
+      a_{n-1} & a_n     & \cdots & 0       \\
+      a_{n-2} & a_{n-1} & \ddots & \vdots  \\
+      \vdots  & \vdots  & \ddots & a_n     \\
+      a_0     & a_1     & \cdots & a_{n-1} \\
+      0       & a_0     & \cdots & a_{n-2} \\
+      \vdots  & \vdots  & \ddots & \vdots  \\
+      0       & 0       & \cdots & a_0
+    \end{matrix}
+  }_{m \text{ columns}}
+  &
+  \underbrace{
+    \begin{matrix}
+      b_m     & 0       & \cdots & 0       \\
+      b_{m-1} & b_m     & \cdots & 0       \\
+      b_{m-2} & b_{m-1} & \ddots & \vdots  \\
+      \vdots  & \vdots  & \ddots & b_m     \\
+      b_0     & b_1     & \cdots & b_{m-1} \\
+      0       & b_0     & \cdots & b_{m-2} \\
+      \vdots  & \vdots  & \ddots & \vdots  \\
+      0       & 0       & \cdots & b_0
+    \end{matrix}
+  }_{n \text{ columns}}
+\end{array}
+\right]_{(m+n) \times (m+n)}.
+    \]
+    If $R$ is an integral domain with field of fractions $K$ and $f(X),g(X)$ have roots $\alpha_1,\alpha_2,\cdots,\alpha_n$ and $\beta_1,\beta_2,\cdots,\beta_m$ in some algebraic closure $\overline{K}$ of $K$ respectively, then
+    \[
+    \mathrm{Res}(f,g)=a_n^m b_m^n \prod_{i=1}^n \prod_{j=1}^m (\alpha_i - \beta_j)=a_n^m \prod_{i=1}^n g(\alpha_i)=(-1)^{mn} b_m^n \prod_{j=1}^m f(\beta_j).
+    \]
+\end{definition}
+\begin{remark}
+    Suppose $R$ is an integral domain with field of fractions $K$ and $f(X),g(X)$ have roots $\alpha_1,\alpha_2,\cdots,\alpha_n$ and $\beta_1,\beta_2,\cdots,\beta_m$ in some algebraic closure $\overline{K}$ of $K$ respectively. Then we have
+    \begin{align*}
+        \frac{1}{a_n}f(X)&=(X-\alpha_1)(X-\alpha_2)\cdots (X-\alpha_n),\\
+        \frac{1}{b_m}g(X)&=(X-\beta_1)(X-\beta_2)\cdots (X-\beta_m).
+    \end{align*}
+    Let 
+    \[
+    V = 
+\begin{bmatrix}
+\alpha_1^{m+n-1} & \alpha_1^{m+n-2} & \cdots & \alpha_1 & 1 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+\alpha_n^{m+n-1} & \alpha_n^{m+n-2} & \cdots & \alpha_n & 1 \\
+\beta_1^{m+n-1} & \beta_1^{m+n-2} & \cdots & \beta_1 & 1 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+\beta_m^{m+n-1} & \beta_m^{m+n-2} & \cdots & \beta_m & 1
+\end{bmatrix},\quad S=\begin{bmatrix}
+a_n     & 0       & \cdots & 0       & b_m     & 0       & \cdots & 0       \\
+a_{n-1} & a_n     & \cdots & 0       & b_{m-1} & b_m     & \cdots & 0       \\
+a_{n-2} & a_{n-1} & \ddots & \vdots  & b_{m-2} & b_{m-1} & \ddots & \vdots  \\
+\vdots  & \vdots  & \ddots & a_n     & \vdots  & \vdots  & \ddots & b_m     \\
+a_0     & a_1     & \cdots & a_{n-1} & b_0     & b_1     & \cdots & b_{m-1} \\
+0       & a_0     & \cdots & a_{n-2} & 0       & b_0     & \cdots & b_{m-2} \\
+\vdots  & \vdots  & \ddots & \vdots  & \vdots  & \vdots  & \ddots & \vdots  \\
+0       & 0       & \cdots & a_0     & 0       & 0       & \cdots & b_0
+\end{bmatrix}.
+    \]
+    Then 
+    \[
+    {\renewcommand{\arraystretch}{1.5}}
+    V S =  \begin{bmatrix}
+    \alpha_1^{m-1}f(\alpha_1) & \alpha_1^{m-2}f(\alpha_1) & \cdots & f(\alpha_1) & \alpha_1^{n-1}g(\alpha_1)  & \alpha_1^{n-2}g(\alpha_1) &\cdots & g(\alpha_1) \\
+     \alpha_2^{m-1}f(\alpha_2) & \alpha_2^{m-2}f(\alpha_2) & \cdots & f(\alpha_2) & \alpha_2^{n-1}g(\alpha_2)  & \alpha_2^{n-2}g(\alpha_2) &\cdots & g(\alpha_2)  \\
+    \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    \alpha_n^{m-1}f(\alpha_n) & \alpha_n^{m-2}f(\alpha_n) & \cdots & f(\alpha_n) & \alpha_n^{n-1}g(\alpha_n)  & \alpha_n^{n-2}g(\alpha_n) &\cdots & g(\alpha_n)  \\
+    \beta_1^{m-1}f(\beta_1) & \beta_1^{m-2}f(\beta_1) & \cdots & f(\beta_1) & \beta_1^{n-1}g(\beta_1)  & \beta_1^{n-2}g(\beta_1) &\cdots & g(\beta_1)  \\
+    \vdots & \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    \beta_m^{m-1}f(\beta_m) & \beta_m^{m-2}f(\beta_m) & \cdots & f(\beta_m) & \beta_m^{n-1}g(\beta_m)  & \beta_m^{n-2}g(\beta_m) &\cdots & g(\beta_m)
+    \end{bmatrix}=\begin{bmatrix}
+    \mathbf{0}_{n\times m} & D_g \\
+    D_f & \mathbf{0}_{m\times n}.
+    \end{bmatrix}
+    \]
+    This implies that
+    \begin{align*}
+        \det(V)\det(S)&=\det(V S)\\
+        &=(-1)^{mn}\det(D_g)\det(D_f)\\
+        &=(-1)^{mn} \left(\prod_{i=1}^ng(\alpha_i)\prod_{1\le i<j\le n}(\alpha_i-\alpha_j)\right) \left(\prod_{j=1}^m f(\beta_j)\prod_{1\le i<j\le m}(\beta_i-\beta_j)\right).
+    \end{align*}
+    Since $\det(V)$ is a Vandermonde determinant, we have
+    \[
+    \det(V)=\prod_{1\le i<j\le n}(\alpha_i-\alpha_j)\prod_{1\le i<j\le m}(\beta_i-\beta_j)\prod_{i=1}^n\prod_{j=1}^m(\alpha_i-\beta_j)
+    \]
+    Thus
+    \[
+    \det(S)=\frac{(-1)^{mn}\displaystyle\prod_{i=1}^n g(\alpha_i)\prod_{j=1}^m f(\beta_j)}{\displaystyle\prod_{i=1}^n\prod_{j=1}^m(\alpha_i-\beta_j)}.
+    \]
+    Note 
+    \begin{align*}
+        &\;\prod_{i=1}^n\prod_{j=1}^m(\alpha_i-\beta_j)=\prod_{i=1}^n \frac{g(\alpha_i)}{b_m}=\frac{1}{b_m^n} \prod_{i=1}^n g(\alpha_i)\\
+         =&\;(-1)^{mn}\prod_{j=1}^m\prod_{i=1}^n(\beta_j-\alpha_i)=(-1)^{mn}\prod_{j=1}^m \frac{f(\beta_j)}{a_n}=\frac{(-1)^{mn}}{a_n^m} \prod_{j=1}^m f(\beta_j).
+    \end{align*}
+    We can conclude that
+    \[
+    \det(S)=a_n^m b_m^n \prod_{i=1}^n \prod_{j=1}^m (\alpha_i - \beta_j)=a_n^m \prod_{i=1}^n g(\alpha_i)=(-1)^{mn} b_m^n \prod_{j=1}^m f(\beta_j).
+    \]
+\end{remark}
+
+\begin{definition}{Discriminant of Polynomial}{discriminant_of_polynomial}
+    Let $R$ be an integral domain and $f(X)\in R[X]$ be a polynomial. The \textbf{discriminant} of $f(X)$ is defined as
+    \[
+    \mathrm{Disc}(f):=(-1)^{\frac{n(n-1)}{2}}\frac{\mathrm{Res}(f,f')}{a_n}.
+    \]
+\end{definition}
+
+\begin{proposition}{}{}
+    Let $K$ be a field and $f(X)\in K[X]$ be a polynomial of degree $n$ with roots $\alpha_1,\alpha_2,\cdots,\alpha_n$ in some algebraic closure $\overline{K}$ of $K$. Then
+    \[
+    \mathrm{Disc}(f)=(-1)^{\frac{n(n-1)}{2}}   a_n^{n-2} \prod_{i=1}^n f'(\alpha_i) = (-1)^{\frac{n(n-1)}{2}} a_n^{2n-2} \prod_{\substack{i,j \\ i \ne j}}(\alpha_i-\alpha_j)=a_n^{2n-2}\prod_{1\le i<j\le n}(\alpha_i-\alpha_j)^2.
+    \]
+\end{proposition}
+\begin{prf}
+    By definition of resultant, we have
+    \[
+      \mathrm{Disc}(f)=(-1)^{\frac{n(n-1)}{2}}\frac{\mathrm{Res}(f,f')}{a_n}=(-1)^{\frac{n(n-1)}{2}}\frac{a_n^{n-1} \prod\limits_{i=1}^n f'(\alpha_i)}{a_n}=(-1)^{\frac{n(n-1)}{2}} a_n^{n-2} \prod_{i=1}^n f'(\alpha_i).
+    \]
+    Since 
+    \begin{align*}
+        f'(X)&=\frac{\mathrm{d}}{\mathrm{d}X}\left(a_n \prod_{i=1}^n (X - \alpha_i) \right)= a_n \sum_{i=1}^n \prod_{j\ne i} (X - \alpha_j)\implies f'(\alpha_i)= a_n \prod_{j\ne i} (\alpha_i - \alpha_j),
+    \end{align*}
+    we have
+    \[
+    \prod_{i=1}^n f'(\alpha_i)= \prod_{i=1}^n \left( a_n \prod_{j\ne i} (\alpha_i - \alpha_j) \right)= a_n^{n} \prod_{\substack{i,j \\ i \ne j}} (\alpha_i - \alpha_j).
+    \]
+    Thus
+    \[
+    \mathrm{Disc}(f)=(-1)^{\frac{n(n-1)}{2}} a_n^{n-2} \prod_{i=1}^n f'(\alpha_i)=(-1)^{\frac{n(n-1)}{2}} a_n^{2n-2} \prod_{\substack{i,j \\ i \ne j}} (\alpha_i - \alpha_j).
+    \]
+    Note
+    \begin{align*}
+        \prod_{\substack{i,j \\ i \ne j}} (\alpha_i - \alpha_j)&=\prod_{1\le i<j\le n} (\alpha_i - \alpha_j)(\alpha_j - \alpha_i)\\
+        &=\prod_{1\le i<j\le n} -(\alpha_i - \alpha_j)^2\\
+        &=(-1)^{\frac{n(n-1)}{2}} \prod_{1\le i<j\le n} (\alpha_i - \alpha_j)^2.
+    \end{align*}
+    We get
+    \[
+    \mathrm{Disc}(f)=(-1)^{\frac{n(n-1)}{2}} a_n^{2n-2} \prod_{\substack{i,j \\ i \ne j}} (\alpha_i - \alpha_j)= a_n^{2n-2}\prod_{1\le i<j\le n}(\alpha_i-\alpha_j)^2.
+    \]
+\end{prf}
+
+\begin{definition}{Discriminant of Bilinear Form $M\times M\to R$}{}
+    Let $R$ be a commutative ring and $M$ be an free $R$-module of rank $n$. Let $Q:M\times M\to R$ be a $R$-bilinear form. Then
+    \begin{align*}
+        \varphi_Q:M &\longrightarrow M^*\\
+        x &\longmapsto Q(x,-)
+    \end{align*}
+    is an $R$-module homomorphism. Taking top exterior powers gives an $R$-module homomorphism
+    \begin{align*}
+        \Largewedge^{n}(\varphi_Q):\Largewedge^{n}(M) &\longrightarrow \Largewedge^{n}(M^*)\\
+        x_1\wedge\cdots\wedge x_n &\longmapsto \varphi_Q(x_1)\wedge\cdots\wedge \varphi_Q(x_n).
+    \end{align*}
+    Note we have natural isomorphisms
+    \begin{align*}
+        \psi_M:\Largewedge^{n}(M^*)&\xlongrightarrow{\sim} (\Largewedge^{n}(M))^*\\
+        f_1\wedge\cdots\wedge f_n &\longmapsto \left( x_1\wedge\cdots\wedge x_n \mapsto \det\left( [f_i(x_j)]_{1\le i,j\le n} \right) \right),
+    \end{align*}
+    By composing $\Largewedge^{n}(\varphi_Q)$ with $\psi_M$, we get an $R$-module endomorphism of the rank-$1$ free $R$-module $\Largewedge^{n}(M)$
+    \begin{align*}
+        \theta:=\psi_M \circ \Largewedge^{n}(\varphi_Q):\Largewedge^{n}(M) &\longrightarrow (\Largewedge^{n}(M))^*\\
+        x_1\wedge\cdots\wedge x_n &\longmapsto \left(x_1\wedge\cdots\wedge x_n\mapsto \det\left( [Q(x_i,x_j)]_{1\le i,j\le n} \right) \right).
+    \end{align*}
+    Let $\varepsilon$ be a basis of $\Largewedge^{n}(M)$ and
+    \begin{align*}
+        \varepsilon^*:\Largewedge^{n}(M) &\longrightarrow R\\
+        \varepsilon &\longmapsto 1_R.
+    \end{align*}
+    be the dual basis of $\varepsilon$. Then there exists a unique $\lambda\in R$ such that
+    \[
+        \theta(\varepsilon) = \lambda \cdot \varepsilon^*.
+    \]
+    Then the \textbf{discriminantof $Q$} is defined as the image of $\lambda$ under the canonical projection $R\to R/(R^{\times})^2$
+    \[
+    \mathrm{Disc}(Q):=\lambda \mod (R^{\times})^2 \in R/(R^{\times})^2,
+    \]
+    where $R/(R^{\times})^2$ is the quotient monoid of the multiplicative monoid $R$ by modulo the congruence relation 
+    \[
+    a \sim b \iff \exists u\in R^{\times}, a = u^2 b.
+    \]
+    We can check that this definition is independent of the choice of basis $\varepsilon$. If we choose another basis $\tilde{\varepsilon} = c \varepsilon$ for some $c\in R^{\times}$, then $\tilde{\varepsilon}^* = c^{-1} \varepsilon^*$ and 
+    \[
+        \theta(\tilde{\varepsilon}) = \theta(c \varepsilon) = c \theta(\varepsilon) = c \lambda \varepsilon^* =c \lambda (c \tilde{\varepsilon}^*) = (c^2 \lambda)\cdot \tilde{\varepsilon}^*.
+    \]
+    If $E=\{e_1,e_2,\cdots,e_n\}$ is a basis of $M$, then the \textbf{discriminant of $Q$ with respect to the basis $\{e_1,e_2,\cdots,e_n\}$} is defined as
+    \[
+    \mathrm{Disc}(Q; e_1,e_2,\cdots,e_n):=\det\left( [Q(e_i,e_j)]_{1\le i,j\le n} \right)\in R.
+    \]
+    The relation between $\mathrm{Disc}(Q)$ and $\mathrm{Disc}(Q; e_1,e_2,\cdots,e_n)$ is given by
+    \[
+    \mathrm{Disc}(Q)=\mathrm{Disc}(Q; e_1,e_2,\cdots,e_n) \mod (R^{\times})^2 \in R/(R^{\times})^2.
+    \]
+    The ideal of $R$ generated by $\mathrm{Disc}(Q; e_1,e_2,\cdots,e_n)$ is called the \textbf{discriminant ideal of $Q$}, which is independent of the choice of basis $\{e_1,e_2,\cdots,e_n\}$.
+\end{definition}
+\begin{remark}
+    Here we check the relation between $\mathrm{Disc}(Q)$ and $\mathrm{Disc}(Q; e_1,e_2,\cdots,e_n)$. Let $\langle \cdot,\cdot \rangle :M^*\times M \to R$ be the dual pairing defined by $\langle f,x \rangle := f(x)$. Note $\varepsilon:=e_1\wedge e_2 \wedge \cdots \wedge e_n$ is a basis of $\Largewedge^{n}(M)$. Then we have 
+    \[
+    \langle\theta(\varepsilon),\varepsilon \rangle= \langle \lambda\varepsilon^*,\varepsilon \rangle =\lambda \langle \varepsilon^*,\varepsilon \rangle = \lambda.
+    \]
+    Denote
+    \[
+    f_i:=\varphi_Q(e_i) \in M^*.
+    \]
+    We have
+    \begin{align*}
+        \langle\theta(\varepsilon),\varepsilon \rangle &= \langle \psi_M(f_1\wedge f_2 \wedge \cdots \wedge f_n), e_1\wedge e_2 \wedge \cdots \wedge e_n \rangle \\
+        &= \det\left( [f_i(e_j)]_{1\le i,j\le n} \right) \\
+        &= \det\left( [\varphi_Q(e_i)(e_j)]_{1\le i,j\le n} \right) \\
+        &= \det\left( [Q(e_i,e_j)]_{1\le i,j\le n} \right).
+    \end{align*}
+\end{remark}
+
+\begin{definition}{Discriminant of Algebra}{discriminant_of_algebra}
+    Let $R$ be a commutative ring and $A$ be an $R$-algebra. Suppose $A$ is a free $R$-module of rank $n$. Then the \textbf{discriminant} of $A$ over $R$ is defined as
+    \[
+       d_A=\mathrm{Disc}\left(\langle \cdot ,\cdot \rangle_{A|R}\right)
+    \]
+    where $\langle \cdot ,\cdot \rangle_{A|R}$ is the \hyperref[th:trace_pairing]{trace pairing} of $A$ over $R$. 
+    
+    Assume $\{e_1,e_2,\cdots,e_n\}$ is a basis of $A$ over $R$. The \textbf{discriminant} of $A$ with respect to the basis $\{e_1,e_2,\cdots,e_n\}$ is defined as
+    \begin{align*}
+        d_A(e_1,e_2,\cdots,e_n):&=\det\left( \left[ \langle e_i,e_j \rangle_{A|R} \right]_{1\le i,j\le n} \right)\\
+        &= \det \begin{bmatrix}
+        \mathrm{Tr}_{A|R}(e_1 e_1) & \mathrm{Tr}_{A|R}(e_1 e_2) & \cdots & \mathrm{Tr}_{A|R}(e_1 e_n) \\
+        \mathrm{Tr}_{A|R}(e_2 e_1) & \mathrm{Tr}_{A|R}(e_2 e_2) & \cdots & \mathrm{Tr}_{A|R}(e_2 e_n) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \mathrm{Tr}_{A|R}(e_n e_1) & \mathrm{Tr}_{A|R}(e_n e_2) & \cdots & \mathrm{Tr}_{A|R}(e_n e_n)
+        \end{bmatrix}\in R.
+    \end{align*}
+    The relation between $d_A$ and $d_A(e_1,e_2,\cdots,e_n)$ is given by
+    \begin{align*}
+        d_A=d_A(e_1,e_2,\cdots,e_n)\mod (R^{\times})^2.
+    \end{align*}
+    The ideal of $R$ generated by $d_A(e_1,e_2,\cdots,e_n)$ is called the \textbf{discriminant ideal
+    of $A$ over $R$} and is denoted by $\mathfrak{d}_A$.
+\end{definition}
+
+
+
+\begin{definition}{Order}{}
+    Let $R$ be an integral domain with field of fractions $K$ and $A$ be a finite-dimensional $K$-algebra. An $R$-\textbf{order} in $A$ is a unital $R$-subalgebra $\mathcal{O}\subseteq A$ which is finitely generated as an $R$-module and satisfies $\mathcal{O}\otimes_R K \cong A$.
+\end{definition}
+\begin{remark}
+    Since the $K$-algebra $A$ can be regarded as an $R$-algebra through the restriction of scalars along $R\hookrightarrow K$, it makes sense to talk about $R$-subalgebras of $A$.
+\end{remark}
+
+\begin{lemma}{}{discriminant_relation}
+    Let $R$ be a commutative ring, $M$ be a free $R$-module of rank $n$ and $N\subseteq M$ be a submodule which is also a free $R$-module of rank $n$. Let $Q:M\times M\to R$ be a $R$-bilinear form. 
+    \begin{enumerate}[(i)]
+    \item Given any basis $\{e_1,e_2,\cdots,e_n\}$ of $M$ over $R$ and any basis $\{f_1,f_2,\cdots,f_n\}$ of $N$ over $R$, there exists a matrix $P\in M_n(R)$ such that
+    \[
+    \begin{bmatrix} 
+f_1 & f_2 & \cdots & f_n
+\end{bmatrix} = \begin{bmatrix} 
+e_1 & e_2 & \cdots & e_n
+\end{bmatrix} P.
+    \]
+    The discriminants with respect to the bases $\{e_1,e_2,\cdots,e_n\}$ and $\{f_1,f_2,\cdots,f_n\}$ satisfy
+    \[
+    \mathrm{Disc}\left(Q|_{N\times N};f_1,f_2,\cdots,f_n\right)=\det(P)^2\; \mathrm{Disc}\left(Q;e_1,e_2,\cdots,e_n\right).
+    \]
+    \item Let $\mathrm{Fitt}_0(M/N)$ be the 0-th Fitting ideal of the $R$-module $M/N$. Then we have equality of ideals
+    \[
+    \left(\mathrm{Disc}(Q|_{N\times N})\right)= \mathrm{Fitt}_0(M/N)^2 \left(\mathrm{Disc}(Q)\right).
+    \]
+    \end{enumerate}
+\end{lemma}
+\begin{prf}
+     \begin{enumerate}[(i)]
+    \item Let $\{e_1,e_2,\cdots,e_n\}$ be a basis of $M$ over $R$. Since $N$ is a unital $R$-submodule of $M$ which is also a free $R$-module of rank $n$, we can assume that $\{f_1,f_2,\cdots,f_n\}$ is a basis of $N$ over $R$. Note each $f_i$ can be expressed as a linear combination of $e_1,e_2,\cdots,e_n$. Thus there exists a matrix $M\in M_n(R)$ such that
+    \[
+    \begin{bmatrix}
+    f_1 & f_2 & \cdots & f_n
+    \end{bmatrix} = \begin{bmatrix}
+    e_1 & e_2 & \cdots & e_n
+    \end{bmatrix} P.
+    \]
+    Thus we have
+    \begin{align*}
+        \mathrm{Disc}\left(Q|_{N\times N};f_1,f_2,\cdots,f_n\right)&=\det\left( \left[ \langle f_i,f_j \rangle_{Q|_{N\times N}} \right]_{1\le i,j\le n} \right)\\
+        &=\det\left( P^\top \left[ \langle e_i,e_j \rangle_{Q} \right]_{1\le i,j\le n} P \right)\\
+        &=\det(P)^2 \det\left( \left[ \langle e_i,e_j \rangle_{Q} \right]_{1\le i,j\le n} \right)\\
+        &=\det(P)^2\: \mathrm{Disc}\left(Q;e_1,e_2,\cdots,e_n\right).
+    \end{align*}
+    \item By identifying matrix $P$ and its corresponding linear map $P:R^n\to R^n$, the $R$-module $M/N$ has a presentation
+    \[
+    R^n \xlongrightarrow{P} R^n \xlongrightarrow{\pi} M/N \longrightarrow 0
+    \]
+    where $\pi$ is defined by 
+    \[ 
+    \pi(0, \cdots, \underset{\text{i-th component}}{1_R}, \cdots, 0) = e_i + N 
+    \]
+    for $1\le i\le n$. By definition, the 0-th Fitting ideal of $M/N$ is generated by $\det(P)$
+    \[
+    \mathrm{Fitt}_0(M/N) = (\det(P)).
+    \]
+      \end{enumerate}
+\end{prf}
+
+\begin{corollary}{Discriminant Relation}{}
+    Let $R$ be a commutative ring and $A$ an $R$-algebra which is a free $R$-module of rank $n$. Let $B\subseteq A$ be a unital $R$-subalgebra of $A$ which is also a free $R$-module of rank $n$. Then for any basis $\{e_1,e_2,\cdots,e_n\}$ of $A$ over $R$ and any basis $\{b_1,b_2,\cdots,b_n\}$ of $B$ over $R$, there exists a matrix $M\in M_n(R)$ such that
+    \[
+    \begin{bmatrix}
+    b_1 & b_2 & \cdots & b_n
+    \end{bmatrix} = \begin{bmatrix}
+    e_1 & e_2 & \cdots & e_n
+    \end{bmatrix} M.
+    \]
+    The discriminants with respect to the bases $\{e_1,e_2,\cdots,e_n\}$ and $\{b_1,b_2,\cdots,b_n\}$ satisfy
+    \[
+    d_B(b_1,b_2,\cdots,b_n)=\det(M)^2\; d_A(e_1,e_2,\cdots,e_n).
+    \]
+    In particular, if $R=\mathbb{Z}$, then $\mathbb{Z}/(\mathbb{Z}^{\times})^2 \cong \mathbb{Z}$ and we have
+    \[
+    d_B = [A:B]^2 d_A,
+    \]
+    where $[A:B]$ is the index of $B$ in $A$ as abelian groups.
+\end{corollary}
+\begin{prf}
+    Note 
+    \[
+    \left(\langle \cdot ,\cdot \rangle_{A|R}\right)|_{B\times B} = \langle \cdot ,\cdot \rangle_{B|R}.
+    \]
+    $d_B(b_1,b_2,\cdots,b_n)=\det(M)^2\; d_A(e_1,e_2,\cdots,e_n)$ is a direct consequence of \Cref{th:discriminant_relation}. If $R=\mathbb{Z}$, then $\det(M)=\pm [A:B]$ and $\mathbb{Z}/(\mathbb{Z}^{\times})^2 \cong \mathbb{Z}$. Thus
+\end{prf}
+
 \section{Algebra over Field}
 \begin{lemma}{Nonzero Ring Homomorphism from Field is Injective}{nonzero_ring_homomorphism_from_field_is_injective}
     If $K$ is a field, $R$ is a ring, a ring homomorphism $f:K\to R$ is either injective or the zero map. Furthermore, If $R$ is not a zero ring, then $f$ is injective.
@@ -628,7 +1144,7 @@ Suppose $a$ is algebraic over $K$. Then the minimal polynomial $m_a(X)\in K[X]$ 
 
 \begin{proposition}{Properties of Polynomial Ring}{properties_of_polynomial_ring}
     Let $R$ be a commutative ring.
-    \begin{enumerate}
+    \begin{enumerate}[(i)]
         \item If $R$ is a UFD, then $R[x_1,\cdots.x_n]$ is a UFD.
         \item $R$ is a field $\iff$ $R[x]$ is a PID $\iff$ $R[x]$ is an Euclidean domain.
         \item $R$ is an integral domain $\iff$ $R[x]$ is an integral domain.

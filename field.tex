@@ -296,7 +296,7 @@ In field category $\mathsf{Field}$, Let $\mathsf{Field}_0$ denote the full subca
     A field extension $L/K$ is \textbf{algebraic} if every element of $L$ is \hyperref[th:algebraic_element_and_transcendental_element]{algebraic} over $K$. That is, for any $\alpha\in L$, there exists a nonzero polynomial $f\in K[X]$ such that $f(\alpha)=0$.
 \end{definition}
 
-\begin{proposition}{}{}
+\begin{proposition}{Simple Algebraic Extension as a Quotient Ring}{simple_algebraic_extension_as_a_quotient_ring}
     Let $L/K$ be a field extension and $\alpha\in L$ be an algebraic element over $K$. Suppose $P(X)\in K[X]$ is an irreducible annihilating polynomial of $\alpha$, or equivalently $P(X)\in K[X]-\{0\}$ is a constant multiple of the minimal polynomial $m_\alpha(X)$ of $\alpha$ over $K$. Then
     \[
     K(\alpha)\cong K[X]/(P(X))
@@ -312,11 +312,39 @@ In field category $\mathsf{Field}$, Let $\mathsf{Field}_0$ denote the full subca
     $K[\alpha]$ is a field and $[K[\alpha]:K]=\deg P(X)$. It is sufficient to show $K(\alpha)=K[\alpha]$. It is clear that $K[\alpha]\subseteq K(\alpha)$. Since $K(\alpha)$ is the smallest subfield of $L$ containing $K$ and $\alpha$, we have $K(\alpha)\subseteq K[\alpha]$. Therefore, $K(\alpha)=K[\alpha]$.
 \end{prf}
 
+\begin{corollary}{Power Basis of Simple Algebraic Extension $K(\alpha)$}{power_basis_of_simple_algebraic_extension}
+    Let $L/K$ be a field extension and $\alpha\in L$ be an algebraic element over $K$. 
+    Then $1,\alpha,\alpha^2,\cdots, \alpha^{n-1}$ is a $K$-basis of $K(\alpha)$, where $n=[K(\alpha):K]$.
+\end{corollary}
+\begin{prf}
+    Let $n=[K(\alpha):K]$. By \Cref{th:simple_algebraic_extension_as_a_quotient_ring}, the minimal polynomial of $\alpha$ over $K$ has degree $n$. Thus
+    we can assume 
+    \[
+    m_\alpha(X)=X^n+a_{n-1}X^{n-1}+\cdots + a_1 X + a_0\in K[X]
+    \]
+    is the minimal polynomial of $\alpha$ over $K$. Note 
+    \[
+    m_\alpha(\alpha)=0\implies \alpha^n =-\left(a_{n-1}\alpha^{n-1}+\cdots + a_1 \alpha + a_0\right).
+    \]
+    We see $K(\alpha)$ is spanned by $1,\alpha,\alpha^2,\cdots, \alpha^{n-1}$ over $K$, i.e.
+    \[
+    K(\alpha)=\operatorname{span}_K\{1,\alpha,\dots,\alpha^{n-1}\}.
+    \]
+    If there exists $b_0,b_1,\cdots, b_{n-1}\in K$ such that
+    \[
+    b_0 + b_1 \alpha + \cdots + b_{n-1}\alpha^{n-1}=0,
+    \]
+    then the polynomial
+    \[
+    f(X)=b_0 + b_1 X + \cdots + b_{n-1}X^{n-1}\in K[X]
+    \]
+    satisfies $f(\alpha)=0$. Since $\deg f < \deg m_\alpha$, we must have $f(X)=0$ and $b_0=b_1=\cdots = b_{n-1}=0$. This implies $1,\alpha,\alpha^2,\cdots, \alpha^{n-1}$ is linearly independent over $K$. Therefore, $1,\alpha,\alpha^2,\cdots, \alpha^{n-1}$ is a $K$-basis of $K(\alpha)$.
+\end{prf}
 
 \begin{proposition}{}{K_embedding_is_K_isomorphism_for_algebraic_extension}
     Let $L/K$ be an algebraic extension. Then any $K$-embedding $L\hookrightarrow L$ is an $K$-isomorphism, namely
     \[
-    \mathrm{End}_{\left(K/\mathsf{Field}\right)}\left(L/K\right) = \mathrm{Aut}_{\left(K/\mathsf{Field}\right)}\left(L/K\right).
+    \mathrm{End}_{\left(\mathsf{Field}/K\right)}\left(L/K\right) = \mathrm{Aut}_{\left(\mathsf{Field}/K\right)}\left(L/K\right).
     \]
 \end{proposition}
 \begin{prf}
@@ -961,15 +989,16 @@ E \arrow[ru, "\sigma", hook] \arrow[rr, "\iota_2", hook] &                      
 \end{remark}
 
 
-\begin{definition}{Trace Pairing}{}
+\begin{definition}{Trace Pairing}{trace_pairing_for_finite_extension}
     Let $L/K$ be a finite extension. The \textbf{trace pairing} is the symmetric $K$-bilinear form
     \begin{align*}
-        \mathrm{Tr}_{L/K}:L\times L&\longrightarrow K\\
+        \langle \cdot,\cdot \rangle_{L/K}: L\times L&\longrightarrow K\\
         (x,y)&\longmapsto \mathrm{Tr}_{L/K}(xy).
     \end{align*}
 \end{definition}
-
-
+\begin{remark}
+    This definition is a special case of \Cref{th:trace_pairing}.
+\end{remark}
 
 
 \section{Finite Field}
