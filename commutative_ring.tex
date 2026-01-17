@@ -2276,18 +2276,6 @@ Since $\mathfrak{P}$ is a prime ideal, there exists some $\tau\in \mathrm{Gal}(L
     \]
 \end{prf}
 
-\begin{definition}{Inertia Group}{}
-    Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak{P}$ is a maximal ideal over $\mathfrak{p}\in \spec\left(\mathcalo\right)$. The \textbf{inertia group} of $\mathfrak{P}$ is defined as the kernel of the surjective group homomorphism
-    \begin{align*}
-        \xi:D_{\mathfrak{P}}&\longrightarrow \mathrm{Aut}_{\left(\kappa(\mathfrak{p})/\mathsf{Field}\right)}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)\\
-        \sigma&\longmapsto \widetilde{\sigma}.
-    \end{align*}
-    denote by $I_{\mathfrak{P}}:=\ker \xi$. And we have the following exact sequence
-    \[
-    1\longrightarrow I_{\mathfrak{P}}\longrightarrow D_{\mathfrak{P}}\longrightarrow \mathrm{Aut}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)\longrightarrow 1.
-    \]
-\end{definition}
-
 \begin{proposition}{}{}
     Let $\mathcalo$ be a normal integral domain with fraction field $K$. Let $L/K$ be a (possibly infinite) Galois extension. Let $G = \text{Gal}(L/K)$ and let
     $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$.
@@ -2308,6 +2296,23 @@ is surjective.
 \begin{prf}
 \url{https://stacks.math.columbia.edu/tag/0BRK}
 \end{prf}
+
+This proposition enables us to define the inertia group.
+
+\begin{definition}{Inertia Group}{}
+    Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak{P}$ is a maximal ideal over $\mathfrak{p}\in \spec\left(\mathcalo\right)$. The \textbf{inertia group} of $\mathfrak{P}$ is defined as the kernel of the surjective group homomorphism
+    \begin{align*}
+        \xi:D_{\mathfrak{P}}&\longrightarrow \mathrm{Aut}_{\left(\kappa(\mathfrak{p})/\mathsf{Field}\right)}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)\\
+        \sigma&\longmapsto \widetilde{\sigma}.
+    \end{align*}
+    denote by $I_{\mathfrak{P}}:=\ker \xi$. And we have the following exact sequence
+    \[
+    1\longrightarrow I_{\mathfrak{P}}\longrightarrow D_{\mathfrak{P}}\longrightarrow \mathrm{Aut}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)\longrightarrow 1.
+    \]
+\end{definition}
+
+Therefore, the decomposition group $D_{\mathfrak{P}}$ controls the splitting behavior of $\mathfrak{p}$ in $L$, with size $|D_{\mathfrak{P}}|=ef$. If we further assume that $\kappa(\mathfrak{P})/\kappa(\mathfrak{p})$ is a finite separable extension, then $\mathrm{Aut}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)=\mathrm{Gal}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)$ and $|\mathrm{Gal}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)|=f$. Thus by the exact sequence, the inertia group $I_{\mathfrak{P}}$ has size $|I_{\mathfrak{P}}|=e$. In this case, the inertia group $I_{\mathfrak{P}}$ measures the ramification of $\mathfrak{p}$ in $L$, while $\mathrm{Gal}\left(\kappa(\mathfrak{P})/\kappa(\mathfrak{p})\right)$ measures the inertia.
+
 
 \begin{definition}{Frobenius Element}{}
     Let $\mathcalo$ be a Dedekind domain with field of fractions $K=\mathrm{Frac}(\mathcalo)$. Let $L/K$ be a finite Galois extension and $\mathcal{O}$ be the integral closure of $\mathcalo$ in $L$. Suppose $\mathfrak{P}$ is a maximal ideal over $\mathfrak{p}\in \spec\left(\mathcalo\right)$ and $\kappa(\mathfrak{p})$ is a finite field isomorphic to $\mathbb{F}_{q}$. Then $\kappa(\mathfrak{P})/\kappa(\mathfrak{p})$ is a finite Galois extension and we have the following exact sequence
